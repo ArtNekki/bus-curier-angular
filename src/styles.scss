@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+/* You can add utils styles to this file, and also import other style files */
+
+@charset 'utf-8';
+//@import '~swiper/css/swiper.min.css';
+
+//core
+@import 'assets/scss/core/functions';
+@import 'assets/scss/core/mixins';
+@import 'assets/scss/core/utils';
+@import 'assets/scss/core/breakpoints';
+@import 'assets/scss/core/animations';
+
+//settings
+@import 'variables';
+@import 'assets/scss/settings';
+
+//libs
+@import 'assets/scss/core/libs';
+
+// @import 'global/typography';
+@import 'assets/scss/core/fonts';
+
+//utils
+@import 'assets/scss/utils';
+
+//grid
+//@import "assets/scss/grid-framework/grid-framework";
+//@import "assets/scss/grid-framework/grid";
+//@import 'assets/scss/grid';
+
+//common
+
+//* {
+//  box-sizing: border-box;
+//}
+
+//components
+//@import "assets/scss/components/...";
+

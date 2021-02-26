@@ -1,0 +1,17 @@
+@keyframes rotate {
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes moveFromLeft {
+  100% {
+    transform: translateX(0);
+  }
+}
+
+//@keyframes moveFromRight {
+//  100% {
+//    transform: translateX(0);
+//  }
+//}
