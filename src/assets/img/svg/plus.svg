@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="7px" height="7px" viewBox="0 0 7 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>Untitled 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1"  fill-rule="evenodd">
+        <g id="Rectangle-420" transform="translate(3.000000, 0.000000)"  fill-rule="nonzero" class="icon__vertical">
+            <rect id="Rectangle-path" transform="translate(0.500000, 3.500000) rotate(90.000000) translate(-0.500000, -3.500000) " x="-3" y="3" width="7" height="1"></rect>
+        </g>
+        <g id="Rectangle-420" transform="translate(3.500000, 3.500000) rotate(90.000000) translate(-3.500000, -3.500000) translate(3.000000, 0.000000)" fill-rule="nonzero">
+            <rect id="Rectangle-path" transform="translate(0.500000, 3.500000) rotate(90.000000) translate(-0.500000, -3.500000) " x="-3" y="3" width="7" height="1"></rect>
+        </g>
+    </g>
+</svg>
