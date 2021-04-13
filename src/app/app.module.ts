@@ -5,15 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {PageHeaderModule} from './modules/page-header/page-header.module';
 import {PageFooterModule} from './modules/page-footer/page-footer.module';
+import { AccountComponent } from './modules/account/account.component';
+import { OrderComponent } from './modules/order/order.component';
+import { CalculatorComponent } from './modules/calculator/calculator.component';
+import {IndexPageModule} from './pages/index-page/index-page.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AccountComponent,
+    OrderComponent,
+    CalculatorComponent
   ],
   imports: [
     BrowserModule,
     PageHeaderModule,
     PageFooterModule,
+    // IndexPageModule,
     AppRoutingModule
   ],
   providers: [],

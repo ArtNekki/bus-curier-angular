@@ -1,4 +1,39 @@
+// colors
+$white-color: #ffffff;
+$black-color: #000000;
+$gray-color: #D9D9D9;
+$gray-color--down-11: darken($gray-color, 11%); //B3B3B3
+$gray-dark-color: #808080;
+$gray-light-color: #E5E5E5;
+$gray-light-color--up-5: lighten($gray-light-color, 5%); //F2F2F2
+$blue-color: #50A7FF;
+$blue-light-color: #7CBEFF;
+$red-color: #C74141;
+$yellow-dark-color: #988300;
+$primary-color: #FFDC00;
+$secondary-color: #2F2F2F;
+$font-color: #2E2E2E;
+
+//font
+$font-family: "Kelson", -apple-system, BlinkMacSystemFont, "Roboto", "Ubuntu", "Droid Sans", "Helvetica Neue", "Arial", sans-serif;
+$font-family--secondary: "GraphikLCG", -apple-system, BlinkMacSystemFont, "Roboto", "Ubuntu", "Droid Sans", "Helvetica Neue", "Arial", sans-serif;
+
+//common
+$shadow: 0px 3px 3px rgba($black-color, 0.25);
+$box-shadow: 0px 24px 54px rgba($black-color, 0.1);
+$header-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+$input-shadow: 0px 0px 10px rgba($black-color, 0.1);
+$border-radius: 5px;
+$sticky-menu-bottom-space: 12px;
+$menu-item-transition: all 0.25s ease-in;
 $enable-grid-classes:  true !default;
+$images-root: '../img/content/';
+
+//list
+
+$list-number--size: 38px;
+$list-number--gap-sm: 20px;
+$list-number--gap-md: 30px;
 
 // Grid breakpoints
 //
@@ -21,24 +56,24 @@ $grid-breakpoints: (
 //
 // Define the maximum width of `.container` for different screen sizes.
 
-$container-max-widths: (
-  //md: 720px,
-  lg: 960px,
-  xl: 1020px
-) !default;
-
-@include _assert-ascending($container-max-widths, "$container-max-widths");
-
-// Grid columns
+//$container-max-widths: (
+//  sm: 540px,
+//  md: 720px,
+//  lg: 960px,
+//  xl: 1170px
+//) !default;
 //
-// Set the number of columns and specify the width of the gutters.
-
-$grid-columns:                12 !default;
-$grid-gutter-width:           40px !default;
-$grid-row-columns:            6 !default;
+//@include _assert-ascending($container-max-widths, "$container-max-widths");
+//
+//// Grid columns
+////
+//// Set the number of columns and specify the width of the gutters.
+//
+//$grid-columns:                12 !default;
+//$grid-gutter-width:           60px !default;
+//$grid-row-columns:            6 !default;
 
 
 // Container padding
 
-$container-padding-x: $grid-gutter-width / 2 !default;
-
+$container-padding-x: 15px;

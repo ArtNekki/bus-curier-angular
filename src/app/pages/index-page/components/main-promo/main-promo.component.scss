@@ -1,0 +1,196 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.main-promo {
+  font-family: $font-family;
+
+  @include media-breakpoint-up(lg) {
+    overflow: hidden;
+  }
+
+  &__inner {
+    @include container();
+    padding-top: 40px;
+
+    @include media-breakpoint-up(md) {
+      padding-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto;
+      grid-column-gap: 32px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 70px;
+      padding-bottom: 65px;
+      grid-column-gap: 0;
+    }
+
+    @include media-breakpoint-up(xl) {
+      grid-template-columns: 602px 1fr;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 32px;
+    line-height: 1.2;
+    color: $black-color;
+
+    @include media-breakpoint-only(sm) {
+      font-size: 44px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 44px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      font-size: 57px;
+    }
+  }
+
+  &__text {
+    margin-top: 35px;
+    font-size: 16px;
+    line-height: 26.4px;
+    color: $black-color;
+
+    @include media-breakpoint-only(sm) {
+      font-size: 22px;
+    }
+
+    @include media-breakpoint-up(md) {
+      margin-top: 1.5em;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 22px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      margin-top: 32px;
+      font-size: 27px;
+      line-height: 32.4px;
+    }
+  }
+
+  &__text span {
+    font-size: 17px;
+    line-height: 20.4px;
+    font-weight: 700;
+
+    @include text-bg();
+
+    @include media-breakpoint-only(sm) {
+      font-size: 23px;
+      line-height: 27px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 23px;
+      line-height: 27px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      font-size: 27px;
+    }
+  }
+
+  &__img {
+    margin-top: 35px;
+    display: none;
+    width: 100%;
+    height: auto;
+    max-height: 185px;
+    object-fit: contain;
+
+    @include media-breakpoint-up(md) {
+      display: block;
+    }
+
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+  }
+
+  &__list {
+    margin: 0;
+    margin-top: 30px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    grid-column-gap: 1.5em;
+    font-size: 14px;
+    line-height: 1.2;
+    list-style: none;
+
+    @include media-breakpoint-only(sm) {
+      margin-top: 50px;
+      font-size: 18px;
+    }
+
+    @include media-breakpoint-up(md) {
+      margin-top: 2em;
+      margin-bottom: 10px;
+      margin-right: 15px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 90px;
+      font-size: 18px;
+    }
+  }
+
+  &__list svg,
+  &__list span {
+    vertical-align: middle;
+    display: inline-block;
+  }
+
+  &__list span {
+    margin-left: 0.3em;
+  }
+
+  &__form {
+    position: relative;
+    margin-top: 60px;
+
+    &::before {
+
+
+      @include media-breakpoint-up(lg) {
+        content: "";
+        position: absolute;
+        top: 30%;
+        right: -14%;
+        z-index: -1;
+        width: 60vw;
+        height: 360px;
+        background: url("img/content/bus-bg.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: 100% 0;
+      }
+
+      @include media-breakpoint-up(xl) {
+        top: 30%;
+        right: -35%;
+        width: 810px;
+        background-size: cover;
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+      margin-top: 0;
+    }
+
+    @include media-breakpoint-up(lg) {
+      text-align: right;
+    }
+  }
+}
