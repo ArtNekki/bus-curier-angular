@@ -1,0 +1,68 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.link {
+  text-decoration: none;
+
+  &__text {
+    font-family: $font-family--secondary;
+    font-size: 14px;
+    line-height: 20px;
+    color: $black-color;
+    border-bottom: 1px dashed #948003;
+    vertical-align: middle;
+
+    .link--in-text & {
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    .link--sm & {
+      font-size: 12px;
+    }
+
+    .link--lg & {
+      font-size: 16px;
+    }
+
+    .link--gray & {
+      color: lighten($gray-dark-color, 10%);
+      border-bottom-color: lighten($gray-dark-color, 10%);
+    }
+
+    .link--blue & {
+      color: $blue-color;
+      border-bottom-color: $blue-color;
+    }
+
+    .link--no-underline & {
+      border: none;
+    }
+
+    .link--outer & {
+      font-size: 18px;
+      line-height: 25.2px;
+      border-bottom: 1px solid $gray-light-color;
+    }
+
+    .link--bold & {
+      font-weight: 500;
+    }
+  }
+
+  svg {
+    vertical-align: middle;
+  }
+
+  svg + &__text {
+    margin-left: 6px;
+  }
+
+  &__text + svg {
+    margin-left: 6px;
+  }
+}

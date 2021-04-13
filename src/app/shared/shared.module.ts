@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import { BtnComponent } from './components/btn/btn.component';
+import { LinkComponent } from './components/link/link.component';
 
 
 
@@ -16,10 +17,12 @@ import { BtnComponent } from './components/btn/btn.component';
     // CommonModule,
     HttpClientModule,
     AngularSvgIconModule,
-    BtnComponent
+    BtnComponent,
+    LinkComponent
   ],
   declarations: [
-    BtnComponent
+    BtnComponent,
+    LinkComponent
   ]
 })
 export class SharedModule { }

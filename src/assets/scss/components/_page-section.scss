@@ -1,0 +1,47 @@
+.page-section {
+
+  &--top-line {
+    margin-top: 55px;
+    border-top: 1px solid $gray-color;
+  }
+
+  &--theme-primary {
+    margin-top: 85px;
+    padding-bottom: 30px;
+    border: 1px solid transparent;
+    background-color: $primary-color;
+  }
+
+  &--no-standard-tasks {
+    padding-top: 35px;
+  }
+
+  //&--article {
+  //  //margin-top: 90px;
+  //}
+
+  &__container {
+    @include container();
+
+    .page-section--main-curve & {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: -793px;
+        left: -12vw;
+        width: 1600px;
+        height: 3910px;
+        z-index: -1;
+        opacity: 0.3;
+        //background-image: url("main-curve");
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        @include media-breakpoint-up(xl) {
+          content: "";
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.subtitle {
+  margin: 0;
+  font-family: $font-family--secondary;
+  font-weight: 400;
+
+  &--lg {
+    margin-bottom: 5px;
+    font-size: 15px;
+    line-height: 19.5px;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 40px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+
+  &--md {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
