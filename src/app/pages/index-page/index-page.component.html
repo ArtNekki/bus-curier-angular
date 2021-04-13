@@ -19,48 +19,10 @@
     <p class="subtitle subtitle--lg">Нужно организовать доставку нестандартного груза в&nbsp;очень сжатые сроки?<br clas="br--show-xs "/>
       Трудно найти исполнителя? Мы&nbsp;предложим индивидуальное решение вашей задачи!</p>
     <div class="row row--no-standart-tasks">
-      <form action="#" class="form form--no-margin form--send-cargo">
-        <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--1-col-lg form__fieldset--2-col-xl">
-          <div class="form__field">
-            <label for="delivery-from-2" class="form__label form__label--light">Откуда отправляем?</label>
-<!--            {{{ select-->
-<!--            id="delivery-from-2"-->
-<!--            name="delivery-from-2"-->
-<!--            data='[-->
-<!--            {"value": "", "name": "Выберите город"},-->
-<!--              {"value": "nakhodka", "name": "Находка"},-->
-<!--              {"value": "arseniev", "name": "Арсеньев"}]'-->
-<!--            }}}-->
-          </div>
-          <div class="form__field">
-            <label for="delivery-to-2" class="form__label form__label--light">Куда отправляем?</label>
-<!--            {{{ select-->
-<!--            id="delivery-to-2"-->
-<!--            name="delivery-to-2"-->
-<!--            data='[-->
-<!--            {"value": "", "name": "Выберите город"},-->
-<!--              {"value": "nakhodka", "name": "Находка"},-->
-<!--              {"value": "arseniev", "name": "Арсеньев"}]'-->
-<!--            }}}-->
-          </div>
-          <div class="form__field form__field--full">
-            <label for="describe-task" class="form__label form__label--light">Куда отправляем?</label>
-<!--            {{{ textarea id="describe-task" name="describe-task" }}}-->
-          </div>
-          <div class="form__field form__field--full">
-            {{{ checkbox id="subscribe" name="personal-data" label='Нажимая кнопку «Отправить», я даю свое согласие на
-            <a href="#" class="link">
-              <span class="link__text">обработку моих персональных данных</span>
-            </a>' mods="md, inverted"}}}
-          </div>
-        </div>
-        <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--1-col-lg form__fieldset--2-col-xl">
-<!--          {{{ btn type="submit" text="Отправить" mods="lg, black, w-full"}}}-->
-        </div>
-      </form>
+      <app-index-form-order></app-index-form-order>
       <section class="page-section page-section--examples">
         <h2 class="title title--lg title--examples">Примеры</h2>
-<!--        {{> example-slider}}-->
+        <app-index-slider></app-index-slider>
       </section>
     </div>
   </div>
@@ -70,20 +32,7 @@
     <h2 class="title title--lg">Помогаем бизнесу</h2>
     <p class="subtitle subtitle--lg">С&nbsp;нами работает более 500 компаний, которые регулярно отправляют грузы<br class="br br--show-xs"/>
       по&nbsp;Приморскому краю и&nbsp;в&nbsp;Хабаровск.</p>
-    <div class="partners">
-      <div class="partners__item">
-<!--        {{{ icon name="sber" }}}-->
-      </div>
-      <div class="partners__item">
-<!--        {{{ icon name="aeroflot" }}}-->
-      </div>
-      <div class="partners__item">
-<!--        {{{ icon name="giperauto" }}}-->
-      </div>
-      <div class="partners__item">
-<!--        {{{ icon name="unilab" }}}-->
-      </div>
-    </div>
+    <app-partners></app-partners>
   </div>
 </section>
 <section class="page-section page-section--article">
@@ -91,26 +40,17 @@
     <div class="row row--article">
       <div>
         <h2 class="title title--lg">Грузоперевозки по&nbsp;Приморскому краю</h2>
-        <div class="text-box">
-          <p>Мы&nbsp;предлагаем приемлемые тарифы, высокую скорость доставки и&nbsp;ручаемся за&nbsp;каждый наш груз.
-            Мы&nbsp;не&nbsp;работаем по&nbsp;принципу &laquo;наборных грузов&raquo;, а&nbsp;доставляем вашу посылку в&nbsp;ближайшее время
-            с&nbsp;момента оформления заказа. Это осуществляется за&nbsp;счет регулярного движения междугородних автобусов и&nbsp;наличию
-            большого количества рейсов по&nbsp;многим направлениям. Мы&nbsp;&mdash; Баскурьер, предлагаем нашим клиентам следующие
-            курьерские услуги: Доставка и&nbsp;забор грузов от&nbsp;двери до&nbsp;двери, забор грузов в&nbsp;Аэропорту г.&nbsp;Владивостока,
-            срочная доставка груза в&nbsp;г.&nbsp;Хабаровск на&nbsp;ежедневной основе, срочная доставка документов по&nbsp;Приморскому краю
-            от&nbsp;2 до&nbsp;24 часов.</p>
-          <p>У&nbsp;наших клиентов есть уникальная возможность&nbsp;&mdash; хранение на&nbsp;складе в&nbsp;течение суток БЕСПЛАТНОЕ! А&nbsp;это значит, что вы</p>
-          <button type="button" class="text-box__more">
-            Читать подробнее
-<!--            {{{ icon name="more" width="32" height="32" }}}-->
-          </button>
-        </div>
+        <app-text-box>
+          Мы&nbsp;предлагаем приемлемые тарифы, высокую скорость доставки и&nbsp;ручаемся за&nbsp;каждый наш груз.
+          Мы&nbsp;не&nbsp;работаем по&nbsp;принципу &laquo;наборных грузов&raquo;, а&nbsp;доставляем вашу посылку в&nbsp;ближайшее время
+          с&nbsp;момента оформления заказа. Это осуществляется за&nbsp;счет регулярного движения междугородних автобусов и&nbsp;наличию
+          большого количества рейсов по&nbsp;многим направлениям. Мы&nbsp;&mdash; Баскурьер, предлагаем нашим клиентам следующие
+          курьерские услуги: Доставка и&nbsp;забор грузов от&nbsp;двери до&nbsp;двери, забор грузов в&nbsp;Аэропорту г.&nbsp;Владивостока,
+          срочная доставка груза в&nbsp;г.&nbsp;Хабаровск на&nbsp;ежедневной основе, срочная доставка документов по&nbsp;Приморскому краю
+          от&nbsp;2 до&nbsp;24 часов.
+        </app-text-box>
       </div>
-      <div class="images-box">
-<!--        {{{ img name="article-photo-1" alt="Возможно это ты" }}}-->
-<!--        {{{ img name="article-photo-2" alt="Возможно это ты" }}}-->
-<!--        {{{ img name="article-photo-3" alt="Возможно это ты" }}}-->
-      </div>
+      <app-images-box></app-images-box>
     </div>
   </div>
 </section>

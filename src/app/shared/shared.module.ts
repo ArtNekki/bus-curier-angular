@@ -4,6 +4,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {AngularSvgIconModule} from 'angular-svg-icon';
 import { BtnComponent } from './components/btn/btn.component';
 import { LinkComponent } from './components/link/link.component';
+import { TextBoxComponent } from './components/text-box/text-box.component';
+import { ImgComponent } from './components/img/img.component';
 
 
 
@@ -18,11 +20,15 @@ import { LinkComponent } from './components/link/link.component';
     HttpClientModule,
     AngularSvgIconModule,
     BtnComponent,
-    LinkComponent
+    LinkComponent,
+    TextBoxComponent,
+    ImgComponent
   ],
   declarations: [
     BtnComponent,
-    LinkComponent
+    LinkComponent,
+    TextBoxComponent,
+    ImgComponent
   ]
 })
 export class SharedModule { }

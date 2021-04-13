@@ -1,0 +1,7 @@
+<picture>
+  <source *ngIf="breakpoints.xl" media="(min-width: 1200px)" srcset="assets/img/content/{{name}}--xl.{{ext}} 1x, assets/img/content/{{name}}--xl@2x.{{ext}} 2x, assets/img/content/{{name}}--xl@3x.{{ext}} 3x">
+  <source *ngIf="breakpoints.lg" media="(min-width: 992px)" srcset="assets/img/content/{{name}}--lg.{{ext}} 1x, assets/img/content/{{name}}--lg@2x.{{ext}} 2x, assets/img/content/{{name}}--lg@3x.{{ext}} 3x">
+  <source *ngIf="breakpoints.md" media="(min-width: 768px)" srcset="assets/img/content/{{name}}--md.{{ext}} 1x, assets/img/content/{{name}}--md@2x.{{ext}} 2x, assets/img/content/{{name}}--md@3x.{{ext}} 3x">
+  <source *ngIf="breakpoints.sm" media="(min-width: 576px)" srcset="assets/img/content/{{name}}--sm.{{ext}} 1x, assets/img/content/{{name}}--sm@2x.{{ext}} 2x, assets/img/content/{{name}}--sm@3x.{{ext}} 3x">
+  <img src="assets/img/content/{{name}}--xs.{{ext}}" srcset="assets/img/content/{{name}}--xs@2x.{{ext}} 2x, assets/img/content/{{name}}--xs@3x.{{ext}} 3x" [attr.width]="width" [attr.height]="height"  [style.maxWidth]="maxWidth" [attr.alt]="alt">
+</picture>

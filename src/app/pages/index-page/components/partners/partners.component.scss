@@ -1,0 +1,43 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.partners {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 95px);
+  grid-column-gap: 15px;
+  grid-row-gap: 20px;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 95px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    grid-template-rows: 125px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    grid-template-rows: 155px;
+  }
+
+  &__item {
+    @include box();
+  }
+
+  &__item svg {
+    width: 110px;
+    height: auto;
+
+    @include media-breakpoint-up(lg) {
+      width: 150px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      width: 190px;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.images-box {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: minmax(min-content, 312px);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: repeat(3, minmax(min-content, 312px));
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 95px;
+    grid-template-columns: 312px;
+    grid-row-gap: 30px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    margin-top: 130px;
+  }
+}
