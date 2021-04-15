@@ -17,6 +17,7 @@ import {AngularMyDatePickerModule} from 'angular-mydatepicker';
 import {NgSelectModule} from '@ng-select/ng-select';
 import { NgSelectConfig } from '@ng-select/ng-select';
 import { TextareaComponent } from './components/textarea/textarea.component';
+import { SliderComponent } from './components/slider/slider.component';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -33,7 +34,7 @@ import { TextareaComponent } from './components/textarea/textarea.component';
     // DeviceDetectorModule.forRoot(),
   ],
   exports: [
-    // CommonModule,
+    CommonModule,
     HttpClientModule,
     AngularSvgIconModule,
     FormsModule,
@@ -44,7 +45,8 @@ import { TextareaComponent } from './components/textarea/textarea.component';
     DatepickerComponent,
     LinkComponent,
     TextBoxComponent,
-    ImgComponent
+    ImgComponent,
+    SliderComponent
   ],
   declarations: [
     BtnComponent,
@@ -55,7 +57,8 @@ import { TextareaComponent } from './components/textarea/textarea.component';
     DatepickerComponent,
     SelectComponent,
     SwitcherComponent,
-    TextareaComponent
+    TextareaComponent,
+    SliderComponent
   ],
   // providers: [NgSelectConfig, ɵs],
 })

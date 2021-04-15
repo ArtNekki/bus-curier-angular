@@ -1,0 +1,118 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.banner {
+
+  --banner-img-width: 236px;
+  --banner-img-height: 314px;
+
+  @include media-breakpoint-up(md) {
+    --banner-img-width: 584px;
+    --banner-img-height: 362px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    --banner-img-width: 777px;
+    --banner-img-height: 447px;
+  }
+
+  position: relative;
+  font-family: $font-family;
+  color: $black-color;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-color: $primary-color;
+    //background-color: #fde018;
+  }
+
+  &::after {
+    //@include bg-image('banner-img--xs', 'png');
+
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    width: var(--banner-img-width);
+    height: var(--banner-img-height);
+    background-size: var(--banner-img-width) var(--banner-img-height);
+
+    @include media-breakpoint-up(md) {
+      //@include bg-image('banner-img--md', 'png');
+    }
+
+    @include media-breakpoint-up(lg) {
+      //@include bg-image('banner-img--lg', 'png');
+    }
+  }
+
+  &__container {
+    @include container();
+
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    @include media-breakpoint-up(xl) {
+      padding-top: 90px;
+      padding-bottom: 110px;
+    }
+  }
+
+  &__title {
+    margin: 0 0 20px 0;
+    max-width: 290px;
+    font-family: $font-family;
+    font-size: 28px;
+    line-height: 33.6px;
+    font-weight: 700;
+
+    @include media-breakpoint-up(sm) {
+      max-width: 420px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      max-width: unset;
+      font-size: 42px;
+      line-height: 52px;
+    }
+  }
+
+  &__text {
+    margin: 0;
+    margin-bottom: 15px;
+    max-width: 210px;
+    font-size: 16px;
+    line-height: 22px;
+
+    @include media-breakpoint-up(sm) {
+      max-width: 320px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      max-width: unset;
+    }
+  }
+
+  &__text span {
+    @include text-bg($white-color);
+
+    padding-left: 0.45em;
+    z-index: 10;
+
+    &::before {
+      top: -0.175em;
+      right: -0.35em;
+      bottom: -0.175em;
+    }
+  }
+}

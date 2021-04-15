@@ -1,0 +1,12 @@
+<div class="swiper swiper--shadow">
+  <div data-slider class="swiper-container">
+    <div class="swiper-wrapper">
+      <div *ngFor="let icon of icons" class="swiper-slide box box--shopping-live box--shadow-right">
+        <svg-icon class="icon" src="/assets/img/svg/{{icon.name}}.svg" width="" height=""></svg-icon>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <button class="swiper-button swiper-button-prev"></button>
+  <button class="swiper-button swiper-button-next"></button>
+</div>
