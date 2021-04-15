@@ -1,1 +1,2 @@
-<p>datepicker works!</p>
+<input  *ngIf="deviceService.isMobile() || deviceService.isTablet()" type="date" [id]="id" [name]="name" #datepicker class="input input--date" (change)="changeValue(datepicker.value)">
+<input *ngIf="deviceService.isDesktop()" type="text" [id]="id" [name]="name" angular-mydatepicker [options]="dpOptions" locale="ru" #dp="angular-mydatepicker" class="input input--date" (click)="dp.openCalendar()" (dateChanged)="changeValue($event)">

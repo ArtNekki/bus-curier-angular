@@ -12,15 +12,24 @@ import { SelectComponent } from './components/select/select.component';
 import { SwitcherComponent } from './components/switcher/switcher.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
+// import {DeviceDetectorModule} from 'ngx-device-detector';
+import {AngularMyDatePickerModule} from 'angular-mydatepicker';
+import {NgSelectModule} from '@ng-select/ng-select';
+import { NgSelectConfig } from '@ng-select/ng-select';
+// import { ɵs } from '@ng-select/ng-select;
+
 
 
 @NgModule({
   imports: [
-    // CommonModule,
+    CommonModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularMyDatePickerModule,
     AngularSvgIconModule,
+    NgSelectModule,
+    // DeviceDetectorModule.forRoot(),
   ],
   exports: [
     // CommonModule,
@@ -42,6 +51,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     DatepickerComponent,
     SelectComponent,
     SwitcherComponent
-  ]
+  ],
+  // providers: [NgSelectConfig, ɵs],
 })
 export class SharedModule { }

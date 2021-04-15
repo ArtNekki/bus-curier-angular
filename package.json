@@ -19,7 +19,10 @@
     "@angular/platform-browser": "~11.2.9",
     "@angular/platform-browser-dynamic": "~11.2.9",
     "@angular/router": "~11.2.9",
+    "@ng-select/ng-select": "^6.1.0",
+    "angular-mydatepicker": "^0.11.2",
     "angular-svg-icon": "^8.0.0",
+    "ngx-device-detector": "^2.0.6",
     "rxjs": "~6.6.7",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

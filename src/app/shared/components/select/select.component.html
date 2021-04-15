@@ -1,1 +1,7 @@
-<p>select works!</p>
+<div *ngIf="deviceService.isMobile() || deviceService.isTablet()" class="select">
+  <select #select [name]="id" [id]="id" class="select-inner" (change)="changeValue($event)">
+    <option *ngFor="let item of items" [value]="item.value">{{ item.name }}</option>
+  </select>
+</div>
+<ng-select *ngIf="deviceService.isDesktop()" [id]="id" [items]="items" bindLabel="name" bindValue="value" [ngModel]="value" (change)="changeValue($event)">
+</ng-select>
