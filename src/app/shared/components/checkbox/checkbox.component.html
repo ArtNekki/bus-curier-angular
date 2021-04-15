@@ -1,4 +1,6 @@
-<div class="checkbox">
+<div [class]="cssClass">
   <input #input type="checkbox" [name]="name || id" [id]="id" [ngModel]="value" (ngModelChange)="changeValue(input.checked)"/>
-  <label class="checkbox-label" [for]="id">{{label}}</label>
+  <label class="checkbox-label" [for]="id">
+    <ng-content></ng-content>
+  </label>
 </div>

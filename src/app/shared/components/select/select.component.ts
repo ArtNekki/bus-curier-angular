@@ -14,12 +14,14 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
     }
   ]
 })
-export class SelectComponent implements  ControlValueAccessor {
+export class SelectComponent implements  ControlValueAccessor, OnInit {
 
   @Input() id;
   @Input() items;
+  @Input() mods;
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
+  public cssClass = 'select';
   value: string;
 
   constructor(public deviceService: DeviceDetectorService) { }
@@ -57,5 +59,22 @@ export class SelectComponent implements  ControlValueAccessor {
 
   registerOnTouched(fn) {
     this.onTouched = fn;
+  }
+
+  ngOnInit(): void {
+    this.setMods();
+  }
+
+  setMods() {
+    let allMods = '';
+
+    if (this.mods !== 'undefined' && this.mods ) {
+      const modsList = this.mods.split(',');
+      for (const item of modsList) {
+        allMods = allMods + ' btn--' + item.trim();
+      }
+    }
+
+    this.cssClass += allMods;
   }
 }

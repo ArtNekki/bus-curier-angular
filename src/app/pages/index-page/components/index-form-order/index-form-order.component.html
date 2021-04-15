@@ -2,35 +2,21 @@
   <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--1-col-lg form__fieldset--2-col-xl">
     <div class="form__field">
       <label for="delivery-from-2" class="form__label form__label--light">Откуда отправляем?</label>
-      <!--            {{{ select-->
-      <!--            id="delivery-from-2"-->
-      <!--            name="delivery-from-2"-->
-      <!--            data='[-->
-      <!--            {"value": "", "name": "Выберите город"},-->
-      <!--              {"value": "nakhodka", "name": "Находка"},-->
-      <!--              {"value": "arseniev", "name": "Арсеньев"}]'-->
-      <!--            }}}-->
+      <app-select [items]="cities" mods="no-shadow"></app-select>
     </div>
     <div class="form__field">
       <label for="delivery-to-2" class="form__label form__label--light">Куда отправляем?</label>
-      <!--            {{{ select-->
-      <!--            id="delivery-to-2"-->
-      <!--            name="delivery-to-2"-->
-      <!--            data='[-->
-      <!--            {"value": "", "name": "Выберите город"},-->
-      <!--              {"value": "nakhodka", "name": "Находка"},-->
-      <!--              {"value": "arseniev", "name": "Арсеньев"}]'-->
-      <!--            }}}-->
+      <app-select [items]="cities" mods="no-shadow"></app-select>
     </div>
     <div class="form__field form__field--full">
       <label for="describe-task" class="form__label form__label--light">Куда отправляем?</label>
       <!--            {{{ textarea id="describe-task" name="describe-task" }}}-->
     </div>
     <div class="form__field form__field--full">
-      {{{ checkbox id="subscribe" name="personal-data" label='Нажимая кнопку «Отправить», я даю свое согласие на
-      <a href="#" class="link">
-        <span class="link__text">обработку моих персональных данных</span>
-      </a>' mods="md, inverted"}}}
+      <app-checkbox name="personal-data" mods="md, inverted">
+        Нажимая кнопку «Отправить», я даю свое согласие на
+        <app-link href="#">обработку моих персональных данных</app-link>
+      </app-checkbox>
     </div>
   </div>
   <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--1-col-lg form__fieldset--2-col-xl">

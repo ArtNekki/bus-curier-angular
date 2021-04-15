@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import cities from '../../../../mock-data/cities';
 
 @Component({
   selector: 'app-index-form-order',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./index-form-order.component.scss']
 })
 export class IndexFormOrderComponent implements OnInit {
+
+  public cities = cities;
 
   constructor() { }
 

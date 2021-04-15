@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
@@ -11,13 +11,15 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
     multi: true
   }]
 })
-export class CheckboxComponent implements ControlValueAccessor  {
+export class CheckboxComponent implements ControlValueAccessor, OnInit {
 
   @Input() id;
   @Input() name;
   @Input() label;
+  @Input() mods;
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
+  public cssClass = 'checkbox';
   value = false;
 
   constructor() {
@@ -43,5 +45,22 @@ export class CheckboxComponent implements ControlValueAccessor  {
 
   registerOnTouched(fn) {
     this.onTouched = fn;
+  }
+
+  ngOnInit(): void {
+    this.setMods();
+  }
+
+  setMods() {
+    let allMods = '';
+
+    if (this.mods !== 'undefined' && this.mods ) {
+      const modsList = this.mods.split(',');
+      for (const item of modsList) {
+        allMods = allMods + ' checkbox--' + item.trim();
+      }
+    }
+
+    this.cssClass += allMods;
   }
 }

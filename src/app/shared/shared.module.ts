@@ -38,6 +38,9 @@ import { NgSelectConfig } from '@ng-select/ng-select';
     FormsModule,
     ReactiveFormsModule,
     BtnComponent,
+    SelectComponent,
+    CheckboxComponent,
+    DatepickerComponent,
     LinkComponent,
     TextBoxComponent,
     ImgComponent
