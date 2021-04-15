@@ -1,0 +1,81 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.checkbox {
+
+  :host-context(.checkbox--inline) & {
+    display: inline-block;
+  }
+
+  &-label {
+    position: relative;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 16px;
+    //color: $gray;
+    cursor: pointer;
+
+    .checkbox--no-pointer-events & {
+      pointer-events: none;
+    }
+
+    &::before {
+      content: '';
+      margin-right: 10px;
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      flex-shrink: 0;
+      //border: 1px solid $gray;
+
+      .checkbox--sm & {
+        width: 15px;
+        height: 15px;
+      }
+
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 8px;
+      width: 9px;
+      height: 13px;
+      display: none;
+      flex-shrink: 0;
+      //border: 2px solid $white;
+      border-top: none;
+      border-left: none;
+      transform: rotate3d(0, 0, 1, 45deg);
+
+      .checkbox--sm & {
+        top: 3px;
+        left: 5px;
+        width: 6px;
+        height: 10px;
+      }
+    }
+  }
+
+  input {
+    display: none;
+  }
+
+  input:checked ~ &-label {
+    //color: rgba($yellow, 0.6);
+
+    &::before {
+      //background-color: $gray;
+      //border-color: $gray;
+    }
+
+    &::after {
+      display: block;
+    }
+  }
+}
