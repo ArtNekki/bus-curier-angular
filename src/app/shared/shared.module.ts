@@ -16,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AngularMyDatePickerModule} from 'angular-mydatepicker';
 import {NgSelectModule} from '@ng-select/ng-select';
 import { NgSelectConfig } from '@ng-select/ng-select';
+import { TextareaComponent } from './components/textarea/textarea.component';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -53,7 +54,8 @@ import { NgSelectConfig } from '@ng-select/ng-select';
     CheckboxComponent,
     DatepickerComponent,
     SelectComponent,
-    SwitcherComponent
+    SwitcherComponent,
+    TextareaComponent
   ],
   // providers: [NgSelectConfig, ɵs],
 })
