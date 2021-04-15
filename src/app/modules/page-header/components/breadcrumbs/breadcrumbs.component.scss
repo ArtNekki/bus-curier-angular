@@ -1,0 +1,56 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.breadcrumb {
+  border-top: 1px solid lighten($gray-light-color, 5%);
+  white-space: nowrap;
+  overflow-x: auto;
+
+  @include header-sticky(xs) {
+    display: none;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 20px 0;
+    display: flex;
+    list-style: none;
+    @include container();
+  }
+
+  &__item {
+    padding-right: 10px;
+
+    &:not(:last-child)::after {
+      content: '\2022';
+      margin-left: 10px;
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 10px;
+      color: $gray-dark-color;
+    }
+  }
+
+  &__link {
+    font-family: $font-family--secondary;
+    font-size: 14px;
+    line-height: 20px;
+    color: $font-color;
+    text-decoration: none;
+
+    @include hover {
+      color: $black-color;
+    }
+
+    .breadcrumb__item--active & {
+      color: rgba($font-color, 0.5);
+
+      @include hover {
+        color: rgba($font-color, 0.5);
+      }
+    }
+  }
+}

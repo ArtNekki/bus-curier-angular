@@ -1,20 +1,18 @@
-<p>page-header works!</p>
-
 <header id="pageHeader" class="page-header">
   <div class="page-header__inner">
     <a href="/" class="page-header__logo">
-      <svg-icon src="/assets/img/svg/logo.svg" class="icon"></svg-icon>
+      <svg-icon class="icon" src="/assets/img/svg/logo.svg"></svg-icon>
     </a>
     <div class="page-header__top">
       <div class="page-header__location">
-<!--        {{> area-selector}}-->
+        <app-location-selector></app-location-selector>
       </div>
       <a href="tel: " class="page-header__contact">
-<!--        {{{ icon name="tel" width="15" height="15" }}}-->
+        <svg-icon class="icon" src="/assets/img/svg/tel.svg" width="15" height="15"></svg-icon>
         <span>8 800 222 22 68</span>
       </a>
       <div class="page-header__user">
-<!--        {{> header-user}}-->
+        <app-header-user></app-header-user>
       </div>
       <div class="page-header__open">
         <button id="mobileNavOpen" type="button">
@@ -23,18 +21,18 @@
       </div>
     </div>
     <nav class="page-header__nav">
-<!--      {{> main-nav}}-->
+      <app-main-nav></app-main-nav>
       <a href="tel: " class="page-header__contact page-header__contact--sticky">
-<!--        {{{ icon name="tel" width="15" height="15" }}}-->
+        <svg-icon class="icon" src="/assets/img/svg/tel.svg" width="15" height="15"></svg-icon>
         <span>8 800 222 22 68</span>
       </a>
       <div class="page-header__user page-header__user--sticky">
-<!--        {{> header-user}}-->
+        <app-header-user></app-header-user>
       </div>
     </nav>
-<!--    {{> main-mobile-nav}}-->
+    <app-mobile-nav></app-mobile-nav>
   </div>
   <div class="page-header__breadcrumb">
-<!--    {{>breadcrumb}}-->
+    <app-breadcrumbs></app-breadcrumbs>
   </div>
 </header>

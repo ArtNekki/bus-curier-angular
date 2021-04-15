@@ -1,0 +1,129 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.main-nav {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  justify-content: space-between;
+  list-style: none;
+
+  @include header-sticky(lg) {
+    margin-right: 65px;
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__item {
+    position: relative;
+
+    .main-nav > & {
+      @include media-breakpoint-up(lg) {
+        padding-bottom: 40px;
+      }
+    }
+
+    .main-nav > &--dropdown {
+      padding-right: 15px;
+    }
+
+    .main-nav__dropdown & {
+      padding: 5px 0;
+    }
+
+
+    .main-nav > &  {
+
+      @include header-sticky(lg) {
+        padding-bottom: $sticky-menu-bottom-space * 2;
+      }
+    }
+  }
+
+  &__link {
+    font-family: $font-family;
+    font-size: 17px;
+    line-height: 24px;
+    color: darken($gray-dark-color, 10%); //#666666
+    text-decoration: none;
+    white-space: nowrap;
+
+    @include hover {
+      color: $black-color;
+    }
+
+    @include active {
+      color: $black-color;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 16px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      font-size: 17px;
+    }
+
+    @include header-sticky(lg) {
+      font-size: 14px;
+    }
+
+    .main-nav__dropdown & {
+      font-size: 16px;
+      line-height: 22px;
+
+      @include media-breakpoint-up(lg) {
+        font-size: 15px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        font-size: 16px;
+      }
+
+      @include header-sticky(lg) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__link  span {
+    position: relative;
+    display: inline-block;
+
+    @include caret(0.5em, -0.75em);
+
+    &::after {
+
+      @include header-sticky(lg) {
+        top: 0.55em;
+      }
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    margin: 0;
+    padding: 15px 30px 20px 20px;
+    list-style: none;
+    display: none;
+    opacity: 0;
+    background-color: $white-color;
+    border-top: 3px solid $primary-color;
+    border-radius: 2px;
+    box-shadow: 0px 5px 40px rgba($black-color, 0.05);
+
+    .main-nav__item:hover > & {
+      display: block;
+      @include menu-hover();
+    }
+  }
+}

@@ -1,0 +1,153 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.header-user {
+  position: relative;
+  padding-bottom: 3px;
+  display: flex;
+  align-items: center;
+
+  @include media-breakpoint-up(lg) { //temp
+    padding-bottom: 3px;
+  }
+
+  &--logged-in {
+
+    @include media-breakpoint-up(lg) { //temp
+      padding-bottom: 8px;
+    }
+  }
+
+  @include header-sticky(lg) {
+    padding-bottom:  calc(#{$sticky-menu-bottom-space} + 10px);
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__icon {
+    margin-right: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    .header-user--logged-in & {
+      margin-right: 0;
+      margin-left: 20px;
+      order: 1;
+
+      @include media-breakpoint-up(lg) {
+        margin-left: 42px;
+      }
+    }
+
+    @include header-sticky(lg) {
+      margin-left: 20px;
+    }
+  }
+
+  &__icon svg {
+    display: block;
+    width: 40px;
+    height: 40px;
+
+    @include header-sticky(lg) {
+      width: 27px;
+      height: 27px;
+    }
+
+    .header-user--logged-in & {
+      width: 27px;
+      height: 27px;
+    }
+  }
+
+  &__label {
+    position: relative;
+    display: none;
+    font-family: $font-family;
+    font-size: 15px;
+    line-height: 20px;
+    color: $font-color;
+    cursor: pointer;
+    transition: $menu-item-transition;
+
+    @include hover {
+      color: $black-color;
+    }
+
+    @include media-breakpoint-up(lg) {
+      display: block;
+    }
+
+    @include header-sticky(lg) {
+      display: none;
+    }
+
+    @include caret(0.4em, -1.25em);
+
+    &::after {
+      display: none;
+
+      .header-user--logged-in & {
+        display: block;
+      }
+    }
+  }
+
+  &__dropdown  {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    padding: 10px 15px 10px 20px;
+    display: none;
+    opacity: 0;
+    background-color: $white-color;
+    border-top: 3px solid $primary-color;
+    border-radius: 2px;
+    box-shadow: 0px 5px 40px rgba($black-color, 0.05);
+
+    .header-user:hover > & {
+      display: block;
+      @include menu-hover();
+    }
+
+    .header-user--logged-in & {
+      right: unset;
+      left: 50%;
+      transform: translateX(-50%);
+
+      @include header-sticky(lg) {
+        right: 0;
+        left: unset;
+        transform: none;
+      }
+    }
+  }
+
+  &__link {
+    padding: 7px 0;
+    display: block;
+    font-family: $font-family;
+    font-size: 15px;
+    line-height: 18px;
+    white-space: nowrap;
+    color: $font-color;
+    text-decoration: none;
+
+    @include hover {
+      color: $black-color;
+    }
+
+    @include active {
+      color: $black-color;
+    }
+  }
+}
