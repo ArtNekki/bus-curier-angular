@@ -1,0 +1,31 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.kce-map {
+  margin-bottom: 40px;
+  //margin-right: auto;
+  //margin-left: auto;
+  width: 338px;
+  //height: 190px;
+
+  @include media-breakpoint-up(sm) {
+    width: 545px;
+  }
+
+  @include media-breakpoint-up(md) {
+    width: 721px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 0;
+    width: 545px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    margin-top: 60px;
+    width: 721px;
+  }
+}

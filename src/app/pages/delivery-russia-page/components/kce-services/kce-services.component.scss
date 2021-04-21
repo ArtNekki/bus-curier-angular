@@ -1,0 +1,50 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.kce-services {
+  @include list-clear();
+
+  margin: 20px 0 5px 0;
+
+  @include media-breakpoint-up(sm) {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+    justify-content: start;
+  }
+
+  @include media-breakpoint-up(md) {
+    margin-top: 40px;
+    grid-column-gap: 40px;
+    grid-row-gap: 40px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 15px;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 42px auto;
+    grid-column-gap: 25px;
+
+    &:not(:last-child) {
+      margin-bottom: 25px;
+
+      @include media-breakpoint-up(sm) {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__text {
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    line-height: 22px;
+  }
+}

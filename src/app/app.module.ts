@@ -9,8 +9,8 @@ import { AccountComponent } from './modules/account/account.component';
 import { OrderComponent } from './modules/order/order.component';
 import { CalculatorComponent } from './modules/calculator/calculator.component';
 import {IndexPageModule} from './pages/index-page/index-page.module';
-import { ParcelsPageComponent } from './pages/parcels-page/parcels-page.component';
 import {ParcelsPageModule} from './pages/parcels-page/parcels-page.module';
+import {DeliveryRussiaPageModule} from './pages/delivery-russia-page/delivery-russia-page.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +24,7 @@ import {ParcelsPageModule} from './pages/parcels-page/parcels-page.module';
     PageHeaderModule,
     PageFooterModule,
     ParcelsPageModule,
+    DeliveryRussiaPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],

@@ -1,0 +1,301 @@
+.page {
+  $col-gap: 50px;
+
+  @include mobile-open {
+    overflow: hidden;
+  }
+
+  @include map-full-mode {
+    overflow: hidden;
+  }
+
+  &--no-scroll {
+    overflow: hidden;
+
+    @include media-breakpoint-up(lg) {
+      overflow: auto;
+    }
+  }
+
+  &__inner {
+    @include container();
+
+    &--col-2 {
+      display: grid;
+      grid-column-gap: 45px;
+
+      //@include media-breakpoint-up(sm) {
+      //  grid-template-columns: minmax(min-content, 750px);
+      //}
+
+      @include media-breakpoint-up(lg) {
+        //grid-template-columns: minmax(min-content, 600px) 370px;
+        grid-template-columns: 1fr 370px;
+        //justify-content: space-between;
+      }
+    }
+
+    //.page-contacts--full-map & {
+    //  position: fixed;
+    //  overflow: hidden;
+    //}
+
+    //@include header-sticky(xs) {
+    //  padding-top: 85px;
+    //}
+  }
+
+  &__container {
+    @include container();
+
+    //width: 100%;
+
+    &--col-2 {
+
+      @include media-breakpoint-up(lg) {
+        $col-gap: 50px;
+        $sidebar-width: 370px;
+
+        display: grid;
+        grid-template-columns: calc(100% - (#{$col-gap} + #{$sidebar-width})) $sidebar-width;
+        grid-column-gap: $col-gap;
+        align-items: start;
+      }
+    }
+
+    &--calculator {
+
+      @include media-breakpoint-up(lg) {
+        $sidebar-width: 400px;
+
+        grid-template-columns: calc(100% - (#{$col-gap} + #{$sidebar-width})) $sidebar-width;
+      }
+    }
+
+    //&--calc-rate {
+    //  @include media-breakpoint-up(lg) {
+    //    $col-gap: 50px;
+    //    $sidebar-width: 400px;
+    //
+    //    display: grid;
+    //    grid-template-columns: 1fr 400px;
+    //    grid-column-gap: $col-gap;
+    //  }
+    //}
+
+    &--col-2-xl {
+
+      @include media-breakpoint-up(xl) {
+        $col-gap: 50px;
+        $sidebar-width: 370px;
+
+        display: grid;
+        grid-template-columns: calc(100% - (#{$col-gap} + #{$sidebar-width})) $sidebar-width;
+        grid-column-gap: $col-gap;
+        align-items: start;
+      }
+    }
+
+    //&--account-two-col {
+    //
+    //}
+
+    //&--calc {
+    //  @include media-breakpoint-up(lg) {
+    //    display: grid;
+    //    grid-template-columns: auto 400px;
+    //    grid-column-gap: 35px;
+    //  }
+    //
+    //  @include media-breakpoint-up(xl) {
+    //    display: grid;
+    //    grid-template-columns: minmax(auto, 700px) minmax(auto, 400px);
+    //    grid-column-gap: 70px;
+    //  }
+    //}
+  }
+
+  &__content {
+    //grid-column: 1 / 2;
+
+    &--media {
+      display: grid;
+      grid-row-gap: 20px;
+
+      @include media-breakpoint-up(md) {
+        grid-template-columns: repeat(2, auto);
+        grid-column-gap: 20px;
+        justify-content: start;
+      }
+
+      @include media-breakpoint-up(lg) {
+        grid-column-gap: 30px;
+        grid-row-gap: 30px;
+      }
+    }
+  }
+
+  //&__content-top {
+  //  @include container();
+  //}
+
+  &__sidebar {
+    margin-top: 40px;
+    display: grid;
+    grid-row-gap: 40px;
+    align-content: start;
+    //grid-column: 2 / 3;
+
+    @include media-breakpoint-only(md) {
+      grid-template-columns: repeat(2, auto);
+      grid-column-gap: $container-padding-x * 2;
+      justify-content: start;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 0;
+    }
+  }
+
+
+  &__go-back {
+    $circle-size: 30px;
+
+    position: relative;
+    margin-top: 30px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: $circle-size 1fr;
+    grid-column-gap: 15px;
+    align-items: center;
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    line-height: 1;
+    color: $font-color;
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 55px;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+
+    &::before {
+      content: "";
+      width: $circle-size;
+      height: $circle-size;
+      border: 1px solid rgba($black-color, 0.1);
+      border-radius: 50%;
+    }
+
+    &::after {
+      $arrow-size: 4px;
+
+      content: "";
+      position: relative;
+      left: 2px;
+      justify-self: center;
+      width: $arrow-size;
+      height: $arrow-size;
+      border: 1px solid $black-color;
+      border-bottom-color: transparent;
+      border-right-color: transparent;
+      transform: rotate3d(0, 0, 1, -45deg);
+    }
+  }
+
+  &__title {
+    margin: 0;
+    margin-top: 40px;
+    margin-bottom: 25px;
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    font-family: $font-family;
+    font-size: 32px;
+    line-height: 38.4px;
+    color: $black-color;
+
+    @include media-breakpoint-up(md) {
+      margin-top: 35px;
+      margin-bottom: 45px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 65px;
+      margin-bottom: 40px;
+      font-size: 42px;
+      line-height: 52px;
+    }
+
+    .page__go-back + & {
+      margin-top: 20px;
+
+      @include media-breakpoint-up(lg) {
+        margin-top: 30px;
+      }
+    }
+  }
+
+  &__subtitle {
+    margin: -10px 0 25px 0;
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    line-height: 22px;
+
+    @include media-breakpoint-up(md) {
+      margin-top: -25px;
+      margin-bottom: 35px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-bottom: 55px;
+    }
+  }
+
+  &__text {
+    margin: 20px 0 0 0;
+    font-family: $font-family--secondary;
+
+    &--work-since {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 26.4px;
+
+      @include media-breakpoint-up(lg) {
+        padding-right: 30px;
+        text-align: right;
+      }
+    }
+  }
+
+  //&__row {
+  //
+  //  @include media-breakpoint-up(lg) {
+  //    display: grid;
+  //    grid-template-columns: 1fr 300px;
+  //    grid-column-gap: 145px;
+  //  }
+  //}
+}
+
+body {
+  @include mobile-open {
+    //position: fixed;
+  }
+
+  @include map-full-mode {
+    position: fixed;
+  }
+}
