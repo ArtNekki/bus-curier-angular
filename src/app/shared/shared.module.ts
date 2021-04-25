@@ -18,6 +18,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import { NgSelectConfig } from '@ng-select/ng-select';
 import { TextareaComponent } from './components/textarea/textarea.component';
 import { SliderComponent } from './components/slider/slider.component';
+import { MediaComponent } from './components/media/media.component';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -43,6 +44,7 @@ import { SliderComponent } from './components/slider/slider.component';
     SelectComponent,
     CheckboxComponent,
     DatepickerComponent,
+    MediaComponent,
     LinkComponent,
     TextBoxComponent,
     ImgComponent,
@@ -51,6 +53,7 @@ import { SliderComponent } from './components/slider/slider.component';
   declarations: [
     BtnComponent,
     LinkComponent,
+    MediaComponent,
     TextBoxComponent,
     ImgComponent,
     CheckboxComponent,
@@ -58,7 +61,8 @@ import { SliderComponent } from './components/slider/slider.component';
     SelectComponent,
     SwitcherComponent,
     TextareaComponent,
-    SliderComponent
+    SliderComponent,
+    MediaComponent
   ],
   // providers: [NgSelectConfig, ɵs],
 })

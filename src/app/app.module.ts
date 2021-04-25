@@ -11,6 +11,8 @@ import { CalculatorComponent } from './modules/calculator/calculator.component';
 import {IndexPageModule} from './pages/index-page/index-page.module';
 import {ParcelsPageModule} from './pages/parcels-page/parcels-page.module';
 import {DeliveryRussiaPageModule} from './pages/delivery-russia-page/delivery-russia-page.module';
+import { SendParcelPageComponent } from './pages/send-parcel-page/send-parcel-page.component';
+import {SendParcelPageModule} from './pages/send-parcel-page/send-parcel-page.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import {DeliveryRussiaPageModule} from './pages/delivery-russia-page/delivery-ru
     PageFooterModule,
     ParcelsPageModule,
     DeliveryRussiaPageModule,
+    SendParcelPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],

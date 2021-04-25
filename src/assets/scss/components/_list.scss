@@ -1,0 +1,95 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.list {
+  @include list-clear();
+
+  $letters: "а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "к", "л", "м";
+
+  &--numbers {
+    counter-reset: number;
+  }
+
+  &--letters {
+    margin-top: 20px;
+
+    @for $i from 1 through length($letters) {
+      & > .list__item:nth-child(#{$i})::before {
+        content: nth($letters, $i) + ")";
+      }
+    }
+  }
+
+  &__item {
+    position: relative;
+    margin-bottom: 12px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-auto-rows: max-content;
+    grid-column-gap: 15px;
+    justify-items: start;
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    line-height: 22px;
+
+    .list--numbers > & {
+      grid-column-gap: $list-number--gap-sm;
+
+      @include media-breakpoint-up(md) {
+        grid-column-gap: $list-number--gap-md;
+      }
+    }
+
+    &::before {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+      align-self: start;
+
+      .list--numbers > & {
+        @include step-point(38px, 20px);
+
+        counter-increment: number;
+        content: counter(number);
+      }
+
+      .list--letters > & {
+        font-family: $font-family--secondary;
+        font-size: 16px;
+        color: $gray-color--down-11;
+      }
+    }
+
+    .list--numbers > & {
+      margin-bottom: 45px;
+      align-items: center;
+    }
+
+    .list--letters > & {
+      margin-bottom: 15px;
+      align-items: center;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .list--items-with-border & {
+
+      //border-bottom: 1px solid $gray-light-color;
+    }
+  }
+
+  &__content {
+
+    & > p:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  p:only-child {
+    margin: 0;
+  }
+}
