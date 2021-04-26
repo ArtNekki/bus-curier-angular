@@ -5,7 +5,6 @@ import { PackageBlockComponent } from './components/package-block/package-block.
 import {SharedModule} from '../../shared/shared.module';
 
 
-
 @NgModule({
   declarations: [
     PackingPageComponent,

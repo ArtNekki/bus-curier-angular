@@ -5,6 +5,7 @@ import {ParcelsPageComponent} from './pages/parcels-page/parcels-page.component'
 import {DeliveryRussiaPageComponent} from './pages/delivery-russia-page/delivery-russia-page.component';
 import {SendParcelPageComponent} from './pages/send-parcel-page/send-parcel-page.component';
 import {PackingPageComponent} from './pages/packing-page/packing-page.component';
+import {RulesOfSendComponent} from './pages/rules-of-send/rules-of-send.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'parcels', component: ParcelsPageComponent},
   {path: 'delivery-russia', component: DeliveryRussiaPageComponent},
   {path: 'send-parcel', component: SendParcelPageComponent},
-  {path: 'packing', component: PackingPageComponent}
+  {path: 'packing', component: PackingPageComponent},
+  {path: 'rules-of-send', component: RulesOfSendComponent}
   // {
   //   path: 'parcels',
   //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')
