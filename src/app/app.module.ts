@@ -13,6 +13,8 @@ import {ParcelsPageModule} from './pages/parcels-page/parcels-page.module';
 import {DeliveryRussiaPageModule} from './pages/delivery-russia-page/delivery-russia-page.module';
 import { SendParcelPageComponent } from './pages/send-parcel-page/send-parcel-page.component';
 import {SendParcelPageModule} from './pages/send-parcel-page/send-parcel-page.module';
+import { PackingPageComponent } from './pages/packing-page/packing-page.component';
+import {PackingPageModule} from './pages/packing-page/packing-page.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import {SendParcelPageModule} from './pages/send-parcel-page/send-parcel-page.mo
     PageHeaderModule,
     PageFooterModule,
     ParcelsPageModule,
+    PackingPageModule,
     DeliveryRussiaPageModule,
     SendParcelPageModule,
     // IndexPageModule,

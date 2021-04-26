@@ -19,6 +19,8 @@ import { NgSelectConfig } from '@ng-select/ng-select';
 import { TextareaComponent } from './components/textarea/textarea.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { MediaComponent } from './components/media/media.component';
+import { TableComponent } from './components/table/table.component';
+import { AlertComponent } from './components/alert/alert.component';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -45,10 +47,12 @@ import { MediaComponent } from './components/media/media.component';
     CheckboxComponent,
     DatepickerComponent,
     MediaComponent,
+    TableComponent,
     LinkComponent,
     TextBoxComponent,
     ImgComponent,
-    SliderComponent
+    SliderComponent,
+    AlertComponent
   ],
   declarations: [
     BtnComponent,
@@ -62,7 +66,9 @@ import { MediaComponent } from './components/media/media.component';
     SwitcherComponent,
     TextareaComponent,
     SliderComponent,
-    MediaComponent
+    MediaComponent,
+    TableComponent,
+    AlertComponent
   ],
   // providers: [NgSelectConfig, ɵs],
 })

@@ -1,0 +1,11 @@
+<article [class]="cssClass" [attr.data-count]="count">
+  <h1 class="package-block__title">{{title}}</h1>
+  <p class="package-block__text">{{text}}</p>
+  <ng-content></ng-content>
+  <div *ngIf="label" class="package-block__label">
+    {{label}}
+  </div>
+  <img *ngIf="img" class="package-block__img"
+       src="${root}assets/img/content/cargo-packing/{{img}}.jpg"
+       srcset="${root}assets/img/content/cargo-packing/{{img}}@2x.jpg 2x, ${root}assets/img/content/cargo-packing/{{img}}@3x.jpg 3x">`
+</article>

@@ -1,0 +1,122 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.package-block {
+  $step-point-size: 38px;
+
+  margin-bottom: 30px;
+  padding-top: 30px;
+  display: grid;
+  grid-template-columns: $list-number--size 1fr;
+  grid-template-rows: repeat(4, auto);
+  grid-column-gap: $list-number--gap-sm;
+  align-items: start;
+  border-top: 1px solid $gray-light-color;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 40px;
+    padding-top: 40px;
+    grid-template-columns: $list-number--size 1fr 270px;
+    grid-template-rows: repeat(3, auto);
+    grid-column-gap: $list-number--gap-md;
+  }
+
+  @include media-breakpoint-only(lg) {
+    grid-template-columns: $list-number--size 1fr;
+  }
+
+  &::before {
+    @include step-point($list-number--size, 20px);
+
+    content: attr(data-count);
+    grid-column: 1 / 2;
+    grid-row: 1 / -1;
+  }
+
+  &__title {
+    margin: 6px 0 0 0;
+    font-family: $font-family--secondary;
+    font-size: 22px;
+    line-height: 1.2;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 0.55em;
+    }
+  }
+
+  &__text {
+    margin-bottom: 15px;
+    font-size: 15px;
+    opacity: 0.8;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 25px;
+    }
+  }
+
+  &__table {
+    $table-mg-top: 30px;
+
+    margin-top: $table-mg-top;
+    grid-column: 1 / -1;
+    grid-row: 4 / 5;
+
+    @include media-breakpoint-up(sm) {
+      grid-column: 2 / -1;
+    }
+
+    @include media-breakpoint-up(md) {
+      margin: 0;
+      grid-column: unset;
+      grid-row: unset;
+    }
+
+    @include media-breakpoint-only(lg) {
+      margin-top: $table-mg-top;
+      grid-column: 2 / -1;
+    }
+  }
+
+  &__label {
+    $label-mg-bottom: 20px;
+
+    margin-bottom: $label-mg-bottom;
+    padding: 0.75em 1.75em;
+    justify-self: start;
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    line-height: 1.4;
+    border: 2px solid $primary-color;
+    border-radius: 0.5em;
+
+    @include media-breakpoint-up(md) {
+      margin: 0;
+    }
+
+    @include media-breakpoint-only(lg) {
+      margin-top: $label-mg-bottom;
+      grid-column: 2 / 3;
+    }
+  }
+
+  &__img {
+    width: 270px;
+    height: 175px;
+    display: block;
+    background-color: red;
+    border-radius: 10px;
+
+    @include media-breakpoint-up(md) {
+      grid-column: 3 / 4;
+      grid-row: 1 / -1;
+    }
+
+    @include media-breakpoint-only(lg) {
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+    }
+  }
+}
