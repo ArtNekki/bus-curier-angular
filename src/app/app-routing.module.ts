@@ -7,6 +7,8 @@ import {SendParcelPageComponent} from './pages/send-parcel-page/send-parcel-page
 import {PackingPageComponent} from './pages/packing-page/packing-page.component';
 import {RulesOfSendComponent} from './pages/rules-of-send/rules-of-send.component';
 import {DocumentsComponent} from './pages/documents/documents.component';
+import {NonStandardTasksModule} from './pages/non-standard-tasks/non-standard-tasks.module';
+import {NonStandardTasksComponent} from './pages/non-standard-tasks/non-standard-tasks.component';
 
 
 const routes: Routes = [
@@ -16,7 +18,8 @@ const routes: Routes = [
   {path: 'send-parcel', component: SendParcelPageComponent},
   {path: 'packing', component: PackingPageComponent},
   {path: 'rules-of-send', component: RulesOfSendComponent},
-  {path: 'documents', component: DocumentsComponent}
+  {path: 'documents', component: DocumentsComponent},
+  {path: 'non-standard-tasks', component: NonStandardTasksComponent}
   // {
   //   path: 'parcels',
   //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')

@@ -1,0 +1,60 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.card {
+  font-family: $font-family;
+
+  @include media-breakpoint-up(sm) {
+    display: grid;
+    grid-template-columns: 255px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-column-gap: 20px;
+    align-content: start;
+  }
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: 345px 1fr;
+    grid-column-gap: 30px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    display: block;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 200px;
+    grid-columns: 1 / 2;
+    grid-row: 1 / -1;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  &__title {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 22px;
+    line-height: 1.25;
+
+    @include media-breakpoint-up(sm) {
+      margin-top: 0;
+      margin-bottom: 5px;
+      grid-row-gap: unset;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+  }
+
+  &__text {
+    font-size: 15px;
+    line-height: 1.45;
+    opacity: 0.8;
+  }
+}

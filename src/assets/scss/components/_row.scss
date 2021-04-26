@@ -1,0 +1,58 @@
+.row {
+
+  &--article {
+    @include media-breakpoint-up(lg) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: 100px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      grid-column-gap: 150px;
+    }
+  }
+
+  &--no-standart-tasks {
+    $first-column--lg: 50%;
+    $first-column--xl: 670px;
+    $column-gap--lg: 55px;
+    $column-gap--xl: 65px;
+
+    @include media-breakpoint-up(lg) {
+      display: grid;
+      grid-template-columns: $first-column--lg calc(100% - #{$first-column--lg} - #{$column-gap--lg});
+      grid-column-gap: $column-gap--lg;
+    }
+
+    @include media-breakpoint-up(xl) {
+      grid-template-columns: $first-column--xl calc(100% - #{$first-column--xl} - #{$column-gap--xl});
+      grid-column-gap: $column-gap--xl;
+    }
+
+    //.page-section--article & {
+    //  @include media-breakpoint-up(xl) {
+    //    grid-column-gap: 150px;
+    //  }
+    //}
+  }
+
+  &--cards {
+    margin-top: 20px;
+    display: grid;
+    grid-row-gap: 25px;
+
+    @include media-breakpoint-up(md) {
+      grid-row-gap: 40px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 35px;
+      grid-template-columns: repeat(3, 1fr);
+      grid-column-gap: 30px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      grid-column-gap: 50px;
+    }
+  }
+}

@@ -19,6 +19,8 @@ import { RulesOfSendComponent } from './pages/rules-of-send/rules-of-send.compon
 import {RulesOfSendModule} from './pages/rules-of-send/rules-of-send.module';
 import { DocumentsComponent } from './pages/documents/documents.component';
 import {DocumentsModule} from './pages/documents/documents.module';
+import { NonStandardTasksComponent } from './pages/non-standard-tasks/non-standard-tasks.component';
+import {NonStandardTasksModule} from './pages/non-standard-tasks/non-standard-tasks.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import {DocumentsModule} from './pages/documents/documents.module';
     SendParcelPageModule,
     RulesOfSendModule,
     DocumentsModule,
+    NonStandardTasksModule,
     // IndexPageModule,
     AppRoutingModule
   ],
