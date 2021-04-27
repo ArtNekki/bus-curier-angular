@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {DocumentsComponent} from './documents.component';
+import {DocumentsPageComponent} from './documents-page.component';
 
 
 
 @NgModule({
   declarations: [
-    DocumentsComponent
+    DocumentsPageComponent
   ],
   imports: [
     CommonModule
   ]
 })
-export class DocumentsModule { }
+export class DocumentsPageModule { }

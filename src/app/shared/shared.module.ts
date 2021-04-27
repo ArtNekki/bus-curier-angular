@@ -21,6 +21,7 @@ import { SliderComponent } from './components/slider/slider.component';
 import { MediaComponent } from './components/media/media.component';
 import { TableComponent } from './components/table/table.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { ListComponent } from './components/list/list.component';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -52,7 +53,8 @@ import { AlertComponent } from './components/alert/alert.component';
     TextBoxComponent,
     ImgComponent,
     SliderComponent,
-    AlertComponent
+    AlertComponent,
+    ListComponent
   ],
   declarations: [
     BtnComponent,
@@ -68,7 +70,8 @@ import { AlertComponent } from './components/alert/alert.component';
     SliderComponent,
     MediaComponent,
     TableComponent,
-    AlertComponent
+    AlertComponent,
+    ListComponent
   ],
   // providers: [NgSelectConfig, ɵs],
 })
