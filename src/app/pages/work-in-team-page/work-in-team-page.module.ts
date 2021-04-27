@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {WorkInTeamComponent} from './work-in-team.component';
+import {WorkInTeamPageComponent} from './work-in-team-page.component';
 import { AchievementsComponent } from './components/achievements/achievements.component';
 import {SharedModule} from '../../shared/shared.module';
 import { DepartmentsComponent } from './components/departments/departments.component';
@@ -10,7 +10,7 @@ import { WorkBannerComponent } from './components/work-banner/work-banner.compon
 
 @NgModule({
   declarations: [
-    WorkInTeamComponent,
+    WorkInTeamPageComponent,
     AchievementsComponent,
     DepartmentsComponent,
     WorkBannerComponent
@@ -20,4 +20,4 @@ import { WorkBannerComponent } from './components/work-banner/work-banner.compon
     SharedModule
   ]
 })
-export class WorkInTeamModule { }
+export class WorkInTeamPageModule { }

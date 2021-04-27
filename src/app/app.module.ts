@@ -15,7 +15,7 @@ import {PackingPageModule} from './pages/packing-page/packing-page.module';
 import {RulesOfSendPageModule} from './pages/rules-of-send-page/rules-of-send-page.module';
 import {DocumentsPageModule} from './pages/documents-page/documents-page.module';
 import {NonStandardTasksPageModule} from './pages/non-standard-tasks-page/non-standard-tasks-page.module';
-import {WorkInTeamModule} from './pages/work-in-team/work-in-team.module';
+import {WorkInTeamPageModule} from './pages/work-in-team-page/work-in-team-page.module';
 import {IndexPageModule} from './pages/index-page/index-page.module';
 
 @NgModule({
@@ -37,7 +37,7 @@ import {IndexPageModule} from './pages/index-page/index-page.module';
     RulesOfSendPageModule,
     DocumentsPageModule,
     NonStandardTasksPageModule,
-    WorkInTeamModule,
+    WorkInTeamPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],
