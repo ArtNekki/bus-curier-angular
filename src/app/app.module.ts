@@ -14,7 +14,7 @@ import {SendParcelPageModule} from './pages/send-parcel-page/send-parcel-page.mo
 import {PackingPageModule} from './pages/packing-page/packing-page.module';
 import {RulesOfSendModule} from './pages/rules-of-send/rules-of-send.module';
 import {DocumentsPageModule} from './pages/documents-page/documents-page.module';
-import {NonStandardTasksModule} from './pages/non-standard-tasks/non-standard-tasks.module';
+import {NonStandardTasksPageModule} from './pages/non-standard-tasks-page/non-standard-tasks-page.module';
 import {WorkInTeamModule} from './pages/work-in-team/work-in-team.module';
 import {IndexPageModule} from './pages/index-page/index-page.module';
 
@@ -36,7 +36,7 @@ import {IndexPageModule} from './pages/index-page/index-page.module';
     SendParcelPageModule,
     RulesOfSendModule,
     DocumentsPageModule,
-    NonStandardTasksModule,
+    NonStandardTasksPageModule,
     WorkInTeamModule,
     // IndexPageModule,
     AppRoutingModule

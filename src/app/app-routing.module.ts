@@ -7,8 +7,7 @@ import {SendParcelPageComponent} from './pages/send-parcel-page/send-parcel-page
 import {PackingPageComponent} from './pages/packing-page/packing-page.component';
 import {RulesOfSendComponent} from './pages/rules-of-send/rules-of-send.component';
 import {DocumentsPageComponent} from './pages/documents-page/documents-page.component';
-import {NonStandardTasksModule} from './pages/non-standard-tasks/non-standard-tasks.module';
-import {NonStandardTasksComponent} from './pages/non-standard-tasks/non-standard-tasks.component';
+import {NonStandardTasksPageComponent} from './pages/non-standard-tasks-page/non-standard-tasks-page.component';
 import {WorkInTeamComponent} from './pages/work-in-team/work-in-team.component';
 
 
@@ -20,7 +19,7 @@ const routes: Routes = [
   {path: 'packing', component: PackingPageComponent},
   {path: 'rules-of-send', component: RulesOfSendComponent},
   {path: 'documents', component: DocumentsPageComponent},
-  {path: 'non-standard-tasks', component: NonStandardTasksComponent},
+  {path: 'non-standard-tasks', component: NonStandardTasksPageComponent},
   {path: 'work-in-team', component: WorkInTeamComponent}
   // {
   //   path: 'parcels',

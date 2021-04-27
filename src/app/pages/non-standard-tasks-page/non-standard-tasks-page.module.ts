@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NonStandardTasksComponent} from './non-standard-tasks.component';
+import {NonStandardTasksPageComponent} from './non-standard-tasks-page.component';
 import { CardComponent } from './components/card/card.component';
 import {SharedModule} from '../../shared/shared.module';
 
@@ -8,7 +8,7 @@ import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
-    NonStandardTasksComponent,
+    NonStandardTasksPageComponent,
     CardComponent
   ],
   imports: [
@@ -16,4 +16,4 @@ import {SharedModule} from '../../shared/shared.module';
     SharedModule
   ]
 })
-export class NonStandardTasksModule { }
+export class NonStandardTasksPageModule { }
