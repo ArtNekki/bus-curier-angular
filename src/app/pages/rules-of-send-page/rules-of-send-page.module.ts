@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RulesOfSendComponent} from './rules-of-send.component';
+import {RulesOfSendPageComponent} from './rules-of-send-page.component';
 
 
 
 @NgModule({
   declarations: [
-    RulesOfSendComponent
+    RulesOfSendPageComponent
   ],
   imports: [
     CommonModule
   ]
 })
-export class RulesOfSendModule { }
+export class RulesOfSendPageModule { }

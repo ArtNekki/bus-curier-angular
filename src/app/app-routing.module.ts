@@ -5,7 +5,7 @@ import {ParcelsPageComponent} from './pages/parcels-page/parcels-page.component'
 import {DeliveryRussiaPageComponent} from './pages/delivery-russia-page/delivery-russia-page.component';
 import {SendParcelPageComponent} from './pages/send-parcel-page/send-parcel-page.component';
 import {PackingPageComponent} from './pages/packing-page/packing-page.component';
-import {RulesOfSendComponent} from './pages/rules-of-send/rules-of-send.component';
+import {RulesOfSendPageComponent} from './pages/rules-of-send-page/rules-of-send-page.component';
 import {DocumentsPageComponent} from './pages/documents-page/documents-page.component';
 import {NonStandardTasksPageComponent} from './pages/non-standard-tasks-page/non-standard-tasks-page.component';
 import {WorkInTeamComponent} from './pages/work-in-team/work-in-team.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'delivery-russia', component: DeliveryRussiaPageComponent},
   {path: 'send-parcel', component: SendParcelPageComponent},
   {path: 'packing', component: PackingPageComponent},
-  {path: 'rules-of-send', component: RulesOfSendComponent},
+  {path: 'rules-of-send', component: RulesOfSendPageComponent},
   {path: 'documents', component: DocumentsPageComponent},
   {path: 'non-standard-tasks', component: NonStandardTasksPageComponent},
   {path: 'work-in-team', component: WorkInTeamComponent}

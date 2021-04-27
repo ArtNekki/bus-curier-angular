@@ -12,7 +12,7 @@ import {ParcelsPageModule} from './pages/parcels-page/parcels-page.module';
 import {DeliveryRussiaPageModule} from './pages/delivery-russia-page/delivery-russia-page.module';
 import {SendParcelPageModule} from './pages/send-parcel-page/send-parcel-page.module';
 import {PackingPageModule} from './pages/packing-page/packing-page.module';
-import {RulesOfSendModule} from './pages/rules-of-send/rules-of-send.module';
+import {RulesOfSendPageModule} from './pages/rules-of-send-page/rules-of-send-page.module';
 import {DocumentsPageModule} from './pages/documents-page/documents-page.module';
 import {NonStandardTasksPageModule} from './pages/non-standard-tasks-page/non-standard-tasks-page.module';
 import {WorkInTeamModule} from './pages/work-in-team/work-in-team.module';
@@ -34,7 +34,7 @@ import {IndexPageModule} from './pages/index-page/index-page.module';
     PackingPageModule,
     DeliveryRussiaPageModule,
     SendParcelPageModule,
-    RulesOfSendModule,
+    RulesOfSendPageModule,
     DocumentsPageModule,
     NonStandardTasksPageModule,
     WorkInTeamModule,
