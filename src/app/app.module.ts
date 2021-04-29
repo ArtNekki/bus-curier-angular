@@ -17,6 +17,7 @@ import {DocumentsPageModule} from './pages/documents-page/documents-page.module'
 import {NonStandardTasksPageModule} from './pages/non-standard-tasks-page/non-standard-tasks-page.module';
 import {WorkInTeamPageModule} from './pages/work-in-team-page/work-in-team-page.module';
 import {IndexPageModule} from './pages/index-page/index-page.module';
+import {FeedbackPageModule} from './pages/feedback-page/feedback-page.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {IndexPageModule} from './pages/index-page/index-page.module';
     DocumentsPageModule,
     NonStandardTasksPageModule,
     WorkInTeamPageModule,
+    FeedbackPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],
