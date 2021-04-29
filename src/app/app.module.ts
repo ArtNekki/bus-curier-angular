@@ -18,6 +18,7 @@ import {NonStandardTasksPageModule} from './pages/non-standard-tasks-page/non-st
 import {WorkInTeamPageModule} from './pages/work-in-team-page/work-in-team-page.module';
 import {IndexPageModule} from './pages/index-page/index-page.module';
 import {FeedbackPageModule} from './pages/feedback-page/feedback-page.module';
+import {HowToSendPageModule} from './pages/how-to-send-page/how-to-send-page.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {FeedbackPageModule} from './pages/feedback-page/feedback-page.module';
     NonStandardTasksPageModule,
     WorkInTeamPageModule,
     FeedbackPageModule,
+    HowToSendPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],

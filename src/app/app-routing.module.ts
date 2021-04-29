@@ -10,6 +10,7 @@ import {DocumentsPageComponent} from './pages/documents-page/documents-page.comp
 import {NonStandardTasksPageComponent} from './pages/non-standard-tasks-page/non-standard-tasks-page.component';
 import {WorkInTeamPageComponent} from './pages/work-in-team-page/work-in-team-page.component';
 import {FeedbackPageComponent} from './pages/feedback-page/feedback-page.component';
+import {HowToSendPageComponent} from './pages/how-to-send-page/how-to-send-page.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path: 'documents', component: DocumentsPageComponent},
   {path: 'non-standard-tasks', component: NonStandardTasksPageComponent},
   {path: 'work-in-team', component: WorkInTeamPageComponent},
-  {path: 'feedback', component: FeedbackPageComponent}
+  {path: 'feedback', component: FeedbackPageComponent},
+  {path: 'how-to-send', component: HowToSendPageComponent}
   // {
   //   path: 'parcels',
   //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')
