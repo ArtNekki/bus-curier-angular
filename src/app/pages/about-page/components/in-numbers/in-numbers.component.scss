@@ -1,0 +1,51 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.in-numbers {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-column-gap: 20px;
+  grid-row-gap: 35px;
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: repeat(3, auto);
+  }
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(4, auto);
+    grid-row-gap: 45px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    margin-top: 35px;
+  }
+
+  &__item b {
+    display: block;
+    font-family: $font-family;
+    font-size: 32px;
+    line-height: 42px;
+
+    @include media-breakpoint-up(xl) {
+      font-size: 42px;
+    }
+  }
+
+  &__item small {
+    margin: 0;
+    font-family: $font-family--secondary;
+    font-size: 14px;
+    line-height: 20px;
+    color: $font-color;
+
+    @include media-breakpoint-up(xl) {
+      font-size: 18px;
+      line-height: 22px;
+    }
+  }
+}
+

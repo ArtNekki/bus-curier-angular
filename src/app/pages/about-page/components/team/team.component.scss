@@ -1,0 +1,75 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.team {
+  margin-top: 50px;
+
+  @include media-breakpoint-up(md) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: repeat(3, auto);
+    align-content: start;
+    grid-column-gap: 45px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 75px;
+    grid-column-gap: 80px;
+  }
+
+  &__img {
+    grid-row: 1 / 5;
+  }
+
+  &__img img {
+    object-fit: cover;
+    //max-width: 375px;
+    height: 250px;
+
+    @include media-breakpoint-up(sm) {
+      height: 345px;
+      max-width: unset;
+    }
+
+    @include media-breakpoint-up(md) {
+      width: 345px;
+      height: auto;
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: 493px;
+    }
+  }
+
+  &__title {
+    margin: 30px 0 0 0;
+    font-family: $font-family;
+    font-size: 28px;
+    line-height: 33.6px;
+    font-weight: 700;
+
+    @include media-breakpoint-up(md) {
+      margin: 0;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 50px;
+    }
+  }
+
+  &__text {
+    margin: 15px 0 20px 0;
+    display: block;
+    font-family: $font-family--secondary;
+    font-size: 20px;
+    line-height: 24px;
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 45px;
+    }
+  }
+}
+

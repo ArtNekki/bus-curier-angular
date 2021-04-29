@@ -19,6 +19,8 @@ import {WorkInTeamPageModule} from './pages/work-in-team-page/work-in-team-page.
 import {IndexPageModule} from './pages/index-page/index-page.module';
 import {FeedbackPageModule} from './pages/feedback-page/feedback-page.module';
 import {HowToSendPageModule} from './pages/how-to-send-page/how-to-send-page.module';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
+import {AboutPageModule} from './pages/about-page/about-page.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import {HowToSendPageModule} from './pages/how-to-send-page/how-to-send-page.mod
     WorkInTeamPageModule,
     FeedbackPageModule,
     HowToSendPageModule,
+    AboutPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],

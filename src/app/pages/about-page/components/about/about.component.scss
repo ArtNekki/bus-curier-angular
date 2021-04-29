@@ -1,0 +1,83 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+
+.about {
+
+  @include media-breakpoint-up(md) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 25px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    grid-template-columns: 1fr 500px;
+    grid-column-gap: 90px;
+  }
+
+  &__label {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-family: $font-family--secondary;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 500;
+  }
+
+  &__img {
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    width: 345px;
+    border-radius: $border-radius;
+
+    @include media-breakpoint-up(sm) {
+      width: 545px;
+    }
+
+    @include media-breakpoint-up(md) {
+      margin-top: 30px;
+      width: 345px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: 500px;
+      height: 300px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      margin-top: 0;
+      width: 500px;
+      height: 500px;
+      grid-column: 2 / 3;
+      grid-row: 1 / span 4;
+    }
+  }
+
+  &__img img {
+    border-radius: $border-radius;
+
+    @include media-breakpoint-only(lg) {
+      height: 360px;
+    }
+  }
+
+  &__list {
+    @include media-breakpoint-up(xl) {
+      grid-column: 1 / 2;
+    }
+  }
+
+  p {
+    grid-column: 1 / -1;
+
+    @include media-breakpoint-up(xl) {
+      grid-column: 1 / 2;
+    }
+  }
+}
+

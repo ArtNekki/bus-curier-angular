@@ -1,0 +1,60 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.values {
+  @include list-clear();
+
+  margin-top: 30px;
+
+  @include media-breakpoint-up(md) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 35px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-breakpoint-up(xl) {
+    grid-column-gap: 50px;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    grid-template-rows: repeat(2, auto);
+    grid-column-gap: 24px;
+    align-content: start;
+
+    &:not(:last-child) {
+      margin-bottom: 30px;
+
+      @include media-breakpoint-up(md) {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__item svg {
+    grid-row: 1 / -1;
+  }
+
+  &__label {
+    margin-bottom: 10px;
+    display: block;
+    font-family: $font-family--secondary;
+    font-size: 25px;
+    line-height: 25px;
+    font-weight: 500;
+  }
+
+  &__text {
+    font-family: $font-family--secondary;
+    font-size: 15px;
+    line-height: 20px;
+  }
+}
