@@ -1,0 +1,177 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.departments {
+  margin-top: 40px;
+
+  &__container {
+    @include container();
+
+    @include media-breakpoint-up(md) {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      justify-content: center;
+      grid-column-gap: 15px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: repeat(2, 1fr);
+      justify-content: start;
+    }
+  }
+
+  &__col {
+    position: relative;
+    max-width: 380px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    @include media-breakpoint-up(sm) {
+      max-width: 700px;
+    }
+
+    @include media-breakpoint-up(md) {
+      max-width: unset;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      background-repeat: no-repeat;
+    }
+  }
+
+  &__col--prim {
+    height: 420px;
+
+    @include media-breakpoint-up(sm) {
+      height: 300px;
+    }
+
+    @include media-breakpoint-up(md) {
+      height: 380px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      height: 260px;
+    }
+
+    &::before {
+      top: -123px;
+      left: -33px;
+      width: 415px;
+      height: 415px;
+      //background-image: url("map-prim");
+      background-position-y: 100%;
+      background-size: 100%;
+
+      @include media-breakpoint-up(sm) {
+        top: -95px;
+        left: 0;
+      }
+
+      @include media-breakpoint-up(md) {
+        top: -170px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        top: -210px;
+        left: -70px;
+        width: 490px;
+        height: 510px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        top: -220px;
+      }
+    }
+  }
+
+  &__col--tat {
+    height: 360px;
+
+    @include media-breakpoint-up(sm) {
+      height: 300px;
+    }
+
+    @include media-breakpoint-up(md) {
+      height: 380px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      height: 260px;
+    }
+
+    &::before {
+      top: -20px;
+      left: 0;
+      width: 360px;
+      height: 242px;
+      //background-image: url("map-tat");
+      background-position-y: 100%;
+      background-size: 100%;
+
+      @include media-breakpoint-up(lg) {
+        top: -85px;
+        width: 475px;
+        height: 340px;
+      }
+    }
+  }
+
+  &__item {
+    margin-left: 25px;
+    width: 350px;
+    min-height: 130px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-column-gap: 20px;
+
+    @include media-breakpoint-up(sm) {
+      margin-left: 0;
+    }
+
+    &::before {
+      content: attr(data-count);
+      font-family: $font-family;
+      font-size: 82px;
+      line-height: 82px;
+      grid-row: 1 / -1;
+    }
+  }
+
+  &__title {
+    margin-bottom: 10px;
+    font-family: $font-family--secondary;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+
+    @include media-breakpoint-up(xl) {
+      font-size: 22px;
+      line-height: 27px;
+    }
+  }
+
+  &__text {
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    line-height: 20.8px;
+
+    @include media-breakpoint-up(xl) {
+      font-size: 18px;
+      line-height: 23px;
+    }
+  }
+}
+

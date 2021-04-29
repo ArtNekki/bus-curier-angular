@@ -1,0 +1,74 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.work-in-team {
+  order: 2;
+
+  @include media-breakpoint-up(md) {
+    margin-top: 20px;
+    order: unset;
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 35px;
+  }
+
+  &__container {
+    @include container();
+  }
+
+  &__main {
+    @include media-breakpoint-up(md) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, auto);
+      grid-column-gap: 25px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      grid-column-gap: 45px;
+    }
+  }
+
+  &__list {
+    &:first-child {
+      grid-column: 1 / 2;
+      grid-row: 1 / -1;
+    }
+  }
+
+  &__title {
+    margin: 25px 0 15px 0;
+    font-family: $font-family;
+    font-size: 22px;
+    line-height: 26.4px;
+
+    @include media-breakpoint-up(lg) {
+      margin: 45px 0 18px 0;
+      font-size: 28px;
+      line-height: 33.6px;
+    }
+  }
+
+  &__footer {
+    position: relative;
+    left: -$container-padding-x;
+    margin-top: 10px;
+    width: calc(100% + #{$container-padding-x} * 2);
+    border-top: 1px solid transparent;
+    box-sizing: border-box;
+
+    @include media-breakpoint-up(md) {
+      left: unset;
+      width: 100%;
+      max-width: 665px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 55px;
+    }
+  }
+}

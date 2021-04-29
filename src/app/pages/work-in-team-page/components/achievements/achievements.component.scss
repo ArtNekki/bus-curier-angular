@@ -1,0 +1,133 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.achievements {
+  position: relative;
+  margin-top: 60px;
+  order: 1;
+  background-color: $primary-color;
+
+  @include media-breakpoint-up(md) {
+    margin-top: 40px;
+    display: block;
+    order: unset;
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 50px;
+  }
+
+  &__container {
+    @include container();
+
+    position: relative;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include media-breakpoint-up(md) {
+      display: grid;
+      grid-template-columns: 310px 330px;
+      grid-column-gap: 55px;
+      justify-content: center;
+      align-items: center;
+      grid-column: 1 / -1;
+    }
+
+    @include media-breakpoint-up(lg) {
+
+      padding-top: 25px;
+      padding-bottom: 25px;
+      grid-template-columns: 420px minmax(min-content, 530px);
+    }
+
+    @include media-breakpoint-up(xl) {
+      grid-template-columns: 420px 1fr;
+    }
+  }
+
+  &__item {
+    padding: 10px 0;
+    width: 100%;
+    min-height: 165px;
+    max-width: 340px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 7px;
+    align-items: start;
+    align-content: center;
+    background-repeat: no-repeat;
+
+    @include media-breakpoint-up(md) {
+      max-width: unset;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding: 0;
+      grid-template-columns: auto 1fr;
+      grid-column-gap: 20px;
+      background-position-y: 50%;
+    }
+
+    &:first-child {
+      @include media-breakpoint-only(sm) {
+        margin-right: auto;
+      }
+    }
+
+    &:last-child {
+      @include media-breakpoint-only(sm) {
+        margin-left: auto;
+      }
+    }
+
+    &::before {
+      content: attr(data-count);
+      font-family: $font-family;
+      font-size: 82px;
+      line-height: 82px;
+    }
+  }
+
+  &__item--work {
+    //background-image: url("work");
+    background-size: 86px 94px;
+    background-position: calc(100% - 25px) 20px;
+
+    @include media-breakpoint-up(lg) {
+      background-size: unset;
+      background-position-x: 20%;
+      background-position-y: 50%;
+    }
+  }
+
+  &__item--parcels {
+    //background-image: url("parcels");
+    background-size: 77px 77px;
+    background-position: calc(100% - 5px) calc(100% - 3px);
+
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: 1fr;
+      background-position-y: 50%;
+      background-position-x: calc(100% - 30px);
+      background-size: unset;
+    }
+
+    @include media-breakpoint-up(xl) {
+      grid-template-columns: auto 1fr;
+      background-position-x: 46%;
+    }
+  }
+
+  &__text {
+    margin: 0;
+    font-family: $font-family--secondary;
+    font-size: 24px;
+    line-height: 32px;
+  }
+}

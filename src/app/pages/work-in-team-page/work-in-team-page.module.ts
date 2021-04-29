@@ -5,6 +5,7 @@ import { AchievementsComponent } from './components/achievements/achievements.co
 import {SharedModule} from '../../shared/shared.module';
 import { DepartmentsComponent } from './components/departments/departments.component';
 import { WorkBannerComponent } from './components/work-banner/work-banner.component';
+import {WorkInTeamComponent} from './components/work-in-team/work-in-team.component';
 
 
 
@@ -13,7 +14,8 @@ import { WorkBannerComponent } from './components/work-banner/work-banner.compon
     WorkInTeamPageComponent,
     AchievementsComponent,
     DepartmentsComponent,
-    WorkBannerComponent
+    WorkBannerComponent,
+    WorkInTeamComponent
   ],
   imports: [
     CommonModule,
