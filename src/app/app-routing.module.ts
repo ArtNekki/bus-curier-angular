@@ -15,6 +15,7 @@ import {AboutPageComponent} from './pages/about-page/about-page.component';
 import {DeliveryFromAirportPageComponent} from './pages/delivery-from-airport-page/delivery-from-airport-page.component';
 import {CargoInsurancePageComponent} from './pages/cargo-insurance-page/cargo-insurance-page.component';
 import {CourierPageComponent} from './pages/courier-page/courier-page.component';
+import {OurServicesPageComponent} from './pages/our-services-page/our-services-page.component';
 
 
 const routes: Routes = [
@@ -32,7 +33,8 @@ const routes: Routes = [
   {path: 'about', component: AboutPageComponent},
   {path: 'delivery-from-airport', component: DeliveryFromAirportPageComponent},
   {path: 'cargo-insurance', component: CargoInsurancePageComponent},
-  {path: 'courier', component: CourierPageComponent}
+  {path: 'courier', component: CourierPageComponent},
+  {path: 'our-services', component: OurServicesPageComponent}
   // {
   //   path: 'parcels',
   //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')

@@ -1,0 +1,147 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.traffic {
+  @include media-breakpoint-up(md) {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-column-gap: 10px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    grid-column-gap: 25px;
+  }
+
+  &__item {
+    //display: flex;
+    //flex-direction: column;
+  }
+
+  &__img {
+    position: relative;
+    left: -$container-padding-x;
+    width: calc(100% + (#{$container-padding-x} * 2));
+    overflow: hidden;
+
+    @include media-breakpoint-up(md) {
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    @include media-breakpoint-up(xl) {
+      height: 290px;
+    }
+
+    img {
+      position: relative;
+      width: unset;
+      height: unset;
+    }
+
+    &--prim {
+      margin-top: -70px;
+
+      @include media-breakpoint-up(md) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &__img--prim img {
+    margin-left: 22px;
+    //width: 414px;
+    //height: 290px;
+
+    @include media-breakpoint-up(sm) {
+      margin-left: 15px;
+    }
+
+    @include media-breakpoint-up(md) {
+      //width: 240px;
+      //height: 201px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      //width: 381px;
+      //height: 291px;
+    }
+  }
+
+  &__img--tat img {
+    margin-left: 15px;
+
+    @include media-breakpoint-up(md) {
+      margin-left: 0;
+    }
+
+  }
+
+  &__img--rus img {
+    margin-left: -35px;
+
+    @include media-breakpoint-up(md) {
+      margin-left: 0;
+    }
+  }
+
+  &__title {
+    margin: 0 0 13px 0;
+    font-family: $font-family--secondary;
+    font-size: 22px;
+    line-height: 27px;
+    font-weight: 500;
+
+    //@include media-breakpoint-up(md) {
+    //  font-size: 20px;
+    //}
+
+    span {
+      position: relative;
+      padding-left: 0.3em;
+      display: inline-block;
+
+      @include media-breakpoint-up(md) {
+        padding-left: 0;
+        display: inline;
+      }
+
+      @include media-breakpoint-up(xl) {
+        padding-left: 0.3em;
+        display: inline-block;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -0.09em;
+        right: -0.3em;
+        bottom: -0.09em;
+        left: 0;
+        z-index: -1;
+        border-radius: 5px;
+        background-color: #FFDC00;
+
+        @include media-breakpoint-up(md) {
+          display: none;
+        }
+
+        @include media-breakpoint-up(xl) {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &__text {
+    font-family: $font-family--secondary;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 400;
+    opacity: 0.8;
+  }
+}
