@@ -23,6 +23,8 @@ import {AboutPageModule} from './pages/about-page/about-page.module';
 import {DeliveryFromAirportPageModule} from './pages/delivery-from-airport-page/delivery-from-airport-page.module';
 import { CargoInsurancePageComponent } from './pages/cargo-insurance-page/cargo-insurance-page.component';
 import {CargoInsurancePageModule} from './pages/cargo-insurance-page/cargo-insurance-page.module';
+import { CourierPageComponent } from './pages/courier-page/courier-page.component';
+import {CourierPageModule} from './pages/courier-page/courier-page.module';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import {CargoInsurancePageModule} from './pages/cargo-insurance-page/cargo-insur
     AboutPageModule,
     DeliveryFromAirportPageModule,
     CargoInsurancePageModule,
+    CourierPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],

@@ -14,6 +14,7 @@ import {HowToSendPageComponent} from './pages/how-to-send-page/how-to-send-page.
 import {AboutPageComponent} from './pages/about-page/about-page.component';
 import {DeliveryFromAirportPageComponent} from './pages/delivery-from-airport-page/delivery-from-airport-page.component';
 import {CargoInsurancePageComponent} from './pages/cargo-insurance-page/cargo-insurance-page.component';
+import {CourierPageComponent} from './pages/courier-page/courier-page.component';
 
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
   {path: 'how-to-send', component: HowToSendPageComponent},
   {path: 'about', component: AboutPageComponent},
   {path: 'delivery-from-airport', component: DeliveryFromAirportPageComponent},
-  {path: 'cargo-insurance', component: CargoInsurancePageComponent}
+  {path: 'cargo-insurance', component: CargoInsurancePageComponent},
+  {path: 'courier', component: CourierPageComponent}
   // {
   //   path: 'parcels',
   //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')
