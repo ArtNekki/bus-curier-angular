@@ -13,6 +13,7 @@ import {FeedbackPageComponent} from './pages/feedback-page/feedback-page.compone
 import {HowToSendPageComponent} from './pages/how-to-send-page/how-to-send-page.component';
 import {AboutPageComponent} from './pages/about-page/about-page.component';
 import {DeliveryFromAirportPageComponent} from './pages/delivery-from-airport-page/delivery-from-airport-page.component';
+import {CargoInsurancePageComponent} from './pages/cargo-insurance-page/cargo-insurance-page.component';
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
   {path: 'feedback', component: FeedbackPageComponent},
   {path: 'how-to-send', component: HowToSendPageComponent},
   {path: 'about', component: AboutPageComponent},
-  {path: 'delivery-from-airport', component: DeliveryFromAirportPageComponent}
+  {path: 'delivery-from-airport', component: DeliveryFromAirportPageComponent},
+  {path: 'cargo-insurance', component: CargoInsurancePageComponent}
   // {
   //   path: 'parcels',
   //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')
