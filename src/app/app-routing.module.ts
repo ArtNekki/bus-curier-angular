@@ -12,6 +12,7 @@ import {WorkInTeamPageComponent} from './pages/work-in-team-page/work-in-team-pa
 import {FeedbackPageComponent} from './pages/feedback-page/feedback-page.component';
 import {HowToSendPageComponent} from './pages/how-to-send-page/how-to-send-page.component';
 import {AboutPageComponent} from './pages/about-page/about-page.component';
+import {DeliveryFromAirportPageComponent} from './pages/delivery-from-airport-page/delivery-from-airport-page.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'work-in-team', component: WorkInTeamPageComponent},
   {path: 'feedback', component: FeedbackPageComponent},
   {path: 'how-to-send', component: HowToSendPageComponent},
-  {path: 'about', component: AboutPageComponent}
+  {path: 'about', component: AboutPageComponent},
+  {path: 'delivery-from-airport', component: DeliveryFromAirportPageComponent}
   // {
   //   path: 'parcels',
   //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')
