@@ -17,6 +17,7 @@ import {CargoInsurancePageComponent} from './pages/cargo-insurance-page/cargo-in
 import {CourierPageComponent} from './pages/courier-page/courier-page.component';
 import {OurServicesPageComponent} from './pages/our-services-page/our-services-page.component';
 import {UsefulInfoPageComponent} from './pages/useful-info-page/useful-info-page.component';
+import {ServicesPageComponent} from './pages/services-page/services-page.component';
 
 
 const routes: Routes = [
@@ -36,7 +37,8 @@ const routes: Routes = [
   {path: 'cargo-insurance', component: CargoInsurancePageComponent},
   {path: 'courier', component: CourierPageComponent},
   {path: 'our-services', component: OurServicesPageComponent},
-  {path: 'useful-info', component: UsefulInfoPageComponent}
+  {path: 'useful-info', component: UsefulInfoPageComponent},
+  {path: 'services', component: ServicesPageComponent}
   // {
   //   path: 'parcels',
   //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')

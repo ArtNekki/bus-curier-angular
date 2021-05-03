@@ -26,6 +26,8 @@ import {CourierPageModule} from './pages/courier-page/courier-page.module';
 import {OurServicesPageModule} from './pages/our-services-page/our-services-page.module';
 import { UsefulInfoPageComponent } from './pages/useful-info-page/useful-info-page.component';
 import {UsefulInfoPageModule} from './pages/useful-info-page/useful-info-page.module';
+import { ServicesPageComponent } from './pages/services-page/services-page.component';
+import {ServicesPageModule} from './pages/services-page/services-page.module';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import {UsefulInfoPageModule} from './pages/useful-info-page/useful-info-page.mo
     CourierPageModule,
     OurServicesPageModule,
     UsefulInfoPageModule,
+    ServicesPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],
