@@ -24,6 +24,8 @@ import {DeliveryFromAirportPageModule} from './pages/delivery-from-airport-page/
 import {CargoInsurancePageModule} from './pages/cargo-insurance-page/cargo-insurance-page.module';
 import {CourierPageModule} from './pages/courier-page/courier-page.module';
 import {OurServicesPageModule} from './pages/our-services-page/our-services-page.module';
+import { UsefulInfoPageComponent } from './pages/useful-info-page/useful-info-page.component';
+import {UsefulInfoPageModule} from './pages/useful-info-page/useful-info-page.module';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import {OurServicesPageModule} from './pages/our-services-page/our-services-page
     CargoInsurancePageModule,
     CourierPageModule,
     OurServicesPageModule,
+    UsefulInfoPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],
