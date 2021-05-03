@@ -28,6 +28,8 @@ import { UsefulInfoPageComponent } from './pages/useful-info-page/useful-info-pa
 import {UsefulInfoPageModule} from './pages/useful-info-page/useful-info-page.module';
 import { ServicesPageComponent } from './pages/services-page/services-page.component';
 import {ServicesPageModule} from './pages/services-page/services-page.module';
+import { FeedbackLinksPageComponent } from './pages/feedback-links-page/feedback-links-page.component';
+import {FeedbackLinksPageModule} from './pages/feedback-links-page/feedback-links-page.module';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import {ServicesPageModule} from './pages/services-page/services-page.module';
     OurServicesPageModule,
     UsefulInfoPageModule,
     ServicesPageModule,
+    FeedbackLinksPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],

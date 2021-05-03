@@ -18,6 +18,7 @@ import {CourierPageComponent} from './pages/courier-page/courier-page.component'
 import {OurServicesPageComponent} from './pages/our-services-page/our-services-page.component';
 import {UsefulInfoPageComponent} from './pages/useful-info-page/useful-info-page.component';
 import {ServicesPageComponent} from './pages/services-page/services-page.component';
+import {FeedbackLinksPageComponent} from './pages/feedback-links-page/feedback-links-page.component';
 
 
 const routes: Routes = [
@@ -38,7 +39,8 @@ const routes: Routes = [
   {path: 'courier', component: CourierPageComponent},
   {path: 'our-services', component: OurServicesPageComponent},
   {path: 'useful-info', component: UsefulInfoPageComponent},
-  {path: 'services', component: ServicesPageComponent}
+  {path: 'services', component: ServicesPageComponent},
+  {path: 'feedback-links', component: FeedbackLinksPageComponent}
   // {
   //   path: 'parcels',
   //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')
