@@ -27,8 +27,8 @@ import {OurServicesPageModule} from './pages/our-services-page/our-services-page
 import {UsefulInfoPageModule} from './pages/useful-info-page/useful-info-page.module';
 import {ServicesPageModule} from './pages/services-page/services-page.module';
 import {FeedbackLinksPageModule} from './pages/feedback-links-page/feedback-links-page.module';
-import { ContactsPageComponent } from './pages/contacts-page/contacts-page.component';
 import {ContactsPageModule} from './pages/contacts-page/contacts-page.module';
+import {TransportationRatesPageModule} from './pages/transportation-rates-page/transportation-rates-page.module';
 
 @NgModule({
   declarations: [
@@ -61,6 +61,7 @@ import {ContactsPageModule} from './pages/contacts-page/contacts-page.module';
     ServicesPageModule,
     FeedbackLinksPageModule,
     ContactsPageModule,
+    TransportationRatesPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],

@@ -20,6 +20,7 @@ import {UsefulInfoPageComponent} from './pages/useful-info-page/useful-info-page
 import {ServicesPageComponent} from './pages/services-page/services-page.component';
 import {FeedbackLinksPageComponent} from './pages/feedback-links-page/feedback-links-page.component';
 import {ContactsPageComponent} from './pages/contacts-page/contacts-page.component';
+import {TransportationRatesPageComponent} from './pages/transportation-rates-page/transportation-rates-page.component';
 
 
 const routes: Routes = [
@@ -42,7 +43,8 @@ const routes: Routes = [
   {path: 'useful-info', component: UsefulInfoPageComponent},
   {path: 'services', component: ServicesPageComponent},
   {path: 'feedback-links', component: FeedbackLinksPageComponent},
-  {path: 'contacts', component: ContactsPageComponent}
+  {path: 'contacts', component: ContactsPageComponent},
+  {path: 'transportation-rates', component: TransportationRatesPageComponent}
   // {
   //   path: 'parcels',
   //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')

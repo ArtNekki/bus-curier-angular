@@ -23,6 +23,8 @@ import { TableComponent } from './components/table/table.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { ListComponent } from './components/list/list.component';
 import { PreloaderComponent } from './components/preloader/preloader.component';
+import { RadioComponent } from './components/radio/radio.component';
+import { InfoBoxComponent } from './components/info-box/info-box.component';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -56,7 +58,9 @@ import { PreloaderComponent } from './components/preloader/preloader.component';
     SliderComponent,
     AlertComponent,
     ListComponent,
-    PreloaderComponent
+    PreloaderComponent,
+    RadioComponent,
+    InfoBoxComponent
   ],
   declarations: [
     BtnComponent,
@@ -74,7 +78,9 @@ import { PreloaderComponent } from './components/preloader/preloader.component';
     TableComponent,
     AlertComponent,
     ListComponent,
-    PreloaderComponent
+    PreloaderComponent,
+    RadioComponent,
+    InfoBoxComponent
   ],
   // providers: [NgSelectConfig, ɵs],
 })

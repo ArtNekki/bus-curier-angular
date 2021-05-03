@@ -1,0 +1,114 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.cargo-info {
+  margin-top: 40px;
+  margin-bottom: 60px;
+
+  &__item {
+    padding: 40px 0;
+    display: grid;
+    grid-template-columns: $list-number--size calc(100% - (#{$list-number--size} + #{$list-number--gap-md}));
+    grid-column-gap: $list-number--gap-md;
+    border-top: 1px solid $gray-light-color;
+
+    &::before {
+      @include step-point($list-number--size, 20px);
+
+      content: attr(data-count);
+      grid-column: 1 / 2;
+      grid-row: 1 / -1;
+      opacity: 0;
+    }
+
+    &[data-count]::before {
+      opacity: 1;
+    }
+
+    &:last-child {
+      border-bottom: 1px solid $gray-light-color;
+    }
+  }
+
+  &__title {
+    margin: 0 0 10px 0;
+    font-family: $font-family;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  &__text {
+    margin: 0 0 20px 0;
+    font-family: $font-family--secondary;
+    font-size: 15px;
+    line-height: 20px;
+    opacity: 0.8;
+  }
+
+  &__note {
+    margin: 25px 0 0 0;
+
+    small {
+      margin: 0;
+      display: block;
+      font-family: $font-family--secondary;
+      font-size: 14px;
+      color: $gray-dark-color;
+    }
+  }
+
+  &__data {
+    margin-top: 20px;
+  }
+
+  &__list {
+    @include list-clear();
+
+    margin-top: 22px;
+    font-family: $font-family--secondary;
+  }
+
+  &__list-item {
+    display: grid;
+    //grid-template-columns: auto 1fr 50%;
+    grid-template-columns: auto 1fr 120px;
+    grid-template-areas: "name dots value";
+    align-items: baseline;
+    grid-column-gap: 5px;
+    max-width: 405px;
+
+    &:not(:last-child) {
+      margin-bottom: 13px;
+    }
+
+    //@include media-breakpoint-only(md) {
+    //  grid-template-columns: auto 1fr 75%;
+    //}
+
+    @include media-breakpoint-up(xl) {
+      //grid-template-columns: auto 1fr 120px;
+    }
+
+    &::before {
+      content: "";
+      grid-area: dots;
+      border-bottom: 1px dotted $gray-color--down-11;
+    }
+  }
+
+  &__list-name {
+    grid-area: name;
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  &__list-value {
+    grid-area: value;
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
