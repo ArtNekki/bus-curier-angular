@@ -1,0 +1,19 @@
+<div class="points-list">
+  <app-preloader></app-preloader>
+  <ul class="points-list__scroll">
+    <li *ngFor="let point of points" class="points-list__item">
+      <app-link href="#" mods="blue, lg">{{ point.title }}</app-link>
+      <button class="points-list__action" data-tippy-content="Прием грузов">
+        <svg-icon class="icon" src="assets/img/svg/give.svg" width="18px" height="18px"></svg-icon>
+      </button>
+      <button class="points-list__action" data-tippy-content="Выдача грузов">
+        <svg-icon class="icon" src="assets/img/svg/accept.svg" width="18px" height="18px"></svg-icon>
+      </button>
+      <button class="points-list__action" data-tippy-content="Офис">
+        <svg-icon class="icon" src="assets/img/svg/office.svg" width="18px" height="18px"></svg-icon>
+      </button>
+      <div class="points-list__text">Русская ул., 2а, ст. 3.</div>
+      <div *ngIf="point.status" class="points-list__text points-list__text--status">{{point.status}}</div>
+    </li>
+  </ul>
+</div>

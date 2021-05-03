@@ -1,0 +1,307 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.page-contacts {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @include media-breakpoint-up(md) {
+    height: 675px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    overflow: hidden;
+  }
+
+  &__main {
+    @include container();
+
+    position: relative;
+    z-index: 2;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto) 1fr auto;
+    grid-template-areas:
+      "tabs"
+      "switcher"
+      "select"
+      "tab-content"
+      "panel";
+    width: 100%;
+    box-sizing: border-box;
+    transition: transform 0.5s ease-in;
+    overflow: hidden;
+
+    @include media-breakpoint-up(md) {
+      position: static;
+      margin-top: 0;
+      padding-top: 35px;
+      padding-bottom: 60px;
+      grid-template-columns: 400px  1fr 25px 1fr 65px;
+      grid-template-rows: repeat(2, auto) 450px;
+      grid-template-areas:
+        "switcher . . panel panel"
+        "select . . panel panel"
+        "list . . . .";
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+      height: auto;
+    }
+
+    @include media-breakpoint-up(xl) {
+      padding-right: 0;
+      padding-left: 0;
+      grid-template-areas:
+        "switcher . panel panel panel"
+        "select . panel panel panel"
+        "list details details details .";
+      box-sizing: content-box;
+      overflow: visible;
+    }
+
+    @include active-map-panel(sm) {
+      height: 100vh;
+    }
+  }
+
+  &__details {
+    position: relative;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    width: 100%;
+    z-index: 2;
+    transition: transform 0.5s ease-in-out;
+    transform: translateX(calc(100% + #{$container-padding-x}));
+
+    .page-contacts--details & {
+      transform: translateX(0);
+    }
+
+    @include media-breakpoint-up(sm) {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      transform: none;
+      width: 100%;
+      background-color: rgba($black-color, 0.5);
+
+      .page-contacts--details & {
+        display: flex;
+      }
+    }
+
+    @include media-breakpoint-up(xl) {
+      position: static;
+      grid-area: details;
+      transform: unset;
+      background: none;
+      box-shadow: $box-shadow;
+
+      .page-contacts--details & {
+        transform: unset;
+      }
+    }
+  }
+
+  &__switcher {
+    margin-top: 25px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-column-gap: 3px;
+    grid-area: switcher;
+
+    @include moveContactPageInfoLeft;
+
+    @include media-breakpoint-up(md) {
+      margin: 0;
+    }
+  }
+
+  &__btn {
+    margin: 0;
+    padding: 5px;
+    height: 55px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: $white-color;
+    border: 1px solid $gray-color;
+    border-radius: $border-radius;
+    cursor: pointer;
+
+    &.active {
+      background-color: $primary-color;
+      border-color: $primary-color;
+    }
+
+    @include hover {
+      border-color: $primary-color;
+    }
+
+    @include active {
+      transition: all 0.5s ease-in;
+      background-color: $primary-color;
+    }
+
+    @include focus {
+      outline: none;
+    }
+
+    @include media-breakpoint-up(md) {
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+  }
+
+  &__btn span {
+    margin-top: 5px;
+    display: block;
+    white-space: nowrap;
+    font-family: $font-family--secondary;
+    font-size: 10px;
+    line-height: 1.2em;
+    color: #333333;
+
+    @include media-breakpoint-up(sm) {
+      font-size: 12px;
+    }
+  }
+
+  &__select {
+    margin-bottom: 25px;
+    grid-area: select;
+
+    @include moveContactPageInfoLeft;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__list {
+    position: relative;
+    grid-area: tab-content;
+    background-color: $white-color;
+    border-radius: $border-radius;
+    transition: all 0.5s ease-in;
+
+    @include moveContactPageInfoLeft;
+
+    @include media-breakpoint-up(md) {
+      padding: 20px 10px 20px 20px;
+      grid-area: list;
+      box-shadow: $box-shadow;
+    }
+
+    .page-contacts--hide-list & {
+      opacity: 0;
+      z-index: -10;
+    }
+  }
+
+  &__feedback {
+    margin-top: 35px;
+    margin-bottom: 60px;
+    padding: 15px 30px 25px 20px;
+    box-sizing: border-box;
+    grid-area: panel;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 10px;
+    background-color: $primary-color;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+
+    @include media-breakpoint-up(sm) {
+      padding: 20px;
+      grid-template-columns: auto 1fr;
+      grid-column-gap: 20px;
+    }
+
+    @include media-breakpoint-only(md) {
+      display: none;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin: 0;
+    }
+
+    @include media-breakpoint-up(xl) {
+      height: 90px;
+    }
+
+    @include active-map-panel(lg) {
+      display: none;
+    }
+
+    @include moveContactPageInfoLeft;
+  }
+
+  &__feedback p {
+    margin: 0;
+    grid-column: 1 / -1;
+  }
+
+  &__feedback div:last-of-type {
+    @include media-breakpoint-only(lg) {
+      display: none;
+    }
+  }
+
+  &__map {
+    position: relative;
+    height: 100%;
+    grid-area: tab-content;
+
+    @include moveContactPageInfoLeft;
+
+    @include map-full-mode {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    @include media-breakpoint-up(md) {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      height: 100%;
+      grid-area: unset;
+    }
+  }
+
+  &__toggle {
+    padding: 10px 20px;
+    grid-area: panel;
+    justify-self: end;
+    align-self: start;
+    display: none;
+    background-color: $white-color;
+    box-shadow: $input-shadow;
+    border-radius: $border-radius;
+    cursor: pointer;
+
+    @include media-breakpoint-only(md) {
+      display: block;
+    }
+  }
+}

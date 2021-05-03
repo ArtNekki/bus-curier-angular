@@ -1,0 +1,27 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.preloader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: lighten($gray-light-color, 7%);
+  border-radius: $border-radius;
+
+  @include media-breakpoint-up(sm) {
+    background-color: $white-color;
+  }
+
+  .loading & {
+    display: flex;
+  }
+}

@@ -1,0 +1,289 @@
+.tabs {
+  $tabs-nav-space: 4px;
+  $tab-nav-border-height: 2px;
+
+  &--contacts {
+    grid-area: tabs;
+
+    @include moveContactPageInfoLeft;
+    @include media-breakpoint-up(md) {
+      display: none;
+    }
+  }
+
+  &--accordeon {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(8, auto);
+
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, auto);
+      grid-column-gap: $tabs-nav-space;
+    }
+  }
+
+  &__nav {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: $tabs-nav-space;
+    list-style: none;
+
+    .tabs--contacts & {
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: 0;
+    }
+
+    .tabs--two & {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tabs--no-space & {
+      grid-column-gap: 0;
+    }
+  }
+
+  &__item {
+    background-color: $gray-light-color--up-5;
+
+    .tabs--contacts & {
+      background-color: $white-color;
+    }
+
+    .tabs--invert & {
+      background-color: transparent;
+    }
+
+    .tabs--accordeon & {
+      margin-bottom: 10px;
+
+      @include media-breakpoint-up(md) {
+        margin-bottom: 0;
+      }
+    }
+
+    .tabs--accordeon &:nth-of-type(1) {
+      grid-column: 1 / -1;
+      grid-row: 1 / 2;
+
+      @include media-breakpoint-up(md) {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+      }
+    }
+
+    .tabs--accordeon &:nth-of-type(2) {
+      grid-column: 1 / -1;
+      grid-row: 3 / 4;
+
+      @include media-breakpoint-up(md) {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+      }
+    }
+
+    .tabs--accordeon &:nth-of-type(3) {
+      grid-column: 1 / -1;
+      grid-row: 5 / 6;
+
+      @include media-breakpoint-up(md) {
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;
+      }
+    }
+
+    .tabs--accordeon &:nth-of-type(4) {
+      grid-column: 1 / -1;
+      grid-row: 6 / 7;
+
+      @include media-breakpoint-up(md) {
+        grid-column: 4 / 5;
+        grid-row: 1 / 2;
+      }
+    }
+  }
+
+  &__item a,
+  &__item label {
+    position: relative;
+    padding: 18px 20px;
+    display: block;
+    font-family: $font-family--secondary;
+    font-size: 22px;
+    line-height: 27px;
+    font-weight: 500;
+    color: $black-color;
+    text-align: center;
+    text-decoration: none;
+    border-bottom: $tab-nav-border-height solid transparent;
+    user-select: none;
+
+    .tabs--contacts & {
+      font-size: 16px;
+      line-height: 1.2;
+      color: darken($gray-color, 13%);
+      border-bottom-color: $gray-light-color;
+    }
+
+    .tabs--invert & {
+      border-bottom-color: $yellow-dark-color;
+      color: $yellow-dark-color;
+    }
+
+    .tabs--nav-sm & {
+      font-size: 16px;
+      border-bottom-width: 1px;
+    }
+
+    .tabs--accordeon & {
+      text-align: left;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -$tab-nav-border-height;
+      width: $tabs-nav-space;
+      height: $tab-nav-border-height;
+      background: transparent;
+
+      .tabs--contacts &,
+      .tabs--no-space & {
+        display: none;
+      }
+    }
+
+    &::before {
+      left: -$tabs-nav-space
+    }
+
+    &::after {
+      right: -$tabs-nav-space
+    }
+
+    @include focus {
+      outline: none;
+    }
+
+    &[aria-selected="true"] {
+      color: $black-color;
+      background-color: $white-color;
+      border-color: $primary-color;
+
+      .tabs--invert & {
+        background-color: transparent;
+        border-color: $white-color;
+      }
+
+      &::before,
+      &::after {
+        background-color: $primary-color;
+
+        .tabs--invert & {
+          background-color: $white-color;
+        }
+      }
+    }
+
+    //.tabs--accordeon input[id="boxberryTab"]:checked
+  }
+
+  &__item span {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  &__panel {
+    $panel-padding-top: 40px;
+    $panel-margin-bottom: 30px;
+
+    padding-top: $panel-padding-top;
+    //display: none;
+
+    &--pdt-sm {
+      padding-top: 20px;
+    }
+
+    .tabs--accordeon & {
+      padding-top: 0;
+
+      @include media-breakpoint-up(md) {
+        padding-top: $panel-padding-top;
+      }
+    }
+
+    .tabs--accordeon &:nth-of-type(5) {
+      grid-column: 1 / -1;
+      grid-row: 2 / 3;
+
+      @include media-breakpoint-up(md) {
+        grid-row: 2 / 3;
+      }
+    }
+
+    .tabs--accordeon &:nth-of-type(6) {
+      grid-column: 1 / -1;
+      grid-row: 4 / 5;
+
+      @include media-breakpoint-up(md) {
+        grid-row: 2 / 3;
+      }
+    }
+
+    .tabs--accordeon &:nth-of-type(7) {
+      grid-column: 1 / -1;
+      grid-row: 6 / 7;
+
+      @include media-breakpoint-up(md) {
+        grid-row: 2 / 3;
+      }
+    }
+
+    .tabs--accordeon &:nth-of-type(8) {
+      grid-column: 1 / -1;
+      grid-row: 7 / 8;
+
+      @include media-breakpoint-up(md) {
+        grid-row: 2 / 3;
+      }
+    }
+
+    .tabs--accordeon input[id="boxberryTab"]:checked ~ &[id="boxberry"] {
+      margin-bottom: $panel-margin-bottom;
+      display: block;
+    }
+
+    .tabs--accordeon input[id="imlTab"]:checked ~ &[id="iml"] {
+      margin-bottom: $panel-margin-bottom;
+      display: block;
+    }
+
+    .tabs--accordeon input[id="hermesTab"]:checked ~ &[id="hermes"] {
+      margin-bottom: $panel-margin-bottom;
+      display: block;
+    }
+
+    .tabs--accordeon input[id="kceTab"]:checked ~ &[id="kce"] {
+      margin-bottom: $panel-margin-bottom;
+      display: block;
+    }
+  }
+
+  &__content {
+    display: grid;
+    //grid-row-gap: 20px;
+
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: 30px;
+    }
+
+    @include media-breakpoint-up(xl) {
+
+    }
+  }
+}

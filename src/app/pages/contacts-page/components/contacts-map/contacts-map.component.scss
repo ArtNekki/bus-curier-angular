@@ -1,0 +1,76 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.contacts-map {
+  height: inherit;
+
+  &__main {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -$container-padding-x;
+    right: -$container-padding-x;
+    height: inherit;
+
+    @include media-breakpoint-up(md) {
+      position: static;
+    }
+  }
+
+  &__main > div {
+    height: inherit;
+  }
+
+  &__header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 70px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    @include media-breakpoint-up(md) {
+      display: none;
+    }
+
+    @include map-full-mode {
+      padding: 0 $container-padding-x;
+      background-color: $white-color;
+      box-shadow: $header-shadow;
+    }
+  }
+
+  &__close {
+    @include close-button(30px,$gray-color, $primary-color);
+
+    position: relative;
+    display: none;
+
+    @include map-full-mode {
+      display: block;
+    }
+  }
+
+  &__full {
+    @include btn-default();
+
+    @include map-full-mode {
+      display: none;
+    }
+  }
+
+  &__full svg {
+    fill: rgba($black-color, 0.6);
+
+    &:hover {
+      fill: rgba($black-color, 0.7);
+    }
+  }
+}

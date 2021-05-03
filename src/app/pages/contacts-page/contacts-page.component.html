@@ -1,0 +1,63 @@
+<div id="contactsPage" class="page-contacts">
+  <div class="page-contacts__main">
+    <div class="tabs tabs--contacts">
+      <ul class="tabs__nav">
+        <li class="tabs__item">
+          <a  href="#contactsMapPanel" role="tab">На карте</a>
+        </li>
+        <li class="tabs__item">
+          <a  data-tabby-default href="#contactsListPanel" role="tab">Списком</a>
+        </li>
+      </ul>
+    </div>
+    <div class="page-contacts__switcher">
+      <button type="button" class="page-contacts__btn active">
+        <svg-icon class="icon" src="assets/img/svg/location.svg" width="15px" height="18px"></svg-icon>
+        <span>Все адреса</span>
+      </button>
+      <button type="button" class="page-contacts__btn">
+        <svg-icon class="icon" src="assets/img/svg/accept.svg" width="18px" height="18px"></svg-icon>
+        <span>Прием грузов</span>
+      </button>
+      <button type="button" class="page-contacts__btn">
+        <svg-icon class="icon" src="assets/img/svg/give.svg" width="18px" height="18px"></svg-icon>
+        <span>Выдача грузов</span>
+      </button>
+      <button type="button" class="page-contacts__btn">
+        <svg-icon class="icon" src="assets/img/svg/office.svg" width="18px" height="18px"></svg-icon>
+        <span>Офис</span>
+      </button>
+    </div>
+    <div class="page-contacts__select">
+      <app-select [items]="cities" mods="no-shadow"></app-select>
+    </div>
+
+    <div id="contactsListPanel" class="page-contacts__list">
+      <app-points-list></app-points-list>
+    </div>
+    <div id="contactsMapPanel" class="page-contacts__map">
+      <app-contacts-map></app-contacts-map>
+    </div>
+    <div class="page-contacts__feedback">
+      <p>Единая справочная для всего Приморского края:</p>
+      <div>
+        <app-link href="tel: +7 (423) 205-86-27" mods="lg, no-underline">
+          <svg-icon class="icon icon--black" src="assets/img/svg/headphone.svg" width="19px" height="16px"></svg-icon>
+          +7 (423) 205-86-27
+        </app-link>
+      </div>
+      <div>
+        <app-link href="mailto: inbox@busbox.guru" mods="lg, dashed">
+          <svg-icon class="icon icon--black" src="assets/img/svg/email.svg" width="19px" height="16px"></svg-icon>
+          inbox@busbox.guru
+        </app-link>
+      </div>
+    </div>
+    <div class="page-contacts__toggle">
+      Скрыть список
+    </div>
+    <div class="page-contacts__details">
+      <app-point-card></app-point-card>
+    </div>
+  </div>
+</div>

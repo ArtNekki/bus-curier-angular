@@ -22,6 +22,7 @@ import { MediaComponent } from './components/media/media.component';
 import { TableComponent } from './components/table/table.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { ListComponent } from './components/list/list.component';
+import { PreloaderComponent } from './components/preloader/preloader.component';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -54,7 +55,8 @@ import { ListComponent } from './components/list/list.component';
     ImgComponent,
     SliderComponent,
     AlertComponent,
-    ListComponent
+    ListComponent,
+    PreloaderComponent
   ],
   declarations: [
     BtnComponent,
@@ -71,7 +73,8 @@ import { ListComponent } from './components/list/list.component';
     MediaComponent,
     TableComponent,
     AlertComponent,
-    ListComponent
+    ListComponent,
+    PreloaderComponent
   ],
   // providers: [NgSelectConfig, ɵs],
 })

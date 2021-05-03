@@ -1,0 +1,56 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.points-list {
+  height: 100%;
+  overflow-y: auto;
+
+  @include media-breakpoint-up(md) {
+    padding-right: 10px;
+  }
+
+  @include scollbar;
+
+  &__scroll {
+    @include list-clear();
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 1fr repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+    grid-column-gap: 10px;
+    grid-row-gap: 5px;
+
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
+  }
+
+  &__action {
+    @include btn-default();
+  }
+
+  &__action svg {
+    opacity: 0.25;
+
+    @include hover {
+      opacity: 0.5;
+    }
+  }
+
+  &__text {
+    font-family: $font-family--secondary;
+    font-size: 12px;
+    line-height: 1.2;
+
+    &--status {
+      grid-column: 2 / -1;
+      color: $red-color;
+      text-transform: lowercase;
+    }
+  }
+}

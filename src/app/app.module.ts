@@ -24,12 +24,11 @@ import {DeliveryFromAirportPageModule} from './pages/delivery-from-airport-page/
 import {CargoInsurancePageModule} from './pages/cargo-insurance-page/cargo-insurance-page.module';
 import {CourierPageModule} from './pages/courier-page/courier-page.module';
 import {OurServicesPageModule} from './pages/our-services-page/our-services-page.module';
-import { UsefulInfoPageComponent } from './pages/useful-info-page/useful-info-page.component';
 import {UsefulInfoPageModule} from './pages/useful-info-page/useful-info-page.module';
-import { ServicesPageComponent } from './pages/services-page/services-page.component';
 import {ServicesPageModule} from './pages/services-page/services-page.module';
-import { FeedbackLinksPageComponent } from './pages/feedback-links-page/feedback-links-page.component';
 import {FeedbackLinksPageModule} from './pages/feedback-links-page/feedback-links-page.module';
+import { ContactsPageComponent } from './pages/contacts-page/contacts-page.component';
+import {ContactsPageModule} from './pages/contacts-page/contacts-page.module';
 
 @NgModule({
   declarations: [
@@ -61,6 +60,7 @@ import {FeedbackLinksPageModule} from './pages/feedback-links-page/feedback-link
     UsefulInfoPageModule,
     ServicesPageModule,
     FeedbackLinksPageModule,
+    ContactsPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],
