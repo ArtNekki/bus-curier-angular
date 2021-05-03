@@ -29,6 +29,7 @@ import {ServicesPageModule} from './pages/services-page/services-page.module';
 import {FeedbackLinksPageModule} from './pages/feedback-links-page/feedback-links-page.module';
 import {ContactsPageModule} from './pages/contacts-page/contacts-page.module';
 import {TransportationRatesPageModule} from './pages/transportation-rates-page/transportation-rates-page.module';
+import {TrackOrderPageModule} from './pages/track-order-page/track-order-page.module';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import {TransportationRatesPageModule} from './pages/transportation-rates-page/t
     FeedbackLinksPageModule,
     ContactsPageModule,
     TransportationRatesPageModule,
+    TrackOrderPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],

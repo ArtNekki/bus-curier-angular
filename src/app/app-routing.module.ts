@@ -21,6 +21,7 @@ import {ServicesPageComponent} from './pages/services-page/services-page.compone
 import {FeedbackLinksPageComponent} from './pages/feedback-links-page/feedback-links-page.component';
 import {ContactsPageComponent} from './pages/contacts-page/contacts-page.component';
 import {TransportationRatesPageComponent} from './pages/transportation-rates-page/transportation-rates-page.component';
+import {TrackOrderPageComponent} from './pages/track-order-page/track-order-page.component';
 
 
 const routes: Routes = [
@@ -44,7 +45,8 @@ const routes: Routes = [
   {path: 'services', component: ServicesPageComponent},
   {path: 'feedback-links', component: FeedbackLinksPageComponent},
   {path: 'contacts', component: ContactsPageComponent},
-  {path: 'transportation-rates', component: TransportationRatesPageComponent}
+  {path: 'transportation-rates', component: TransportationRatesPageComponent},
+  {path: 'track-order', component: TrackOrderPageComponent}
   // {
   //   path: 'parcels',
   //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')
