@@ -25,6 +25,7 @@ import { ListComponent } from './components/list/list.component';
 import { PreloaderComponent } from './components/preloader/preloader.component';
 import { RadioComponent } from './components/radio/radio.component';
 import { InfoBoxComponent } from './components/info-box/info-box.component';
+import { DataListComponent } from './components/data-list/data-list.component';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -80,7 +81,8 @@ import { InfoBoxComponent } from './components/info-box/info-box.component';
     ListComponent,
     PreloaderComponent,
     RadioComponent,
-    InfoBoxComponent
+    InfoBoxComponent,
+    DataListComponent
   ],
   // providers: [NgSelectConfig, ɵs],
 })

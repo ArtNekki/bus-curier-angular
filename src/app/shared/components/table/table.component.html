@@ -7,7 +7,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let row of body">
-        <td *ngFor="let data of row">{{data}}</td>
+        <td *ngFor="let data of row" [innerHTML]="data"></td>
       </tr>
     </tbody>
   </table>

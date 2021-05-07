@@ -1,0 +1,82 @@
+<form action="#" class="form form--no-margin" autocomplete="off">
+  <section class="form__section">
+    <div class="form__fieldset form__fieldset--filter">
+      <div class="form__group">
+        <span class="form__label">Период:</span>
+<!--        {{{ input type="text" id="period-from" name="period-from" placeholder="дд.мм.гггг" error="Не заполнено" mods="no-shadow" }}}-->
+<!--        {{{ input type="text" id="period-to" name="period-to" placeholder="дд.мм.гггг" error="Не заполнено" mods="no-shadow" }}}-->
+      </div>
+      <div class="form__field">
+        <label for="city-from" class="form__label form__label--light">Город отправления</label>
+        <app-select [items]="cities" mods="no-shadow"></app-select>
+      </div>
+      <div class="form__field">
+        <label for="city-to" class="form__label form__label--light">Город получения</label>
+        <app-select [items]="cities" mods="no-shadow"></app-select>
+      </div>
+      <app-btn mods="lg">Показать</app-btn>
+    </div>
+  </section>
+</form>
+<div class="report">
+  <div class="report__table">
+<!--    {{> table&#45;&#45;report}}-->
+  </div>
+  <div class="report__data">
+<!--    {{{ data-list items='[-->
+<!--    {"name": "Заказ", "value": "№ 614933", "type": "bold"},-->
+<!--      {"name": "Дата заказа", "value": "2020-04-03"},-->
+<!--      {"name": "Отправитель", "value": "Ким-Мельникова А.А., ИП"},-->
+<!--      {"name": "Получатель", "value": "Петрухи А.А., ИП"},-->
+<!--      {"name": "Город отправ.", "value": "Владивосток"},-->
+<!--      {"name": "Город получ.", "value": "Уссурийск"},-->
+<!--      {"name": "Стоимость", "value": "150.00"}-->
+<!--    ]' mods="w-underline"-->
+<!--    }}}-->
+<!--    {{{ data-list items='[-->
+<!--    {"name": "Заказ", "value": "№ 614933", "type": "bold"},-->
+<!--      {"name": "Дата заказа", "value": "2020-04-03"},-->
+<!--      {"name": "Отправитель", "value": "Ким-Мельникова А.А., ИП"},-->
+<!--      {"name": "Получатель", "value": "Петрухи А.А., ИП"},-->
+<!--      {"name": "Город отправ.", "value": "Владивосток"},-->
+<!--      {"name": "Город получ.", "value": "Уссурийск"},-->
+<!--      {"name": "Стоимость", "value": "150.00"}-->
+<!--    ]' mods="w-underline"-->
+<!--    }}}-->
+<!--    {{{ data-list items='[-->
+<!--    {"name": "Заказ", "value": "№ 614933", "type": "bold"},-->
+<!--      {"name": "Дата заказа", "value": "2020-04-03"},-->
+<!--      {"name": "Отправитель", "value": "Ким-Мельникова А.А., ИП"},-->
+<!--      {"name": "Получатель", "value": "Петрухи А.А., ИП"},-->
+<!--      {"name": "Город отправ.", "value": "Владивосток"},-->
+<!--      {"name": "Город получ.", "value": "Уссурийск"},-->
+<!--      {"name": "Стоимость", "value": "150.00"}-->
+<!--    ]' mods="w-underline"-->
+<!--    }}}-->
+<!--    {{{ data-list items='[-->
+<!--    {"name": "Заказ", "value": "№ 614933", "type": "bold"},-->
+<!--      {"name": "Дата заказа", "value": "2020-04-03"},-->
+<!--      {"name": "Отправитель", "value": "Ким-Мельникова А.А., ИП"},-->
+<!--      {"name": "Получатель", "value": "Петрухи А.А., ИП"},-->
+<!--      {"name": "Город отправ.", "value": "Владивосток"},-->
+<!--      {"name": "Город получ.", "value": "Уссурийск"},-->
+<!--      {"name": "Стоимость", "value": "150.00"}-->
+<!--    ]' mods="w-underline"-->
+<!--    }}}-->
+<!--    {{{ data-list items='[-->
+<!--    {"name": "Заказ", "value": "№ 614933", "type": "bold"},-->
+<!--      {"name": "Дата заказа", "value": "2020-04-03"},-->
+<!--      {"name": "Отправитель", "value": "Ким-Мельникова А.А., ИП"},-->
+<!--      {"name": "Получатель", "value": "Петрухи А.А., ИП"},-->
+<!--      {"name": "Город отправ.", "value": "Владивосток"},-->
+<!--      {"name": "Город получ.", "value": "Уссурийск"},-->
+<!--      {"name": "Стоимость", "value": "150.00"}-->
+<!--    ]' mods="w-underline"-->
+<!--    }}}-->
+  </div>
+  <div class="report__footer">
+<!--    {{> pagination}}-->
+<!--    {{{ btn type="button" text="Скачать отчет в формате XLS" }}}-->
+    <app-btn>Скачать отчет в формате XLS</app-btn>
+  </div>
+</div>

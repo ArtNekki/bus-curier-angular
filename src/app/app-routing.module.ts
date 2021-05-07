@@ -22,6 +22,7 @@ import {FeedbackLinksPageComponent} from './pages/feedback-links-page/feedback-l
 import {ContactsPageComponent} from './pages/contacts-page/contacts-page.component';
 import {TransportationRatesPageComponent} from './pages/transportation-rates-page/transportation-rates-page.component';
 import {TrackOrderPageComponent} from './pages/track-order-page/track-order-page.component';
+import {AccountPageComponent} from './pages/account-page/account-page.component';
 
 
 const routes: Routes = [
@@ -46,7 +47,9 @@ const routes: Routes = [
   {path: 'feedback-links', component: FeedbackLinksPageComponent},
   {path: 'contacts', component: ContactsPageComponent},
   {path: 'transportation-rates', component: TransportationRatesPageComponent},
-  {path: 'track-order', component: TrackOrderPageComponent}
+  {path: 'track-order', component: TrackOrderPageComponent},
+  // { path: 'account', loadChildren: () => import('./pages/account-page/account-page.module').then((m) => m.AccountPageModule) }
+
   // {
   //   path: 'parcels',
   //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')

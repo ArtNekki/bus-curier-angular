@@ -1,0 +1,77 @@
+
+<form action="#" class="form form--no-margin" autocomplete="off">
+  <section class="form__section">
+    <div class="form__fieldset form__fieldset--filter form__fieldset--orders">
+      <div class="form__group">
+        <span class="form__label">Период:</span>
+        <input type="text">
+        <input type="text">
+<!--        {{{ input type="text" id="period-from" name="period-from" placeholder="дд.мм.гггг" error="Не заполнено" mods="no-shadow" }}}-->
+<!--        {{{ input type="text" id="period-to" name="period-to" placeholder="дд.мм.гггг" error="Не заполнено" mods="no-shadow" }}}-->
+      </div>
+      <div class="form__field">
+        <label for="city-from" class="form__label form__label--light">Cтатус</label>
+        <app-select [items]='[
+          {"value": "", "name": "Выберите статус"},
+          {"value": "1", "name": "Подготовка к отправке"},
+          {"value": "2", "name": "Готов к выдаче"},
+          {"value": "3", "name": "Возврат"},
+          {"value": "4", "name": "Испорчено"}]' mods="no-shadow"></app-select>
+      </div>
+      <app-btn mods="lg">Показать</app-btn>
+    </div>
+  </section>
+</form>
+<div class="report">
+  <div class="report__table">
+    <app-table
+      [head]='["Дата заказа", "Заказ", "Сумма заказа", "Статус"]'
+      [body]='[["Велосипед", "<app-link href=\"#\" mods=\"blue, lg\">asdasd</app-link>", "2 050 руб", "2 550 руб"],
+            ["Коляска", "950 руб", "1 150 руб", "1 750 руб"],
+            ["Цветы", "750 руб", "850 руб", "950 руб"],
+            ["Телевизор", "950 руб", "1 550 руб", "2 050 руб"]]'
+    >
+    </app-table>
+  </div>
+  <div class="report__data">
+<!--    {{{ data-list items='[-->
+<!--    {"name": "Дата заказа", "value": "2020-04-03"},-->
+<!--      {"name": "Заказ", "value": "614933", "type": "link"},-->
+<!--      {"name": "Сумма заказа", "value": "150.00"},-->
+<!--      {"name": "Статус", "value": "Готов к выдаче"}]'-->
+<!--    mods="w-underline"-->
+<!--    }}}-->
+<!--    {{{ data-list items='[-->
+<!--    {"name": "Дата заказа", "value": "2020-04-03"},-->
+<!--      {"name": "Заказ", "value": "614933", "type": "link"},-->
+<!--      {"name": "Сумма заказа", "value": "150.00"},-->
+<!--      {"name": "Статус", "value": "Готов к выдаче"}]'-->
+<!--    mods="w-underline"-->
+<!--    }}}-->
+<!--    {{{ data-list items='[-->
+<!--    {"name": "Дата заказа", "value": "2020-04-03"},-->
+<!--      {"name": "Заказ", "value": "614933", "type": "link"},-->
+<!--      {"name": "Сумма заказа", "value": "150.00"},-->
+<!--      {"name": "Статус", "value": "Готов к выдаче"}]'-->
+<!--    mods="w-underline"-->
+<!--    }}}-->
+<!--    {{{ data-list items='[-->
+<!--    {"name": "Дата заказа", "value": "2020-04-03"},-->
+<!--      {"name": "Заказ", "value": "614933", "type": "link"},-->
+<!--      {"name": "Сумма заказа", "value": "150.00"},-->
+<!--      {"name": "Статус", "value": "Готов к выдаче"}]'-->
+<!--    mods="w-underline"-->
+<!--    }}}-->
+<!--    {{{ data-list items='[-->
+<!--    {"name": "Дата заказа", "value": "2020-04-03"},-->
+<!--      {"name": "Заказ", "value": "614933", "type": "link"},-->
+<!--      {"name": "Сумма заказа", "value": "150.00"},-->
+<!--      {"name": "Статус", "value": "Готов к выдаче"}]'-->
+<!--    mods="w-underline"-->
+<!--    }}}-->
+  </div>
+  <div class="report__footer">
+<!--    {{> pagination}}-->
+    <app-btn>Скачать отчет в формате XLS</app-btn>
+  </div>
+</div>

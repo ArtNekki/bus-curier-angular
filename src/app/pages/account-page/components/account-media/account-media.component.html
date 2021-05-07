@@ -1,0 +1,11 @@
+<a [href]="href" [class]="cssClass">
+  <div class="account-media__img">
+    <ng-content select="svg-icon"></ng-content>
+  </div>
+  <div class="account-media__body">
+    <h2 class="account-media__title">{{title}}</h2>
+    <p class="account-media__text">
+      <ng-content></ng-content>
+    </p>
+  </div>
+</a>

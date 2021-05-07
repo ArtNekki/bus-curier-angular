@@ -1,0 +1,54 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.account {
+  display: grid;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: 1fr minmax(min-content, 270px);
+    grid-column-gap: 50px;
+  }
+
+  &--inner {
+    display: block;
+
+    @include media-breakpoint-up(md) {
+      grid-column-gap: 0;
+    }
+  }
+
+  &__main {
+    order: 2;
+    //max-width: 570px;
+
+    @include media-breakpoint-up(md) {
+      order: 1;
+    }
+  }
+
+  &__sidebar {
+    order: 1;
+
+    @include media-breakpoint-up(md) {
+      order: 2;
+    }
+  }
+
+  &__sidebar-btn {
+    @include media-breakpoint-only(sm) {
+      max-width: 270px;
+    }
+  }
+
+  &__logout {
+    margin-top: 20px;
+    margin-bottom: 30px;
+
+    @include media-breakpoint-up(md) {
+      margin-top: 30px;
+    }
+  }
+}
