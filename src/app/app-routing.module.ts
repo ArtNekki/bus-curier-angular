@@ -23,6 +23,8 @@ import {ContactsPageComponent} from './pages/contacts-page/contacts-page.compone
 import {TransportationRatesPageComponent} from './pages/transportation-rates-page/transportation-rates-page.component';
 import {TrackOrderPageComponent} from './pages/track-order-page/track-order-page.component';
 import {AccountPageComponent} from './pages/account-page/account-page.component';
+import {OrderPageComponent} from './pages/order-page/order-page.component';
+import {CalcRatePageComponent} from './pages/calc-rate-page/calc-rate-page.component';
 
 
 const routes: Routes = [
@@ -48,6 +50,8 @@ const routes: Routes = [
   {path: 'contacts', component: ContactsPageComponent},
   {path: 'transportation-rates', component: TransportationRatesPageComponent},
   {path: 'track-order', component: TrackOrderPageComponent},
+  {path: 'order', component: OrderPageComponent},
+  {path: 'calc-rate', component: CalcRatePageComponent}
   // { path: 'account', loadChildren: () => import('./pages/account-page/account-page.module').then((m) => m.AccountPageModule) }
 
   // {

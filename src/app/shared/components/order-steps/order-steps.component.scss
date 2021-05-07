@@ -1,0 +1,119 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.calc-steps {
+  $item-size: 50px;
+  $row-gap: 10px;
+
+  margin: 0 0 40px 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) auto;
+  grid-column-gap: 10px;
+  justify-content: space-between;
+  list-style: none;
+  counter-reset: point;
+
+  @include media-breakpoint-only(md) {
+    margin: 0 0 70px 0;
+  }
+
+  &__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: $item-size 1fr;
+
+    grid-column-gap: 10px;
+    grid-row-gap: $row-gap;
+
+    &:not(:last-child)::after,
+    &:not(:last-child)::before {
+      content: "";
+      height: 7px;
+      align-self: center;
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+      background-color: $gray-light-color--up-5;
+      transition: all 0.5s;
+    }
+
+    &:not(:last-child)::after {
+      background-color: $primary-color;
+      width: 0;
+    }
+
+    &:not(:last-child).done::after {
+      width: 100%;
+    }
+  }
+
+  &__point {
+    @include step-point($item-size, 24px, rgba($black-color, 0.2), $gray-light-color--up-5);
+
+    transition-property: all;
+    transition-delay: 0.5s;
+
+    .calc-steps__item.active &,
+    .calc-steps__item.done & {
+      background-color: $primary-color;
+      color: $black-color;
+    }
+
+    &::before {
+      counter-increment: point;
+      content: counter(point);
+
+      .calc-steps__item.done & {
+        opacity: 0;
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 16px;
+      height: 8px;
+      display: none;
+      border: 2px solid transparent;
+      border-bottom-color: $black-color;
+      border-left-color: $black-color;
+      transform: rotate3d(0, 0, 1, -45deg);
+
+      .calc-steps__item.done & {
+        display: block;
+      }
+    }
+  }
+
+  &__label {
+    width: 1px;
+    grid-column: 1 / -1;
+    grid-row: 2 / 3;
+    font-family: $font-family--secondary;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    color: $gray-color--down-11;
+    opacity: 0;
+
+    .calc-steps__item.active & {
+      width: unset;
+      opacity: 1;
+      color: $black-color;
+    }
+
+    @include media-breakpoint-up(sm) {
+      width: unset;
+      opacity: 1;
+      color: $black-color;
+    }
+  }
+}

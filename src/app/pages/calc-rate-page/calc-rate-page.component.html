@@ -1,0 +1,72 @@
+
+<div class="page__container page__container--col-2 page__container--calculator">
+  <div class="page__content">
+    <h1 class="page__title">Расчет стоимости перевозки <br class="br br--show-sm">по Приморскому краю</h1>
+    <form action="#" class="form" autocomplete="off">
+      <div class="form__section form__section--w-underline">
+        <div class="form__fieldset form__fieldset--delivery">
+          <h2 class="form__heading form__heading--no-mgb">Откуда</h2>
+          <div class="form__field">
+            <app-select [items]="cities" mods="no-shadow"></app-select>
+          </div>
+          <h2 class="form__heading form__heading--no-mgb">Куда</h2>
+          <div class="form__field">
+            <app-select [items]="cities" mods="no-shadow"></app-select>
+          </div>
+          <button type="button" class="form__refresh">
+            <svg-icon class="icon" src="assets/img/svg/refresh.svg" width="18" height="18"></svg-icon>
+          </button>
+          <div >
+            <ul data-tabs class="form__tabs">
+              <li>
+                <a data-tabby-default href="#city-from-1">Сдать в отделение</a>
+              </li>
+              <li>
+                <a href="#city-from-2">Вызвать курьера</a>
+              </li>
+            </ul>
+          </div>
+          <ul data-tabs class="form__tabs">
+            <li>
+              <a href="#city-to-1">Забрать в отделении</a>
+            </li>
+            <li>
+              <a data-tabby-default href="#city-to-2">Доставка курьером</a>
+            </li>
+          </ul>
+          <div>
+            <div id="city-from-1" class="form__tabs-panel">
+<!--              {{> fieldset&#45;&#45;department}}-->
+            </div>
+            <div id="city-from-2" class="form__tabs-panel">
+<!--              {{> fieldset&#45;&#45;address}}-->
+<!--              {{> fieldset&#45;&#45;schedule}}-->
+            </div>
+          </div>
+          <div>
+            <div id="city-to-1" class="form__tabs-panel">
+<!--              {{> fieldset&#45;&#45;department}}-->
+            </div>
+            <div id="city-to-2" class="form__tabs-panel">
+<!--              {{> fieldset&#45;&#45;address}}-->
+<!--              {{> fieldset&#45;&#45;schedule}}-->
+            </div>
+          </div>
+        </div>
+      </div>
+<!--      {{> goods&#45;&#45;common-block}}-->
+      <app-btn mods="lg, max-w-300">Рассчитать стоимость</app-btn>
+    </form>
+    <section class="text-box">
+      <div class="text-box__content">
+        <p>Компания «Баскурьер»  - это современная курьерская служба экспресс-доставки на Дальнем Востоке. Ежедневно мы успешно организовываем курьерскую доставку посылок, документов и различных грузов из г. Владивостока в г. Хабаровск, Уссурийск, Находку, Дальнегорск, Кавалерово и др. с помощью РЕЙСОВЫХ АВТОБУСОВ!</p>
+        <p>Мы предлагаем приемлемые тарифы...</p>
+      </div>
+      <button type="button" class="text-box__more">
+        Читать подробнее
+        <svg-icon class="icon" src="assets/img/svg/more.svg" width="32" height="32"></svg-icon>
+      </button>
+    </section>
+  </div>
+<!--  {{> sidebar-calc-result }}-->
+</div>

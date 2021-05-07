@@ -30,8 +30,9 @@ import {FeedbackLinksPageModule} from './pages/feedback-links-page/feedback-link
 import {ContactsPageModule} from './pages/contacts-page/contacts-page.module';
 import {TransportationRatesPageModule} from './pages/transportation-rates-page/transportation-rates-page.module';
 import {TrackOrderPageModule} from './pages/track-order-page/track-order-page.module';
-import { AccountPageComponent } from './pages/account-page/account-page.component';
 import {AccountPageModule} from './pages/account-page/account-page.module';
+import {OrderPageModule} from './pages/order-page/order-page.module';
+import {CalcRatePageModule} from './pages/calc-rate-page/calc-rate-page.module';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,8 @@ import {AccountPageModule} from './pages/account-page/account-page.module';
     TransportationRatesPageModule,
     TrackOrderPageModule,
     AccountPageModule,
+    OrderPageModule,
+    CalcRatePageModule,
     // IndexPageModule,
     AppRoutingModule
   ],
