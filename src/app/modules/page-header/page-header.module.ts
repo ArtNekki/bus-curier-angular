@@ -7,12 +7,15 @@ import { MobileNavComponent } from './components/mobile-nav/mobile-nav.component
 import { HeaderUserComponent } from './components/header-user/header-user.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { LocationSelectorComponent } from './components/location-selector/location-selector.component';
+import {HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from '../../app-routing.module';
 
 @NgModule({
   declarations: [PageHeaderComponent, MainNavComponent, MobileNavComponent, HeaderUserComponent, BreadcrumbsComponent, LocationSelectorComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
   exports: [
     PageHeaderComponent

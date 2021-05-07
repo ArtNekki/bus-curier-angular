@@ -10,71 +10,16 @@
   </div>
   <div class="mobile-nav__scroll">
     <ul class="mobile-nav__list">
-      <li class="mobile-nav__item">
-        <a href="track-parcels-by-number.html" class="mobile-nav__link">Отследить посылку</a>
-      </li>
-      <li class="mobile-nav__item">
-        <a href="freight-rate-primorye.html" class="mobile-nav__link">Рассчет тарифа по Приморью</a>
-      </li>
-      <li class="mobile-nav__item">
-        <input type="radio" name="mobile-nav" id="mobile-services" class="mobile-nav__input">
-        <label for="mobile-services" class="mobile-nav__link mobile-nav__link--toggle">Услуги</label>
-        <ul class="mobile-nav__list mobile-nav__list--inner">
-          <li class="mobile-nav__item">
-            <a href="#" class="mobile-nav__link">Грузоперевозки по Приморскому краю</a>
-          </li>
-          <li class="mobile-nav__item">
-            <a href="#" class="mobile-nav__link">Грузоперевозки в республике Татарстан</a>
-          </li>
-          <li class="mobile-nav__item">
-            <a href="delivery-russia.html" class="mobile-nav__link">Грузоперевозки по России</a>
-          </li>
-          <li class="mobile-nav__item">
-            <a href="courier.html" class="mobile-nav__link">Забор и доставка курьером</a>
-          </li>
-          <li class="mobile-nav__item">
-            <a href="non-standard-tasks.html" class="mobile-nav__link">Доставка посылок из интернет-магазинов</a>
-          </li>
-          <li class="mobile-nav__item">
-            <a href="non-standard-tasks.html" class="mobile-nav__link">Решение нестандартных логистических задач</a>
-          </li>
-          <li class="mobile-nav__item">
-            <a href="cargo-insurance.html" class="mobile-nav__link">Страхование груза</a>
+      <li *ngFor="let item of nav"  class="mobile-nav__item">
+        <a *ngIf="!item.dropdown" [routerLink]="item.link" class="mobile-nav__link">
+          {{item.name}}
+        </a>
+        <span *ngIf="item.dropdown" class="mobile-nav__link mobile-nav__link--toggle">{{item.name}}</span>
+        <ul  *ngIf="item.dropdown" class="mobile-nav__list mobile-nav__list--inner">
+          <li *ngFor="let item of item.dropdown" class="mobile-nav__item">
+            <a [routerLink]="item.link" class="mobile-nav__link">{{item.name}}</a>
           </li>
         </ul>
-      </li>
-      <li class="mobile-nav__item">
-        <input type="radio" name="mobile-nav" id="mobile-info" class="mobile-nav__input">
-        <label for="mobile-info" class="mobile-nav__link mobile-nav__link--toggle">Информация</label>
-        <ul class="mobile-nav__list mobile-nav__list--inner">
-          <li class="mobile-nav__item">
-            <a href="how-to-sent-parcel.html" class="mobile-nav__link">Как отправить посылку</a>
-          </li>
-          <li class="mobile-nav__item">
-            <a href="how-to-get-parcel.html" class="mobile-nav__link">Как получить посылку</a>
-          </li>
-          <li class="mobile-nav__item">
-            <a href="rules-of-send-delivery-parcels.html" class="mobile-nav__link">Правила приемки и отправки грузов</a>
-          </li>
-          <li class="mobile-nav__item">
-            <a href="transportation-rates.html" class="mobile-nav__link">Тарифы на перевозку</a>
-          </li>
-          <li class="mobile-nav__item">
-            <a href="cargo-packing.html" class="mobile-nav__link">Упаковки грузов и виды упаковки</a>
-          </li>
-          <li class="mobile-nav__item">
-            <a href="storage-of-cargo.html" class="mobile-nav__link">Хранение груза на складах Bus-курьер</a>
-          </li>
-          <li class="mobile-nav__item">
-            <a href="delivery-from-airport.html" class="mobile-nav__link">Доставка грузов и багажа из Аэропорта</a>
-          </li>
-        </ul>
-      </li>
-      <li class="mobile-nav__item">
-        <a href="documents-for-senders-and-recipients.html" class="mobile-nav__link">Документы</a>
-      </li>
-      <li class="mobile-nav__item">
-        <a href="contacts.html" class="mobile-nav__link">Контакты</a>
       </li>
     </ul>
     <div class="mobile-nav__footer">

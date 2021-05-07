@@ -1,76 +1,14 @@
 <ul class="main-nav">
-  <li class="main-nav__item">
-    <a href="track-parcels-by-number.html" class="main-nav__link">
-      Отследить посылку
+  <li *ngFor="let item of nav" class="main-nav__item" [class.main-nav__item--dropdown]="item.dropdown">
+    <a [routerLink]='item.link' class="main-nav__link">
+      <span>{{item.name}}</span>
     </a>
-  </li>
-  <li class="main-nav__item">
-    <a href="calc-rate-primorye.html" class="main-nav__link">
-      Расчет тарифа по Приморью
-    </a>
-  </li>
-  <li class="main-nav__item main-nav__item--dropdown">
-    <a href="our-services.html" class="main-nav__link">
-      <span>Услуги</span>
-    </a>
-    <ul class="main-nav__dropdown">
-      <li class="main-nav__item">
-        <a href="#" class="main-nav__link">Грузоперевозки по Приморскому краю</a>
-      </li>
-      <li class="main-nav__item">
-        <a href="delivery-russia.html" class="main-nav__link">Грузоперевозки по России</a>
-      </li>
-      <li class="main-nav__item">
-        <a href="courier.html" class="main-nav__link">Забор и доставка курьером</a>
-      </li>
-      <li class="main-nav__item">
-        <a href="delivery-from-online-shop.html" class="main-nav__link">Доставка посылок из интернет-магазинов</a>
-      </li>
-      <li class="main-nav__item">
-        <a href="non-standard-tasks.html" class="main-nav__link">Реализация нестандартных логистических задач</a>
-      </li>
-      <li class="main-nav__item">
-        <a href="cargo-insurance.html" class="main-nav__link">Страхование груза</a>
+    <ul *ngIf="item.dropdown" class="main-nav__dropdown">
+      <li *ngFor="let item of item.dropdown" class="main-nav__item">
+        <a [routerLink]='item.link' class="main-nav__link">
+          <span>{{item.name}}</span>
+        </a>
       </li>
     </ul>
-  </li>
-  <li class="main-nav__item main-nav__item--dropdown">
-    <a href="info.html" class="main-nav__link" for="nav-info">
-      <span>Информация</span>
-    </a>
-    <input type="radio" name="nav-items" id="nav-info" class="main-nav__input">
-    <ul class="main-nav__dropdown">
-      <li class="main-nav__item">
-        <a href="how-to-sent-parcel.html" class="main-nav__link">Как отправить посылку</a>
-      </li>
-      <li class="main-nav__item">
-        <a href="how-to-get-parcel.html" class="main-nav__link">Как получить посылку</a>
-      </li>
-      <li class="main-nav__item">
-        <a href="rules-of-send-delivery-parcels.html" class="main-nav__link">Правила приемки и отправки грузов</a>
-      </li>
-      <li class="main-nav__item">
-        <a href="transportation-rates.html" class="main-nav__link">Тарифы на перевозку</a>
-      </li>
-      <li class="main-nav__item">
-        <a href="cargo-packing.html" class="main-nav__link">Упаковки грузов и виды упаковки</a>
-      </li>
-      <li class="main-nav__item">
-        <a href="storage-of-cargo.html" class="main-nav__link">Хранение груза на складах Bus-курьер</a>
-      </li>
-      <li class="main-nav__item">
-        <a href="delivery-from-airport.html" class="main-nav__link">Доставка грузов и багажа из Аэропорта</a>
-      </li>
-    </ul>
-  </li>
-  <li class="main-nav__item">
-    <a href="documents-for-senders-and-recipients.html" class="main-nav__link">
-      Документы
-    </a>
-  </li>
-  <li class="main-nav__item">
-    <a href="contacts.html" class="main-nav__link">
-      Контакты
-    </a>
   </li>
 </ul>
