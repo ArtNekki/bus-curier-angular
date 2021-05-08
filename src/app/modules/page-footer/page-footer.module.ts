@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageFooterComponent } from './page-footer.component';
 import {SharedModule} from '../../shared/shared.module';
+import {AppRoutingModule} from '../../app-routing.module';
 
 
 
@@ -9,7 +10,8 @@ import {SharedModule} from '../../shared/shared.module';
   declarations: [PageFooterComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
   exports: [
     PageFooterComponent

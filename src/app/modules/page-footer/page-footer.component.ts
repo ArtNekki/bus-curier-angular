@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {mainNav, topNav} from '../../footer-nav';
 
 @Component({
   selector: 'app-page-footer',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-footer.component.scss']
 })
 export class PageFooterComponent implements OnInit {
+
+  public topNav = topNav;
+  public mainNav = mainNav;
 
   constructor() { }
 
