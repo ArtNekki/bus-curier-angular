@@ -4,7 +4,7 @@
 @import "src/variables";
 @import "src/assets/scss/settings";
 
-.area-selector {
+.location-selector {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -74,19 +74,13 @@
     left: 0;
     z-index: 10;
     padding: 25px;
-    display: none;
-    opacity: 0;
+    display: grid;
     grid-template-columns: repeat(2, auto);
     grid-column-gap: 25px;
     border-top: 3px solid $primary-color;
     background-color: $white-color;
     border-radius: 2px;
     box-shadow: 0px 5px 40px rgba($black-color, 0.05);
-
-    .area-selector:hover > & {
-      display: grid;
-      @include menu-hover();
-    }
 
     @include media-breakpoint-up(lg) {
       padding: 30px 90px 25px 45px;
@@ -168,5 +162,14 @@
         }
       }
     }
+  }
+
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
   }
 }

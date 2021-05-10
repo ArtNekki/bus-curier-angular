@@ -9,13 +9,15 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { LocationSelectorComponent } from './components/location-selector/location-selector.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from '../../app-routing.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [PageHeaderComponent, MainNavComponent, MobileNavComponent, HeaderUserComponent, BreadcrumbsComponent, LocationSelectorComponent],
   imports: [
     CommonModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   exports: [
     PageHeaderComponent
