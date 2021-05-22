@@ -1,34 +1,29 @@
-<!--<div class="header-user">-->
-<!--  <i class="header-user__icon">-->
-<!--    {{{ icon name="user" width="40" height="40"}}}-->
-<!--  </i>-->
-<!--  <input type="checkbox" name="user-login" id="user-login" class="header-user__input">-->
-<!--  <label for="user-login" class="header-user__label">Личный кабинет</label>-->
-<!--  <ul class="header-user__dropdown">-->
-<!--    <li class="header-user__item">-->
-<!--      <a href="#" class="header-user__link">Вход</a>-->
-<!--    </li>-->
-<!--    <li class="header-user__item">-->
-<!--      <a href="#" class="header-user__link">Регистрация</a>-->
-<!--    </li>-->
-<!--  </ul>-->
-<!--</div>-->
-
-<div class="header-user header-user--logged-in">
+<div class="header-user" [class.header-user--logged-in]="loggedIn">
   <i class="header-user__icon">
-    <svg-icon class="icon" src="assets/img/svg/user-logged-in.svg" width="27" height="27"></svg-icon>
+    <svg-icon  *ngIf="loggedIn" class="icon" src="assets/img/svg/user-logged-in.svg" width="27" height="27"></svg-icon>
+    <svg-icon *ngIf="!loggedIn" class="icon" src="assets/img/svg/user.svg" width="40" height="40"></svg-icon>
   </i>
-  <!--  <input type="checkbox" name="user-login" id="user-logged-in" class="header-user__input">-->
-  <span class="header-user__label">Пользователь</span>
-  <ul class="header-user__dropdown">
-    <li class="header-user__item">
-      <a href="#" class="header-user__link">Заказать доставку</a>
-    </li>
-    <li class="header-user__item">
-      <a href="#" class="header-user__link">Персональные данные</a>
-    </li>
-    <li class="header-user__item">
-      <a href="#" class="header-user__link">Выйти</a>
-    </li>
+  <button type="button" class="header-user__btn" (click)="toggleDropdown()">{{ loggedIn ? 'Личный кабинет' : 'Пользователь' }}</button>
+  <ul *ngIf="isOpen" class="header-user__dropdown" [@dropdown]="">
+    <ng-template [ngIf]="loggedIn">
+      <li class="header-user__item">
+        <a href="#" class="header-user__link">Заказать доставку</a>
+      </li>
+      <li class="header-user__item">
+        <a href="#" class="header-user__link">Персональные данные</a>
+      </li>
+      <li class="header-user__item">
+        <a href="#" class="header-user__link">Выйти</a>
+      </li>
+    </ng-template>
+    <ng-template [ngIf]="!loggedIn">
+      <li class="header-user__item">
+        <a href="#" class="header-user__link">Вход</a>
+      </li>
+      <li class="header-user__item">
+        <a href="#" class="header-user__link">Регистрация</a>
+      </li>
+    </ng-template>
   </ul>
+  <div *ngIf="isOpen" class="header-user__backdrop" (click)="toggleDropdown()"></div>
 </div>

@@ -41,7 +41,7 @@
     .main-nav > &  {
 
       @include header-sticky(lg) {
-        padding-bottom: $sticky-menu-bottom-space * 2;
+        padding-bottom: $sticky-menu-bottom-space * 2 !important;
       }
     }
   }

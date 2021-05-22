@@ -1,8 +1,8 @@
 <article class="location-selector">
-  <span class="location-selector__toggle" (click)="toggleDropdown()">
+  <button type="button" class="location-selector__btn" (click)="toggleDropdown()">
      <svg-icon class="icon" src="/assets/img/svg/area.svg"></svg-icon>
     <span>{{currentCity}}</span>
-  </span>
+  </button>
   <div *ngIf="isOpen" class="location-selector__dropdown" [@dropdown]="">
     <div *ngFor="let region of regions" class="location-selector__column">
       <h2 class="location-selector__title">{{region.name}}</h2>

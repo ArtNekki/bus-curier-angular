@@ -13,7 +13,9 @@
     display: none;
   }
 
-  &__toggle {
+  &__btn {
+    @include btn-default();
+
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -44,7 +46,7 @@
     @include caret(0.55em, -1em);
   }
 
-  &__toggle svg {
+  &__btn svg {
     position: relative;
     top: -2px;
     width: 15px;
@@ -165,11 +167,6 @@
   }
 
   &__backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 1;
+    @include backdrop();
   }
 }
