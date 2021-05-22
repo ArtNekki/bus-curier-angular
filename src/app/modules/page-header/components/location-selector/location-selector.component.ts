@@ -1,19 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import regions from './data';
+import dropdown from '../../../../core/animations/dropdown';
 
 @Component({
   selector: 'app-location-selector',
   templateUrl: './location-selector.component.html',
   styleUrls: ['./location-selector.component.scss'],
-  animations: [
-    trigger('dropdown', [
-      transition('void => *', [
-        style({opacity: 0}),
-        animate('200ms')
-      ])
-    ])
-  ]
+  animations: [dropdown]
 })
 export class LocationSelectorComponent implements OnInit {
 
