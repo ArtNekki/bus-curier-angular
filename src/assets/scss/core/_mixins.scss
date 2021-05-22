@@ -187,7 +187,7 @@
 }
 
 @mixin header-sticky($bp) {
-  .page--header-sticky & {
+  ::ng-deep .page-header--sticky & {
     @include media-breakpoint-up($bp) {
       @content;
     }

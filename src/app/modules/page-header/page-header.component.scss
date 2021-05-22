@@ -6,19 +6,26 @@
 
 .page-header {
   position: relative;
-  z-index: 100;
-  width: 100%;
-  background-color: $white-color;
-  box-shadow: $header-shadow;
-
-  @include header-sticky(xs) {
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
 
   @include map-full-mode {
     display: none;
+  }
+
+  &__content {
+    width: 100%;
+    background-color: $white-color;
+
+    .page-header--sticky & {
+      @include media-breakpoint-up(xs) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        width: 100%;
+        background-color: $white-color;
+        box-shadow: $header-shadow;
+      }
+    }
   }
 
   &__inner {

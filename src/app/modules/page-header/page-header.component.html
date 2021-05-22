@@ -1,38 +1,40 @@
-<header id="pageHeader" class="page-header">
-  <div class="page-header__inner">
-    <a href="/" class="page-header__logo">
-      <svg-icon class="icon" src="/assets/img/svg/logo.svg"></svg-icon>
-    </a>
-    <div class="page-header__top">
-      <div class="page-header__location">
-        <app-location-selector></app-location-selector>
-      </div>
-      <a href="tel: " class="page-header__contact">
-        <svg-icon class="icon" src="/assets/img/svg/tel.svg" width="15" height="15"></svg-icon>
-        <span>8 800 222 22 68</span>
+<header id="pageHeader" class="page-header" [class.page-header--sticky]="isSticky" #header>
+  <div class="page-header__content">
+    <div class="page-header__inner">
+      <a href="/" class="page-header__logo">
+        <svg-icon class="icon" src="/assets/img/svg/logo.svg"></svg-icon>
       </a>
-      <div class="page-header__user">
-        <app-header-user></app-header-user>
+      <div class="page-header__top">
+        <div class="page-header__location">
+          <app-location-selector></app-location-selector>
+        </div>
+        <a href="tel: " class="page-header__contact">
+          <svg-icon class="icon" src="/assets/img/svg/tel.svg" width="15" height="15"></svg-icon>
+          <span>8 800 222 22 68</span>
+        </a>
+        <div class="page-header__user">
+          <app-header-user></app-header-user>
+        </div>
+        <div class="page-header__open">
+          <button id="mobileNavOpen" type="button">
+            <span></span>
+          </button>
+        </div>
       </div>
-      <div class="page-header__open">
-        <button id="mobileNavOpen" type="button">
-          <span></span>
-        </button>
-      </div>
+      <nav class="page-header__nav">
+        <app-main-nav></app-main-nav>
+        <a href="tel: " class="page-header__contact page-header__contact--sticky">
+          <svg-icon class="icon" src="/assets/img/svg/tel.svg" width="15" height="15"></svg-icon>
+          <span>8 800 222 22 68</span>
+        </a>
+        <div class="page-header__user page-header__user--sticky">
+          <app-header-user></app-header-user>
+        </div>
+      </nav>
+      <app-mobile-nav></app-mobile-nav>
     </div>
-    <nav class="page-header__nav">
-      <app-main-nav></app-main-nav>
-      <a href="tel: " class="page-header__contact page-header__contact--sticky">
-        <svg-icon class="icon" src="/assets/img/svg/tel.svg" width="15" height="15"></svg-icon>
-        <span>8 800 222 22 68</span>
-      </a>
-      <div class="page-header__user page-header__user--sticky">
-        <app-header-user></app-header-user>
-      </div>
-    </nav>
-    <app-mobile-nav></app-mobile-nav>
-  </div>
-  <div class="page-header__breadcrumb">
-    <app-breadcrumbs></app-breadcrumbs>
+    <div class="page-header__breadcrumb">
+      <app-breadcrumbs></app-breadcrumbs>
+    </div>
   </div>
 </header>
