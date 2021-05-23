@@ -8,9 +8,9 @@ import {RulesOfSendPageComponent} from './rules-of-send-page/rules-of-send-page.
 import {TransportationRatesPageComponent} from './transportation-rates-page/transportation-rates-page.component';
 
 const routes: Routes = [
-  {path: '', component: InfoGroupComponent, children: [
+  {path: '', component: InfoGroupComponent, data: { title: 'Информация' }, children: [
       { path: '', redirectTo: '/info/how-to-send', pathMatch: 'full'},
-      { path: 'how-to-send', component:  HowToSendPageComponent},
+      { path: 'how-to-send', component:  HowToSendPageComponent, data: { title: 'Как отправить посылку' }},
       { path: 'how-to-get', component:  null},
       { path: 'delivery-from-airport', component:  DeliveryFromAirportPageComponent},
       { path: 'packing', component:  PackingPageComponent},

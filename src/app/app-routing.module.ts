@@ -23,11 +23,11 @@ import {CalcRatePageComponent} from './pages/widgets-group/calc-rate-page/calc-r
 
 
 const routes: Routes = [
-  {path: '', component: IndexPageComponent},
-  {path: 'parcels', component: ParcelsPageComponent},
-  {path: 'send-parcel', component: SendParcelPageComponent},
-  {path: 'documents', component: DocumentsPageComponent},
-  {path: 'work-in-team', component: WorkInTeamPageComponent},
+  {path: '', component: IndexPageComponent, data: { title: 'Главная' }},
+  {path: 'parcels', component: ParcelsPageComponent, data: { title: 'Посылки' }},
+  {path: 'send-parcel', component: SendParcelPageComponent, data: { title: 'Отправка посылки' }},
+  {path: 'documents', component: DocumentsPageComponent, data: { title: 'Документы' }},
+  {path: 'work-in-team', component: WorkInTeamPageComponent, data: { title: 'Работа в команде' }},
   {path: 'feedback', component: FeedbackPageComponent},
   // {path: 'how-to-get', component: HowToGetPageComponent},
   {path: 'about', component: AboutPageComponent},

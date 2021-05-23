@@ -1,13 +1,26 @@
-<div class="breadcrumb">
-  <ul class="breadcrumb__list">
-    <li class="breadcrumb__item">
-      <a href="#" class="breadcrumb__link">Главная</a>
+<!--<div class="breadcrumb">-->
+<!--  <ul class="breadcrumb__list">-->
+<!--    <li class="breadcrumb__item">-->
+<!--      <a href="#" class="breadcrumb__link">Главная</a>-->
+<!--    </li>-->
+<!--    <li class="breadcrumb__item">-->
+<!--      <a href="#" class="breadcrumb__link">Сервис</a>-->
+<!--    </li>-->
+<!--    <li class="breadcrumb__item breadcrumb__item&#45;&#45;active">-->
+<!--      <a class="breadcrumb__link">Расчет стоимости перевозки по Приморскому краю</a>-->
+<!--    </li>-->
+<!--  </ul>-->
+<!--</div>-->
+
+<ul>
+  <ng-template ngFor let-breadcrumb [ngForOf]="breadcrumbs" let-last = last>
+    <li class="breadcrumb-item"
+        *ngIf="(breadcrumb.label.title && breadcrumb.url.substring(breadcrumb.url.length-1) == '/') || (breadcrumb.label.title && last)"
+        [ngClass]="{active: last}">
+
+      <a *ngIf="!last && !breadcrumb.isStub" [routerLink]="breadcrumb.url">{{breadcrumb.label.title}}</a>
+      <a *ngIf="!last && breadcrumb.isStub">{{breadcrumb.label.title}}</a>
+      <span *ngIf="last" [routerLink]="breadcrumb.url">{{breadcrumb.label.title}}</span>
     </li>
-    <li class="breadcrumb__item">
-      <a href="#" class="breadcrumb__link">Сервис</a>
-    </li>
-    <li class="breadcrumb__item breadcrumb__item--active">
-      <a class="breadcrumb__link">Расчет стоимости перевозки по Приморскому краю</a>
-    </li>
-  </ul>
-</div>
+  </ng-template>`
+</ul>

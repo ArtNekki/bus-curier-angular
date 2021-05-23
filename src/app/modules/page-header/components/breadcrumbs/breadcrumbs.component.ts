@@ -1,15 +1,61 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {filter} from 'rxjs/operators';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss']
 })
-export class BreadcrumbsComponent implements OnInit {
+export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  breadcrumbs: Array<object>;
+  unsubscribeAll = new Subject();
+
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event) => {
+      this.render();
+    });
   }
 
+  private render() {
+
+    this.breadcrumbs = [];
+
+    let currentRoute = this.route.root;
+    let url = '';
+
+    do {
+      const childrenRoutes = currentRoute.children;
+      currentRoute = null;
+
+      childrenRoutes.forEach(route => {
+        if (route.outlet === 'primary') {
+          const routeSnapshot = route.snapshot;
+          url += routeSnapshot.url.map(segment => segment.path).join('/') + '/';
+
+          const routeData = Object.assign({}, route.snapshot.data);
+
+          this.breadcrumbs.push({
+            isStub: typeof routeSnapshot.component === 'undefined',
+            label: routeData,
+            url
+          });
+
+          console.log('this.breadcrumbs', this.breadcrumbs);
+          currentRoute = route;
+        }
+      });
+    } while (currentRoute);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
+  }
 }
