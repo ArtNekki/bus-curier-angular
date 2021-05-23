@@ -6,12 +6,12 @@ import {CalcRatePageComponent} from './calc-rate-page/calc-rate-page.component';
 import {OrderPageComponent} from './order-page/order-page.component';
 
 const routes: Routes = [
-  {path: '', component: WidgetsGroupComponent, children: [
+  {path: '', component: WidgetsGroupComponent, data: { title: 'Сервисы' }, children: [
       { path: '', redirectTo: '/widgets/track-order', pathMatch: 'full'},
-      { path: 'track-order', component: TrackOrderPageComponent},
-      { path: 'calc-rate', component:  CalcRatePageComponent},
-      { path: 'order', component:  OrderPageComponent},
-      { path: 'search-order', component: null}
+      { path: 'track-order', component: TrackOrderPageComponent, data: { title: 'Отследить посылку' }},
+      { path: 'calc-rate', component:  CalcRatePageComponent, data: { title: 'Расчет тарифа по Приморью' }},
+      { path: 'order', component:  OrderPageComponent, data: { title: 'Онлайн-заявка' }},
+      { path: 'search-order', component: null, data: { title: 'Поиск заказа' }}
   ]}
 ];
 

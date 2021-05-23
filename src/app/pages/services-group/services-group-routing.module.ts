@@ -9,13 +9,13 @@ import {NonStandardTasksPageComponent} from './non-standard-tasks-page/non-stand
 
 
 const routes: Routes = [
-  {path: '', component: ServicesGroupComponent, children: [
+  {path: '', component: ServicesGroupComponent, data: { title: 'Наши услуги' }, children: [
       { path: '', redirectTo: '/services/our-services', pathMatch: 'full'},
       { path: 'our-services', component:  ServicesPageComponent},
-      { path: 'cargo-insurance', component:  CargoInsurancePageComponent},
-      { path: 'courier', component:  CourierPageComponent},
-      { path: 'delivery-russia', component:  DeliveryRussiaPageComponent},
-      { path: 'non-standard-tasks', component:  NonStandardTasksPageComponent},
+      { path: 'cargo-insurance', component:  CargoInsurancePageComponent, data: { title: 'Страхование груза' }},
+      { path: 'courier', component:  CourierPageComponent, data: { title: 'Забор и доставка курьером' }},
+      { path: 'delivery-russia', component:  DeliveryRussiaPageComponent, data: { title: 'Грузоперевозки по России' }},
+      { path: 'non-standard-tasks', component:  NonStandardTasksPageComponent, data: { title: 'Реализация нестандартных логистических задач' }},
   ]}
 ];
 

@@ -11,12 +11,12 @@ const routes: Routes = [
   {path: '', component: InfoGroupComponent, data: { title: 'Информация' }, children: [
       { path: '', redirectTo: '/info/how-to-send', pathMatch: 'full'},
       { path: 'how-to-send', component:  HowToSendPageComponent, data: { title: 'Как отправить посылку' }},
-      { path: 'how-to-get', component:  null},
-      { path: 'delivery-from-airport', component:  DeliveryFromAirportPageComponent},
-      { path: 'packing', component:  PackingPageComponent},
-      { path: 'storage-cargo', component: null},
-      { path: 'rules-of-send', component:  RulesOfSendPageComponent},
-      { path: 'transportation-rates', component:  TransportationRatesPageComponent},
+      { path: 'how-to-get', component:  null, data: { title: 'Как получить посылку' }},
+      { path: 'delivery-from-airport', component:  DeliveryFromAirportPageComponent, data: { title: 'Доставка грузов и багажа из Аэропорта' }},
+      { path: 'packing', component:  PackingPageComponent, data: { title: 'Упаковки грузов и виды упаковки' }},
+      { path: 'storage-cargo', component: null, data: { title: 'Хранение груза на складах Bus-курьер' }},
+      { path: 'rules-of-send', component:  RulesOfSendPageComponent, data: { title: 'Правила приемки и отправки грузов' }},
+      { path: 'transportation-rates', component:  TransportationRatesPageComponent, data: { title: 'Тарифы на перевозку' }},
   ]}
 ];
 

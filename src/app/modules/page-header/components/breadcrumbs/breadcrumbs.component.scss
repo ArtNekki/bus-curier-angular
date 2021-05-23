@@ -4,7 +4,7 @@
 @import "src/variables";
 @import "src/assets/scss/settings";
 
-.breadcrumb {
+.breadcrumbs {
   border-top: 1px solid lighten($gray-light-color, 5%);
   white-space: nowrap;
   overflow-x: auto;
@@ -45,7 +45,7 @@
       color: $black-color;
     }
 
-    .breadcrumb__item--active & {
+    .breadcrumbs__item--active & {
       color: rgba($font-color, 0.5);
 
       @include hover {
