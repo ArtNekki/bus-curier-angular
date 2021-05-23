@@ -16,45 +16,29 @@ import {UsefulInfoPageComponent} from './pages/useful-info-page/useful-info-page
 import {FeedbackLinksPageComponent} from './pages/feedback-links-page/feedback-links-page.component';
 import {ContactsPageComponent} from './pages/contacts-page/contacts-page.component';
 import {TransportationRatesPageComponent} from './pages/info-group/transportation-rates-page/transportation-rates-page.component';
-import {TrackOrderPageComponent} from './pages/track-order-page/track-order-page.component';
+import {TrackOrderPageComponent} from './pages/widgets-group/track-order-page/track-order-page.component';
 import {AccountPageComponent} from './pages/account-page/account-page.component';
-import {OrderPageComponent} from './pages/order-page/order-page.component';
-import {CalcRatePageComponent} from './pages/calc-rate-page/calc-rate-page.component';
+import {OrderPageComponent} from './pages/widgets-group/order-page/order-page.component';
+import {CalcRatePageComponent} from './pages/widgets-group/calc-rate-page/calc-rate-page.component';
 
 
 const routes: Routes = [
   {path: '', component: IndexPageComponent},
   {path: 'parcels', component: ParcelsPageComponent},
   {path: 'send-parcel', component: SendParcelPageComponent},
-  {path: 'packing', component: PackingPageComponent},
-  {path: 'rules-of-send', component: RulesOfSendPageComponent},
   {path: 'documents', component: DocumentsPageComponent},
   {path: 'work-in-team', component: WorkInTeamPageComponent},
   {path: 'feedback', component: FeedbackPageComponent},
-  {path: 'how-to-send', component: HowToSendPageComponent},
   // {path: 'how-to-get', component: HowToGetPageComponent},
   {path: 'about', component: AboutPageComponent},
-  {path: 'delivery-from-airport', component: DeliveryFromAirportPageComponent},
   // {path: 'cargo-storage', component: CargoStoragePageComponent},
-  {path: 'our-services', component: OurServicesPageComponent},
+  // {path: 'our-services', component: OurServicesPageComponent},
   {path: 'useful-info', component: UsefulInfoPageComponent},
   {path: 'feedback-links', component: FeedbackLinksPageComponent},
   {path: 'contacts', component: ContactsPageComponent},
-  {path: 'transportation-rates', component: TransportationRatesPageComponent},
-  {path: 'track-order', component: TrackOrderPageComponent},
-  {path: 'order', component: OrderPageComponent},
-  {path: 'calc-rate', component: CalcRatePageComponent},
   {path: 'services', loadChildren: () => import('./pages/services-group/services-group.module').then((m) => m.ServicesGroupModule) },
-  {path: 'info', loadChildren: () => import('./pages/info-group/info-group.module').then((m) => m.InfoGroupModule) }
-
-
-  // { path: 'account', loadChildren: () => import('./pages/account-page/account-page.module').then((m) => m.AccountPageModule) }
-
-  // {
-  //   path: 'parcels',
-  //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')
-  //     .then(m => m.ParcelsPageModule)
-  // },
+  {path: 'info', loadChildren: () => import('./pages/info-group/info-group.module').then((m) => m.InfoGroupModule) },
+  {path: 'widgets', loadChildren: () => import('./pages/widgets-group/widgets-group.module').then((m) => m.WidgetsGroupModule) }
 ];
 
 @NgModule({

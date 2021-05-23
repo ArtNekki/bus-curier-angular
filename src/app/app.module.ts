@@ -19,10 +19,7 @@ import {OurServicesPageModule} from './pages/our-services-page/our-services-page
 import {UsefulInfoPageModule} from './pages/useful-info-page/useful-info-page.module';
 import {FeedbackLinksPageModule} from './pages/feedback-links-page/feedback-links-page.module';
 import {ContactsPageModule} from './pages/contacts-page/contacts-page.module';
-import {TrackOrderPageModule} from './pages/track-order-page/track-order-page.module';
 import {AccountPageModule} from './pages/account-page/account-page.module';
-import {OrderPageModule} from './pages/order-page/order-page.module';
-import {CalcRatePageModule} from './pages/calc-rate-page/calc-rate-page.module';
 
 @NgModule({
   declarations: [
@@ -46,10 +43,7 @@ import {CalcRatePageModule} from './pages/calc-rate-page/calc-rate-page.module';
     UsefulInfoPageModule,
     FeedbackLinksPageModule,
     ContactsPageModule,
-    TrackOrderPageModule,
     AccountPageModule,
-    OrderPageModule,
-    CalcRatePageModule,
     // IndexPageModule,
     AppRoutingModule
   ],
