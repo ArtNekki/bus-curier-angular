@@ -6,7 +6,7 @@
     </a>
     <ul *ngIf="item.dropdown && activeItem === item" class="main-nav__dropdown" [@dropdown]="">
       <li *ngFor="let item of item.dropdown" class="main-nav__item">
-        <a [routerLink]='item.link' class="main-nav__link">
+        <a [routerLink]='item.link' class="main-nav__link" routerLinkActive="main-nav__link--active">
           <span *ngIf="item.dropdown">{{item.name}}</span>
           <ng-template [ngIf]="!item.dropdown">{{item.name}}</ng-template>
         </a>

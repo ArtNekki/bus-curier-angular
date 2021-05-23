@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ModsService} from '../../../../core/services/mods.service';
+import {ModsService} from '../../../../../core/services/mods.service';
 
 @Component({
   selector: 'app-card',

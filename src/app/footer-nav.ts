@@ -11,11 +11,11 @@ export const mainNav = [
   {link: 'no', name: 'Услуги', dropdown: [
     {link: 'no', name: 'Грузоперевозки по Приморскому краю'},
     {link: 'no', name: 'Грузоперевозки в республике Татарстан'},
-    {link: 'delivery-russia', name: 'Грузоперевозки по России'},
-    {link: 'courier', name: 'Забор и доставка курьером'},
+    {link: 'services/delivery-russia', name: 'Грузоперевозки по России'},
+    {link: 'services/courier', name: 'Забор и доставка курьером'},
     {link: 'no', name: 'Доставка посылок из интернет-магазинов'},
-    {link: 'non-standard-tasks', name: 'Решение нестандартных логистических задач'},
-    {link: 'cargo-insurance', name: 'Страхование груза'}
+    {link: 'services/non-standard-tasks', name: 'Решение нестандартных логистических задач'},
+    {link: 'services/cargo-insurance', name: 'Страхование груза'}
   ]},
   {link: 'no', name: 'Информация', dropdown: [
     {link: 'how-to-send', name: 'Как отправить посылку', sm: true},
