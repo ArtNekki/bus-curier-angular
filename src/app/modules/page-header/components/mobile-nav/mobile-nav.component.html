@@ -11,13 +11,13 @@
   <div class="mobile-nav__scroll">
     <ul class="mobile-nav__list">
       <li *ngFor="let item of nav"  class="mobile-nav__item">
-        <a *ngIf="!item.dropdown" [routerLink]="item.link" class="mobile-nav__link">
+        <a *ngIf="!item.dropdown" [routerLink]="item.link" routerLinkActive="mobile-nav__link--active" class="mobile-nav__link">
           {{item.name}}
         </a>
-        <span *ngIf="item.dropdown" class="mobile-nav__link mobile-nav__link--toggle">{{item.name}}</span>
-        <ul  *ngIf="item.dropdown" class="mobile-nav__list mobile-nav__list--inner">
+        <span *ngIf="item.dropdown" class="mobile-nav__link mobile-nav__link--toggle" [class.mobile-nav__link--active]="activeItem === item" (click)="openDropdown(item)">{{item.name}}</span>
+        <ul  *ngIf="item.dropdown && activeItem === item" class="mobile-nav__list mobile-nav__list--inner">
           <li *ngFor="let item of item.dropdown" class="mobile-nav__item">
-            <a [routerLink]="item.link" class="mobile-nav__link">{{item.name}}</a>
+            <a [routerLink]="item.link" class="mobile-nav__link" routerLinkActive="mobile-nav__link--active">{{item.name}}</a>
           </li>
         </ul>
       </li>
@@ -26,7 +26,8 @@
       <a href="mailto: inbox@busbox.guru" class="mobile-nav__footer-link mobile-nav__footer-link--lg"><b>inbox@busbox.guru</b></a>
       <a href="privacy-policy.html" class="mobile-nav__footer-link">Политика конфиденциальности</a>
       <div class="mobile-nav__text">2013-2020 © ООО «Приморье»</div>
-      <div class="mobile-nav__text">Идея и дизайн сайта: <a href="#" class="link">Lead Wave</a></div>
+      <div class="mobile-nav__text">Идея и дизайн сайта: <app-link href="#">Lead Wave</app-link></div>
     </div>
   </div>
 </div>
+<div *ngIf="isOpen" class="mobile-nav-backdrop" (click)="closeNav()"></div>

@@ -168,6 +168,10 @@
     color: $white-color;
     text-decoration: none;
 
+    &--active {
+      color: red;
+    }
+
     @include hover {
       opacity: 0.8;
     }

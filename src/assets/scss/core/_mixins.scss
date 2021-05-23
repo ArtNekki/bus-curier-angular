@@ -195,7 +195,7 @@
 }
 
 @mixin mobile-open($bp: null) {
-  .page--mobile-open & {
+  ::ng-deep .page--mobile-open & {
     @if ($bp) {
       @include media-breakpoint-up($bp) {
         @content;

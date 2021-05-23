@@ -39,9 +39,11 @@ export class PageHeaderComponent implements OnInit, AfterViewInit {
 
   openMobileNav() {
     this.mobileNavIsOpen = true;
+    document.documentElement.classList.add('page--mobile-open');
   }
 
   closeMobileNav(state) {
     this.mobileNavIsOpen = state;
+    document.documentElement.classList.remove('page--mobile-open');
   }
 }

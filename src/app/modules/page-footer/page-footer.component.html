@@ -6,18 +6,18 @@
       </a>
       <ul class="page-footer__nav">
         <li *ngFor="let item of topNav">
-          <a [routerLink]="item.link" class="page-footer__link">{{ item.name }}</a>
+          <a [routerLink]="item.link" class="page-footer__link" routerLinkActive="page-footer__link--active">{{ item.name }}</a>
         </li>
       </ul>
     </div>
     <div class="page-footer__main">
       <div *ngFor="let item of mainNav" class="page-footer__item page-footer__item--desktop page-footer__item--services" [class.page-footer__item--services]='item.name === "Услуги"'>
         <b class="page-footer__header">
-          <a [routerLink]="item.link" class="page-footer__link">{{item.name}}</a>
+          <a [routerLink]="item.link" class="page-footer__link" routerLinkActive="page-footer__link--active">{{item.name}}</a>
         </b>
         <ul class="page-footer__list">
           <li *ngFor="let item of item.dropdown">
-            <a [routerLink]="item.link" class="page-footer__link" [class.page-footer__link--sm]="item.sm">{{ item.name }}</a>
+            <a [routerLink]="item.link" class="page-footer__link" routerLinkActive="page-footer__link--active" [class.page-footer__link--sm]="item.sm">{{ item.name }}</a>
           </li>
         </ul>
       </div>

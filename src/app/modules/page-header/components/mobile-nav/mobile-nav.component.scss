@@ -36,6 +36,7 @@
 
   &__header {
     position: relative;
+    z-index: 11;
     padding-right: $mobile-padding-right;
     padding-left: $mobile-padding-left;
     min-height: 80px;
@@ -70,16 +71,9 @@
     @include close-button(35px, darken($gray-color, 13%), $black-color);
   }
 
-  &__input {
-    display: none;
-
-    &:checked ~ .mobile-nav__list--inner {
-      position: static;
-      opacity: 1;
-    }
-  }
-
   &__scroll {
+    position: relative;
+    z-index: 11;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -91,13 +85,8 @@
     list-style: none;
 
     &--inner {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
       padding-top: 20px;
       padding-bottom: 20px;
-      opacity: 0;
       background-color: lighten($gray-light-color, 7%); //#f7f7f7;
     }
   }
@@ -124,7 +113,7 @@
       line-height: 19.2px;
     }
 
-    .mobile-nav__input:checked ~  & {
+     &--active {
       background-color: $white-color;
       box-shadow: 0px 2px 10px rgba($black-color, 0.05);
     }
@@ -163,4 +152,7 @@
     margin-top: 10px;
   }
 
+  &-backdrop {
+    @include backdrop();
+  }
 }

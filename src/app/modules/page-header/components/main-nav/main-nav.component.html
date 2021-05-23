@@ -1,6 +1,6 @@
 <ul class="main-nav">
   <li *ngFor="let item of nav" class="main-nav__item" [class.main-nav__item--dropdown]="item.dropdown">
-    <a [routerLink]='item.link' class="main-nav__link" (mouseenter)="showDropdown(item)">
+    <a [routerLink]='item.link' class="main-nav__link" routerLinkActive="main-nav__link--active" (mouseenter)="showDropdown(item)">
       <span *ngIf="item.dropdown">{{item.name}}</span>
       <ng-template [ngIf]="!item.dropdown">{{item.name}}</ng-template>
     </a>

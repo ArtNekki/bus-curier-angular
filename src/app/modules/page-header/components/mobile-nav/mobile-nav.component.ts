@@ -25,6 +25,7 @@ export class MobileNavComponent implements OnInit {
 
   public nav = mainNav;
   public navBlock = '';
+  public activeItem = null;
 
   constructor() { }
 
@@ -34,6 +35,10 @@ export class MobileNavComponent implements OnInit {
   closeNav() {
     this.isOpen = false;
     this.onClose.emit(false);
+  }
+
+  openDropdown(item) {
+    this.activeItem = item;
   }
 
 }

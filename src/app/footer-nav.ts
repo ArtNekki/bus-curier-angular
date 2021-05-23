@@ -1,42 +1,42 @@
 export const topNav = [
-  {link: '', name: 'Отследить посылку'},
-  {link: '', name: 'Рассчет тарифа по Приморью'},
-  {link: '', name: 'Услуги'},
-  {link: '', name: 'Информация'},
-  {link: '', name: 'Документы'},
-  {link: '', name: 'Контакты'}
+  {link: 'track-order', name: 'Отследить посылку'},
+  {link: 'calc-rate', name: 'Рассчет тарифа по Приморью'},
+  {link: 'services', name: 'Услуги'},
+  {link: 'no', name: 'Информация'},
+  {link: 'documents', name: 'Документы'},
+  {link: 'contacts', name: 'Контакты'}
 ]
 
 export const mainNav = [
-  {link: '', name: 'Услуги', dropdown: [
-    {link: '', name: 'Грузоперевозки по Приморскому краю'},
-    {link: '', name: 'Грузоперевозки в республике Татарстан'},
-    {link: '', name: 'Грузоперевозки по России'},
-    {link: '', name: 'Забор и доставка курьером'},
-    {link: '', name: 'Доставка посылок из интернет-магазинов'},
-    {link: '', name: 'Решение нестандартных логистических задач'},
-    {link: '', name: 'Страхование груза'}
+  {link: 'no', name: 'Услуги', dropdown: [
+    {link: 'no', name: 'Грузоперевозки по Приморскому краю'},
+    {link: 'no', name: 'Грузоперевозки в республике Татарстан'},
+    {link: 'delivery-russia', name: 'Грузоперевозки по России'},
+    {link: 'courier', name: 'Забор и доставка курьером'},
+    {link: 'no', name: 'Доставка посылок из интернет-магазинов'},
+    {link: 'non-standard-tasks', name: 'Решение нестандартных логистических задач'},
+    {link: 'cargo-insurance', name: 'Страхование груза'}
   ]},
-  {link: '', name: 'Информация', dropdown: [
-    {link: '', name: 'Как отправить посылку', sm: true},
-    {link: '', name: 'Как получить посылку', sm: true},
-    {link: '', name: 'Правила приемки и отправки грузов', sm: true},
-    {link: '', name: 'Тарифы на перевозку', sm: true},
-    {link: '', name: 'Упаковки грузов и виды упаковки', sm: true},
-    {link: '', name: 'Доставка грузов и багажа из Аэропорта', sm: true},
-    {link: '', name: 'Франшиза Bus-Курьер', sm: true}
+  {link: 'no', name: 'Информация', dropdown: [
+    {link: 'how-to-send', name: 'Как отправить посылку', sm: true},
+    {link: 'no', name: 'Как получить посылку', sm: true},
+    {link: 'rules-of-send', name: 'Правила приемки и отправки грузов', sm: true},
+    {link: 'transportation-rates', name: 'Тарифы на перевозку', sm: true},
+    {link: 'packing', name: 'Упаковки грузов и виды упаковки', sm: true},
+    {link: 'delivery-from-airport', name: 'Доставка грузов и багажа из Аэропорта', sm: true},
+    {link: 'no', name: 'Франшиза Bus-Курьер', sm: true}
   ]},
-  {link: '', name: 'Сервисы', dropdown: [
-      {link: '', name: 'Поиск заказа', sm: true},
-      {link: '', name: 'Личный кабинет', sm: true},
-      {link: '', name: 'Онлайн-заявка', sm: true},
-      {link: '', name: 'Расчет тарифа по Приморью', sm: true},
-      {link: '', name: 'Расчет тарифа по Республике Татарстан', sm: true},
-      {link: '', name: 'Расчет тарифа по России', sm: true},
-      {link: '', name: 'О компании'},
-      {link: '', name: 'Вакансии'},
-      {link: '', name: 'Документы'},
-      {link: '', name: 'Обратная связь'},
-      {link: '', name: 'Контакты'}
+  {link: 'no', name: 'Сервисы', dropdown: [
+      {link: 'no', name: 'Поиск заказа', sm: true},
+      {link: 'no', name: 'Личный кабинет', sm: true},
+      {link: 'no', name: 'Онлайн-заявка', sm: true},
+      {link: 'calc-rate', name: 'Расчет тарифа по Приморью', sm: true},
+      {link: 'no', name: 'Расчет тарифа по Республике Татарстан', sm: true},
+      {link: 'no', name: 'Расчет тарифа по России', sm: true},
+      {link: 'about', name: 'О компании'},
+      {link: 'work-in-team', name: 'Вакансии'},
+      {link: 'documents', name: 'Документы'},
+      {link: 'feedback', name: 'Обратная связь'},
+      {link: 'contacts', name: 'Контакты'}
     ]},
 ]
