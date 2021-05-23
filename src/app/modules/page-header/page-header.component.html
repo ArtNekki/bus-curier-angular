@@ -16,7 +16,7 @@
           <app-header-user></app-header-user>
         </div>
         <div class="page-header__open">
-          <button id="mobileNavOpen" type="button">
+          <button type="button" (click)="openMobileNav()">
             <span></span>
           </button>
         </div>
@@ -31,7 +31,7 @@
           <app-header-user></app-header-user>
         </div>
       </nav>
-      <app-mobile-nav></app-mobile-nav>
+      <app-mobile-nav [isOpen]="mobileNavIsOpen" (onClose)="closeMobileNav($event)"></app-mobile-nav>
     </div>
     <div class="page-header__breadcrumb">
       <app-breadcrumbs></app-breadcrumbs>

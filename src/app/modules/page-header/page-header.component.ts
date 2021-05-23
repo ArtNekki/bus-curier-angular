@@ -7,16 +7,14 @@ import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} f
 })
 export class PageHeaderComponent implements OnInit, AfterViewInit {
   @ViewChild('header', {read: ElementRef}) header: ElementRef;
+
   isSticky = false;
+  mobileNavIsOpen = false;
 
   constructor() { }
 
   ngOnInit() {
-    if (this.isSticky) {
-      document.documentElement.classList.add('page--header-sticky');
-    } else {
-      document.documentElement.classList.remove('page--header-sticky');
-    }
+
   }
 
   ngAfterViewInit(): void {
@@ -34,10 +32,16 @@ export class PageHeaderComponent implements OnInit, AfterViewInit {
   setStickyMenu() {
     if (this.header.nativeElement.getBoundingClientRect().top < -30) {
       this.isSticky = true;
-      // document.documentElement.classList.add('page--header-sticky');
     } else {
       this.isSticky = false;
-      // document.documentElement.classList.remove('page--header-sticky');
     }
+  }
+
+  openMobileNav() {
+    this.mobileNavIsOpen = true;
+  }
+
+  closeMobileNav(state) {
+    this.mobileNavIsOpen = state;
   }
 }

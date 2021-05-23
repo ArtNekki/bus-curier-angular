@@ -1,12 +1,12 @@
-<div class="mobile-nav">
+<div class="mobile-nav" [@navBlock]="isOpen">
   <div class="mobile-nav__header">
     <a href="#" class="mobile-nav__logo">
-      <svg-icon class="icon" src="assets/img/svg/logo.svg" width="68" height="40"></svg-icon>
+<!--      <svg-icon class="icon" src="assets/img/svg/logo.svg" width="68" height="40"></svg-icon>-->
     </a>
     <a href="tel:" class="mobile-nav__contact">
       <svg-icon class="icon" src="assets/img/svg/tel.svg" width="15" height="15"></svg-icon>
     </a>
-    <button id="mobileNavClose" class="mobile-nav__close"></button>
+    <button *ngIf="isOpen" class="mobile-nav__close" (click)="closeNav()"></button>
   </div>
   <div class="mobile-nav__scroll">
     <ul class="mobile-nav__list">
