@@ -10,20 +10,15 @@ import { OrderComponent } from './modules/order/order.component';
 import { CalculatorComponent } from './modules/calculator/calculator.component';
 import {ParcelsPageModule} from './pages/parcels-page/parcels-page.module';
 import {SendParcelPageModule} from './pages/send-parcel-page/send-parcel-page.module';
-import {PackingPageModule} from './pages/packing-page/packing-page.module';
-import {RulesOfSendPageModule} from './pages/rules-of-send-page/rules-of-send-page.module';
 import {DocumentsPageModule} from './pages/documents-page/documents-page.module';
 import {WorkInTeamPageModule} from './pages/work-in-team-page/work-in-team-page.module';
 import {IndexPageModule} from './pages/index-page/index-page.module';
 import {FeedbackPageModule} from './pages/feedback-page/feedback-page.module';
-import {HowToSendPageModule} from './pages/how-to-send-page/how-to-send-page.module';
 import {AboutPageModule} from './pages/about-page/about-page.module';
-import {DeliveryFromAirportPageModule} from './pages/delivery-from-airport-page/delivery-from-airport-page.module';
 import {OurServicesPageModule} from './pages/our-services-page/our-services-page.module';
 import {UsefulInfoPageModule} from './pages/useful-info-page/useful-info-page.module';
 import {FeedbackLinksPageModule} from './pages/feedback-links-page/feedback-links-page.module';
 import {ContactsPageModule} from './pages/contacts-page/contacts-page.module';
-import {TransportationRatesPageModule} from './pages/transportation-rates-page/transportation-rates-page.module';
 import {TrackOrderPageModule} from './pages/track-order-page/track-order-page.module';
 import {AccountPageModule} from './pages/account-page/account-page.module';
 import {OrderPageModule} from './pages/order-page/order-page.module';
@@ -42,20 +37,15 @@ import {CalcRatePageModule} from './pages/calc-rate-page/calc-rate-page.module';
     PageFooterModule,
     IndexPageModule,
     ParcelsPageModule,
-    PackingPageModule,
     SendParcelPageModule,
-    RulesOfSendPageModule,
     DocumentsPageModule,
     WorkInTeamPageModule,
     FeedbackPageModule,
-    HowToSendPageModule,
     AboutPageModule,
-    DeliveryFromAirportPageModule,
     OurServicesPageModule,
     UsefulInfoPageModule,
     FeedbackLinksPageModule,
     ContactsPageModule,
-    TransportationRatesPageModule,
     TrackOrderPageModule,
     AccountPageModule,
     OrderPageModule,

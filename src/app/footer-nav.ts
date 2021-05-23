@@ -18,12 +18,12 @@ export const mainNav = [
     {link: 'services/cargo-insurance', name: 'Страхование груза'}
   ]},
   {link: 'no', name: 'Информация', dropdown: [
-    {link: 'how-to-send', name: 'Как отправить посылку', sm: true},
+    {link: 'info/how-to-send', name: 'Как отправить посылку', sm: true},
     {link: 'no', name: 'Как получить посылку', sm: true},
-    {link: 'rules-of-send', name: 'Правила приемки и отправки грузов', sm: true},
-    {link: 'transportation-rates', name: 'Тарифы на перевозку', sm: true},
-    {link: 'packing', name: 'Упаковки грузов и виды упаковки', sm: true},
-    {link: 'delivery-from-airport', name: 'Доставка грузов и багажа из Аэропорта', sm: true},
+    {link: 'info/rules-of-send', name: 'Правила приемки и отправки грузов', sm: true},
+    {link: 'info/transportation-rates', name: 'Тарифы на перевозку', sm: true},
+    {link: 'info/packing', name: 'Упаковки грузов и виды упаковки', sm: true},
+    {link: 'info/delivery-from-airport', name: 'Доставка грузов и багажа из Аэропорта', sm: true},
     {link: 'no', name: 'Франшиза Bus-Курьер', sm: true}
   ]},
   {link: 'no', name: 'Сервисы', dropdown: [

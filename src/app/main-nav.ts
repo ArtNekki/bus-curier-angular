@@ -9,14 +9,14 @@ export default [
       {link: 'services/non-standard-tasks', name: 'Реализация нестандартных логистических задач'},
       {link: 'services/cargo-insurance', name: 'Страхование груза'},
   ]},
-  {link: 'empty', name: 'Информация', dropdown: [
-      {link: 'how-to-send', name: 'Как отправить посылку'},
+  {link: 'info/how-to-send', name: 'Информация', dropdown: [
+      {link: 'info/how-to-send', name: 'Как отправить посылку'},
       {link: 'no', name: 'Как получить посылку'},
-      {link: 'rules-of-send', name: 'Правила приемки и отправки грузов'},
-      {link: 'transportation-rates', name: 'Тарифы на перевозку'},
-      {link: 'packing', name: 'Упаковки грузов и виды упаковки'},
+      {link: 'info/rules-of-send', name: 'Правила приемки и отправки грузов'},
+      {link: 'info/transportation-rates', name: 'Тарифы на перевозку'},
+      {link: 'info/packing', name: 'Упаковки грузов и виды упаковки'},
       {link: 'no', name: 'Хранение груза на складах Bus-курьер'},
-      {link: 'delivery-from-airport', name: 'Доставка грузов и багажа из Аэропорта'},
+      {link: 'info/delivery-from-airport', name: 'Доставка грузов и багажа из Аэропорта'},
   ]},
   {link: 'documents', name: 'Документы'},
   {link: 'contacts', name: 'Контакты'}
