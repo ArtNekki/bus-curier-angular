@@ -6,21 +6,14 @@ import {AccountPersonalDataPageComponent} from './pages/account-personal-data-pa
 import {AccountOrdersPageComponent} from './pages/account-orders-page/account-orders-page.component';
 import {AccountReportPageComponent} from './pages/account-report-page/account-report-page.component';
 
-
 const routes: Routes = [
-  {path: 'account', component: AccountPageComponent, children: [
-      // {path: '', redirectTo: 'account/index', pathMatch: 'full'}
+  {path: '', component: AccountPageComponent, data: { title: 'Личный кабинет' }, children: [
+      {path: '', redirectTo: '/account/index', pathMatch: 'full'},
       {path: 'index', component: AccountIndexPageComponent},
-      {path: 'personal', component: AccountPersonalDataPageComponent},
-      {path: 'orders', component: AccountOrdersPageComponent},
-      {path: 'report', component: AccountReportPageComponent}
-  ]},
-
-  // {
-  //   path: 'parcels',
-  //   loadChildren: () => import('./pages/parcels-page/parcels-page.module')
-  //     .then(m => m.ParcelsPageModule)
-  // },
+      {path: 'personal', component: AccountPersonalDataPageComponent, data: { title: 'Персональные данные' }},
+      {path: 'orders', component: AccountOrdersPageComponent, data: { title: 'Мои заказы' }},
+      {path: 'report', component: AccountReportPageComponent, data: { title: 'Сформировать отчет' }}
+  ]}
 ];
 
 @NgModule({

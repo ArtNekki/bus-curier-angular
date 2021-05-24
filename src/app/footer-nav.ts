@@ -28,7 +28,7 @@ export const mainNav = [
   ]},
   {link: 'no', name: 'Сервисы', dropdown: [
       {link: 'no', name: 'Поиск заказа', sm: true},
-      {link: 'no', name: 'Личный кабинет', sm: true},
+      {link: 'account', name: 'Личный кабинет', sm: true},
       {link: 'widgets/order', name: 'Онлайн-заявка', sm: true},
       {link: 'widgets/calc-rate', name: 'Расчет тарифа по Приморью', sm: true},
       {link: 'no', name: 'Расчет тарифа по Республике Татарстан', sm: true},

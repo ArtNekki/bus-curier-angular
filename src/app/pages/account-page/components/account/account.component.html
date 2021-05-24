@@ -1,20 +1,25 @@
 <div class="account">
   <div class="account__main">
-    <app-account-media href="account--orders.html">
+    <app-account-media path="orders" title="Мои заявки">
       <svg-icon class="icon" src="assets/img/svg/orders.svg" imgWidth="65" imgHeight="51"></svg-icon>
       Вы еще не создали ни одного отправления<br />Посмотрите историю ваших отправлений.
     </app-account-media>
-    <app-account-media href="account--physic-personal-data.html" title="Персональные данные">
+    <app-account-media path="personal" title="Персональные данные">
       <svg-icon class="icon" src="assets/img/svg/profile.svg" imgWidth="65" imgHeight="54"></svg-icon>
       Вы еще не создали ни одного отправления<br />Посмотрите историю ваших отправлений.
     </app-account-media>
-    <app-account-media href="account--report.html" title="Сформировать отчет">
+    <app-account-media path="report" title="Сформировать отчет">
       <svg-icon class="icon" src="assets/img/svg/report.svg" imgWidth="48" imgHeight="66"></svg-icon>
       Удобное формирование отчета с применением фильтров.
     </app-account-media>
   </div>
 
   <div class="account__sidebar">
+    <article class="balance-block">
+      <div class="balance-block__label">Ваш баланс:</div>
+      <b class="balance-block__sum">12,500 <span>Р.</span></b>
+<!--      {{{ link href="#" text="Пополнить" mods="lg, blue"}}}-->
+    </article>
     <div class="account__sidebar-btn">
       <app-btn mods="lg, w-full">Оформить заказ</app-btn>
     </div>

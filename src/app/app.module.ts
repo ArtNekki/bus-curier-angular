@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {PageHeaderModule} from './modules/page-header/page-header.module';
 import {PageFooterModule} from './modules/page-footer/page-footer.module';
-import { AccountComponent } from './modules/account/account.component';
 import { OrderComponent } from './modules/order/order.component';
 import { CalculatorComponent } from './modules/calculator/calculator.component';
 import {ParcelsPageModule} from './pages/parcels-page/parcels-page.module';
@@ -19,12 +18,10 @@ import {OurServicesPageModule} from './pages/our-services-page/our-services-page
 import {UsefulInfoPageModule} from './pages/useful-info-page/useful-info-page.module';
 import {FeedbackLinksPageModule} from './pages/feedback-links-page/feedback-links-page.module';
 import {ContactsPageModule} from './pages/contacts-page/contacts-page.module';
-import {AccountPageModule} from './pages/account-page/account-page.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AccountComponent,
     OrderComponent,
     CalculatorComponent
   ],
@@ -43,7 +40,6 @@ import {AccountPageModule} from './pages/account-page/account-page.module';
     UsefulInfoPageModule,
     FeedbackLinksPageModule,
     ContactsPageModule,
-    AccountPageModule,
     // IndexPageModule,
     AppRoutingModule
   ],
