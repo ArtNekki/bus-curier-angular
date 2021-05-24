@@ -36,6 +36,7 @@ export class SelectComponent implements  ControlValueAccessor, OnInit {
       value = data.target.value;
     } else {
       value = data.value;
+      this.currentItem = data;
     }
 
     this.writeValue(value);
@@ -73,10 +74,6 @@ export class SelectComponent implements  ControlValueAccessor, OnInit {
 
   closeSelect() {
     this.isSelectOpened = false;
-  }
-
-  selectItem(item) {
-    this.currentItem = item;
   }
 
   setMods() {
