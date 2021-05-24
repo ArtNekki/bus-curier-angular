@@ -22,6 +22,8 @@ export class SelectComponent implements  ControlValueAccessor, OnInit {
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   public cssClass = 'select';
+  public isSelectOpened = false;
+  public currentItem = null;
   value: string;
 
   constructor(public deviceService: DeviceDetectorService) { }
@@ -63,6 +65,18 @@ export class SelectComponent implements  ControlValueAccessor, OnInit {
 
   ngOnInit(): void {
     this.setMods();
+  }
+
+  openSelect() {
+    this.isSelectOpened = true;
+  }
+
+  closeSelect() {
+    this.isSelectOpened = false;
+  }
+
+  selectItem(item) {
+    this.currentItem = item;
   }
 
   setMods() {

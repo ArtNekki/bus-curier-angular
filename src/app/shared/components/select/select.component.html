@@ -1,7 +1,20 @@
-<div *ngIf="deviceService.isMobile() || deviceService.isTablet()" class="select">
-  <select #select [name]="id" [id]="id" class="select-inner" (change)="changeValue($event)">
-    <option *ngFor="let item of items" [value]="item.value">{{ item.name }}</option>
-  </select>
+<!--<div *ngIf="deviceService.isMobile() || deviceService.isTablet()" class="select">-->
+<!--  <select #select [name]="id" [id]="id" class="select-inner" (change)="changeValue($event)">-->
+<!--    <option *ngFor="let item of items" [value]="item.value">{{ item.name }}</option>-->
+<!--  </select>-->
+<!--</div>-->
+<!--<ng-select *ngIf="deviceService.isDesktop()" [id]="id" [items]="items" bindLabel="name" bindValue="value" [ngModel]="value" (change)="changeValue($event)">-->
+<!--</ng-select>-->
+
+<div class="select" [class.select--opened]="isSelectOpened">
+  <div class="select__field" (click)="openSelect()">
+    <span>{{ (currentItem && currentItem.name) || 'Выберите город' }}</span>
+    <i class="fa fa-chevron-down" data-type="arrow"></i>
+  </div>
+  <div *ngIf="isSelectOpened" class="select__dropdown">
+    <ul class="select__list">
+      <li *ngFor="let item of items" class="select__item" [attr.data-value]="item.value" (click)="selectItem(item); closeSelect()">{{ item.name }}</li>
+    </ul>
+  </div>
+  <div *ngIf="isSelectOpened" class="select__backdrop" (click)="closeSelect()"></div>
 </div>
-<ng-select *ngIf="deviceService.isDesktop()" [id]="id" [items]="items" bindLabel="name" bindValue="value" [ngModel]="value" (change)="changeValue($event)">
-</ng-select>
