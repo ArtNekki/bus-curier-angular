@@ -1,0 +1,65 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.text-box {
+  padding-bottom: 20px;
+  overflow: hidden;
+
+  &__content {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      box-shadow: 0 -60px 10px rgba($white-color, 0.75) inset;
+
+      .text-box--open & {
+        display: none;
+      }
+    }
+  }
+
+  ::ng-deep &__btn {
+    position: relative;
+    margin-top: 15px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    line-height: 1.2;
+    color: $font-color;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  ::ng-deep &__btn svg {
+    --stroke-opacity: 0.1;
+    --stroke-color: #000000;
+    --arrow-color: #000000;
+
+    margin-left: 10px;
+  }
+
+  ::ng-deep .text-box--open &__btn svg {
+    transform: rotate3d(0, 0, 1, 180deg);
+  }
+
+  ::ng-deep &__btn:hover svg {
+    --stroke-opacity: 1;
+    --stroke-color: #FFDC00;
+    --fill-color: #FFDC00;
+  }
+}

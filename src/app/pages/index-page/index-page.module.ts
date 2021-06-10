@@ -10,6 +10,7 @@ import { IndexFormCalculatorComponent } from './components/index-form-calculator
 import { IndexSliderComponent } from './components/index-slider/index-slider.component';
 import { PartnersComponent } from './components/partners/partners.component';
 import { ImagesBoxComponent } from './components/images-box/images-box.component';
+import { ExampleComponent } from './components/example/example.component';
 
 
 
@@ -23,7 +24,8 @@ import { ImagesBoxComponent } from './components/images-box/images-box.component
     IndexFormCalculatorComponent,
     IndexSliderComponent,
     PartnersComponent,
-    ImagesBoxComponent
+    ImagesBoxComponent,
+    ExampleComponent
   ],
   imports: [
     CommonModule,

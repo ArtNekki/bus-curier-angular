@@ -8,6 +8,7 @@
   text-decoration: none;
 
   &__text {
+    display: inline-block;
     font-family: $font-family--secondary;
     font-size: 14px;
     line-height: 20px;
@@ -54,15 +55,15 @@
     }
   }
 
-  svg {
+  ::ng-deep svg {
     vertical-align: middle;
   }
 
-  svg + &__text {
+  ::ng-deep svg-icon + &__text {
     margin-left: 6px;
   }
 
-  &__text + svg {
+  ::ng-deep &__text + svg-icon {
     margin-left: 6px;
   }
 }

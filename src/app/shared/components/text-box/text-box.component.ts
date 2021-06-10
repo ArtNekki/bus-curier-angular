@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./text-box.component.scss']
 })
 export class TextBoxComponent implements OnInit {
+  public isOpen = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  toggle() {
+    this.isOpen = !this.isOpen;
+  }
 }

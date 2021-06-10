@@ -75,7 +75,7 @@
     }
   }
 
-  &__logo svg {
+  ::ng-deep &__logo svg {
     width: 68px;
     height: 40px;
 
@@ -177,7 +177,7 @@
     }
   }
 
-  &__contact svg {
+  ::ng-deep &__contact svg {
     display: inline-block;
     vertical-align: middle;
     opacity: 0.9;

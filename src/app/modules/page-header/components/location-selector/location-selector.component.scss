@@ -46,7 +46,7 @@
     @include caret(0.55em, -1em);
   }
 
-  &__btn svg {
+  ::ng-deep &__btn svg {
     position: relative;
     top: -2px;
     width: 15px;

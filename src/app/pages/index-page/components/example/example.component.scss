@@ -1,0 +1,48 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.example {
+
+  @include media-breakpoint-up(sm) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    grid-column-gap: 20px;
+  }
+
+  @include media-breakpoint-up(md) {
+    grid-column-gap: 40px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    display: block;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+    border-radius: 10px;
+
+    @include media-breakpoint-up(lg) {
+      height: 200px;
+    }
+  }
+
+  &__title {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-family: $font-family--secondary;
+    font-size: 18px;
+    line-height: 1.3;
+    color: $black-color;
+
+    @include media-breakpoint-between(sm, md) {
+      margin-top: 0;
+    }
+  }
+}

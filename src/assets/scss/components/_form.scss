@@ -15,6 +15,8 @@
   }
 
   &--promo {
+    position: relative;
+    z-index: 10;
     padding: 45px 33px 60px 33px;
     background-color: $primary-color;
     border-radius: $form-border-radius;
@@ -26,6 +28,9 @@
     }
 
     @include media-breakpoint-up(lg) {
+      //position: absolute;
+      //top: 0;
+      //right: 0;
       display: inline-grid;
       max-width: 375px;
     }

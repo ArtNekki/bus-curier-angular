@@ -1,0 +1,130 @@
+.swiper {
+  position: relative;
+
+  $swiper-btn-size: 42px;
+
+  &--examples {
+    @include media-breakpoint-up(lg) {
+      width: 400px;
+    }
+  }
+
+  &-container {
+    .swiper--shadow & {
+      //margin-left: -20px;
+      padding: 40px 0 20px;
+      //width: calc(100% + 40px);
+
+      @include media-breakpoint-up(lg) {
+        padding: 40px 0;
+      }
+    }
+  }
+
+  &-slide {
+
+    .swiper--shadow &:first-child {
+      box-shadow: 15px 14px 21px rgba($black-color, 0.1);
+    }
+
+    .swiper--shadow &:last-child {
+      box-shadow: -15px 14px 21px rgba($black-color, 0.1);
+    }
+  }
+
+  &-pagination {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //left: 50%;
+    //transform: translateX(-50%);
+    //width: 100%;
+    //display: grid;
+    //grid-template-columns: repeat(4, auto);
+
+    @include media-breakpoint-up(xl) {
+      display: none;
+    }
+  }
+
+  &-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    padding: 0;
+    width: $swiper-btn-size;
+    height: $swiper-btn-size;
+    display: none;
+    border: none;
+    background-color: $primary-color;
+    border-radius: 50%;
+    cursor: pointer;
+
+    .swiper--examples & {
+      top: 105px;
+      transform: unset;
+    }
+
+    @include media-breakpoint-up(xl) {
+      display: block;
+    }
+
+    @include focus {
+      outline: none;
+    }
+
+    &-prev::before,
+    &-next::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 7px solid transparent;
+    }
+
+    &-prev::after,
+    &-next::after {
+      display: none;
+    }
+
+    &-prev {
+      left: -$swiper-btn-size / 2;
+
+      &::before {
+        left: 10px;
+        border-right-color: $black-color;
+      }
+    }
+
+    &-next {
+      right: -$swiper-btn-size / 2;
+
+      &::before {
+        right: 8px;
+        border-left-color:$black-color;
+      }
+    }
+  }
+
+  &-pagination-bullet {
+    margin:  0 12px 10px 12px;
+    width: 6px;
+    height: 6px;
+    display: block;
+    border-radius: 50%;
+    background-color: $gray-light-color;
+    cursor: pointer;
+
+    &-active {
+      width: 8px;
+      height: 8px;
+      background-color: $black-color;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

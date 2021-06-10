@@ -8,7 +8,7 @@
   font-family: $font-family;
 
   @include media-breakpoint-up(lg) {
-    overflow: hidden;
+    //overflow: hidden;
   }
 
   &__inner {
@@ -159,6 +159,7 @@
   &__form {
     position: relative;
     margin-top: 60px;
+    height: 400px;
 
     &::before {
 

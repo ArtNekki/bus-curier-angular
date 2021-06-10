@@ -1,0 +1,12 @@
+<article class="example">
+  <img class="example__img"
+       [src]="'assets/img/content/index/' + data.image + '.png'"
+       [srcset]="'assets/img/content/index/' + data.image + '@2x.png 2x, assets/img/content/index/' + data.image + '@3x.png 3x'">
+  <div class="example__content">
+    <h1 class="example__title">{{data.title}}</h1>
+    <app-link href="#" mods="gray">
+      <svg-icon class="icon" src="assets/img/svg/info.svg" width="22" height="21"></svg-icon>
+      Как мы решили эту задачу
+    </app-link>
+  </div>
+</article>

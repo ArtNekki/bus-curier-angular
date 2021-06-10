@@ -1,9 +1,12 @@
-<div class="text-box">
-  <p>
+<div class="text-box" [class.text-box--open]="isOpen">
+  <div class="text-box__content">
     <ng-content></ng-content>
-  </p>
-  <button type="button" class="text-box__more">
-    Читать подробнее
+    <ng-template [ngIf]="isOpen">
+      <ng-content select=".hidden"></ng-content>
+    </ng-template>
+  </div>
+  <button type="button" class="text-box__btn" (click)="toggle()">
+    {{ isOpen ? 'Свернуть текст' : 'Читать подробнее' }}
     <svg-icon class="icon" src="assets/img/svg/more.svg" width="32" height="32"></svg-icon>
   </button>
 </div>

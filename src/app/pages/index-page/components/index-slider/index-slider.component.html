@@ -1,53 +1,12 @@
 <div class="swiper swiper--examples">
-  <div id="example-slider" class="swiper-container">
+  <div #slider class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <article class="example">
-          <img class="example__img"
-               src="assets/img/content/index/example-slide.png"
-               srcset="assets/img/content/index/example-slide@2x.png 2x, assets/img/content/index/example-slide@3x.png 3x">
-          <div class="example__content">
-            <h1 class="example__title">«Поставка цветов из Эквадора в 70 магазинов Приморья за 3 дня»</h1>
-<!--            {{> info-link name="Как мы решили эту задачу"}}-->
-          </div>
-        </article>
-      </div>
-      <div class="swiper-slide">
-        <article class="example">
-          <img class="example__img"
-               src="assets/img/content/index/example-slide.png"
-               srcset="assets/img/content/index/example-slide@2x.png 2x, assets/img/content/index/example-slide@3x.png 3x">
-          <div class="example__content">
-            <h1 class="example__title">«Поставка цветов из Эквадора в 70 магазинов Приморья за 3 дня»</h1>
-<!--            {{> info-link name="Как мы решили эту задачу"}}-->
-          </div>
-        </article>
-      </div>
-      <div class="swiper-slide">
-        <article class="example">
-          <img class="example__img"
-               src="assets/img/content/index/example-slide.png"
-               srcset="assets/img/content/index/example-slide@2x.png 2x, assets/img/content/index/example-slide@3x.png 3x">
-          <div class="example__content">
-            <h1 class="example__title">«Поставка цветов из Эквадора в 70 магазинов Приморья за 3 дня»</h1>
-<!--            {{> info-link name="Как мы решили эту задачу"}}-->
-          </div>
-        </article>
-      </div>
-      <div class="swiper-slide">
-        <article class="example">
-          <img class="example__img"
-               src="assets/img/content/index/example-slide.png"
-               srcset="assets/img/content/index/example-slide@2x.png 2x, assets/img/content/index/example-slide@3x.png 3x">
-          <div class="example__content">
-            <h1 class="example__title">«Поставка цветов из Эквадора в 70 магазинов Приморья за 3 дня»</h1>
-<!--            {{> info-link name="Как мы решили эту задачу"}}-->
-          </div>
-        </article>
+      <div *ngFor="let example of examples" class="swiper-slide">
+        <app-example [data]="example"></app-example>
       </div>
     </div>
-    <div class="swiper-pagination"></div>
+    <div id="index-pagination" class="swiper-pagination"></div>
   </div>
-  <button class="swiper-button swiper-button-prev"></button>
-  <button class="swiper-button swiper-button-next"></button>
+  <button id="index-button-prev" class="swiper-button swiper-button-prev"></button>
+  <button id="index-button-next" class="swiper-button swiper-button-next"></button>
 </div>

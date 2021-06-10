@@ -3,7 +3,7 @@
 /* You can add utils styles to this file, and also import other style files */
 
 @charset 'utf-8';
-//@import '~swiper/css/swiper.min.css';
+@import '~swiper/swiper-bundle.min.css';
 
 //core
 @import 'assets/scss/core/functions';
@@ -50,3 +50,4 @@
 @import "assets/scss/components/list";
 @import "assets/scss/components/tabs";
 @import "assets/scss/components/ng-select";
+@import "assets/scss/components/swiper";

@@ -28,7 +28,7 @@
     @include box();
   }
 
-  &__item svg {
+  ::ng-deep &__item svg {
     width: 110px;
     height: auto;
 
