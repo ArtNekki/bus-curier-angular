@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pick-up-tabs.component.scss']
 })
 export class PickUpTabsComponent implements OnInit {
+  public tabsMap = {
+    BoxBerry: 'boxBerry',
+    Iml: 'iml',
+    Hermes: 'hermes',
+    Kce: 'kce'
+  }
+
+  public activeTab = this.tabsMap.BoxBerry;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  showTab(tab) {
+    this.activeTab = tab;
+  }
 }
