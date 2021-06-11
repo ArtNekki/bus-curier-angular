@@ -1,0 +1,49 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.box {
+  @include box();
+  //height: auto;
+  height: 153px;
+  border: 2px solid transparent;
+
+  @include hover {
+    //border-color: $primary-color;
+    cursor: pointer;
+  }
+
+  ::ng-deep &--shopping-live svg {
+    width: 135px;
+  }
+
+  ::ng-deep &--decathlon svg {
+    width: 165px;
+  }
+
+  ::ng-deep &--zara svg {
+    width: 140px;
+  }
+
+  ::ng-deep &--child-world svg {
+    width: 173px;
+  }
+
+  ::ng-deep &--iml svg {
+    width: 120px;
+  }
+
+  ::ng-deep &--boxberry svg {
+    width: 200px;
+  }
+
+  ::ng-deep &--hermes svg {
+    width: 170px;
+  }
+
+  ::ng-deep &--kce  svg {
+    width: 153px;
+  }
+}
