@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import pickupPoints from '../../../../mock-data/pickup-points';
 
 @Component({
   selector: 'app-pick-up-tabs',
@@ -7,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PickUpTabsComponent implements OnInit {
   public tabsMap = {
-    BoxBerry: 'boxBerry',
-    Iml: 'iml',
-    Hermes: 'hermes',
-    Kce: 'kce'
+    BoxBerry: 'BoxBerry',
+    IML: 'IML',
+    Hermes: 'Hermes',
+    Kce: 'Kce'
   }
 
+  public pickupPoints = pickupPoints;
   public activeTab = this.tabsMap.BoxBerry;
 
   constructor() { }

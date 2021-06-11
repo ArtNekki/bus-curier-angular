@@ -1,0 +1,30 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.contact-box {
+  margin-top: 0;
+  margin-bottom: 17px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 5px;
+
+  &--border {
+    padding-bottom: 17px;
+    border-bottom: 1px solid $gray-color;
+  }
+
+  &__text {
+    margin: 0;
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    line-height: 28px;
+    color: $black-color;
+  }
+
+  &__text b {
+    font-weight: 700;
+  }
+}

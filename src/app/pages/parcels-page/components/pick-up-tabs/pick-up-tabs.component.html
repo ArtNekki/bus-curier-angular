@@ -1,47 +1,13 @@
+{{ activeTab }}
+
 <div class="pickup-tabs">
-  <button type="button" class="pickup-tabs__btn" (click)="showTab(tabsMap.BoxBerry)">BoxBerry <span>(4 отделения)</span></button>
-  <button type="button" class="pickup-tabs__btn" (click)="showTab(tabsMap.Iml)">IML <span>(2 отделения)</span></button>
-  <button type="button" class="pickup-tabs__btn" (click)="showTab(tabsMap.Hermes)">Hermes <span>(4 отделения)</span></button>
-  <button type="button"class="pickup-tabs__btn" (click)="showTab(tabsMap.Kce)">КСЭ <span>(1 отделение)</span></button>
+  <button *ngFor="let point of pickupPoints" type="button" class="pickup-tabs__btn" (click)="showTab(tabsMap[point.name])">{{ point.name }} <span>({{ point.departments }} отделения)</span></button>
 
-  <div *ngIf="activeTab === tabsMap.BoxBerry" class="pickup-tabs__panel">
-    <div class="tabs__content">
-      tab 1
-<!--      {{> accordion name="boxberry"}}-->
-      <div class="map">
-        <div class="map__content"></div>
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="activeTab === tabsMap.Iml" class="pickup-tabs__panel">
-    tab 2
-    <div class="tabs__content">
-<!--      {{> accordion name="iml"}}-->
-      <div class="map">
-        <div class="map__content"></div>
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="activeTab === tabsMap.Hermes" class="pickup-tabs__panel">
-    tab 3
-    <div class="tabs__content">
-<!--      {{> accordion name="hermes"}}-->
-      <div  class="map">
-        <div class="map__content"></div>
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="activeTab === tabsMap.Kce" class="pickup-tabs__panel">
-    tab 4
-    <div class="tabs__content">
-<!--      {{> accordion name="kce"}}-->
-      <div  class="map">
-        <div class="map__content"></div>
-      </div>
-    </div>
+  <div *ngFor="let point of pickupPoints" class="pickup-tabs__panel" [style]="{display: activeTab === tabsMap[point.name] ? 'block' : 'none'}">
+    2
+<!--    <div class="tabs__content">-->
+<!--      <app-pickup [data]="point.cities"></app-pickup>-->
+<!--    </div>-->
   </div>
 </div>
 

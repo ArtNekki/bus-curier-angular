@@ -4,13 +4,15 @@ import { BannerComponent } from './components/banner/banner.component';
 import {SharedModule} from '../../shared/shared.module';
 import {ParcelsPageComponent} from './parcels-page.component';
 import { PickUpTabsComponent } from './components/pick-up-tabs/pick-up-tabs.component';
+import { PickupComponent } from './components/pickup/pickup.component';
 
 
 @NgModule({
   declarations: [
     ParcelsPageComponent,
     BannerComponent,
-    PickUpTabsComponent
+    PickUpTabsComponent,
+    PickupComponent
   ],
   imports: [
     CommonModule,

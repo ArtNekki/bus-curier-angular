@@ -1,0 +1,6 @@
+<dl [class]="cssClass">
+  <ng-template ngFor let-d [ngForOf]="data">
+    <dt class="contact-box__text"><b>{{d.label}}</b></dt>
+    <dd class="contact-box__text">{{d.text}}</dd>
+  </ng-template>
+</dl>

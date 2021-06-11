@@ -28,6 +28,8 @@ import { InfoBoxComponent } from './components/info-box/info-box.component';
 import { DataListComponent } from './components/data-list/data-list.component';
 import { OrderStepsComponent } from './components/order-steps/order-steps.component';
 import { BoxComponent } from './components/box/box.component';
+import { AccordeonComponent } from './components/accordeon/accordeon.component';
+import { ContactBoxComponent } from './components/contact-box/contact-box.component';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -65,7 +67,9 @@ import { BoxComponent } from './components/box/box.component';
     RadioComponent,
     InfoBoxComponent,
     OrderStepsComponent,
-    BoxComponent
+    BoxComponent,
+    AccordeonComponent,
+    ContactBoxComponent
   ],
   declarations: [
     BtnComponent,
@@ -88,7 +92,9 @@ import { BoxComponent } from './components/box/box.component';
     InfoBoxComponent,
     DataListComponent,
     OrderStepsComponent,
-    BoxComponent
+    BoxComponent,
+    AccordeonComponent,
+    ContactBoxComponent
   ],
   // providers: [NgSelectConfig, ɵs],
 })
