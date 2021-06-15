@@ -36,7 +36,7 @@
   }
 
   &::after {
-    //@include bg-image('banner-img--xs', 'png');
+    @include bg-image('~/assets/img/content/parcels/banner-img--xs', 'png');
 
     content: "";
     position: absolute;
@@ -48,11 +48,11 @@
     background-size: var(--banner-img-width) var(--banner-img-height);
 
     @include media-breakpoint-up(md) {
-      //@include bg-image('banner-img--md', 'png');
+      @include bg-image('~/assets/img/content/parcels/banner-img--md', 'png');
     }
 
     @include media-breakpoint-up(lg) {
-      //@include bg-image('banner-img--lg', 'png');
+      @include bg-image('~/assets/img/content/parcels/banner-img--lg', 'png');
     }
   }
 
