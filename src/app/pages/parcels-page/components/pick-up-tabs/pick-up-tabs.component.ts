@@ -11,7 +11,7 @@ import {animate, keyframes, state, style, transition, trigger} from '@angular/an
     trigger('activeTab', [
       transition('void => *', [
         // style({opacity: 0, height: '0px'}),
-        style({height: '0px'}),
+        style({opacity: 0}),
         animate('300ms')
       ])
     ])
@@ -33,8 +33,10 @@ export class PickUpTabsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showTab(tab) {
+  showTab(tab, btn) {
     this.activeTab = tab;
+    // btn.scrollTo(0, btn.getBoundingClientRect().top);
+    btn.scrollIntoView({block: 'start',  behavior: 'smooth'});
   }
 
   setIcon(point: any) {

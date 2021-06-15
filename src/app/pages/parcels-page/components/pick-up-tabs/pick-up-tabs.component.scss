@@ -8,7 +8,10 @@
   $tabs-nav-space: 4px;
   $tab-nav-border-height: 2px;
 
+  position: relative;
+  left: -15px;
   margin-top: 40px;
+  width: calc(100% + 30px);
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(8, auto);
@@ -82,24 +85,24 @@
         grid-row: 1 / 2;
       }
     }
+
+    &--active {
+      background-color: $white-color;
+      box-shadow: 0 -6px 6px -6px rgba($black-color, 7%);
+    }
+  }
+
+  &__btn span {
+    font-size: 14px;
+    line-height: 1.3;
+    //color: $gray-dark-color;
   }
 
   &__panel {
     $panel-padding-top: 40px;
     $panel-margin-bottom: 30px;
 
-    width: 100%;
-    overflow: hidden;
-
-    //height: 0;
-    //box-sizing: border-box;
-    //overflow: hidden;
-    //transition: all 0.25s ease-in;
-    //
-    //&--active {
-    //  height: 420px;
-    //  transition: all 0.25s ease-in;
-    //}
+    padding: 0 15px;
 
     @include media-breakpoint-up(md) {
       padding-top: $panel-padding-top;
@@ -144,6 +147,10 @@
 
   &__content {
     width: 100%;
+
+    .pickup-tabs__panel--active & {
+      margin-bottom: 30px;
+    }
   }
 
   svg-icon {

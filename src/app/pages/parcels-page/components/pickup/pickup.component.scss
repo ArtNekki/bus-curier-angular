@@ -89,14 +89,13 @@
   }
 
   &__panel {
-    padding-left: $accordion-content-left;
+    //padding-left: $accordion-content-left;
     box-sizing: border-box;
-    overflow: hidden;
     transition: all 0.25s ease-in;
 
     &--active {
       padding-top: 17px;
-      padding-bottom: 5px;
+      padding-bottom: 20px;
     }
   }
 

@@ -11,6 +11,7 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
 import { SelectComponent } from './components/select/select.component';
 import { SwitcherComponent } from './components/switcher/switcher.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
 
 // import {DeviceDetectorModule} from 'ngx-device-detector';
 import {AngularMyDatePickerModule} from 'angular-mydatepicker';
@@ -30,6 +31,8 @@ import { OrderStepsComponent } from './components/order-steps/order-steps.compon
 import { BoxComponent } from './components/box/box.component';
 import { AccordeonComponent } from './components/accordeon/accordeon.component';
 import { ContactBoxComponent } from './components/contact-box/contact-box.component';
+import { MapComponent } from './components/map/map.component';
+import {environment} from '../../environments/environment';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -43,6 +46,10 @@ import { ContactBoxComponent } from './components/contact-box/contact-box.compon
     AngularMyDatePickerModule,
     AngularSvgIconModule,
     NgSelectModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.firebaseConfig.apiKey,
+      libraries: ['places']
+    }),
     // DeviceDetectorModule.forRoot(),
   ],
   exports: [
@@ -69,7 +76,8 @@ import { ContactBoxComponent } from './components/contact-box/contact-box.compon
     OrderStepsComponent,
     BoxComponent,
     AccordeonComponent,
-    ContactBoxComponent
+    ContactBoxComponent,
+    MapComponent
   ],
   declarations: [
     BtnComponent,
@@ -94,7 +102,8 @@ import { ContactBoxComponent } from './components/contact-box/contact-box.compon
     OrderStepsComponent,
     BoxComponent,
     AccordeonComponent,
-    ContactBoxComponent
+    ContactBoxComponent,
+    MapComponent
   ],
   // providers: [NgSelectConfig, ɵs],
 })

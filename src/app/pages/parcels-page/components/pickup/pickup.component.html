@@ -19,10 +19,10 @@
     </button>
     <div *ngIf="activePanel === city" class="pickup__panel" [class.pickup__panel--active]="activePanel === city" [@activePanel]="">
       <div class="pickup__contact">
-        <app-contact-box [data]="city.addresses"></app-contact-box>
+        <app-contact-box *ngFor="let city of city.addresses" [data]="city"></app-contact-box>
       </div>
       <div class="pickup__map">
-        map
+        <app-map></app-map>
       </div>
     </div>
   </div>

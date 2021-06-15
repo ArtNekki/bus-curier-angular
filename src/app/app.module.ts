@@ -19,6 +19,12 @@ import {UsefulInfoPageModule} from './pages/useful-info-page/useful-info-page.mo
 import {FeedbackLinksPageModule} from './pages/feedback-links-page/feedback-links-page.module';
 import {ContactsPageModule} from './pages/contacts-page/contacts-page.module';
 
+import { AngularFireModule} from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
+import {environment} from '../environments/environment';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +47,10 @@ import {ContactsPageModule} from './pages/contacts-page/contacts-page.module';
     FeedbackLinksPageModule,
     ContactsPageModule,
     // IndexPageModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

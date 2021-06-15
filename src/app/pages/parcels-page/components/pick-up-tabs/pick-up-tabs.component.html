@@ -1,12 +1,12 @@
 <div class="pickup-tabs">
-  <button *ngFor="let point of pickupPoints" type="button" class="pickup-tabs__btn" [class.pickup-tabs__btn--active]="activeTab === tabsMap[point.name]" (click)="showTab(tabsMap[point.name])">
+  <button #btn *ngFor="let point of pickupPoints" type="button" class="pickup-tabs__btn" [class.pickup-tabs__btn--active]="activeTab === tabsMap[point.name]" (click)="showTab(tabsMap[point.name], btn)">
     <div>{{ point.name }} <span>({{ point.departments }} отделения)</span></div>
     <svg-icon class="icon" [src]="setIcon(tabsMap[point.name])" width="8" height="4"></svg-icon>
   </button>
 
 
 <!--  <ng-template ngFor let-breadcrumb [ngForOf]="pick" ></ng-template>-->
-  <div *ngFor="let point of pickupPoints" class="pickup-tabs__panel">
+  <div *ngFor="let point of pickupPoints" class="pickup-tabs__panel" [class.pickup-tabs__panel--active]="activeTab === tabsMap[point.name]">
     <div *ngIf="activeTab === tabsMap[point.name]" class="pickup-tabs__content" [@activeTab]="">
       <app-pickup [data]="point.cities"></app-pickup>
     </div>

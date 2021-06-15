@@ -7,13 +7,17 @@
 .contact-box {
   margin-top: 0;
   margin-bottom: 17px;
+  padding-left: 25px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid $gray-color;
   display: grid;
   grid-template-columns: auto 1fr;
   grid-column-gap: 5px;
 
-  &--border {
-    padding-bottom: 17px;
-    border-bottom: 1px solid $gray-color;
+  :host:last-child &,
+  :host:only-child & {
+    padding-bottom: 0;
+    border-bottom: transparent;
   }
 
   &__text {
