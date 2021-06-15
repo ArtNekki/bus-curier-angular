@@ -1,0 +1,122 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.input {
+  position: relative;
+
+  &__field {
+    @include input();
+    display: flex;
+    align-items: center;
+
+    .input--textarea & {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      height: auto;
+    }
+
+    .input.focused & {
+      color: $black-color;
+      border: 2px solid $primary-color;
+    }
+
+    .input--error &,
+    .form.error & {
+      border: 1px solid $red-color;
+      background-color: rgba($red-color, 0.5);
+      color: $black-color;
+    }
+
+    .input--clean & {
+      box-shadow: none;
+      border: none;
+    }
+
+    .input--no-shadow & {
+      box-shadow: none;
+    }
+  }
+
+  &__edit {
+    display: inline-block;
+    min-width: 1px;
+    width: auto;
+    max-width: 100%;
+    line-height: 1;
+    white-space: nowrap;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @include focus {
+      outline: none;
+    }
+  }
+
+  &__unit {
+    margin-left: 5px;
+    display: block;
+
+    .input__edit:empty ~ & {
+      display: none;
+    }
+  }
+
+  &__error {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+    display: none;
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    line-height: 1;
+    color: $red-color;
+    pointer-events: none;
+
+    .input--error &,
+    .form.error & {
+      display: block;
+    }
+
+    .input.focused &,
+    .input__field:focus ~ & {
+      display: none;
+    }
+  }
+
+  &__forgot {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 18px;
+    font-family: $font-family--secondary;
+    font-size: 12px;
+    line-height: 17px;
+    color: $gray-dark-color;
+    text-decoration: none;
+
+    @include hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+//.text-area {
+//  padding: 10px;
+//  box-sizing: border-box;
+//  width: 100%;
+//  border: none;
+//  border-radius: $border-radius;
+//  appearance: none;
+//  resize: none;
+//
+//  &:focus {
+//    outline: none;
+//  }
+//}

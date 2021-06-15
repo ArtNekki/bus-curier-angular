@@ -33,6 +33,8 @@ import { AccordeonComponent } from './components/accordeon/accordeon.component';
 import { ContactBoxComponent } from './components/contact-box/contact-box.component';
 import { MapComponent } from './components/map/map.component';
 import {environment} from '../../environments/environment';
+import { InputComponent } from './components/input/input.component';
+import { SupportFormComponent } from './components/support-form/support-form.component';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -77,7 +79,9 @@ import {environment} from '../../environments/environment';
     BoxComponent,
     AccordeonComponent,
     ContactBoxComponent,
-    MapComponent
+    MapComponent,
+    InputComponent,
+    SupportFormComponent
   ],
   declarations: [
     BtnComponent,
@@ -103,7 +107,9 @@ import {environment} from '../../environments/environment';
     BoxComponent,
     AccordeonComponent,
     ContactBoxComponent,
-    MapComponent
+    MapComponent,
+    InputComponent,
+    SupportFormComponent
   ],
   // providers: [NgSelectConfig, ɵs],
 })

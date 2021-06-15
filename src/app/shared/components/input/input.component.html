@@ -1,0 +1,9 @@
+<div *ngIf="type === 'textarea'; else input" [class]="cssClass + ' input--textarea'">
+  <textarea  [id]="id" class="input__field" [name]="name" [placeholder]="placeholder" [rows]="rows"></textarea>
+</div>
+
+<ng-template #input>
+  <div [class]="cssClass">
+    <input [type]="type" [id]="id" class="input__field" [name]="name" [placeholder]="placeholder" />
+  </div>
+</ng-template>

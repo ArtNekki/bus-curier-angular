@@ -1,0 +1,33 @@
+<form action="#" class="form form--max-w-820" autocomplete="off">
+  <div class="form__fieldset form__fieldset--3-col-md">
+    <div class="form__field">
+      <label for="user-city" class="form__label">Ваш город <sup>*</sup></label>
+      <app-select [items]="cities" mods="no-shadow"></app-select>
+    </div>
+    <div class="form__field">
+      <label for="email" class="form__label">E-mail<sup>*</sup></label>
+      <app-input type="email" id="email" name="email"></app-input>
+    </div>
+    <div class="form__field">
+      <label for="tel" class="form__label">Телефон<sup>*</sup></label>
+      <app-input type="text" id="tel" name="tel"></app-input>
+<!--      {{{ input type="text" id="tel" name="tel" error="Не заполнено"}}}-->
+    </div>
+    <div class="form__field form__field--full">
+      <label for="describe-task" class="form__label">Напишите ваш вопрос</label>
+      <app-input type="textarea" id="describe-task" name="describe-task"></app-input>
+<!--      {{{ textarea id="describe-task" name="describe-task" }}}-->
+    </div>
+    <div class="form__field form__field--full">
+      <app-checkbox name="subscribe" mods="sm">Получать e-mail уведомления</app-checkbox>
+<!--      {{{ checkbox id="subscribe" name="personal-data" label='Нажимая кнопку «Отправить», я даю свое согласие на-->
+<!--      <a href="#" class="link link&#45;&#45;blue">-->
+<!--        <span class="link__text">обработку моих персональных данных</span>-->
+<!--      </a>' mods="md"}}}-->
+    </div>
+  </div>
+  <div class="form__fieldset form__fieldset--3-col-md" style="margin-top: 30px;">
+    <app-btn type="submit" mods="lg, w-full">Отправить вопрос</app-btn>
+<!--    {{{ btn type="button" text="Отправить вопрос" mods="lg, w-full"}}}-->
+  </div>
+</form>
