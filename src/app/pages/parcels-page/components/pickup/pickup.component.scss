@@ -33,6 +33,10 @@
       border-color: transparent;
       box-shadow: none;
     }
+
+    .pickup__section:last-child & {
+      margin-bottom: 0;
+    }
   }
 
   &__label {

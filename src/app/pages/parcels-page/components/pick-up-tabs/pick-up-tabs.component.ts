@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import pickupPoints from '../../../../mock-data/pickup-points';
 import dropdown from '../../../../core/animations/dropdown';
 import {animate, keyframes, state, style, transition, trigger} from '@angular/animations';
+import media from '../../../../core/utils/media';
 
 @Component({
   selector: 'app-pick-up-tabs',
@@ -27,10 +28,19 @@ export class PickUpTabsComponent implements OnInit {
 
   public pickupPoints = pickupPoints;
   public activeTab = this.tabsMap.BoxBerry;
+  public breakpoint = null;
+  public minWidthMD = false;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.breakpoint = window.matchMedia(`(min-width: ${media.MD}px)`);
+    this.breakpoint.addListener(this.checkScreen.bind(this));
+    this.checkScreen();
+  }
+
+  checkScreen() {
+    this.minWidthMD = this.breakpoint && this.breakpoint.matches;
   }
 
   showTab(tab, btn) {

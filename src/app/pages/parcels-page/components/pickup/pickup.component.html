@@ -21,8 +21,8 @@
       <div class="pickup__contact">
         <app-contact-box *ngFor="let city of city.addresses" [data]="city"></app-contact-box>
       </div>
-      <div class="pickup__map">
-        <app-map></app-map>
+      <div *ngIf="!minWidthMD" class="pickup__map">
+        <app-map mods="pickup"></app-map>
       </div>
     </div>
   </div>

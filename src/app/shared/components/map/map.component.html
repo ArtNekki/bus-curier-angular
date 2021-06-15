@@ -11,13 +11,15 @@
 <!--</agm-map>-->
 
 
-<agm-map
-  [latitude]="latitude"
-  [longitude]="longitude"
-  [zoom]="zoom"
-  [disableDefaultUI]="false"
->
-  <agm-marker
+<article [class]="cssClass">
+  <agm-map
     [latitude]="latitude"
-    [longitude]="longitude"></agm-marker>
-</agm-map>
+    [longitude]="longitude"
+    [zoom]="zoom"
+    [disableDefaultUI]="false"
+  >
+    <agm-marker
+      [latitude]="latitude"
+      [longitude]="longitude"></agm-marker>
+  </agm-map>
+</article>

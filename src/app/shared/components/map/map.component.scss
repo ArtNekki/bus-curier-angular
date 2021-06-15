@@ -1,10 +1,41 @@
-agm-map {
-  //height: 80vw;
-  //
-  //@include media-breakpoint-up(sm) {
-  //  height: 500px;
-  //}
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
 
-  height: 300px;
+
+//agm-map {
+//  //height: 80vw;
+//  //
+//  //@include media-breakpoint-up(sm) {
+//  //  height: 500px;
+//  //}
+//
+//  height: 100%;
+//  width: auto;
+//}
+
+.map {
   width: 100%;
+
+  &--pickup {
+    height: 300px;
+
+    @include media-breakpoint-up(md) {
+      height: 415px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      height: 385px;
+    }
+
+    @include media-breakpoint-up(xl) {
+
+    }
+  }
+
+  agm-map {
+    height: inherit;
+  }
 }

@@ -9,6 +9,7 @@
   <div *ngFor="let point of pickupPoints" class="pickup-tabs__panel" [class.pickup-tabs__panel--active]="activeTab === tabsMap[point.name]">
     <div *ngIf="activeTab === tabsMap[point.name]" class="pickup-tabs__content" [@activeTab]="">
       <app-pickup [data]="point.cities"></app-pickup>
+      <app-map *ngIf="minWidthMD" mods="pickup"></app-map>
     </div>
   </div>
 </div>
