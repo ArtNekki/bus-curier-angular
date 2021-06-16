@@ -1,6 +1,19 @@
-<div [class]="cssClass">
-  <input #input type="checkbox" [name]="name || id" [id]="id" [ngModel]="value" (ngModelChange)="changeValue(input.checked)"/>
-  <label class="checkbox-label" [for]="id">
-    <ng-content></ng-content>
-  </label>
-</div>
+<!--<div >-->
+<!--  <input #input type="checkbox" [name]="name || id" [id]="id" [ngModel]="value" (ngModelChange)="changeValue(input.checked)"/>-->
+<!--  <label class="checkbox-label" [for]="id">-->
+<!--    <ng-content></ng-content>-->
+<!--  </label>-->
+<!--</div>-->
+
+<label [class]="cssClass">
+  <input #checkbox type="checkbox" [id]="id" [name]="name" class="checkbox__input" (change)="changeValue(checkbox.checked)">
+  <div class="checkbox__body">
+    <span  class="checkbox__label">
+      <ng-content select=".label"></ng-content>
+    </span>
+    <span class="checkbox__meta">
+      <ng-content select=".meta"></ng-content>
+    </span>
+    <ng-content select=".help"></ng-content>
+  </div>
+</label>

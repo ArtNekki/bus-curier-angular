@@ -1,36 +1,35 @@
-<form action="#" class="form form--max-w-820" autocomplete="off">
+<form action="#" class="form form--max-w-820" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="form__fieldset form__fieldset--3-col-md">
     <div class="form__field">
-      <label for="user-city" class="form__label">Ваш город <sup>*</sup></label>
-      <app-select [items]="cities" mods="no-shadow"></app-select>
+      <label for="city" class="form__label">Ваш город <sup>*</sup></label>
+      <app-select id="city" [items]="cities" formControlName="city" mods="no-shadow"></app-select>
     </div>
     <div class="form__field">
       <label for="email" class="form__label">E-mail<sup>*</sup></label>
-      <app-input type="email" id="email" name="email" unit="см"></app-input>
+      <app-input type="email" id="email" name="email" formControlName="email">
+        <div class="input__error" *ngIf="form.get('email').invalid && form.get('email').touched">
+          <small *ngIf="form.get('email').errors.required">Не заполнено</small>
+        </div>
+      </app-input>
     </div>
     <div class="form__field">
       <label for="tel" class="form__label">Телефон<sup>*</sup></label>
-      <app-input type="text" id="tel" name="tel"></app-input>
-<!--      {{{ input type="text" id="tel" name="tel" error="Не заполнено"}}}-->
+      <app-input type="text" id="tel" name="tel" formControlName="tel"></app-input>
     </div>
     <div class="form__field form__field--full">
-      <label for="describe-task" class="form__label">Напишите ваш вопрос</label>
-      <app-input type="textarea" id="describe-task" name="describe-task"></app-input>
-<!--      {{{ textarea id="describe-task" name="describe-task" }}}-->
+      <label for="question" class="form__label">Напишите ваш вопрос</label>
+      <app-input type="textarea" id="question" name="question" formControlName="question"></app-input>
     </div>
     <div class="form__field form__field--full">
-      <app-checkbox name="personal-data" mods="md">
-        Нажимая кнопку «Отправить», я даю свое согласие на
-        <app-link href="#">обработку моих персональных данных</app-link>
+      <app-checkbox name="personal-data" formControlName="subscribe" mods="md">
+        <ng-container class="label">
+          Нажимая кнопку «Отправить», я даю свое согласие на
+          <app-link href="#" mods="blue">обработку моих персональных данных</app-link>
+        </ng-container>
       </app-checkbox>
-<!--      {{{ checkbox id="subscribe" name="personal-data" label='Нажимая кнопку «Отправить», я даю свое согласие на-->
-<!--      <a href="#" class="link link&#45;&#45;blue">-->
-<!--        <span class="link__text">обработку моих персональных данных</span>-->
-<!--      </a>' mods="md"}}}-->
     </div>
   </div>
   <div class="form__fieldset form__fieldset--3-col-md" style="margin-top: 30px;">
     <app-btn type="submit" mods="lg, w-full">Отправить вопрос</app-btn>
-<!--    {{{ btn type="button" text="Отправить вопрос" mods="lg, w-full"}}}-->
   </div>
 </form>

@@ -27,6 +27,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   public cssClass;
   public isFocused = false;
+  public touched = false;
 
   constructor(private modsService: ModsService) { }
 
@@ -69,6 +70,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   onBlur() {
     this.isFocused = false;
+    this.markAsTouched();
   }
 
   setCursor(pos) {
@@ -82,5 +84,14 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
     selection.removeAllRanges();
     selection.addRange(range);
+  }
+
+  markAsTouched() {
+    if (!this.touched) {
+      this.onTouched();
+      this.touched = true;
+    }
+
+    this.onTouched();
   }
 }

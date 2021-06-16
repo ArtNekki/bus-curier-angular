@@ -1,5 +1,8 @@
 <div *ngIf="type === 'textarea'; else input" [class]="cssClass + ' input--textarea'">
   <textarea #textarea [id]="id" class="input__field" [name]="name" [placeholder]="placeholder" [rows]="rows" (input)="changeValue(textarea.value)"></textarea>
+  <div class="input__error">
+    <ng-content select=".error"></ng-content>
+  </div>
 </div>
 
 <ng-template #input>
@@ -9,10 +12,14 @@
       <span #editContent class="input__edit" contenteditable (blur)="onBlur()" (input)="changeValue(editContent.textContent)">{{ inputField.value}}</span>
       <span class="input__unit">{{unit}}</span>
     </div>
+    <div class="input__error">
+      <ng-content select=".error"></ng-content>
+    </div>
   </div>
   <ng-template #simpleInput>
     <div [class]="cssClass">
       <input #simpleInputField [type]="type" [id]="id" class="input__field" [name]="name" [placeholder]="placeholder" (input)="changeValue(simpleInputField.value)" />
+      <ng-content></ng-content>
     </div>
   </ng-template>
 </ng-template>
