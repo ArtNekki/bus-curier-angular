@@ -35,12 +35,10 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   }
 
   changeValue(data) {
-    // const date = (data.singleDate && data.singleDate.formatted) || new Intl.DateTimeFormat('ru-Ru').format(new Date(data));
-    // this.writeValue(date);
+    this.writeValue(data);
   }
 
   writeValue(value) {
-    // this.value = value;
     this.onChange(value);
   }
 
