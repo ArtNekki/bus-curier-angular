@@ -3,7 +3,16 @@
 </div>
 
 <ng-template #input>
-  <div [class]="cssClass">
-    <input [type]="type" [id]="id" class="input__field" [name]="name" [placeholder]="placeholder" />
+  <div *ngIf="unit; else simpleInput" [class]="cssClass" [class.input--focused]="isFocused" (click)="onFocus()">
+    <div class="input__field">
+      <input #inputField [type]="type" [id]="id" [name]="name" [placeholder]="placeholder" hidden />
+      <span #editContent class="input__edit" contenteditable (blur)="onBlur()">{{ inputField.value}}</span>
+      <span class="input__unit">{{unit}}</span>
+    </div>
   </div>
+  <ng-template #simpleInput>
+    <div [class]="cssClass">
+      <input [type]="type" [id]="id" class="input__field" [name]="name" [placeholder]="placeholder" />
+    </div>
+  </ng-template>
 </ng-template>

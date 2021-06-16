@@ -6,7 +6,7 @@
     </div>
     <div class="form__field">
       <label for="email" class="form__label">E-mail<sup>*</sup></label>
-      <app-input type="email" id="email" name="email"></app-input>
+      <app-input type="email" id="email" name="email" unit="см"></app-input>
     </div>
     <div class="form__field">
       <label for="tel" class="form__label">Телефон<sup>*</sup></label>
@@ -19,7 +19,10 @@
 <!--      {{{ textarea id="describe-task" name="describe-task" }}}-->
     </div>
     <div class="form__field form__field--full">
-      <app-checkbox name="subscribe" mods="sm">Получать e-mail уведомления</app-checkbox>
+      <app-checkbox name="personal-data" mods="md">
+        Нажимая кнопку «Отправить», я даю свое согласие на
+        <app-link href="#">обработку моих персональных данных</app-link>
+      </app-checkbox>
 <!--      {{{ checkbox id="subscribe" name="personal-data" label='Нажимая кнопку «Отправить», я даю свое согласие на-->
 <!--      <a href="#" class="link link&#45;&#45;blue">-->
 <!--        <span class="link__text">обработку моих персональных данных</span>-->

@@ -18,7 +18,7 @@
       height: auto;
     }
 
-    .input.focused & {
+    .input--focused & {
       color: $black-color;
       border: 2px solid $primary-color;
     }
@@ -48,6 +48,10 @@
     line-height: 1;
     white-space: nowrap;
     overflow-x: auto;
+
+    &:empty {
+      min-width: 100%;
+    }
 
     &::-webkit-scrollbar {
       display: none;

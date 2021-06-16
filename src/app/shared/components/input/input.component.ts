@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, forwardRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ModsService} from '../../../core/services/mods.service';
 
@@ -15,14 +15,18 @@ import {ModsService} from '../../../core/services/mods.service';
   ]
 })
 export class InputComponent implements ControlValueAccessor, OnInit {
+  @ViewChild('editContent', {read: ElementRef}) editContent: ElementRef;
+
   @Input() id: string;
   @Input() name: string;
   @Input() type: string;
+  @Input() unit: string;
   @Input() placeholder = '';
   @Input() rows = 5;
   @Input() mods;
 
   public cssClass;
+  public isFocused = false;
 
   constructor(private modsService: ModsService) { }
 
@@ -54,5 +58,31 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   registerOnTouched(fn) {
     this.onTouched = fn;
+  }
+
+  onFocus() {
+    this.isFocused = true;
+    this.editContent.nativeElement.focus();
+
+    const length = this.editContent.nativeElement.textContent.length;
+
+    this.setCursor(length);
+  }
+
+  onBlur() {
+    this.isFocused = false;
+  }
+
+  setCursor(pos) {
+    const range = document.createRange();
+    const selection = window.getSelection();
+
+    if (this.editContent.nativeElement.childNodes[0]) {
+      range.setStart(this.editContent.nativeElement.childNodes[0], pos);
+      range.collapse(true);
+    }
+
+    selection.removeAllRanges();
+    selection.addRange(range);
   }
 }
