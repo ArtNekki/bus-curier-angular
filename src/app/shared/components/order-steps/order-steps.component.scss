@@ -56,7 +56,7 @@
     transition-property: all;
     transition-delay: 0.5s;
 
-    .calc-steps__item.active &,
+    .calc-steps__item--active &,
     .calc-steps__item.done & {
       background-color: $primary-color;
       color: $black-color;
@@ -104,7 +104,7 @@
     color: $gray-color--down-11;
     opacity: 0;
 
-    .calc-steps__item.active & {
+    .calc-steps__item--active & {
       width: unset;
       opacity: 1;
       color: $black-color;

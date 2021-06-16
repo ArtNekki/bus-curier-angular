@@ -3,9 +3,9 @@
   <div class="page__content">
     <h1 class="page__title">Заявка на перевозку</h1>
     <p class="page__subtitle">Заполните форму необходимыми данными и отправьте</p>
-    <app-order-steps></app-order-steps>
+    <app-order-steps (change)="setCurrentStep($event)"></app-order-steps>
     <form class="form" autocomplete="off">
-      <div data-step-content="1" style="display: none;">
+      <div *ngIf="currentStep === 0">
         <section class="form__section">
           <h2 class="form__heading">Ваши данные</h2>
           <ul data-tabs class="form__tabs">
@@ -20,35 +20,27 @@
             <div  class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl">
               <div class="form__field">
                 <label for="last-name" class="form__label">Фамилия<sup>*</sup></label>
-<!--                {{{ input type="text" id="last-name" name="last-name" error="Не заполнено"}}}-->
+                <app-input type="text" id="last-name" name="last-name"></app-input>
               </div>
               <div class="form__field">
                 <label for="first-name" class="form__label">Имя<sup>*</sup></label>
-<!--                {{{ input type="text" id="first-name" name="first-name" error="Не заполнено"}}}-->
+                <app-input type="text" id="first-name" name="first-name"></app-input>
               </div>
               <div class="form__field">
                 <label for="middle-name" class="form__label">Отчество<sup>*</sup></label>
-<!--                {{{ input type="text" id="middle-name" name="middle-name" error="Не заполнено"}}}-->
+                <app-input type="text" id="middle-name" name="middle-name"></app-input>
               </div>
               <div class="form__field">
                 <label for="email" class="form__label">E-mail<sup>*</sup></label>
-<!--                {{{ input type="email" id="email" name="email" error="Не заполнено"}}}-->
+                <app-input type="text" id="email" name="email"></app-input>
               </div>
               <div class="form__field">
                 <label for="tel" class="form__label">Телефон<sup>*</sup></label>
-<!--                {{{ input type="text" id="tel" name="tel" error="Не заполнено"}}}-->
+                <app-input type="text" id="tel" name="tel"></app-input>
               </div>
               <div class="form__field">
-                <label for="tel" class="form__label">Роль</label>
-                <app-select items=""></app-select>
-<!--                {{{ select-->
-<!--                id="role"-->
-<!--                name="role"-->
-<!--                data='[-->
-<!--                {"value": "", "name": " "},-->
-<!--                  {"value": "nakhodka", "name": "Отправитель"},-->
-<!--                  {"value": "arseniev", "name": "Отправитель"}]'-->
-<!--                }}}-->
+                <label class="form__label">Роль</label>
+                <app-select [items]="cities"></app-select>
               </div>
             </div>
           </div>
@@ -59,7 +51,7 @@
           <!-- <p class="form__help-text">Чтобы оформить заказ как юридическое лицо,<br />вам необходимо <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>войти</span></span></a>или <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>зарегистрироваться</span></span></a></p> -->
         </section>
       </div>
-      <div data-step-content="2" style="display: none;">
+      <div *ngIf="currentStep === 1">
         <section class="form__section">
           <h2 class="form__heading">Отправитель</h2>
           <div class="form__fieldset form__fieldset--2-col-sm">
@@ -119,7 +111,7 @@
           </div>
         </section>
       </div>
-      <div data-step-content="3" style="display: none;">
+      <div *ngIf="currentStep === 2">
 <!--        {{> goods&#45;&#45;common-block}}-->
         <section class="form__section">
           <h2 class="form__heading">Получатель:</h2>
@@ -168,7 +160,7 @@
           </div>
         </section>
       </div>
-      <div data-step-content="4" style="display: none;">
+      <div *ngIf="currentStep === 3">
         <section class="form__section form__section--w-underline">
           <h2 class="form__heading form__heading--w-counter">Отправитель</h2>
 <!--          {{{ data-list items='[-->
