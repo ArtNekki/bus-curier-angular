@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import cities from 'src/app/mock-data/cities';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {animate, style, transition, trigger} from '@angular/animations';
+import GoodsType from '../../../core/maps/GoodsType';
 
 @Component({
   selector: 'app-order-page',
@@ -19,6 +20,15 @@ export class OrderPageComponent implements OnInit {
   public cities = cities;
   public form: FormGroup;
   public tags = [];
+  public currentGoodsType = null;
+  public GoodsType = GoodsType;
+
+  public goodsTypes = [
+    { id: GoodsType.Docs, name: 'Документы'},
+    { id: GoodsType.Parcels, name: 'Посылки'},
+    { id: GoodsType.AutoDetails, name: 'Автозапчасти'},
+    { id: GoodsType.Other, name: 'Другое'}
+  ];
 
   constructor() { }
 
@@ -32,6 +42,7 @@ export class OrderPageComponent implements OnInit {
     });
 
     this.tags.push(`cargo-${this.tags.length + 1}`);
+    this.currentGoodsType = this.goodsTypes[0];
   }
 
   setCurrentStep($event: any) {
@@ -67,5 +78,9 @@ export class OrderPageComponent implements OnInit {
     const index = this.tags.indexOf(tag);
     this.tags.splice(index, 1);
     console.log('tags', this.tags);
+  }
+
+  selectGoodsType(type: { name: string; id: string }) {
+    this.currentGoodsType = type;
   }
 }

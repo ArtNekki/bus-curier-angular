@@ -15,6 +15,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 export class RadioComponent implements ControlValueAccessor, OnInit {
   @Input() checked: boolean;
   @Input() id: string;
+  @Input() name: string;
   @Input() mods;
 
   public cssClass;

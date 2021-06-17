@@ -153,6 +153,41 @@
           </app-tag>
           <app-tag type="add" (click)="addTag()"></app-tag>
         </div>
+        <div class="form__section">
+          <div class="form__fieldset form__fieldset--goods-type">
+            <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
+            <div *ngFor="let type of goodsTypes"  class="form__field">
+              <app-radio name="goods-type" (change)="selectGoodsType(type.id)">{{type.name}}</app-radio>
+            </div>
+          </div>
+          <div *ngIf="currentGoodsType === GoodsType.Docs">
+            <div class="form__field">
+              <label class="form__label">Количество мест</label>
+<!--              {{{ counter name="place-count" }}}-->
+            </div>
+          </div>
+          <div *ngIf="currentGoodsType === GoodsType.Parcels">
+            parcels
+<!--            {{> fieldset&#45;&#45;package delete="true"}}-->
+<!--            {{> fieldset&#45;&#45;package error="true" delete="true"}}-->
+<!--            {{> fieldset&#45;&#45;package }}-->
+<!--            {{{ btn text="Добавить еще 1 позицию" }}}-->
+          </div>
+          <div *ngIf="currentGoodsType === GoodsType.AutoDetails">
+            <label class="form__label">Выберите тип запчасти</label>
+            autodetails
+<!--            {{> fieldset&#45;&#45;auto-part delete="true"}}-->
+<!--            {{> fieldset&#45;&#45;auto-part }}-->
+<!--            {{{ btn text="Добавить еще 1 позицию" }}}-->
+            <dl class="form__details">
+              <dt><b>Тип груза:</b></dt>
+              <dd>Пожалуйста, выберите тип запчасти из списка. Если вы не нашли подходящей запчасти, рассчитайте стоимость обычной посылки.</dd>
+            </dl>
+          </div>
+          <!--  <div data-content="goods-type-other">-->
+          <!--    Что-то другое ...-->
+          <!--  </div>-->
+        </div>
 <!--        {{> goods&#45;&#45;common-block}}-->
         <section class="form__section">
           <h2 class="form__heading">Получатель:</h2>
