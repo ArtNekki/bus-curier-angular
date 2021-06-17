@@ -89,24 +89,58 @@
                 <app-radio>Владивосток, Карла Маркса</app-radio>
               </div>
             </div>
-            <ul data-tabs class="form__tabs form__tabs--mg-top">
-              <li>
-                <a data-tabby-default href="#city-to-1">Сдать в отделение</a>
-              </li>
-              <li>
-                <a href="#city-from-1">Вызвать курьера</a>
-              </li>
-            </ul>
-            <div id="city-to-1" class="form__tabs-panel">
-<!--              {{> fieldset&#45;&#45;address}}-->
-            </div>
-            <div id="city-from-1" class="form__tabs-panel">
-              Не понятно какие тут будут поля
-              <!-- {{> fieldset--address}} -->
-              <!-- {{> fieldset--schedule}} -->
-            </div>
+            <app-tabs>
+              <app-tab-item>
+                <app-tab-label>Сдать в отделение</app-tab-label>
+                <app-tab-body>
+                  <div class="form__fieldset form__fieldset--address">
+                    <div class="form__field">
+                      <label for="street-to" class="form__label">Улица</label>
+                      <app-input type="text" name="street-to"></app-input>
+                    </div>
+                    <div class="form__field">
+                      <label for="building-to" class="form__label">Дом, корус, строение</label>
+                      <app-input type="text" name="building-to"></app-input>
+                    </div>
+                    <div class="form__field">
+                      <label for="apartment-to" class="form__label">Кв. / офис</label>
+                      <app-input type="text" name="apartment-to"></app-input>
+                    </div>
+                  </div>
+                </app-tab-body>
+              </app-tab-item>
+              <app-tab-item >
+                <app-tab-label>Вызвать курьера</app-tab-label>
+                <app-tab-body>
+                  <div class="form__fieldset form__fieldset--address">
+                    <div class="form__field">
+                      <label for="street-to" class="form__label">Улица</label>
+                      <app-input type="text" name="street-to"></app-input>
+                    </div>
+                    <div class="form__field">
+                      <label for="building-to" class="form__label">Дом, корус, строение</label>
+                      <app-input type="text" name="building-to"></app-input>
+                    </div>
+                    <div class="form__field">
+                      <label for="apartment-to" class="form__label">Кв. / офис</label>
+                      <app-input type="text" name="apartment-to"></app-input>
+                    </div>
+                  </div>
+                  <section class="form__fieldset form__fieldset--schedule">
+                    <label class="form__label form__label--light">Удобное время для приезда курьера</label>
+                    <div class="form__field">
+                      <app-radio checked="true">8:00 - 14:00</app-radio>
+                    </div>
+                    <div class="form__field">
+                      <app-radio checked="true">14:00 - 18:00</app-radio>
+                    </div>
+                  </section>
+                </app-tab-body>
+              </app-tab-item>
+            </app-tabs>
             <div class="form__field form__field--delivery-date">
               <label for="destination" class="form__label">Дата отправки<sup>*</sup></label>
+<!--              <app-datapicker></app-datapicker>-->
 <!--              {{{ input type="text" id="destination" name="destination" error="Не заполнено"}}}-->
             </div>
           </div>
