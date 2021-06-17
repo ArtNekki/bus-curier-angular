@@ -3,12 +3,11 @@
   <div class="page__content">
     <h1 class="page__title">Заявка на перевозку</h1>
     <p class="page__subtitle">Заполните форму необходимыми данными и отправьте</p>
-    <app-order-steps (change)="setCurrentStep($event)"></app-order-steps>
+    <app-order-steps [currentStep]="currentStep"></app-order-steps>
     <form class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div *ngIf="currentStep === 0">
         <section class="form__section">
           <h2 class="form__heading">Ваши данные</h2>
-
           <app-tabs>
             <app-tab-item>
               <app-tab-label>Физическое лицо</app-tab-label>
@@ -48,7 +47,6 @@
               </app-tab-body>
             </app-tab-item>
           </app-tabs>
-          <button type="submit">Отправить</button>
           <!-- <p class="form__help-text form__help-text--gray form__help-text--align-center">Выберите статус лица для перехода на следующий шаг</p> -->
           <!-- <p class="form__help-text">Чтобы оформить заказ как юридическое лицо,<br />вам необходимо <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>войти</span></span></a>или <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>зарегистрироваться</span></span></a></p> -->
         </section>
@@ -229,14 +227,19 @@
               <label class="form__label">Комментарий к заявке</label>
 <!--              {{{ textarea id="user-comment" name="user-comment" }}}-->
             </div>
-            {{{ checkbox id="agree" name="agree" label="Нажимая кнопку «Отправить», я даю свое согласие на <a href='#' class='link link--blue link--in-text'><span class='link__text'>обработку моих персональных данных</span></a>" mods="sm"}}}
+<!--            {{{ checkbox id="agree" name="agree" label="Нажимая кнопку «Отправить», я даю свое согласие на <a href='#' class='link link&#45;&#45;blue link&#45;&#45;in-text'><span class='link__text'>обработку моих персональных данных</span></a>" mods="sm"}}}-->
           </div>
         </section>
       </div>
       <div class="form__actions">
+        <app-btn type="button" disabled="true" mods="back" (click)="goPrev()">
+          <svg-icon class="icon" src="assets/img/svg/back.svg" width="24" height="20"></svg-icon>
+          Назад
+        </app-btn>
 <!--        {{{ btn id="backStep" type="back" disabled="true" hidden="true"}}}-->
         <!-- {{{ btn type="submit" text="Далее" mods="lg"}}} -->
 <!--        {{{ btn id="nextStep" type="button" text="Далее" mods="lg"}}}-->
+        <app-btn type="button" mods="lg" (click)="goNext()">Далее</app-btn>
       </div>
     </form>
   </div>

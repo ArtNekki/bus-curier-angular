@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-order-steps',
@@ -6,10 +6,11 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./order-steps.component.scss']
 })
 export class OrderStepsComponent implements OnInit {
+  @Input() currentStep: number;
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   public steps = ['Автор заявки', 'Отправитель груза', 'Параметры груза', 'Завершение'];
-  public currentStep = 0;
+  // public currentStep = 0;
 
   constructor() { }
 

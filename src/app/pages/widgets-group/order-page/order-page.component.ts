@@ -31,4 +31,20 @@ export class OrderPageComponent implements OnInit {
   onSubmit() {
     console.log('form', this.form.value);
   }
+
+  goNext() {
+    if (this.currentStep >= 3 ) {
+      return;
+    }
+
+    this.currentStep++;
+  }
+
+  goPrev() {
+    if (this.currentStep <= 0 ) {
+      return;
+    }
+
+    this.currentStep--;
+  }
 }
