@@ -1,1 +1,12 @@
-<p>radio works!</p>
+<label [class]="cssClass">
+  <input #radio type="radio" [id]="id" class="radio__input" (change)="changeValue(radio.checked)">
+  <div class="radio__body">
+    <span  class="radio__label">
+      <ng-content></ng-content>
+    </span>
+    <span class="radio__meta">
+      <ng-content select=".meta"></ng-content>
+    </span>
+    <ng-content select=".help"></ng-content>
+  </div>
+</label>

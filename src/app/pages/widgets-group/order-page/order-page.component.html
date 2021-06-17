@@ -15,22 +15,22 @@
                 <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl">
                   <div class="form__field">
                     <label for="last-name" class="form__label">Фамилия<sup>*</sup></label>
-                    <app-input type="text" name="last-name" formControlName="lastName"></app-input>
+                    <app-input id="last-name" type="text" name="last-name" formControlName="lastName"></app-input>
                   </div>
                   <div class="form__field">
                     <label for="first-name" class="form__label">Имя<sup>*</sup></label>
-                    <app-input type="text" name="first-name"></app-input>
+                    <app-input id="first-name" type="text" name="first-name"></app-input>
                   </div>
                   <div class="form__field">
-                    <label for="middle-name" class="form__label">Отчество<sup>*</sup></label>
+                    <label id="middle-name" for="middle-name" class="form__label">Отчество<sup>*</sup></label>
                     <app-input type="text" name="middle-name"></app-input>
                   </div>
                   <div class="form__field">
-                    <label for="email" class="form__label">E-mail<sup>*</sup></label>
+                    <label id="email" for="email" class="form__label">E-mail<sup>*</sup></label>
                     <app-input type="text" name="email"></app-input>
                   </div>
                   <div class="form__field">
-                    <label for="tel" class="form__label">Телефон<sup>*</sup></label>
+                    <label id="tel" for="tel" class="form__label">Телефон<sup>*</sup></label>
                     <app-input type="text" name="tel"></app-input>
                   </div>
                   <div class="form__field">
@@ -57,26 +57,19 @@
           <div class="form__fieldset form__fieldset--2-col-sm">
             <div class="form__field form__field--full">
               <label for="fio" class="form__label">ФИО<sup>*</sup></label>
-<!--              {{{ input type="text" id="fio" name="fio" error="Не заполнено"}}}-->
+              <app-input type="text" id="fio" name="fio"></app-input>
             </div>
             <div class="form__field">
-              <label for="document" class="form__label">Документ<sup>*</sup></label>
-              <app-select></app-select>
-<!--              {{{ select-->
-<!--              id="document"-->
-<!--              name="document"-->
-<!--              data='[-->
-<!--              {"value": "pass", "name": "Паспорт"},-->
-<!--                {"value": "pass", "name": "Паспорт"}]'-->
-<!--              }}}-->
+              <label class="form__label">Документ<sup>*</sup></label>
+              <app-select [items]="cities"></app-select>
             </div>
             <div class="form__field">
               <label for="doc-data" class="form__label">Серия и номер документа<sup>*</sup></label>
-<!--              {{{ input type="text" id="doc-data" name="doc-data" error="Не заполнено"}}}-->
+              <app-input type="text" id="doc-data" name="doc-data"></app-input>
             </div>
             <div class="form__field">
               <label for="tel" class="form__label">Номер телефона<sup>*</sup></label>
-<!--              {{{ input type="tel" id="tel" name="tel" error="Не заполнено"}}}-->
+              <app-input type="tel"  name="tel"></app-input>
             </div>
           </div>
         </section>
@@ -85,9 +78,17 @@
           <div class="form__fieldset form__fieldset--delivery-point form__fieldset--row-gap-lg">
             <div class="form__field form__field--location">
               <label for="destination" class="form__label">Населенный пункт<sup>*</sup></label>
-<!--              {{{ input type="text" id="destination" name="destination" error="Не заполнено"}}}-->
+              <app-input type="text" id="destination" name="destination"></app-input>
             </div>
-<!--            {{> fieldset&#45;&#45;department}}-->
+            <div class="form__fieldset form__fieldset--department">
+              <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
+              <div class="form__field">
+                <app-radio checked="true">Владивосток, Гоголя 22</app-radio>
+              </div>
+              <div class="form__field">
+                <app-radio>Владивосток, Карла Маркса</app-radio>
+              </div>
+            </div>
             <ul data-tabs class="form__tabs form__tabs--mg-top">
               <li>
                 <a data-tabby-default href="#city-to-1">Сдать в отделение</a>
