@@ -147,6 +147,12 @@
         </section>
       </div>
       <div *ngIf="currentStep === 2">
+        <div class="form__fieldset form__fieldset--tags">
+          <app-tag *ngFor="let id of tags; let i = index;" [id]="id" (delete)="deleteTag($event)" [@tag]="">
+            Груз №{{i + 1}}
+          </app-tag>
+          <app-tag type="add" (click)="addTag()"></app-tag>
+        </div>
 <!--        {{> goods&#45;&#45;common-block}}-->
         <section class="form__section">
           <h2 class="form__heading">Получатель:</h2>

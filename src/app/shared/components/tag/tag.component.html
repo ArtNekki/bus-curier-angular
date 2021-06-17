@@ -1,0 +1,18 @@
+<button *ngIf="type === 'add'; else tag" type="button" [class]="cssClass + ' tag--add'">
+  <div class="tag__body">
+    <svg-icon class="icon" src="assets/img/svg/plus.svg" width="19" height="19"></svg-icon>
+    <span class="tag__text">Добавить</span>
+  </div>
+</button>
+
+<ng-template #tag>
+  <label [class]="cssClass" [id]="id">
+    <input type="radio" name="tag" class="tag__input" [checked]="checked">
+    <div class="tag__body">
+      <span class="tag__text">
+        <ng-content></ng-content>
+      </span>
+      <button type="button" class="tag__delete" (click)="onDelete(id)">&#160;</button>
+    </div>
+  </label>
+</ng-template>

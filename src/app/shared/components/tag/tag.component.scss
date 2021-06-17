@@ -1,0 +1,75 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.tag {
+  $bottom-space: 10px;
+
+  margin-right: 10px;
+  margin-bottom: $bottom-space;
+  display: block;
+
+  &__input {
+    display: none;
+  }
+
+  &__body {
+    padding: 10px;
+    height: 40px;
+    min-width: 120px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid $primary-color;
+    border-radius: 30px;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    .tag__input:checked ~ & {
+      background-color: $primary-color;
+    }
+
+    .tag--add & {
+      padding-right: 12px;
+      border-width: 1px;
+      border-color: #e5e5e5;
+      justify-content: center;
+
+      // @include media-breakpoint-up(md) {
+
+      // }
+    }
+  }
+
+  &__text {
+    margin-left: auto;
+    margin-right: auto;
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    line-height: 1;
+
+    .tag--add & {
+      margin-left: 10px;
+      margin-right: unset;
+    }
+  }
+
+  &__delete {
+    position: relative;
+
+    @include close-button(12px, $gray-color, darken($gray-color, 8%));
+
+    .tag__input:checked ~ .tag__body & {
+      display: none;
+    }
+  }
+
+  &--add {
+    @include btn-default();
+
+    // flex-basis: 100%;
+    margin-bottom: $bottom-space;
+  }
+}
