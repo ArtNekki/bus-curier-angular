@@ -6,13 +6,13 @@
 </button>
 
 <ng-template #tag>
-  <label [class]="cssClass" [id]="id">
+  <label [class]="cssClass">
     <input type="radio" name="tag" class="tag__input" [checked]="checked">
     <div class="tag__body">
       <span class="tag__text">
         <ng-content></ng-content>
       </span>
-      <button type="button" class="tag__delete" (click)="onDelete(id)">&#160;</button>
+      <button type="button" class="tag__delete" (click)="onDelete(index)">&#160;</button>
     </div>
   </label>
 </ng-template>

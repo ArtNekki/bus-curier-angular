@@ -149,7 +149,7 @@
       <div *ngIf="currentStep === 2">
 <!--        {{form.get('cargoParams') | json}}-->
         <div class="form__fieldset form__fieldset--tags">
-          <app-tag *ngFor="let control of cargo.controls; let i = index;"  (delete)="deleteCargo($event)" [@tag]="">
+          <app-tag *ngFor="let control of cargo.controls; let i = index;" [index]="i" (delete)="deleteCargo($event)" [@tag]="">
             Груз №{{i + 1}}
           </app-tag>
           <app-tag type="add" (click)="addCargo()"></app-tag>

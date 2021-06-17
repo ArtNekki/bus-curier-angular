@@ -10,7 +10,7 @@ export class TagComponent implements OnInit {
   @Output() delete: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() type: string;
-  @Input() id: any;
+  @Input() index: any;
   @Input() checked: boolean;
   @Input() mods;
 
@@ -22,9 +22,8 @@ export class TagComponent implements OnInit {
     this.cssClass = this.modsService.setMods('tag', this.mods);
   }
 
-  onDelete(id) {
-    this.delete.emit(id);
-    console.log('tag', id);
+  onDelete(index) {
+    this.delete.emit(index);
   }
 
 }

@@ -79,10 +79,11 @@ export class OrderPageComponent implements OnInit {
     return this.form.get('cargo') as FormArray;
   }
 
-  deleteCargo(tag: any) {
-    const index = this.tags.indexOf(tag);
-    this.tags.splice(index, 1);
-    console.log('tags', this.tags);
+  deleteCargo(index: number) {
+    // const index = this.tags.indexOf(tag);
+    // this.tags.splice(index, 1);
+    // console.log('tags', this.tags);
+    (this.form.get('cargo') as FormArray).removeAt(index);
   }
 
   selectGoodsType(type: { name: string; id: string }) {
