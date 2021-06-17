@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import cities from 'src/app/mock-data/cities';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {animate, style, transition, trigger} from '@angular/animations';
 import GoodsType from '../../../core/maps/GoodsType';
 
@@ -39,6 +39,7 @@ export class OrderPageComponent implements OnInit {
       // tel: new FormControl('', [Validators.required]),
       // question: new FormControl('', [Validators.required]),
       // subscribe: new FormControl('', []),
+      cargo: new FormArray([])
     });
 
     this.tags.push(`cargo-${this.tags.length + 1}`);
@@ -69,12 +70,16 @@ export class OrderPageComponent implements OnInit {
     this.currentStep--;
   }
 
-  addTag() {
-    this.tags.push(`cargo-${this.tags.length + 1}`);
-    console.log('tags', this.tags);
+  addCargo() {
+    const group = new FormGroup({});
+    (this.form.get('cargo') as FormArray).push(group);
   }
 
-  deleteTag(tag: any) {
+  get cargo() {
+    return this.form.get('cargo') as FormArray;
+  }
+
+  deleteCargo(tag: any) {
     const index = this.tags.indexOf(tag);
     this.tags.splice(index, 1);
     console.log('tags', this.tags);

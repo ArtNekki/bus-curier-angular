@@ -100,7 +100,7 @@
     }
   }
 
-  &--delete svg {
+  ::ng-deep &--delete svg {
     --stroke-color: #C74141;
     --fill-color: none;
   }

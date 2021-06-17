@@ -147,11 +147,12 @@
         </section>
       </div>
       <div *ngIf="currentStep === 2">
+<!--        {{form.get('cargoParams') | json}}-->
         <div class="form__fieldset form__fieldset--tags">
-          <app-tag *ngFor="let id of tags; let i = index;" [id]="id" (delete)="deleteTag($event)" [@tag]="">
+          <app-tag *ngFor="let control of cargo.controls; let i = index;"  (delete)="deleteCargo($event)" [@tag]="">
             Груз №{{i + 1}}
           </app-tag>
-          <app-tag type="add" (click)="addTag()"></app-tag>
+          <app-tag type="add" (click)="addCargo()"></app-tag>
         </div>
         <div class="form__section">
           <div class="form__fieldset form__fieldset--goods-type">
@@ -167,11 +168,43 @@
             </div>
           </div>
           <div *ngIf="currentGoodsType === GoodsType.Parcels">
-            parcels
-<!--            {{> fieldset&#45;&#45;package delete="true"}}-->
-<!--            {{> fieldset&#45;&#45;package error="true" delete="true"}}-->
-<!--            {{> fieldset&#45;&#45;package }}-->
-<!--            {{{ btn text="Добавить еще 1 позицию" }}}-->
+            <div>
+              <div class="form__fieldset form__fieldset--package">
+                <div class="form__field">
+                  <label class="form__label" for="package-count">Кол-во мест</label>
+                  <app-input type="text" name="package-count"></app-input>
+                </div>
+                <div class="form__field">
+                  <label class="form__label" for="package-weight">Вес</label>
+                  <app-input type="text" name="package-weight" unit="кг"></app-input>
+                </div>
+                <div class="form__field">
+                  <label class="form__label" for="package-width">Ширина</label>
+                  <app-input type="text" name="package-width" unit="см"></app-input>
+                </div>
+                <div class="form__field">
+                  <label class="form__label" for="package-height">Высота</label>
+                  <app-input type="text" name="package-height" unit="см"></app-input>
+                </div>
+                <div class="form__field">
+                  <label class="form__label" for="package-length">Длина</label>
+                  <app-input type="text" name="package-length" unit="см"></app-input>
+                </div>
+                <div class="form__field form__field--align-center">
+                  <label class="form__label">&#160;</label>
+                  <app-btn type="button" mods="delete">
+                    <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>
+                    Удалить
+                  </app-btn>
+                </div>
+
+<!--                {{#if error}}-->
+<!--                <div class="form__error">Габариты превышают допустимые значения 0,5×0,5×0,5 м. Перевозка невозможна.</div>-->
+<!--                {{/if}}-->
+              </div>
+
+            </div>
+            <app-btn type="button">Добавить еще 1 позицию</app-btn>
           </div>
           <div *ngIf="currentGoodsType === GoodsType.AutoDetails">
             <label class="form__label">Выберите тип запчасти</label>
