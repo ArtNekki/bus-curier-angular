@@ -762,19 +762,19 @@
     }
   }
 
-  &__tabs {
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 2px;
-    list-style: none;
-    grid-area: switcher;
-
-    &--mg-top {
-      margin-top: 15px;
-    }
-  }
+  //&__tabs {
+  //  margin: 0;
+  //  padding: 0;
+  //  display: grid;
+  //  grid-template-columns: repeat(2, 1fr);
+  //  grid-column-gap: 2px;
+  //  list-style: none;
+  //  grid-area: switcher;
+  //
+  //  &--mg-top {
+  //    margin-top: 15px;
+  //  }
+  //}
 
   &__tabs a {
     position: relative;

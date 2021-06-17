@@ -35,6 +35,11 @@ import { MapComponent } from './components/map/map.component';
 import {environment} from '../../environments/environment';
 import { InputComponent } from './components/input/input.component';
 import { SupportFormComponent } from './components/support-form/support-form.component';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { TabItemComponent } from './components/tabs/tab-item/tab-item.component';
+import { TabLabelComponent } from './components/tabs/tab-label/tab-label.component';
+import { TabBodyComponent } from './components/tabs/tab-body/tab-body.component';
+import {TabsModule} from './components/tabs/tabs.module';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -52,6 +57,7 @@ import { SupportFormComponent } from './components/support-form/support-form.com
       apiKey: environment.firebaseConfig.apiKey,
       libraries: ['places']
     }),
+    TabsModule
     // DeviceDetectorModule.forRoot(),
   ],
   exports: [
@@ -60,6 +66,7 @@ import { SupportFormComponent } from './components/support-form/support-form.com
     AngularSvgIconModule,
     FormsModule,
     ReactiveFormsModule,
+    TabsModule,
     BtnComponent,
     SelectComponent,
     CheckboxComponent,

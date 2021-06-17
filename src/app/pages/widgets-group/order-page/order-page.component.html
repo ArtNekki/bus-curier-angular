@@ -4,49 +4,51 @@
     <h1 class="page__title">Заявка на перевозку</h1>
     <p class="page__subtitle">Заполните форму необходимыми данными и отправьте</p>
     <app-order-steps (change)="setCurrentStep($event)"></app-order-steps>
-    <form class="form" autocomplete="off">
+    <form class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div *ngIf="currentStep === 0">
         <section class="form__section">
           <h2 class="form__heading">Ваши данные</h2>
-          <ul data-tabs class="form__tabs">
-            <li>
-              <a data-tabby-default href="#natural">Физическое лицо</a>
-            </li>
-            <li>
-              <a href="#entity">Юридическое лицо</a>
-            </li>
-          </ul>
-          <div id="natural" class="form__tabs-panel form__tabs-panel--mg-top">
-            <div  class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl">
-              <div class="form__field">
-                <label for="last-name" class="form__label">Фамилия<sup>*</sup></label>
-                <app-input type="text" id="last-name" name="last-name"></app-input>
-              </div>
-              <div class="form__field">
-                <label for="first-name" class="form__label">Имя<sup>*</sup></label>
-                <app-input type="text" id="first-name" name="first-name"></app-input>
-              </div>
-              <div class="form__field">
-                <label for="middle-name" class="form__label">Отчество<sup>*</sup></label>
-                <app-input type="text" id="middle-name" name="middle-name"></app-input>
-              </div>
-              <div class="form__field">
-                <label for="email" class="form__label">E-mail<sup>*</sup></label>
-                <app-input type="text" id="email" name="email"></app-input>
-              </div>
-              <div class="form__field">
-                <label for="tel" class="form__label">Телефон<sup>*</sup></label>
-                <app-input type="text" id="tel" name="tel"></app-input>
-              </div>
-              <div class="form__field">
-                <label class="form__label">Роль</label>
-                <app-select [items]="cities"></app-select>
-              </div>
-            </div>
-          </div>
-          <div id="entity" class="form__tabs-panel form__tabs-panel--mg-top">
-            Не понятно какие данные...
-          </div>
+
+          <app-tabs>
+            <app-tab-item>
+              <app-tab-label>Физическое лицо</app-tab-label>
+              <app-tab-body>
+                <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl">
+                  <div class="form__field">
+                    <label for="last-name" class="form__label">Фамилия<sup>*</sup></label>
+                    <app-input type="text" name="last-name" formControlName="lastName"></app-input>
+                  </div>
+                  <div class="form__field">
+                    <label for="first-name" class="form__label">Имя<sup>*</sup></label>
+                    <app-input type="text" name="first-name"></app-input>
+                  </div>
+                  <div class="form__field">
+                    <label for="middle-name" class="form__label">Отчество<sup>*</sup></label>
+                    <app-input type="text" name="middle-name"></app-input>
+                  </div>
+                  <div class="form__field">
+                    <label for="email" class="form__label">E-mail<sup>*</sup></label>
+                    <app-input type="text" name="email"></app-input>
+                  </div>
+                  <div class="form__field">
+                    <label for="tel" class="form__label">Телефон<sup>*</sup></label>
+                    <app-input type="text" name="tel"></app-input>
+                  </div>
+                  <div class="form__field">
+                    <label class="form__label">Роль</label>
+                    <app-select [items]="cities"></app-select>
+                  </div>
+                </div>
+              </app-tab-body>
+            </app-tab-item>
+            <app-tab-item >
+              <app-tab-label>Юридическое лицо</app-tab-label>
+              <app-tab-body>
+                Не понятно какие данные...
+              </app-tab-body>
+            </app-tab-item>
+          </app-tabs>
+          <button type="submit">Отправить</button>
           <!-- <p class="form__help-text form__help-text--gray form__help-text--align-center">Выберите статус лица для перехода на следующий шаг</p> -->
           <!-- <p class="form__help-text">Чтобы оформить заказ как юридическое лицо,<br />вам необходимо <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>войти</span></span></a>или <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>зарегистрироваться</span></span></a></p> -->
         </section>

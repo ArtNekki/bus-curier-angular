@@ -1,0 +1,86 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+//.tabs-header {
+//  display: flex;
+//}
+//.active {
+//  color: red;
+//}
+//
+//.tab-label {
+//  border: 1px dashed black;
+//  padding: 25px;
+//  margin: 0 10px;
+//}
+
+
+.tabs-nav {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 2px;
+  list-style: none;
+  grid-area: switcher;
+
+  //&--mg-top {
+  //  margin-top: 15px;
+  //}
+}
+
+.tabs-label {
+  position: relative;
+  padding: 10px;
+  min-height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family--secondary;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  color: $black-color;
+  background-color: $gray-light-color--up-5;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+
+  @include focus {
+    outline: none;
+  }
+
+  &:first-child {
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+  }
+
+  &:last-child {
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+
+  &.active {
+    color: $black-color;
+    background-color: $primary-color;
+
+    &::before,
+    &::after {
+      background-color: $primary-color;
+    }
+  }
+}
+
+.tabs-body {
+  margin-top: 40px; //temp
+  grid-area: form-tab;
+
+  &--mg-top {
+    margin-top: 40px;
+  }
+}
