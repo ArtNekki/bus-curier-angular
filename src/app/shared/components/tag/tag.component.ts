@@ -8,6 +8,7 @@ import {ModsService} from '../../../core/services/mods.service';
 })
 export class TagComponent implements OnInit {
   @Output() delete: EventEmitter<any> = new EventEmitter<any>();
+  @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() type: string;
   @Input() index: any;
@@ -26,4 +27,8 @@ export class TagComponent implements OnInit {
     this.delete.emit(index);
   }
 
+  selectTag(e, index: any) {
+    e.stopPropagation();
+    this.change.emit(index);
+  }
 }

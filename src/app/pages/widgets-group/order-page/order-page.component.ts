@@ -20,6 +20,7 @@ export class OrderPageComponent implements OnInit {
   public cities = cities;
   public form: FormGroup;
   public tags = [];
+  public currentCargo = null;
   public currentGoodsType = null;
   public GoodsType = GoodsType;
 
@@ -73,6 +74,8 @@ export class OrderPageComponent implements OnInit {
   addCargo() {
     const group = new FormGroup({});
     (this.form.get('cargo') as FormArray).push(group);
+
+    this.currentCargo = (this.form.get('cargo') as FormArray).length - 1;
   }
 
   get cargo() {
@@ -84,6 +87,11 @@ export class OrderPageComponent implements OnInit {
     // this.tags.splice(index, 1);
     // console.log('tags', this.tags);
     (this.form.get('cargo') as FormArray).removeAt(index);
+  }
+
+  selectCargo(index: number) {
+    this.currentCargo = index;
+    console.log('cargo 222', this.currentCargo);
   }
 
   selectGoodsType(type: { name: string; id: string }) {

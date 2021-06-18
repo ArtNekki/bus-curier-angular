@@ -7,7 +7,7 @@
 
 <ng-template #tag>
   <label [class]="cssClass">
-    <input type="radio" name="tag" class="tag__input" [checked]="checked">
+    <input type="radio" name="tag" class="tag__input" [checked]="checked" (change)="selectTag($event, index)">
     <div class="tag__body">
       <span class="tag__text">
         <ng-content></ng-content>
