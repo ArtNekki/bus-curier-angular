@@ -48,7 +48,14 @@ export class OrderPageComponent implements OnInit {
       // tel: new FormControl('', [Validators.required]),
       // question: new FormControl('', [Validators.required]),
       // subscribe: new FormControl('', []),
-      cargo: new FormArray([new FormGroup({})])
+      cargo: new FormArray([new FormGroup({
+        type: new FormGroup({
+          docs: new FormGroup({}),
+          parcels: new FormGroup({}),
+          autoDetails: new FormGroup({}),
+          other: new FormGroup({})
+        })
+      })])
     });
 
     this.tags.push(`cargo-${this.tags.length + 1}`);
@@ -79,15 +86,31 @@ export class OrderPageComponent implements OnInit {
     this.currentStep--;
   }
 
+  get cargo() {
+    return this.form.get('cargo') as FormArray;
+  }
+
+  // get cargoType() {
+  //   console.log(Object.keys(((this.form.get('cargo') as FormArray).controls[0].get('type') as FormGroup).controls));
+  //   return Object.keys(((this.form.get('cargo') as FormArray).controls[0].get('type') as FormGroup).controls) ;
+  // }
+
+  getFormKeys(control) {
+    return Object.keys((control as FormGroup).controls);
+  }
+
   addCargo() {
-    const group = new FormGroup({});
+    const group = new FormGroup({
+      type: new FormGroup({
+        docs: new FormGroup({}),
+        parcels: new FormGroup({}),
+        autoDetails: new FormGroup({}),
+        other: new FormGroup({})
+      })
+    });
     (this.form.get('cargo') as FormArray).push(group);
 
     this.currentCargoIndex = (this.form.get('cargo') as FormArray).length - 1;
-  }
-
-  get cargo() {
-    return this.form.get('cargo') as FormArray;
   }
 
   deleteCargo(index: number) {
@@ -99,7 +122,7 @@ export class OrderPageComponent implements OnInit {
     this.currentCargoIndex = index;
   }
 
-  selectGoodsType(type: { name: string; id: string }) {
-    this.currentGoodsType = type;
+  selectGoodsType(index: number) {
+    this.currentGoodsType = index;
   }
 }
