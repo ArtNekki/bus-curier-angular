@@ -151,7 +151,7 @@
         <div class="form__fieldset form__fieldset--tags">
           <app-tag *ngFor="let control of cargo.controls; let i = index;"
                    [index]="i"
-                   [checked]="currentCargo === i"
+                   [checked]="currentCargoIndex === i"
                    (delete)="deleteCargo($event)"
                    (change)="selectCargo($event)" [@tag]="">
             Груз №{{i + 1}}
@@ -159,7 +159,7 @@
           <app-tag type="add" (click)="addCargo()"></app-tag>
         </div>
         <div *ngFor="let control of cargo.controls; let i = index;"
-             class="form__section" [style]="{display: currentCargo === i ? 'block' : 'none'}" [@panel]="">
+             class="form__section" [style]="{display: currentCargoIndex === i ? 'block' : 'none'}" [@panel]="">
           <div class="form__fieldset form__fieldset--goods-type">
             <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
             <div *ngFor="let type of goodsTypes"  class="form__field">
