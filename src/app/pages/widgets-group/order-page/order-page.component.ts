@@ -8,12 +8,20 @@ import GoodsType from '../../../core/maps/GoodsType';
   selector: 'app-order-page',
   templateUrl: './order-page.component.html',
   styleUrls: ['./order-page.component.scss'],
-  animations: [trigger('tag', [
+  animations: [
+    trigger('tag', [
     transition('void => *', [
       style({opacity: 0}),
       animate('200ms')
     ])
-  ])]
+  ]),
+    trigger('panel', [
+      transition('void => *', [
+        style({opacity: 0}),
+        animate('200ms')
+      ])
+    ])
+  ]
 })
 export class OrderPageComponent implements OnInit {
   public currentStep = 0;
@@ -83,10 +91,8 @@ export class OrderPageComponent implements OnInit {
   }
 
   deleteCargo(index: number) {
-    // const index = this.tags.indexOf(tag);
-    // this.tags.splice(index, 1);
-    // console.log('tags', this.tags);
     (this.form.get('cargo') as FormArray).removeAt(index);
+    this.currentCargo = (this.form.get('cargo') as FormArray).length - 1;
   }
 
   selectCargo(index: number) {

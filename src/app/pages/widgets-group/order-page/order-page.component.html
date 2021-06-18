@@ -158,7 +158,8 @@
           </app-tag>
           <app-tag type="add" (click)="addCargo()"></app-tag>
         </div>
-        <div *ngFor="let control of cargo.controls; let i = index;" class="form__section" [style]="{display: currentCargo === i ? 'block' : 'none'}">
+        <div *ngFor="let control of cargo.controls; let i = index;"
+             class="form__section" [style]="{display: currentCargo === i ? 'block' : 'none'}" [@panel]="">
           <div class="form__fieldset form__fieldset--goods-type">
             <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
             <div *ngFor="let type of goodsTypes"  class="form__field">
