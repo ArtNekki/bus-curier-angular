@@ -30,7 +30,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   public form: FormGroup;
   public tags = [];
   public currentCargoIndex = 0;
-  public currentCargoType = null;
+  public currentCargoType = [];
   public GoodsType = GoodsType;
 
   public goodsTypes = [
@@ -60,7 +60,8 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     });
 
     this.tags.push(`cargo-${this.tags.length + 1}`);
-    this.currentCargoType = 'docs';
+    this.currentCargoType.push('docs');
+    // this.currentCargoType = 'docs';
   }
 
   ngAfterViewInit(): void {
@@ -121,20 +122,22 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     (this.form.get('cargo') as FormArray).push(group);
 
     this.currentCargoIndex = (this.form.get('cargo') as FormArray).length - 1;
+    this.currentCargoType.push('docs');
   }
 
   deleteCargo(index: number) {
     (this.form.get('cargo') as FormArray).removeAt(index);
     this.currentCargoIndex = (this.form.get('cargo') as FormArray).length - 1;
+    this.currentCargoType.splice(index, 1);
   }
 
   selectCargo(index: number) {
     this.currentCargoIndex = index;
   }
 
-  selectCargoType(type: string) {
-    this.currentCargoType = type;
-    console.log('vikki', this.currentCargoType);
+  selectCargoType(type: string, index) {
+    this.currentCargoType.splice(index, 1, type);
+    console.log('currentCargo', this.currentCargoType);
   }
 
   originalOrder = (a: KeyValue<string, AbstractControl>, b: KeyValue<string, AbstractControl>): number => {
