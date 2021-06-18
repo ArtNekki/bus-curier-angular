@@ -146,7 +146,7 @@
           </div>
         </section>
       </div>
-      <div *ngIf="currentStep === 2">
+      <div *ngIf="currentStep === 2" formArrayName="cargo">
 <!--        {{form.get('cargoParams') | json}}-->
         <div class="form__fieldset form__fieldset--tags">
           <app-tag *ngFor="let control of cargo.controls; let i = index;"
@@ -159,20 +159,18 @@
           <app-tag type="add" (click)="addCargo()"></app-tag>
         </div>
         <div *ngFor="let cargoParams of cargo.controls; let i = index;"
-             class="form__section" [style]="{display: currentCargoIndex === i ? 'block' : 'none'}" [@panel]="">
-          <div class="form__fieldset form__fieldset--goods-type">
+             class="form__section" [style]="{display: currentCargoIndex === i ? 'block' : 'none'}" [@panel]="" [formGroup]="cargoParams">
+          <div class="form__fieldset form__fieldset--goods-type" >
             <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
-<!--              {{ cargoParams.get('type').value | json }}-->
-              <app-radio *ngFor="let type of getFormKeys(cargoParams.get('type')); let i = index;" name="goods-type" (change)="selectGoodsType(i)">{{type}}</app-radio>
+              <app-radio *ngFor="let type of getGroupControls(cargoParams.get('type')) | keyvalue: originalOrder; let i = index;" name="goods-type" (change)="selectCargoType(type.key)" [checked]="type.key === currentCargoType">{{type.key}}</app-radio>
             </div>
-
-          <div *ngIf="currentGoodsType === GoodsType.Docs">
+          <div *ngIf="currentCargoType === GoodsType.Docs">
             <div class="form__field">
               <label class="form__label">Количество мест</label>
 <!--              {{{ counter name="place-count" }}}-->
             </div>
           </div>
-          <div *ngIf="currentGoodsType === GoodsType.Parcels">
+          <div *ngIf="currentCargoType === GoodsType.Parcels">
             <div>
               <div class="form__fieldset form__fieldset--package">
                 <div class="form__field">
@@ -211,7 +209,7 @@
             </div>
             <app-btn type="button">Добавить еще 1 позицию</app-btn>
           </div>
-          <div *ngIf="currentGoodsType === GoodsType.AutoDetails">
+          <div *ngIf="currentCargoType === GoodsType.AutoDetails">
             <label class="form__label">Выберите тип запчасти</label>
             autodetails
 <!--            {{> fieldset&#45;&#45;auto-part delete="true"}}-->

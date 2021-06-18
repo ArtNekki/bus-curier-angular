@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import cities from 'src/app/mock-data/cities';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {animate, style, transition, trigger} from '@angular/animations';
 import GoodsType from '../../../core/maps/GoodsType';
+import {KeyValue} from '@angular/common';
 
 @Component({
   selector: 'app-order-page',
@@ -23,13 +24,13 @@ import GoodsType from '../../../core/maps/GoodsType';
     ])
   ]
 })
-export class OrderPageComponent implements OnInit {
+export class OrderPageComponent implements OnInit, AfterViewInit {
   public currentStep = 0;
   public cities = cities;
   public form: FormGroup;
   public tags = [];
   public currentCargoIndex = 0;
-  public currentGoodsType = null;
+  public currentCargoType = null;
   public GoodsType = GoodsType;
 
   public goodsTypes = [
@@ -59,7 +60,11 @@ export class OrderPageComponent implements OnInit {
     });
 
     this.tags.push(`cargo-${this.tags.length + 1}`);
-    this.currentGoodsType = this.goodsTypes[0];
+    this.currentCargoType = 'docs';
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   setCurrentStep($event: any) {
@@ -95,8 +100,13 @@ export class OrderPageComponent implements OnInit {
   //   return Object.keys(((this.form.get('cargo') as FormArray).controls[0].get('type') as FormGroup).controls) ;
   // }
 
-  getFormKeys(control) {
-    return Object.keys((control as FormGroup).controls);
+
+  // getArrayKeys(array) {
+  //   return Object.keys((array as FormArray).controls);
+  // }
+
+  getGroupControls(group) {
+    return (group as FormGroup).controls;
   }
 
   addCargo() {
@@ -122,7 +132,12 @@ export class OrderPageComponent implements OnInit {
     this.currentCargoIndex = index;
   }
 
-  selectGoodsType(index: number) {
-    this.currentGoodsType = index;
+  selectCargoType(type: string) {
+    this.currentCargoType = type;
+    console.log('vikki', this.currentCargoType);
+  }
+
+  originalOrder = (a: KeyValue<string, AbstractControl>, b: KeyValue<string, AbstractControl>): number => {
+    return 0;
   }
 }
