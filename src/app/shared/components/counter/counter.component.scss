@@ -1,0 +1,40 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.counter {
+  padding: 15px;
+  width: 140px;
+  display: grid;
+  grid-template-columns: 20px 1fr 20px;
+  grid-column-gap: 5px;
+  align-items: center;
+  border: 1px solid #E5E5E5;
+  border-radius: $border-radius;
+  box-sizing: border-box;
+
+  &__input {
+    padding: 0;
+    width: 100%;
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    line-height: 1;
+    text-align: center;
+    color: $font-color;
+    border: none;
+    background-color: transparent;
+    user-select: none;
+
+    @include focus {
+      outline: none;
+    }
+  }
+
+  &__btn {
+    @include btn-default();
+
+    display: flex;
+  }
+}

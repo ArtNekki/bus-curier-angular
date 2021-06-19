@@ -170,7 +170,7 @@
             <div *ngIf="currentCargoType[cargoIndex] === GoodsType.Docs" formGroupName="docs">
               <div class="form__field">
                 <label class="form__label">Количество мест</label>
-                <!--              {{{ counter name="place-count" }}}-->
+                <app-counter formControlName="placeCount"></app-counter>
               </div>
             </div>
             <div *ngIf="currentCargoType[cargoIndex] === GoodsType.Parcels" formGroupName="parcels">
@@ -190,39 +190,7 @@
                       Удалить
                     </app-btn>
                   </div>
-<!--                  <div class="form__field">-->
-<!--                    <label class="form__label" for="package-count">Кол-во мест</label>-->
-<!--                    <app-input type="text" name="package-count" formControlName="count"></app-input>-->
-<!--                  </div>-->
-<!--                  <div class="form__field">-->
-<!--                    <label class="form__label" for="package-weight">Вес</label>-->
-<!--                    <app-input type="text" name="package-weight" unit="кг" formControlName="weight"></app-input>-->
-<!--                  </div>-->
-<!--                  <div class="form__field">-->
-<!--                    <label class="form__label" for="package-width">Ширина</label>-->
-<!--                    <app-input type="text" name="package-width" unit="см" formControlName="width"></app-input>-->
-<!--                  </div>-->
-<!--                  <div class="form__field">-->
-<!--                    <label class="form__label" for="package-height">Высота</label>-->
-<!--                    <app-input type="text" name="package-height" unit="см" formControlName="height"></app-input>-->
-<!--                  </div>-->
-<!--                  <div class="form__field">-->
-<!--                    <label class="form__label" for="package-length">Длина</label>-->
-<!--                    <app-input type="text" name="package-length" unit="см" formControlName="length"></app-input>-->
-<!--                  </div>-->
-<!--                  <div class="form__field form__field&#45;&#45;align-center">-->
-<!--                    <label class="form__label">&#160;</label>-->
-<!--                    <app-btn type="button" mods="delete">-->
-<!--                      <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>-->
-<!--                      Удалить-->
-<!--                    </app-btn>-->
-<!--                  </div>-->
-
-                  <!--                {{#if error}}-->
-                  <!--                <div class="form__error">Габариты превышают допустимые значения 0,5×0,5×0,5 м. Перевозка невозможна.</div>-->
-                  <!--                {{/if}}-->
                 </div>
-
               </div>
               <app-btn type="button" (click)="addParcelParams()">Добавить еще 1 позицию</app-btn>
             </div>

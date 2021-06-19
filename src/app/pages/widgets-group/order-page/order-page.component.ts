@@ -51,7 +51,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       // subscribe: new FormControl('', []),
       cargo: new FormArray([new FormGroup({
         type: new FormGroup({
-          docs: new FormGroup({}),
+          docs: new FormGroup({
+            placeCount: new FormControl('', [])
+          }),
           parcels: new FormArray([
             new FormGroup({
               count: new FormControl('', []),
@@ -125,7 +127,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   addCargo() {
     const group = new FormGroup({
       type: new FormGroup({
-        docs: new FormGroup({}),
+        docs: new FormGroup({
+          placeCount: new FormControl('', [])
+        }),
         parcels: new FormArray([
           new FormGroup({
             count: new FormControl('', []),

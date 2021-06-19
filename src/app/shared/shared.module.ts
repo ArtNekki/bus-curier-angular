@@ -41,6 +41,7 @@ import { TabLabelComponent } from './components/tabs/tab-label/tab-label.compone
 import { TabBodyComponent } from './components/tabs/tab-body/tab-body.component';
 import {TabsModule} from './components/tabs/tabs.module';
 import { TagComponent } from './components/tag/tag.component';
+import { CounterComponent } from './components/counter/counter.component';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -90,7 +91,8 @@ import { TagComponent } from './components/tag/tag.component';
     MapComponent,
     InputComponent,
     SupportFormComponent,
-    TagComponent
+    TagComponent,
+    CounterComponent
   ],
   declarations: [
     BtnComponent,
@@ -119,7 +121,8 @@ import { TagComponent } from './components/tag/tag.component';
     MapComponent,
     InputComponent,
     SupportFormComponent,
-    TagComponent
+    TagComponent,
+    CounterComponent
   ],
   // providers: [NgSelectConfig, ɵs],
 })
