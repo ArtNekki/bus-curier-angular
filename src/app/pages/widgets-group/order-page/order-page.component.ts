@@ -118,6 +118,10 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     return (group as FormGroup).controls;
   }
 
+  getArrayControls(array) {
+    return (array as FormArray).controls;
+  }
+
   addCargo() {
     const group = new FormGroup({
       type: new FormGroup({
@@ -150,5 +154,17 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
   originalOrder = (a: KeyValue<string, AbstractControl>, b: KeyValue<string, AbstractControl>): number => {
     return 0;
+  }
+
+  addParcel() {
+    const parcel = new FormGroup({
+      count: new FormControl('', []),
+      weight: new FormControl('', []),
+      width: new FormControl('', []),
+      height: new FormControl('', []),
+      length: new FormControl('', [])
+    });
+
+    ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray).push(parcel);
   }
 }
