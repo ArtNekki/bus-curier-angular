@@ -146,7 +146,7 @@
           </div>
         </section>
       </div>
-      <div *ngIf="currentStep === 2" formArrayName="cargo">
+      <div *ngIf="currentStep === 2" formGroupName="cargo">
 <!--        {{form.get('cargoParams') | json}}-->
         <div class="form__fieldset form__fieldset--tags">
           <app-tag *ngFor="let control of cargo.controls; let cargoIndex = index;"
@@ -159,72 +159,74 @@
           <app-tag type="add" (click)="addCargo()"></app-tag>
         </div>
         <div *ngFor="let cargoParams of cargo.controls; let cargoIndex = index;"
-             class="form__section" [style]="{display: currentCargoIndex === cargoIndex ? 'block' : 'none'}" [@panel]="" [formGroup]="cargoParams">
-          <div class="form__fieldset form__fieldset--goods-type" >
+             class="form__section" [style]="{display: currentCargoIndex === cargoIndex ? 'block' : 'none'}" [@panel]="" [formGroupName]="cargoIndex">
+          <div class="form__fieldset form__fieldset--goods-type">
             <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
               <app-radio *ngFor="let type of getGroupControls(cargoParams.get('type')) | keyvalue: originalOrder;"
                          [name]="'cargo-type-' + cargoIndex" (change)="selectCargoType(type.key, cargoIndex)"
                          [checked]="type.key === currentCargoType">{{type.key}}</app-radio>
             </div>
-          <div *ngIf="currentCargoType[cargoIndex] === GoodsType.Docs">
-            <div class="form__field">
-              <label class="form__label">Количество мест</label>
-<!--              {{{ counter name="place-count" }}}-->
-            </div>
-          </div>
-          <div *ngIf="currentCargoType[cargoIndex] === GoodsType.Parcels">
-            <div>
-              <div class="form__fieldset form__fieldset--package">
-                <div class="form__field">
-                  <label class="form__label" for="package-count">Кол-во мест</label>
-                  <app-input type="text" name="package-count"></app-input>
-                </div>
-                <div class="form__field">
-                  <label class="form__label" for="package-weight">Вес</label>
-                  <app-input type="text" name="package-weight" unit="кг"></app-input>
-                </div>
-                <div class="form__field">
-                  <label class="form__label" for="package-width">Ширина</label>
-                  <app-input type="text" name="package-width" unit="см"></app-input>
-                </div>
-                <div class="form__field">
-                  <label class="form__label" for="package-height">Высота</label>
-                  <app-input type="text" name="package-height" unit="см"></app-input>
-                </div>
-                <div class="form__field">
-                  <label class="form__label" for="package-length">Длина</label>
-                  <app-input type="text" name="package-length" unit="см"></app-input>
-                </div>
-                <div class="form__field form__field--align-center">
-                  <label class="form__label">&#160;</label>
-                  <app-btn type="button" mods="delete">
-                    <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>
-                    Удалить
-                  </app-btn>
-                </div>
-
-<!--                {{#if error}}-->
-<!--                <div class="form__error">Габариты превышают допустимые значения 0,5×0,5×0,5 м. Перевозка невозможна.</div>-->
-<!--                {{/if}}-->
+          <div formGroupName="type">
+            <div *ngIf="currentCargoType[cargoIndex] === GoodsType.Docs" formGroupName="docs">
+              <div class="form__field">
+                <label class="form__label">Количество мест</label>
+                <!--              {{{ counter name="place-count" }}}-->
               </div>
-
             </div>
-            <app-btn type="button">Добавить еще 1 позицию</app-btn>
+            <div *ngIf="currentCargoType[cargoIndex] === GoodsType.Parcels" formGroupName="parcels">
+              <div>
+                <div class="form__fieldset form__fieldset--package">
+                  <div class="form__field">
+                    <label class="form__label" for="package-count">Кол-во мест</label>
+                    <app-input type="text" name="package-count"></app-input>
+                  </div>
+                  <div class="form__field">
+                    <label class="form__label" for="package-weight">Вес</label>
+                    <app-input type="text" name="package-weight" unit="кг"></app-input>
+                  </div>
+                  <div class="form__field">
+                    <label class="form__label" for="package-width">Ширина</label>
+                    <app-input type="text" name="package-width" unit="см"></app-input>
+                  </div>
+                  <div class="form__field">
+                    <label class="form__label" for="package-height">Высота</label>
+                    <app-input type="text" name="package-height" unit="см"></app-input>
+                  </div>
+                  <div class="form__field">
+                    <label class="form__label" for="package-length">Длина</label>
+                    <app-input type="text" name="package-length" unit="см"></app-input>
+                  </div>
+                  <div class="form__field form__field--align-center">
+                    <label class="form__label">&#160;</label>
+                    <app-btn type="button" mods="delete">
+                      <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>
+                      Удалить
+                    </app-btn>
+                  </div>
+
+                  <!--                {{#if error}}-->
+                  <!--                <div class="form__error">Габариты превышают допустимые значения 0,5×0,5×0,5 м. Перевозка невозможна.</div>-->
+                  <!--                {{/if}}-->
+                </div>
+
+              </div>
+              <app-btn type="button">Добавить еще 1 позицию</app-btn>
+            </div>
+            <div *ngIf="currentCargoType[cargoIndex] === GoodsType.AutoDetails">
+              <label class="form__label">Выберите тип запчасти</label>
+              autodetails
+              <!--            {{> fieldset&#45;&#45;auto-part delete="true"}}-->
+              <!--            {{> fieldset&#45;&#45;auto-part }}-->
+              <!--            {{{ btn text="Добавить еще 1 позицию" }}}-->
+              <dl class="form__details">
+                <dt><b>Тип груза:</b></dt>
+                <dd>Пожалуйста, выберите тип запчасти из списка. Если вы не нашли подходящей запчасти, рассчитайте стоимость обычной посылки.</dd>
+              </dl>
+            </div>
+            <!--  <div data-content="goods-type-other">-->
+            <!--    Что-то другое ...-->
+            <!--  </div>-->
           </div>
-          <div *ngIf="currentCargoType[cargoIndex] === GoodsType.AutoDetails">
-            <label class="form__label">Выберите тип запчасти</label>
-            autodetails
-<!--            {{> fieldset&#45;&#45;auto-part delete="true"}}-->
-<!--            {{> fieldset&#45;&#45;auto-part }}-->
-<!--            {{{ btn text="Добавить еще 1 позицию" }}}-->
-            <dl class="form__details">
-              <dt><b>Тип груза:</b></dt>
-              <dd>Пожалуйста, выберите тип запчасти из списка. Если вы не нашли подходящей запчасти, рассчитайте стоимость обычной посылки.</dd>
-            </dl>
-          </div>
-          <!--  <div data-content="goods-type-other">-->
-          <!--    Что-то другое ...-->
-          <!--  </div>-->
         </div>
 <!--        {{> goods&#45;&#45;common-block}}-->
         <section class="form__section">
