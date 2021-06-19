@@ -156,7 +156,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     return 0;
   }
 
-  addParcel() {
+  addParcelParams() {
     const parcel = new FormGroup({
       count: new FormControl('', []),
       weight: new FormControl('', []),
@@ -166,5 +166,15 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     });
 
     ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray).push(parcel);
+  }
+
+  deleteParcelParams(index: number) {
+    const array = ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray);
+
+    if (array.length <= 1) {
+      return;
+    }
+
+    array.removeAt(index);
   }
 }

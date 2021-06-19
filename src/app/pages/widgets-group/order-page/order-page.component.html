@@ -177,15 +177,15 @@
               <div>
                 <div
                   *ngFor="let parcel of getGroupControls(cargoParams.get('type').get('parcels')); let parcelIndex = index"
-                  class="form__fieldset form__fieldset--package" [formGroupName]="parcelIndex">
+                  class="form__fieldset form__fieldset--package" [formGroupName]="parcelIndex" [@panel]="">
 
                   <div class="form__field" *ngFor="let field of getArrayControls(parcel) | keyvalue: originalOrder; let fieldIndex = index">
                     <label class="form__label" for="parcel-count">{{ field.key }}</label>
                     <app-input type="text" [formControlName]="field.key" [unit]="field.key"></app-input>
                   </div>
-                  <div class="form__field form__field--align-center">
+                  <div *ngIf="+getGroupControls(cargoParams.get('type').get('parcels')).length > 1" class="form__field form__field--align-center">
                     <label class="form__label">&#160;</label>
-                    <app-btn type="button" mods="delete">
+                    <app-btn type="button" mods="delete" (click)="deleteParcelParams(parcelIndex)">
                       <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>
                       Удалить
                     </app-btn>
@@ -224,7 +224,7 @@
                 </div>
 
               </div>
-              <app-btn type="button" (click)="addParcel()">Добавить еще 1 позицию</app-btn>
+              <app-btn type="button" (click)="addParcelParams()">Добавить еще 1 позицию</app-btn>
             </div>
             <div *ngIf="currentCargoType[cargoIndex] === GoodsType.AutoDetails">
               <label class="form__label">Выберите тип запчасти</label>
