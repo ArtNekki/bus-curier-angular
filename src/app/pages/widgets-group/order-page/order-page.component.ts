@@ -126,7 +126,15 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     const group = new FormGroup({
       type: new FormGroup({
         docs: new FormGroup({}),
-        parcels: new FormGroup({}),
+        parcels: new FormArray([
+          new FormGroup({
+            count: new FormControl('', []),
+            weight: new FormControl('', []),
+            width: new FormControl('', []),
+            height: new FormControl('', []),
+            length: new FormControl('', [])
+          })
+        ]),
         autoDetails: new FormGroup({}),
         other: new FormGroup({})
       })
