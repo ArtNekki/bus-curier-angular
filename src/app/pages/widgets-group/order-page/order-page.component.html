@@ -175,26 +175,26 @@
             </div>
             <div *ngIf="currentCargoType[cargoIndex] === GoodsType.Parcels" formGroupName="parcels">
               <div>
-                <div class="form__fieldset form__fieldset--package">
+                <div class="form__fieldset form__fieldset--package" formGroupName="0">
                   <div class="form__field">
                     <label class="form__label" for="package-count">Кол-во мест</label>
-                    <app-input type="text" name="package-count"></app-input>
+                    <app-input type="text" name="package-count" formControlName="count"></app-input>
                   </div>
                   <div class="form__field">
                     <label class="form__label" for="package-weight">Вес</label>
-                    <app-input type="text" name="package-weight" unit="кг"></app-input>
+                    <app-input type="text" name="package-weight" unit="кг" formControlName="weight"></app-input>
                   </div>
                   <div class="form__field">
                     <label class="form__label" for="package-width">Ширина</label>
-                    <app-input type="text" name="package-width" unit="см"></app-input>
+                    <app-input type="text" name="package-width" unit="см" formControlName="width"></app-input>
                   </div>
                   <div class="form__field">
                     <label class="form__label" for="package-height">Высота</label>
-                    <app-input type="text" name="package-height" unit="см"></app-input>
+                    <app-input type="text" name="package-height" unit="см" formControlName="height"></app-input>
                   </div>
                   <div class="form__field">
                     <label class="form__label" for="package-length">Длина</label>
-                    <app-input type="text" name="package-length" unit="см"></app-input>
+                    <app-input type="text" name="package-length" unit="см" formControlName="length"></app-input>
                   </div>
                   <div class="form__field form__field--align-center">
                     <label class="form__label">&#160;</label>
