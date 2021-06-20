@@ -168,7 +168,7 @@
             </div>
           <div formGroupName="type">
             <div *ngIf="currentCargoType[cargoIndex] === GoodsType.Docs" formGroupName="docs">
-              <div class="form__field">
+              <div class="form__field" [@panel]="">
                 <label class="form__label">Количество мест</label>
                 <app-counter formControlName="placeCount"></app-counter>
               </div>
@@ -196,7 +196,7 @@
             </div>
             <div *ngIf="currentCargoType[cargoIndex] === GoodsType.AutoDetails" formGroupName="autoDetails">
               <label class="form__label">Выберите тип запчасти</label>
-              <div *ngFor="let autoDetail of getGroupControls(cargoParams.get('type').get('autoDetails')); let autoDetailIndex = index" class="form__fieldset form__fieldset--auto-part">
+              <div *ngFor="let autoDetail of getGroupControls(cargoParams.get('type').get('autoDetails')); let autoDetailIndex = index" class="form__fieldset form__fieldset--auto-part" [@panel]="">
                 <app-select [items]="cities" [formControlName]="autoDetailIndex"></app-select>
                 <app-btn *ngIf="+getGroupControls(cargoParams.get('type').get('autoDetails')).length > 1" type="button" mods="delete" (click)="removeAutoDetail(autoDetailIndex)">
                   <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>

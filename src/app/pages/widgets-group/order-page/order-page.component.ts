@@ -4,6 +4,7 @@ import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@a
 import {animate, style, transition, trigger} from '@angular/animations';
 import GoodsType from '../../../core/maps/GoodsType';
 import {KeyValue} from '@angular/common';
+import {parcelGroup} from '../../../core/form/groups';
 
 @Component({
   selector: 'app-order-page',
@@ -54,18 +55,8 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
           docs: new FormGroup({
             placeCount: new FormControl('', [])
           }),
-          parcels: new FormArray([
-            new FormGroup({
-              count: new FormControl('', []),
-              weight: new FormControl('', []),
-              width: new FormControl('', []),
-              height: new FormControl('', []),
-              length: new FormControl('', [])
-            })
-          ]),
-          autoDetails: new FormArray([
-            new FormControl('', [])
-          ]),
+          parcels: new FormArray([]),
+          autoDetails: new FormArray([]),
           other: new FormGroup({})
         })
       })])
@@ -132,15 +123,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
         docs: new FormGroup({
           placeCount: new FormControl('', [])
         }),
-        parcels: new FormArray([
-          new FormGroup({
-            count: new FormControl('', []),
-            weight: new FormControl('', []),
-            width: new FormControl('', []),
-            height: new FormControl('', []),
-            length: new FormControl('', [])
-          })
-        ]),
+        parcels: new FormArray([parcelGroup]),
         autoDetails: new FormArray([
           new FormControl('', [])
         ]),
@@ -165,7 +148,24 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
   selectCargoType(type: string, index) {
     this.currentCargoType.splice(index, 1, type);
-    console.log('currentCargo', this.currentCargoType);
+
+    switch (type) {
+      case 'docs':
+        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('docs') as FormGroup).addControl('placeCount', new FormControl('', []));
+        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray).clear();
+        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('autoDetails') as FormArray).clear();
+        break;
+      case 'parcels':
+        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray).push(parcelGroup);
+        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('autoDetails') as FormArray).clear();
+        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('docs') as FormGroup).removeControl('placeCount');
+        break;
+      case 'autoDetails':
+        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('autoDetails') as FormArray).push(new FormControl('', []));
+        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray).clear();
+        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('docs') as FormGroup).removeControl('placeCount');
+        break;
+    }
   }
 
   originalOrder = (a: KeyValue<string, AbstractControl>, b: KeyValue<string, AbstractControl>): number => {
@@ -173,15 +173,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   }
 
   addParcelParams() {
-    const parcel = new FormGroup({
-      count: new FormControl('', []),
-      weight: new FormControl('', []),
-      width: new FormControl('', []),
-      height: new FormControl('', []),
-      length: new FormControl('', [])
-    });
-
-    ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray).push(parcel);
+    ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray).push(parcelGroup);
   }
 
   deleteParcelParams(index: number) {
