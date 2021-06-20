@@ -58,6 +58,13 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
           parcels: new FormArray([]),
           autoDetails: new FormArray([]),
           other: new FormGroup({})
+        }),
+        packaging: new FormGroup({
+          'cardboard-box': new FormControl(),
+          'transparent-film': new FormControl(),
+          'safe-pack': new FormControl(),
+          'black-film': new FormControl(),
+          'bag-with-seal': new FormControl()
         })
       })]),
       recipient: new FormGroup({

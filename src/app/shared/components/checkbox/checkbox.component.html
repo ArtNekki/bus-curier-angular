@@ -9,7 +9,7 @@
   <input #checkbox type="checkbox" [id]="id" [name]="name" class="checkbox__input" (change)="changeValue(checkbox.checked)">
   <div class="checkbox__body">
     <span  class="checkbox__label">
-      <ng-content select=".label"></ng-content>
+      <ng-content select=".text"></ng-content>
     </span>
     <span class="checkbox__meta">
       <ng-content select=".meta"></ng-content>

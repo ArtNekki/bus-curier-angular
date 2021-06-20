@@ -214,6 +214,41 @@
              <!--    Что-то другое ...-->
              <!--  </div>-->
            </div>
+           <section class="form__section" formGroupName="packaging">
+             <h2 class="form__heading">Упаковка:</h2>
+             <div class="form__fieldset form__fieldset--boxing">
+               <div class="form__field">
+                 <app-checkbox formControlName="cardboard-box">
+                   <div class="text">Коробка картонная</div>
+                   <div class="meta">50 руб. - 180 руб.</div>
+                 </app-checkbox>
+               </div>
+               <div class="form__field">
+                 <app-checkbox formControlName="transparent-film">
+                   <div class="text">Пленка стрейч прозрачная</div>
+                   <div class="meta">30 руб. за 1 м.</div>
+                 </app-checkbox>
+               </div>
+               <div class="form__field">
+                 <app-checkbox formControlName="safe-pack">
+                   <div class="text">Сейф пакет</div>
+                   <div class="meta">10 руб.</div>
+                 </app-checkbox>
+               </div>
+               <div class="form__field">
+                 <app-checkbox formControlName="black-film">
+                   <div class="text">Пленка стрейч черная</div>
+                   <div class="meta">30 руб. за 1 м.</div>
+                 </app-checkbox>
+               </div>
+               <div class="form__field form__field--span-2">
+                 <app-checkbox formControlName="bag-with-seal">
+                   <div class="text">Мешок полипропиленовый с пломбой</div>
+                   <div class="meta">50 руб. - 180 руб.</div>
+                 </app-checkbox>
+               </div>
+             </div>
+           </section>
          </div>
        </div>
         <section class="form__section" formGroupName="recipient">
