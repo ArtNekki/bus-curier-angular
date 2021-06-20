@@ -63,7 +63,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
               length: new FormControl('', [])
             })
           ]),
-          autoDetails: new FormGroup({}),
+          autoDetails: new FormArray([
+            new FormControl('', [])
+          ]),
           other: new FormGroup({})
         })
       })])
@@ -139,7 +141,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
             length: new FormControl('', [])
           })
         ]),
-        autoDetails: new FormGroup({}),
+        autoDetails: new FormArray([
+          new FormControl('', [])
+        ]),
         other: new FormGroup({})
       })
     });
@@ -182,6 +186,22 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
   deleteParcelParams(index: number) {
     const array = ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray);
+
+    if (array.length <= 1) {
+      return;
+    }
+
+    array.removeAt(index);
+  }
+
+  addAutoDetail() {
+    const autoDetail = new FormControl('', []);
+
+    ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('autoDetails') as FormArray).push(autoDetail);
+  }
+
+  removeAutoDetail(index: number) {
+    const array = ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('autoDetails') as FormArray);
 
     if (array.length <= 1) {
       return;
