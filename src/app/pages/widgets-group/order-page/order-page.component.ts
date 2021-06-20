@@ -59,7 +59,15 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
           autoDetails: new FormArray([]),
           other: new FormGroup({})
         })
-      })])
+      })]),
+      recipient: new FormGroup({
+        fio: new FormControl('', []),
+        tel: new FormControl('', [])
+      }),
+      pickupPoint: new FormGroup({
+        location: new FormControl('', []),
+        department: new FormControl('', [])
+      })
     });
 
     this.tags.push(`cargo-${this.tags.length + 1}`);
