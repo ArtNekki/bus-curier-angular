@@ -5,6 +5,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
 import GoodsType from '../../../core/maps/GoodsType';
 import {KeyValue} from '@angular/common';
 import {parcelGroup} from '../../../core/form/groups';
+import AddService from '../../../core/maps/AddService';
 
 @Component({
   selector: 'app-order-page',
@@ -26,12 +27,14 @@ import {parcelGroup} from '../../../core/form/groups';
   ]
 })
 export class OrderPageComponent implements OnInit, AfterViewInit {
+  public AddService = AddService;
   public currentStep = 0;
   public cities = cities;
   public form: FormGroup;
   public tags = [];
   public currentCargoIndex = 0;
   public currentCargoType = [];
+  public currentAddService = AddService.Insurance;
   public GoodsType = GoodsType;
 
   public goodsTypes = [
@@ -65,6 +68,11 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
           'safe-pack': new FormControl(),
           'black-film': new FormControl(),
           'bag-with-seal': new FormControl()
+        }),
+        'add-services': new FormGroup({
+          [AddService.Insurance]: new FormControl('', []),
+          [AddService.SmsForSender]: new FormControl('', []),
+          [AddService.SmsForRecipient]: new FormControl('', [])
         })
       })]),
       recipient: new FormGroup({
@@ -215,5 +223,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     }
 
     array.removeAt(index);
+  }
+
+  setAddService(type: string) {
+    this.currentAddService = type;
   }
 }

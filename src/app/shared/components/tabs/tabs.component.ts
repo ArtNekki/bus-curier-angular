@@ -47,6 +47,7 @@ export class TabsComponent implements AfterContentInit, AfterContentChecked {
     }
 
     this.activeTab = tabItem;
+    console.log('tabItem', tabItem.labelComponent.labelContent.elementRef)
 
     tabItem.isActive = true;
   }

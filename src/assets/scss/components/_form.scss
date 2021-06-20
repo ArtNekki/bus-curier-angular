@@ -892,18 +892,18 @@
     }
   }
 
-  [data-content] {
-    display: none;
-    opacity: 0;
-
-    &.active {
-      display: block;
-
-      animation-name: fade-in;
-      animation-duration: 0.5s;
-      animation-fill-mode: forwards;
-    }
-  }
+  //[data-content] {
+  //  display: none;
+  //  opacity: 0;
+  //
+  //  &.active {
+  //    display: block;
+  //
+  //    animation-name: fade-in;
+  //    animation-duration: 0.5s;
+  //    animation-fill-mode: forwards;
+  //  }
+  //}
 
   &__submit {
     margin-top: 13px;
