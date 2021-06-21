@@ -8,6 +8,7 @@ import {entityGroup, individualGroup, parcelGroup, senderGroup} from '../../../c
 import AddService from '../../../core/maps/AddService';
 import UserType from '../../../core/maps/UserType';
 import User from 'firebase';
+import DepartureTab from '../../../core/maps/DepartureTab';
 
 @Component({
   selector: 'app-order-page',
@@ -31,15 +32,18 @@ import User from 'firebase';
 export class OrderPageComponent implements OnInit, AfterViewInit {
   public AddService = AddService;
   public UserType = UserType;
+  public DepartureTab = DepartureTab;
 
-  public currentStep = 0;
   public cities = cities;
   public form: FormGroup;
   public tags = [];
+
+  public currentStep = 0;
   public currentCargoIndex = 0;
   public currentUserType = UserType.Individual;
   public currentCargoType = [];
   public currentAddService = AddService.Insurance;
+  public currentDepartureTab = DepartureTab.Department;
   public GoodsType = GoodsType;
 
   public goodsTypes = [
@@ -257,5 +261,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
         (this.form.get('user') as FormGroup).removeControl(UserType.Individual);
         break;
     }
+  }
+
+  setCurrentDepartureTab(tab: string) {
+    this.currentDepartureTab = tab;
   }
 }

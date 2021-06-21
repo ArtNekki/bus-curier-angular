@@ -98,55 +98,53 @@
                 <app-radio formControlName="department" name="department" value="Владивосток, Карла Маркса 22">Владивосток, Карла Маркса 22</app-radio>
               </div>
             </div>
-            <app-tabs>
-              <app-tab-item>
-                <app-tab-label>Сдать в отделение</app-tab-label>
-                <app-tab-body>
-                  <div class="form__fieldset form__fieldset--address">
-                    <div class="form__field">
-                      <label for="street-to" class="form__label">Улица</label>
-                      <app-input type="text" name="street-to"></app-input>
-                    </div>
-                    <div class="form__field">
-                      <label for="building-to" class="form__label">Дом, корус, строение</label>
-                      <app-input type="text" name="building-to"></app-input>
-                    </div>
-                    <div class="form__field">
-                      <label for="apartment-to" class="form__label">Кв. / офис</label>
-                      <app-input type="text" name="apartment-to"></app-input>
-                    </div>
-                  </div>
-                </app-tab-body>
-              </app-tab-item>
-              <app-tab-item >
-                <app-tab-label>Вызвать курьера</app-tab-label>
-                <app-tab-body>
-                  <div class="form__fieldset form__fieldset--address">
-                    <div class="form__field">
-                      <label for="street-to" class="form__label">Улица</label>
-                      <app-input type="text" name="street-to"></app-input>
-                    </div>
-                    <div class="form__field">
-                      <label for="building-to" class="form__label">Дом, корус, строение</label>
-                      <app-input type="text" name="building-to"></app-input>
-                    </div>
-                    <div class="form__field">
-                      <label for="apartment-to" class="form__label">Кв. / офис</label>
-                      <app-input type="text" name="apartment-to"></app-input>
-                    </div>
-                  </div>
-                  <section class="form__fieldset form__fieldset--schedule">
-                    <label class="form__label form__label--light">Удобное время для приезда курьера</label>
-                    <div class="form__field">
-                      <app-radio checked="true">8:00 - 14:00</app-radio>
-                    </div>
-                    <div class="form__field">
-                      <app-radio checked="true">14:00 - 18:00</app-radio>
-                    </div>
-                  </section>
-                </app-tab-body>
-              </app-tab-item>
-            </app-tabs>
+            <div class="form__tabs">
+              <button type="button" [class.active]="currentDepartureTab === DepartureTab.Department"
+                      (click)="setCurrentDepartureTab(DepartureTab.Department)">{{DepartureTab.Department}}</button>
+              <button type="button" [class.active]="currentDepartureTab === DepartureTab.Courier"
+                      (click)="setCurrentDepartureTab(DepartureTab.Courier)">{{DepartureTab.Courier}}</button>
+            </div>
+            <div *ngIf="currentDepartureTab === DepartureTab.Department" class="form__panel">
+              <div class="form__fieldset form__fieldset--address">
+                <div class="form__field">
+                  <label for="street-to" class="form__label">Улица</label>
+                  <app-input type="text" name="street-to"></app-input>
+                </div>
+                <div class="form__field">
+                  <label for="building-to" class="form__label">Дом, корус, строение</label>
+                  <app-input type="text" name="building-to"></app-input>
+                </div>
+                <div class="form__field">
+                  <label for="apartment-to" class="form__label">Кв. / офис</label>
+                  <app-input type="text" name="apartment-to"></app-input>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="currentDepartureTab === DepartureTab.Courier" class="form__panel">
+              <div class="form__fieldset form__fieldset--address">
+                <div class="form__field">
+                  <label for="street-to" class="form__label">Улица</label>
+                  <app-input type="text" name="street-to"></app-input>
+                </div>
+                <div class="form__field">
+                  <label for="building-to" class="form__label">Дом, корус, строение</label>
+                  <app-input type="text" name="building-to"></app-input>
+                </div>
+                <div class="form__field">
+                  <label for="apartment-to" class="form__label">Кв. / офис</label>
+                  <app-input type="text" name="apartment-to"></app-input>
+                </div>
+              </div>
+              <section class="form__fieldset form__fieldset--schedule">
+                <label class="form__label form__label--light">Удобное время для приезда курьера</label>
+                <div class="form__field">
+                  <app-radio checked="true">8:00 - 14:00</app-radio>
+                </div>
+                <div class="form__field">
+                  <app-radio checked="true">14:00 - 18:00</app-radio>
+                </div>
+              </section>
+            </div>
             <div class="form__field form__field--delivery-date">
               <label for="destination" class="form__label">Дата отправки<sup>*</sup></label>
 <!--              <app-datapicker></app-datapicker>-->
