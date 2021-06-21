@@ -4,7 +4,7 @@ import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@a
 import {animate, style, transition, trigger} from '@angular/animations';
 import GoodsType from '../../../core/maps/GoodsType';
 import {KeyValue} from '@angular/common';
-import {entityGroup, individualGroup, parcelGroup} from '../../../core/form/groups';
+import {entityGroup, individualGroup, parcelGroup, senderGroup} from '../../../core/form/groups';
 import AddService from '../../../core/maps/AddService';
 import UserType from '../../../core/maps/UserType';
 import User from 'firebase';
@@ -56,6 +56,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       user: new FormGroup({
         individual: individualGroup
       }),
+      // 'departure-point': new FormGroup({
+      //
+      // }),
       cargo: new FormArray([new FormGroup({
         type: new FormGroup({
           docs: new FormGroup({
@@ -111,6 +114,10 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     }
 
     this.currentStep++;
+
+    if (this.currentStep === 1 && !((this.form as FormGroup).get('sender'))) {
+      (this.form as FormGroup).addControl(UserType.Sender, senderGroup);
+    }
   }
 
   goPrev() {

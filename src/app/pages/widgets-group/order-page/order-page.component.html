@@ -61,24 +61,25 @@
         </section>
       </div>
       <div [style]="{display: currentStep === 1 ? 'block' : 'none'}" [@panel]="">
-        <section class="form__section">
+<!--        {{this.form.get('sender').value}}-->
+        <section *ngIf="currentStep === 1 && (this.form.get('sender').value)" class="form__section" formGroupName="sender">
           <h2 class="form__heading">Отправитель</h2>
           <div class="form__fieldset form__fieldset--2-col-sm">
             <div class="form__field form__field--full">
               <label for="fio" class="form__label">ФИО<sup>*</sup></label>
-              <app-input type="text" id="fio" name="fio"></app-input>
+              <app-input type="text" id="fio" formControlName="fio"></app-input>
             </div>
             <div class="form__field">
               <label class="form__label">Документ<sup>*</sup></label>
-              <app-select [items]="cities"></app-select>
+              <app-select [items]="cities" formControlName="doc"></app-select>
             </div>
             <div class="form__field">
-              <label for="doc-data" class="form__label">Серия и номер документа<sup>*</sup></label>
-              <app-input type="text" id="doc-data" name="doc-data"></app-input>
+              <label for="doc-number" class="form__label">Серия и номер документа<sup>*</sup></label>
+              <app-input type="text" id="doc-number" formControlName="doc-number"></app-input>
             </div>
             <div class="form__field">
               <label for="tel" class="form__label">Номер телефона<sup>*</sup></label>
-              <app-input type="tel"  name="tel"></app-input>
+              <app-input id="tel" type="tel" formControlName="tel"></app-input>
             </div>
           </div>
         </section>
@@ -472,7 +473,7 @@
 <!--        {{{ btn id="backStep" type="back" disabled="true" hidden="true"}}}-->
         <!-- {{{ btn type="submit" text="Далее" mods="lg"}}} -->
 <!--        {{{ btn id="nextStep" type="button" text="Далее" mods="lg"}}}-->
-        <app-btn type="button" mods="lg" (click)="goNext()">Далее</app-btn>
+        <app-btn mods="lg" (click)="goNext()">Далее</app-btn>
       </div>
     </form>
   </div>

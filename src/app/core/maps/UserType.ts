@@ -1,4 +1,5 @@
 export default {
   Individual: 'individual',
-  Entity: 'entity'
+  Entity: 'entity',
+  Sender: 'sender'
 }

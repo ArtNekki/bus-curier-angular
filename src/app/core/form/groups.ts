@@ -22,3 +22,10 @@ export const entityGroup = new FormGroup({
   address: new FormControl('', []),
   tel: new FormControl('', []),
 })
+
+export const senderGroup = new FormGroup({
+  fio: new FormControl('', []),
+  doc: new FormControl('', []),
+  'doc-number': new FormControl('', []),
+  tel: new FormControl('', []),
+})
