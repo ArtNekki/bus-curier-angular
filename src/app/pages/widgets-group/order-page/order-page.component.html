@@ -92,10 +92,10 @@
             <div class="form__fieldset form__fieldset--department">
               <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
               <div class="form__field">
-                <app-radio formControlName="department" name="department" value="Владивосток, Карла Маркса" checked="checked">Владивосток, Карла Маркса</app-radio>
+                <app-radio formControlName="department-address" name="department-address" value="Владивосток, Карла Маркса" checked="checked">Владивосток, Карла Маркса</app-radio>
               </div>
               <div class="form__field">
-                <app-radio formControlName="department" name="department" value="Владивосток, Карла Маркса 22">Владивосток, Карла Маркса 22</app-radio>
+                <app-radio formControlName="department-address" name="department-address" value="Владивосток, Карла Маркса 22">Владивосток, Карла Маркса 22</app-radio>
               </div>
             </div>
             <div class="form__tabs">
@@ -104,35 +104,35 @@
               <button type="button" [class.active]="currentDepartureTab === DepartureTab.Courier"
                       (click)="setCurrentDepartureTab(DepartureTab.Courier)">{{DepartureTab.Courier}}</button>
             </div>
-            <div *ngIf="currentDepartureTab === DepartureTab.Department" class="form__panel">
+            <div *ngIf="currentDepartureTab === DepartureTab.Department" class="form__panel" formGroupName="department">
               <div class="form__fieldset form__fieldset--address">
                 <div class="form__field">
-                  <label for="street-to" class="form__label">Улица</label>
-                  <app-input type="text" name="street-to"></app-input>
+                  <label for="department-street" class="form__label">Улица</label>
+                  <app-input id="department-street" type="text" FormControlName="street"></app-input>
                 </div>
                 <div class="form__field">
-                  <label for="building-to" class="form__label">Дом, корус, строение</label>
-                  <app-input type="text" name="building-to"></app-input>
+                  <label for="department-building" class="form__label">Дом, корус, строение</label>
+                  <app-input id="department-building" type="text" name="building"></app-input>
                 </div>
                 <div class="form__field">
-                  <label for="apartment-to" class="form__label">Кв. / офис</label>
-                  <app-input type="text" name="apartment-to"></app-input>
+                  <label for="department-apartment" class="form__label">Кв. / офис</label>
+                  <app-input id="department-apartment" type="text" FormContolName="apartment"></app-input>
                 </div>
               </div>
             </div>
-            <div *ngIf="currentDepartureTab === DepartureTab.Courier" class="form__panel">
+            <div *ngIf="currentDepartureTab === DepartureTab.Courier" class="form__panel" formGroupName="courier">
               <div class="form__fieldset form__fieldset--address">
                 <div class="form__field">
-                  <label for="street-to" class="form__label">Улица</label>
-                  <app-input type="text" name="street-to"></app-input>
+                  <label for="courier-street" class="form__label">Улица</label>
+                  <app-input id="courier-street" type="text" FormControlName="street"></app-input>
                 </div>
                 <div class="form__field">
-                  <label for="building-to" class="form__label">Дом, корус, строение</label>
-                  <app-input type="text" name="building-to"></app-input>
+                  <label for="courier-building" class="form__label">Дом, корус, строение</label>
+                  <app-input id="courier-building" type="text" name="building"></app-input>
                 </div>
                 <div class="form__field">
-                  <label for="apartment-to" class="form__label">Кв. / офис</label>
-                  <app-input type="text" name="apartment-to"></app-input>
+                  <label for="courier-apartment" class="form__label">Кв. / офис</label>
+                  <app-input id="courier-apartment" type="text" FormContolName="apartment"></app-input>
                 </div>
               </div>
               <section class="form__fieldset form__fieldset--schedule">
