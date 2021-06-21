@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 
 export class BtnComponent implements OnInit {
   @Input() id;
+  @Input() type;
   @Input() mods;
   @Input() disabled: boolean;
   @Input() hidden: boolean;

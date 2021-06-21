@@ -5,7 +5,7 @@
     <p class="page__subtitle">Заполните форму необходимыми данными и отправьте</p>
     <app-order-steps [currentStep]="currentStep"></app-order-steps>
     <form class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div *ngIf="currentStep === 0">
+      <div [style]="{display: currentStep === 0 ? 'block' : 'none'}" [@panel]="">
         <section class="form__section" formGroupName="user">
           <h2 class="form__heading">Ваши данные</h2>
           <div class="form__tabs">
@@ -60,7 +60,7 @@
           <!-- <p class="form__help-text">Чтобы оформить заказ как юридическое лицо,<br />вам необходимо <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>войти</span></span></a>или <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>зарегистрироваться</span></span></a></p> -->
         </section>
       </div>
-      <div *ngIf="currentStep === 1">
+      <div [style]="{display: currentStep === 1 ? 'block' : 'none'}" [@panel]="">
         <section class="form__section">
           <h2 class="form__heading">Отправитель</h2>
           <div class="form__fieldset form__fieldset--2-col-sm">
@@ -155,7 +155,7 @@
           </div>
         </section>
       </div>
-      <div *ngIf="currentStep === 2">
+      <div [style]="{display: currentStep === 2 ? 'block' : 'none'}" [@panel]="">
 <!--        {{form.get('cargoParams') | json}}-->
        <div formGroupName="cargo">
          <div class="form__fieldset form__fieldset--tags">
@@ -393,7 +393,7 @@
           </div>
         </section>
       </div>
-      <div *ngIf="currentStep === 3">
+      <div [style]="{display: currentStep === 3 ? 'block' : 'none'}" [@panel]="">
         <section class="form__section form__section--w-underline">
           <h2 class="form__heading form__heading--w-counter">Отправитель</h2>
 <!--          {{{ data-list items='[-->
