@@ -4,7 +4,15 @@ import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@a
 import {animate, style, transition, trigger} from '@angular/animations';
 import GoodsType from '../../../core/maps/GoodsType';
 import {KeyValue} from '@angular/common';
-import {entityGroup, individualGroup, parcelGroup, senderGroup} from '../../../core/form/groups';
+import {
+  courierGroup,
+  departmentGroup,
+  departureGroup,
+  entityGroup,
+  individualGroup,
+  parcelGroup,
+  senderGroup
+} from '../../../core/form/groups';
 import AddService from '../../../core/maps/AddService';
 import UserType from '../../../core/maps/UserType';
 import User from 'firebase';
@@ -59,21 +67,6 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     this.form = new FormGroup({
       user: new FormGroup({
         individual: individualGroup
-      }),
-      departure: new FormGroup({
-        location: new FormControl('', []),
-        'department-address': new FormControl('Владивосток, Карла Маркса', []),
-        department: new FormGroup({
-          street: new FormControl('', []),
-          building: new FormControl('', []),
-          apartment: new FormControl('', []),
-        }),
-        courier: new FormGroup({
-          street: new FormControl('', []),
-          building: new FormControl('', []),
-          apartment: new FormControl('', []),
-          time: new FormControl('', [])
-        })
       }),
       cargo: new FormArray([new FormGroup({
         type: new FormGroup({
@@ -131,8 +124,13 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
     this.currentStep++;
 
-    if (this.currentStep === 1 && !((this.form as FormGroup).get('sender'))) {
+    if (this.currentStep === 1 && !((this.form as FormGroup).get(UserType.Sender))) {
       (this.form as FormGroup).addControl(UserType.Sender, senderGroup);
+    }
+
+    if (this.currentStep === 1 && !((this.form as FormGroup).get('departure'))) {
+      (this.form as FormGroup).addControl('departure', departureGroup);
+      this.showDepartureTab(this.currentDepartureTab);
     }
   }
 
@@ -272,5 +270,19 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
   setCurrentDepartureTab(tab: string) {
     this.currentDepartureTab = tab;
+    this.showDepartureTab(tab);
+  }
+
+  showDepartureTab(tab: string) {
+    switch (tab) {
+      case this.DepartureTab.Department:
+        (this.form.get('departure') as FormGroup).addControl('department', departmentGroup);
+        (this.form.get('departure') as FormGroup).removeControl('courier');
+        break;
+      case this.DepartureTab.Courier:
+        (this.form.get('departure') as FormGroup).addControl('courier', courierGroup);
+        (this.form.get('departure') as FormGroup).removeControl('department');
+        break;
+    }
   }
 }

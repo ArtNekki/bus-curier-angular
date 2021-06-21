@@ -82,7 +82,7 @@
             </div>
           </div>
         </section>
-        <section class="form__section" formGroupName="departure">
+        <section *ngIf="currentStep === 1 && (this.form.get('departure') && this.form.get('departure').value)" class="form__section" formGroupName="departure">
           <h2 class="form__heading">Пункт отправления</h2>
           <div class="form__fieldset form__fieldset--delivery-point form__fieldset--row-gap-lg">
             <div class="form__field form__field--location">
@@ -108,15 +108,15 @@
               <div class="form__fieldset form__fieldset--address">
                 <div class="form__field">
                   <label for="department-street" class="form__label">Улица</label>
-                  <app-input id="department-street" type="text" FormControlName="street"></app-input>
+                  <app-input id="department-street" type="text" formControlName="street"></app-input>
                 </div>
                 <div class="form__field">
                   <label for="department-building" class="form__label">Дом, корус, строение</label>
-                  <app-input id="department-building" type="text" name="building"></app-input>
+                  <app-input id="department-building" type="text" formControlName="building"></app-input>
                 </div>
                 <div class="form__field">
                   <label for="department-apartment" class="form__label">Кв. / офис</label>
-                  <app-input id="department-apartment" type="text" FormContolName="apartment"></app-input>
+                  <app-input id="department-apartment" type="text" formControlName="apartment"></app-input>
                 </div>
               </div>
             </div>
@@ -124,29 +124,30 @@
               <div class="form__fieldset form__fieldset--address">
                 <div class="form__field">
                   <label for="courier-street" class="form__label">Улица</label>
-                  <app-input id="courier-street" type="text" FormControlName="street"></app-input>
+                  <app-input id="courier-street" type="text" formControlName="street"></app-input>
                 </div>
                 <div class="form__field">
                   <label for="courier-building" class="form__label">Дом, корус, строение</label>
-                  <app-input id="courier-building" type="text" name="building"></app-input>
+                  <app-input id="courier-building" type="text" formControlName="building"></app-input>
                 </div>
                 <div class="form__field">
                   <label for="courier-apartment" class="form__label">Кв. / офис</label>
-                  <app-input id="courier-apartment" type="text" FormContolName="apartment"></app-input>
+                  <app-input id="courier-apartment" type="text" formControlName="apartment"></app-input>
                 </div>
               </div>
               <section class="form__fieldset form__fieldset--schedule">
                 <label class="form__label form__label--light">Удобное время для приезда курьера</label>
                 <div class="form__field">
-                  <app-radio checked="true">8:00 - 14:00</app-radio>
+                  <app-radio formControlName="time" name="courier-time" value="8:00 - 14:00" checked="true">8:00 - 14:00</app-radio>
                 </div>
                 <div class="form__field">
-                  <app-radio checked="true">14:00 - 18:00</app-radio>
+                  <app-radio formControlName="time" name="courier-time" value="14:00 - 18:00">14:00 - 18:00</app-radio>
                 </div>
               </section>
             </div>
             <div class="form__field form__field--delivery-date">
-              <label for="destination" class="form__label">Дата отправки<sup>*</sup></label>
+              <label for="departure-date" class="form__label">Дата отправки<sup>*</sup></label>
+              <app-input id="departure-date" formControlName="date"></app-input>
 <!--              <app-datapicker></app-datapicker>-->
 <!--              {{{ input type="text" id="destination" name="destination" error="Не заполнено"}}}-->
             </div>
