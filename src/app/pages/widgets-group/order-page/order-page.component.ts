@@ -4,8 +4,10 @@ import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@a
 import {animate, style, transition, trigger} from '@angular/animations';
 import GoodsType from '../../../core/maps/GoodsType';
 import {KeyValue} from '@angular/common';
-import {parcelGroup} from '../../../core/form/groups';
+import {entityGroup, individualGroup, parcelGroup} from '../../../core/form/groups';
 import AddService from '../../../core/maps/AddService';
+import UserType from '../../../core/maps/UserType';
+import User from 'firebase';
 
 @Component({
   selector: 'app-order-page',
@@ -28,11 +30,14 @@ import AddService from '../../../core/maps/AddService';
 })
 export class OrderPageComponent implements OnInit, AfterViewInit {
   public AddService = AddService;
+  public UserType = UserType;
+
   public currentStep = 0;
   public cities = cities;
   public form: FormGroup;
   public tags = [];
   public currentCargoIndex = 0;
+  public currentUserType = UserType.Individual;
   public currentCargoType = [];
   public currentAddService = AddService.Insurance;
   public GoodsType = GoodsType;
@@ -48,11 +53,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      lastName: new FormControl(this.cities[1].value, [Validators.required]),
-      // email: new FormControl('', [Validators.required]),
-      // tel: new FormControl('', [Validators.required]),
-      // question: new FormControl('', [Validators.required]),
-      // subscribe: new FormControl('', []),
+      user: new FormGroup({
+        individual: individualGroup
+      }),
       cargo: new FormArray([new FormGroup({
         type: new FormGroup({
           docs: new FormGroup({
@@ -227,5 +230,20 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
   setAddService(type: string) {
     this.currentAddService = type;
+  }
+
+  setCurrentUserType(type: string) {
+    this.currentUserType = type;
+
+    switch (type) {
+      case UserType.Individual:
+        (this.form.get('user') as FormGroup).addControl(UserType.Individual, individualGroup);
+        (this.form.get('user') as FormGroup).removeControl(UserType.Entity);
+        break;
+      case UserType.Entity:
+        (this.form.get('user') as FormGroup).addControl(UserType.Entity, entityGroup);
+        (this.form.get('user') as FormGroup).removeControl(UserType.Individual);
+        break;
+    }
   }
 }

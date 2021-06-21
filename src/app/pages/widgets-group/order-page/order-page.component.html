@@ -6,47 +6,56 @@
     <app-order-steps [currentStep]="currentStep"></app-order-steps>
     <form class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div *ngIf="currentStep === 0">
-        <section class="form__section">
+        <section class="form__section" formGroupName="user">
           <h2 class="form__heading">Ваши данные</h2>
-          <app-tabs>
-            <app-tab-item>
-              <app-tab-label>Физическое лицо</app-tab-label>
-              <app-tab-body>
-                <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl">
-                  <div class="form__field">
-                    <label for="last-name" class="form__label">Фамилия<sup>*</sup></label>
-                    <app-input id="last-name" type="text" name="last-name" formControlName="lastName"></app-input>
-                  </div>
-                  <div class="form__field">
-                    <label for="first-name" class="form__label">Имя<sup>*</sup></label>
-                    <app-input id="first-name" type="text" name="first-name"></app-input>
-                  </div>
-                  <div class="form__field">
-                    <label id="middle-name" for="middle-name" class="form__label">Отчество<sup>*</sup></label>
-                    <app-input type="text" name="middle-name"></app-input>
-                  </div>
-                  <div class="form__field">
-                    <label id="email" for="email" class="form__label">E-mail<sup>*</sup></label>
-                    <app-input type="text" name="email"></app-input>
-                  </div>
-                  <div class="form__field">
-                    <label id="tel" for="tel" class="form__label">Телефон<sup>*</sup></label>
-                    <app-input type="text" name="tel"></app-input>
-                  </div>
-                  <div class="form__field">
-                    <label class="form__label">Роль</label>
-                    <app-select [items]="cities"></app-select>
-                  </div>
-                </div>
-              </app-tab-body>
-            </app-tab-item>
-            <app-tab-item >
-              <app-tab-label>Юридическое лицо</app-tab-label>
-              <app-tab-body>
-                Не понятно какие данные...
-              </app-tab-body>
-            </app-tab-item>
-          </app-tabs>
+          <div class="form__tabs">
+            <button type="button" [class.active]="currentUserType === UserType.Individual" (click)="setCurrentUserType(UserType.Individual)">Физическое лицо</button>
+            <button type="button" [class.active]="currentUserType === UserType.Entity" (click)="setCurrentUserType(UserType.Entity)">Юридическое лицо</button>
+          </div>
+          <div *ngIf="currentUserType === UserType.Individual" class="form__panel form__panel--mg-top">
+            <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl" [formGroupName]="UserType.Individual">
+              <div class="form__field">
+                <label for="last-name" class="form__label">Фамилия<sup>*</sup></label>
+                <app-input id="last-name" type="text" formControlName="last-name"></app-input>
+              </div>
+              <div class="form__field">
+                <label for="first-name" class="form__label">Имя<sup>*</sup></label>
+                <app-input id="first-name" type="text" formControlName="first-name"></app-input>
+              </div>
+              <div class="form__field">
+                <label for="middle-name" class="form__label">Отчество<sup>*</sup></label>
+                <app-input type="text" id="middle-name" formControlName="middle-name"></app-input>
+              </div>
+              <div class="form__field">
+                <label for="individual-email" class="form__label">E-mail<sup>*</sup></label>
+                <app-input type="text" id="individual-email" formControlName="email"></app-input>
+              </div>
+              <div class="form__field">
+                <label for="individual-tel" class="form__label">Телефон<sup>*</sup></label>
+                <app-input type="text" id="individual-tel" formControlName="tel"></app-input>
+              </div>
+              <div class="form__field">
+                <label class="form__label">Роль</label>
+                <app-select [items]="cities" formControlName="role"></app-select>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="currentUserType === UserType.Entity" class="form__panel form__panel--mg-top">
+            <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl" [formGroupName]="UserType.Entity">
+              <div class="form__field">
+                <label for="entity-name" class="form__label">Название<sup>*</sup></label>
+                <app-input id="entity-name" type="text" formControlName="name"></app-input>
+              </div>
+              <div class="form__field">
+                <label for="entity-address" class="form__label">Адрес<sup>*</sup></label>
+                <app-input id="entity-address" type="text" formControlName="address"></app-input>
+              </div>
+              <div class="form__field">
+                <label for="entity-tel" for="middle-name" class="form__label">Телефон<sup>*</sup></label>
+                <app-input type="text" id="entity-tel" formControlName="tel"></app-input>
+              </div>
+            </div>
+          </div>
           <!-- <p class="form__help-text form__help-text--gray form__help-text--align-center">Выберите статус лица для перехода на следующий шаг</p> -->
           <!-- <p class="form__help-text">Чтобы оформить заказ как юридическое лицо,<br />вам необходимо <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>войти</span></span></a>или <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>зарегистрироваться</span></span></a></p> -->
         </section>

@@ -1,4 +1,14 @@
-import {AfterContentChecked, AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList} from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  QueryList
+} from '@angular/core';
 import {TabItemComponent} from './tab-item/tab-item.component';
 import {Observable} from 'rxjs';
 import {startWith, map, take, tap, delay} from 'rxjs/operators';
@@ -11,6 +21,8 @@ import {startWith, map, take, tap, delay} from 'rxjs/operators';
 export class TabsComponent implements AfterContentInit, AfterContentChecked {
   @ContentChildren(TabItemComponent)
   tabs: QueryList<TabItemComponent>;
+
+  @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   tabItems$: Observable<TabItemComponent[]>;
 
@@ -47,7 +59,7 @@ export class TabsComponent implements AfterContentInit, AfterContentChecked {
     }
 
     this.activeTab = tabItem;
-    console.log('tabItem', tabItem.labelComponent.labelContent.elementRef)
+    this.change.emit(tabItem.labelComponent.id);
 
     tabItem.isActive = true;
   }
