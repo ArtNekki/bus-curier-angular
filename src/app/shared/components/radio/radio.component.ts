@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
 import {ModsService} from '../../../core/services/mods.service';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
@@ -13,13 +13,14 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
   }]
 })
 export class RadioComponent implements ControlValueAccessor, OnInit {
+  @Output() change: EventEmitter<any> = new EventEmitter<any>();
   @Input() checked: boolean;
   @Input() id: string;
+  @Input() value: string;
   @Input() name: string;
   @Input() mods;
 
   public cssClass;
-  value = false;
 
   constructor(private modsService: ModsService) { }
 
@@ -32,12 +33,12 @@ export class RadioComponent implements ControlValueAccessor, OnInit {
 
   changeValue(value) {
     this.writeValue(value);
-    // this.change.emit(value);
+    this.change.emit(value);
   }
 
-  writeValue(value: boolean): void {
-    this.value = value;
-    this.onChange(this.value);
+  writeValue(value: any): void {
+    // this.value = value;
+    this.onChange(value);
   }
 
   registerOnChange(fn) {

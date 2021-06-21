@@ -1,5 +1,5 @@
 <label [class]="cssClass">
-  <input #radio type="radio" [id]="id" [name]="name" class="radio__input" (change)="changeValue(radio.checked)" [checked]="checked">
+  <input #radio type="radio" [id]="id" [name]="name" class="radio__input"  (change)="changeValue(value)" [checked]="checked">
   <div class="radio__body">
     <span class="radio__label">
       <ng-content></ng-content>

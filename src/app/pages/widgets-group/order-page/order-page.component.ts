@@ -56,9 +56,14 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       user: new FormGroup({
         individual: individualGroup
       }),
-      // 'departure-point': new FormGroup({
-      //
-      // }),
+      departure: new FormGroup({
+        location: new FormControl('', []),
+        // department: new FormGroup({
+        //   'address-1': new FormControl('', []),
+        //   'address-2': new FormControl('', [])
+        // })
+        department: new FormControl('Владивосток, Карла Маркса', [])
+      }),
       cargo: new FormArray([new FormGroup({
         type: new FormGroup({
           docs: new FormGroup({

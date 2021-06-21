@@ -61,7 +61,6 @@
         </section>
       </div>
       <div [style]="{display: currentStep === 1 ? 'block' : 'none'}" [@panel]="">
-<!--        {{this.form.get('sender').value}}-->
         <section *ngIf="currentStep === 1 && (this.form.get('sender').value)" class="form__section" formGroupName="sender">
           <h2 class="form__heading">Отправитель</h2>
           <div class="form__fieldset form__fieldset--2-col-sm">
@@ -83,20 +82,20 @@
             </div>
           </div>
         </section>
-        <section class="form__section">
+        <section class="form__section" formGroupName="departure">
           <h2 class="form__heading">Пункт отправления</h2>
           <div class="form__fieldset form__fieldset--delivery-point form__fieldset--row-gap-lg">
             <div class="form__field form__field--location">
-              <label for="destination" class="form__label">Населенный пункт<sup>*</sup></label>
-              <app-input type="text" id="destination" name="destination"></app-input>
+              <label for="departure-location" class="form__label">Населенный пункт<sup>*</sup></label>
+              <app-input type="text" id="departure-location" formControlName="location"></app-input>
             </div>
             <div class="form__fieldset form__fieldset--department">
               <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
               <div class="form__field">
-                <app-radio checked="true">Владивосток, Гоголя 22</app-radio>
+                <app-radio formControlName="department" name="department" value="Владивосток, Карла Маркса" checked="checked">Владивосток, Карла Маркса</app-radio>
               </div>
               <div class="form__field">
-                <app-radio>Владивосток, Карла Маркса</app-radio>
+                <app-radio formControlName="department" name="department" value="Владивосток, Карла Маркса 22">Владивосток, Карла Маркса 22</app-radio>
               </div>
             </div>
             <app-tabs>
