@@ -30,6 +30,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   public cssClass;
   public isFocused = false;
   public touched = false;
+  public value = '';
 
   constructor(private modsService: ModsService) { }
 
@@ -37,15 +38,17 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     this.cssClass = this.modsService.setMods('input', this.mods);
   }
 
-  changeValue(data) {
-    this.writeValue(data);
+  changeValue(value) {
+    this.value = value;
+    this.onChange(value);
+    this.onTouched();
   }
 
   writeValue(value) {
-    this.onChange(value);
+    this.value = value;
   }
 
-  onChange: any = () => {
+  onChange: any = (data) => {
 
   }
 

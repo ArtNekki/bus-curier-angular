@@ -1,5 +1,5 @@
 <div *ngIf="type === 'textarea'; else input" [class]="cssClass + ' input--textarea'">
-  <textarea #textarea [id]="id" class="input__field" [name]="name" [placeholder]="placeholder" [rows]="rows" (input)="changeValue(textarea.value)"></textarea>
+  <textarea #textarea [id]="id" class="input__field" [name]="name" [placeholder]="placeholder" [rows]="rows" [ngModel]="value" (ngModelChange)="changeValue($event)"></textarea>
   <div class="input__error">
     <ng-content select=".error"></ng-content>
   </div>
@@ -18,9 +18,9 @@
   </div>
   <ng-template #simpleInput>
     <div [class]="cssClass">
-      <input  *ngIf="mask; else withoutMask" #simpleInputField [type]="type" [id]="id" class="input__field" [placeholder]="placeholder" [mask]="mask" [prefix]="prefix" (input)="changeValue(simpleInputField.value)" />
+      <input  *ngIf="mask; else withoutMask" #simpleInputField [type]="type" [id]="id" class="input__field" [placeholder]="placeholder" [mask]="mask" [prefix]="prefix" [ngModel]="value" (ngModelChange)="changeValue($event)" />
       <ng-template #withoutMask>
-        <input #simpleInputField [type]="type" [id]="id" class="input__field" [placeholder]="placeholder" (input)="changeValue(simpleInputField.value)" />
+        <input #simpleInputField [type]="type" [id]="id" class="input__field" [placeholder]="placeholder" [ngModel]="value" (ngModelChange)="changeValue($event)" />
       </ng-template>
       <ng-content></ng-content>
     </div>
