@@ -11,7 +11,7 @@ import {
   departureGroup,
   entityGroup,
   individualGroup,
-  parcelGroup, pickupGroup,
+  parcelGroup, pickupGroup, recipientGroup,
   senderGroup
 } from '../../../core/form/groups';
 import AddService from '../../../core/maps/AddService';
@@ -71,16 +71,11 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     this.form = new FormGroup({
       user: new FormGroup({
         individual: individualGroup
-      }),
-      recipient: new FormGroup({
-        fio: new FormControl('', []),
-        tel: new FormControl('', [])
       })
     });
 
     this.tags.push(`cargo-${this.tags.length + 1}`);
     this.currentCargoType.push('docs');
-    // this.currentCargoType = 'docs';
   }
 
   ngAfterViewInit(): void {
@@ -113,6 +108,10 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
     if (this.currentStep === 2 && !((this.form as FormGroup).get('cargo'))) {
       (this.form as FormGroup).addControl('cargo', cargoGroup);
+    }
+
+    if (this.currentStep === 2 && !((this.form as FormGroup).get('recipient'))) {
+      (this.form as FormGroup).addControl('recipient', recipientGroup);
     }
 
     if (this.currentStep === 2 && !((this.form as FormGroup).get('pickup'))) {

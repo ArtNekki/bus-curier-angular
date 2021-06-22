@@ -66,6 +66,11 @@ export const cargoGroup = new FormArray([new FormGroup({
   })
 })]);
 
+export const recipientGroup = new FormGroup({
+  fio: new FormControl('', []),
+  tel: new FormControl('', [])
+});
+
 export const pickupGroup = new FormGroup({
   location: new FormControl('', []),
   'department-address': new FormControl('', [])
