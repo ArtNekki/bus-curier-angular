@@ -68,11 +68,14 @@
               <label [for]="'sender-' + senderControl.key" class="form__label">{{formGroupsInfo.Sender[senderControl.key].label}}<sup>*</sup></label>
               <app-select *ngIf="senderControl.key === 'doc'; else input" [formControlName]="senderControl.key" [items]="cities"></app-select>
               <ng-template #input>
+                ttt {{senderControl.value.touched && senderControl.value.invalid }}
                 <app-input
                   [type]="formGroupsInfo.Sender[senderControl.key].type"
                   [id]="'sender-' + senderControl.key"
                   [formControlName]="senderControl.key"
-                  [mask]="formGroupsInfo.Sender[senderControl.key].mask" [prefix]="formGroupsInfo.Sender[senderControl.key].prefix"></app-input>
+                  [mask]="formGroupsInfo.Sender[senderControl.key].mask" [prefix]="formGroupsInfo.Sender[senderControl.key].prefix"
+                  [mods]="(senderControl.value.invalid && senderControl.value.touched) && 'invalid'"
+                ></app-input>
               </ng-template>
             </div>
           </div>

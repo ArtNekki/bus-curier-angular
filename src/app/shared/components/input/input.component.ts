@@ -1,5 +1,6 @@
-import {AfterViewInit, Component, ElementRef, forwardRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, forwardRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import State from 'src/app/core/maps/State';
 import {ModsService} from '../../../core/services/mods.service';
 
 @Component({
@@ -14,7 +15,7 @@ import {ModsService} from '../../../core/services/mods.service';
     }
   ]
 })
-export class InputComponent implements ControlValueAccessor, OnInit {
+export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @ViewChild('editContent', {read: ElementRef}) editContent: ElementRef;
 
   @Input() id: string;
@@ -29,6 +30,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   public cssClass;
   public isFocused = false;
+  public isInvalid = false;
   public touched = false;
   public value = '';
 
@@ -38,10 +40,20 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     this.cssClass = this.modsService.setMods('input', this.mods);
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.mods) {
+      if (changes.mods.currentValue === State.Invalid) {
+        this.isInvalid = true;
+      } else {
+        this.isInvalid = false;
+      }
+    }
+  }
+
   changeValue(value) {
     this.value = value;
     this.onChange(value);
-    this.onTouched();
+    // this.onTouched();
   }
 
   writeValue(value) {
