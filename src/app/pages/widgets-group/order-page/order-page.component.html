@@ -65,14 +65,14 @@
           <h2 class="form__heading">Отправитель</h2>
           <div class="form__fieldset form__fieldset--2-col-sm">
             <div *ngFor="let senderControl of getGroupControls((this.form).get(UserType.Sender)) | keyvalue: originalOrder"  class="form__field" [class.form__field--full]="senderControl.key === 'fio'">
-              <label [for]="'sender-' + senderControl.key" class="form__label">{{formFieldsData[senderControl.key].label}}<sup>*</sup></label>
+              <label [for]="'sender-' + senderControl.key" class="form__label">{{formGroupsInfo.Sender[senderControl.key].label}}<sup>*</sup></label>
               <app-select *ngIf="senderControl.key === 'doc'; else input" [formControlName]="senderControl.key" [items]="cities"></app-select>
               <ng-template #input>
                 <app-input
-                  [type]="formFieldsData[senderControl.key].type"
+                  [type]="formGroupsInfo.Sender[senderControl.key].type"
                   [id]="'sender-' + senderControl.key"
                   [formControlName]="senderControl.key"
-                  [mask]="formFieldsData[senderControl.key].mask" [prefix]="formFieldsData[senderControl.key].prefix"></app-input>
+                  [mask]="formGroupsInfo.Sender[senderControl.key].mask" [prefix]="formGroupsInfo.Sender[senderControl.key].prefix"></app-input>
               </ng-template>
             </div>
           </div>

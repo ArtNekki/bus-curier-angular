@@ -19,7 +19,7 @@ import UserType from '../../../core/maps/UserType';
 import User from 'firebase';
 import DepartureTab from '../../../core/maps/DepartureTab';
 import PickupTab from '../../../core/maps/PickupTab';
-import formFieldsData from '../../../core/form/formFieldsData';
+import formGroupsInfo from '../../../core/form/formGroupsInfo';
 
 @Component({
   selector: 'app-order-page',
@@ -45,7 +45,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   public UserType = UserType;
   public DepartureTab = DepartureTab;
   public PickupTab = PickupTab;
-  public formFieldsData = formFieldsData;
+  public formGroupsInfo = formGroupsInfo;
 
   public cities = cities;
   public form: FormGroup;
