@@ -5,18 +5,20 @@ import {animate, style, transition, trigger} from '@angular/animations';
 import GoodsType from '../../../core/maps/GoodsType';
 import {KeyValue} from '@angular/common';
 import {
+  busGroup, cargoGroup,
   courierGroup,
   departmentGroup,
   departureGroup,
   entityGroup,
   individualGroup,
-  parcelGroup,
+  parcelGroup, pickupGroup,
   senderGroup
 } from '../../../core/form/groups';
 import AddService from '../../../core/maps/AddService';
 import UserType from '../../../core/maps/UserType';
 import User from 'firebase';
 import DepartureTab from '../../../core/maps/DepartureTab';
+import PickupTab from '../../../core/maps/PickupTab';
 
 @Component({
   selector: 'app-order-page',
@@ -41,6 +43,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   public AddService = AddService;
   public UserType = UserType;
   public DepartureTab = DepartureTab;
+  public PickupTab = PickupTab;
 
   public cities = cities;
   public form: FormGroup;
@@ -52,6 +55,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   public currentCargoType = [];
   public currentAddService = AddService.Insurance;
   public currentDepartureTab = DepartureTab.Department;
+  public currentPickupTab = PickupTab.Bus;
   public GoodsType = GoodsType;
 
   public goodsTypes = [
@@ -68,35 +72,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       user: new FormGroup({
         individual: individualGroup
       }),
-      cargo: new FormArray([new FormGroup({
-        type: new FormGroup({
-          docs: new FormGroup({
-            placeCount: new FormControl('', [])
-          }),
-          parcels: new FormArray([]),
-          autoDetails: new FormArray([]),
-          other: new FormGroup({})
-        }),
-        packaging: new FormGroup({
-          'cardboard-box': new FormControl(),
-          'transparent-film': new FormControl(),
-          'safe-pack': new FormControl(),
-          'black-film': new FormControl(),
-          'bag-with-seal': new FormControl()
-        }),
-        'add-services': new FormGroup({
-          [AddService.Insurance]: new FormControl('', []),
-          [AddService.SmsForSender]: new FormControl('', []),
-          [AddService.SmsForRecipient]: new FormControl('', [])
-        })
-      })]),
       recipient: new FormGroup({
         fio: new FormControl('', []),
         tel: new FormControl('', [])
-      }),
-      pickupPoint: new FormGroup({
-        location: new FormControl('', []),
-        department: new FormControl('', [])
       })
     });
 
@@ -131,6 +109,15 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     if (this.currentStep === 1 && !((this.form as FormGroup).get('departure'))) {
       (this.form as FormGroup).addControl('departure', departureGroup);
       this.showDepartureTab(this.currentDepartureTab);
+    }
+
+    if (this.currentStep === 2 && !((this.form as FormGroup).get('cargo'))) {
+      (this.form as FormGroup).addControl('cargo', cargoGroup);
+    }
+
+    if (this.currentStep === 2 && !((this.form as FormGroup).get('pickup'))) {
+      (this.form as FormGroup).addControl('pickup', pickupGroup);
+      this.showPickupTab(this.currentPickupTab);
     }
   }
 
@@ -282,6 +269,24 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       case this.DepartureTab.Courier:
         (this.form.get('departure') as FormGroup).addControl('courier', courierGroup);
         (this.form.get('departure') as FormGroup).removeControl('department');
+        break;
+    }
+  }
+
+  setCurrentPickupTab(tab: string) {
+    this.currentPickupTab = tab;
+    this.showPickupTab(tab);
+  }
+
+  showPickupTab(tab: string) {
+    switch (tab) {
+      case this.PickupTab.Bus:
+        (this.form.get('pickup') as FormGroup).addControl('bus', busGroup);
+        (this.form.get('pickup') as FormGroup).removeControl('courier');
+        break;
+      case this.PickupTab.Courier:
+        (this.form.get('pickup') as FormGroup).addControl('courier', courierGroup);
+        (this.form.get('pickup') as FormGroup).removeControl('bus');
         break;
     }
   }

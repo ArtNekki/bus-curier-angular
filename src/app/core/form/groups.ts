@@ -1,4 +1,5 @@
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import AddService from '../maps/AddService';
 
 export const parcelGroup = new FormGroup({
   count: new FormControl('', []),
@@ -37,6 +38,40 @@ export const departureGroup = new FormGroup({
 });
 
 export const departmentGroup = new FormGroup({
+  street: new FormControl('', []),
+  building: new FormControl('', []),
+  apartment: new FormControl('', []),
+});
+
+export const cargoGroup = new FormArray([new FormGroup({
+  type: new FormGroup({
+    docs: new FormGroup({
+      placeCount: new FormControl('', [])
+    }),
+    parcels: new FormArray([]),
+    autoDetails: new FormArray([]),
+    other: new FormGroup({})
+  }),
+  packaging: new FormGroup({
+    'cardboard-box': new FormControl(),
+    'transparent-film': new FormControl(),
+    'safe-pack': new FormControl(),
+    'black-film': new FormControl(),
+    'bag-with-seal': new FormControl()
+  }),
+  'add-services': new FormGroup({
+    [AddService.Insurance]: new FormControl('', []),
+    [AddService.SmsForSender]: new FormControl('', []),
+    [AddService.SmsForRecipient]: new FormControl('', [])
+  })
+})]);
+
+export const pickupGroup = new FormGroup({
+  location: new FormControl('', []),
+  'department-address': new FormControl('', [])
+});
+
+export const busGroup = new FormGroup({
   street: new FormControl('', []),
   building: new FormControl('', []),
   apartment: new FormControl('', []),
