@@ -13,6 +13,10 @@ import { SwitcherComponent } from './components/switcher/switcher.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 
+// mask
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
+
 // import {DeviceDetectorModule} from 'ngx-device-detector';
 import {AngularMyDatePickerModule} from 'angular-mydatepicker';
 import {NgSelectModule} from '@ng-select/ng-select';
@@ -59,6 +63,7 @@ import { CounterComponent } from './components/counter/counter.component';
       apiKey: environment.firebaseConfig.apiKey,
       libraries: ['places']
     }),
+    NgxMaskModule.forRoot(options),
     TabsModule
     // DeviceDetectorModule.forRoot(),
   ],

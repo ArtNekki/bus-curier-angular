@@ -19,6 +19,7 @@ import UserType from '../../../core/maps/UserType';
 import User from 'firebase';
 import DepartureTab from '../../../core/maps/DepartureTab';
 import PickupTab from '../../../core/maps/PickupTab';
+import formFieldsData from '../../../core/form/formFieldsData';
 
 @Component({
   selector: 'app-order-page',
@@ -44,6 +45,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   public UserType = UserType;
   public DepartureTab = DepartureTab;
   public PickupTab = PickupTab;
+  public formFieldsData = formFieldsData;
 
   public cities = cities;
   public form: FormGroup;
@@ -71,7 +73,8 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     this.form = new FormGroup({
       user: new FormGroup({
         individual: individualGroup
-      })
+      }),
+      sender: new FormGroup({})
     });
 
     this.tags.push(`cargo-${this.tags.length + 1}`);
@@ -97,8 +100,10 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
     this.currentStep++;
 
-    if (this.currentStep === 1 && !((this.form as FormGroup).get(UserType.Sender))) {
-      (this.form as FormGroup).addControl(UserType.Sender, senderGroup);
+    console.log();
+
+    if (this.currentStep === 1 && !(Object.keys((this.form as FormGroup).get(UserType.Sender).value).length)) {
+      (this.form as FormGroup).setControl(UserType.Sender, senderGroup);
     }
 
     if (this.currentStep === 1 && !((this.form as FormGroup).get('departure'))) {

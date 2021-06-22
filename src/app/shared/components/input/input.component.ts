@@ -21,6 +21,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() name: string;
   @Input() type: string;
   @Input() unit: string;
+  @Input() mask: string;
+  @Input() prefix: string;
   @Input() placeholder = '';
   @Input() rows = 5;
   @Input() mods;

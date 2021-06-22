@@ -1,4 +1,4 @@
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import AddService from '../maps/AddService';
 
 export const parcelGroup = new FormGroup({
@@ -25,7 +25,7 @@ export const entityGroup = new FormGroup({
 });
 
 export const senderGroup = new FormGroup({
-  fio: new FormControl('', []),
+  fio: new FormControl('', [Validators.required]),
   doc: new FormControl('', []),
   'doc-number': new FormControl('', []),
   tel: new FormControl('', []),
