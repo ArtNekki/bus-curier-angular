@@ -79,7 +79,7 @@
             </div>
           </div>
         </section>
-        <section *ngIf="currentStep === 1 && (this.form.get('departure') && this.form.get('departure').value)" class="form__section" formGroupName="departure">
+        <section *ngIf="currentStep === 1 && (this.form.get(FormControlName.Departure) && this.form.get(FormControlName.Departure).value)" class="form__section" [formGroupName]="FormControlName.Departure">
           <h2 class="form__heading">Пункт отправления</h2>
           <div class="form__fieldset form__fieldset--delivery-point form__fieldset--row-gap-lg">
             <div class="form__field form__field--location">
@@ -103,7 +103,7 @@
             </div>
             <div *ngIf="currentDepartureTab === DepartureTab.Department" class="form__panel" [formGroupName]="FormControlName.Department">
               <div class="form__fieldset form__fieldset--address">
-                <div *ngFor="let departmentControl of getGroupControls(form.get('departure').get(FormControlName.Department))  | keyvalue: originalOrder" class="form__field">
+                <div *ngFor="let departmentControl of getGroupControls(form.get(FormControlName.Departure).get(FormControlName.Department))  | keyvalue: originalOrder" class="form__field">
                   <label [for]="FormControlName.Department + '-' + departmentControl.key" class="form__label">{{ formGroupMeta.Department[departmentControl.key].label }}</label>
                   <app-input [id]="FormControlName.Department + '-' + departmentControl.key"
                              [type]="formGroupMeta.Department[departmentControl.key].type"
