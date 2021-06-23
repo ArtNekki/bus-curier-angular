@@ -1,21 +1,22 @@
 import formFieldMeta from './formFieldMeta';
+import FormControlName from '../maps/FormControlName';
 
 export default {
   Sender: {
-    fio: formFieldMeta.fio,
-    doc: formFieldMeta.doc,
-    'doc-number': formFieldMeta['doc-number'],
-    'tel': formFieldMeta.tel
+    [FormControlName.Fio]: formFieldMeta.fio,
+    [FormControlName.Doc]: formFieldMeta.doc,
+    [FormControlName.DocNumber]: formFieldMeta[FormControlName.DocNumber],
+    [FormControlName.Tel]: formFieldMeta.tel
   },
   Department: {
-    street: formFieldMeta.street,
-    building: formFieldMeta.building,
-    apartment: formFieldMeta.apartment
+    [FormControlName.Street]: formFieldMeta.street,
+    [FormControlName.Building]: formFieldMeta.building,
+    [FormControlName.Apartment]: formFieldMeta.apartment
   },
   Courier: {
-    street: formFieldMeta.street,
-    building: formFieldMeta.building,
-    apartment: formFieldMeta.apartment,
-    ['courier-time']: formFieldMeta['courier-time']
+    [FormControlName.Street]: formFieldMeta.street,
+    [FormControlName.Building]: formFieldMeta.building,
+    [FormControlName.Apartment]: formFieldMeta.apartment,
+    [FormControlName.CourierTime]: formFieldMeta[FormControlName.CourierTime]
   }
 };

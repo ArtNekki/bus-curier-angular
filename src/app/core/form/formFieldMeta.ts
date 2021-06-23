@@ -1,37 +1,39 @@
+import FormControlName from '../maps/FormControlName';
+
 export default {
-  fio: {
+  [FormControlName.Fio]: {
     label: 'ФИО',
     type: 'text'
   },
-  doc: {
+  [FormControlName.Doc]: {
     label: 'Документ',
     select: 'cities'
   },
-  'doc-number': {
+  [FormControlName.DocNumber]: {
     label: 'Серия и номер документа',
     type: 'text',
     mask: '0000 000000',
     prefix: ''
   },
-  'tel': {
+  [FormControlName.Tel]: {
     label: 'Номер телефона',
     type: 'tel',
     mask: '(000) 000-0000',
     prefix: '+7'
   },
-  street: {
+  [FormControlName.Street]: {
     label: 'Улица',
     type: 'text'
   },
-  building: {
+  [FormControlName.Building]: {
     label: 'Дом, корус, строение',
     type: 'text'
   },
-  apartment: {
+  [FormControlName.Apartment]: {
     label: 'Кв. / офис',
     type: 'text'
   },
-  ['courier-time']: {
+  [FormControlName.CourierTime]: {
     label: 'Удобное время для приезда курьера',
     type: 'text'
   }
