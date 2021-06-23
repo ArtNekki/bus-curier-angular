@@ -65,15 +65,14 @@
           <h2 class="form__heading">Отправитель</h2>
           <div class="form__fieldset form__fieldset--2-col-sm">
             <div *ngFor="let senderControl of getGroupControls((this.form).get(UserType.Sender)) | keyvalue: originalOrder"  class="form__field" [class.form__field--full]="senderControl.key === 'fio'">
-              <label [for]="'sender-' + senderControl.key" class="form__label">{{formGroupsInfo.Sender[senderControl.key].label}}<sup>*</sup></label>
+              <label [for]="'sender-' + senderControl.key" class="form__label">{{formGroupMeta.Sender[senderControl.key].label}}<sup>*</sup></label>
               <app-select *ngIf="senderControl.key === 'doc'; else input" [formControlName]="senderControl.key" [items]="cities"></app-select>
               <ng-template #input>
-                ttt {{senderControl.value.touched && senderControl.value.invalid }}
                 <app-input
-                  [type]="formGroupsInfo.Sender[senderControl.key].type"
+                  [type]="formGroupMeta.Sender[senderControl.key].type"
                   [id]="'sender-' + senderControl.key"
                   [formControlName]="senderControl.key"
-                  [mask]="formGroupsInfo.Sender[senderControl.key].mask" [prefix]="formGroupsInfo.Sender[senderControl.key].prefix"
+                  [mask]="formGroupMeta.Sender[senderControl.key].mask" [prefix]="formGroupMeta.Sender[senderControl.key].prefix"
                   [mods]="(senderControl.value.invalid && senderControl.value.touched) && 'invalid'"
                 ></app-input>
               </ng-template>
@@ -90,7 +89,7 @@
             <div class="form__fieldset form__fieldset--department">
               <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
               <div class="form__field">
-                <app-radio formControlName="department-address" name="department-address" value="Владивосток, Карла Маркса" checked="checked">Владивосток, Карла Маркса</app-radio>
+                <app-radio formControlName="department-address" name="department-address" value="Владивосток, Карла Маркса 111" checked="checked">Владивосток, Карла Маркса 111</app-radio>
               </div>
               <div class="form__field">
                 <app-radio formControlName="department-address" name="department-address" value="Владивосток, Карла Маркса 22">Владивосток, Карла Маркса 22</app-radio>
@@ -102,19 +101,14 @@
               <button type="button" [class.active]="currentDepartureTab === DepartureTab.Courier"
                       (click)="setCurrentDepartureTab(DepartureTab.Courier)">{{DepartureTab.Courier}}</button>
             </div>
-            <div *ngIf="currentDepartureTab === DepartureTab.Department" class="form__panel" formGroupName="department">
+            <div *ngIf="currentDepartureTab === DepartureTab.Department" class="form__panel" [formGroupName]="FormControlName.Department">
               <div class="form__fieldset form__fieldset--address">
-                <div class="form__field">
-                  <label for="department-street" class="form__label">Улица</label>
-                  <app-input id="department-street" type="text" formControlName="street"></app-input>
-                </div>
-                <div class="form__field">
-                  <label for="department-building" class="form__label">Дом, корус, строение</label>
-                  <app-input id="department-building" type="text" formControlName="building"></app-input>
-                </div>
-                <div class="form__field">
-                  <label for="department-apartment" class="form__label">Кв. / офис</label>
-                  <app-input id="department-apartment" type="text" formControlName="apartment"></app-input>
+                <div *ngFor="let departmentControl of getGroupControls(form.get('departure').get(FormControlName.Department))  | keyvalue: originalOrder" class="form__field">
+                  <label [for]="FormControlName.Department + '-' + departmentControl.key" class="form__label">{{ formGroupMeta.Department[departmentControl.key].label }}</label>
+                  <app-input [id]="FormControlName.Department + '-' + departmentControl.key"
+                             [type]="formGroupMeta.Department[departmentControl.key].type"
+                             [formControlName]="departmentControl.key">
+                  </app-input>
                 </div>
               </div>
             </div>

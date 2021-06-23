@@ -33,7 +33,7 @@ export const senderGroup = new FormGroup({
 
 export const departureGroup = new FormGroup({
   location: new FormControl('', []),
-  'department-address': new FormControl('Владивосток, Карла Маркса', []),
+  'department-address': new FormControl('', []),
   date: new FormControl('', [])
 });
 

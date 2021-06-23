@@ -19,7 +19,8 @@ import UserType from '../../../core/maps/UserType';
 import User from 'firebase';
 import DepartureTab from '../../../core/maps/DepartureTab';
 import PickupTab from '../../../core/maps/PickupTab';
-import formGroupsInfo from '../../../core/form/formGroupsInfo';
+import formGroupMeta from '../../../core/form/formGroupMeta';
+import FormControlName from '../../../core/maps/FormControlName';
 
 @Component({
   selector: 'app-order-page',
@@ -45,7 +46,8 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   public UserType = UserType;
   public DepartureTab = DepartureTab;
   public PickupTab = PickupTab;
-  public formGroupsInfo = formGroupsInfo;
+  public FormControlName = FormControlName;
+  public formGroupMeta = formGroupMeta;
 
   public cities = cities;
   public form: FormGroup;
@@ -267,12 +269,12 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   showDepartureTab(tab: string) {
     switch (tab) {
       case this.DepartureTab.Department:
-        (this.form.get('departure') as FormGroup).addControl('department', departmentGroup);
+        (this.form.get('departure') as FormGroup).addControl(FormControlName.Department, departmentGroup);
         (this.form.get('departure') as FormGroup).removeControl('courier');
         break;
       case this.DepartureTab.Courier:
         (this.form.get('departure') as FormGroup).addControl('courier', courierGroup);
-        (this.form.get('departure') as FormGroup).removeControl('department');
+        (this.form.get('departure') as FormGroup).removeControl(FormControlName.Department);
         break;
     }
   }

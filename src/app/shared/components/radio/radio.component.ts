@@ -32,13 +32,13 @@ export class RadioComponent implements ControlValueAccessor, OnInit {
   onTouched: () => void = () => {};
 
   changeValue(value) {
-    this.writeValue(value);
+    this.value = value;
+    this.onChange(value);
     this.change.emit(value);
   }
 
   writeValue(value: any): void {
-    // this.value = value;
-    this.onChange(value);
+    this.value = value;
   }
 
   registerOnChange(fn) {

@@ -18,5 +18,17 @@ export default {
     type: 'tel',
     mask: '(000) 000-0000',
     prefix: '+7'
-  }
+  },
+  street: {
+    label: 'Улица',
+    type: 'text'
+  },
+  building: {
+    label: 'Дом, корус, строение',
+    type: 'text'
+  },
+  apartment: {
+    label: 'Кв. / офис',
+    type: 'text'
+  },
 };
