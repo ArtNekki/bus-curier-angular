@@ -14,7 +14,7 @@
           </div>
           <div *ngIf="currentUserType === UserType.Individual" class="form__panel form__panel--mg-top">
             <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl" [formGroupName]="UserType.Individual">
-              <div *ngFor="let individualControl of getGroupControls(form.get(FormControlName.Author).get(UserType.Individual))  | keyvalue: originalOrder " class="form__field">
+              <div *ngFor="let individualControl of getGroupControls(form.get(FormControlName.Author).get(UserType.Individual))  | keyvalue: originalOrder" class="form__field">
                 <label [for]="UserType.Individual + '-' + individualControl.key" class="form__label">{{formGroupMeta.Individual[individualControl.key].label}}<sup *ngIf="individualControl.value.errors && individualControl.value.hasError('required')">*</sup></label>
                 <app-select *ngIf="individualControl.key === FormControlName.Role; else input" [formControlName]="individualControl.key" [items]="cities"></app-select>
                 <ng-template #input>
@@ -35,17 +35,19 @@
           </div>
           <div *ngIf="currentUserType === UserType.Entity" class="form__panel form__panel--mg-top">
             <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl" [formGroupName]="UserType.Entity">
-              <div class="form__field">
-                <label for="entity-name" class="form__label">Название<sup>*</sup></label>
-                <app-input id="entity-name" type="text" formControlName="name"></app-input>
-              </div>
-              <div class="form__field">
-                <label for="entity-address" class="form__label">Адрес<sup>*</sup></label>
-                <app-input id="entity-address" type="text" formControlName="address"></app-input>
-              </div>
-              <div class="form__field">
-                <label for="entity-tel" for="middle-name" class="form__label">Телефон<sup>*</sup></label>
-                <app-input type="text" id="entity-tel" formControlName="tel"></app-input>
+              <div *ngFor="let entityControl of getGroupControls(form.get(FormControlName.Author).get(UserType.Entity)) | keyvalue: originalOrder" class="form__field">
+                <label [for]="UserType.Entity + '-' + entityControl.key" class="form__label">{{formGroupMeta.Entity[entityControl.key].label}}<sup *ngIf="entityControl.value.errors && entityControl.value.hasError('required')">*</sup></label>
+                <app-input
+                  [type]="formGroupMeta.Entity[entityControl.key].type"
+                  [id]="UserType.Entity + '-' + entityControl.key"
+                  [formControlName]="entityControl.key"
+                  [mask]="formGroupMeta.Entity[entityControl.key].mask" [prefix]="formGroupMeta.Entity[entityControl.key].prefix"
+                  [mods]="(entityControl.value.invalid && entityControl.value.touched) && 'invalid'"
+                >
+                  <ng-container class="errors">
+                    <small *ngIf="getObjectKey(entityControl.value.errors).length">{{FormFieldError[getObjectKey(entityControl.value.errors)[0]]}}</small>
+                  </ng-container>
+                </app-input>
               </div>
             </div>
           </div>

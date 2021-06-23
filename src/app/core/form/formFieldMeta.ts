@@ -56,5 +56,13 @@ export default {
   [FormControlName.CourierTime]: {
     label: 'Удобное время для приезда курьера',
     type: 'text'
-  }
+  },
+  [FormControlName.CompanyName]: {
+    label: 'Название компании',
+    type: 'text'
+  },
+  [FormControlName.Address]: {
+    label: 'Адрес',
+    type: 'text'
+  },
 };

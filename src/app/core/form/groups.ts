@@ -19,7 +19,7 @@ export const individualGroup = new FormGroup({
 });
 
 export const entityGroup = new FormGroup({
-  name: new FormControl('', []),
+  'company-name': new FormControl('', []),
   address: new FormControl('', []),
   tel: new FormControl('', []),
 });

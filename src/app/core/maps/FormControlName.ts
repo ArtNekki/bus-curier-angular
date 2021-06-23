@@ -15,5 +15,7 @@ export default {
   MiddleName: 'middle-name',
   LastName: 'last-name',
   Email: 'email',
-  Role: 'role'
+  Role: 'role',
+  CompanyName: 'company-name',
+  Address: 'address'
 };

@@ -26,5 +26,10 @@ export default {
     [FormControlName.Email]: formFieldMeta.email,
     [FormControlName.Tel]: formFieldMeta.tel,
     [FormControlName.Role]: formFieldMeta.role
+  },
+  Entity: {
+    [FormControlName.CompanyName]: formFieldMeta[FormControlName.CompanyName],
+    [FormControlName.Address]: formFieldMeta.address,
+    [FormControlName.Tel]: formFieldMeta.tel
   }
 };
