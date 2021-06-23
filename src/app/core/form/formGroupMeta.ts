@@ -11,5 +11,11 @@ export default {
     street: formFieldMeta.street,
     building: formFieldMeta.building,
     apartment: formFieldMeta.apartment
+  },
+  Courier: {
+    street: formFieldMeta.street,
+    building: formFieldMeta.building,
+    apartment: formFieldMeta.apartment,
+    ['courier-time']: formFieldMeta['courier-time']
   }
 };

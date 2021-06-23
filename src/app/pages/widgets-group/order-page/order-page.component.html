@@ -112,30 +112,25 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="currentDepartureTab === DepartureTab.Courier" class="form__panel" formGroupName="courier">
+            <div *ngIf="currentDepartureTab === DepartureTab.Courier" class="form__panel" [formGroupName]="FormControlName.Courier">
               <div class="form__fieldset form__fieldset--address">
-                <div class="form__field">
-                  <label for="courier-street" class="form__label">Улица</label>
-                  <app-input id="courier-street" type="text" formControlName="street"></app-input>
-                </div>
-                <div class="form__field">
-                  <label for="courier-building" class="form__label">Дом, корус, строение</label>
-                  <app-input id="courier-building" type="text" formControlName="building"></app-input>
-                </div>
-                <div class="form__field">
-                  <label for="courier-apartment" class="form__label">Кв. / офис</label>
-                  <app-input id="courier-apartment" type="text" formControlName="apartment"></app-input>
+                <div *ngFor="let courierControl of getGroupControls(form.get(FormControlName.Departure).get(FormControlName.Courier))  | keyvalue: originalOrder" class="form__field">
+                  <label [for]="FormControlName.Courier + '-' + courierControl.key" class="form__label">{{ formGroupMeta.Courier[courierControl.key].label }}</label>
+                  <app-input [id]="FormControlName.Courier + '-' + courierControl.key"
+                             [type]="formGroupMeta.Courier[courierControl.key].type"
+                             [formControlName]="courierControl.key">
+                  </app-input>
                 </div>
               </div>
-              <section class="form__fieldset form__fieldset--schedule">
-                <label class="form__label form__label--light">Удобное время для приезда курьера</label>
-                <div class="form__field">
-                  <app-radio formControlName="time" name="courier-time" value="8:00 - 14:00" checked="true">8:00 - 14:00</app-radio>
-                </div>
-                <div class="form__field">
-                  <app-radio formControlName="time" name="courier-time" value="14:00 - 18:00">14:00 - 18:00</app-radio>
-                </div>
-              </section>
+<!--              <section class="form__fieldset form__fieldset&#45;&#45;schedule">-->
+<!--                <label class="form__label form__label&#45;&#45;light">Удобное время для приезда курьера</label>-->
+<!--                <div class="form__field">-->
+<!--                  <app-radio formControlName="time" name="courier-time" value="8:00 - 14:00" checked="true">8:00 - 14:00</app-radio>-->
+<!--                </div>-->
+<!--                <div class="form__field">-->
+<!--                  <app-radio formControlName="time" name="courier-time" value="14:00 - 18:00">14:00 - 18:00</app-radio>-->
+<!--                </div>-->
+<!--              </section>-->
             </div>
             <div class="form__field form__field--delivery-date">
               <label for="departure-date" class="form__label">Дата отправки<sup>*</sup></label>

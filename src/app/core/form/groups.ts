@@ -86,5 +86,5 @@ export const courierGroup = new FormGroup({
   street: new FormControl('', []),
   building: new FormControl('', []),
   apartment: new FormControl('', []),
-  time: new FormControl('', [])
+  ['courier-time']: new FormControl('', [])
 });

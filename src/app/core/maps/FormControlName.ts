@@ -1,4 +1,5 @@
 export default {
   Departure: 'departure',
-  Department: 'department'
+  Department: 'department',
+  Courier: 'courier'
 };

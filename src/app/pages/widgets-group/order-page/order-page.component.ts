@@ -270,10 +270,10 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     switch (tab) {
       case this.DepartureTab.Department:
         (this.form.get(FormControlName.Departure) as FormGroup).addControl(FormControlName.Department, departmentGroup);
-        (this.form.get(FormControlName.Departure) as FormGroup).removeControl('courier');
+        (this.form.get(FormControlName.Departure) as FormGroup).removeControl(FormControlName.Courier);
         break;
       case this.DepartureTab.Courier:
-        (this.form.get(FormControlName.Departure) as FormGroup).addControl('courier', courierGroup);
+        (this.form.get(FormControlName.Departure) as FormGroup).addControl(FormControlName.Courier, courierGroup);
         (this.form.get(FormControlName.Departure) as FormGroup).removeControl(FormControlName.Department);
         break;
     }
@@ -288,10 +288,10 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     switch (tab) {
       case this.PickupTab.Bus:
         (this.form.get('pickup') as FormGroup).addControl('bus', busGroup);
-        (this.form.get('pickup') as FormGroup).removeControl('courier');
+        (this.form.get('pickup') as FormGroup).removeControl(FormControlName.Courier);
         break;
       case this.PickupTab.Courier:
-        (this.form.get('pickup') as FormGroup).addControl('courier', courierGroup);
+        (this.form.get('pickup') as FormGroup).addControl(FormControlName.Courier, courierGroup);
         (this.form.get('pickup') as FormGroup).removeControl('bus');
         break;
     }

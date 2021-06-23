@@ -31,4 +31,8 @@ export default {
     label: 'Кв. / офис',
     type: 'text'
   },
+  ['courier-time']: {
+    label: 'Удобное время для приезда курьера',
+    type: 'text'
+  }
 };
