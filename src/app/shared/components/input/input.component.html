@@ -1,7 +1,7 @@
 <div *ngIf="type === 'textarea'; else input" [class]="cssClass + ' input--textarea'">
   <textarea #textarea [id]="id" class="input__field" [name]="name" [placeholder]="placeholder" [rows]="rows" [ngModel]="value" (ngModelChange)="changeValue($event)"></textarea>
-  <div class="input__error">
-    <ng-content select=".error"></ng-content>
+  <div class="input__errors">
+<!--    <ng-content select=".errors"></ng-content>-->
   </div>
 </div>
 
@@ -12,8 +12,8 @@
       <span #editContent class="input__edit" contenteditable (blur)="onBlur()" (input)="changeValue(editContent.textContent)">{{ inputField.value}}</span>
       <span class="input__unit">{{unit}}</span>
     </div>
-    <div class="input__error">
-      <ng-content select=".error"></ng-content>
+    <div class="input__errors">
+<!--      <ng-content select=".errors"></ng-content>-->
     </div>
   </div>
   <ng-template #simpleInput>
@@ -22,7 +22,10 @@
       <ng-template #withoutMask>
         <input #simpleInputField [type]="type" [id]="id" class="input__field" [placeholder]="placeholder" [ngModel]="value" (ngModelChange)="changeValue($event)" (blur)="markAsTouched()"/>
       </ng-template>
-      <ng-content></ng-content>
+<!--      <ng-content></ng-content>-->
+      <div *ngIf="isInvalid" class="input__errors">
+        <ng-content select=".errors"></ng-content>
+      </div>
     </div>
   </ng-template>
 </ng-template>

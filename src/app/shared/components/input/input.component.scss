@@ -76,18 +76,18 @@
     top: 50%;
     transform: translateY(-50%);
     left: 15px;
-    display: none;
+    //display: none;
     font-family: $font-family--secondary;
     font-size: 16px;
     line-height: 1;
     color: $red-color;
     pointer-events: none;
 
-    .input--error &,
-    .form.error & {
-      display: block;
-    }
-
+    //.input--error &,
+    //.form.error & {
+    //  display: block;
+    //}
+    //
     .input.focused &,
     .input__field:focus ~ & {
       display: none;

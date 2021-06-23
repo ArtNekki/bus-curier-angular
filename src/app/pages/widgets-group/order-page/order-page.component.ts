@@ -21,6 +21,7 @@ import DepartureTab from '../../../core/maps/DepartureTab';
 import PickupTab from '../../../core/maps/PickupTab';
 import formGroupMeta from '../../../core/form/formGroupMeta';
 import FormControlName from '../../../core/maps/FormControlName';
+import fieldError from '../../../core/form/fieldError';
 
 @Component({
   selector: 'app-order-page',
@@ -48,6 +49,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   public PickupTab = PickupTab;
   public FormControlName = FormControlName;
   public formGroupMeta = formGroupMeta;
+  public FormFieldError = fieldError;
 
   public cities = cities;
   public form: FormGroup;
@@ -295,5 +297,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
         (this.form.get('pickup') as FormGroup).removeControl('bus');
         break;
     }
+  }
+
+  getObjectKey(object) {
+    return (object instanceof Object) && Object.keys(object);
   }
 }

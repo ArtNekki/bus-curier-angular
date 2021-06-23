@@ -65,7 +65,7 @@
           <h2 class="form__heading">Отправитель</h2>
           <div class="form__fieldset form__fieldset--2-col-sm">
             <div *ngFor="let senderControl of getGroupControls((this.form).get(UserType.Sender)) | keyvalue: originalOrder"  class="form__field" [class.form__field--full]="senderControl.key === 'fio'">
-              <label [for]="'sender-' + senderControl.key" class="form__label">{{formGroupMeta.Sender[senderControl.key].label}}<sup>*</sup></label>
+              <label [for]="'sender-' + senderControl.key" class="form__label">{{formGroupMeta.Sender[senderControl.key].label}}<sup *ngIf="senderControl.value.errors && senderControl.value.hasError('required')">*</sup></label>
               <app-select *ngIf="senderControl.key === 'doc'; else input" [formControlName]="senderControl.key" [items]="cities"></app-select>
               <ng-template #input>
                 <app-input
@@ -74,7 +74,11 @@
                   [formControlName]="senderControl.key"
                   [mask]="formGroupMeta.Sender[senderControl.key].mask" [prefix]="formGroupMeta.Sender[senderControl.key].prefix"
                   [mods]="(senderControl.value.invalid && senderControl.value.touched) && 'invalid'"
-                ></app-input>
+                >
+                  <ng-container class="errors">
+                    <small *ngIf="getObjectKey(senderControl.value.errors).length">{{FormFieldError[getObjectKey(senderControl.value.errors)[0]]}}</small>
+                  </ng-container>
+                </app-input>
               </ng-template>
             </div>
           </div>
