@@ -27,7 +27,7 @@ export const entityGroup = new FormGroup({
 export const senderGroup = new FormGroup({
   fio: new FormControl('', [Validators.required, Validators.email]),
   doc: new FormControl('', []),
-  'doc-number': new FormControl('', [Validators.required]),
+  'doc-number': new FormControl('', [Validators.required, Validators.pattern('0000 000000')]),
   tel: new FormControl('', []),
 });
 

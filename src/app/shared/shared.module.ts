@@ -15,7 +15,11 @@ import { AgmCoreModule } from '@agm/core';
 
 // mask
 import { NgxMaskModule, IConfig } from 'ngx-mask';
-export let options: Partial<IConfig> | (() => Partial<IConfig>);
+export let options: Partial<IConfig> = {
+  validation: true,
+  dropSpecialCharacters: false,
+  showMaskTyped: true
+};
 
 // import {DeviceDetectorModule} from 'ngx-device-detector';
 import {AngularMyDatePickerModule} from 'angular-mydatepicker';

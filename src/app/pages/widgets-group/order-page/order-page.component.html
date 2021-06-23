@@ -68,6 +68,7 @@
               <label [for]="'sender-' + senderControl.key" class="form__label">{{formGroupMeta.Sender[senderControl.key].label}}<sup *ngIf="senderControl.value.errors && senderControl.value.hasError('required')">*</sup></label>
               <app-select *ngIf="senderControl.key === 'doc'; else input" [formControlName]="senderControl.key" [items]="cities"></app-select>
               <ng-template #input>
+                {{ senderControl.value.errors | json }}
                 <app-input
                   [type]="formGroupMeta.Sender[senderControl.key].type"
                   [id]="'sender-' + senderControl.key"
