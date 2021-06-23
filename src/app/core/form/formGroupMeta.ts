@@ -18,5 +18,13 @@ export default {
     [FormControlName.Building]: formFieldMeta.building,
     [FormControlName.Apartment]: formFieldMeta.apartment,
     [FormControlName.CourierTime]: formFieldMeta[FormControlName.CourierTime]
+  },
+  Individual: {
+    [FormControlName.LastName]: formFieldMeta[FormControlName.LastName],
+    [FormControlName.FirstName]: formFieldMeta[FormControlName.FirstName],
+    [FormControlName.MiddleName]: formFieldMeta[FormControlName.MiddleName],
+    [FormControlName.Email]: formFieldMeta.email,
+    [FormControlName.Tel]: formFieldMeta.tel,
+    [FormControlName.Role]: formFieldMeta.role
   }
 };

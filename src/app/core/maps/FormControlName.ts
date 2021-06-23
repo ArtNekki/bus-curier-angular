@@ -9,5 +9,11 @@ export default {
   Street: 'street',
   Building: 'building',
   Apartment: 'apartment',
-  CourierTime: 'courier-time'
+  CourierTime: 'courier-time',
+  Author: 'author',
+  FirstName: 'first-name',
+  MiddleName: 'middle-name',
+  LastName: 'last-name',
+  Email: 'email',
+  Role: 'role'
 };

@@ -5,6 +5,26 @@ export default {
     label: 'ФИО',
     type: 'text'
   },
+  [FormControlName.FirstName]: {
+    label: 'Имя',
+    type: 'text'
+  },
+  [FormControlName.MiddleName]: {
+    label: 'Отчество',
+    type: 'text'
+  },
+  [FormControlName.LastName]: {
+    label: 'Фамилия',
+    type: 'text'
+  },
+  [FormControlName.Email]: {
+    label: 'Email',
+    type: 'email'
+  },
+  [FormControlName.Role]: {
+    label: 'Роль',
+    select: 'cities'
+  },
   [FormControlName.Doc]: {
     label: 'Документ',
     select: 'cities'

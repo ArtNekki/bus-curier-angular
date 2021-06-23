@@ -75,7 +75,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      user: new FormGroup({
+      author: new FormGroup({
         individual: individualGroup
       }),
       sender: new FormGroup({})
@@ -253,12 +253,12 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
     switch (type) {
       case UserType.Individual:
-        (this.form.get('user') as FormGroup).addControl(UserType.Individual, individualGroup);
-        (this.form.get('user') as FormGroup).removeControl(UserType.Entity);
+        (this.form.get(FormControlName.Author) as FormGroup).addControl(UserType.Individual, individualGroup);
+        (this.form.get(FormControlName.Author) as FormGroup).removeControl(UserType.Entity);
         break;
       case UserType.Entity:
-        (this.form.get('user') as FormGroup).addControl(UserType.Entity, entityGroup);
-        (this.form.get('user') as FormGroup).removeControl(UserType.Individual);
+        (this.form.get(FormControlName.Author) as FormGroup).addControl(UserType.Entity, entityGroup);
+        (this.form.get(FormControlName.Author) as FormGroup).removeControl(UserType.Individual);
         break;
     }
   }
