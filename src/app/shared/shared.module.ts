@@ -50,6 +50,7 @@ import { TabBodyComponent } from './components/tabs/tab-body/tab-body.component'
 import {TabsModule} from './components/tabs/tabs.module';
 import { TagComponent } from './components/tag/tag.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { RadioGroupComponent } from './components/radio-group/radio-group.component';
 // import { ɵs } from '@ng-select/ng-select;
 
 
@@ -101,7 +102,8 @@ import { CounterComponent } from './components/counter/counter.component';
     InputComponent,
     SupportFormComponent,
     TagComponent,
-    CounterComponent
+    CounterComponent,
+    RadioGroupComponent
   ],
   declarations: [
     BtnComponent,
@@ -131,7 +133,8 @@ import { CounterComponent } from './components/counter/counter.component';
     InputComponent,
     SupportFormComponent,
     TagComponent,
-    CounterComponent
+    CounterComponent,
+    RadioGroupComponent
   ],
   // providers: [NgSelectConfig, ɵs],
 })

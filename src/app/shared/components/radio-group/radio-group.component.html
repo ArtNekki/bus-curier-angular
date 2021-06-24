@@ -1,0 +1,10 @@
+<div *ngFor="let item of items" class="radio-group">
+  <app-radio
+    [id]="item.id"
+    [name]="name"
+    (change)="changeValue(item.id)"
+    [checked]="id == item.id"
+  >
+    {{item.value}}
+  </app-radio>
+</div>

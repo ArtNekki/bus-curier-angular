@@ -36,7 +36,6 @@ export class RadioComponent implements ControlValueAccessor, OnInit {
     this.value = id;
     this.onChange(id);
     this.change.emit(id || this.checked);
-    console.log('value', id);
   }
 
   writeValue(value: any): void {

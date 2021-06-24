@@ -93,13 +93,19 @@
             </div>
             <div class="form__fieldset form__fieldset--department">
               <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
-              <div *ngFor="let department of departments" class="form__field">
-                <app-radio
-                  [id]="department.id"
-                  formControlName="department-address"
-                  name="department-address">{{department.address}}
-                </app-radio>
-              </div>
+<!--              <div *ngFor="let department of departments" class="form__field">-->
+<!--                <app-radio-->
+<!--                  [id]="department.id"-->
+<!--                  formControlName="department-address"-->
+<!--                  name="department-address"-->
+<!--                  [checked]="formControl">{{department.address}}-->
+<!--                </app-radio>-->
+<!--              </div>-->
+              <app-radio-group
+                [items]="departments"
+                name="department-address"
+                formControlName="department-address">
+              </app-radio-group>
             </div>
             <div class="form__tabs">
               <button type="button" [class.active]="currentDepartureTab === DepartureTab.Department"
