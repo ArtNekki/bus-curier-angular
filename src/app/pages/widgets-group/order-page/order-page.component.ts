@@ -22,6 +22,7 @@ import PickupTab from '../../../core/maps/PickupTab';
 import formGroupMeta from '../../../core/form/formGroupMeta';
 import FormControlName from '../../../core/maps/FormControlName';
 import fieldError from '../../../core/form/fieldError';
+import roles from '../../../mock-data/roles';
 
 @Component({
   selector: 'app-order-page',
@@ -51,6 +52,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   public formGroupMeta = formGroupMeta;
   public FormFieldError = fieldError;
 
+  public roles = [];
   public cities = cities;
   public form: FormGroup;
   public tags = [];
@@ -83,6 +85,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
     this.tags.push(`cargo-${this.tags.length + 1}`);
     this.currentCargoType.push('docs');
+
+    roles.unshift({value: '', name: 'Не выбрано'});
+    this.roles = roles;
   }
 
   ngAfterViewInit(): void {
@@ -102,9 +107,15 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.currentStep++;
+    this.form.markAllAsTouched();
 
-    console.log();
+    console.log('this.form', this.form);
+
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.currentStep++;
 
     if (this.currentStep === 1 && !(Object.keys((this.form as FormGroup).get(UserType.Sender).value).length)) {
       (this.form as FormGroup).setControl(UserType.Sender, senderGroup);
@@ -133,6 +144,8 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     if (this.currentStep <= 0 ) {
       return;
     }
+
+    // this.form.markAllAsTouched();
 
     this.currentStep--;
   }

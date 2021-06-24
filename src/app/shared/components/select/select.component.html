@@ -1,5 +1,5 @@
 <div *ngIf="deviceService.isMobile() || deviceService.isTablet()" class="select">
-  <select #select [name]="id" [id]="id" class="select__field" (change)="changeValue($event)">
+  <select #select [name]="id" [id]="id" class="select__field" [ngModel]="value" (ngModelChange)="changeValue($event)">
     <option *ngFor="let item of items" [value]="item.value">{{ item.name }}</option>
   </select>
 </div>
@@ -8,12 +8,12 @@
 
 <div *ngIf="deviceService.isDesktop()" class="select" [class.select--opened]="isSelectOpened">
   <div class="select__field" (click)="openSelect()">
-    <span>{{ (currentItem && currentItem.name) || items[0].name}}</span>
+    <span>{{fieldValue}}</span>
     <i class="fa fa-chevron-down" data-type="arrow"></i>
   </div>
   <div *ngIf="isSelectOpened" class="select__dropdown">
     <ul class="select__list">
-      <li *ngFor="let item of items" class="select__item" [attr.data-value]="item.value" (click)="changeValue(item); closeSelect()">{{ item.name }}</li>
+      <li *ngFor="let item of items" class="select__item" [attr.data-value]="item.value" (click)="closeSelect();changeValue(item.value)">{{ item.name }}</li>
     </ul>
   </div>
   <div *ngIf="isSelectOpened" class="select__backdrop" (click)="closeSelect()"></div>

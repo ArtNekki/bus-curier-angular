@@ -10,11 +10,11 @@ export const parcelGroup = new FormGroup({
 });
 
 export const individualGroup = new FormGroup({
-  'last-name': new FormControl('', []),
-  'first-name': new FormControl('', []),
-  'middle-name': new FormControl('', []),
-  email: new FormControl('', []),
-  tel: new FormControl('', []),
+  'last-name': new FormControl('', [Validators.required]),
+  'first-name': new FormControl('', [Validators.required]),
+  'middle-name': new FormControl('', [Validators.required]),
+  email: new FormControl('', [Validators.required]),
+  tel: new FormControl('', [Validators.required]),
   role: new FormControl('', []),
 });
 

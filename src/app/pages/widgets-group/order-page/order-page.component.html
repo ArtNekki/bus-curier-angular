@@ -5,7 +5,7 @@
     <p class="page__subtitle">Заполните форму необходимыми данными и отправьте</p>
     <app-order-steps [currentStep]="currentStep"></app-order-steps>
     <form class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div [style]="{display: currentStep === 0 ? 'block' : 'none'}" [@panel]="">
+      <div *ngIf="currentStep === 0" [@panel]="">
         <section class="form__section" [formGroupName]="FormControlName.Author">
           <h2 class="form__heading">Ваши данные</h2>
           <div class="form__tabs">
@@ -16,7 +16,7 @@
             <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl" [formGroupName]="UserType.Individual">
               <div *ngFor="let individualControl of getGroupControls(form.get(FormControlName.Author).get(UserType.Individual))  | keyvalue: originalOrder" class="form__field">
                 <label [for]="UserType.Individual + '-' + individualControl.key" class="form__label">{{formGroupMeta.Individual[individualControl.key].label}}<sup *ngIf="individualControl.value.errors && individualControl.value.hasError('required')">*</sup></label>
-                <app-select *ngIf="individualControl.key === FormControlName.Role; else input" [formControlName]="individualControl.key" [items]="cities"></app-select>
+                <app-select *ngIf="individualControl.key === FormControlName.Role; else input" [formControlName]="individualControl.key" [items]="roles"></app-select>
                 <ng-template #input>
                   <app-input
                     [type]="formGroupMeta.Individual[individualControl.key].type"
@@ -55,7 +55,7 @@
           <!-- <p class="form__help-text">Чтобы оформить заказ как юридическое лицо,<br />вам необходимо <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>войти</span></span></a>или <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>зарегистрироваться</span></span></a></p> -->
         </section>
       </div>
-      <div [style]="{display: currentStep === 1 ? 'block' : 'none'}" [@panel]="">
+      <div *ngIf="currentStep === 1" [@panel]="">
         <section class="form__section" formGroupName="sender">
           <h2 class="form__heading">Отправитель</h2>
           <div class="form__fieldset form__fieldset--2-col-sm">
@@ -141,7 +141,7 @@
           </div>
         </section>
       </div>
-      <div [style]="{display: currentStep === 2 ? 'block' : 'none'}" [@panel]="">
+      <div *ngIf="currentStep === 2" [@panel]="">
 <!--        {{form.get('cargoParams') | json}}-->
        <div *ngIf="currentStep === 2 && (this.form.get('cargo') && this.form.get('cargo').value)" formGroupName="cargo">
          <div class="form__fieldset form__fieldset--tags">
@@ -377,7 +377,7 @@
           </div>
         </section>
       </div>
-      <div [style]="{display: currentStep === 3 ? 'block' : 'none'}" [@panel]="">
+      <div *ngIf="currentStep === 3" [@panel]="">
         <section class="form__section form__section--w-underline">
           <h2 class="form__heading form__heading--w-counter">Отправитель</h2>
 <!--          {{{ data-list items='[-->

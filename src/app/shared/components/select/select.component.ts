@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DeviceDetectorService} from 'ngx-device-detector';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
@@ -15,6 +15,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
   ]
 })
 export class SelectComponent implements  ControlValueAccessor, OnInit {
+  @ViewChild('input', {read: ElementRef}) input: ElementRef;
 
   @Input() id;
   @Input() items;
@@ -23,29 +24,25 @@ export class SelectComponent implements  ControlValueAccessor, OnInit {
 
   public cssClass = 'select';
   public isSelectOpened = false;
-  public currentItem = null;
-  value: string;
+  public fieldValue = null;
+  public value: string;
 
-  constructor(public deviceService: DeviceDetectorService) { }
+  constructor(public deviceService: DeviceDetectorService) {}
 
-  changeValue(data) {
-    let value = null;
+  ngOnInit(): void {
+    this.setMods();
+  }
 
-    if (data.stopPropagation) {
-      data.stopPropagation();
-      value = data.target.value;
-    } else {
-      value = data.value;
-      this.currentItem = data;
-    }
+  changeValue(value) {
+    this.value = value;
+    this.onChange(value);
 
-    this.writeValue(value);
-    this.change.emit(value);
+    this.setFieldValue();
   }
 
   writeValue(value) {
     this.value = value;
-    this.onChange(value);
+    this.setFieldValue();
   }
 
   onChange: any = () => {
@@ -62,10 +59,6 @@ export class SelectComponent implements  ControlValueAccessor, OnInit {
 
   registerOnTouched(fn) {
     this.onTouched = fn;
-  }
-
-  ngOnInit(): void {
-    this.setMods();
   }
 
   openSelect() {
@@ -87,5 +80,15 @@ export class SelectComponent implements  ControlValueAccessor, OnInit {
     }
 
     this.cssClass += allMods;
+  }
+
+  setFieldValue() {
+    const selectItem = this.items.filter((item) => {
+      return item.value === this.value;
+    })[0];
+
+    if (selectItem) {
+      this.fieldValue = selectItem.name;
+    }
   }
 }
