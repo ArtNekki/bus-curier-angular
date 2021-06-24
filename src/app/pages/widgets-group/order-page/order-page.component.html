@@ -118,23 +118,24 @@
             </div>
             <div *ngIf="currentDepartureTab === DepartureTab.Courier" class="form__panel" [formGroupName]="FormControlName.Courier">
               <div class="form__fieldset form__fieldset--address">
-                <div *ngFor="let courierControl of getGroupControls(form.get(FormControlName.Departure).get(FormControlName.Courier))  | keyvalue: originalOrder" class="form__field">
-                  <label [for]="FormControlName.Courier + '-' + courierControl.key" class="form__label">{{ formGroupMeta.Courier[courierControl.key].label }}</label>
-                  <app-input [id]="FormControlName.Courier + '-' + courierControl.key"
-                             [type]="formGroupMeta.Courier[courierControl.key].type"
-                             [formControlName]="courierControl.key">
-                  </app-input>
-                </div>
+                <ng-template ngFor let-courierControl [ngForOf]="getGroupControls(form.get(FormControlName.Departure).get(FormControlName.Courier)) | keyvalue: originalOrder">
+                  <div *ngIf="courierControl.key !== FormControlName.CourierTime" class="form__field">
+                    <label [for]="FormControlName.Courier + '-' + courierControl.key" class="form__label">{{ formGroupMeta.Courier[courierControl.key].label }}</label>
+                    <app-input [id]="FormControlName.Courier + '-' + courierControl.key"
+                               [type]="formGroupMeta.Courier[courierControl.key].type"
+                               [formControlName]="courierControl.key">
+                    </app-input>
+                  </div>
+                </ng-template>
               </div>
-<!--              <section class="form__fieldset form__fieldset&#45;&#45;schedule">-->
-<!--                <label class="form__label form__label&#45;&#45;light">Удобное время для приезда курьера</label>-->
-<!--                <div class="form__field">-->
-<!--                  <app-radio formControlName="time" name="courier-time" value="8:00 - 14:00" checked="true">8:00 - 14:00</app-radio>-->
-<!--                </div>-->
-<!--                <div class="form__field">-->
-<!--                  <app-radio formControlName="time" name="courier-time" value="14:00 - 18:00">14:00 - 18:00</app-radio>-->
-<!--                </div>-->
-<!--              </section>-->
+              <section class="form__fieldset form__fieldset--schedule">
+                <label class="form__label form__label--light">Удобное время для приезда курьера</label>
+                <app-radio-group
+                  [items]="schedule"
+                  [name]="FormControlName.CourierTime"
+                  [formControlName]="FormControlName.CourierTime">
+                </app-radio-group>
+              </section>
             </div>
             <div class="form__field form__field--delivery-date">
               <label for="departure-date" class="form__label">Дата отправки<sup>*</sup></label>

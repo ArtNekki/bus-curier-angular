@@ -24,6 +24,7 @@ import FormControlName from '../../../core/maps/FormControlName';
 import fieldError from '../../../core/form/fieldError';
 import roles from '../../../mock-data/roles';
 import departments from '../../../mock-data/departments';
+import schedule from '../../../mock-data/schedule';
 
 @Component({
   selector: 'app-order-page',
@@ -55,6 +56,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
   public roles = [];
   public departments = [];
+  public schedule = [];
   public cities = cities;
   public form: FormGroup;
   public tags = [];
@@ -92,6 +94,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     this.roles = roles;
 
     this.departments = departments;
+    this.schedule = schedule;
   }
 
   ngAfterViewInit(): void {
