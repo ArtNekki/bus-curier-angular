@@ -19,22 +19,10 @@
     border-color: darken($gray-light-color, 10%);
   }
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 8px;
-    width: 4px;
-    height: 4px;
-    border: 1px solid $gray-dark-color;
-    border-top-color: transparent;
-    border-right-color: transparent;
-    transform: rotate3d(0, 0, 1, -45deg) translateY(-6px);
-  }
-
   &__field {
     @include input();
 
+    position: relative;
     display: flex;
     align-items: center;
 
@@ -42,9 +30,23 @@
       box-shadow: none;
     }
 
-    .form.error & {
-      border-color: $red-color;
+    .select--invalid & {
+      border: 1px solid $red-color;
       background-color: rgba($red-color, 0.5);
+      color: $red-color;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      width: 4px;
+      height: 4px;
+      border: 1px solid $gray-dark-color;
+      border-top-color: transparent;
+      border-right-color: transparent;
+      transform: rotate3d(0, 0, 1, -45deg) translateY(-6px);
     }
   }
 

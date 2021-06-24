@@ -15,7 +15,7 @@ export const individualGroup = new FormGroup({
   'middle-name': new FormControl('', [Validators.required]),
   email: new FormControl('', [Validators.required]),
   tel: new FormControl('', [Validators.required]),
-  role: new FormControl('', []),
+  role: new FormControl('', [Validators.required]),
 });
 
 export const entityGroup = new FormGroup({

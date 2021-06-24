@@ -1,6 +1,8 @@
-import {Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {DeviceDetectorService} from 'ngx-device-detector';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import State from '../../../core/maps/State';
+import {ModsService} from '../../../core/services/mods.service';
 
 @Component({
   selector: 'app-select',
@@ -14,7 +16,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
     }
   ]
 })
-export class SelectComponent implements  ControlValueAccessor, OnInit {
+export class SelectComponent implements  ControlValueAccessor, OnInit, OnChanges {
   @ViewChild('input', {read: ElementRef}) input: ElementRef;
 
   @Input() id;
@@ -22,15 +24,26 @@ export class SelectComponent implements  ControlValueAccessor, OnInit {
   @Input() mods;
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
-  public cssClass = 'select';
+  public cssClass;
   public isSelectOpened = false;
+  public isInvalid = false;
   public fieldValue = null;
   public value: string;
 
-  constructor(public deviceService: DeviceDetectorService) {}
+  constructor(public deviceService: DeviceDetectorService, private modsService: ModsService) {}
 
   ngOnInit(): void {
-    this.setMods();
+    this.cssClass = this.modsService.setMods('input', this.mods);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.mods) {
+      if (changes.mods.currentValue === State.Invalid) {
+        this.isInvalid = true;
+      } else {
+        this.isInvalid = false;
+      }
+    }
   }
 
   changeValue(value) {
@@ -67,19 +80,6 @@ export class SelectComponent implements  ControlValueAccessor, OnInit {
 
   closeSelect() {
     this.isSelectOpened = false;
-  }
-
-  setMods() {
-    let allMods = '';
-
-    if (this.mods !== 'undefined' && this.mods ) {
-      const modsList = this.mods.split(',');
-      for (const item of modsList) {
-        allMods = allMods + ' btn--' + item.trim();
-      }
-    }
-
-    this.cssClass += allMods;
   }
 
   setFieldValue() {

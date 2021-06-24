@@ -16,7 +16,12 @@
             <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl" [formGroupName]="UserType.Individual">
               <div *ngFor="let individualControl of getGroupControls(form.get(FormControlName.Author).get(UserType.Individual))  | keyvalue: originalOrder" class="form__field">
                 <label [for]="UserType.Individual + '-' + individualControl.key" class="form__label">{{formGroupMeta.Individual[individualControl.key].label}}<sup *ngIf="individualControl.value.errors && individualControl.value.hasError('required')">*</sup></label>
-                <app-select *ngIf="individualControl.key === FormControlName.Role; else input" [formControlName]="individualControl.key" [items]="roles"></app-select>
+                <app-select
+                  *ngIf="individualControl.key === FormControlName.Role; else input"
+                  [formControlName]="individualControl.key"
+                  [items]="roles"
+                  [mods]="(individualControl.value.invalid && individualControl.value.touched) && 'invalid'"
+                ></app-select>
                 <ng-template #input>
                   <app-input
                     [type]="formGroupMeta.Individual[individualControl.key].type"
