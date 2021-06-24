@@ -23,6 +23,7 @@ import formGroupMeta from '../../../core/form/formGroupMeta';
 import FormControlName from '../../../core/maps/FormControlName';
 import fieldError from '../../../core/form/fieldError';
 import roles from '../../../mock-data/roles';
+import departments from '../../../mock-data/departments';
 
 @Component({
   selector: 'app-order-page',
@@ -53,6 +54,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   public FormFieldError = fieldError;
 
   public roles = [];
+  public departments = [];
   public cities = cities;
   public form: FormGroup;
   public tags = [];
@@ -88,6 +90,8 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
     roles.unshift({value: '', name: 'Не выбрано'});
     this.roles = roles;
+
+    this.departments = departments;
   }
 
   ngAfterViewInit(): void {
@@ -107,13 +111,13 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.form.markAllAsTouched();
+    // this.form.markAllAsTouched();
 
     console.log('this.form', this.form);
 
-    if (this.form.invalid) {
-      return;
-    }
+    // if (this.form.invalid) {
+    //   return;
+    // }
 
     this.currentStep++;
 

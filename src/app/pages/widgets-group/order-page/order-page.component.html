@@ -93,11 +93,12 @@
             </div>
             <div class="form__fieldset form__fieldset--department">
               <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
-              <div class="form__field">
-                <app-radio formControlName="department-address" name="department-address" value="Владивосток, Карла Маркса 111" checked="checked">Владивосток, Карла Маркса 111</app-radio>
-              </div>
-              <div class="form__field">
-                <app-radio formControlName="department-address" name="department-address" value="Владивосток, Карла Маркса 22">Владивосток, Карла Маркса 22</app-radio>
+              <div *ngFor="let department of departments" class="form__field">
+                <app-radio
+                  [id]="department.id"
+                  formControlName="department-address"
+                  name="department-address">{{department.address}}
+                </app-radio>
               </div>
             </div>
             <div class="form__tabs">

@@ -16,11 +16,12 @@ export class RadioComponent implements ControlValueAccessor, OnInit {
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
   @Input() checked: boolean;
   @Input() id: string;
-  @Input() value: string;
+  @Input() data: any;
   @Input() name: string;
   @Input() mods;
 
   public cssClass;
+  public value;
 
   constructor(private modsService: ModsService) { }
 
@@ -31,14 +32,16 @@ export class RadioComponent implements ControlValueAccessor, OnInit {
   onChange: (_: any) => void = (_: any) => {};
   onTouched: () => void = () => {};
 
-  changeValue(value) {
-    this.value = value;
-    this.onChange(value);
-    this.change.emit(value);
+  changeValue(id) {
+    this.value = id;
+    this.onChange(id);
+    this.change.emit(id || this.checked);
+    console.log('value', id);
   }
 
   writeValue(value: any): void {
     this.value = value;
+    this.change.emit(value);
   }
 
   registerOnChange(fn) {
