@@ -1,8 +1,9 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {IAngularMyDpOptions, IMyDateModel} from 'angular-mydatepicker';
 import {DeviceDetectorService} from 'ngx-device-detector';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ModsService} from '../../../core/services/mods.service';
+import State from '../../../core/maps/State';
 
 @Component({
   selector: 'app-datepicker',
@@ -16,14 +17,15 @@ import {ModsService} from '../../../core/services/mods.service';
     }
   ]
 })
-export class DatepickerComponent implements ControlValueAccessor, OnInit {
+export class DatepickerComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   @Input() id;
   @Input() name;
   @Input() mods;
 
-  public cssClass;
-  public value;
+  public cssClass: string;
+  public value: string;
+  public isInvalid = false;
 
   dpOptions: IAngularMyDpOptions = {
     dateRange: false,
@@ -35,6 +37,16 @@ export class DatepickerComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit(): void {
     this.cssClass = this.modsService.setMods('datepicker', this.mods);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.mods) {
+      if (changes.mods.currentValue === State.Invalid) {
+        this.isInvalid = true;
+      } else {
+        this.isInvalid = false;
+      }
+    }
   }
 
   changeValue(date) {

@@ -9,5 +9,11 @@
 
   &__field {
     @include input();
+
+    .datepicker--invalid & {
+      border: 1px solid $red-color;
+      background-color: rgba($red-color, 0.5);
+      color: $red-color;
+    }
   }
 }

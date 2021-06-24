@@ -111,7 +111,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    // this.form.markAllAsTouched();
+    this.form.markAllAsTouched();
 
     console.log('this.form', this.form);
 

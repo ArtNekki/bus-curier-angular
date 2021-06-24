@@ -34,7 +34,7 @@ export const senderGroup = new FormGroup({
 export const departureGroup = new FormGroup({
   location: new FormControl('', []),
   'department-address': new FormControl('department-2', []),
-  date: new FormControl('', [])
+  date: new FormControl('', [Validators.required])
 });
 
 export const departmentGroup = new FormGroup({

@@ -138,7 +138,14 @@
             </div>
             <div class="form__field form__field--delivery-date">
               <label for="departure-date" class="form__label">Дата отправки<sup>*</sup></label>
-              <app-datepicker id="departure-date" formControlName="date"></app-datepicker>
+              <app-datepicker
+                id="departure-date"
+                formControlName="date"
+                [mods]="form.get('departure').get('date').invalid && form.get('departure').get('date').touched && 'invalid'">
+                <ng-container class="errors">
+                  <small *ngIf="getObjectKey(form.get('departure').get('date').errors).length">{{FormFieldError[getObjectKey(form.get('departure').get('date').errors)[0]]}}</small>
+                </ng-container>
+              </app-datepicker>
 <!--              {{{ input type="text" id="destination" name="destination" error="Не заполнено"}}}-->
             </div>
           </div>
