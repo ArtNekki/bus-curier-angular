@@ -1,2 +1,7 @@
-<input  *ngIf="deviceService.isMobile() || deviceService.isTablet()" type="date" [id]="id" [name]="name" #datepicker class="input input--date" (change)="changeValue(datepicker.value)">
-<input *ngIf="deviceService.isDesktop()" type="text" [id]="id" [name]="name" angular-mydatepicker [options]="dpOptions" locale="ru" #dp="angular-mydatepicker" class="input input--date" (click)="dp.openCalendar()" (dateChanged)="changeValue($event)">
+<div *ngIf="deviceService.isMobile() || deviceService.isTablet()" [class]="cssClass">
+  <input type="date" [id]="id" [name]="name" #datepicker class="datepicker__field" [ngModel]="value" (ngModelChange)="changeValue($event)">
+</div>
+
+<div *ngIf="deviceService.isDesktop()" [class]="cssClass">
+  <input type="text" [id]="id" [name]="name" [value]="value" angular-mydatepicker [options]="dpOptions" locale="ru" #dp="angular-mydatepicker" class="datepicker__field" (click)="dp.openCalendar()" (dateChanged)="changeValue($event)">
+</div>

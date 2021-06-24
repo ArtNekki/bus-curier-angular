@@ -93,14 +93,6 @@
             </div>
             <div class="form__fieldset form__fieldset--department">
               <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
-<!--              <div *ngFor="let department of departments" class="form__field">-->
-<!--                <app-radio-->
-<!--                  [id]="department.id"-->
-<!--                  formControlName="department-address"-->
-<!--                  name="department-address"-->
-<!--                  [checked]="formControl">{{department.address}}-->
-<!--                </app-radio>-->
-<!--              </div>-->
               <app-radio-group
                 [items]="departments"
                 name="department-address"
@@ -146,8 +138,7 @@
             </div>
             <div class="form__field form__field--delivery-date">
               <label for="departure-date" class="form__label">Дата отправки<sup>*</sup></label>
-              <app-input id="departure-date" formControlName="date"></app-input>
-<!--              <app-datapicker></app-datapicker>-->
+              <app-datepicker id="departure-date" formControlName="date"></app-datepicker>
 <!--              {{{ input type="text" id="destination" name="destination" error="Не заполнено"}}}-->
             </div>
           </div>

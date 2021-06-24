@@ -2,6 +2,7 @@ import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {IAngularMyDpOptions, IMyDateModel} from 'angular-mydatepicker';
 import {DeviceDetectorService} from 'ngx-device-detector';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ModsService} from '../../../core/services/mods.service';
 
 @Component({
   selector: 'app-datepicker',
@@ -15,10 +16,14 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
     }
   ]
 })
-export class DatepickerComponent implements ControlValueAccessor {
+export class DatepickerComponent implements ControlValueAccessor, OnInit {
 
   @Input() id;
   @Input() name;
+  @Input() mods;
+
+  public cssClass;
+  public value;
 
   dpOptions: IAngularMyDpOptions = {
     dateRange: false,
@@ -26,16 +31,21 @@ export class DatepickerComponent implements ControlValueAccessor {
     // other options...
   };
 
-  constructor(public deviceService: DeviceDetectorService) { }
+  constructor(public deviceService: DeviceDetectorService, private modsService: ModsService) { }
 
-  changeValue(data) {
-    const date = (data.singleDate && data.singleDate.formatted) || new Intl.DateTimeFormat('ru-Ru').format(new Date(data));
-    this.writeValue(date);
+  ngOnInit(): void {
+    this.cssClass = this.modsService.setMods('datepicker', this.mods);
+  }
+
+  changeValue(date) {
+    date = (date.singleDate && date.singleDate.formatted) || new Intl.DateTimeFormat('ru-Ru').format(new Date(date));
+    this.value = date;
+    console.log('date', this.value);
+    this.onChange(date.toString());
   }
 
   writeValue(value) {
-    // this.value = value;
-    this.onChange(value);
+    this.value = value;
   }
 
   onChange: any = () => {
