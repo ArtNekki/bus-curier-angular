@@ -1,7 +1,7 @@
 <div [formGroup]="form">
   <div formArrayName="parcels">
-    <div *ngFor="let parcelGroup of parcels.controls; let i = index" class="form__field" [formGroupName]="i">
-      <div *ngFor="let parcelControl of getGroupControls(parcelGroup) | keyvalue: originalOrder">
+    <div *ngFor="let parcelGroup of parcels.controls; let i = index" [formGroupName]="i" class="form__fieldset form__fieldset--package">
+      <div *ngFor="let parcelControl of getGroupControls(parcelGroup) | keyvalue: originalOrder" class="form__field">
         <label
           [for]="'sender-' + parcelControl.key"
           class="form__label">
@@ -13,9 +13,9 @@
           [formControlName]="parcelControl.key"
           [mods]="(parcelControl.value.invalid && parcelControl.value.touched) && 'invalid'"
         >
-          <ng-container class="errors">
-            <small *ngIf="getObjectKey(parcelControl.value.errors).length">{{FormFieldError[getObjectKey(parcelControl.value.errors)[0]]}}</small>
-          </ng-container>
+<!--          <ng-container class="errors">-->
+<!--            <small *ngIf="getObjectKey(parcelControl.value.errors).length">{{FormFieldError[getObjectKey(parcelControl.value.errors)[0]]}}</small>-->
+<!--          </ng-container>-->
         </app-input>
 <!--        [unit]="formGroupMeta.Parcel[parcelControl.key].unit"-->
       </div>
