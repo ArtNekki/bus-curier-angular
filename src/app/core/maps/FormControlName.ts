@@ -4,6 +4,7 @@ export default {
   Courier: 'courier',
   Fio: 'fio',
   Doc: 'doc',
+  Docs: 'docs',
   DocNumber: 'doc-number',
   Tel: 'tel',
   Street: 'street',
@@ -17,5 +18,10 @@ export default {
   Email: 'email',
   Role: 'role',
   CompanyName: 'company-name',
-  Address: 'address'
+  Address: 'address',
+  Type: 'type',
+  Cargo: 'cargo',
+  PlaceCount: 'place-count',
+  Parcels: 'parcels',
+  AutoDetails: 'auto-details'
 };

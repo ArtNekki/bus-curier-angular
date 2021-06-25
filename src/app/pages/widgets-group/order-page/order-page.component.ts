@@ -2,7 +2,6 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import cities from 'src/app/mock-data/cities';
 import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {animate, style, transition, trigger} from '@angular/animations';
-import GoodsType from '../../../core/maps/GoodsType';
 import {KeyValue} from '@angular/common';
 import {
   busGroup, cargoGroup,
@@ -68,14 +67,6 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   public currentAddService = AddService.Insurance;
   public currentDepartureTab = DepartureTab.Department;
   public currentPickupTab = PickupTab.Bus;
-  public GoodsType = GoodsType;
-
-  public goodsTypes = [
-    { id: GoodsType.Docs, name: 'Документы'},
-    { id: GoodsType.Parcels, name: 'Посылки'},
-    { id: GoodsType.AutoDetails, name: 'Автозапчасти'},
-    { id: GoodsType.Other, name: 'Другое'}
-  ];
 
   constructor() { }
 
@@ -88,7 +79,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     });
 
     this.tags.push(`cargo-${this.tags.length + 1}`);
-    this.currentCargoType.push('docs');
+    this.currentCargoType.push(FormControlName.Docs);
 
     roles.unshift({value: '', name: 'Не выбрано'});
     this.roles = roles;
@@ -133,8 +124,8 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       this.showDepartureTab(this.currentDepartureTab);
     }
 
-    if (this.currentStep === 2 && !((this.form as FormGroup).get('cargo'))) {
-      (this.form as FormGroup).addControl('cargo', cargoGroup);
+    if (this.currentStep === 2 && !((this.form as FormGroup).get(FormControlName.Cargo))) {
+      (this.form as FormGroup).addControl(FormControlName.Cargo, cargoGroup);
     }
 
     if (this.currentStep === 2 && !((this.form as FormGroup).get('recipient'))) {
@@ -158,7 +149,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   }
 
   get cargo() {
-    return this.form.get('cargo') as FormArray;
+    return this.form.get(FormControlName.Cargo) as FormArray;
   }
 
   // get cargoType() {
@@ -182,25 +173,25 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   addCargo() {
     const group = new FormGroup({
       type: new FormGroup({
-        docs: new FormGroup({
-          placeCount: new FormControl('', [])
+        [FormControlName.Docs]: new FormGroup({
+          [FormControlName.PlaceCount]: new FormControl('', [])
         }),
-        parcels: new FormArray([parcelGroup]),
-        autoDetails: new FormArray([
+        [FormControlName.Parcels]: new FormArray([parcelGroup]),
+        [FormControlName.AutoDetails]: new FormArray([
           new FormControl('', [])
         ]),
         other: new FormGroup({})
       })
     });
-    (this.form.get('cargo') as FormArray).push(group);
+    (this.form.get(FormControlName.Cargo) as FormArray).push(group);
 
-    this.currentCargoIndex = (this.form.get('cargo') as FormArray).length - 1;
-    this.currentCargoType.push('docs');
+    this.currentCargoIndex = (this.form.get(FormControlName.Cargo) as FormArray).length - 1;
+    this.currentCargoType.push(FormControlName.Docs);
   }
 
   deleteCargo(index: number) {
-    (this.form.get('cargo') as FormArray).removeAt(index);
-    this.currentCargoIndex = (this.form.get('cargo') as FormArray).length - 1;
+    (this.form.get(FormControlName.Cargo) as FormArray).removeAt(index);
+    this.currentCargoIndex = (this.form.get(FormControlName.Cargo) as FormArray).length - 1;
     this.currentCargoType.splice(index, 1);
   }
 
@@ -212,20 +203,20 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     this.currentCargoType.splice(index, 1, type);
 
     switch (type) {
-      case 'docs':
-        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('docs') as FormGroup).addControl('placeCount', new FormControl('', []));
-        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray).clear();
-        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('autoDetails') as FormArray).clear();
+      case FormControlName.Docs:
+        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).addControl(FormControlName.PlaceCount, new FormControl('', []));
+        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).clear();
+        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoDetails) as FormArray).clear();
         break;
-      case 'parcels':
-        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray).push(parcelGroup);
-        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('autoDetails') as FormArray).clear();
-        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('docs') as FormGroup).removeControl('placeCount');
+      case FormControlName.Parcels:
+        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).push(parcelGroup);
+        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoDetails) as FormArray).clear();
+        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).removeControl(FormControlName.PlaceCount);
         break;
-      case 'autoDetails':
-        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('autoDetails') as FormArray).push(new FormControl('', []));
-        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray).clear();
-        ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('docs') as FormGroup).removeControl('placeCount');
+      case FormControlName.AutoDetails:
+        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoDetails) as FormArray).push(new FormControl('', []));
+        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).clear();
+        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).removeControl(FormControlName.PlaceCount);
         break;
     }
   }
@@ -235,11 +226,11 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   }
 
   addParcelParams() {
-    ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray).push(parcelGroup);
+    ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).push(parcelGroup);
   }
 
   deleteParcelParams(index: number) {
-    const array = ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('parcels') as FormArray);
+    const array = ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray);
 
     if (array.length <= 1) {
       return;
@@ -251,11 +242,11 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   addAutoDetail() {
     const autoDetail = new FormControl('', []);
 
-    ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('autoDetails') as FormArray).push(autoDetail);
+    ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoDetails) as FormArray).push(autoDetail);
   }
 
   removeAutoDetail(index: number) {
-    const array = ((this.form.get('cargo') as FormArray).controls[this.currentCargoIndex].get('type').get('autoDetails') as FormArray);
+    const array = ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoDetails) as FormArray);
 
     if (array.length <= 1) {
       return;

@@ -1,5 +1,6 @@
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import AddService from '../maps/AddService';
+import FormControlName from '../maps/FormControlName';
 
 export const parcelGroup = new FormGroup({
   count: new FormControl('', []),
@@ -44,12 +45,12 @@ export const departmentGroup = new FormGroup({
 });
 
 export const cargoGroup = new FormArray([new FormGroup({
-  type: new FormGroup({
-    docs: new FormGroup({
-      placeCount: new FormControl('', [])
+  [FormControlName.Type]: new FormGroup({
+    [FormControlName.Docs]: new FormGroup({
+      [FormControlName.PlaceCount]: new FormControl('', [])
     }),
-    parcels: new FormArray([]),
-    autoDetails: new FormArray([]),
+    [FormControlName.Parcels]: new FormArray([]),
+    [FormControlName.AutoDetails]: new FormArray([]),
     other: new FormGroup({})
   }),
   packaging: new FormGroup({
