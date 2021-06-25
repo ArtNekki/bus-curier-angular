@@ -38,20 +38,13 @@ export class ParcelGroupComponent implements OnInit, ControlValueAccessor, Valid
 
   public form: FormGroup;
   public formGroupMeta = formGroupMeta;
-  // private parcelGroup = new FormGroup({
-  //   [FormControlName.PlaceCount]: new FormControl('', [Validators.required]),
-  //   [FormControlName.Weight]: new FormControl('', [Validators.required]),
-  //   [FormControlName.Width]: new FormControl('', [Validators.required]),
-  //   [FormControlName.Height]: new FormControl('', [Validators.required]),
-  //   [FormControlName.Length]: new FormControl('', [Validators.required])
-  // });
 
   constructor() { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
       parcels: new FormArray([
-        parcelGroup
+        new FormControl('')
       ])
     });
   }
@@ -70,19 +63,10 @@ export class ParcelGroupComponent implements OnInit, ControlValueAccessor, Valid
 
   public onTouched: () => void = () => {};
 
-  writeValue(val: any): void {
-    if (val) {
+  writeValue(value: any): void {
+    if (value) {
       this.parcels.clear();
-
-      const parcel = new FormGroup({});
-
-      val.forEach((item, i) => {
-        for (const[key, value] of Object.entries(item)) {
-          parcel.addControl(key, new FormControl(value, [Validators.required]));
-        }
-
-        this.parcels.push(parcel);
-      });
+      value.forEach(item => this.parcels.push(new FormControl(item)));
     }
   }
 
@@ -107,7 +91,7 @@ export class ParcelGroupComponent implements OnInit, ControlValueAccessor, Valid
   }
 
   addParcelParams() {
-    this.parcels.push(parcelGroup);
+    this.parcels.push(new FormControl(''));
   }
 
   deleteParcelParams(index: number) {

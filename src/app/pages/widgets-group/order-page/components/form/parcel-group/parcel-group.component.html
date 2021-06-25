@@ -1,24 +1,25 @@
 <div [formGroup]="form">
   <div formArrayName="parcels">
-    <div *ngFor="let parcelGroup of parcels.controls; let i = index" [formGroupName]="i" class="form__fieldset form__fieldset--package">
-      <div *ngFor="let parcelControl of getGroupControls(parcelGroup) | keyvalue: originalOrder" class="form__field">
-        <label
-          [for]="'parcel-' + parcelControl.key"
-          class="form__label">
-          {{formGroupMeta.Parcel[parcelControl.key].label}}
-          <sup *ngIf="parcelControl.value.errors && parcelControl.value.hasError('required')">*</sup>
-        </label>
-        <app-input
-          type="text"
-          [formControlName]="parcelControl.key"
-          [mods]="(parcelControl.value.invalid && parcelControl.value.touched) && 'invalid'"
-        >
-<!--          <ng-container class="errors">-->
-<!--            <small *ngIf="getObjectKey(parcelControl.value.errors).length">{{FormFieldError[getObjectKey(parcelControl.value.errors)[0]]}}</small>-->
-<!--          </ng-container>-->
-        </app-input>
-<!--        [unit]="formGroupMeta.Parcel[parcelControl.key].unit"-->
-      </div>
+    <div *ngFor="let parcelGroup of parcels.controls; let i = index">
+      <app-parcel [formControlName]="i"></app-parcel>
+      <!--      <div *ngFor="let parcelControl of getGroupControls(parcelGroup) | keyvalue: originalOrder" class="form__field">-->
+<!--        <label-->
+<!--          [for]="'parcel-' + parcelControl.key"-->
+<!--          class="form__label">-->
+<!--          {{formGroupMeta.Parcel[parcelControl.key].label}}-->
+<!--          <sup *ngIf="parcelControl.value.errors && parcelControl.value.hasError('required')">*</sup>-->
+<!--        </label>-->
+<!--        <app-input-->
+<!--          type="text"-->
+<!--          [formControlName]="parcelControl.key"-->
+<!--          [mods]="(parcelControl.value.invalid && parcelControl.value.touched) && 'invalid'"-->
+<!--        >-->
+<!--&lt;!&ndash;          <ng-container class="errors">&ndash;&gt;-->
+<!--&lt;!&ndash;            <small *ngIf="getObjectKey(parcelControl.value.errors).length">{{FormFieldError[getObjectKey(parcelControl.value.errors)[0]]}}</small>&ndash;&gt;-->
+<!--&lt;!&ndash;          </ng-container>&ndash;&gt;-->
+<!--        </app-input>-->
+<!--&lt;!&ndash;        [unit]="formGroupMeta.Parcel[parcelControl.key].unit"&ndash;&gt;-->
+<!--      </div>-->
       <div *ngIf="parcels.length > 1" class="form__field form__field--align-center">
         <label class="form__label">&#160;</label>
         <app-btn type="button" mods="delete" (click)="deleteParcelParams(i)">

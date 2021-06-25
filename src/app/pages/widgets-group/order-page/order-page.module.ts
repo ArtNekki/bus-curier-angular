@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import {SharedModule} from '../../../shared/shared.module';
 import {OrderPageComponent} from './order-page.component';
 import { ParcelGroupComponent } from './components/form/parcel-group/parcel-group.component';
+import { ParcelComponent } from './components/form/parcel/parcel.component';
 
 
 
 @NgModule({
   declarations: [
     OrderPageComponent,
-    ParcelGroupComponent
+    ParcelGroupComponent,
+    ParcelComponent
   ],
   imports: [
     CommonModule,
