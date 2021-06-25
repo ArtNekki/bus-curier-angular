@@ -165,152 +165,138 @@
            </app-tag>
            <app-tag type="add" (click)="addCargo()"></app-tag>
          </div>
-         <div *ngFor="let cargoParams of cargo.controls; let cargoIndex = index;"
-              class="form__section" [style]="{display: currentCargoIndex === cargoIndex ? 'block' : 'none'}" [@panel]="" [formGroupName]="cargoIndex">
-           <div class="form__fieldset form__fieldset--goods-type">
-             <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
-             <app-radio *ngFor="let cargoTypeControl of getGroupControls(cargoParams.get(FormControlName.Type)) | keyvalue: originalOrder;"
-                        [name]="'cargo-type-' + cargoIndex" (change)="selectCargoType(cargoTypeControl.key, cargoIndex)"
-                        [checked]="cargoTypeControl.key === currentCargoType">{{cargoTypeControl.key}}</app-radio>
-           </div>
-           <div [formGroupName]="FormControlName.Type">
-             <div *ngIf="currentCargoType[cargoIndex] === FormControlName.Docs" [formGroupName]="FormControlName.Docs">
-               <div class="form__field" [@panel]="">
-                 <label class="form__label">Количество мест</label>
-                 <app-counter
-                   [formControlName]="FormControlName.PlaceCount"
-                   [mods]="(cargoParams.get('type').get('docs').get('place-count').invalid && cargoParams.get('type').get('docs').get('place-count').touched) && 'invalid'"
-                 >
-                 </app-counter>
-               </div>
+         <ng-template ngFor let-cargoParams [ngForOf]="cargo.controls" let-cargoIndex = index>
+           <div *ngIf="currentCargoIndex === cargoIndex"
+                class="form__section" [@panel]="" [formGroupName]="cargoIndex">
+<!--             [style]="{display: currentCargoIndex === cargoIndex ? 'block' : 'none'}"-->
+             <div class="form__fieldset form__fieldset--goods-type">
+               <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
+               <app-radio *ngFor="let cargoTypeControl of getGroupControls(cargoParams.get(FormControlName.Type)) | keyvalue: originalOrder;"
+                          [name]="'cargo-type-' + cargoIndex" (change)="selectCargoType(cargoTypeControl.key, cargoIndex)"
+                          [checked]="cargoTypeControl.key === currentCargoType">{{cargoTypeControl.key}}</app-radio>
              </div>
-             <div *ngIf="currentCargoType[cargoIndex] === FormControlName.Parcels" [formGroupName]="FormControlName.Parcels">
-               <div>
-                 <div
-                   *ngFor="let parcel of getGroupControls(cargoParams.get(FormControlName.Type).get(FormControlName.Parcels)); let parcelIndex = index"
-                   class="form__fieldset form__fieldset--package" [formGroupName]="parcelIndex" [@panel]="">
-
-                   <div class="form__field" *ngFor="let field of getArrayControls(parcel) | keyvalue: originalOrder; let fieldIndex = index">
-                     <label class="form__label" for="parcel-count">{{ field.key }}</label>
-                     <app-input type="text" [formControlName]="field.key" [unit]="field.key"></app-input>
-                   </div>
-                   <div *ngIf="+getGroupControls(cargoParams.get(FormControlName.Type).get(FormControlName.Parcels)).length > 1" class="form__field form__field--align-center">
-                     <label class="form__label">&#160;</label>
-                     <app-btn type="button" mods="delete" (click)="deleteParcelParams(parcelIndex)">
-                       <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>
-                       Удалить
-                     </app-btn>
-                   </div>
+             <div [formGroupName]="FormControlName.Type">
+               <div *ngIf="currentCargoType[cargoIndex] === FormControlName.Docs" [formGroupName]="FormControlName.Docs">
+                 <div class="form__field" [@panel]="">
+                   <label class="form__label">Количество мест</label>
+                   222 {{cargoParams.get('type').get('docs').get('place-count').invalid && cargoParams.get('type').get('docs').get('place-count').touched}}
+                   <app-counter
+                     [formControlName]="FormControlName.PlaceCount"
+                     [mods]="(cargoParams.get('type').get('docs').get('place-count').invalid && cargoParams.get('type').get('docs').get('place-count').touched) && 'invalid'"
+                   >
+                   </app-counter>
                  </div>
                </div>
-               <app-btn type="button" (click)="addParcelParams()">Добавить еще 1 позицию</app-btn>
-             </div>
-             <div *ngIf="currentCargoType[cargoIndex] === FormControlName.AutoDetails" [formGroupName]="FormControlName.AutoDetails">
-               <label class="form__label">Выберите тип запчасти</label>
-               <div *ngFor="let autoDetail of getGroupControls(cargoParams.get(FormControlName.Type).get(FormControlName.AutoDetails)); let autoDetailIndex = index" class="form__fieldset form__fieldset--auto-part" [@panel]="">
-                 <app-select [items]="cities" [formControlName]="autoDetailIndex"></app-select>
-                 <app-btn *ngIf="+getGroupControls(cargoParams.get(FormControlName.Type).get(FormControlName.AutoDetails)).length > 1" type="button" mods="delete" (click)="removeAutoDetail(autoDetailIndex)">
-                   <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>
-                   Удалить
-                 </app-btn>
+               <div *ngIf="currentCargoType[cargoIndex] === FormControlName.Parcels">
+                 <app-parcel-group [formControlName]="FormControlName.Parcels"></app-parcel-group>
                </div>
-               <app-btn type="button" (click)="addAutoDetail()">Добавить еще 1 позицию</app-btn>
-               <dl class="form__details">
-                 <dt><b>Тип груза:</b></dt>
-                 <dd>Пожалуйста, выберите тип запчасти из списка. Если вы не нашли подходящей запчасти, рассчитайте стоимость обычной посылки.</dd>
-               </dl>
+               <div *ngIf="currentCargoType[cargoIndex] === FormControlName.AutoDetails" [formGroupName]="FormControlName.AutoDetails">
+                 <label class="form__label">Выберите тип запчасти</label>
+                 <div *ngFor="let autoDetail of getGroupControls(cargoParams.get(FormControlName.Type).get(FormControlName.AutoDetails)); let autoDetailIndex = index" class="form__fieldset form__fieldset--auto-part" [@panel]="">
+                   <app-select [items]="cities" [formControlName]="autoDetailIndex"></app-select>
+                   <app-btn *ngIf="+getGroupControls(cargoParams.get(FormControlName.Type).get(FormControlName.AutoDetails)).length > 1" type="button" mods="delete" (click)="removeAutoDetail(autoDetailIndex)">
+                     <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>
+                     Удалить
+                   </app-btn>
+                 </div>
+                 <app-btn type="button" (click)="addAutoDetail()">Добавить еще 1 позицию</app-btn>
+                 <dl class="form__details">
+                   <dt><b>Тип груза:</b></dt>
+                   <dd>Пожалуйста, выберите тип запчасти из списка. Если вы не нашли подходящей запчасти, рассчитайте стоимость обычной посылки.</dd>
+                 </dl>
+               </div>
+               <!--  <div data-content="goods-type-other">-->
+               <!--    Что-то другое ...-->
+               <!--  </div>-->
              </div>
-             <!--  <div data-content="goods-type-other">-->
-             <!--    Что-то другое ...-->
-             <!--  </div>-->
+             <!--           <section class="form__section" formGroupName="packaging">-->
+             <!--             <h2 class="form__heading">Упаковка:</h2>-->
+             <!--             <div class="form__fieldset form__fieldset&#45;&#45;boxing">-->
+             <!--               <div class="form__field">-->
+             <!--                 <app-checkbox formControlName="cardboard-box">-->
+             <!--                   <div class="text">Коробка картонная</div>-->
+             <!--                   <div class="meta">50 руб. - 180 руб.</div>-->
+             <!--                 </app-checkbox>-->
+             <!--               </div>-->
+             <!--               <div class="form__field">-->
+             <!--                 <app-checkbox formControlName="transparent-film">-->
+             <!--                   <div class="text">Пленка стрейч прозрачная</div>-->
+             <!--                   <div class="meta">30 руб. за 1 м.</div>-->
+             <!--                 </app-checkbox>-->
+             <!--               </div>-->
+             <!--               <div class="form__field">-->
+             <!--                 <app-checkbox formControlName="safe-pack">-->
+             <!--                   <div class="text">Сейф пакет</div>-->
+             <!--                   <div class="meta">10 руб.</div>-->
+             <!--                 </app-checkbox>-->
+             <!--               </div>-->
+             <!--               <div class="form__field">-->
+             <!--                 <app-checkbox formControlName="black-film">-->
+             <!--                   <div class="text">Пленка стрейч черная</div>-->
+             <!--                   <div class="meta">30 руб. за 1 м.</div>-->
+             <!--                 </app-checkbox>-->
+             <!--               </div>-->
+             <!--               <div class="form__field form__field&#45;&#45;span-2">-->
+             <!--                 <app-checkbox formControlName="bag-with-seal">-->
+             <!--                   <div class="text">Мешок полипропиленовый с пломбой</div>-->
+             <!--                   <div class="meta">50 руб. - 180 руб.</div>-->
+             <!--                 </app-checkbox>-->
+             <!--               </div>-->
+             <!--             </div>-->
+             <!--           </section>-->
+             <!--           <section class="form__section" formGroupName="add-services">-->
+             <!--             <h2 class="form__heading">Дополнительные услуги:</h2>-->
+             <!--             <dl class="form__fieldset">-->
+             <!--               <dt>-->
+             <!--                 <app-radio name="add-service" (click)="setAddService(AddService.Insurance)"-->
+             <!--                            [checked]="currentAddService === AddService.Insurance">-->
+             <!--                   Страхования-->
+             <!--&lt;!&ndash;                   <div class='tooltip'>&ndash;&gt;-->
+             <!--&lt;!&ndash;                     <p class='tooltip__text'>Страхование грузов</p>&ndash;&gt;-->
+             <!--&lt;!&ndash;                     <app-link href="#" mods="blue, sm">&ndash;&gt;-->
+             <!--&lt;!&ndash;                       Страхование грузов в Приморском крае&ndash;&gt;-->
+             <!--&lt;!&ndash;                     </app-link>&ndash;&gt;-->
+             <!--&lt;!&ndash;                   </div>&ndash;&gt;-->
+             <!--                 </app-radio>-->
+             <!--               </dt>-->
+             <!--               <dd *ngIf="currentAddService === AddService.Insurance" [@panel]="">-->
+             <!--                 <label for="insurance" class="form__label">Объявленная ценность</label>-->
+             <!--                 <app-input type="text" id="insurance" formControlName="insurance"></app-input>-->
+             <!--               </dd>-->
+             <!--               <dt>-->
+             <!--                 <app-radio name="add-service" (click)="setAddService(AddService.SmsForSender)"-->
+             <!--                            [checked]="currentAddService === AddService.SmsForSender">-->
+             <!--                   СМС-уведомления отправителю-->
+             <!--&lt;!&ndash;                   <div class='tooltip'>&ndash;&gt;-->
+             <!--&lt;!&ndash;                     <p class='tooltip__text'>Вся информация об отправке груза: гос. номер автобуса, маршрут, приблизительное&ndash;&gt;-->
+             <!--&lt;!&ndash;                       время прибытия - отправляется не только получателю, но и отправителю</p>&ndash;&gt;-->
+             <!--&lt;!&ndash;                     <div class='tooltip__meta'>Стоимость 30 ₽</div>&ndash;&gt;-->
+             <!--&lt;!&ndash;                   </div>&ndash;&gt;-->
+             <!--                 </app-radio>-->
+             <!--               </dt>-->
+             <!--               <dd *ngIf="currentAddService === AddService.SmsForSender" [@panel]="">-->
+             <!--                 <label for="sms-for-sender" class="form__label">Номер телефона</label>-->
+             <!--                 <app-input type="text" id="sms-for-sender" formControlName="sms-for-sender"></app-input>-->
+             <!--               </dd>-->
+             <!--               <dt>-->
+             <!--                 <app-radio name="add-service" (click)="setAddService(AddService.SmsForRecipient)"-->
+             <!--                            [checked]="currentAddService === AddService.SmsForRecipient">-->
+             <!--                   СМС-уведомления получателю-->
+             <!--&lt;!&ndash;                   <div class='tooltip'>&ndash;&gt;-->
+             <!--&lt;!&ndash;                     <p class='tooltip__text'>К информации об отправке груза: гос. номер автобуса, маршрут, приблизительное&ndash;&gt;-->
+             <!--&lt;!&ndash;                       время прибытия - добавляется ФИО отправителя и описание груза.</p>&ndash;&gt;-->
+             <!--&lt;!&ndash;                     <div class='tooltip__meta'>Стоимость 30 ₽</div>&ndash;&gt;-->
+             <!--&lt;!&ndash;                   </div>&ndash;&gt;-->
+             <!--                 </app-radio>-->
+             <!--               </dt>-->
+             <!--               <dd *ngIf="currentAddService === AddService.SmsForRecipient" [@panel]="">-->
+             <!--                 <label for="sms-for-recipient" class="form__label">Номер телефона</label>-->
+             <!--                 <app-input type="text" id="sms-for-recipient" formControlName="sms-for-recipient"></app-input>-->
+             <!--               </dd>-->
+             <!--             </dl>-->
+             <!--           </section>-->
            </div>
-<!--           <section class="form__section" formGroupName="packaging">-->
-<!--             <h2 class="form__heading">Упаковка:</h2>-->
-<!--             <div class="form__fieldset form__fieldset&#45;&#45;boxing">-->
-<!--               <div class="form__field">-->
-<!--                 <app-checkbox formControlName="cardboard-box">-->
-<!--                   <div class="text">Коробка картонная</div>-->
-<!--                   <div class="meta">50 руб. - 180 руб.</div>-->
-<!--                 </app-checkbox>-->
-<!--               </div>-->
-<!--               <div class="form__field">-->
-<!--                 <app-checkbox formControlName="transparent-film">-->
-<!--                   <div class="text">Пленка стрейч прозрачная</div>-->
-<!--                   <div class="meta">30 руб. за 1 м.</div>-->
-<!--                 </app-checkbox>-->
-<!--               </div>-->
-<!--               <div class="form__field">-->
-<!--                 <app-checkbox formControlName="safe-pack">-->
-<!--                   <div class="text">Сейф пакет</div>-->
-<!--                   <div class="meta">10 руб.</div>-->
-<!--                 </app-checkbox>-->
-<!--               </div>-->
-<!--               <div class="form__field">-->
-<!--                 <app-checkbox formControlName="black-film">-->
-<!--                   <div class="text">Пленка стрейч черная</div>-->
-<!--                   <div class="meta">30 руб. за 1 м.</div>-->
-<!--                 </app-checkbox>-->
-<!--               </div>-->
-<!--               <div class="form__field form__field&#45;&#45;span-2">-->
-<!--                 <app-checkbox formControlName="bag-with-seal">-->
-<!--                   <div class="text">Мешок полипропиленовый с пломбой</div>-->
-<!--                   <div class="meta">50 руб. - 180 руб.</div>-->
-<!--                 </app-checkbox>-->
-<!--               </div>-->
-<!--             </div>-->
-<!--           </section>-->
-<!--           <section class="form__section" formGroupName="add-services">-->
-<!--             <h2 class="form__heading">Дополнительные услуги:</h2>-->
-<!--             <dl class="form__fieldset">-->
-<!--               <dt>-->
-<!--                 <app-radio name="add-service" (click)="setAddService(AddService.Insurance)"-->
-<!--                            [checked]="currentAddService === AddService.Insurance">-->
-<!--                   Страхования-->
-<!--&lt;!&ndash;                   <div class='tooltip'>&ndash;&gt;-->
-<!--&lt;!&ndash;                     <p class='tooltip__text'>Страхование грузов</p>&ndash;&gt;-->
-<!--&lt;!&ndash;                     <app-link href="#" mods="blue, sm">&ndash;&gt;-->
-<!--&lt;!&ndash;                       Страхование грузов в Приморском крае&ndash;&gt;-->
-<!--&lt;!&ndash;                     </app-link>&ndash;&gt;-->
-<!--&lt;!&ndash;                   </div>&ndash;&gt;-->
-<!--                 </app-radio>-->
-<!--               </dt>-->
-<!--               <dd *ngIf="currentAddService === AddService.Insurance" [@panel]="">-->
-<!--                 <label for="insurance" class="form__label">Объявленная ценность</label>-->
-<!--                 <app-input type="text" id="insurance" formControlName="insurance"></app-input>-->
-<!--               </dd>-->
-<!--               <dt>-->
-<!--                 <app-radio name="add-service" (click)="setAddService(AddService.SmsForSender)"-->
-<!--                            [checked]="currentAddService === AddService.SmsForSender">-->
-<!--                   СМС-уведомления отправителю-->
-<!--&lt;!&ndash;                   <div class='tooltip'>&ndash;&gt;-->
-<!--&lt;!&ndash;                     <p class='tooltip__text'>Вся информация об отправке груза: гос. номер автобуса, маршрут, приблизительное&ndash;&gt;-->
-<!--&lt;!&ndash;                       время прибытия - отправляется не только получателю, но и отправителю</p>&ndash;&gt;-->
-<!--&lt;!&ndash;                     <div class='tooltip__meta'>Стоимость 30 ₽</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                   </div>&ndash;&gt;-->
-<!--                 </app-radio>-->
-<!--               </dt>-->
-<!--               <dd *ngIf="currentAddService === AddService.SmsForSender" [@panel]="">-->
-<!--                 <label for="sms-for-sender" class="form__label">Номер телефона</label>-->
-<!--                 <app-input type="text" id="sms-for-sender" formControlName="sms-for-sender"></app-input>-->
-<!--               </dd>-->
-<!--               <dt>-->
-<!--                 <app-radio name="add-service" (click)="setAddService(AddService.SmsForRecipient)"-->
-<!--                            [checked]="currentAddService === AddService.SmsForRecipient">-->
-<!--                   СМС-уведомления получателю-->
-<!--&lt;!&ndash;                   <div class='tooltip'>&ndash;&gt;-->
-<!--&lt;!&ndash;                     <p class='tooltip__text'>К информации об отправке груза: гос. номер автобуса, маршрут, приблизительное&ndash;&gt;-->
-<!--&lt;!&ndash;                       время прибытия - добавляется ФИО отправителя и описание груза.</p>&ndash;&gt;-->
-<!--&lt;!&ndash;                     <div class='tooltip__meta'>Стоимость 30 ₽</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                   </div>&ndash;&gt;-->
-<!--                 </app-radio>-->
-<!--               </dt>-->
-<!--               <dd *ngIf="currentAddService === AddService.SmsForRecipient" [@panel]="">-->
-<!--                 <label for="sms-for-recipient" class="form__label">Номер телефона</label>-->
-<!--                 <app-input type="text" id="sms-for-recipient" formControlName="sms-for-recipient"></app-input>-->
-<!--               </dd>-->
-<!--             </dl>-->
-<!--           </section>-->
-         </div>
+         </ng-template>
        </div>
         <section *ngIf="currentStep === 2 && (this.form.get('recipient') && this.form.get('recipient').value)" class="form__section" formGroupName="recipient">
           <h2 class="form__heading">Получатель:</h2>

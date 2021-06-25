@@ -176,7 +176,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
         [FormControlName.Docs]: new FormGroup({
           [FormControlName.PlaceCount]: new FormControl('', [])
         }),
-        [FormControlName.Parcels]: new FormArray([parcelGroup]),
+        [FormControlName.Parcels]: new FormControl(''),
         [FormControlName.AutoDetails]: new FormArray([
           new FormControl('', [])
         ]),
@@ -205,17 +205,17 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     switch (type) {
       case FormControlName.Docs:
         ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).addControl(FormControlName.PlaceCount, new FormControl('', []));
-        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).clear();
+        // ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).clear();
         ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoDetails) as FormArray).clear();
         break;
       case FormControlName.Parcels:
-        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).push(parcelGroup);
+        // ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).push(parcelGroup);
         ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoDetails) as FormArray).clear();
         ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).removeControl(FormControlName.PlaceCount);
         break;
       case FormControlName.AutoDetails:
         ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoDetails) as FormArray).push(new FormControl('', []));
-        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).clear();
+        // ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).clear();
         ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).removeControl(FormControlName.PlaceCount);
         break;
     }
