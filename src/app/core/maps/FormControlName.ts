@@ -23,7 +23,7 @@ export default {
   Cargo: 'cargo',
   PlaceCount: 'place-count',
   Parcels: 'parcels',
-  AutoDetails: 'auto-details',
+  AutoParts: 'auto-parts',
   Weight: 'weight',
   Width: 'width',
   Height: 'height',

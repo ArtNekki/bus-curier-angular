@@ -50,7 +50,7 @@ export const cargoGroup = new FormArray([new FormGroup({
       [FormControlName.PlaceCount]: new FormControl('', [Validators.required, Validators.min(1)])
     }),
     [FormControlName.Parcels]: new FormControl(''),
-    [FormControlName.AutoDetails]: new FormArray([]),
+    [FormControlName.AutoParts]: new FormControl(''),
     other: new FormGroup({})
   }),
   packaging: new FormGroup({

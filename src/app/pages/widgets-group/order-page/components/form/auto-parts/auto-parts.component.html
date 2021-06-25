@@ -1,0 +1,17 @@
+<ng-container [formGroup]="formGroup">
+  <label class="form__label">Выберите тип запчасти</label>
+ <ng-container formArrayName="parts">
+   <div *ngFor="let part of parts.controls; let i = index" class="form__fieldset form__fieldset--auto-part">
+     <app-select [items]="cities" [formControlName]="i"></app-select>
+     <app-btn *ngIf="+parts.length > 1" type="button" mods="delete" (click)="removeAutoPart(i)">
+       <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>
+       Удалить
+     </app-btn>
+   </div>
+ </ng-container>
+  <app-btn type="button" (click)="addAutoPart()">Добавить еще 1 позицию</app-btn>
+  <dl class="form__details">
+    <dt><b>Тип груза:</b></dt>
+    <dd>Пожалуйста, выберите тип запчасти из списка. Если вы не нашли подходящей запчасти, рассчитайте стоимость обычной посылки.</dd>
+  </dl>
+</ng-container>

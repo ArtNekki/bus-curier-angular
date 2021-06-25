@@ -177,9 +177,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
           [FormControlName.PlaceCount]: new FormControl('', [])
         }),
         [FormControlName.Parcels]: new FormControl(''),
-        [FormControlName.AutoDetails]: new FormArray([
-          new FormControl('', [])
-        ]),
+        [FormControlName.AutoParts]: new FormControl('', []),
         other: new FormGroup({})
       })
     });
@@ -202,23 +200,23 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   selectCargoType(type: string, index) {
     this.currentCargoType.splice(index, 1, type);
 
-    switch (type) {
-      case FormControlName.Docs:
-        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).addControl(FormControlName.PlaceCount, new FormControl('', []));
-        // ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).clear();
-        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoDetails) as FormArray).clear();
-        break;
-      case FormControlName.Parcels:
-        // ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).push(parcelGroup);
-        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoDetails) as FormArray).clear();
-        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).removeControl(FormControlName.PlaceCount);
-        break;
-      case FormControlName.AutoDetails:
-        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoDetails) as FormArray).push(new FormControl('', []));
-        // ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).clear();
-        ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).removeControl(FormControlName.PlaceCount);
-        break;
-    }
+    // switch (type) {
+    //   case FormControlName.Docs:
+    //     ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).addControl(FormControlName.PlaceCount, new FormControl('', []));
+    //     // ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).clear();
+    //     ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoParts) as FormArray).clear();
+    //     break;
+    //   case FormControlName.Parcels:
+    //     // ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).push(parcelGroup);
+    //     ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoParts) as FormArray).clear();
+    //     ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).removeControl(FormControlName.PlaceCount);
+    //     break;
+    //   case FormControlName.AutoParts:
+    //     ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoParts) as FormArray).push(new FormControl('', []));
+    //     // ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).clear();
+    //     ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).removeControl(FormControlName.PlaceCount);
+    //     break;
+    // }
   }
 
   originalOrder = (a: KeyValue<string, AbstractControl>, b: KeyValue<string, AbstractControl>): number => {
@@ -242,11 +240,11 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   addAutoDetail() {
     const autoDetail = new FormControl('', []);
 
-    ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoDetails) as FormArray).push(autoDetail);
+    ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoParts) as FormArray).push(autoDetail);
   }
 
   removeAutoDetail(index: number) {
-    const array = ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoDetails) as FormArray);
+    const array = ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoParts) as FormArray);
 
     if (array.length <= 1) {
       return;
