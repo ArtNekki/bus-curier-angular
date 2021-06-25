@@ -12,12 +12,15 @@
         [formControlName]="parcelControl.key"
         [mods]="(parcelControl.value.invalid && parcelControl.value.touched) && 'invalid'"
       >
-        <!--          <ng-container class="errors">-->
-        <!--            <small *ngIf="getObjectKey(parcelControl.value.errors).length">{{FormFieldError[getObjectKey(parcelControl.value.errors)[0]]}}</small>-->
-        <!--          </ng-container>-->
+        <!--[unit]="formGroupMeta.Parcel[parcelControl.key].unit"-->
       </app-input>
     </div>
-
-    <!--        [unit]="formGroupMeta.Parcel[parcelControl.key].unit"-->
+    <ng-content select=".close"></ng-content>
   </div>
+  <div *ngIf="isInvalid">Данные заполнены не корректно</div>
 </ng-container>
+
+
+<!--          <ng-container class="errors">-->
+<!--            <small *ngIf="getObjectKey(parcelControl.value.errors).length">{{FormFieldError[getObjectKey(parcelControl.value.errors)[0]]}}</small>-->
+<!--          </ng-container>-->

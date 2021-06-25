@@ -32,6 +32,7 @@ import formGroupMeta from '../../../../../../core/form/formGroupMeta';
 })
 export class ParcelComponent implements OnInit, ControlValueAccessor, Validator {
   public formGroupMeta = formGroupMeta;
+  public isInvalid = false;
 
   public parcelGroup = new FormGroup({
     [FormControlName.PlaceCount]: new FormControl('', [Validators.required]),
@@ -55,7 +56,6 @@ export class ParcelComponent implements OnInit, ControlValueAccessor, Validator 
   }
 
   registerOnChange(fn: any): void {
-    console.log('parcelGroup', this.parcelGroup)
     this.parcelGroup.valueChanges.subscribe(fn);
   }
 
@@ -68,7 +68,8 @@ export class ParcelComponent implements OnInit, ControlValueAccessor, Validator 
   }
 
   validate(c: AbstractControl): ValidationErrors | null{
-    console.log('Basic Info validation', c);
-    return this.parcelGroup.valid ? null : { invalidForm: {valid: false, message: 'basicInfoForm fields are invalid'}};
+    this.isInvalid = !this.parcelGroup.valid && this.parcelGroup.touched;
+
+    return this.parcelGroup.valid ? null : { invalidForm: {valid: false, message: 'Control invalid'}};
   }
 }
