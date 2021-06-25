@@ -11,6 +11,9 @@ import {
 } from '@angular/forms';
 import {KeyValue} from '@angular/common';
 import {map, tap} from 'rxjs/operators';
+import formGroupMeta from '../../../../../../core/form/formGroupMeta';
+import FormControlName from '../../../../../../core/maps/FormControlName';
+import fieldError from '../../../../../../core/form/fieldError';
 
 @Component({
   selector: 'app-parcel-group',
@@ -30,8 +33,10 @@ import {map, tap} from 'rxjs/operators';
   ]
 })
 export class ParcelGroupComponent implements OnInit, ControlValueAccessor, Validator {
+  public FormFieldError = fieldError;
 
   public form: FormGroup;
+  public formGroupMeta = formGroupMeta;
 
   constructor() { }
 
@@ -39,11 +44,11 @@ export class ParcelGroupComponent implements OnInit, ControlValueAccessor, Valid
     this.form = new FormGroup({
       parcels: new FormArray([
         new FormGroup({
-          count: new FormControl('', [Validators.required]),
-          weight: new FormControl('', [Validators.required]),
-          width: new FormControl('', [Validators.required]),
-          height: new FormControl('', [Validators.required]),
-          length: new FormControl('', [Validators.required])
+          [FormControlName.PlaceCount]: new FormControl('', [Validators.required]),
+          [FormControlName.Weight]: new FormControl('', [Validators.required]),
+          [FormControlName.Width]: new FormControl('', [Validators.required]),
+          [FormControlName.Height]: new FormControl('', [Validators.required]),
+          [FormControlName.Length]: new FormControl('', [Validators.required])
         })
       ])
     });
@@ -93,5 +98,9 @@ export class ParcelGroupComponent implements OnInit, ControlValueAccessor, Valid
   validate(c: AbstractControl): ValidationErrors | null {
     console.log("Basic Info validation", c);
     return this.form.valid ? null : { invalidForm: {valid: false, message: "basicInfoForm fields are invalid"}};
+  }
+
+  getObjectKey(object) {
+    return (object instanceof Object) && Object.keys(object);
   }
 }

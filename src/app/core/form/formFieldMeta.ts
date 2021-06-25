@@ -65,4 +65,28 @@ export default {
     label: 'Адрес',
     type: 'text'
   },
+  [FormControlName.PlaceCount]: {
+    label: 'Кол-во мест',
+    type: 'text'
+  },
+  [FormControlName.Weight]: {
+    label: 'Вес',
+    type: 'text',
+    unit: 'кг'
+  },
+  [FormControlName.Width]: {
+    label: 'Ширина',
+    type: 'text',
+    unit: 'см'
+  },
+  [FormControlName.Height]: {
+    label: 'Высота',
+    type: 'text',
+    unit: 'см'
+  },
+  [FormControlName.Length]: {
+    label: 'Длина',
+    type: 'text',
+    unit: 'см'
+  },
 };

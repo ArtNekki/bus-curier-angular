@@ -31,5 +31,12 @@ export default {
     [FormControlName.CompanyName]: formFieldMeta[FormControlName.CompanyName],
     [FormControlName.Address]: formFieldMeta.address,
     [FormControlName.Tel]: formFieldMeta.tel
+  },
+  Parcel: {
+    [FormControlName.PlaceCount]: formFieldMeta[FormControlName.PlaceCount],
+    [FormControlName.Weight]: formFieldMeta[FormControlName.Weight],
+    [FormControlName.Width]: formFieldMeta[FormControlName.Width],
+    [FormControlName.Height]: formFieldMeta[FormControlName.Height],
+    [FormControlName.Length]: formFieldMeta[FormControlName.Length]
   }
 };
