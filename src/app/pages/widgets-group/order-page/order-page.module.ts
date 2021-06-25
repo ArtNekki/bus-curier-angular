@@ -5,6 +5,7 @@ import {OrderPageComponent} from './order-page.component';
 import { ParcelGroupComponent } from './components/form/parcel-group/parcel-group.component';
 import { ParcelComponent } from './components/form/parcel/parcel.component';
 import { AutoPartsComponent } from './components/form/auto-parts/auto-parts.component';
+import { PackagingComponent } from './components/form/packaging/packaging.component';
 
 
 
@@ -13,7 +14,8 @@ import { AutoPartsComponent } from './components/form/auto-parts/auto-parts.comp
     OrderPageComponent,
     ParcelGroupComponent,
     ParcelComponent,
-    AutoPartsComponent
+    AutoPartsComponent,
+    PackagingComponent
   ],
   imports: [
     CommonModule,

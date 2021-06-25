@@ -197,41 +197,7 @@
                <!--    Что-то другое ...-->
                <!--  </div>-->
              </div>
-             <!--           <section class="form__section" formGroupName="packaging">-->
-             <!--             <h2 class="form__heading">Упаковка:</h2>-->
-             <!--             <div class="form__fieldset form__fieldset&#45;&#45;boxing">-->
-             <!--               <div class="form__field">-->
-             <!--                 <app-checkbox formControlName="cardboard-box">-->
-             <!--                   <div class="text">Коробка картонная</div>-->
-             <!--                   <div class="meta">50 руб. - 180 руб.</div>-->
-             <!--                 </app-checkbox>-->
-             <!--               </div>-->
-             <!--               <div class="form__field">-->
-             <!--                 <app-checkbox formControlName="transparent-film">-->
-             <!--                   <div class="text">Пленка стрейч прозрачная</div>-->
-             <!--                   <div class="meta">30 руб. за 1 м.</div>-->
-             <!--                 </app-checkbox>-->
-             <!--               </div>-->
-             <!--               <div class="form__field">-->
-             <!--                 <app-checkbox formControlName="safe-pack">-->
-             <!--                   <div class="text">Сейф пакет</div>-->
-             <!--                   <div class="meta">10 руб.</div>-->
-             <!--                 </app-checkbox>-->
-             <!--               </div>-->
-             <!--               <div class="form__field">-->
-             <!--                 <app-checkbox formControlName="black-film">-->
-             <!--                   <div class="text">Пленка стрейч черная</div>-->
-             <!--                   <div class="meta">30 руб. за 1 м.</div>-->
-             <!--                 </app-checkbox>-->
-             <!--               </div>-->
-             <!--               <div class="form__field form__field&#45;&#45;span-2">-->
-             <!--                 <app-checkbox formControlName="bag-with-seal">-->
-             <!--                   <div class="text">Мешок полипропиленовый с пломбой</div>-->
-             <!--                   <div class="meta">50 руб. - 180 руб.</div>-->
-             <!--                 </app-checkbox>-->
-             <!--               </div>-->
-             <!--             </div>-->
-             <!--           </section>-->
+             <app-packaging *ngIf="cargoIndex === currentCargoIndex" [formControlName]="FormControlName.Packaging"></app-packaging>
              <!--           <section class="form__section" formGroupName="add-services">-->
              <!--             <h2 class="form__heading">Дополнительные услуги:</h2>-->
              <!--             <dl class="form__fieldset">-->

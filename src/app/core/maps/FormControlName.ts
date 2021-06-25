@@ -27,5 +27,6 @@ export default {
   Weight: 'weight',
   Width: 'width',
   Height: 'height',
-  Length: 'length'
+  Length: 'length',
+  Packaging: 'packaging'
 };

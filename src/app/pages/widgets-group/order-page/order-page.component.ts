@@ -172,14 +172,15 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
   addCargo() {
     const group = new FormGroup({
-      type: new FormGroup({
+      [FormControlName.Type]: new FormGroup({
         [FormControlName.Docs]: new FormGroup({
           [FormControlName.PlaceCount]: new FormControl('', [])
         }),
         [FormControlName.Parcels]: new FormControl(''),
         [FormControlName.AutoParts]: new FormControl('', []),
         other: new FormGroup({})
-      })
+      }),
+      [FormControlName.Packaging]: new FormControl(''),
     });
     (this.form.get(FormControlName.Cargo) as FormArray).push(group);
 

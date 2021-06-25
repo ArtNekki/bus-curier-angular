@@ -53,13 +53,7 @@ export const cargoGroup = new FormArray([new FormGroup({
     [FormControlName.AutoParts]: new FormControl(''),
     other: new FormGroup({})
   }),
-  packaging: new FormGroup({
-    'cardboard-box': new FormControl(),
-    'transparent-film': new FormControl(),
-    'safe-pack': new FormControl(),
-    'black-film': new FormControl(),
-    'bag-with-seal': new FormControl()
-  }),
+  [FormControlName.Packaging]: new FormControl(''),
   'add-services': new FormGroup({
     [AddService.Insurance]: new FormControl('', []),
     [AddService.SmsForSender]: new FormControl('', []),
