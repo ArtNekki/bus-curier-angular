@@ -47,7 +47,7 @@ export const departmentGroup = new FormGroup({
 export const cargoGroup = new FormArray([new FormGroup({
   [FormControlName.Type]: new FormGroup({
     [FormControlName.Docs]: new FormGroup({
-      [FormControlName.PlaceCount]: new FormControl('', [])
+      [FormControlName.PlaceCount]: new FormControl('', [Validators.required, Validators.min(1)])
     }),
     [FormControlName.Parcels]: new FormArray([]),
     [FormControlName.AutoDetails]: new FormArray([]),

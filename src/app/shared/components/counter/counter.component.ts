@@ -1,6 +1,7 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ModsService} from '../../../core/services/mods.service';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import State from '../../../core/maps/State';
 
 @Component({
   selector: 'app-counter',
@@ -14,11 +15,12 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
     }
   ]
 })
-export class CounterComponent implements ControlValueAccessor, OnInit {
+export class CounterComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() mods;
 
   public cssClass;
   public currentCount = 0;
+  public isInvalid = false;
 
   constructor(private modsService: ModsService) { }
 
@@ -26,12 +28,23 @@ export class CounterComponent implements ControlValueAccessor, OnInit {
     this.cssClass = this.modsService.setMods('counter', this.mods);
   }
 
-  changeValue(data) {
-    this.writeValue(data);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.mods) {
+      if (changes.mods.currentValue === State.Invalid) {
+        this.isInvalid = true;
+      } else {
+        this.isInvalid = false;
+      }
+    }
   }
 
-  writeValue(value) {
-    this.onChange(value);
+  changeValue(count) {
+    this.currentCount = count;
+    this.onChange(count);
+  }
+
+  writeValue(count) {
+    this.currentCount = count || 0;
   }
 
   onChange: any = () => {

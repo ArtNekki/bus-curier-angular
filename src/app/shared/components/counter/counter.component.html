@@ -1,4 +1,4 @@
-<div [class]="cssClass">
+<div [class]="cssClass" [class.counter--invalid]="isInvalid">
   <button type="button" class="counter__btn" (click)="countDown()">
     <svg-icon class="icon" src="assets/img/svg/minus.svg" width="19" height="19"></svg-icon>
   </button>

@@ -177,7 +177,11 @@
              <div *ngIf="currentCargoType[cargoIndex] === FormControlName.Docs" [formGroupName]="FormControlName.Docs">
                <div class="form__field" [@panel]="">
                  <label class="form__label">Количество мест</label>
-                 <app-counter [formControlName]="FormControlName.PlaceCount"></app-counter>
+                 <app-counter
+                   [formControlName]="FormControlName.PlaceCount"
+                   [mods]="(cargoParams.get('type').get('docs').get('place-count').invalid && cargoParams.get('type').get('docs').get('place-count').touched) && 'invalid'"
+                 >
+                 </app-counter>
                </div>
              </div>
              <div *ngIf="currentCargoType[cargoIndex] === FormControlName.Parcels" [formGroupName]="FormControlName.Parcels">
