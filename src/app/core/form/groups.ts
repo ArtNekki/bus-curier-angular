@@ -2,12 +2,12 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import AddService from '../maps/AddService';
 import FormControlName from '../maps/FormControlName';
 
-export const parcelGroup = new FormGroup({
-  count: new FormControl('', []),
-  weight: new FormControl('', []),
-  width: new FormControl('', []),
-  height: new FormControl('', []),
-  length: new FormControl('', [])
+export const parcelGroup =  new FormGroup({
+  [FormControlName.PlaceCount]: new FormControl('', [Validators.required]),
+  [FormControlName.Weight]: new FormControl('', [Validators.required]),
+  [FormControlName.Width]: new FormControl('', [Validators.required]),
+  [FormControlName.Height]: new FormControl('', [Validators.required]),
+  [FormControlName.Length]: new FormControl('', [Validators.required])
 });
 
 export const individualGroup = new FormGroup({

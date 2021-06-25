@@ -14,6 +14,7 @@ import {map, tap} from 'rxjs/operators';
 import formGroupMeta from '../../../../../../core/form/formGroupMeta';
 import FormControlName from '../../../../../../core/maps/FormControlName';
 import fieldError from '../../../../../../core/form/fieldError';
+import {parcelGroup} from '../../../../../../core/form/groups';
 
 @Component({
   selector: 'app-parcel-group',
@@ -37,19 +38,20 @@ export class ParcelGroupComponent implements OnInit, ControlValueAccessor, Valid
 
   public form: FormGroup;
   public formGroupMeta = formGroupMeta;
+  // private parcelGroup = new FormGroup({
+  //   [FormControlName.PlaceCount]: new FormControl('', [Validators.required]),
+  //   [FormControlName.Weight]: new FormControl('', [Validators.required]),
+  //   [FormControlName.Width]: new FormControl('', [Validators.required]),
+  //   [FormControlName.Height]: new FormControl('', [Validators.required]),
+  //   [FormControlName.Length]: new FormControl('', [Validators.required])
+  // });
 
   constructor() { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
       parcels: new FormArray([
-        new FormGroup({
-          [FormControlName.PlaceCount]: new FormControl('', [Validators.required]),
-          [FormControlName.Weight]: new FormControl('', [Validators.required]),
-          [FormControlName.Width]: new FormControl('', [Validators.required]),
-          [FormControlName.Height]: new FormControl('', [Validators.required]),
-          [FormControlName.Length]: new FormControl('', [Validators.required])
-        })
+        parcelGroup
       ])
     });
   }
@@ -102,5 +104,17 @@ export class ParcelGroupComponent implements OnInit, ControlValueAccessor, Valid
 
   getObjectKey(object) {
     return (object instanceof Object) && Object.keys(object);
+  }
+
+  addParcelParams() {
+    this.parcels.push(parcelGroup);
+  }
+
+  deleteParcelParams(index: number) {
+    if (this.parcels.length <= 1) {
+      return;
+    }
+
+    this.parcels.removeAt(index);
   }
 }
