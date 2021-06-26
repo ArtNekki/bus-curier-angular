@@ -29,13 +29,14 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
   onTouched: () => void = () => {};
 
   changeValue(value) {
-    this.writeValue(value);
-    this.change.emit(value);
+    this.value = value;
+    this.onChange(value);
+    // this.change.emit(value);
   }
 
   writeValue(value: boolean): void {
     this.value = value;
-    this.onChange(this.value);
+    // this.change.emit(value);
   }
 
   registerOnChange(fn) {

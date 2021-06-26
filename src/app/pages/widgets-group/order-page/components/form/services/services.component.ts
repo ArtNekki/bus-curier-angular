@@ -46,7 +46,7 @@ export class ServicesComponent implements OnInit, ControlValueAccessor, Validato
   constructor() { }
 
   ngOnInit(): void {
-    this.currentService = this.Service.Insurance;
+    // this.currentService = this.Service.Insurance;
 
     this.formGroup = new FormGroup({
       [this.Service.Insurance]: new FormControl(''),

@@ -193,12 +193,9 @@
                <div *ngIf="currentCargoType[cargoIndex] === FormControlName.AutoParts">
                  <app-auto-parts [formControlName]="FormControlName.AutoParts"></app-auto-parts>
                </div>
-               <!--  <div data-content="goods-type-other">-->
-               <!--    Что-то другое ...-->
-               <!--  </div>-->
              </div>
              <app-packaging [formControlName]="FormControlName.Packaging"></app-packaging>
-<!--             <app-services></app-services>-->
+             <app-services formControlName="services"></app-services>
            </div>
          </ng-template>
        </div>
