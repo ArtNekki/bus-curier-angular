@@ -6,6 +6,7 @@ import { ParcelGroupComponent } from './components/form/parcel-group/parcel-grou
 import { ParcelComponent } from './components/form/parcel/parcel.component';
 import { AutoPartsComponent } from './components/form/auto-parts/auto-parts.component';
 import { PackagingComponent } from './components/form/packaging/packaging.component';
+import { ServicesComponent } from './components/form/services/services.component';
 
 
 
@@ -15,7 +16,8 @@ import { PackagingComponent } from './components/form/packaging/packaging.compon
     ParcelGroupComponent,
     ParcelComponent,
     AutoPartsComponent,
-    PackagingComponent
+    PackagingComponent,
+    ServicesComponent
   ],
   imports: [
     CommonModule,

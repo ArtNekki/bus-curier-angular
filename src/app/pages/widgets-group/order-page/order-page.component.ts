@@ -181,6 +181,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
         other: new FormGroup({})
       }),
       [FormControlName.Packaging]: new FormControl(''),
+      services: new FormControl('')
     });
     (this.form.get(FormControlName.Cargo) as FormArray).push(group);
 

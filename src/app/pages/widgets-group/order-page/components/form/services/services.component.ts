@@ -1,58 +1,63 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
+import {animate, style, transition, trigger} from '@angular/animations';
 import {
   AbstractControl,
   ControlValueAccessor,
-  FormArray,
   FormControl,
-  FormGroup,
-  NG_VALIDATORS,
+  FormGroup, NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
-  ValidationErrors, Validator
+  ValidationErrors,
+  Validator
 } from '@angular/forms';
-import {map} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-packaging',
-  templateUrl: './packaging.component.html',
-  styleUrls: ['./packaging.component.scss'],
+  selector: 'app-services',
+  templateUrl: './services.component.html',
+  styleUrls: ['./services.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => PackagingComponent),
+      useExisting: forwardRef(() => ServicesComponent),
       multi: true
     },
     {
       provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => PackagingComponent),
+      useExisting: forwardRef(() => ServicesComponent),
       multi: true
     }
   ],
+  animations: [trigger('panel', [
+    transition('void => *', [
+      style({opacity: 0}),
+      animate('200ms')
+    ])
+  ])]
 })
-export class PackagingComponent implements OnInit, ControlValueAccessor, Validator {
-  public formGroup: FormGroup;
-  public ControlName = {
-    CardBox: 'cardboard-box',
-    TransparentFilm: 'transparent-film',
-    SafePack: 'safe-pack',
-    BlackFilm: 'black-film',
-    BagWithSeal: 'bag-with-seal'
+export class ServicesComponent implements OnInit, ControlValueAccessor, Validator {
+  public Service = {
+    Insurance: 'insurance',
+    SmsForSender: 'sms-for-sender',
+    SmsForRecipient: 'sms-for-recipient'
   };
+
+  public formGroup: FormGroup;
+  public currentService: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.currentService = this.Service.Insurance;
+
     this.formGroup = new FormGroup({
-        [this.ControlName.CardBox]: new FormControl(''),
-        [this.ControlName.TransparentFilm]: new FormControl(''),
-        [this.ControlName.SafePack]: new FormControl(''),
-        [this.ControlName.BlackFilm]: new FormControl(''),
-        [this.ControlName.BagWithSeal]: new FormControl(''),
+      [this.Service.Insurance]: new FormControl(''),
+      [this.Service.SmsForSender]: new FormControl(''),
+      [this.Service.SmsForRecipient]: new FormControl('')
     });
   }
 
-  // public get items(): FormArray {
-  //   return this.formGroup.get('items') as FormArray;
-  // }
+  showService(service: string) {
+    this.currentService = service;
+  }
 
   public onTouched: () => void = () => {};
 

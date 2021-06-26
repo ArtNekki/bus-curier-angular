@@ -1,0 +1,51 @@
+<section class="form__section" [formGroup]="formGroup">
+ <h2 class="form__heading">Дополнительные услуги:</h2>
+ <dl class="form__fieldset">
+   <dt>
+     <app-radio name="add-service" (click)="showService(Service.Insurance)"
+                [checked]="currentService === Service.Insurance">
+       Страхования
+<!--                   <div class='tooltip'>-->
+<!--                     <p class='tooltip__text'>Страхование грузов</p>-->
+<!--                     <app-link href="#" mods="blue, sm">-->
+<!--                       Страхование грузов в Приморском крае-->
+<!--                     </app-link>-->
+<!--                   </div>-->
+     </app-radio>
+   </dt>
+   <dd *ngIf="currentService === Service.Insurance" [@panel]="">
+     <label for="insurance" class="form__label">Объявленная ценность</label>
+     <app-input type="text" id="insurance" [formControlName]="Service.Insurance"></app-input>
+   </dd>
+   <dt>
+     <app-radio name="add-service" (click)="showService(Service.SmsForSender)"
+                [checked]="currentService === Service.SmsForSender">
+       СМС-уведомления отправителю
+<!--                   <div class='tooltip'>-->
+<!--                     <p class='tooltip__text'>Вся информация об отправке груза: гос. номер автобуса, маршрут, приблизительное-->
+<!--                       время прибытия - отправляется не только получателю, но и отправителю</p>-->
+<!--                     <div class='tooltip__meta'>Стоимость 30 ₽</div>-->
+<!--                   </div>-->
+     </app-radio>
+   </dt>
+   <dd *ngIf="currentService === Service.SmsForSender" [@panel]="">
+     <label for="sms-for-sender" class="form__label">Номер телефона</label>
+     <app-input type="text" id="sms-for-sender" [formControlName]="Service.SmsForSender"></app-input>
+   </dd>
+   <dt>
+     <app-radio name="add-service" (click)="showService(Service.SmsForRecipient)"
+                [checked]="currentService === Service.SmsForRecipient">
+       СМС-уведомления получателю
+<!--                   <div class='tooltip'>-->
+<!--                     <p class='tooltip__text'>К информации об отправке груза: гос. номер автобуса, маршрут, приблизительное-->
+<!--                       время прибытия - добавляется ФИО отправителя и описание груза.</p>-->
+<!--                     <div class='tooltip__meta'>Стоимость 30 ₽</div>-->
+<!--                   </div>-->
+     </app-radio>
+   </dt>
+   <dd *ngIf="currentService === Service.SmsForRecipient" [@panel]="">
+     <label for="sms-for-recipient" class="form__label">Номер телефона</label>
+     <app-input type="text" id="sms-for-recipient" [formControlName]="Service.SmsForRecipient"></app-input>
+   </dd>
+ </dl>
+</section>
