@@ -8,6 +8,7 @@ import { AutoPartsComponent } from './components/form/auto-parts/auto-parts.comp
 import { PackagingComponent } from './components/form/packaging/packaging.component';
 import { ServicesComponent } from './components/form/services/services.component';
 import { RecipientComponent } from './components/form/recipient/recipient.component';
+import { IndividualComponent } from './components/form/individual/individual.component';
 
 
 
@@ -19,7 +20,8 @@ import { RecipientComponent } from './components/form/recipient/recipient.compon
     AutoPartsComponent,
     PackagingComponent,
     ServicesComponent,
-    RecipientComponent
+    RecipientComponent,
+    IndividualComponent
   ],
   imports: [
     CommonModule,

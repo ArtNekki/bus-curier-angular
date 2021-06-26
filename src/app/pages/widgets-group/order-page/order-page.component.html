@@ -13,30 +13,7 @@
             <button type="button" [class.active]="currentUserType === UserType.Entity" (click)="setCurrentUserType(UserType.Entity)">Юридическое лицо</button>
           </div>
           <div *ngIf="currentUserType === UserType.Individual" class="form__panel form__panel--mg-top">
-            <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl" [formGroupName]="UserType.Individual">
-              <div *ngFor="let individualControl of getGroupControls(form.get(FormControlName.Author).get(UserType.Individual))  | keyvalue: originalOrder" class="form__field">
-                <label [for]="UserType.Individual + '-' + individualControl.key" class="form__label">{{formGroupMeta.Individual[individualControl.key].label}}<sup *ngIf="individualControl.value.errors && individualControl.value.hasError('required')">*</sup></label>
-                <app-select
-                  *ngIf="individualControl.key === FormControlName.Role; else input"
-                  [formControlName]="individualControl.key"
-                  [items]="roles"
-                  [mods]="(individualControl.value.invalid && individualControl.value.touched) && 'invalid'"
-                ></app-select>
-                <ng-template #input>
-                  <app-input
-                    [type]="formGroupMeta.Individual[individualControl.key].type"
-                    [id]="UserType.Individual + '-' + individualControl.key"
-                    [formControlName]="individualControl.key"
-                    [mask]="formGroupMeta.Individual[individualControl.key].mask" [prefix]="formGroupMeta.Individual[individualControl.key].prefix"
-                    [mods]="(individualControl.value.invalid && individualControl.value.touched) && 'invalid'"
-                  >
-                    <ng-container class="errors">
-                      <small *ngIf="getObjectKey(individualControl.value.errors).length">{{FormFieldError[getObjectKey(individualControl.value.errors)[0]]}}</small>
-                    </ng-container>
-                  </app-input>
-                </ng-template>
-              </div>
-            </div>
+            <app-individual></app-individual>
           </div>
           <div *ngIf="currentUserType === UserType.Entity" class="form__panel form__panel--mg-top">
             <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl" [formGroupName]="UserType.Entity">
@@ -200,20 +177,7 @@
          </ng-template>
        </div>
        <app-recipient [formControlName]="FormControlName.Recipient"></app-recipient>
-<!--        <section *ngIf="currentStep === 2 && (this.form.get('recipient') && this.form.get('recipient').value)" class="form__section" formGroupName="recipient">-->
-<!--          <h2 class="form__heading">Получатель:</h2>-->
-<!--          <div class="form__fieldset form__fieldset&#45;&#45;2-col-sm">-->
-<!--            <div class="form__field form__field&#45;&#45;full">-->
-<!--              <label for="fio" class="form__label">ФИО<sup>*</sup></label>-->
-<!--              <app-input type="text" formControlName="fio"></app-input>-->
-<!--&lt;!&ndash;              {{{ input type="text" id="fio" name="fio" error="Не заполнено"}}}&ndash;&gt;-->
-<!--            </div>-->
-<!--            <div class="form__field">-->
-<!--              <label for="tel" class="form__label">Номер телефона<sup>*</sup></label>-->
-<!--              <app-input type="tel" formControlName="tel"></app-input>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </section>-->
+
         <section *ngIf="currentStep === 2 && (this.form.get('pickup') && this.form.get('pickup').value)"  class="form__section" formGroupName="pickup">
           <h2 class="form__heading">Пункт получения</h2>
           <div class="form__fieldset form__fieldset--pickup-point form__fieldset--row-gap-lg">

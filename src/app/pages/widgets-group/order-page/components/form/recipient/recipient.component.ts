@@ -33,10 +33,11 @@ import formFieldMeta from '../../../../../../core/form/formFieldMeta';
   ]
 })
 export class RecipientComponent implements OnInit, ControlValueAccessor, Validator {
-  public formGroup: FormGroup;
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
+
+  public formGroup: FormGroup;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService) { }
