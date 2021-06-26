@@ -13,7 +13,7 @@
             <button type="button" [class.active]="currentUserType === UserType.Entity" (click)="setCurrentUserType(UserType.Entity)">Юридическое лицо</button>
           </div>
           <div *ngIf="currentUserType === UserType.Individual" class="form__panel form__panel--mg-top">
-            <app-individual></app-individual>
+            <app-individual [formControlName]="UserType.Individual"></app-individual>
           </div>
           <div *ngIf="currentUserType === UserType.Entity" class="form__panel form__panel--mg-top">
             <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl" [formGroupName]="UserType.Entity">

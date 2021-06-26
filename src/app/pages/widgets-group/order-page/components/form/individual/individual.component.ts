@@ -1,5 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, forwardRef, OnInit} from '@angular/core';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormControl,
+  FormGroup, NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator,
+  Validators
+} from '@angular/forms';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import FormControlName from 'src/app/core/maps/FormControlName';
@@ -10,9 +19,21 @@ import roles from 'src/app/mock-data/roles';
 @Component({
   selector: 'app-individual',
   templateUrl: './individual.component.html',
-  styleUrls: ['./individual.component.scss']
+  styleUrls: ['./individual.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => IndividualComponent),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => IndividualComponent),
+      multi: true
+    }
+  ]
 })
-export class IndividualComponent implements OnInit {
+export class IndividualComponent implements OnInit, ControlValueAccessor, Validator {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
@@ -32,5 +53,28 @@ export class IndividualComponent implements OnInit {
       [FormControlName.Tel]: new FormControl('', [Validators.required]),
       [FormControlName.Role]: new FormControl('', [Validators.required]),
     });
+  }
+
+  public onTouched: () => void = () => {};
+
+  writeValue(value: any): void {
+    if (value) {
+      this.formGroup.setValue(value, { emitEvent: false });
+    }
+  }
+
+  registerOnChange(fn: any): void {
+    this.formGroup.valueChanges.subscribe(fn);
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+  // setDisabledState?(isDisabled: boolean): void {
+  //   isDisabled ? this.formGroup.disable() : this.formGroup.enable();
+  // }
+
+  validate(c: AbstractControl): ValidationErrors | null {
+    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'recipient are invalid'}};
   }
 }
