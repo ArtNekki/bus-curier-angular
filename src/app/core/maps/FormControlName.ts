@@ -30,5 +30,6 @@ export default {
   Length: 'length',
   Packaging: 'packaging',
   Recipient: 'recipient',
-  Individual: 'individual'
+  Individual: 'individual',
+  Sender: 'sender'
 };

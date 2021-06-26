@@ -10,6 +10,7 @@ import { ServicesComponent } from './components/form/services/services.component
 import { RecipientComponent } from './components/form/recipient/recipient.component';
 import { IndividualComponent } from './components/form/individual/individual.component';
 import { EntityComponent } from './components/form/entity/entity.component';
+import { SenderComponent } from './components/form/sender/sender.component';
 
 
 
@@ -23,7 +24,8 @@ import { EntityComponent } from './components/form/entity/entity.component';
     ServicesComponent,
     RecipientComponent,
     IndividualComponent,
-    EntityComponent
+    EntityComponent,
+    SenderComponent
   ],
   imports: [
     CommonModule,
