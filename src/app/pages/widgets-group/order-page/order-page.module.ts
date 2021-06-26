@@ -9,6 +9,7 @@ import { PackagingComponent } from './components/form/packaging/packaging.compon
 import { ServicesComponent } from './components/form/services/services.component';
 import { RecipientComponent } from './components/form/recipient/recipient.component';
 import { IndividualComponent } from './components/form/individual/individual.component';
+import { EntityComponent } from './components/form/entity/entity.component';
 
 
 
@@ -21,7 +22,8 @@ import { IndividualComponent } from './components/form/individual/individual.com
     PackagingComponent,
     ServicesComponent,
     RecipientComponent,
-    IndividualComponent
+    IndividualComponent,
+    EntityComponent
   ],
   imports: [
     CommonModule,

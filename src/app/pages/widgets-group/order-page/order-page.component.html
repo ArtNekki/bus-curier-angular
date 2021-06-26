@@ -16,22 +16,7 @@
             <app-individual [formControlName]="UserType.Individual"></app-individual>
           </div>
           <div *ngIf="currentUserType === UserType.Entity" class="form__panel form__panel--mg-top">
-            <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl" [formGroupName]="UserType.Entity">
-              <div *ngFor="let entityControl of getGroupControls(form.get(FormControlName.Author).get(UserType.Entity)) | keyvalue: originalOrder" class="form__field">
-                <label [for]="UserType.Entity + '-' + entityControl.key" class="form__label">{{formGroupMeta.Entity[entityControl.key].label}}<sup *ngIf="entityControl.value.errors && entityControl.value.hasError('required')">*</sup></label>
-                <app-input
-                  [type]="formGroupMeta.Entity[entityControl.key].type"
-                  [id]="UserType.Entity + '-' + entityControl.key"
-                  [formControlName]="entityControl.key"
-                  [mask]="formGroupMeta.Entity[entityControl.key].mask" [prefix]="formGroupMeta.Entity[entityControl.key].prefix"
-                  [mods]="(entityControl.value.invalid && entityControl.value.touched) && 'invalid'"
-                >
-                  <ng-container class="errors">
-                    <small *ngIf="getObjectKey(entityControl.value.errors).length">{{FormFieldError[getObjectKey(entityControl.value.errors)[0]]}}</small>
-                  </ng-container>
-                </app-input>
-              </div>
-            </div>
+            <app-entity [formControlName]="UserType.Entity"></app-entity>
           </div>
           <!-- <p class="form__help-text form__help-text--gray form__help-text--align-center">Выберите статус лица для перехода на следующий шаг</p> -->
           <!-- <p class="form__help-text">Чтобы оформить заказ как юридическое лицо,<br />вам необходимо <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>войти</span></span></a>или <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>зарегистрироваться</span></span></a></p> -->

@@ -20,7 +20,9 @@
         [mods]="(control.value.invalid && control.value.touched) && 'invalid'"
       >
         <ng-container class="errors">
-          <small *ngIf="utils.getObjectKey(control.value.errors).length">{{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}</small>
+          <small *ngIf="utils.getObjectKey(control.value.errors).length">
+            {{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}
+          </small>
         </ng-container>
       </app-input>
     </ng-template>
