@@ -7,6 +7,7 @@ import { ParcelComponent } from './components/form/parcel/parcel.component';
 import { AutoPartsComponent } from './components/form/auto-parts/auto-parts.component';
 import { PackagingComponent } from './components/form/packaging/packaging.component';
 import { ServicesComponent } from './components/form/services/services.component';
+import { RecipientComponent } from './components/form/recipient/recipient.component';
 
 
 
@@ -17,7 +18,8 @@ import { ServicesComponent } from './components/form/services/services.component
     ParcelComponent,
     AutoPartsComponent,
     PackagingComponent,
-    ServicesComponent
+    ServicesComponent,
+    RecipientComponent
   ],
   imports: [
     CommonModule,

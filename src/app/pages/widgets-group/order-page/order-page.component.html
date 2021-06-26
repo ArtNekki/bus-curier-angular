@@ -199,20 +199,21 @@
            </div>
          </ng-template>
        </div>
-        <section *ngIf="currentStep === 2 && (this.form.get('recipient') && this.form.get('recipient').value)" class="form__section" formGroupName="recipient">
-          <h2 class="form__heading">Получатель:</h2>
-          <div class="form__fieldset form__fieldset--2-col-sm">
-            <div class="form__field form__field--full">
-              <label for="fio" class="form__label">ФИО<sup>*</sup></label>
-              <app-input type="text" formControlName="fio"></app-input>
-<!--              {{{ input type="text" id="fio" name="fio" error="Не заполнено"}}}-->
-            </div>
-            <div class="form__field">
-              <label for="tel" class="form__label">Номер телефона<sup>*</sup></label>
-              <app-input type="tel" formControlName="tel"></app-input>
-            </div>
-          </div>
-        </section>
+       <app-recipient></app-recipient>
+<!--        <section *ngIf="currentStep === 2 && (this.form.get('recipient') && this.form.get('recipient').value)" class="form__section" formGroupName="recipient">-->
+<!--          <h2 class="form__heading">Получатель:</h2>-->
+<!--          <div class="form__fieldset form__fieldset&#45;&#45;2-col-sm">-->
+<!--            <div class="form__field form__field&#45;&#45;full">-->
+<!--              <label for="fio" class="form__label">ФИО<sup>*</sup></label>-->
+<!--              <app-input type="text" formControlName="fio"></app-input>-->
+<!--&lt;!&ndash;              {{{ input type="text" id="fio" name="fio" error="Не заполнено"}}}&ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="form__field">-->
+<!--              <label for="tel" class="form__label">Номер телефона<sup>*</sup></label>-->
+<!--              <app-input type="tel" formControlName="tel"></app-input>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </section>-->
         <section *ngIf="currentStep === 2 && (this.form.get('pickup') && this.form.get('pickup').value)"  class="form__section" formGroupName="pickup">
           <h2 class="form__heading">Пункт получения</h2>
           <div class="form__fieldset form__fieldset--pickup-point form__fieldset--row-gap-lg">
