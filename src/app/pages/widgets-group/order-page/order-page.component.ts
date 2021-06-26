@@ -111,9 +111,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
     console.log('this.form', this.form);
 
-    // if (this.form.invalid) {
-    //   return;
-    // }
+    if (this.form.invalid) {
+      return;
+    }
 
     this.currentStep++;
 

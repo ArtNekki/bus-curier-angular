@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -42,7 +42,8 @@ export class IndividualComponent implements OnInit, ControlValueAccessor, Valida
   public roles = roles;
 
   constructor(public formUtils: FormUtilsService,
-              public utils: UtilsService) { }
+              public utils: UtilsService,
+              private readonly cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -61,6 +62,9 @@ export class IndividualComponent implements OnInit, ControlValueAccessor, Valida
     if (value) {
       this.formGroup.setValue(value, { emitEvent: false });
     }
+    // this.cdr.detectChanges();
+    // this.cdr.markForCheck();
+    // this.formGroup.markAllAsTouched();
   }
 
   registerOnChange(fn: any): void {
