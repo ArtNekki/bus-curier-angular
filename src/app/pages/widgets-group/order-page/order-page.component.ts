@@ -75,7 +75,8 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       author: new FormGroup({
         individual: individualGroup
       }),
-      sender: new FormGroup({})
+      sender: new FormGroup({}),
+      [FormControlName.Recipient]: new FormControl('')
     });
 
     this.tags.push(`cargo-${this.tags.length + 1}`);

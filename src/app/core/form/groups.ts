@@ -54,7 +54,7 @@ export const cargoGroup = new FormArray([new FormGroup({
     other: new FormGroup({})
   }),
   [FormControlName.Packaging]: new FormControl(''),
-  services: new FormControl('')
+  services: new FormControl(''),
 })]);
 
 export const recipientGroup = new FormGroup({

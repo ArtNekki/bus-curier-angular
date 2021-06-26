@@ -26,7 +26,7 @@ import {map} from 'rxjs/operators';
       useExisting: forwardRef(() => PackagingComponent),
       multi: true
     }
-  ],
+  ]
 })
 export class PackagingComponent implements OnInit, ControlValueAccessor, Validator {
   public formGroup: FormGroup;

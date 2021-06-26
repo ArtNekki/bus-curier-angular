@@ -28,5 +28,6 @@ export default {
   Width: 'width',
   Height: 'height',
   Length: 'length',
-  Packaging: 'packaging'
+  Packaging: 'packaging',
+  Recipient: 'recipient'
 };
