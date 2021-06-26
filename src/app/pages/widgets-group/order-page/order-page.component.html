@@ -23,7 +23,7 @@
         </section>
       </div>
       <div *ngIf="currentStep === 1" [@panel]="">
-        <app-sender></app-sender>
+        <app-sender [formControlName]="FormControlName.Sender"></app-sender>
         <section *ngIf="currentStep === 1 && (this.form.get(FormControlName.Departure) && this.form.get(FormControlName.Departure).value)" class="form__section" [formGroupName]="FormControlName.Departure">
           <h2 class="form__heading">Пункт отправления</h2>
           <div class="form__fieldset form__fieldset--delivery-point form__fieldset--row-gap-lg">

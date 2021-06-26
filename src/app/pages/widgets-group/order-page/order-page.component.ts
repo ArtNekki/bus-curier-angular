@@ -76,7 +76,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
         individual: new FormControl(''),
         entity: new FormControl('')
       }),
-      sender: new FormGroup({}),
+      [FormControlName.Sender]: new FormControl(''),
       [FormControlName.Recipient]: new FormControl('')
     });
 
@@ -117,9 +117,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
     this.currentStep++;
 
-    if (this.currentStep === 1 && !(Object.keys((this.form as FormGroup).get(UserType.Sender).value).length)) {
-      (this.form as FormGroup).setControl(UserType.Sender, senderGroup);
-    }
+    // if (this.currentStep === 1 && !(Object.keys((this.form as FormGroup).get(UserType.Sender).value).length)) {
+    //   (this.form as FormGroup).setControl(UserType.Sender, senderGroup);
+    // }
 
     if (this.currentStep === 1 && !((this.form as FormGroup).get(FormControlName.Departure))) {
       (this.form as FormGroup).addControl(FormControlName.Departure, departureGroup);
