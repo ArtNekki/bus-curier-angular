@@ -1,5 +1,5 @@
 export default {
-  Departure: 'departure',
+  DeparturePoint: 'departure-point',
   Department: 'department',
   Courier: 'courier',
   Fio: 'fio',
@@ -31,5 +31,9 @@ export default {
   Packaging: 'packaging',
   Recipient: 'recipient',
   Individual: 'individual',
-  Sender: 'sender'
+  Sender: 'sender',
+  Location: 'location',
+  AddressPoints: 'address-points',
+  Date: 'date',
+  DispatchData: 'dispatch-data'
 };

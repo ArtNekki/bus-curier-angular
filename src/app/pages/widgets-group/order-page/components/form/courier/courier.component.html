@@ -1,0 +1,23 @@
+<div [formGroup]="formGroup">
+  <div class="form__fieldset form__fieldset--address">
+    <ng-container *ngFor="let control of formUtils.getGroupControls(formGroup)  | keyvalue: formUtils.originalOrder">
+      <div *ngIf="control.key !== FormControlName.CourierTime" class="form__field">
+        <label [for]="FormControlName.Courier + '-' + control.key" class="form__label">
+          {{ FormFieldMeta[control.key].label }}
+        </label>
+        <app-input [id]="FormControlName.Courier + '-' + control.key"
+                   [type]="FormFieldMeta[control.key].type"
+                   [formControlName]="control.key">
+        </app-input>
+      </div>
+    </ng-container>
+  </div>
+  <section class="form__fieldset form__fieldset--schedule">
+    <label class="form__label form__label--light">Удобное время для приезда курьера</label>
+    <app-radio-group
+      [items]="schedule"
+      [name]="FormControlName.CourierTime"
+      [formControlName]="FormControlName.CourierTime">
+    </app-radio-group>
+  </section>
+</div>

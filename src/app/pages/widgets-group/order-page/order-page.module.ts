@@ -11,6 +11,9 @@ import { RecipientComponent } from './components/form/recipient/recipient.compon
 import { IndividualComponent } from './components/form/individual/individual.component';
 import { EntityComponent } from './components/form/entity/entity.component';
 import { SenderComponent } from './components/form/sender/sender.component';
+import {DeparturePointComponent} from './components/form/departure-point/departure-point.component';
+import { DepartmentComponent } from './components/form/department/department.component';
+import { CourierComponent } from './components/form/courier/courier.component';
 
 
 
@@ -25,7 +28,10 @@ import { SenderComponent } from './components/form/sender/sender.component';
     RecipientComponent,
     IndividualComponent,
     EntityComponent,
-    SenderComponent
+    SenderComponent,
+    DeparturePointComponent,
+    DepartmentComponent,
+    CourierComponent
   ],
   imports: [
     CommonModule,

@@ -22,7 +22,7 @@ import formGroupMeta from '../../../core/form/formGroupMeta';
 import FormControlName from '../../../core/maps/FormControlName';
 import fieldError from '../../../core/form/fieldError';
 import roles from '../../../mock-data/roles';
-import departments from '../../../mock-data/departments';
+import departments from '../../../mock-data/address-points';
 import schedule from '../../../mock-data/schedule';
 
 @Component({
@@ -77,7 +77,8 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
         entity: new FormControl('')
       }),
       [FormControlName.Sender]: new FormControl(''),
-      [FormControlName.Recipient]: new FormControl('')
+      [FormControlName.Recipient]: new FormControl(''),
+      [FormControlName.DeparturePoint]: new FormControl('')
     });
 
     this.tags.push(`cargo-${this.tags.length + 1}`);
@@ -121,10 +122,10 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     //   (this.form as FormGroup).setControl(UserType.Sender, senderGroup);
     // }
 
-    if (this.currentStep === 1 && !((this.form as FormGroup).get(FormControlName.Departure))) {
-      (this.form as FormGroup).addControl(FormControlName.Departure, departureGroup);
-      this.showDepartureTab(this.currentDepartureTab);
-    }
+    // if (this.currentStep === 1 && !((this.form as FormGroup).get(FormControlName.Departure))) {
+    //   (this.form as FormGroup).addControl(FormControlName.Departure, departureGroup);
+    //   this.showDepartureTab(this.currentDepartureTab);
+    // }
 
     if (this.currentStep === 2 && !((this.form as FormGroup).get(FormControlName.Cargo))) {
       (this.form as FormGroup).addControl(FormControlName.Cargo, cargoGroup);
@@ -276,23 +277,23 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     }
   }
 
-  setCurrentDepartureTab(tab: string) {
-    this.currentDepartureTab = tab;
-    this.showDepartureTab(tab);
-  }
+  // setCurrentDepartureTab(tab: string) {
+  //   this.currentDepartureTab = tab;
+  //   this.showDepartureTab(tab);
+  // }
 
-  showDepartureTab(tab: string) {
-    switch (tab) {
-      case this.DepartureTab.Department:
-        (this.form.get(FormControlName.Departure) as FormGroup).addControl(FormControlName.Department, departmentGroup);
-        (this.form.get(FormControlName.Departure) as FormGroup).removeControl(FormControlName.Courier);
-        break;
-      case this.DepartureTab.Courier:
-        (this.form.get(FormControlName.Departure) as FormGroup).addControl(FormControlName.Courier, courierGroup);
-        (this.form.get(FormControlName.Departure) as FormGroup).removeControl(FormControlName.Department);
-        break;
-    }
-  }
+  // showDepartureTab(tab: string) {
+  //   switch (tab) {
+  //     case this.DepartureTab.Department:
+  //       (this.form.get(FormControlName.Departure) as FormGroup).addControl(FormControlName.Department, departmentGroup);
+  //       (this.form.get(FormControlName.Departure) as FormGroup).removeControl(FormControlName.Courier);
+  //       break;
+  //     case this.DepartureTab.Courier:
+  //       (this.form.get(FormControlName.Departure) as FormGroup).addControl(FormControlName.Courier, courierGroup);
+  //       (this.form.get(FormControlName.Departure) as FormGroup).removeControl(FormControlName.Department);
+  //       break;
+  //   }
+  // }
 
   setCurrentPickupTab(tab: string) {
     this.currentPickupTab = tab;

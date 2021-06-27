@@ -24,73 +24,7 @@
       </div>
       <div *ngIf="currentStep === 1" [@panel]="">
         <app-sender [formControlName]="FormControlName.Sender"></app-sender>
-        <section *ngIf="currentStep === 1 && (this.form.get(FormControlName.Departure) && this.form.get(FormControlName.Departure).value)" class="form__section" [formGroupName]="FormControlName.Departure">
-          <h2 class="form__heading">Пункт отправления</h2>
-          <div class="form__fieldset form__fieldset--delivery-point form__fieldset--row-gap-lg">
-            <div class="form__field form__field--location">
-              <label for="departure-location" class="form__label">Населенный пункт<sup>*</sup></label>
-              <app-input type="text" id="departure-location" formControlName="location"></app-input>
-            </div>
-            <div class="form__fieldset form__fieldset--department">
-              <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
-              <app-radio-group
-                [items]="departments"
-                name="department-address"
-                formControlName="department-address">
-              </app-radio-group>
-            </div>
-            <div class="form__tabs">
-              <button type="button" [class.active]="currentDepartureTab === DepartureTab.Department"
-                      (click)="setCurrentDepartureTab(DepartureTab.Department)">{{DepartureTab.Department}}</button>
-              <button type="button" [class.active]="currentDepartureTab === DepartureTab.Courier"
-                      (click)="setCurrentDepartureTab(DepartureTab.Courier)">{{DepartureTab.Courier}}</button>
-            </div>
-            <div *ngIf="currentDepartureTab === DepartureTab.Department" class="form__panel" [formGroupName]="FormControlName.Department">
-              <div class="form__fieldset form__fieldset--address">
-                <div *ngFor="let departmentControl of getGroupControls(form.get(FormControlName.Departure).get(FormControlName.Department))  | keyvalue: originalOrder" class="form__field">
-                  <label [for]="FormControlName.Department + '-' + departmentControl.key" class="form__label">{{ formGroupMeta.Department[departmentControl.key].label }}</label>
-                  <app-input [id]="FormControlName.Department + '-' + departmentControl.key"
-                             [type]="formGroupMeta.Department[departmentControl.key].type"
-                             [formControlName]="departmentControl.key">
-                  </app-input>
-                </div>
-              </div>
-            </div>
-            <div *ngIf="currentDepartureTab === DepartureTab.Courier" class="form__panel" [formGroupName]="FormControlName.Courier">
-              <div class="form__fieldset form__fieldset--address">
-                <ng-template ngFor let-courierControl [ngForOf]="getGroupControls(form.get(FormControlName.Departure).get(FormControlName.Courier)) | keyvalue: originalOrder">
-                  <div *ngIf="courierControl.key !== FormControlName.CourierTime" class="form__field">
-                    <label [for]="FormControlName.Courier + '-' + courierControl.key" class="form__label">{{ formGroupMeta.Courier[courierControl.key].label }}</label>
-                    <app-input [id]="FormControlName.Courier + '-' + courierControl.key"
-                               [type]="formGroupMeta.Courier[courierControl.key].type"
-                               [formControlName]="courierControl.key">
-                    </app-input>
-                  </div>
-                </ng-template>
-              </div>
-              <section class="form__fieldset form__fieldset--schedule">
-                <label class="form__label form__label--light">Удобное время для приезда курьера</label>
-                <app-radio-group
-                  [items]="schedule"
-                  [name]="FormControlName.CourierTime"
-                  [formControlName]="FormControlName.CourierTime">
-                </app-radio-group>
-              </section>
-            </div>
-            <div class="form__field form__field--delivery-date">
-              <label for="departure-date" class="form__label">Дата отправки<sup>*</sup></label>
-              <app-datepicker
-                id="departure-date"
-                formControlName="date"
-                [mods]="form.get('departure').get('date').invalid && form.get('departure').get('date').touched && 'invalid'">
-                <ng-container class="errors">
-                  <small *ngIf="getObjectKey(form.get('departure').get('date').errors).length">{{FormFieldError[getObjectKey(form.get('departure').get('date').errors)[0]]}}</small>
-                </ng-container>
-              </app-datepicker>
-<!--              {{{ input type="text" id="destination" name="destination" error="Не заполнено"}}}-->
-            </div>
-          </div>
-        </section>
+        <app-departure-point [formControlName]="FormControlName.DeparturePoint"></app-departure-point>
       </div>
       <div *ngIf="currentStep === 2" [@panel]="">
 <!--        {{form.get('cargoParams') | json}}-->

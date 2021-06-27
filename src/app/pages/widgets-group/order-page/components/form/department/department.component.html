@@ -1,0 +1,11 @@
+<div class="form__fieldset form__fieldset--address" [formGroup]="formGroup">
+  <div *ngFor="let control of formUtils.getGroupControls(formGroup)  | keyvalue: formUtils.originalOrder" class="form__field">
+    <label [for]="FormControlName.Department + '-' + control.key" class="form__label">
+      {{ FormFieldMeta[control.key].label }}
+    </label>
+    <app-input [id]="FormControlName.Department + '-' + control.key"
+               [type]="FormFieldMeta[control.key].type"
+               [formControlName]="control.key">
+    </app-input>
+  </div>
+</div>
