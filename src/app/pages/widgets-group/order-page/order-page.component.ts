@@ -77,8 +77,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
         entity: new FormControl('')
       }),
       [FormControlName.Sender]: new FormControl(''),
+      [FormControlName.DeparturePoint]: new FormControl(''),
       [FormControlName.Recipient]: new FormControl(''),
-      [FormControlName.DeparturePoint]: new FormControl('')
+      [FormControlName.PickupPoint]: new FormControl('')
     });
 
     this.tags.push(`cargo-${this.tags.length + 1}`);

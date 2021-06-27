@@ -1,0 +1,31 @@
+<section class="form__section" [formGroup]="formGroup">
+  <h2 class="form__heading">Пункт получения</h2>
+  <div class="form__fieldset form__fieldset--pickup-point form__fieldset--row-gap-lg">
+    <div class="form__field form__field--location">
+      <label for="departure-location" class="form__label">Населенный пункт<sup>*</sup></label>
+      <app-input type="text" id="departure-location" [formControlName]="FormControlName.Location"></app-input>
+    </div>
+    <div class="form__fieldset form__fieldset--department">
+      <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
+      <app-radio-group
+        [items]="addressPoints"
+        [name]="FormControlName.AddressPoints"
+        [formControlName]="FormControlName.AddressPoints">
+      </app-radio-group>
+    </div>
+    <ng-container [formGroupName]="FormControlName.ReceiveData">
+      <div class="form__tabs">
+        <button type="button" [class.active]="currentTab === Tab.One"
+                (click)="setCurrentTab(Tab.One)">Встретить с автобуса</button>
+        <button type="button" [class.active]="currentTab === Tab.Two"
+                (click)="setCurrentTab(Tab.Two)">Доставка курьером</button>
+      </div>
+      <div *ngIf="currentTab === Tab.One" class="form__panel">
+        <app-department [formControlName]="FormControlName.Department"></app-department>
+      </div>
+      <div *ngIf="currentTab === Tab.Two" class="form__panel">
+        <app-courier [formControlName]="FormControlName.Courier"></app-courier>
+      </div>
+    </ng-container>
+  </div>
+</section>

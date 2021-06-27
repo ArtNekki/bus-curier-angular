@@ -14,6 +14,7 @@ import { SenderComponent } from './components/form/sender/sender.component';
 import {DeparturePointComponent} from './components/form/departure-point/departure-point.component';
 import { DepartmentComponent } from './components/form/department/department.component';
 import { CourierComponent } from './components/form/courier/courier.component';
+import { PickupPointComponent } from './components/form/pickup-point/pickup-point.component';
 
 
 
@@ -31,7 +32,8 @@ import { CourierComponent } from './components/form/courier/courier.component';
     SenderComponent,
     DeparturePointComponent,
     DepartmentComponent,
-    CourierComponent
+    CourierComponent,
+    PickupPointComponent
   ],
   imports: [
     CommonModule,

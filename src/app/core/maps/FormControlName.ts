@@ -29,11 +29,13 @@ export default {
   Height: 'height',
   Length: 'length',
   Packaging: 'packaging',
+  PickupPoint: 'pickup-point',
   Recipient: 'recipient',
   Individual: 'individual',
   Sender: 'sender',
   Location: 'location',
   AddressPoints: 'address-points',
   Date: 'date',
-  DispatchData: 'dispatch-data'
+  DispatchData: 'dispatch-data',
+  ReceiveData: 'receive-data'
 };

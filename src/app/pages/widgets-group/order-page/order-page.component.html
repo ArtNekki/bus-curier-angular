@@ -74,72 +74,7 @@
          </ng-template>
        </div>
        <app-recipient [formControlName]="FormControlName.Recipient"></app-recipient>
-
-        <section *ngIf="currentStep === 2 && (this.form.get('pickup') && this.form.get('pickup').value)"  class="form__section" formGroupName="pickup">
-          <h2 class="form__heading">Пункт получения</h2>
-          <div class="form__fieldset form__fieldset--pickup-point form__fieldset--row-gap-lg">
-            <div class="form__field form__field--location">
-              <label for="pickup-location" class="form__label">Населенный пункт<sup>*</sup></label>
-              <app-input id="pickup-location" type="text" formControlName="location"></app-input>
-            </div>
-            <div class="form__fieldset form__fieldset--department">
-              <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
-              <div class="form__field">
-                <app-radio formControlName="department-address" name="department-address" value="Владивосток, Карла Маркса" checked="checked">Владивосток, Карла Маркса</app-radio>
-              </div>
-              <div class="form__field">
-                <app-radio formControlName="department-address" name="department-address" value="Владивосток, Карла Маркса 222" checked="checked">Владивосток, Карла Маркса 222</app-radio>
-              </div>
-            </div>
-            <div class="form__tabs">
-              <button type="button" [class.active]="currentPickupTab === PickupTab.Bus"
-                      (click)="setCurrentPickupTab(PickupTab.Bus)">{{PickupTab.Bus}}</button>
-              <button type="button" [class.active]="currentPickupTab === PickupTab.Courier"
-                      (click)="setCurrentPickupTab(PickupTab.Courier)">{{PickupTab.Courier}}</button>
-            </div>
-            <div *ngIf="currentPickupTab === PickupTab.Bus" class="form__panel" formGroupName="bus">
-              <div class="form__fieldset form__fieldset--address">
-                <div class="form__field">
-                  <label for="department-street" class="form__label">Улица</label>
-                  <app-input id="bus-street" type="text" formControlName="street"></app-input>
-                </div>
-                <div class="form__field">
-                  <label for="department-building" class="form__label">Дом, корус, строение</label>
-                  <app-input id="bus-building" type="text" formControlName="building"></app-input>
-                </div>
-                <div class="form__field">
-                  <label for="department-apartment" class="form__label">Кв. / офис</label>
-                  <app-input id="bus-apartment" type="text" formControlName="apartment"></app-input>
-                </div>
-              </div>
-            </div>
-            <div *ngIf="currentPickupTab === PickupTab.Courier" class="form__panel" formGroupName="courier">
-              <div class="form__fieldset form__fieldset--address">
-                <div class="form__field">
-                  <label for="pickup-courier-street" class="form__label">Улица</label>
-                  <app-input id="pickup-courier-street" type="text" formControlName="street"></app-input>
-                </div>
-                <div class="form__field">
-                  <label for="pickup-courier-building" class="form__label">Дом, корус, строение</label>
-                  <app-input id="pickup-courier-building" type="text" formControlName="building"></app-input>
-                </div>
-                <div class="form__field">
-                  <label for="pickup-courier-apartment" class="form__label">Кв. / офис</label>
-                  <app-input id="pickup-courier-apartment" type="text" formControlName="apartment"></app-input>
-                </div>
-              </div>
-              <section class="form__fieldset form__fieldset--schedule">
-                <label class="form__label form__label--light">Удобное время для приезда курьера</label>
-                <div class="form__field">
-                  <app-radio formControlName="time" name="courier-time" value="8:00 - 14:00" checked="true">8:00 - 14:00</app-radio>
-                </div>
-                <div class="form__field">
-                  <app-radio formControlName="time" name="courier-time" value="14:00 - 18:00">14:00 - 18:00</app-radio>
-                </div>
-              </section>
-            </div>
-          </div>
-        </section>
+       <app-pickup-point [formControlName]="FormControlName.PickupPoint"></app-pickup-point>
       </div>
       <div *ngIf="currentStep === 3" [@panel]="">
         <section class="form__section form__section--w-underline">
