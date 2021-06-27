@@ -77,75 +77,7 @@
        <app-pickup-point [formControlName]="FormControlName.PickupPoint"></app-pickup-point>
       </div>
       <div *ngIf="currentStep === 3" [@panel]="">
-        <section class="form__section form__section--w-underline">
-          <h2 class="form__heading form__heading--w-counter">Отправитель</h2>
-<!--          {{{ data-list items='[-->
-<!--          {"name": "Ваша роль", "value": "Отправитель"},-->
-<!--            {"name": "ФИО", "value": "Иванов Иван Иванович"},-->
-<!--            {"name": "Телефон", "value": "+7(914)123-12-12"},-->
-<!--            {"name": "E-mail", "value": "ivan@mail.ru"}]'-->
-<!--          }}}-->
-        </section>
-        <section class="form__section form__section--w-underline">
-          <h2 class="form__heading form__heading--w-counter">Пункт отправления</h2>
-<!--          {{{ data-list items='[-->
-<!--          {"name": "Населенный пункт", "value": "Владивосток"},-->
-<!--            {"name": "Доставка курьером", "value": "ул. Кирова, д. 12, офис/кв. 66"},-->
-<!--            {"name": "Дата отправки", "value": "22.11.2019"}]'-->
-<!--          }}}-->
-        </section>
-        <section class="form__section form__section--w-underline">
-          <h2 class="form__heading form__heading--w-counter">Получатель</h2>
-<!--          {{{ data-list items='[-->
-<!--          {"name": "ФИО", "value": "Иванов Иван Иванович"},-->
-<!--            {"name": "Документ", "value": "Паспорт"},-->
-<!--            {"name": "Номер документа", "value": "1234 123493"},-->
-<!--            {"name": "Телефон", "value": "+ 7(914)123-12-12"}]'-->
-<!--          }}}-->
-        </section>
-        <section class="form__section form__section--w-underline">
-          <h2 class="form__heading form__heading--w-counter">Пункт получения</h2>
-<!--          {{{ data-list items='[-->
-<!--          {"name": "Населенный пункт", "value": "Уссурийск"},-->
-<!--            {"name": "Доставка курьером", "value": "ул. Кирова, д. 12, офис/кв. 66"},-->
-<!--            {"name": "Дата отправки", "value": "22.11.2019"}]'-->
-<!--          }}}-->
-        </section>
-        <section class="form__section form__section--w-underline">
-          <h2 class="form__heading form__heading--w-counter">Пункт получения</h2>
-<!--          {{{ data-list items='[-->
-<!--          {"name": "Характер груза", "value": "Посылка"}]'-->
-<!--          }}}-->
-          <div class="form__mark">Место №1</div>
-<!--          {{{ data-list items='[-->
-<!--          {"name": "Габариты", "value": "Ширина: <b>32 см</b>., Высота: <b>120 см</b>., Длина: <b>50 см</b>. "},-->
-<!--          {"name": "Вес", "value": "12 кг."},-->
-<!--          {"name": "Упаковка", "value": "Коробка картонная (4 шт), Сейф пакет (1 шт)"}]'-->
-<!--          }}}-->
-          <div class="form__mark">Место №2</div>
-<!--          {{{ data-list items='[-->
-<!--          {"name": "Габариты", "value": "Ширина: <b>32 см</b>., Высота: <b>120 см</b>., Длина: <b>50 см</b>. "},-->
-<!--          {"name": "Вес", "value": "12 кг."},-->
-<!--          {"name": "Упаковка", "value": "Коробка картонная (4 шт), Сейф пакет (1 шт)"}]'-->
-<!--          }}}-->
-        </section>
-        <section class="form__section form__section--w-underline">
-          <h2 class="form__heading form__heading--w-counter">Дополнительные услуги</h2>
-<!--          {{{ data-list items='[-->
-<!--          {"name": "Страховка", "value": "25 000 руб."},-->
-<!--          {"name": "СМС-уведомления<br />отправителю", "value": "Нет"},-->
-<!--          {"name": "СМС-уведомления<br />получателю", "value": "Нет"}]'-->
-<!--          }}}-->
-        </section>
-        <section class="form__section">
-          <div class="form__fieldset">
-            <div class="form__field">
-              <label class="form__label">Комментарий к заявке</label>
-<!--              {{{ textarea id="user-comment" name="user-comment" }}}-->
-            </div>
-<!--            {{{ checkbox id="agree" name="agree" label="Нажимая кнопку «Отправить», я даю свое согласие на <a href='#' class='link link&#45;&#45;blue link&#45;&#45;in-text'><span class='link__text'>обработку моих персональных данных</span></a>" mods="sm"}}}-->
-          </div>
-        </section>
+        <app-order-report></app-order-report>
       </div>
       <div class="form__actions">
         <app-btn type="button" disabled="true" mods="back" (click)="goPrev()">
