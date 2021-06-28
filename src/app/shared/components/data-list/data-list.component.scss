@@ -1,0 +1,69 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.data-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: $font-family--secondary;
+  font-size: 15px;
+  line-height: 1.2;
+
+  &:not(:last-of-type) {
+    margin-bottom: 30px;
+  }
+
+  &--w-underline {
+    padding-bottom: 30px;
+    border-bottom: 2px solid $gray-light-color--up-5;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: auto 1fr 50%;
+    grid-template-areas: "name dots value";
+    align-items: baseline;
+    grid-column-gap: 5px;
+
+    @include media-breakpoint-only(md) {
+      grid-template-columns: auto 1fr 75%;
+    }
+
+    @include media-breakpoint-up(xl) {
+      grid-template-columns: auto 1fr 74%;
+    }
+
+    &::before {
+      content: "";
+      grid-area: dots;
+      border-bottom: 1px dotted $gray-color--down-11;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+
+    .data-list--account & {
+      @include media-breakpoint-up(md) {
+        grid-template-columns: auto 1fr 50%;
+      }
+
+      @include media-breakpoint-up(xl) {
+        grid-template-columns: auto 1fr 45%;
+      }
+    }
+  }
+
+  &__name {
+    grid-area: name;
+    color: $gray-color--down-11;
+  }
+
+  &__value {
+    grid-area: value;
+    justify-self: start;
+  }
+}

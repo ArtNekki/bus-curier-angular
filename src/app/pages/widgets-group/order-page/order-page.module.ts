@@ -20,8 +20,6 @@ import { CargoComponent } from './components/form/cargo/cargo.component';
 import { CargoGroupComponent } from './components/form/cargo-group/cargo-group.component';
 import { AuthorComponent } from './components/form/author/author.component';
 
-
-
 @NgModule({
   declarations: [
     OrderPageComponent,

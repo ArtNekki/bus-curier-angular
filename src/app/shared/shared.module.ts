@@ -84,6 +84,7 @@ import { FormTabsComponent } from './components/form-tabs/form-tabs.component';
     SelectComponent,
     CheckboxComponent,
     DatepickerComponent,
+    DataListComponent,
     MediaComponent,
     TableComponent,
     LinkComponent,

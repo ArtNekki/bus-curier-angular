@@ -1,1 +1,6 @@
-<p>data-list works!</p>
+<ul class="data-list">
+  <li *ngFor="let item of data" class="data-list__item">
+    <span class="data-list__name">{{item.name}}</span>
+    <span class="data-list__value" [innerHTML]="item.value"></span>
+  </li>
+</ul>
