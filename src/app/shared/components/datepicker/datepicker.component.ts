@@ -22,10 +22,10 @@ export class DatepickerComponent implements ControlValueAccessor, OnInit, OnChan
   @Input() id;
   @Input() name;
   @Input() mods;
+  @Input() isInvalid = false;
 
   public cssClass: string;
   public value: string;
-  public isInvalid = false;
 
   dpOptions: IAngularMyDpOptions = {
     dateRange: false,
@@ -40,13 +40,13 @@ export class DatepickerComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.mods) {
-      if (changes.mods.currentValue === State.Invalid) {
-        this.isInvalid = true;
-      } else {
-        this.isInvalid = false;
-      }
-    }
+    // if (changes.mods) {
+    //   if (changes.mods.currentValue === State.Invalid) {
+    //     this.isInvalid = true;
+    //   } else {
+    //     this.isInvalid = false;
+    //   }
+    // }
   }
 
   changeValue(date) {

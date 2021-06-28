@@ -10,7 +10,7 @@
       [id]="'entity-' + control.key"
       [formControlName]="control.key"
       [mask]="FormFieldMeta[control.key].mask" [prefix]="FormFieldMeta[control.key].prefix"
-      [mods]="(control.value.invalid && control.value.touched) && 'invalid'"
+      [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
     >
       <ng-container class="errors">
         <small *ngIf="utils.getObjectKey(control.value.errors).length">

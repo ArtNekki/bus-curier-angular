@@ -8,7 +8,12 @@
         <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
       </label>
       <app-select *ngIf="control.key === FormControlName.Doc; else input"
-                  [formControlName]="control.key" [items]="roles">
+                  [formControlName]="control.key"
+                  [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+                  [items]="roles">
+        <ng-container class="errors">
+          <small *ngIf="utils.getObjectKey(control.value.errors).length">{{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}</small>
+        </ng-container>
       </app-select>
       <ng-template #input>
         <app-input
@@ -16,7 +21,7 @@
           [id]="FormControlName.Sender + '-' + control.key"
           [formControlName]="control.key"
           [mask]="FormFieldMeta[control.key].mask" [prefix]="FormFieldMeta[control.key].prefix"
-          [mods]="(control.value.invalid && control.value.touched) && 'invalid'"
+          [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
         >
           <ng-container class="errors">
             <small *ngIf="utils.getObjectKey(control.value.errors).length">{{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}</small>

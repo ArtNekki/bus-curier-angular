@@ -27,10 +27,10 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() placeholder = '';
   @Input() rows = 5;
   @Input() mods;
+  @Input() isInvalid = false;
 
   public cssClass;
   public isFocused = false;
-  public isInvalid = false;
   public touched = false;
   public value = '';
 
@@ -41,13 +41,13 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.mods) {
-      if (changes.mods.currentValue === State.Invalid) {
-        this.isInvalid = true;
-      } else {
-        this.isInvalid = false;
-      }
-    }
+    // if (changes.mods) {
+    //   if (changes.isInvalid.currentValue === State.Invalid) {
+    //     this.isInvalid = true;
+    //   } else {
+    //     this.isInvalid = false;
+    //   }
+    // }
   }
 
   changeValue(value) {

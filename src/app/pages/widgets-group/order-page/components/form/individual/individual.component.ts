@@ -52,7 +52,7 @@ export class IndividualComponent implements OnInit, ControlValueAccessor, Valida
       [FormControlName.LastName]: new FormControl('', [Validators.required]),
       [FormControlName.FirstName]: new FormControl('', [Validators.required]),
       [FormControlName.MiddleName]: new FormControl('', [Validators.required]),
-      [FormControlName.Email]: new FormControl('', [Validators.required]),
+      [FormControlName.Email]: new FormControl('', [Validators.required, Validators.required]),
       [FormControlName.Tel]: new FormControl('', [Validators.required]),
       [FormControlName.Role]: new FormControl('', [Validators.required]),
     });
@@ -91,13 +91,11 @@ export class IndividualComponent implements OnInit, ControlValueAccessor, Valida
 
       if (c.errors) {
         this.orderForm.setInvalidStep(result.step);
-
       } else {
         this.orderForm.setInvalidStep(null);
       }
 
-      console.log('isSubmited666', result.step );
     });
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'recipient are invalid'}};
+    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'individual group are invalid'}};
   }
 }

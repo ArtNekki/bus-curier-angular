@@ -15,6 +15,7 @@ import {FormUtilsService} from '../../../../../../core/services/form-utils.servi
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import schedule from 'src/app/mock-data/schedule';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-courier',
@@ -43,13 +44,14 @@ export class CourierComponent implements OnInit, ControlValueAccessor, Validator
   public schedule = schedule;
 
   constructor(public formUtils: FormUtilsService,
+              private orderForm: OrderFormService,
               public utils: UtilsService) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.Street]: new FormControl('', []),
-      [FormControlName.Building]: new FormControl('', []),
-      [FormControlName.Apartment]: new FormControl('', []),
+      [FormControlName.Street]: new FormControl('', [Validators.required]),
+      [FormControlName.Building]: new FormControl('', [Validators.required]),
+      [FormControlName.Apartment]: new FormControl('', [Validators.required]),
       [FormControlName.CourierTime]: new FormControl('time-1', [])
     });
   }
@@ -74,6 +76,19 @@ export class CourierComponent implements OnInit, ControlValueAccessor, Validator
   // }
 
   validate(c: AbstractControl): ValidationErrors | null {
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'courier are invalid'}};
+    this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
+      if (c.errors) {
+        this.formGroup.markAllAsTouched();
+      }
+
+      if (c.errors) {
+        this.orderForm.setInvalidStep(result.step);
+      } else {
+        this.orderForm.setInvalidStep(null);
+      }
+
+    });
+
+    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'department point are invalid'}};
   }
 }

@@ -22,11 +22,12 @@ export class SelectComponent implements  ControlValueAccessor, OnInit, OnChanges
   @Input() id;
   @Input() items;
   @Input() mods;
+  @Input() isInvalid = false;
+
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   public cssClass;
   public isSelectOpened = false;
-  public isInvalid = false;
   public fieldValue = null;
   public value: string;
 
@@ -37,13 +38,13 @@ export class SelectComponent implements  ControlValueAccessor, OnInit, OnChanges
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.mods) {
-      if (changes.mods.currentValue === State.Invalid) {
-        this.isInvalid = true;
-      } else {
-        this.isInvalid = false;
-      }
-    }
+    // if (changes.mods) {
+    //   if (changes.mods.currentValue === State.Invalid) {
+    //     this.isInvalid = true;
+    //   } else {
+    //     this.isInvalid = false;
+    //   }
+    // }
   }
 
   changeValue(value) {

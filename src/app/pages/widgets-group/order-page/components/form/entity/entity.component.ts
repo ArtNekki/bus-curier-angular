@@ -8,11 +8,12 @@ import {
   FormGroup, NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
-  Validator
+  Validator, Validators
 } from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-entity',
@@ -39,13 +40,14 @@ export class EntityComponent implements OnInit, ControlValueAccessor, Validator 
   public formGroup: FormGroup;
 
   constructor(public formUtils: FormUtilsService,
+              private orderForm: OrderFormService,
               public utils: UtilsService) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.CompanyName]: new FormControl('', []),
-      [FormControlName.Address]: new FormControl('', []),
-      [FormControlName.Tel]: new FormControl('', []),
+      [FormControlName.CompanyName]: new FormControl('', [Validators.required]),
+      [FormControlName.Address]: new FormControl('', [Validators.required]),
+      [FormControlName.Tel]: new FormControl('', [Validators.required]),
     });
   }
 
@@ -69,6 +71,18 @@ export class EntityComponent implements OnInit, ControlValueAccessor, Validator 
   // }
 
   validate(c: AbstractControl): ValidationErrors | null {
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'recipient are invalid'}};
+    this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
+      if (c.errors) {
+        this.formGroup.markAllAsTouched();
+      }
+
+      if (c.errors) {
+        this.orderForm.setInvalidStep(result.step);
+      } else {
+        this.orderForm.setInvalidStep(null);
+      }
+
+    });
+    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'individual group are invalid'}};
   }
 }

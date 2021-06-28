@@ -6,8 +6,13 @@
           {{ FormFieldMeta[control.key].label }}
         </label>
         <app-input [id]="FormControlName.Courier + '-' + control.key"
-                   [type]="FormFieldMeta[control.key].type"
-                   [formControlName]="control.key">
+           [type]="FormFieldMeta[control.key].type"
+           [formControlName]="control.key"
+           [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+        >
+          <ng-container class="errors">
+            <small *ngIf="utils.getObjectKey(control.value.errors).length">{{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}</small>
+          </ng-container>
         </app-input>
       </div>
     </ng-container>

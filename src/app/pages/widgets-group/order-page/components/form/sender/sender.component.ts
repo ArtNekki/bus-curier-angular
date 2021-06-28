@@ -15,6 +15,7 @@ import {FormUtilsService} from '../../../../../../core/services/form-utils.servi
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import roles from 'src/app/mock-data/roles';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-sender',
@@ -44,14 +45,15 @@ export class SenderComponent implements OnInit, ControlValueAccessor, Validator 
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
+              private orderForm: OrderFormService,
               private readonly cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.Fio]: new FormControl('', [Validators.required, Validators.email]),
-      [FormControlName.Doc]: new FormControl('', []),
-      [FormControlName.DocNumber]: new FormControl('', [Validators.required, Validators.pattern('0000 000000')]),
-      [FormControlName.Tel]: new FormControl('', []),
+      [FormControlName.Fio]: new FormControl('', [Validators.required]),
+      [FormControlName.Doc]: new FormControl('', [Validators.required]),
+      [FormControlName.DocNumber]: new FormControl('', [Validators.required]),
+      [FormControlName.Tel]: new FormControl('', [Validators.required]),
     });
   }
 
@@ -76,6 +78,19 @@ export class SenderComponent implements OnInit, ControlValueAccessor, Validator 
   // }
 
   validate(c: AbstractControl): ValidationErrors | null {
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'sender are invalid'}};
+    this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
+      if (c.errors) {
+        this.formGroup.markAllAsTouched();
+      }
+
+      if (c.errors) {
+        this.orderForm.setInvalidStep(result.step);
+      } else {
+        this.orderForm.setInvalidStep(null);
+      }
+
+    });
+
+    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'sender group are invalid'}};
   }
 }

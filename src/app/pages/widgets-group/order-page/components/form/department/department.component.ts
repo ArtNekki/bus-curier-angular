@@ -14,6 +14,7 @@ import {
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-department',
@@ -40,6 +41,7 @@ export class DepartmentComponent implements OnInit, ControlValueAccessor, Valida
   public formGroup: FormGroup;
 
   constructor(public formUtils: FormUtilsService,
+              private orderForm: OrderFormService,
               public utils: UtilsService) { }
 
   ngOnInit(): void {
@@ -70,6 +72,19 @@ export class DepartmentComponent implements OnInit, ControlValueAccessor, Valida
   // }
 
   validate(c: AbstractControl): ValidationErrors | null {
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'department are invalid'}};
+    this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
+      if (c.errors) {
+        this.formGroup.markAllAsTouched();
+      }
+
+      if (c.errors) {
+        this.orderForm.setInvalidStep(result.step);
+      } else {
+        this.orderForm.setInvalidStep(null);
+      }
+
+    });
+
+    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'department point are invalid'}};
   }
 }
