@@ -10,7 +10,7 @@
       <app-input
         type="text"
         [formControlName]="parcelControl.key"
-        [mods]="(parcelControl.value.invalid && parcelControl.value.touched) && 'invalid'"
+        [isInvalid]="(parcelControl.value.invalid && parcelControl.value.touched) && 'invalid'"
       >
         <!--[unit]="formGroupMeta.Parcel[parcelControl.key].unit"-->
       </app-input>

@@ -17,10 +17,10 @@ import State from '../../../core/maps/State';
 })
 export class CounterComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() mods;
+  @Input() isInvalid = false;
 
   public cssClass;
   public currentCount = 0;
-  public isInvalid = false;
 
   constructor(private modsService: ModsService) { }
 
@@ -29,13 +29,13 @@ export class CounterComponent implements ControlValueAccessor, OnInit, OnChanges
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.mods) {
-      if (changes.mods.currentValue === State.Invalid) {
-        this.isInvalid = true;
-      } else {
-        this.isInvalid = false;
-      }
-    }
+    // if (changes.mods) {
+    //   if (changes.mods.currentValue === State.Invalid) {
+    //     this.isInvalid = true;
+    //   } else {
+    //     this.isInvalid = false;
+    //   }
+    // }
   }
 
   changeValue(count) {

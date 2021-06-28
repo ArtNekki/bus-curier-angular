@@ -12,6 +12,7 @@ import {
 import FormControlName from '../../../../../../core/maps/FormControlName';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import formGroupMeta from '../../../../../../core/form/formGroupMeta';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-parcel',
@@ -42,7 +43,9 @@ export class ParcelComponent implements OnInit, ControlValueAccessor, Validator 
     [FormControlName.Length]: new FormControl('', [Validators.required])
   });
 
-  constructor(public formUtils: FormUtilsService) { }
+  constructor(
+    public formUtils: FormUtilsService,
+    private orderForm: OrderFormService) { }
 
   ngOnInit( ): void {
   }
@@ -68,8 +71,23 @@ export class ParcelComponent implements OnInit, ControlValueAccessor, Validator 
   }
 
   validate(c: AbstractControl): ValidationErrors | null{
-    this.isInvalid = !this.parcelGroup.valid && this.parcelGroup.touched;
+    // this.isInvalid = !this.parcelGroup.valid && this.parcelGroup.touched;
+    //
+    // return this.parcelGroup.valid ? null : { invalidForm: {valid: false, message: 'Control invalid'}};
 
-    return this.parcelGroup.valid ? null : { invalidForm: {valid: false, message: 'Control invalid'}};
+    this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
+      if (c.errors) {
+        this.parcelGroup.markAllAsTouched();
+      }
+
+      if (c.errors) {
+        this.orderForm.setInvalidStep(result.step);
+      } else {
+        this.orderForm.setInvalidStep(null);
+      }
+
+    });
+
+    return this.parcelGroup.valid ? null : { invalidForm: {valid: false, message: 'department point are invalid'}};
   }
 }
