@@ -6,14 +6,16 @@ import {Subject} from 'rxjs';
 })
 export class OrderFormService {
   public isTouched$ = new Subject();
+  public formData$ = new Subject();
+  public invalidStep$ = new Subject();
 
   constructor() { }
 
-  setAsTouched() {
-    this.isTouched$.next(true);
+  setInvalidStep(num: any) {
+    this.invalidStep$.next(num);
   }
 
-  setAsUntouched() {
-    this.isTouched$.next(false);
+  submit(data: {submitted: boolean, step: number}) {
+    this.formData$.next(data);
   }
 }

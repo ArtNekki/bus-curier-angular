@@ -1,5 +1,9 @@
 <ul class="calc-steps">
-  <li *ngFor="let step of steps; let i = index" class="calc-steps__item" [class.calc-steps__item--active]="currentStep === i" (click)="setStep(i)">
+  <li *ngFor="let step of steps; let i = index"
+      class="calc-steps__item"
+      [class.calc-steps__item--active]="currentStep === i"
+      [class.calc-steps__item--invalid]="invalidStep === i"
+      (click)="setStep(i)">
     <i class="calc-steps__point"></i>
     <div class="calc-steps__label">{{step}}</div>
   </li>

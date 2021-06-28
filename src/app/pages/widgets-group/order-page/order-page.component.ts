@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {animate, style, transition, trigger} from '@angular/animations';
 import FormControlName from '../../../core/maps/FormControlName';
+import {OrderFormService} from '../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-order-page',
@@ -34,8 +35,9 @@ export class OrderPageComponent implements OnInit {
 
   public form: FormGroup;
   public currentStep = 0;
+  public invalidStep;
 
-  constructor() { }
+  constructor(public orderForm: OrderFormService) { }
 
   ngOnInit(): void {
 
@@ -58,6 +60,10 @@ export class OrderPageComponent implements OnInit {
         }),
       ])
     });
+
+    this.orderForm.invalidStep$.subscribe((step) => {
+      this.invalidStep = step;
+    });
   }
 
   get steps() {
@@ -69,7 +75,12 @@ export class OrderPageComponent implements OnInit {
       return;
     }
 
-    // this.form.markAllAsTouched();
+    this.orderForm.submit({submitted: true, step: this.currentStep});
+
+    if (this.invalidStep != null) {
+      return;
+    }
+
     this.currentStep++;
   }
 
@@ -83,5 +94,6 @@ export class OrderPageComponent implements OnInit {
 
   onSubmit() {
     console.log('form', this.form.value);
+
   }
 }

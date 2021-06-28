@@ -15,6 +15,7 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import roles from 'src/app/mock-data/roles';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-individual',
@@ -43,6 +44,7 @@ export class IndividualComponent implements OnInit, ControlValueAccessor, Valida
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
+              private orderForm: OrderFormService,
               private readonly cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -82,6 +84,20 @@ export class IndividualComponent implements OnInit, ControlValueAccessor, Valida
   // }
 
   validate(c: AbstractControl): ValidationErrors | null {
+    this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
+      if (c.errors) {
+        this.formGroup.markAllAsTouched();
+      }
+
+      if (c.errors) {
+        this.orderForm.setInvalidStep(result.step);
+
+      } else {
+        this.orderForm.setInvalidStep(null);
+      }
+
+      console.log('isSubmited666', result.step );
+    });
     return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'recipient are invalid'}};
   }
 }

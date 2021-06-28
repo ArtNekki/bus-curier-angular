@@ -7,6 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class OrderStepsComponent implements OnInit {
   @Input() currentStep: number;
+  @Input() invalidStep: number;
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   public steps = ['Автор заявки', 'Отправитель груза', 'Параметры груза', 'Завершение'];
