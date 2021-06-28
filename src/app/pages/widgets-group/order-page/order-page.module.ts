@@ -16,6 +16,8 @@ import { DepartmentComponent } from './components/form/department/department.com
 import { CourierComponent } from './components/form/courier/courier.component';
 import { PickupPointComponent } from './components/form/pickup-point/pickup-point.component';
 import { OrderReportComponent } from './components/form/order-report/order-report.component';
+import { CargoComponent } from './components/form/cargo/cargo.component';
+import { CargoGroupComponent } from './components/form/cargo-group/cargo-group.component';
 
 
 
@@ -35,7 +37,9 @@ import { OrderReportComponent } from './components/form/order-report/order-repor
     DepartmentComponent,
     CourierComponent,
     PickupPointComponent,
-    OrderReportComponent
+    OrderReportComponent,
+    CargoComponent,
+    CargoGroupComponent
   ],
   imports: [
     CommonModule,

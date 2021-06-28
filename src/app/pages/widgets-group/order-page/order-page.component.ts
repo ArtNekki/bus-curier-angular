@@ -58,12 +58,11 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   public schedule = [];
   public cities = cities;
   public form: FormGroup;
-  public tags = [];
 
   public currentStep = 0;
-  public currentCargoIndex = 0;
+
   public currentUserType = UserType.Individual;
-  public currentCargoType = [];
+
   public currentAddService = AddService.Insurance;
   public currentDepartureTab = DepartureTab.Department;
   public currentPickupTab = PickupTab.Bus;
@@ -78,12 +77,10 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       }),
       [FormControlName.Sender]: new FormControl(''),
       [FormControlName.DeparturePoint]: new FormControl(''),
+      ['cargo-group']: new FormControl(''),
       [FormControlName.Recipient]: new FormControl(''),
       [FormControlName.PickupPoint]: new FormControl('')
     });
-
-    this.tags.push(`cargo-${this.tags.length + 1}`);
-    this.currentCargoType.push(FormControlName.Docs);
 
     roles.unshift({value: '', name: 'Не выбрано'});
     this.roles = roles;
@@ -152,9 +149,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     this.currentStep--;
   }
 
-  get cargo() {
-    return this.form.get(FormControlName.Cargo) as FormArray;
-  }
+
 
   // get cargoType() {
   //   console.log(Object.keys(((this.form.get('cargo') as FormArray).controls[0].get('type') as FormGroup).controls));
@@ -174,94 +169,24 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
     return (array as FormArray).controls;
   }
 
-  addCargo() {
-    const group = new FormGroup({
-      [FormControlName.Type]: new FormGroup({
-        [FormControlName.Docs]: new FormGroup({
-          [FormControlName.PlaceCount]: new FormControl('', [])
-        }),
-        [FormControlName.Parcels]: new FormControl(''),
-        [FormControlName.AutoParts]: new FormControl('', []),
-        other: new FormGroup({})
-      }),
-      [FormControlName.Packaging]: new FormControl(''),
-      services: new FormControl('')
-    });
-    (this.form.get(FormControlName.Cargo) as FormArray).push(group);
-
-    this.currentCargoIndex = (this.form.get(FormControlName.Cargo) as FormArray).length - 1;
-    this.currentCargoType.push(FormControlName.Docs);
-  }
-
-  deleteCargo(index: number) {
-    (this.form.get(FormControlName.Cargo) as FormArray).removeAt(index);
-    this.currentCargoIndex = (this.form.get(FormControlName.Cargo) as FormArray).length - 1;
-    this.currentCargoType.splice(index, 1);
-  }
-
-  selectCargo(index: number) {
-    this.currentCargoIndex = index;
-  }
-
-  selectCargoType(type: string, index) {
-    this.currentCargoType.splice(index, 1, type);
-
-    // switch (type) {
-    //   case FormControlName.Docs:
-    //     ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).addControl(FormControlName.PlaceCount, new FormControl('', []));
-    //     // ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).clear();
-    //     ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoParts) as FormArray).clear();
-    //     break;
-    //   case FormControlName.Parcels:
-    //     // ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).push(parcelGroup);
-    //     ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoParts) as FormArray).clear();
-    //     ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).removeControl(FormControlName.PlaceCount);
-    //     break;
-    //   case FormControlName.AutoParts:
-    //     ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoParts) as FormArray).push(new FormControl('', []));
-    //     // ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).clear();
-    //     ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Docs) as FormGroup).removeControl(FormControlName.PlaceCount);
-    //     break;
-    // }
-  }
-
   originalOrder = (a: KeyValue<string, AbstractControl>, b: KeyValue<string, AbstractControl>): number => {
     return 0;
   }
 
-  addParcelParams() {
-    ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).push(parcelGroup);
-  }
+  // addParcelParams() {
+  //   ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).push(parcelGroup);
+  // }
+  //
+  // deleteParcelParams(index: number) {
+  //   const array = ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray);
+  //
+  //   if (array.length <= 1) {
+  //     return;
+  //   }
+  //
+  //   array.removeAt(index);
+  // }
 
-  deleteParcelParams(index: number) {
-    const array = ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray);
-
-    if (array.length <= 1) {
-      return;
-    }
-
-    array.removeAt(index);
-  }
-
-  addAutoDetail() {
-    const autoDetail = new FormControl('', []);
-
-    ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoParts) as FormArray).push(autoDetail);
-  }
-
-  removeAutoDetail(index: number) {
-    const array = ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.AutoParts) as FormArray);
-
-    if (array.length <= 1) {
-      return;
-    }
-
-    array.removeAt(index);
-  }
-
-  setAddService(type: string) {
-    this.currentAddService = type;
-  }
 
   setCurrentUserType(type: string) {
     this.currentUserType = type;

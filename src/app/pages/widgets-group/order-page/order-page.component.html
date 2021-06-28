@@ -27,52 +27,7 @@
         <app-departure-point [formControlName]="FormControlName.DeparturePoint"></app-departure-point>
       </div>
       <div *ngIf="currentStep === 2" [@panel]="">
-<!--        {{form.get('cargoParams') | json}}-->
-       <div *ngIf="currentStep === 2 && (this.form.get(FormControlName.Cargo) && this.form.get(FormControlName.Cargo).value)" [formGroupName]="FormControlName.Cargo">
-         <div class="form__fieldset form__fieldset--tags">
-           <app-tag *ngFor="let control of cargo.controls; let cargoIndex = index;"
-                    [index]="cargoIndex"
-                    [checked]="currentCargoIndex === cargoIndex"
-                    (delete)="deleteCargo($event)"
-                    (change)="selectCargo($event)" [@tag]="">
-             Груз №{{cargoIndex + 1}}
-           </app-tag>
-           <app-tag type="add" (click)="addCargo()"></app-tag>
-         </div>
-         <ng-template ngFor let-cargoParams [ngForOf]="cargo.controls" let-cargoIndex = index>
-           <div *ngIf="currentCargoIndex === cargoIndex"
-                class="form__section" [@panel]="" [formGroupName]="cargoIndex">
-<!--             [style]="{display: currentCargoIndex === cargoIndex ? 'block' : 'none'}"-->
-             <div class="form__fieldset form__fieldset--goods-type">
-               <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
-               <app-radio *ngFor="let cargoTypeControl of getGroupControls(cargoParams.get(FormControlName.Type)) | keyvalue: originalOrder;"
-                          [name]="'cargo-type-' + cargoIndex" (change)="selectCargoType(cargoTypeControl.key, cargoIndex)"
-                          [checked]="cargoTypeControl.key === currentCargoType">{{cargoTypeControl.key}}</app-radio>
-             </div>
-             <div [formGroupName]="FormControlName.Type">
-               <div *ngIf="currentCargoType[cargoIndex] === FormControlName.Docs" [formGroupName]="FormControlName.Docs">
-                 <div class="form__field" [@panel]="">
-                   <label class="form__label">Количество мест</label>
-                   222 {{cargoParams.get('type').get('docs').get('place-count').invalid && cargoParams.get('type').get('docs').get('place-count').touched}}
-                   <app-counter
-                     [formControlName]="FormControlName.PlaceCount"
-                     [mods]="(cargoParams.get('type').get('docs').get('place-count').invalid && cargoParams.get('type').get('docs').get('place-count').touched) && 'invalid'"
-                   >
-                   </app-counter>
-                 </div>
-               </div>
-               <div *ngIf="currentCargoType[cargoIndex] === FormControlName.Parcels">
-                 <app-parcel-group [formControlName]="FormControlName.Parcels"></app-parcel-group>
-               </div>
-               <div *ngIf="currentCargoType[cargoIndex] === FormControlName.AutoParts">
-                 <app-auto-parts [formControlName]="FormControlName.AutoParts"></app-auto-parts>
-               </div>
-             </div>
-             <app-packaging [formControlName]="FormControlName.Packaging"></app-packaging>
-             <app-services formControlName="services"></app-services>
-           </div>
-         </ng-template>
-       </div>
+       <app-cargo-group formControlName="cargo-group"></app-cargo-group>
        <app-recipient [formControlName]="FormControlName.Recipient"></app-recipient>
        <app-pickup-point [formControlName]="FormControlName.PickupPoint"></app-pickup-point>
       </div>
