@@ -1,29 +1,7 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import cities from 'src/app/mock-data/cities';
-import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 import {animate, style, transition, trigger} from '@angular/animations';
-import {KeyValue} from '@angular/common';
-import {
-  busGroup, cargoGroup,
-  courierGroup,
-  departmentGroup,
-  departureGroup,
-  entityGroup,
-  individualGroup,
-  parcelGroup, pickupGroup, recipientGroup,
-  senderGroup
-} from '../../../core/form/groups';
-import AddService from '../../../core/maps/AddService';
-import UserType from '../../../core/maps/UserType';
-import User from 'firebase';
-import DepartureTab from '../../../core/maps/DepartureTab';
-import PickupTab from '../../../core/maps/PickupTab';
-import formGroupMeta from '../../../core/form/formGroupMeta';
 import FormControlName from '../../../core/maps/FormControlName';
-import fieldError from '../../../core/form/fieldError';
-import roles from '../../../mock-data/roles';
-import departments from '../../../mock-data/address-points';
-import schedule from '../../../mock-data/schedule';
 
 @Component({
   selector: 'app-order-page',
@@ -44,28 +22,12 @@ import schedule from '../../../mock-data/schedule';
     ])
   ]
 })
-export class OrderPageComponent implements OnInit, AfterViewInit {
-  public AddService = AddService;
-  public UserType = UserType;
-  public DepartureTab = DepartureTab;
-  public PickupTab = PickupTab;
+
+export class OrderPageComponent implements OnInit {
   public FormControlName = FormControlName;
-  public formGroupMeta = formGroupMeta;
-  public FormFieldError = fieldError;
 
-  public roles = [];
-  public departments = [];
-  public schedule = [];
-  public cities = cities;
   public form: FormGroup;
-
   public currentStep = 0;
-
-  public currentUserType = UserType.Individual;
-
-  public currentAddService = AddService.Insurance;
-  public currentDepartureTab = DepartureTab.Department;
-  public currentPickupTab = PickupTab.Bus;
 
   constructor() { }
 
@@ -78,24 +40,6 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       [FormControlName.Recipient]: new FormControl(''),
       [FormControlName.PickupPoint]: new FormControl('')
     });
-
-    roles.unshift({value: '', name: 'Не выбрано'});
-    this.roles = roles;
-
-    this.departments = departments;
-    this.schedule = schedule;
-  }
-
-  ngAfterViewInit(): void {
-
-  }
-
-  setCurrentStep($event: any) {
-    this.currentStep = $event;
-  }
-
-  onSubmit() {
-    console.log('form', this.form.value);
   }
 
   goNext() {
@@ -103,37 +47,8 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.form.markAllAsTouched();
-
-    console.log('this.form', this.form);
-
-    // if (this.form.invalid) {
-    //   return;
-    // }
-
+    // this.form.markAllAsTouched();
     this.currentStep++;
-
-    // if (this.currentStep === 1 && !(Object.keys((this.form as FormGroup).get(UserType.Sender).value).length)) {
-    //   (this.form as FormGroup).setControl(UserType.Sender, senderGroup);
-    // }
-
-    // if (this.currentStep === 1 && !((this.form as FormGroup).get(FormControlName.Departure))) {
-    //   (this.form as FormGroup).addControl(FormControlName.Departure, departureGroup);
-    //   this.showDepartureTab(this.currentDepartureTab);
-    // }
-
-    if (this.currentStep === 2 && !((this.form as FormGroup).get(FormControlName.Cargo))) {
-      (this.form as FormGroup).addControl(FormControlName.Cargo, cargoGroup);
-    }
-
-    if (this.currentStep === 2 && !((this.form as FormGroup).get('recipient'))) {
-      (this.form as FormGroup).addControl('recipient', recipientGroup);
-    }
-
-    if (this.currentStep === 2 && !((this.form as FormGroup).get('pickup'))) {
-      (this.form as FormGroup).addControl('pickup', pickupGroup);
-      this.showPickupTab(this.currentPickupTab);
-    }
   }
 
   goPrev() {
@@ -141,102 +56,10 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    // this.form.markAllAsTouched();
-
     this.currentStep--;
   }
 
-
-
-  // get cargoType() {
-  //   console.log(Object.keys(((this.form.get('cargo') as FormArray).controls[0].get('type') as FormGroup).controls));
-  //   return Object.keys(((this.form.get('cargo') as FormArray).controls[0].get('type') as FormGroup).controls) ;
-  // }
-
-
-  // getArrayKeys(array) {
-  //   return Object.keys((array as FormArray).controls);
-  // }
-
-  getGroupControls(group) {
-    return (group as FormGroup).controls;
-  }
-
-  getArrayControls(array) {
-    return (array as FormArray).controls;
-  }
-
-  originalOrder = (a: KeyValue<string, AbstractControl>, b: KeyValue<string, AbstractControl>): number => {
-    return 0;
-  }
-
-  // addParcelParams() {
-  //   ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray).push(parcelGroup);
-  // }
-  //
-  // deleteParcelParams(index: number) {
-  //   const array = ((this.form.get(FormControlName.Cargo) as FormArray).controls[this.currentCargoIndex].get(FormControlName.Type).get(FormControlName.Parcels) as FormArray);
-  //
-  //   if (array.length <= 1) {
-  //     return;
-  //   }
-  //
-  //   array.removeAt(index);
-  // }
-
-
-  // setCurrentUserType(type: string) {
-  //   this.currentUserType = type;
-  //
-  //   switch (type) {
-  //     // case UserType.Individual:
-  //     //   (this.form.get(FormControlName.Author) as FormGroup).addControl(UserType.Individual, individualGroup);
-  //     //   (this.form.get(FormControlName.Author) as FormGroup).removeControl(UserType.Entity);
-  //     //   break;
-  //     // case UserType.Entity:
-  //     //   (this.form.get(FormControlName.Author) as FormGroup).addControl(UserType.Entity, entityGroup);
-  //     //   (this.form.get(FormControlName.Author) as FormGroup).removeControl(UserType.Individual);
-  //     //   break;
-  //   }
-  // }
-
-  // setCurrentDepartureTab(tab: string) {
-  //   this.currentDepartureTab = tab;
-  //   this.showDepartureTab(tab);
-  // }
-
-  // showDepartureTab(tab: string) {
-  //   switch (tab) {
-  //     case this.DepartureTab.Department:
-  //       (this.form.get(FormControlName.Departure) as FormGroup).addControl(FormControlName.Department, departmentGroup);
-  //       (this.form.get(FormControlName.Departure) as FormGroup).removeControl(FormControlName.Courier);
-  //       break;
-  //     case this.DepartureTab.Courier:
-  //       (this.form.get(FormControlName.Departure) as FormGroup).addControl(FormControlName.Courier, courierGroup);
-  //       (this.form.get(FormControlName.Departure) as FormGroup).removeControl(FormControlName.Department);
-  //       break;
-  //   }
-  // }
-
-  setCurrentPickupTab(tab: string) {
-    this.currentPickupTab = tab;
-    this.showPickupTab(tab);
-  }
-
-  showPickupTab(tab: string) {
-    switch (tab) {
-      case this.PickupTab.Bus:
-        (this.form.get('pickup') as FormGroup).addControl('bus', busGroup);
-        (this.form.get('pickup') as FormGroup).removeControl(FormControlName.Courier);
-        break;
-      case this.PickupTab.Courier:
-        (this.form.get('pickup') as FormGroup).addControl(FormControlName.Courier, courierGroup);
-        (this.form.get('pickup') as FormGroup).removeControl('bus');
-        break;
-    }
-  }
-
-  getObjectKey(object) {
-    return (object instanceof Object) && Object.keys(object);
+  onSubmit() {
+    console.log('form', this.form.value);
   }
 }

@@ -54,6 +54,9 @@ export class IndividualComponent implements OnInit, ControlValueAccessor, Valida
       [FormControlName.Tel]: new FormControl('', [Validators.required]),
       [FormControlName.Role]: new FormControl('', [Validators.required]),
     });
+
+    roles.unshift({value: '', name: 'Не выбрано'});
+    this.roles = roles;
   }
 
   public onTouched: () => void = () => {};
