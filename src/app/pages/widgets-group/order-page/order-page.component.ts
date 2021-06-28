@@ -71,10 +71,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      author: new FormGroup({
-        individual: new FormControl(''),
-        entity: new FormControl('')
-      }),
+      author: new FormControl(''),
       [FormControlName.Sender]: new FormControl(''),
       [FormControlName.DeparturePoint]: new FormControl(''),
       ['cargo-group']: new FormControl(''),
@@ -188,20 +185,20 @@ export class OrderPageComponent implements OnInit, AfterViewInit {
   // }
 
 
-  setCurrentUserType(type: string) {
-    this.currentUserType = type;
-
-    switch (type) {
-      // case UserType.Individual:
-      //   (this.form.get(FormControlName.Author) as FormGroup).addControl(UserType.Individual, individualGroup);
-      //   (this.form.get(FormControlName.Author) as FormGroup).removeControl(UserType.Entity);
-      //   break;
-      // case UserType.Entity:
-      //   (this.form.get(FormControlName.Author) as FormGroup).addControl(UserType.Entity, entityGroup);
-      //   (this.form.get(FormControlName.Author) as FormGroup).removeControl(UserType.Individual);
-      //   break;
-    }
-  }
+  // setCurrentUserType(type: string) {
+  //   this.currentUserType = type;
+  //
+  //   switch (type) {
+  //     // case UserType.Individual:
+  //     //   (this.form.get(FormControlName.Author) as FormGroup).addControl(UserType.Individual, individualGroup);
+  //     //   (this.form.get(FormControlName.Author) as FormGroup).removeControl(UserType.Entity);
+  //     //   break;
+  //     // case UserType.Entity:
+  //     //   (this.form.get(FormControlName.Author) as FormGroup).addControl(UserType.Entity, entityGroup);
+  //     //   (this.form.get(FormControlName.Author) as FormGroup).removeControl(UserType.Individual);
+  //     //   break;
+  //   }
+  // }
 
   // setCurrentDepartureTab(tab: string) {
   //   this.currentDepartureTab = tab;

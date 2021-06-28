@@ -1,0 +1,19 @@
+<section class="form__section" [formGroup]="formGroup">
+  <h2 class="form__heading">Ваши данные</h2>
+  <div class="form__tabs">
+    <button type="button"
+            [class.active]="currentUserType === UserType.Individual"
+            (click)="setCurrentUserType(UserType.Individual)">Физическое лицо</button>
+    <button type="button"
+            [class.active]="currentUserType === UserType.Entity"
+            (click)="setCurrentUserType(UserType.Entity)">Юридическое лицо</button>
+  </div>
+  <div *ngIf="currentUserType === UserType.Individual" class="form__panel form__panel--mg-top">
+    <app-individual [formControlName]="UserType.Individual"></app-individual>
+  </div>
+  <div *ngIf="currentUserType === UserType.Entity" class="form__panel form__panel--mg-top">
+    <app-entity [formControlName]="UserType.Entity"></app-entity>
+  </div>
+  <!-- <p class="form__help-text form__help-text--gray form__help-text--align-center">Выберите статус лица для перехода на следующий шаг</p> -->
+  <!-- <p class="form__help-text">Чтобы оформить заказ как юридическое лицо,<br />вам необходимо <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>войти</span></span></a>или <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>зарегистрироваться</span></span></a></p> -->
+</section>
