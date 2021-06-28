@@ -48,7 +48,7 @@ export class CargoGroupComponent implements OnInit, ControlValueAccessor, Valida
       ])
     });
 
-    this.tags.push(`cargo-${this.tags.length + 1}`);
+    // this.tags.push(`cargo-${this.tags.length + 1}`);
   }
 
   public get items(): FormArray {
@@ -56,20 +56,7 @@ export class CargoGroupComponent implements OnInit, ControlValueAccessor, Valida
   }
 
   addCargo() {
-    const group = new FormGroup({
-      [FormControlName.Type]: new FormGroup({
-        [FormControlName.Docs]: new FormGroup({
-          [FormControlName.PlaceCount]: new FormControl('', [])
-        }),
-        [FormControlName.Parcels]: new FormControl(''),
-        [FormControlName.AutoParts]: new FormControl('', []),
-        other: new FormGroup({})
-      }),
-      [FormControlName.Packaging]: new FormControl(''),
-      services: new FormControl('')
-    });
-
-    this.items.push(group);
+    this.items.push(new FormControl(''));
     this.currentCargoIndex = this.items.length - 1;
   }
 
