@@ -4,21 +4,23 @@
     <p class="page__subtitle">Заполните форму необходимыми данными и отправьте</p>
     <app-order-steps [currentStep]="currentStep"></app-order-steps>
     <form class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div *ngIf="currentStep === 0" [@panel]="">
-        <app-author [formControlName]="FormControlName.Author"></app-author>
-      </div>
-      <div *ngIf="currentStep === 1" [@panel]="">
-        <app-sender [formControlName]="FormControlName.Sender"></app-sender>
-        <app-departure-point [formControlName]="FormControlName.DeparturePoint"></app-departure-point>
-      </div>
-      <div *ngIf="currentStep === 2" [@panel]="">
-       <app-cargo-group formControlName="cargo-group"></app-cargo-group>
-       <app-recipient [formControlName]="FormControlName.Recipient"></app-recipient>
-       <app-pickup-point [formControlName]="FormControlName.PickupPoint"></app-pickup-point>
-      </div>
-      <div *ngIf="currentStep === 3" [@panel]="">
-        <app-order-report></app-order-report>
-      </div>
+      <ng-container formArrayName="steps">
+        <div *ngIf="currentStep === FormStep.One" [formGroup]="steps[FormStep.One]" [@panel]="">
+          <app-author [formControlName]="FormControlName.Author"></app-author>
+        </div>
+        <div *ngIf="currentStep === FormStep.Two" [formGroup]="steps[FormStep.Two]" [@panel]="">
+          <app-sender [formControlName]="FormControlName.Sender"></app-sender>
+          <app-departure-point [formControlName]="FormControlName.DeparturePoint"></app-departure-point>
+        </div>
+        <div *ngIf="currentStep === FormStep.Three" [formGroup]="steps[FormStep.Three]" [@panel]="">
+          <app-cargo-group formControlName="cargo-group"></app-cargo-group>
+          <app-recipient [formControlName]="FormControlName.Recipient"></app-recipient>
+          <app-pickup-point [formControlName]="FormControlName.PickupPoint"></app-pickup-point>
+        </div>
+        <div *ngIf="currentStep === FormStep.Four" [formGroup]="steps[FormStep.Four]" [@panel]="">
+          <app-order-report></app-order-report>
+        </div>
+      </ng-container>
       <div class="form__actions">
         <app-btn type="button" disabled="true" mods="back" (click)="goPrev()">
           <svg-icon class="icon" src="assets/img/svg/back.svg" width="24" height="20"></svg-icon>

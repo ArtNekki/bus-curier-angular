@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {animate, style, transition, trigger} from '@angular/animations';
 import FormControlName from '../../../core/maps/FormControlName';
 
@@ -25,6 +25,12 @@ import FormControlName from '../../../core/maps/FormControlName';
 
 export class OrderPageComponent implements OnInit {
   public FormControlName = FormControlName;
+  public FormStep = {
+    One: 0,
+    Two: 1,
+    Three: 2,
+    Four: 3
+  };
 
   public form: FormGroup;
   public currentStep = 0;
@@ -32,14 +38,30 @@ export class OrderPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
     this.form = new FormGroup({
-      author: new FormControl(''),
-      [FormControlName.Sender]: new FormControl(''),
-      [FormControlName.DeparturePoint]: new FormControl(''),
-      ['cargo-group']: new FormControl(''),
-      [FormControlName.Recipient]: new FormControl(''),
-      [FormControlName.PickupPoint]: new FormControl('')
+      steps: new FormArray([
+        new FormGroup({
+          author: new FormControl('')
+        }),
+        new FormGroup({
+          [FormControlName.Sender]: new FormControl(''),
+          [FormControlName.DeparturePoint]: new FormControl('')
+        }),
+        new FormGroup({
+          ['cargo-group']: new FormControl(''),
+          [FormControlName.Recipient]: new FormControl(''),
+          [FormControlName.PickupPoint]: new FormControl('')
+        }),
+        new FormGroup({
+
+        }),
+      ])
     });
+  }
+
+  get steps() {
+    return (this.form.get('steps') as FormArray).controls;
   }
 
   goNext() {
