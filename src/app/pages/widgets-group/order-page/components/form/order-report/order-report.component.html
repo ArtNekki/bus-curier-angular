@@ -1,6 +1,10 @@
 <section class="form__section form__section--w-underline">
   <h2 class="form__heading form__heading--w-counter">Автор</h2>
-  <app-data-list [data]="formatData(author)"></app-data-list>
+  <app-data-list [data]="author"></app-data-list>
+</section>
+<section class="form__section form__section--w-underline">
+  <h2 class="form__heading form__heading--w-counter">Отправитель</h2>
+  <app-data-list [data]="sender"></app-data-list>
 </section>
 <section class="form__section form__section--w-underline">
   <h2 class="form__heading form__heading--w-counter">Пункт отправления</h2>

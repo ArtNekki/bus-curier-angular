@@ -23,16 +23,21 @@ export class OrderReportComponent implements OnInit {
   }
 
   get author() {
-    return this.data.steps[0].author;
+    for (const [key, value] of Object.entries(this.data.steps[0].author)) {
+      if (value) {
+        return this.formatData(value);
+      }
+    }
+  }
+
+  get sender() {
+    return this.formatData(this.data.steps[1].sender);
   }
 
   formatData(data) {
-    for (const [key, value] of Object.entries(data)) {
-      if (value) {
-        return Object.entries(value).map((item: [string, string]) => {
-          return {name: this.FormFieldMeta[item[0]].label, value: item[1]};
-        });
-      }
-    }
+    return Object.entries(data).map((item: [string, string]) => {
+      console.log('item', item);
+      return {name: this.FormFieldMeta[item[0]].label, value: item[1]};
+    });
   }
 }
