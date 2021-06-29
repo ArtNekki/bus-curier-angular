@@ -9,6 +9,8 @@ import {
   ValidationErrors,
   Validator
 } from '@angular/forms';
+import FormControlName from 'src/app/core/maps/FormControlName';
+import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 
 @Component({
   selector: 'app-services',
@@ -34,11 +36,8 @@ import {
   ])]
 })
 export class ServicesComponent implements OnInit, ControlValueAccessor, Validator {
-  public Service = {
-    Insurance: 'insurance',
-    SmsForSender: 'sms-for-sender',
-    SmsForRecipient: 'sms-for-recipient'
-  };
+  public FormControlName = FormControlName;
+  public FormFieldMeta = formFieldMeta;
 
   public formGroup: FormGroup;
   public currentService: string;
@@ -49,9 +48,9 @@ export class ServicesComponent implements OnInit, ControlValueAccessor, Validato
     // this.currentService = this.Service.Insurance;
 
     this.formGroup = new FormGroup({
-      [this.Service.Insurance]: new FormControl(''),
-      [this.Service.SmsForSender]: new FormControl(''),
-      [this.Service.SmsForRecipient]: new FormControl('')
+      [this.FormControlName.Insurance]: new FormControl(''),
+      [this.FormControlName.SmsForSender]: new FormControl(''),
+      [this.FormControlName.SmsForRecipient]: new FormControl('')
     });
   }
 

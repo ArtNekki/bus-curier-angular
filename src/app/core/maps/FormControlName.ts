@@ -39,5 +39,8 @@ export default {
   AddressPoints: 'address-points',
   Date: 'date',
   DispatchData: 'dispatch-data',
-  ReceiveData: 'receive-data'
+  ReceiveData: 'receive-data',
+  Insurance: 'insurance',
+  SmsForSender: 'sms-for-sender',
+  SmsForRecipient: 'sms-for-recipient'
 };

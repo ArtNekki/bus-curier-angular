@@ -133,4 +133,16 @@ export default {
     label: 'Автозапчасти',
     type: 'radio'
   },
+  [FormControlName.Insurance]: {
+    label: 'Cтрахование',
+    type: 'radio'
+  },
+  [FormControlName.SmsForSender]: {
+    label: 'СМС-уведомления отправителю',
+    type: 'radio'
+  },
+  [FormControlName.SmsForRecipient]: {
+    label: 'СМС-уведомления получателю',
+    type: 'radio'
+  }
 };

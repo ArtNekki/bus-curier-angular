@@ -51,8 +51,7 @@ export class CargoComponent implements OnInit, ControlValueAccessor, Validator {
         [FormControlName.AutoParts]: new FormControl(''),
         // other: new FormGroup({})
       }),
-      [FormControlName.Packaging]: new FormControl(''),
-      services: new FormControl(''),
+      [FormControlName.Packaging]: new FormControl('')
     });
 
     this.currentCargoType = FormControlName.Docs;

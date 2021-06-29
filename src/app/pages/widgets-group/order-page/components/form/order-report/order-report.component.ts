@@ -21,7 +21,7 @@ export class OrderReportComponent implements OnInit {
   constructor(public formUtils: FormUtilsService) { }
 
   ngOnInit(): void {
-
+    // console.log('services', this.services);
   }
 
   get author() {
@@ -38,6 +38,10 @@ export class OrderReportComponent implements OnInit {
 
   get recipient() {
     return this.formatData(this.data.steps[2].recipient);
+  }
+
+  get services() {
+    return this.formatData(this.data.steps[2].services);
   }
 
   get departurePoint() {
@@ -114,16 +118,16 @@ export class OrderReportComponent implements OnInit {
 
   getCurrentCargo(items: any) {
     const cargo = Object.entries(items).filter((item: [string, string]) => {
-      return item[1] && item;
+      return (item.length && item[1]) && item;
     });
-
-    console.log('cargo', cargo[0][1]);
 
     if (cargo.length) {
       return {
         type: cargo[0][0],
         items: cargo[0][1]
       };
+    } else {
+      return {};
     }
   }
 
