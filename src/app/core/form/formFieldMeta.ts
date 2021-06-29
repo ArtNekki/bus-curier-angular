@@ -94,24 +94,43 @@ export default {
     unit: 'см'
   },
   [FormControlName.Date]: {
-    label: 'Дата'
+    label: 'Дата',
+    type: 'text'
   },
   [FormControlName.DispatchData]: {
-    label: 'Пункт отправления'
+    label: 'Пункт отправления',
+    type: 'text'
   },
   [FormControlName.Location]: {
-    label: 'Населенный пункт'
+    label: 'Населенный пункт',
+    type: 'text'
   },
   [FormControlName.AddressPoints]: {
-    label: 'Адреса'
+    label: 'Адреса',
+    type: 'text'
   },
   [FormControlName.Department]: {
-    label: 'Отделение'
+    label: 'Отделение',
+    type: 'text'
   },
   [FormControlName.DepartmentTo]: {
-    label: 'Передать в отделение'
+    label: 'Передать в отделение',
+    type: 'text'
   },
   [FormControlName.DepartmentFrom]: {
-    label: 'Забрать из отделения'
+    label: 'Забрать из отделения',
+    type: 'text'
+  },
+  [FormControlName.Docs]: {
+    label: 'Документы',
+    type: 'radio'
+  },
+  [FormControlName.Parcels]: {
+    label: 'Посылки',
+    type: 'radio'
+  },
+  [FormControlName.AutoParts]: {
+    label: 'Автозапчасти',
+    type: 'radio'
   },
 };

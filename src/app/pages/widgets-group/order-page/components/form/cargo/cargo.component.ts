@@ -13,6 +13,7 @@ import FormControlName from '../../../../../../core/maps/FormControlName';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
+import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 
 @Component({
   selector: 'app-cargo',
@@ -33,6 +34,7 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
 })
 export class CargoComponent implements OnInit, ControlValueAccessor, Validator {
   public FormControlName = FormControlName;
+  public FormFieldMeta = formFieldMeta;
 
   public formGroup: FormGroup;
   public currentCargoType = null;
@@ -47,7 +49,7 @@ export class CargoComponent implements OnInit, ControlValueAccessor, Validator {
         [FormControlName.Docs]: new FormControl(''),
         [FormControlName.Parcels]: new FormControl(''),
         [FormControlName.AutoParts]: new FormControl(''),
-        other: new FormGroup({})
+        // other: new FormGroup({})
       }),
       [FormControlName.Packaging]: new FormControl(''),
       services: new FormControl(''),

@@ -15,6 +15,7 @@ import Address from '../../../../../../core/models/Address';
 export class OrderReportComponent implements OnInit {
   @Input() data;
 
+  public FormControlName = FormControlName;
   public FormFieldMeta = formFieldMeta;
 
   constructor(public formUtils: FormUtilsService) { }
@@ -111,13 +112,33 @@ export class OrderReportComponent implements OnInit {
     });
   }
 
-  getCargoType(obj: any) {
-    const type = Object.entries(obj).filter((item: [string, string]) => {
-      // console.log(obj);
+  getCurrentCargo(items: any) {
+    const cargo = Object.entries(items).filter((item: [string, string]) => {
       return item[1] && item;
     });
 
-    console.log('type', obj);
-    return type;
+    console.log('cargo', cargo[0][1]);
+
+    if (cargo.length) {
+      return {
+        type: cargo[0][0],
+        items: cargo[0][1]
+      };
+    }
+  }
+
+  setCargoType(type: string) {
+    return [{name: 'Характер груза', value: type}];
+  }
+
+  formatParcel(item: any) {
+    return [
+    {name: 'Габариты',
+      value: `
+        Ширина: <b>${item.width} см</b>.,
+        Высота: <b>${item.height} см</b>.,
+        Длина: <b>${item.length} см</b>.`},
+    {name: 'Вес', value: `${item.weight} кг.`},
+    {name: 'Упаковка', value: 'Коробка картонная (4 шт), Сейф пакет (1 шт)'}];
   }
 }

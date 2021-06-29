@@ -4,7 +4,7 @@
     <app-radio *ngFor="let control of
         formUtils.getGroupControls(formGroup.get(FormControlName.Type)) | keyvalue: formUtils.originalOrder;"
                [name]="'cargo-type'" (change)="selectCargoType(control.key)"
-               [checked]="control.key === currentCargoType">{{control.key}}</app-radio>
+               [checked]="control.key === currentCargoType">{{FormFieldMeta[control.key].label}}</app-radio>
   </div>
   <div [formGroupName]="FormControlName.Type">
     <div *ngIf="currentCargoType === FormControlName.Docs">

@@ -4,6 +4,13 @@
 @import "src/variables";
 @import "src/assets/scss/settings";
 
+:host {
+  &:not(:last-of-type) {
+    margin-bottom: 30px;
+    display: block;
+  }
+}
+
 .data-list {
   margin: 0;
   padding: 0;
@@ -11,10 +18,6 @@
   font-family: $font-family--secondary;
   font-size: 15px;
   line-height: 1.2;
-
-  &:not(:last-of-type) {
-    margin-bottom: 30px;
-  }
 
   &--w-underline {
     padding-bottom: 30px;
@@ -39,6 +42,7 @@
     &::before {
       content: "";
       grid-area: dots;
+      align-self: end;
       border-bottom: 1px dotted $gray-color--down-11;
     }
 

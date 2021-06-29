@@ -18,21 +18,25 @@
   <h2 class="form__heading form__heading--w-counter">Пункт получения</h2>
 <!--  <app-data-list [data]="pickupPoint"></app-data-list>-->
 </section>
-<section *ngFor="let cargo of cargoList; let cargoIndex" class="form__section form__section--w-underline">
+<section *ngFor="let cargo of cargoList; let cargoIndex = index" class="form__section form__section--w-underline">
   <h2 class="form__heading form__heading--w-counter">Груз {{cargoIndex + 1}}</h2>
-  {{getCargoType(cargo.type)}}
-<!--    <app-data-list [data]="getCargoType(cargo.type)"></app-data-list>-->
-
+    <app-data-list [data]="setCargoType(FormFieldMeta[getCurrentCargo(cargo.type).type].label)"></app-data-list>
+    <ng-container *ngIf="getCurrentCargo(cargo.type).type === FormControlName.Parcels">
+      <ng-container *ngFor="let item of getCurrentCargo(cargo.type).items; let i = index">
+        <div class="form__mark">Место №{{i + 1}}</div>
+          <app-data-list [data]="formatParcel(item)"></app-data-list>
+      </ng-container>
+    </ng-container>
 <!--            {{{ data-list items='[-->
 <!--            {"name": "Характер груза", "value": "Посылка"}]'-->
 <!--            }}}-->
-  <div class="form__mark">Место №1</div>
+<!--  <div class="form__mark">Место №1</div>-->
   <!--          {{{ data-list items='[-->
   <!--          {"name": "Габариты", "value": "Ширина: <b>32 см</b>., Высота: <b>120 см</b>., Длина: <b>50 см</b>. "},-->
   <!--          {"name": "Вес", "value": "12 кг."},-->
   <!--          {"name": "Упаковка", "value": "Коробка картонная (4 шт), Сейф пакет (1 шт)"}]'-->
   <!--          }}}-->
-  <div class="form__mark">Место №2</div>
+<!--  <div class="form__mark">Место №2</div>-->
   <!--          {{{ data-list items='[-->
   <!--          {"name": "Габариты", "value": "Ширина: <b>32 см</b>., Высота: <b>120 см</b>., Длина: <b>50 см</b>. "},-->
   <!--          {"name": "Вес", "value": "12 кг."},-->
