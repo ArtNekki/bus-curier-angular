@@ -145,4 +145,8 @@ export class OrderReportComponent implements OnInit {
   formatDocs(item: any) {
     return [{name: 'Количество', value: `${item} шт.`}];
   }
+
+  formatAutoparts(item: any) {
+    return [{name: 'Запчасть', value: item}];
+  }
 }
