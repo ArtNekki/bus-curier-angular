@@ -36,29 +36,10 @@
       <app-data-list [data]="formatAutoparts(item)"></app-data-list>
     </ng-container>
   </ng-container>
-<!--            {{{ data-list items='[-->
-<!--            {"name": "Характер груза", "value": "Посылка"}]'-->
-<!--            }}}-->
-<!--  <div class="form__mark">Место №1</div>-->
-  <!--          {{{ data-list items='[-->
-  <!--          {"name": "Габариты", "value": "Ширина: <b>32 см</b>., Высота: <b>120 см</b>., Длина: <b>50 см</b>. "},-->
-  <!--          {"name": "Вес", "value": "12 кг."},-->
-  <!--          {"name": "Упаковка", "value": "Коробка картонная (4 шт), Сейф пакет (1 шт)"}]'-->
-  <!--          }}}-->
-<!--  <div class="form__mark">Место №2</div>-->
-  <!--          {{{ data-list items='[-->
-  <!--          {"name": "Габариты", "value": "Ширина: <b>32 см</b>., Высота: <b>120 см</b>., Длина: <b>50 см</b>. "},-->
-  <!--          {"name": "Вес", "value": "12 кг."},-->
-  <!--          {"name": "Упаковка", "value": "Коробка картонная (4 шт), Сейф пакет (1 шт)"}]'-->
-  <!--          }}}-->
 </section>
 <section class="form__section form__section--w-underline">
   <h2 class="form__heading form__heading--w-counter">Дополнительные услуги</h2>
-  <!--          {{{ data-list items='[-->
-  <!--          {"name": "Страховка", "value": "25 000 руб."},-->
-  <!--          {"name": "СМС-уведомления<br />отправителю", "value": "Нет"},-->
-  <!--          {"name": "СМС-уведомления<br />получателю", "value": "Нет"}]'-->
-  <!--          }}}-->
+  <app-data-list [data]="services"></app-data-list>
 </section>
 <section class="form__section">
   <div class="form__fieldset">

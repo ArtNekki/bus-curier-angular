@@ -21,7 +21,7 @@ export class OrderReportComponent implements OnInit {
   constructor(public formUtils: FormUtilsService) { }
 
   ngOnInit(): void {
-    // console.log('services', this.services);
+    console.log('services', this.services);
   }
 
   get author() {
@@ -112,7 +112,7 @@ export class OrderReportComponent implements OnInit {
 
   formatData(data) {
     return Object.entries(data).map((item: [string, string]) => {
-      return {name: this.FormFieldMeta[item[0]].label, value: item[1]};
+      return {name: this.FormFieldMeta[item[0]].label, value: item[1] || 'нет'};
     });
   }
 
