@@ -27,15 +27,16 @@
           <app-data-list [data]="formatParcel(item)"></app-data-list>
       </ng-container>
     </ng-container>
-  <ng-container *ngIf="getCurrentCargo(cargo.type).type === FormControlName.Docs">
+    <ng-container *ngIf="getCurrentCargo(cargo.type).type === FormControlName.Docs">
     <app-data-list [data]="formatDocs(getCurrentCargo(cargo.type).items[FormControlName.PlaceCount])"></app-data-list>
   </ng-container>
-  <ng-container *ngIf="getCurrentCargo(cargo.type).type === FormControlName.AutoParts">
+    <ng-container *ngIf="getCurrentCargo(cargo.type).type === FormControlName.AutoParts">
     <ng-container *ngFor="let item of getCurrentCargo(cargo.type).items; let i = index">
       <div class="form__mark">Место №{{i + 1}}</div>
       <app-data-list [data]="formatAutoparts(item)"></app-data-list>
     </ng-container>
   </ng-container>
+    <app-data-list [data]="formatPackaging(cargo.packaging)"></app-data-list>
 </section>
 <section class="form__section form__section--w-underline">
   <h2 class="form__heading form__heading--w-counter">Дополнительные услуги</h2>

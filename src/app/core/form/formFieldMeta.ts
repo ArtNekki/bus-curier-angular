@@ -144,5 +144,30 @@ export default {
   [FormControlName.SmsForRecipient]: {
     label: 'СМС-уведомления получателю',
     type: 'radio'
+  },
+  [FormControlName.CardboardBox]: {
+    label: 'Коробка картонная',
+    type: 'checkbox',
+    meta: '50 руб. - 180 руб.'
+  },
+  [FormControlName.TransparentFilm]: {
+    label: 'Пленка стрейч прозрачная',
+    type: 'checkbox',
+    meta: '30 руб. за 1 м.'
+  },
+  [FormControlName.SafePack]: {
+    label: 'Сейф пакет',
+    type: 'checkbox',
+    meta: '10 руб.'
+  },
+  [FormControlName.BlackFilm]: {
+    label: 'Пленка стрейч черная',
+    type: 'checkbox',
+    meta: '30 руб. за 1 м.'
+  },
+  [FormControlName.BagWithSeal]: {
+    label: 'Мешок полипропиленовый с пломбой',
+    type: 'checkbox',
+    meta: '50 руб. - 180 руб.'
   }
 };

@@ -10,6 +10,8 @@ import {
   ValidationErrors, Validator
 } from '@angular/forms';
 import {map} from 'rxjs/operators';
+import FormControlName from 'src/app/core/maps/FormControlName';
+import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 
 @Component({
   selector: 'app-packaging',
@@ -29,24 +31,20 @@ import {map} from 'rxjs/operators';
   ]
 })
 export class PackagingComponent implements OnInit, ControlValueAccessor, Validator {
+  public FormFieldMeta = formFieldMeta;
+  public FormControlName = FormControlName;
+
   public formGroup: FormGroup;
-  public ControlName = {
-    CardBox: 'cardboard-box',
-    TransparentFilm: 'transparent-film',
-    SafePack: 'safe-pack',
-    BlackFilm: 'black-film',
-    BagWithSeal: 'bag-with-seal'
-  };
 
   constructor() { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-        [this.ControlName.CardBox]: new FormControl(''),
-        [this.ControlName.TransparentFilm]: new FormControl(''),
-        [this.ControlName.SafePack]: new FormControl(''),
-        [this.ControlName.BlackFilm]: new FormControl(''),
-        [this.ControlName.BagWithSeal]: new FormControl(''),
+        [FormControlName.CardboardBox]: new FormControl(''),
+        [FormControlName.TransparentFilm]: new FormControl(''),
+        [FormControlName.SafePack]: new FormControl(''),
+        [FormControlName.BlackFilm]: new FormControl(''),
+        [FormControlName.BagWithSeal]: new FormControl(''),
     });
   }
 

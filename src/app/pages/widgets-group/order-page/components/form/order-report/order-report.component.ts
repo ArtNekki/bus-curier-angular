@@ -122,6 +122,7 @@ export class OrderReportComponent implements OnInit {
     });
 
     if (cargo.length) {
+      console.log('cargo', cargo);
       return {
         type: cargo[0][0],
         items: cargo[0][1]
@@ -142,8 +143,8 @@ export class OrderReportComponent implements OnInit {
         Ширина: <b>${item.width} см</b>.,
         Высота: <b>${item.height} см</b>.,
         Длина: <b>${item.length} см</b>.`},
-    {name: 'Вес', value: `${item.weight} кг.`},
-    {name: 'Упаковка', value: 'Коробка картонная (4 шт), Сейф пакет (1 шт)'}];
+    {name: 'Вес', value: `${item.weight} кг.`}];
+    // {name: 'Упаковка', value: 'Коробка картонная (4 шт), Сейф пакет (1 шт)'}
   }
 
   formatDocs(item: any) {
@@ -152,5 +153,15 @@ export class OrderReportComponent implements OnInit {
 
   formatAutoparts(item: any) {
     return [{name: 'Запчасть', value: item}];
+  }
+
+  formatPackaging(items: any) {
+    const data = Object.entries(items)
+          .map((item: [string, string]) => {
+            return item[1] && this.FormFieldMeta[item[0]].label;
+          })
+          .filter((item: string) => item);
+
+    return [{name: 'Упаковка', value: data.join(`, `)}];
   }
 }

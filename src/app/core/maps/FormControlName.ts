@@ -42,5 +42,10 @@ export default {
   ReceiveData: 'receive-data',
   Insurance: 'insurance',
   SmsForSender: 'sms-for-sender',
-  SmsForRecipient: 'sms-for-recipient'
+  SmsForRecipient: 'sms-for-recipient',
+  CardboardBox: 'cardboard-box',
+  TransparentFilm: 'transparent-film',
+  SafePack: 'safe-pack',
+  BlackFilm: 'black-film',
+  BagWithSeal: 'bag-with-seal'
 };

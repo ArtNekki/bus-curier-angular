@@ -2,33 +2,33 @@
   <h2 class="form__heading">Упаковка:</h2>
   <div class="form__fieldset form__fieldset--boxing">
     <div class="form__field">
-      <app-checkbox [formControlName]="ControlName.CardBox">
-        <div class="text">Коробка картонная</div>
-        <div class="meta">50 руб. - 180 руб.</div>
+      <app-checkbox [formControlName]="FormControlName.CardboardBox">
+        <div class="text">{{FormFieldMeta[FormControlName.CardboardBox].label}}</div>
+        <div class="meta">{{FormFieldMeta[FormControlName.CardboardBox].meta}}</div>
       </app-checkbox>
     </div>
     <div class="form__field">
-      <app-checkbox [formControlName]="ControlName.TransparentFilm">
-        <div class="text">Пленка стрейч прозрачная</div>
-        <div class="meta">30 руб. за 1 м.</div>
+      <app-checkbox [formControlName]="FormControlName.TransparentFilm">
+        <div class="text">{{FormFieldMeta[FormControlName.TransparentFilm].label}}</div>
+        <div class="meta">{{FormFieldMeta[FormControlName.TransparentFilm].meta}}</div>
       </app-checkbox>
     </div>
     <div class="form__field">
-      <app-checkbox [formControlName]="ControlName.SafePack">
-        <div class="text">Сейф пакет</div>
-        <div class="meta">10 руб.</div>
+      <app-checkbox [formControlName]="FormControlName.SafePack">
+        <div class="text">{{FormFieldMeta[FormControlName.SafePack].label}}</div>
+        <div class="meta">{{FormFieldMeta[FormControlName.SafePack].meta}}</div>
       </app-checkbox>
     </div>
     <div class="form__field">
-      <app-checkbox [formControlName]="ControlName.BlackFilm">
-        <div class="text">Пленка стрейч черная</div>
-        <div class="meta">30 руб. за 1 м.</div>
+      <app-checkbox [formControlName]="FormControlName.BlackFilm">
+        <div class="text">{{FormFieldMeta[FormControlName.BlackFilm].label}}</div>
+        <div class="meta">{{FormFieldMeta[FormControlName.BlackFilm].meta}}</div>
       </app-checkbox>
     </div>
     <div class="form__field form__field--span-2">
-      <app-checkbox [formControlName]="ControlName.BagWithSeal">
-        <div class="text">Мешок полипропиленовый с пломбой</div>
-        <div class="meta">50 руб. - 180 руб.</div>
+      <app-checkbox [formControlName]="FormControlName.BagWithSeal">
+        <div class="text">{{FormFieldMeta[FormControlName.BagWithSeal].label}}</div>
+        <div class="meta">{{FormFieldMeta[FormControlName.BagWithSeal].meta}}</div>
       </app-checkbox>
     </div>
   </div>
