@@ -53,6 +53,10 @@ export default {
     label: 'Кв. / офис',
     type: 'text'
   },
+  [FormControlName.Courier]: {
+    label: 'Курьер',
+    type: 'text'
+  },
   [FormControlName.CourierTime]: {
     label: 'Удобное время для приезда курьера',
     type: 'text'
@@ -88,5 +92,26 @@ export default {
     label: 'Длина',
     type: 'text',
     unit: 'см'
+  },
+  [FormControlName.Date]: {
+    label: 'Дата'
+  },
+  [FormControlName.DispatchData]: {
+    label: 'Пункт отправления'
+  },
+  [FormControlName.Location]: {
+    label: 'Населенный пункт'
+  },
+  [FormControlName.AddressPoints]: {
+    label: 'Адреса'
+  },
+  [FormControlName.Department]: {
+    label: 'Отделение'
+  },
+  [FormControlName.DepartmentTo]: {
+    label: 'Передать в отделение'
+  },
+  [FormControlName.DepartmentFrom]: {
+    label: 'Забрать из отделения'
   },
 };

@@ -1,6 +1,8 @@
 export default {
   DeparturePoint: 'departure-point',
   Department: 'department',
+  DepartmentTo: 'departmentTo',
+  DepartmentFrom: 'departmentFrom',
   Courier: 'courier',
   Fio: 'fio',
   Doc: 'doc',

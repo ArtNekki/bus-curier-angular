@@ -5,6 +5,7 @@ import UserType from '../../../../../../core/maps/UserType';
 import firebase from 'firebase';
 import User = firebase.User;
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
+import Address from '../../../../../../core/models/Address';
 
 @Component({
   selector: 'app-order-report',
@@ -19,7 +20,7 @@ export class OrderReportComponent implements OnInit {
   constructor(public formUtils: FormUtilsService) { }
 
   ngOnInit(): void {
-    console.log('author', this.author);
+
   }
 
   get author() {
@@ -34,9 +35,38 @@ export class OrderReportComponent implements OnInit {
     return this.formatData(this.data.steps[1].sender);
   }
 
+  get departurePoint() {
+    let data =  this.data.steps[1][FormControlName.DeparturePoint];
+    const dispatchData = data[FormControlName.DispatchData];
+
+    let type = {};
+
+    for (const [key, value] of Object.entries(dispatchData)) {
+      if (value) {
+        type = {[key]: `
+        ул. ${(value as Address).street},
+        д. ${(value as Address).building},
+        кв. ${(value as Address).apartment}`};
+      }
+    }
+
+    data = Object.assign(data, type);
+
+    data = Object.entries(data)
+      .map((item: [string, string]) => {
+        if ((item[0] === FormControlName.DispatchData) || (item[0] === FormControlName.AddressPoints)) {
+          return null;
+        } else {
+          return {name: this.FormFieldMeta[item[0]].label, value: item[1]};
+        }
+      })
+      .filter((item) => item);
+
+    return data;
+  }
+
   formatData(data) {
     return Object.entries(data).map((item: [string, string]) => {
-      console.log('item', item);
       return {name: this.FormFieldMeta[item[0]].label, value: item[1]};
     });
   }
