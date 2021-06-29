@@ -20,6 +20,7 @@ import { CargoComponent } from './components/form/cargo/cargo.component';
 import { CargoGroupComponent } from './components/form/cargo-group/cargo-group.component';
 import { AuthorComponent } from './components/form/author/author.component';
 import { DocsComponent } from './components/form/docs/docs.component';
+import { SidebarResultComponent } from './components/sidebar-result/sidebar-result.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { DocsComponent } from './components/form/docs/docs.component';
     CargoComponent,
     CargoGroupComponent,
     AuthorComponent,
-    DocsComponent
+    DocsComponent,
+    SidebarResultComponent
   ],
   imports: [
     CommonModule,

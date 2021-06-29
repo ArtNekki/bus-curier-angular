@@ -1,0 +1,61 @@
+<aside class="sidebar-result">
+  <div class="sidebar-result__link">
+    <app-link href="#" mods="gray">
+      Расписание движения рейсовых автобусов
+      <svg-icon class="icon"
+        src="assets/img/svg/info.svg" width="22" height="21"
+      ></svg-icon>
+    </app-link>
+<!--    {{{ link href="#" text="" type="help" mods="gray, align-start"}}}-->
+  </div>
+  <section class="sidebar-result__main">
+    <h2 class="sidebar-result__title">Расчет</h2>
+    <!-- <div class="sidebar-result__info">
+        <p>Для расчета стоимости отправления, укажите место отправления и прибытия, а также тип груза.</p>
+        <p>Внимание! Информация, приведенная в калькуляторе справочная, точную информацию по доставкам в населенные пункты вы можете уточнить в чате на сайте или у диспетчера.</p>
+        <p>Если вам необходимо отправить посылку между разными регионами России, воспользуйтесь другим калькулятором -
+           {{{ link href="#" text="расчет перевозки по России." mods="blue"}}}
+        </p>
+    </div> -->
+    <div class="sidebar-result__details">
+      <div class="sidebar-result__scroll">
+        <p class="gray">Тип груза:</p>
+        <dl>
+          <dt><b>Груз 1:</b></dt>
+          <dd>Запчасти: бампер (мест: 1), капот (мест: 2), стекло (мест: 1) </dd>
+          <dt><b>Груз 2:</b></dt>
+          <dd>Посылку (мест: 1)</dd>
+          <dt><b>Груз 3:</b></dt>
+          <dd>Документы (мест: 1)</dd>
+        </dl>
+        <p class="gray">Направление перевозки:</p>
+        <p>г. Владивосток — г. Уссурийск <b class="lg">500 руб.</b></p>
+        <p class="gray">Забор посылки у отправителя - вызов курьера</p>
+        <p><b class="lg">300 руб.</b></p>
+        <p class="gray">Доставка посылки до получателя - вызов курьера</p>
+        <p><b class="lg">300 руб.</b></p>
+        <p class="gray">Упаковка груза:</p>
+        <dl>
+          <dt>Коробка картонная (4 шт):</dt>
+          <dd><b class="lg">120 руб.</b></dd>
+          <dt>Сейф пакет (1 шт):</dt>
+          <dd><b class="lg">120 руб.</b></dd>
+        </dl>
+        <p class="gray">Страхование посылки на сумму 25 000 руб.</p>
+        <p><b class="lg">200 руб.</b></p>
+      </div>
+    </div>
+    <div class="sidebar-result__total">
+      <p><span class="gray">Итого: </span><b>1 550 руб.</b></p>
+      <!-- <p><b>Расчет</b></p> -->
+      <button type="button" class="sidebar-result__collapse">&#160;</button>
+    </div>
+    <div class="sidebar-result__footer">
+      <small>Срок отправки: от 2 до 24 часов<br />*в направлении Владивосток-Находка возможна задержка   сроков до 24 часов.</small>
+      <div class="sidebar-result__submit">
+        <app-btn type="button" mods="lg">Оформить заказ</app-btn>
+      </div>
+      <button type="button" class="sidebar-result__reset">Сбросить расчет</button>
+    </div>
+  </section>
+</aside>
