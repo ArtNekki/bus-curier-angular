@@ -1,21 +1,25 @@
 <ng-container [formGroup]="formGroup">
-  <div class="form__fieldset form__fieldset--goods-type">
-    <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
-    <app-radio *ngFor="let control of
+  <section class="form__section">
+    <div class="form__fieldset form__fieldset--goods-type">
+      <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
+      <app-radio *ngFor="let control of
         formUtils.getGroupControls(formGroup.get(FormControlName.Type)) | keyvalue: formUtils.originalOrder;"
-               [name]="'cargo-type'" (change)="selectCargoType(control.key)"
-               [checked]="control.key === currentCargoType">{{FormFieldMeta[control.key].label}}</app-radio>
+                 [name]="'cargo-type'" (change)="selectCargoType(control.key)"
+                 [checked]="control.key === currentCargoType">{{FormFieldMeta[control.key].label}}</app-radio>
+    </div>
+    <div [formGroupName]="FormControlName.Type">
+      <div *ngIf="currentCargoType === FormControlName.Docs">
+        <app-docs [formControlName]="FormControlName.Docs"></app-docs>
+      </div>
+      <div *ngIf="currentCargoType === FormControlName.Parcels">
+        <app-parcel-group [formControlName]="FormControlName.Parcels"></app-parcel-group>
+      </div>
+      <div *ngIf="currentCargoType === FormControlName.AutoParts">
+        <app-auto-parts [formControlName]="FormControlName.AutoParts"></app-auto-parts>
+      </div>
+    </div>
+  </section>
+  <div class="form__section">
+    <app-packaging [formControlName]="FormControlName.Packaging"></app-packaging>
   </div>
-  <div [formGroupName]="FormControlName.Type">
-    <div *ngIf="currentCargoType === FormControlName.Docs">
-      <app-docs [formControlName]="FormControlName.Docs"></app-docs>
-    </div>
-    <div *ngIf="currentCargoType === FormControlName.Parcels">
-      <app-parcel-group [formControlName]="FormControlName.Parcels"></app-parcel-group>
-    </div>
-    <div *ngIf="currentCargoType === FormControlName.AutoParts">
-      <app-auto-parts [formControlName]="FormControlName.AutoParts"></app-auto-parts>
-    </div>
-  </div>
-  <app-packaging [formControlName]="FormControlName.Packaging"></app-packaging>
 </ng-container>

@@ -11,9 +11,9 @@
   </div>
   <div formArrayName="items">
     <ng-template ngFor let-item [ngForOf]="items.controls" let-i = index>
-      <div *ngIf="currentCargoIndex === i" class="form__section">
+      <ng-container *ngIf="currentCargoIndex === i">
         <app-cargo [formControlName]="i"></app-cargo>
-      </div>
+      </ng-container>
     </ng-template>
   </div>
 </ng-container>
