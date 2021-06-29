@@ -99,9 +99,25 @@ export class OrderReportComponent implements OnInit {
     return data;
   }
 
+  get cargoList() {
+    const cargoItems =  this.data.steps[2]['cargo-group'];
+    // console.log('cargo', cargoItems);
+    return cargoItems;
+  }
+
   formatData(data) {
     return Object.entries(data).map((item: [string, string]) => {
       return {name: this.FormFieldMeta[item[0]].label, value: item[1]};
     });
+  }
+
+  getCargoType(obj: any) {
+    const type = Object.entries(obj).filter((item: [string, string]) => {
+      // console.log(obj);
+      return item[1] && item;
+    });
+
+    console.log('type', obj);
+    return type;
   }
 }

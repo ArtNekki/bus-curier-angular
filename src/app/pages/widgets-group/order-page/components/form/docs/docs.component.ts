@@ -1,57 +1,42 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
 import {
   AbstractControl,
-  ControlValueAccessor,
-  FormControl,
+  ControlValueAccessor, FormControl,
   FormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
-  ValidationErrors, Validator,
-  Validators
+  ValidationErrors,
+  Validator, Validators
 } from '@angular/forms';
-import formFieldMeta from '../../../../../../core/form/formFieldMeta';
-import fieldError from '../../../../../../core/form/fieldError';
-import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
-import {UtilsService} from '../../../../../../core/services/utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
-import schedule from 'src/app/mock-data/schedule';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
-  selector: 'app-courier',
-  templateUrl: './courier.component.html',
-  styleUrls: ['./courier.component.scss'],
+  selector: 'app-docs',
+  templateUrl: './docs.component.html',
+  styleUrls: ['./docs.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CourierComponent),
+      useExisting: forwardRef(() => DocsComponent),
       multi: true
     },
     {
       provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => CourierComponent),
+      useExisting: forwardRef(() => DocsComponent),
       multi: true
     }
   ]
 })
-export class CourierComponent implements OnInit, ControlValueAccessor, Validator {
-  public FormFieldMeta = formFieldMeta;
+export class DocsComponent implements OnInit, ControlValueAccessor, Validator {
   public FormControlName = FormControlName;
-  public FormFieldError = fieldError;
-
   public formGroup: FormGroup;
-  public schedule = schedule;
 
-  constructor(public formUtils: FormUtilsService,
-              private orderForm: OrderFormService,
-              public utils: UtilsService) { }
+  constructor(private orderForm: OrderFormService) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.Street]: new FormControl('', [Validators.required]),
-      [FormControlName.Building]: new FormControl('', [Validators.required]),
-      [FormControlName.Apartment]: new FormControl('', [Validators.required]),
-      [FormControlName.CourierTime]: new FormControl('time-1', [])
+      [FormControlName.PlaceCount]: new FormControl('', [Validators.required, Validators.min(1)])
     });
   }
 

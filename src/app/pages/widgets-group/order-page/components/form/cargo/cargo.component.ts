@@ -44,9 +44,7 @@ export class CargoComponent implements OnInit, ControlValueAccessor, Validator {
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       [FormControlName.Type]: new FormGroup({
-        [FormControlName.Docs]: new FormGroup({
-          [FormControlName.PlaceCount]: new FormControl('', [Validators.required, Validators.min(1)])
-        }),
+        [FormControlName.Docs]: new FormControl(''),
         [FormControlName.Parcels]: new FormControl(''),
         [FormControlName.AutoParts]: new FormControl(''),
         other: new FormGroup({})

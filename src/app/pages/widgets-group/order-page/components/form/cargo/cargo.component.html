@@ -7,14 +7,8 @@
                [checked]="control.key === currentCargoType">{{control.key}}</app-radio>
   </div>
   <div [formGroupName]="FormControlName.Type">
-    <div *ngIf="currentCargoType === FormControlName.Docs" [formGroupName]="FormControlName.Docs">
-      <div class="form__field">
-        <label class="form__label">Количество мест</label>
-        <app-counter
-          [formControlName]="FormControlName.PlaceCount"
-        >
-        </app-counter>
-      </div>
+    <div *ngIf="currentCargoType === FormControlName.Docs">
+      <app-docs [formControlName]="FormControlName.Docs"></app-docs>
     </div>
     <div *ngIf="currentCargoType === FormControlName.Parcels">
       <app-parcel-group [formControlName]="FormControlName.Parcels"></app-parcel-group>

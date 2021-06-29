@@ -24,7 +24,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
 import {environment} from '../environments/environment';
 
-
 @NgModule({
   declarations: [
     AppComponent,

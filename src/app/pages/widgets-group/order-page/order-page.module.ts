@@ -19,6 +19,7 @@ import { OrderReportComponent } from './components/form/order-report/order-repor
 import { CargoComponent } from './components/form/cargo/cargo.component';
 import { CargoGroupComponent } from './components/form/cargo-group/cargo-group.component';
 import { AuthorComponent } from './components/form/author/author.component';
+import { DocsComponent } from './components/form/docs/docs.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AuthorComponent } from './components/form/author/author.component';
     OrderReportComponent,
     CargoComponent,
     CargoGroupComponent,
-    AuthorComponent
+    AuthorComponent,
+    DocsComponent
   ],
   imports: [
     CommonModule,
