@@ -141,4 +141,8 @@ export class OrderReportComponent implements OnInit {
     {name: 'Вес', value: `${item.weight} кг.`},
     {name: 'Упаковка', value: 'Коробка картонная (4 шт), Сейф пакет (1 шт)'}];
   }
+
+  formatDocs(item: any) {
+    return [{name: 'Количество', value: `${item} шт.`}];
+  }
 }
