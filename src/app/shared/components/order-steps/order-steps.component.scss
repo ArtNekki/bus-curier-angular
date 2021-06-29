@@ -45,7 +45,7 @@
       width: 0;
     }
 
-    &:not(:last-child).done::after {
+    &:not(:last-child).calc-steps__item--done::after {
       width: 100%;
     }
   }
@@ -57,7 +57,7 @@
     transition-delay: 0.5s;
 
     .calc-steps__item--active &,
-    .calc-steps__item.done & {
+    .calc-steps__item.calc-steps__item--done & {
       background-color: $primary-color;
       color: $black-color;
     }
@@ -70,7 +70,7 @@
       counter-increment: point;
       content: counter(point);
 
-      .calc-steps__item.done & {
+      .calc-steps__item.calc-steps__item--done & {
         opacity: 0;
       }
     }
@@ -88,7 +88,7 @@
       border-left-color: $black-color;
       transform: rotate3d(0, 0, 1, -45deg);
 
-      .calc-steps__item.done & {
+      .calc-steps__item.calc-steps__item--done & {
         display: block;
       }
     }

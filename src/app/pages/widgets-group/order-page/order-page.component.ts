@@ -92,6 +92,7 @@ export class OrderPageComponent implements OnInit {
     }
 
     this.currentStep--;
+    this.scrollToTop();
   }
 
   get formData() {
