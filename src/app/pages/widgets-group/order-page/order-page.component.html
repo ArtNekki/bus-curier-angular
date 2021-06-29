@@ -21,6 +21,20 @@
         </div>
         <div *ngIf="currentStep === FormStep.Four" [formGroup]="steps[FormStep.Four]" [@panel]="">
           <app-order-report [data]="form.value"></app-order-report>
+          <section class="form__section">
+            <div class="form__fieldset">
+              <div class="form__field">
+                <label class="form__label">Комментарий к заявке</label>
+                <app-input type="textarea"></app-input>
+              </div>
+              <app-checkbox mods="sm">
+                <ng-container class="text">
+                  Нажимая кнопку «Отправить», я даю свое согласие на
+                  <app-link href="#" mods="blue, in-text">обработку моих персональных данных</app-link>
+                </ng-container>
+              </app-checkbox>
+            </div>
+          </section>
         </div>
       </ng-container>
       <div class="form__actions">
