@@ -83,6 +83,7 @@ export class OrderPageComponent implements OnInit {
     }
 
     this.currentStep++;
+    this.scrollToTop();
   }
 
   goPrev() {
@@ -95,6 +96,13 @@ export class OrderPageComponent implements OnInit {
 
   get formData() {
     return this.form.value;
+  }
+
+  scrollToTop() {
+    window.scrollTo({
+      top: 5,
+      // behavior: 'smooth'
+    });
   }
 
   onSubmit() {
