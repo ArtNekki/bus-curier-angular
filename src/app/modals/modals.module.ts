@@ -5,12 +5,14 @@ import {SharedModule} from '../shared/shared.module';
 import {SignInComponent} from './sign-in/sign-in.component';
 import {LoginComponent} from './login/login.component';
 import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
+import { InvoiceDoneComponent } from './invoice-done/invoice-done.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     SignInComponent,
-    CreateInvoiceComponent
+    CreateInvoiceComponent,
+    InvoiceDoneComponent
   ],
   imports: [
     CommonModule,

@@ -2,8 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import fieldError from '../../core/form/fieldError';
 import {UtilsService} from '../../core/services/utils.service';
-import {SimpleModalComponent} from 'ngx-simple-modal';
+import {SimpleModalComponent, SimpleModalService} from 'ngx-simple-modal';
 import FormControlName from 'src/app/core/maps/FormControlName';
+import {InvoiceDoneComponent} from '../invoice-done/invoice-done.component';
 
 @Component({
   selector: 'app-create-invoice',
@@ -16,7 +17,9 @@ export class CreateInvoiceComponent extends SimpleModalComponent<null, null> imp
 
   public form: FormGroup;
 
-  constructor(public utils: UtilsService) {
+  constructor(
+    public utils: UtilsService,
+    private modalService: SimpleModalService) {
     super();
   }
 
@@ -29,7 +32,14 @@ export class CreateInvoiceComponent extends SimpleModalComponent<null, null> imp
   ngOnDestroy(): void {
   }
 
+  showDoneModal() {
+    this.modalService.addModal(InvoiceDoneComponent);
+  }
+
   onSubmit() {
     console.log('create invoice', this.form.value);
+    setTimeout(() => {
+      this.showDoneModal();
+    }, 500);
   }
 }
