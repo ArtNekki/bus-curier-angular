@@ -36,7 +36,7 @@ export class LoginComponent extends SimpleModalComponent<null, null> implements 
   ngOnDestroy(): void {
   }
 
-  showRegistrationModal(e) {
+  showSignInModal(e) {
     e.preventDefault();
     this.modalService.addModal(SignInComponent);
   }

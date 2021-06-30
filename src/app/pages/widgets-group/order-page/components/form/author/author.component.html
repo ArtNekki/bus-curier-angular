@@ -17,8 +17,8 @@
   <!-- <p class="form__help-text form__help-text--gray form__help-text--align-center">Выберите статус лица для перехода на следующий шаг</p> -->
    <p class="form__help-text">Чтобы оформить заказ как юридическое лицо,
      <br />вам необходимо
-     <app-link href="#" mods="blue, in-text" (click)="showAuthorizationModal($event)">войти</app-link>
+     <app-link mods="blue, in-text" (click)="showLoginModal($event)">войти</app-link>
       или
-     <app-link href="#" mods="blue, in-text">зарегистрироваться</app-link>
+     <app-link mods="blue, in-text" (click)="showSignInModal($event)">зарегистрироваться</app-link>
    </p>
 </section>

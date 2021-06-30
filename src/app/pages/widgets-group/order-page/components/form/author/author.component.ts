@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {LoginComponent} from '../../../../../../modals/login/login.component';
+import {SignInComponent} from '../../../../../../modals/sign-in/sign-in.component';
 
 @Component({
   selector: 'app-author',
@@ -50,13 +51,14 @@ export class AuthorComponent implements OnInit, ControlValueAccessor, Validator 
     this.currentUserType = type;
   }
 
-  showAuthorizationModal(e) {
+  showLoginModal(e) {
     e.preventDefault();
     this.modalService.addModal(LoginComponent);
   }
 
-  showRegisterModal() {
-
+  showSignInModal(e) {
+    e.preventDefault();
+    this.modalService.addModal(SignInComponent);
   }
 
   public onTouched: () => void = () => {};
