@@ -3,6 +3,7 @@
     autocomplete="off"
     [formGroup]="form"
     (submit)="onSubmit()"
+    style="margin-bottom: 25px;"
   >
     <div class="form__fieldset">
       <div class="form__field">
@@ -50,4 +51,5 @@
       <app-btn type="submit" mods="lg, black">Авторизоваться</app-btn>
     </div>
   </form>
+  <app-link (click)="showRegistrationModal($event)">Регистрация</app-link>
 </app-modal>

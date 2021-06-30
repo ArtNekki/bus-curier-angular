@@ -1,10 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
+import {SimpleModalComponent, SimpleModalService} from 'ngx-simple-modal';
 import formFieldMeta from '../../core/form/formFieldMeta';
 import fieldError from '../../core/form/fieldError';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {UtilsService} from '../../core/services/utils.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {RegistrationComponent} from '../registration/registration.component';
 
 @Component({
   selector: 'app-authorization',
@@ -18,7 +19,9 @@ export class AuthorizationComponent extends SimpleModalComponent<null, null> imp
 
   public form: FormGroup;
 
-  constructor(public utils: UtilsService) {
+  constructor(
+    public utils: UtilsService,
+    private modalService: SimpleModalService) {
     super();
   }
 
@@ -31,6 +34,11 @@ export class AuthorizationComponent extends SimpleModalComponent<null, null> imp
   }
 
   ngOnDestroy(): void {
+  }
+
+  showRegistrationModal(e) {
+    e.preventDefault();
+    this.modalService.addModal(RegistrationComponent);
   }
 
   onSubmit() {

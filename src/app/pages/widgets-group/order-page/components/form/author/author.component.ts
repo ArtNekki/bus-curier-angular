@@ -53,7 +53,6 @@ export class AuthorComponent implements OnInit, ControlValueAccessor, Validator 
 
   showAuthorizationModal(e) {
     e.preventDefault();
-    console.log('authoriz', AuthorizationComponent);
     this.modalService.addModal(AuthorizationComponent);
   }
 
