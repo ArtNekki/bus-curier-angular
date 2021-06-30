@@ -9,6 +9,9 @@ import {
   ValidationErrors,
   Validator
 } from '@angular/forms';
+import {SimpleModalService} from 'ngx-simple-modal';
+import {AuthorizationComponent} from '../../../../../../modals/authorization/authorization.component';
+
 
 @Component({
   selector: 'app-author',
@@ -33,7 +36,7 @@ export class AuthorComponent implements OnInit, ControlValueAccessor, Validator 
   public formGroup: FormGroup;
   public currentUserType = null;
 
-  constructor() { }
+  constructor(private modalService: SimpleModalService) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -46,6 +49,16 @@ export class AuthorComponent implements OnInit, ControlValueAccessor, Validator 
 
   setCurrentUserType(type: string) {
     this.currentUserType = type;
+  }
+
+  showAuthorizationModal(e) {
+    e.preventDefault();
+    console.log('authoriz', AuthorizationComponent);
+    this.modalService.addModal(AuthorizationComponent);
+  }
+
+  showRegisterModal() {
+
   }
 
   public onTouched: () => void = () => {};

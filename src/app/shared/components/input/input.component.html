@@ -22,7 +22,7 @@
       <ng-template #withoutMask>
         <input #simpleInputField [type]="type" [id]="id" class="input__field" [placeholder]="placeholder" [ngModel]="value" (ngModelChange)="changeValue($event)" (blur)="markAsTouched()"/>
       </ng-template>
-<!--      <ng-content></ng-content>-->
+      <ng-content select=".restore"></ng-content>
       <div *ngIf="isInvalid" class="input__errors">
         <ng-content select=".errors"></ng-content>
       </div>

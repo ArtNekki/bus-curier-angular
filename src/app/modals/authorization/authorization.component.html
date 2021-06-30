@@ -1,0 +1,53 @@
+<app-modal mods="theme-yellow" title="Авторизация">
+  <form action="#" class="form form--no-margin"
+    autocomplete="off"
+    [formGroup]="form"
+    (submit)="onSubmit()"
+  >
+    <div class="form__fieldset">
+      <div class="form__field">
+        <label for="login" class="form__label form__label--light">Логин</label>
+        <app-input
+          [type]="FormFieldMeta[FormControlName.Login].type"
+          [formControlName]="FormControlName.Login"
+          [mask]="FormFieldMeta[FormControlName.Login].mask"
+          [prefix]="FormFieldMeta[FormControlName.Login].prefix"
+          [isInvalid]="(form.get(FormControlName.Login).invalid
+           && form.get(FormControlName.Login).touched) && 'invalid'"
+          mods="clean"
+        >
+          <ng-container class="errors">
+            <small *ngIf="utils.getObjectKey(form.get(FormControlName.Login).errors).length">
+              {{FormFieldError[utils.getObjectKey(form.get(FormControlName.Login).errors)[0]]}}
+            </small>
+          </ng-container>
+        </app-input>
+      </div>
+      <div class="form__field">
+        <label for="password" class="form__label form__label--light">
+          {{FormFieldMeta[FormControlName.Password].label}}
+        </label>
+        <app-input
+          [type]="FormFieldMeta[FormControlName.Password].type"
+          [formControlName]="FormControlName.Password"
+          [isInvalid]="(form.get(FormControlName.Password).invalid
+           && form.get(FormControlName.Password).touched) && 'invalid'"
+          mods="clean"
+        >
+          <ng-container class="restore">
+            <a href="#" class="input__restore">Забыли пароль</a>
+          </ng-container>
+          <ng-container class="errors">
+            <small *ngIf="utils.getObjectKey(form.get(FormControlName.Password).errors).length">
+              {{FormFieldError[utils.getObjectKey(form.get(FormControlName.Password).errors)[0]]}}
+            </small>
+          </ng-container>
+        </app-input>
+      </div>
+      <app-checkbox mods="md, inverted" [formControlName]="FormControlName.Remember">
+        <ng-container class="text">{{FormFieldMeta[FormControlName.Remember].label}}</ng-container>
+      </app-checkbox>
+      <app-btn type="submit" mods="lg, black">Авторизоваться</app-btn>
+    </div>
+  </form>
+</app-modal>

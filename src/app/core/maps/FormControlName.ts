@@ -47,5 +47,8 @@ export default {
   TransparentFilm: 'transparent-film',
   SafePack: 'safe-pack',
   BlackFilm: 'black-film',
-  BagWithSeal: 'bag-with-seal'
+  BagWithSeal: 'bag-with-seal',
+  Login: 'login',
+  Password: 'password',
+  Remember: 'remember'
 };

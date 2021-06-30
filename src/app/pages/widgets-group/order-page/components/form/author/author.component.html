@@ -15,5 +15,10 @@
     <app-entity [formControlName]="UserType.Entity"></app-entity>
   </div>
   <!-- <p class="form__help-text form__help-text--gray form__help-text--align-center">Выберите статус лица для перехода на следующий шаг</p> -->
-  <!-- <p class="form__help-text">Чтобы оформить заказ как юридическое лицо,<br />вам необходимо <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>войти</span></span></a>или <a href="#" class='link link--blue link--in-text'><span class='link__text'><span>зарегистрироваться</span></span></a></p> -->
+   <p class="form__help-text">Чтобы оформить заказ как юридическое лицо,
+     <br />вам необходимо
+     <app-link href="#" mods="blue, in-text" (click)="showAuthorizationModal($event)">войти</app-link>
+      или
+     <app-link href="#" mods="blue, in-text">зарегистрироваться</app-link>
+   </p>
 </section>

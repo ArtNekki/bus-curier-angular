@@ -169,5 +169,20 @@ export default {
     label: 'Мешок полипропиленовый с пломбой',
     type: 'checkbox',
     meta: '50 руб. - 180 руб.'
+  },
+  [FormControlName.Login]: {
+    label: 'Логин',
+    type: 'tel',
+    placeholder: 'Номер телефона',
+    mask: '(000) 000-0000',
+    prefix: '+7'
+  },
+  [FormControlName.Password]: {
+    label: 'Пароль',
+    type: 'password'
+  },
+  [FormControlName.Remember]: {
+    label: 'Запомнить',
+    type: 'checkbox'
   }
 };

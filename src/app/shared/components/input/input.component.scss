@@ -94,7 +94,7 @@
     }
   }
 
-  &__forgot {
+  ::ng-deep &__restore {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

@@ -52,9 +52,9 @@ import { TagComponent } from './components/tag/tag.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { RadioGroupComponent } from './components/radio-group/radio-group.component';
 import { FormTabsComponent } from './components/form-tabs/form-tabs.component';
+import { ModalComponent } from './components/modal/modal.component';
+
 // import { ɵs } from '@ng-select/ng-select;
-
-
 
 @NgModule({
   imports: [
@@ -105,7 +105,8 @@ import { FormTabsComponent } from './components/form-tabs/form-tabs.component';
     SupportFormComponent,
     TagComponent,
     CounterComponent,
-    RadioGroupComponent
+    RadioGroupComponent,
+    ModalComponent
   ],
   declarations: [
     BtnComponent,
@@ -137,8 +138,9 @@ import { FormTabsComponent } from './components/form-tabs/form-tabs.component';
     TagComponent,
     CounterComponent,
     RadioGroupComponent,
-    FormTabsComponent
-  ],
+    FormTabsComponent,
+    ModalComponent
+  ]
   // providers: [NgSelectConfig, ɵs],
 })
 export class SharedModule { }

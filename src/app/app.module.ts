@@ -23,6 +23,7 @@ import { AngularFireModule} from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
 import {environment} from '../environments/environment';
+import {ModalsModule} from './modals/modals.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {environment} from '../environments/environment';
     FeedbackLinksPageModule,
     ContactsPageModule,
     // IndexPageModule,
+    // ModalsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
