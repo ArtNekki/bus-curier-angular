@@ -10,8 +10,7 @@ import {
   Validator
 } from '@angular/forms';
 import {SimpleModalService} from 'ngx-simple-modal';
-import {AuthorizationComponent} from '../../../../../../modals/authorization/authorization.component';
-
+import {LoginComponent} from '../../../../../../modals/login/login.component';
 
 @Component({
   selector: 'app-author',
@@ -53,7 +52,7 @@ export class AuthorComponent implements OnInit, ControlValueAccessor, Validator 
 
   showAuthorizationModal(e) {
     e.preventDefault();
-    this.modalService.addModal(AuthorizationComponent);
+    this.modalService.addModal(LoginComponent);
   }
 
   showRegisterModal() {

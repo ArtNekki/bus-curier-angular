@@ -8,11 +8,11 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SignInComponent} from '../sign-in/sign-in.component';
 
 @Component({
-  selector: 'app-authorization',
-  templateUrl: './authorization.component.html',
-  styleUrls: ['./authorization.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class AuthorizationComponent extends SimpleModalComponent<null, null> implements OnInit, OnDestroy  {
+export class LoginComponent extends SimpleModalComponent<null, null> implements OnInit, OnDestroy  {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
@@ -42,6 +42,6 @@ export class AuthorizationComponent extends SimpleModalComponent<null, null> imp
   }
 
   onSubmit() {
-    console.log('authorization form', this.form.value);
+    console.log('login form', this.form.value);
   }
 }
