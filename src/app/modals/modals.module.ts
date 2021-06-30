@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { AuthorizationComponent } from './authorization/authorization.component';
 import {DefaultSimpleModalOptionConfig, defaultSimpleModalOptions, SimpleModalModule} from 'ngx-simple-modal';
 import {SharedModule} from '../shared/shared.module';
-import { RegistrationComponent } from './registration/registration.component';
+import {SignInComponent} from './sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
     AuthorizationComponent,
-    RegistrationComponent
+    SignInComponent
   ],
   imports: [
     CommonModule,

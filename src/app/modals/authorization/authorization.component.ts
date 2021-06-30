@@ -5,7 +5,7 @@ import fieldError from '../../core/form/fieldError';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {UtilsService} from '../../core/services/utils.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {RegistrationComponent} from '../registration/registration.component';
+import {SignInComponent} from '../sign-in/sign-in.component';
 
 @Component({
   selector: 'app-authorization',
@@ -38,7 +38,7 @@ export class AuthorizationComponent extends SimpleModalComponent<null, null> imp
 
   showRegistrationModal(e) {
     e.preventDefault();
-    this.modalService.addModal(RegistrationComponent);
+    this.modalService.addModal(SignInComponent);
   }
 
   onSubmit() {
