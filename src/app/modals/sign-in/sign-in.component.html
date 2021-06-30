@@ -1,18 +1,18 @@
 <app-modal mods="theme-yellow" title="Регистрация">
   <form class="form form--no-margin" autocomplete="off" [formGroup]="form" (submit)="onSubmit()">
-    <div class="form__tabs">
+    <div class="form__tabs form__tabs--modal">
       <button type="button"
               [class.active]="currentUserType === UserType.Individual"
-              (click)="setCurrentUserType(UserType.Individual)">Физическое лицо</button>
+              (click)="setCurrentUserType(UserType.Individual)">Для физ. лиц</button>
       <button type="button"
               [class.active]="currentUserType === UserType.Entity"
-              (click)="setCurrentUserType(UserType.Entity)">Юридическое лицо</button>
+              (click)="setCurrentUserType(UserType.Entity)">Для юр. лиц</button>
     </div>
-    <div *ngIf="currentUserType === UserType.Individual"
+    <div *ngIf="currentUserType === UserType.Individual && form.get(UserType.Individual)"
          class="form__panel"
-         style="{padding-top: 20px;}"
-         [formGroupName]="UserType.Individual">
-      <div class="form__fieldset">
+         style="padding-top: 20px;"
+         [@fadeIn]="">
+      <div class="form__fieldset" [formGroupName]="UserType.Individual">
         <div *ngFor="let control of formUtils.getGroupControls(form.get(UserType.Individual))  | keyvalue: formUtils.originalOrder"
              class="form__field">
           <label [for]="'individual-' + control.key" class="form__label">
@@ -37,9 +37,9 @@
     </div>
     <div *ngIf="currentUserType === UserType.Entity"
          class="form__panel"
-         style="{padding-top: 20px}"
-         [formGroupName]="UserType.Entity">
-      <div class="form__fieldset">
+         style="padding-top: 20px"
+         [@fadeIn]="">
+      <div class="form__fieldset" [formGroupName]="UserType.Entity">
         <div *ngFor="let control of formUtils.getGroupControls(form.get(UserType.Entity)) | keyvalue: formUtils.originalOrder"
              class="form__field">
           <label [for]="'entity-' + control.key"

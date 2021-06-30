@@ -774,6 +774,10 @@
     &--mg-top {
       margin-top: 15px;
     }
+
+    &--modal {
+      grid-column-gap: 0;
+    }
   }
 
   &__tabs button {
@@ -787,7 +791,7 @@
     justify-content: center;
     font-family: $font-family--secondary;
     font-size: 14px;
-    line-height: 1.4;
+    line-height: 16px;
     text-align: center;
     color: $black-color;
     background-color: $gray-light-color--up-5;
@@ -820,6 +824,33 @@
   &__tabs button:last-child {
     border-top-right-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
+  }
+
+  &__tabs--modal button {
+    padding: 20px;
+    font-size: 16px;
+    line-height: 16px;
+    color: #988300;
+    background-color: $primary-color;
+    border-bottom: 2px solid rgba(#988300, 0.4);
+
+    &:first-child {
+      border-radius: 0;
+    }
+
+    &:last-child {
+      border-radius: 0;
+    }
+
+    &.active {
+      color: $black-color;
+      border-color: rgba($white-color, 0.4);
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
   }
 
   //&__tabs-panel {
