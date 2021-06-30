@@ -50,5 +50,6 @@ export default {
   BagWithSeal: 'bag-with-seal',
   Login: 'login',
   Password: 'password',
-  Remember: 'remember'
+  Remember: 'remember',
+  Sum: 'sum'
 };

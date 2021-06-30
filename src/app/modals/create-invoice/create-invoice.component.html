@@ -1,0 +1,30 @@
+<app-modal title="Сформировать отчет">
+  <form class="form form--no-margin"
+        autocomplete="off"
+        [formGroup]="form" (submit)="onSubmit()">
+    <div class="form__fieldset">
+      <div class="form__field">
+        <label
+          for="sum" class="form__label">
+          Введите сумму счета в рублях
+          <sup *ngIf="form.get(FormControlName.Sum).errors
+          && form.get(FormControlName.Sum).hasError('required')">*</sup>
+        </label>
+        <app-input
+          type="text"
+          id="sum"
+          [formControlName]="FormControlName.Sum"
+          [isInvalid]="(form.get(FormControlName.Sum).invalid
+        && form.get(FormControlName.Sum).touched) && 'invalid'"
+        >
+          <ng-container class="errors">
+            <small *ngIf="utils.getObjectKey(form.get(FormControlName.Sum).errors).length">
+              {{FormFieldError[utils.getObjectKey(form.get(FormControlName.Sum).errors)[0]]}}
+            </small>
+          </ng-container>
+        </app-input>
+      </div>
+      <app-btn type="submit" mods="lg">Сформировать отчет</app-btn>
+    </div>
+  </form>
+</app-modal>

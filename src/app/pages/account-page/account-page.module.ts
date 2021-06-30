@@ -9,6 +9,7 @@ import { AccountMediaComponent } from './components/account-media/account-media.
 import {AccountRoutingModule} from './account-routing.module';
 import {SharedModule} from '../../shared/shared.module';
 import { AccountComponent } from './components/account/account.component';
+import {ModalsModule} from '../../modals/modals.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AccountComponent } from './components/account/account.component';
   ],
   imports: [
     CommonModule,
+    ModalsModule,
     SharedModule,
     AccountRoutingModule
   ]

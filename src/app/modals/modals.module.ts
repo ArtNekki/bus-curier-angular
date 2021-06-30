@@ -4,11 +4,13 @@ import {DefaultSimpleModalOptionConfig, defaultSimpleModalOptions, SimpleModalMo
 import {SharedModule} from '../shared/shared.module';
 import {SignInComponent} from './sign-in/sign-in.component';
 import {LoginComponent} from './login/login.component';
+import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    SignInComponent
+    SignInComponent,
+    CreateInvoiceComponent
   ],
   imports: [
     CommonModule,

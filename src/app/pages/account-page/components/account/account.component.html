@@ -21,7 +21,10 @@
 <!--      {{{ link href="#" text="Пополнить" mods="lg, blue"}}}-->
     </article>
     <div class="account__sidebar-btn">
-      <app-btn mods="lg, w-full">Оформить заказ</app-btn>
+      <app-btn type="button" mods="lg, w-full">Оформить заказ</app-btn>
+    </div>
+    <div class="account__sidebar-btn">
+      <app-btn type="button" mods="lg, w-full, black" (click)="showInvoiceModal()">Сформировать отчет</app-btn>
     </div>
     <div class="account__logout">
       <app-link  href="" mods="lg, no-underline">
