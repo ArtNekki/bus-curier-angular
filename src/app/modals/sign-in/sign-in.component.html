@@ -1,3 +1,69 @@
 <app-modal mods="theme-yellow" title="Регистрация">
-asdasd
+  <form class="form form--no-margin" autocomplete="off" [formGroup]="form" (submit)="onSubmit()">
+    <div class="form__tabs">
+      <button type="button"
+              [class.active]="currentUserType === UserType.Individual"
+              (click)="setCurrentUserType(UserType.Individual)">Физическое лицо</button>
+      <button type="button"
+              [class.active]="currentUserType === UserType.Entity"
+              (click)="setCurrentUserType(UserType.Entity)">Юридическое лицо</button>
+    </div>
+    <div *ngIf="currentUserType === UserType.Individual"
+         class="form__panel"
+         style="{padding-top: 20px;}"
+         [formGroupName]="UserType.Individual">
+      <div class="form__fieldset">
+        <div *ngFor="let control of formUtils.getGroupControls(form.get(UserType.Individual))  | keyvalue: formUtils.originalOrder"
+             class="form__field">
+          <label [for]="'individual-' + control.key" class="form__label">
+            {{FormFieldMeta[control.key].label}}
+            <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
+          </label>
+          <app-input
+            [type]="FormFieldMeta[control.key].type"
+            [id]="'individual-' + control.key"
+            [formControlName]="control.key"
+            [mask]="FormFieldMeta[control.key].mask" [prefix]="FormFieldMeta[control.key].prefix"
+            [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+          >
+            <ng-container class="errors">
+              <small *ngIf="utils.getObjectKey(control.value.errors).length">
+                {{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}
+              </small>
+            </ng-container>
+          </app-input>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="currentUserType === UserType.Entity"
+         class="form__panel"
+         style="{padding-top: 20px}"
+         [formGroupName]="UserType.Entity">
+      <div class="form__fieldset">
+        <div *ngFor="let control of formUtils.getGroupControls(form.get(UserType.Entity)) | keyvalue: formUtils.originalOrder"
+             class="form__field">
+          <label [for]="'entity-' + control.key"
+                 class="form__label">{{FormFieldMeta[control.key].label}}
+            <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
+          </label>
+          <app-input
+            [type]="FormFieldMeta[control.key].type"
+            [id]="'entity-' + control.key"
+            [formControlName]="control.key"
+            [mask]="FormFieldMeta[control.key].mask" [prefix]="FormFieldMeta[control.key].prefix"
+            [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+          >
+            <ng-container class="errors">
+              <small *ngIf="utils.getObjectKey(control.value.errors).length">
+                {{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}
+              </small>
+            </ng-container>
+          </app-input>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 20px;">
+      <app-btn type="submit" mods="lg, black, w-full">Зарегистрироваться</app-btn>
+    </div>
+  </form>
 </app-modal>

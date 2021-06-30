@@ -4,6 +4,10 @@
 @import "src/variables";
 @import "src/assets/scss/settings";
 
+:host {
+  display: block;
+}
+
 .btn {
   @include btn-default();
 
