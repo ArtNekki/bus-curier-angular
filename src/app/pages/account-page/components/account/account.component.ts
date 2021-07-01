@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {CreateInvoiceComponent} from '../../../../modals/create-invoice/create-invoice.component';
+import {OrderModalComponent} from '../../../../modals/order-modal/order-modal.component';
 
 @Component({
   selector: 'app-account',
@@ -16,5 +17,9 @@ export class AccountComponent implements OnInit {
 
   showInvoiceModal() {
     this.modalService.addModal(CreateInvoiceComponent);
+  }
+
+  showOrderModal() {
+    this.modalService.addModal(OrderModalComponent);
   }
 }

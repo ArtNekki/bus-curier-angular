@@ -53,6 +53,7 @@ import { CounterComponent } from './components/counter/counter.component';
 import { RadioGroupComponent } from './components/radio-group/radio-group.component';
 import { FormTabsComponent } from './components/form-tabs/form-tabs.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { OrderResultComponent } from './components/order-result/order-result.component';
 
 // import { ɵs } from '@ng-select/ng-select;
 
@@ -106,7 +107,8 @@ import { ModalComponent } from './components/modal/modal.component';
     TagComponent,
     CounterComponent,
     RadioGroupComponent,
-    ModalComponent
+    ModalComponent,
+    OrderResultComponent
   ],
   declarations: [
     BtnComponent,
@@ -139,7 +141,8 @@ import { ModalComponent } from './components/modal/modal.component';
     CounterComponent,
     RadioGroupComponent,
     FormTabsComponent,
-    ModalComponent
+    ModalComponent,
+    OrderResultComponent
   ]
   // providers: [NgSelectConfig, ɵs],
 })

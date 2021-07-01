@@ -1,0 +1,53 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.order-result {
+  height: 340px;
+  text-align: left;
+
+  p {
+    margin: 0.5em 0;
+    font-family: $font-family--secondary;
+    font-size: 13px;
+    line-height: 1.2;
+  }
+
+  dl {
+    position: relative;
+    margin: 0.5em 0;
+    font-family: $font-family--secondary;
+    font-size: 13px;
+    line-height: 1.2;
+
+    &::before {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
+
+  dt {
+    margin-right: 5px;
+    float: left;
+  }
+
+  dd {
+    margin-left: 0;
+  }
+
+  .gray {
+    color: $gray-color;
+  }
+
+  .lg {
+    font-size: 16px;
+  }
+
+  &__scroll {
+    height: 100%;
+    overflow-y: auto;
+  }
+}
