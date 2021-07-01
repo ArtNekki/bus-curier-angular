@@ -7,6 +7,8 @@ import {LoginComponent} from './login/login.component';
 import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
 import { InvoiceDoneComponent } from './invoice-done/invoice-done.component';
 import { OrderModalComponent } from './order-modal/order-modal.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { AlertModalComponent } from './alert-modal/alert-modal.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { OrderModalComponent } from './order-modal/order-modal.component';
     SignInComponent,
     CreateInvoiceComponent,
     InvoiceDoneComponent,
-    OrderModalComponent
+    OrderModalComponent,
+    ConfirmModalComponent,
+    AlertModalComponent
   ],
   imports: [
     CommonModule,

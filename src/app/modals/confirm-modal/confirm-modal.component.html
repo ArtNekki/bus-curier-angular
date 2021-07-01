@@ -1,0 +1,8 @@
+<app-modal>
+  <svg-icon class="icon" src="assets/img/svg/notice.svg" width="50" height="45"></svg-icon>
+  <p>{{ message || 'Вы уверены?' }}</p>
+  <div style="margin-top: 20px; display: grid; grid-template-columns: repeat(2, 1fr); grid-column-gap: 10px;">
+    <app-btn type="button" mods="black" (click)="cancel()">Нет, не отменять</app-btn>
+    <app-btn type="button" mods="white" (click)="ok()">Да, отменить!</app-btn>
+  </div>
+</app-modal>

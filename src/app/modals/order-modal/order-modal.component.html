@@ -1,5 +1,10 @@
 <app-modal title="№614933">
   <app-order-result>
-    <p><span class="gray">Итого: </span><b>1 550 руб.</b></p>
+    <ng-container class="total">
+      <p><span class="gray">Итого: </span><b>1 550 руб.</b></p>
+    </ng-container>
   </app-order-result>
+  <div style="margin-top: 50px;">
+    <app-btn type="button" mods="black, lg" (click)="cancelOrder()">Отменить заказ</app-btn>
+  </div>
 </app-modal>
