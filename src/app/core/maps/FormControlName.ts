@@ -51,5 +51,6 @@ export default {
   Login: 'login',
   Password: 'password',
   Remember: 'remember',
-  Sum: 'sum'
+  Sum: 'sum',
+  Agree: 'agree'
 };

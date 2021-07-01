@@ -16,6 +16,8 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
   @Input() id;
   @Input() name;
   @Input() mods;
+  @Input() isInvalid;
+
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   public cssClass = 'checkbox';

@@ -184,5 +184,10 @@ export default {
   [FormControlName.Remember]: {
     label: 'Запомнить',
     type: 'checkbox'
-  }
+  },
+  [FormControlName.Agree]: {
+    label: (href: string) => `Нажимая кнопку «Отправить», я даю свое согласие на +
+      '          <app-link [href]="${href}">обработку моих персональных данных</app-link>`,
+    type: 'checkbox'
+  },
 };

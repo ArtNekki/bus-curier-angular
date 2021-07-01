@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {CreateInvoiceComponent} from '../../../../modals/create-invoice/create-invoice.component';
 import {OrderModalComponent} from '../../../../modals/order-modal/order-modal.component';
+import {ManagerCallModalComponent} from '../../../../modals/manager-call-modal/manager-call-modal.component';
 
 @Component({
   selector: 'app-account',
@@ -20,6 +21,7 @@ export class AccountComponent implements OnInit {
   }
 
   showOrderModal() {
-    this.modalService.addModal(OrderModalComponent);
+    // this.modalService.addModal(OrderModalComponent);
+    this.modalService.addModal(ManagerCallModalComponent);
   }
 }

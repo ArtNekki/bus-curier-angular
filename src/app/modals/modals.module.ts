@@ -9,6 +9,7 @@ import { InvoiceDoneComponent } from './invoice-done/invoice-done.component';
 import { OrderModalComponent } from './order-modal/order-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
+import { ManagerCallModalComponent } from './manager-call-modal/manager-call-modal.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AlertModalComponent } from './alert-modal/alert-modal.component';
     InvoiceDoneComponent,
     OrderModalComponent,
     ConfirmModalComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    ManagerCallModalComponent
   ],
   imports: [
     CommonModule,
