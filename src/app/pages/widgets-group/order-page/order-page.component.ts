@@ -3,6 +3,7 @@ import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {animate, style, transition, trigger} from '@angular/animations';
 import FormControlName from '../../../core/maps/FormControlName';
 import {OrderFormService} from '../../../core/services/order-form/order-form.service';
+import {AuthService} from '../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-order-page',
@@ -35,9 +36,13 @@ export class OrderPageComponent implements OnInit {
 
   public form: FormGroup;
   public currentStep = 0;
+  public currentUser = null;
   public invalidStep;
 
-  constructor(public orderForm: OrderFormService) { }
+  constructor(
+    public orderForm: OrderFormService,
+    public authService: AuthService
+  ) { }
 
   ngOnInit(): void {
 
@@ -109,5 +114,9 @@ export class OrderPageComponent implements OnInit {
   onSubmit() {
     console.log('form', this.form.value);
 
+  }
+
+  setCurrentUser(user: any) {
+    this.currentUser = user;
   }
 }

@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {Component, EventEmitter, forwardRef, OnInit, Output} from '@angular/core';
 import UserType from 'src/app/core/maps/UserType';
 import {
   AbstractControl,
@@ -12,6 +12,7 @@ import {
 import {SimpleModalService} from 'ngx-simple-modal';
 import {LoginComponent} from '../../../../../../modals/login/login.component';
 import {SignInComponent} from '../../../../../../modals/sign-in/sign-in.component';
+import {AuthService} from '../../../../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-author',
@@ -31,24 +32,28 @@ import {SignInComponent} from '../../../../../../modals/sign-in/sign-in.componen
   ]
 })
 export class AuthorComponent implements OnInit, ControlValueAccessor, Validator {
+  @Output() selectUser: EventEmitter<any> = new EventEmitter<any>();
+
   public UserType = UserType;
 
   public formGroup: FormGroup;
   public currentUserType = null;
 
-  constructor(private modalService: SimpleModalService) { }
+  constructor(
+    private modalService: SimpleModalService,
+    public authService: AuthService
+    ) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       individual: new FormControl(''),
       entity: new FormControl('')
     });
-
-    this.currentUserType = UserType.Individual;
   }
 
   setCurrentUserType(type: string) {
     this.currentUserType = type;
+    this.selectUser.emit(type);
   }
 
   showLoginModal(e) {
