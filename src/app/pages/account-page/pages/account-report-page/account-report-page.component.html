@@ -1,18 +1,53 @@
-<form action="#" class="form form--no-margin" autocomplete="off">
+<form action="#" class="form form--no-margin" autocomplete="off" [formGroup]="form">
   <section class="form__section">
     <div class="form__fieldset form__fieldset--filter">
       <div class="form__group">
         <span class="form__label">Период:</span>
+        <app-datepicker
+          [formControlName]="FormControlName.DateStart"
+          [isInvalid]="form.get(FormControlName.DateStart).invalid
+          && form.get(FormControlName.DateStart).touched && 'invalid'"
+          mods="no-shadow">
+          <ng-container class="errors">
+            <small *ngIf="utils.getObjectKey(form.get(FormControlName.DateStart).errors).length">
+              {{FormFieldError[utils.getObjectKey(form.get(FormControlName.DateStart).errors)[0]]}}
+            </small>
+          </ng-container>
+        </app-datepicker>
+        <app-datepicker
+          [formControlName]="FormControlName.DateEnd"
+          [isInvalid]="form.get(FormControlName.DateEnd).invalid
+          && form.get(FormControlName.DateEnd).touched && 'invalid'"
+          mods="no-shadow">
+          <ng-container class="errors">
+            <small *ngIf="utils.getObjectKey(form.get(FormControlName.DateEnd).errors).length">
+              {{FormFieldError[utils.getObjectKey(form.get(FormControlName.DateEnd).errors)[0]]}}
+            </small>
+          </ng-container>
+        </app-datepicker>
+
 <!--        {{{ input type="text" id="period-from" name="period-from" placeholder="дд.мм.гггг" error="Не заполнено" mods="no-shadow" }}}-->
 <!--        {{{ input type="text" id="period-to" name="period-to" placeholder="дд.мм.гггг" error="Не заполнено" mods="no-shadow" }}}-->
       </div>
       <div class="form__field">
-        <label for="city-from" class="form__label form__label--light">Город отправления</label>
-        <app-select [items]="cities" mods="no-shadow"></app-select>
+        <label class="form__label form__label--light">Город отправления</label>
+        <app-select
+          [formControlName]="FormControlName.CityStart"
+          [items]="cities"
+          [isInvalid]="(form.get(FormControlName.CityStart).invalid &&
+          form.get(FormControlName.CityStart).value.touched) && 'invalid'"
+          mods="no-shadow"
+        ></app-select>
       </div>
       <div class="form__field">
-        <label for="city-to" class="form__label form__label--light">Город получения</label>
-        <app-select [items]="cities" mods="no-shadow"></app-select>
+        <label class="form__label form__label--light">Город получения</label>
+        <app-select
+          [formControlName]="FormControlName.CityEnd"
+          [items]="cities"
+          [isInvalid]="(form.get(FormControlName.CityEnd).invalid &&
+          form.get(FormControlName.CityEnd).value.touched) && 'invalid'"
+          mods="no-shadow"
+        ></app-select>
       </div>
       <app-btn mods="lg">Показать</app-btn>
     </div>

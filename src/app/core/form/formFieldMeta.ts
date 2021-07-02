@@ -190,4 +190,12 @@ export default {
       '          <app-link [href]="${href}">обработку моих персональных данных</app-link>`,
     type: 'checkbox'
   },
+  [FormControlName.CityStart]: {
+    label: 'Город оправления',
+    type: 'select'
+  },
+  [FormControlName.CityEnd]: {
+    label: 'Город получения',
+    type: 'select'
+  },
 };

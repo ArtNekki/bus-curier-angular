@@ -52,5 +52,9 @@ export default {
   Password: 'password',
   Remember: 'remember',
   Sum: 'sum',
-  Agree: 'agree'
+  Agree: 'agree',
+  DateStart: 'date-start',
+  DateEnd: 'date-end',
+  CityStart: 'city-start',
+  CityEnd: 'city-end'
 };
