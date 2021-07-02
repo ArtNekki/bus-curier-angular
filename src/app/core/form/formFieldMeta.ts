@@ -202,4 +202,8 @@ export default {
     label: 'Селект',
     type: 'select'
   },
+  [FormControlName.ProxyNumber]: {
+    label: 'Номер доверенности',
+    type: 'text'
+  }
 };

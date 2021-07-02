@@ -57,5 +57,6 @@ export default {
   DateEnd: 'date-end',
   CityStart: 'city-start',
   CityEnd: 'city-end',
-  Status: 'status'
+  Status: 'status',
+  ProxyNumber: 'proxy-number'
 };

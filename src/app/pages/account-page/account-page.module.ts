@@ -11,6 +11,8 @@ import {SharedModule} from '../../shared/shared.module';
 import { AccountComponent } from './components/account/account.component';
 import {ModalsModule} from '../../modals/modals.module';
 import { AccountInnerPageComponent } from './pages/account-inner-page/account-inner-page.component';
+import { ProxyManGroupComponent } from './components/form/proxy-man-group/proxy-man-group.component';
+import { ProxyManComponent } from './components/form/proxy-man/proxy-man.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { AccountInnerPageComponent } from './pages/account-inner-page/account-in
     AccountReportPageComponent,
     AccountMediaComponent,
     AccountComponent,
-    AccountInnerPageComponent
+    AccountInnerPageComponent,
+    ProxyManGroupComponent,
+    ProxyManComponent
   ],
   imports: [
     CommonModule,

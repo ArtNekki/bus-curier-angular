@@ -1,0 +1,21 @@
+<div class="form__fieldset form__fieldset--2-col-sm" [formGroup]="formGroup" [@fadeIn]="">
+  <div *ngFor="let control of formUtils.getGroupControls(formGroup) | keyvalue: formUtils.originalOrder"
+       class="form__field">
+    <label [for]="FormControlName.ProxyNumber + '-' + control.key" class="form__label">
+      {{ FormFieldMeta[control.key].label }}
+    </label>
+    <app-input [id]="FormControlName.ProxyNumber + '-' + control.key"
+     [type]="FormFieldMeta[control.key].type"
+     [formControlName]="control.key"
+     [mask]="FormFieldMeta[control.key].mask"
+     [prefix]="FormFieldMeta[control.key].prefix"
+     [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+    >
+      <ng-container class="errors">
+        <small *ngIf="utils.getObjectKey(control.value.errors).length">
+          {{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}
+        </small>
+      </ng-container>
+    </app-input>
+  </div>
+</div>
