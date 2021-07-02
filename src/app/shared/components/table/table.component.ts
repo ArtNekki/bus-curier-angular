@@ -11,6 +11,7 @@ export class TableComponent implements OnInit {
   @Input() body: [];
   @Input() mods;
   @Input() headerMods;
+  @Input() withScroll;
 
   public tableClass = '';
   public headerClass = '';

@@ -1,0 +1,48 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+:host {
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+
+.pagination {
+  @include list-clear();
+
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 34px);
+  grid-column-gap: 5px;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 35px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 0;
+  }
+
+  &__item {
+    span,
+    a {
+      height: 34px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: $font-family--secondary;
+      font-size: 14px;
+      color: $black-color;
+      text-decoration: none;
+      border-radius: 50%;
+    }
+
+    &.current span,
+    &.current a {
+      background-color: $primary-color;
+    }
+  }
+}

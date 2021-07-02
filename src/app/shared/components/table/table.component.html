@@ -1,14 +1,22 @@
 <div [class]="tableClass">
-  <table class="table__data">
-    <thead [class]="headerClass">
+  <div [class.table__scroll]="withScroll">
+    <table class="table__data">
+      <thead [class]="headerClass">
       <tr>
         <th *ngFor="let data of head">{{data}}</th>
       </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let row of body">
-        <td *ngFor="let data of row" [innerHTML]="data"></td>
-      </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="body">
+          <tr *ngFor="let row of body">
+            <td *ngFor="let data of row" [innerHTML]="data"></td>
+          </tr>
+        </ng-container>
+        <ng-container *ngIf="!body">
+          <ng-content></ng-content>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="withScroll" class="table__scrollbar"></div>
 </div>

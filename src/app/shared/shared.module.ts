@@ -54,6 +54,8 @@ import { RadioGroupComponent } from './components/radio-group/radio-group.compon
 import { FormTabsComponent } from './components/form-tabs/form-tabs.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { OrderResultComponent } from './components/order-result/order-result.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { ReportComponent } from './components/report/report.component';
 
 // import { ɵs } from '@ng-select/ng-select;
 
@@ -108,7 +110,9 @@ import { OrderResultComponent } from './components/order-result/order-result.com
     CounterComponent,
     RadioGroupComponent,
     ModalComponent,
-    OrderResultComponent
+    OrderResultComponent,
+    PaginationComponent,
+    ReportComponent
   ],
   declarations: [
     BtnComponent,
@@ -142,7 +146,9 @@ import { OrderResultComponent } from './components/order-result/order-result.com
     RadioGroupComponent,
     FormTabsComponent,
     ModalComponent,
-    OrderResultComponent
+    OrderResultComponent,
+    PaginationComponent,
+    ReportComponent
   ]
   // providers: [NgSelectConfig, ɵs],
 })
