@@ -1,14 +1,31 @@
 <form action="#" class="form" autocomplete="off">
   <section class="form__section form__section--w-underline form__section--account">
-
-<!--    {{{ data-list items='[-->
-<!--    {"name": "ФИО:", "value": "Петров Иван Александрович"},-->
-<!--      {"name": "Email:", "value": "tafibuchgalter@mail.ru"},-->
-<!--      {"name": "Телефон:", "value": "+7 (900) 434 34 54"},-->
-<!--      {"name": "Паспортные данные:", "value": "8013 902456"},-->
-<!--      {"name": "Пароль:", "value": "********", "type": "password", "href": "account&#45;&#45;physic-edit-password.html"}]' mods="account"-->
-<!--    }}}-->
-    <app-btn mods="lg, w-270">Изменить данные</app-btn>
+    <app-data-list [data]="auth" mods="account"></app-data-list>
   </section>
-  <app-checkbox name="subscribe" mods="sm">Получать e-mail уведомления</app-checkbox>
+  <section class="form__section form__section--w-underline form__section--account">
+    <h2 class="form__heading">Данные организации</h2>
+    <app-data-list [data]="organization" mods="account"></app-data-list>
+    <div style="margin-top: 30px;">
+      <app-btn type="button" mods="lg, max-w-270">Изменить данные</app-btn>
+    </div>
+  </section>
+<!--  <section class="form__section form__section&#45;&#45;w-underline form__section&#45;&#45;account">-->
+<!--    <h2 class="form__heading">Отправитель по доверенности</h2>-->
+<!--    {{> fieldset&#45;&#45;tags-surety}}-->
+<!--    <div class="form__fieldset form__fieldset&#45;&#45;2-col-sm">-->
+<!--      <div class="form__field">-->
+<!--        <label for="fio" class="form__label">ФИО:</label>-->
+<!--        {{{ input type="text" id="fio" name="fio" error="Не заполнено"}}}-->
+<!--      </div>-->
+<!--      <div class="form__field">-->
+<!--        <label for="tel" class="form__label">Телефон:</label>-->
+<!--        {{{ input type="tel" id="tel" name="tel" error="Не заполнено"}}}-->
+<!--      </div>-->
+<!--      <div class="form__field">-->
+<!--        <label for="contract-number" class="form__label">Номер договоренности:</label>-->
+<!--        {{{ input type="text" id="contract-number" name="contract-number" error="Не заполнено"}}}-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </section>-->
+<!--  {{{ checkbox id="subscribe" name="subscribe" label="Получать e-mail уведомления"}}}-->
 </form>

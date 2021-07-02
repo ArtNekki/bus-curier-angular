@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ModsService} from '../../../core/services/mods.service';
 
 @Component({
   selector: 'app-data-list',
@@ -7,10 +8,14 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class DataListComponent implements OnInit {
   @Input() data;
+  @Input() mods;
 
-  constructor() { }
+  public cssClass;
+
+  constructor(private modsService: ModsService) { }
 
   ngOnInit(): void {
+    this.cssClass = this.modsService.setMods('data-list', this.mods);
   }
 
 }
