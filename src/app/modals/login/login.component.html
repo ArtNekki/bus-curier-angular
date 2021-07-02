@@ -7,20 +7,20 @@
   >
     <div class="form__fieldset">
       <div class="form__field">
-        <label for="login" class="form__label form__label--light">Логин</label>
+        <label for="Email" class="form__label form__label--light">Логин</label>
         <app-input
-          id="login"
-          [type]="FormFieldMeta[FormControlName.Login].type"
-          [formControlName]="FormControlName.Login"
-          [mask]="FormFieldMeta[FormControlName.Login].mask"
-          [prefix]="FormFieldMeta[FormControlName.Login].prefix"
-          [isInvalid]="(form.get(FormControlName.Login).invalid
-           && form.get(FormControlName.Login).touched) && 'invalid'"
+          id="Email"
+          [type]="FormFieldMeta[FormControlName.Email].type"
+          [formControlName]="FormControlName.Email"
+          [mask]="FormFieldMeta[FormControlName.Email].mask"
+          [prefix]="FormFieldMeta[FormControlName.Email].prefix"
+          [isInvalid]="(form.get(FormControlName.Email).invalid
+           && form.get(FormControlName.Email).touched) && 'invalid'"
           mods="clean"
         >
           <ng-container class="errors">
-            <small *ngIf="utils.getObjectKey(form.get(FormControlName.Login).errors).length">
-              {{FormFieldError[utils.getObjectKey(form.get(FormControlName.Login).errors)[0]]}}
+            <small *ngIf="utils.getObjectKey(form.get(FormControlName.Email).errors).length">
+              {{FormFieldError[utils.getObjectKey(form.get(FormControlName.Email).errors)[0]]}}
             </small>
           </ng-container>
         </app-input>

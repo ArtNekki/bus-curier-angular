@@ -6,6 +6,9 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import {UtilsService} from '../../core/services/utils.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SignInComponent} from '../sign-in/sign-in.component';
+import {AuthService} from '../../core/services/auth/auth.service';
+import {Router} from '@angular/router';
+import firebase from 'firebase';
 
 @Component({
   selector: 'app-login',
@@ -21,13 +24,15 @@ export class LoginComponent extends SimpleModalComponent<null, null> implements 
 
   constructor(
     public utils: UtilsService,
-    private modalService: SimpleModalService) {
+    private modalService: SimpleModalService,
+    private auth: AuthService,
+    private router: Router) {
     super();
   }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      [FormControlName.Login]: new FormControl('', [Validators.required]),
+      [FormControlName.Email]: new FormControl('', [Validators.required]),
       [FormControlName.Password]: new FormControl('**********', [Validators.required]),
       [FormControlName.Remember]: new FormControl('')
     });
@@ -42,6 +47,11 @@ export class LoginComponent extends SimpleModalComponent<null, null> implements 
   }
 
   onSubmit() {
-    console.log('login form', this.form.value);
+    const user = this.form.value;
+
+    this.auth.login(user).subscribe((response) => {
+      console.log('response', response);
+      this.close();
+    });
   }
 }
