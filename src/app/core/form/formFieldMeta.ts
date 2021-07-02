@@ -1,4 +1,5 @@
 import FormControlName from '../maps/FormControlName';
+import {FormControl} from '@angular/forms';
 
 export default {
   [FormControlName.Fio]: {
@@ -204,6 +205,46 @@ export default {
   },
   [FormControlName.ProxyNumber]: {
     label: 'Номер доверенности',
+    type: 'text'
+  },
+  [FormControlName.Inn]: {
+    label: 'ИНН',
+    type: 'text'
+  },
+  [FormControlName.Kpp]: {
+    label: 'КПП',
+    type: 'text'
+  },
+  [FormControlName.Ogrn]: {
+    label: 'ОГРН',
+    type: 'text'
+  },
+  [FormControlName.Rc]: {
+    label: 'Р/с',
+    type: 'text'
+  },
+  [FormControlName.Kc]: {
+    label: 'К/c',
+    type: 'text'
+  },
+  [FormControlName.DocNumber]: {
+    label: 'Номер документа',
+    type: 'text'
+  },
+  [FormControlName.DocDate]: {
+    label: 'Дата договора',
+    type: 'text'
+  },
+  [FormControlName.Carrier]: {
+    label: 'Перевозчик',
+    type: 'text'
+  },
+  [FormControlName.Leader]: {
+    label: 'Руководитель',
+    type: 'text'
+  },
+  [FormControlName.Bank]: {
+    label: 'Банк',
     type: 'text'
   }
 };

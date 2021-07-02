@@ -58,5 +58,14 @@ export default {
   CityStart: 'city-start',
   CityEnd: 'city-end',
   Status: 'status',
-  ProxyNumber: 'proxy-number'
+  ProxyNumber: 'proxy-number',
+  Inn: 'inn',
+  Kpp: 'kpp',
+  Ogrn: 'ogrn',
+  Rc: 'rc',
+  Kc: 'kc',
+  DocDate: 'doc-date',
+  Carrier: 'carrier',
+  Leader: 'leader',
+  Bank: 'bank'
 };
