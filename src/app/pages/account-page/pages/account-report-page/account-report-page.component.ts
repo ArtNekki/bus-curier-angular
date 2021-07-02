@@ -46,5 +46,4 @@ export class AccountReportPageComponent implements OnInit {
       [FormControlName.CityEnd]: new FormControl('', [Validators.required]),
     });
   }
-
 }

@@ -1,77 +1,69 @@
-
-<form action="#" class="form form--no-margin" autocomplete="off">
+<form action="#" class="form form--no-margin" autocomplete="off" [formGroup]="form">
   <section class="form__section">
     <div class="form__fieldset form__fieldset--filter form__fieldset--orders">
       <div class="form__group">
         <span class="form__label">Период:</span>
-        <input type="text">
-        <input type="text">
-<!--        {{{ input type="text" id="period-from" name="period-from" placeholder="дд.мм.гггг" error="Не заполнено" mods="no-shadow" }}}-->
-<!--        {{{ input type="text" id="period-to" name="period-to" placeholder="дд.мм.гггг" error="Не заполнено" mods="no-shadow" }}}-->
+        <app-datepicker
+          [formControlName]="FormControlName.DateStart"
+          [isInvalid]="form.get(FormControlName.DateStart).invalid
+          && form.get(FormControlName.DateStart).touched && 'invalid'"
+          mods="no-shadow">
+          <ng-container class="errors">
+            <small *ngIf="utils.getObjectKey(form.get(FormControlName.DateStart).errors).length">
+              {{FormFieldError[utils.getObjectKey(form.get(FormControlName.DateStart).errors)[0]]}}
+            </small>
+          </ng-container>
+        </app-datepicker>
+        <app-datepicker
+          [formControlName]="FormControlName.DateEnd"
+          [isInvalid]="form.get(FormControlName.DateEnd).invalid
+          && form.get(FormControlName.DateEnd).touched && 'invalid'"
+          mods="no-shadow">
+          <ng-container class="errors">
+            <small *ngIf="utils.getObjectKey(form.get(FormControlName.DateEnd).errors).length">
+              {{FormFieldError[utils.getObjectKey(form.get(FormControlName.DateEnd).errors)[0]]}}
+            </small>
+          </ng-container>
+        </app-datepicker>
       </div>
       <div class="form__field">
-        <label for="city-from" class="form__label form__label--light">Cтатус</label>
-        <app-select [items]='[
-          {"value": "", "name": "Выберите статус"},
-          {"value": "1", "name": "Подготовка к отправке"},
-          {"value": "2", "name": "Готов к выдаче"},
-          {"value": "3", "name": "Возврат"},
-          {"value": "4", "name": "Испорчено"}]' mods="no-shadow"></app-select>
+        <label class="form__label form__label--light">Статус</label>
+        <app-select
+          [formControlName]="FormControlName.Status"
+          [items]="status"
+          [isInvalid]="(form.get(FormControlName.Status).invalid &&
+          form.get(FormControlName.Status).value.touched) && 'invalid'"
+          mods="no-shadow"
+        ></app-select>
       </div>
       <app-btn mods="lg">Показать</app-btn>
     </div>
   </section>
 </form>
-<div class="report">
-  <div class="report__table">
+<app-report>
+  <ng-container class="table">
     <app-table
-      [head]='["Дата заказа", "Заказ", "Сумма заказа", "Статус"]'
-      [body]='[["Велосипед", "<app-link href=\"#\" mods=\"blue, lg\">asdasd</app-link>", "2 050 руб", "2 550 руб"],
-            ["Коляска", "950 руб", "1 150 руб", "1 750 руб"],
-            ["Цветы", "750 руб", "850 руб", "950 руб"],
-            ["Телевизор", "950 руб", "1 550 руб", "2 050 руб"]]'
+      [head]="tableHead"
+      [body]="tableBody"
+      withScroll="true"
     >
     </app-table>
-  </div>
-  <div class="report__data">
-<!--    {{{ data-list items='[-->
-<!--    {"name": "Дата заказа", "value": "2020-04-03"},-->
-<!--      {"name": "Заказ", "value": "614933", "type": "link"},-->
-<!--      {"name": "Сумма заказа", "value": "150.00"},-->
-<!--      {"name": "Статус", "value": "Готов к выдаче"}]'-->
-<!--    mods="w-underline"-->
-<!--    }}}-->
-<!--    {{{ data-list items='[-->
-<!--    {"name": "Дата заказа", "value": "2020-04-03"},-->
-<!--      {"name": "Заказ", "value": "614933", "type": "link"},-->
-<!--      {"name": "Сумма заказа", "value": "150.00"},-->
-<!--      {"name": "Статус", "value": "Готов к выдаче"}]'-->
-<!--    mods="w-underline"-->
-<!--    }}}-->
-<!--    {{{ data-list items='[-->
-<!--    {"name": "Дата заказа", "value": "2020-04-03"},-->
-<!--      {"name": "Заказ", "value": "614933", "type": "link"},-->
-<!--      {"name": "Сумма заказа", "value": "150.00"},-->
-<!--      {"name": "Статус", "value": "Готов к выдаче"}]'-->
-<!--    mods="w-underline"-->
-<!--    }}}-->
-<!--    {{{ data-list items='[-->
-<!--    {"name": "Дата заказа", "value": "2020-04-03"},-->
-<!--      {"name": "Заказ", "value": "614933", "type": "link"},-->
-<!--      {"name": "Сумма заказа", "value": "150.00"},-->
-<!--      {"name": "Статус", "value": "Готов к выдаче"}]'-->
-<!--    mods="w-underline"-->
-<!--    }}}-->
-<!--    {{{ data-list items='[-->
-<!--    {"name": "Дата заказа", "value": "2020-04-03"},-->
-<!--      {"name": "Заказ", "value": "614933", "type": "link"},-->
-<!--      {"name": "Сумма заказа", "value": "150.00"},-->
-<!--      {"name": "Статус", "value": "Готов к выдаче"}]'-->
-<!--    mods="w-underline"-->
-<!--    }}}-->
-  </div>
-  <div class="report__footer">
-<!--    {{> pagination}}-->
-    <app-btn>Скачать отчет в формате XLS</app-btn>
-  </div>
-</div>
+  </ng-container>
+  <ng-container class="data">
+    <!--    {{{ data-list items='[-->
+    <!--    {"name": "Заказ", "value": "№ 614933", "type": "bold"},-->
+    <!--      {"name": "Дата заказа", "value": "2020-04-03"},-->
+    <!--      {"name": "Отправитель", "value": "Ким-Мельникова А.А., ИП"},-->
+    <!--      {"name": "Получатель", "value": "Петрухи А.А., ИП"},-->
+    <!--      {"name": "Город отправ.", "value": "Владивосток"},-->
+    <!--      {"name": "Город получ.", "value": "Уссурийск"},-->
+    <!--      {"name": "Стоимость", "value": "150.00"}-->
+    <!--    ]' mods="w-underline"-->
+    <!--    }}}-->
+  </ng-container>
+  <ng-container class="footer">
+    <app-pagination></app-pagination>
+    <app-btn type="button">Скачать отчет в формате XLS</app-btn>
+  </ng-container>
+</app-report>
+

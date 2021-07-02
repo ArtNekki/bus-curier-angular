@@ -56,5 +56,6 @@ export default {
   DateStart: 'date-start',
   DateEnd: 'date-end',
   CityStart: 'city-start',
-  CityEnd: 'city-end'
+  CityEnd: 'city-end',
+  Status: 'status'
 };

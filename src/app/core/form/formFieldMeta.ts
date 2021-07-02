@@ -198,4 +198,8 @@ export default {
     label: 'Город получения',
     type: 'select'
   },
+  [FormControlName.Status]: {
+    label: 'Селект',
+    type: 'select'
+  },
 };
