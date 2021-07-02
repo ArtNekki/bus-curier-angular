@@ -1,14 +1,14 @@
 <div class="account">
   <div class="account__main">
-    <app-account-media path="orders" title="Мои заявки">
+    <app-account-media [path]="['inner', 'orders']" title="Мои заявки">
       <svg-icon class="icon" src="assets/img/svg/orders.svg" imgWidth="65" imgHeight="51"></svg-icon>
       Вы еще не создали ни одного отправления<br />Посмотрите историю ваших отправлений.
     </app-account-media>
-    <app-account-media path="personal" title="Персональные данные">
+    <app-account-media [path]="['inner', 'personal']" title="Персональные данные">
       <svg-icon class="icon" src="assets/img/svg/profile.svg" imgWidth="65" imgHeight="54"></svg-icon>
       Вы еще не создали ни одного отправления<br />Посмотрите историю ваших отправлений.
     </app-account-media>
-    <app-account-media path="report" title="Сформировать отчет">
+    <app-account-media [path]="['inner', 'report']" title="Сформировать отчет">
       <svg-icon class="icon" src="assets/img/svg/report.svg" imgWidth="48" imgHeight="66"></svg-icon>
       Удобное формирование отчета с применением фильтров.
     </app-account-media>

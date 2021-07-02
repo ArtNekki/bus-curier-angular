@@ -10,6 +10,7 @@ import {AccountRoutingModule} from './account-routing.module';
 import {SharedModule} from '../../shared/shared.module';
 import { AccountComponent } from './components/account/account.component';
 import {ModalsModule} from '../../modals/modals.module';
+import { AccountInnerPageComponent } from './pages/account-inner-page/account-inner-page.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {ModalsModule} from '../../modals/modals.module';
     AccountOrdersPageComponent,
     AccountReportPageComponent,
     AccountMediaComponent,
-    AccountComponent
+    AccountComponent,
+    AccountInnerPageComponent
   ],
   imports: [
     CommonModule,

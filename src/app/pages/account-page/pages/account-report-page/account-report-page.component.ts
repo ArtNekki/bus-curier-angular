@@ -29,6 +29,8 @@ export class AccountReportPageComponent implements OnInit {
       [FormControlName.CityStart]: new FormControl('', [Validators.required]),
       [FormControlName.CityEnd]: new FormControl('', [Validators.required]),
     });
+
+    console.log('66666');
   }
 
 }
