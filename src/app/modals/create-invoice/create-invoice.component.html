@@ -1,4 +1,4 @@
-<app-modal title="Сформировать отчет">
+<app-modal title="Сформировать отчет" (close)="close()">
   <form class="form form--no-margin"
         autocomplete="off"
         [formGroup]="form" (submit)="onSubmit()">

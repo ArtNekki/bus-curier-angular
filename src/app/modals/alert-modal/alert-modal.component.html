@@ -1,4 +1,4 @@
-<app-modal>
+<app-modal (close)="close()">
   <svg-icon class="icon" src="assets/img/svg/circle-ok.svg" width="52" height="46"></svg-icon>
   <p>{{message || 'Готово'}}</p>
   <div style="margin-top: 20px;">

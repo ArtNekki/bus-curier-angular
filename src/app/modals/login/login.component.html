@@ -1,4 +1,4 @@
-<app-modal mods="theme-yellow" title="Авторизация">
+<app-modal mods="theme-yellow" title="Авторизация" (close)="close()">
   <form action="#" class="form form--no-margin"
     autocomplete="off"
     [formGroup]="form"
@@ -9,6 +9,7 @@
       <div class="form__field">
         <label for="login" class="form__label form__label--light">Логин</label>
         <app-input
+          id="login"
           [type]="FormFieldMeta[FormControlName.Login].type"
           [formControlName]="FormControlName.Login"
           [mask]="FormFieldMeta[FormControlName.Login].mask"
@@ -29,6 +30,7 @@
           {{FormFieldMeta[FormControlName.Password].label}}
         </label>
         <app-input
+          id="password"
           [type]="FormFieldMeta[FormControlName.Password].type"
           [formControlName]="FormControlName.Password"
           [isInvalid]="(form.get(FormControlName.Password).invalid

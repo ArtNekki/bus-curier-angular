@@ -1,4 +1,4 @@
-<app-modal mods="theme-yellow" title="Регистрация">
+<app-modal mods="theme-yellow" title="Регистрация" (close)="close()">
   <form class="form form--no-margin" autocomplete="off" [formGroup]="form" (submit)="onSubmit()">
     <div class="form__tabs form__tabs--modal">
       <button type="button"
