@@ -14,6 +14,7 @@ import { AccountInnerPageComponent } from './pages/account-inner-page/account-in
 import { ProxyManGroupComponent } from './components/form/proxy-man-group/proxy-man-group.component';
 import { ProxyManComponent } from './components/form/proxy-man/proxy-man.component';
 import { EntityEditComponent } from './components/form/entity-edit/entity-edit.component';
+import { EntityAuthEditComponent } from './components/form/entity-auth-edit/entity-auth-edit.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { EntityEditComponent } from './components/form/entity-edit/entity-edit.c
     AccountInnerPageComponent,
     ProxyManGroupComponent,
     ProxyManComponent,
-    EntityEditComponent
+    EntityEditComponent,
+    EntityAuthEditComponent
   ],
   imports: [
     CommonModule,

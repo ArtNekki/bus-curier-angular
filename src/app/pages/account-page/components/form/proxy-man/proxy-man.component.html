@@ -1,10 +1,10 @@
 <div class="form__fieldset form__fieldset--2-col-sm" [formGroup]="formGroup" [@fadeIn]="">
   <div *ngFor="let control of formUtils.getGroupControls(formGroup) | keyvalue: formUtils.originalOrder"
        class="form__field">
-    <label [for]="FormControlName.ProxyNumber + '-' + control.key" class="form__label">
+    <label [for]="control.key" class="form__label">
       {{ FormFieldMeta[control.key].label }}
     </label>
-    <app-input [id]="FormControlName.ProxyNumber + '-' + control.key"
+    <app-input [id]="control.key"
      [type]="FormFieldMeta[control.key].type"
      [formControlName]="control.key"
      [mask]="FormFieldMeta[control.key].mask"
