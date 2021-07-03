@@ -246,5 +246,11 @@ export default {
   [FormControlName.Bank]: {
     label: 'Банк',
     type: 'text'
+  },
+  [FormControlName.PassportNumber]: {
+    label: 'Номер документа',
+    type: 'text',
+    mask: '0000 000000',
+    prefix: ''
   }
 };

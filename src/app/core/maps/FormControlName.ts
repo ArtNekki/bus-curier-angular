@@ -67,5 +67,6 @@ export default {
   DocDate: 'doc-date',
   Carrier: 'carrier',
   Leader: 'leader',
-  Bank: 'bank'
+  Bank: 'bank',
+  PassportNumber: 'passport-number'
 };
