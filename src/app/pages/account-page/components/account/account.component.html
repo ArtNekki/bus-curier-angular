@@ -15,17 +15,13 @@
   </div>
 
   <div class="account__sidebar">
-    <article class="balance-block">
-      <div class="balance-block__label">Ваш баланс:</div>
-      <b class="balance-block__sum">12,500 <span>Р.</span></b>
-<!--      {{{ link href="#" text="Пополнить" mods="lg, blue"}}}-->
-    </article>
+    <app-balance-block></app-balance-block>
     <div class="account__sidebar-btn">
       <app-btn type="button" mods="lg, w-full" (click)="showOrderModal()">Оформить заказ</app-btn>
     </div>
-    <div class="account__sidebar-btn">
-      <app-btn type="button" mods="lg, w-full, black" (click)="showInvoiceModal()">Сформировать отчет</app-btn>
-    </div>
+<!--    <div class="account__sidebar-btn">-->
+<!--      <app-btn type="button" mods="lg, w-full, black" (click)="showInvoiceModal()">Сформировать отчет</app-btn>-->
+<!--    </div>-->
     <div class="account__logout">
       <app-link  href="" mods="lg, no-underline">
         Выйти из личного кабинета

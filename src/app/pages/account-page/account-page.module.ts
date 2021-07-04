@@ -16,6 +16,7 @@ import { ProxyManComponent } from './components/form/proxy-man/proxy-man.compone
 import { EntityEditComponent } from './components/form/entity-edit/entity-edit.component';
 import { EntityAuthEditComponent } from './components/form/entity-auth-edit/entity-auth-edit.component';
 import { IndividualEditComponent } from './components/form/individual-edit/individual-edit.component';
+import { BalanceBlockComponent } from './components/balance-block/balance-block.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { IndividualEditComponent } from './components/form/individual-edit/indiv
     ProxyManComponent,
     EntityEditComponent,
     EntityAuthEditComponent,
-    IndividualEditComponent
+    IndividualEditComponent,
+    BalanceBlockComponent
   ],
   imports: [
     CommonModule,
