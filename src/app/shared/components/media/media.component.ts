@@ -6,6 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./media.component.scss']
 })
 export class MediaComponent implements OnInit {
+  @Input() data;
   @Input() mods;
 
   public cssClass = 'media';

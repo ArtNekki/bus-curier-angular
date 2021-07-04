@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RulesOfSendPageComponent} from './rules-of-send-page.component';
+import {SharedModule} from '../../../shared/shared.module';
 
 
 
@@ -9,7 +10,8 @@ import {RulesOfSendPageComponent} from './rules-of-send-page.component';
     RulesOfSendPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ]
 })
 export class RulesOfSendPageModule { }

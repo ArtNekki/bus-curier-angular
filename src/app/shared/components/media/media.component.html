@@ -2,8 +2,8 @@
   <div class="media__img">
     <svg-icon class="icon" src="assets/img/svg/pdf.svg" width="42px" height="42px"></svg-icon>
   </div>
-  <h1 class="media__title">Как отправить посылку</h1>
+  <h1 class="media__title" *ngIf="data">{{data.title}}</h1>
   <div class="media__link">
-    <app-link href="#" mods="lg, blue">Скачать в PDF (80 кб)</app-link>
+    <ng-content select=".link"></ng-content>
   </div>
 </article>

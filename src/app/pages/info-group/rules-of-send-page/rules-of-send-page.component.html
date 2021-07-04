@@ -1,5 +1,5 @@
 <div class="page__container page__container--col-2">
-  <h1 class="page__title">Правила приёмки и отправки <br class="br br--show-sm br--hide-md">грузов <br class="br br--show-md">в компании Bus-Курьер</h1>
+  <h1 class="page__title">Правила приёмки и отправки <br class="br br--show-sm br--hide-md">грузов в компании Bus-Курьер</h1>
 </div>
 <div class="page__container page__container--col-2">
   <div class="page__content">
@@ -64,9 +64,15 @@
 <!--    {{{ media theme="two" title="Вы можете скачать файл «Правила приемки<br /> и отправки грузов» в формате PDF" link='{"href": "#", "text": "Скачать в PDF (80 кб)"}' imgName="pdf" imgWidth="36" imgHeight="40" mods="under-list" }}}-->
   </div>
   <aside class="page__sidebar">
-    media
-    media
-<!--    {{{ media title="Тарифы на упаковку в другом городе / регионе" link='{"href": "#", "text": "Приморский край"}' imgName="map-point" imgWidth="20" imgHeight="35" }}}-->
-<!--    {{{ media href="account&#45;&#45;orders.html" title="Правила приемки и отправки грузов " link='{"href": "#", "text": "Скачать в PDF (80 кб)"}' imgName="pdf" imgWidth="42" imgHeight="42" }}}-->
+    <app-media [data]="{title: 'Тарифы на упаковку в другом городе / регионе'}">
+      <ng-container class="link">
+        <app-link href="#" mods="lg, blue">Приморский край</app-link>
+      </ng-container>
+    </app-media>
+    <app-media [data]="{title: 'Правила приемки и отправки грузов'}">
+      <ng-container class="link">
+        <app-link href="#" mods="lg, blue">Скачать в PDF (80 кб)</app-link>
+      </ng-container>
+    </app-media>
   </aside>
 </div>

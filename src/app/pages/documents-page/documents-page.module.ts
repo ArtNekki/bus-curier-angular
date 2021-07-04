@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {DocumentsPageComponent} from './documents-page.component';
+import {SharedModule} from '../../shared/shared.module';
 
 
 
@@ -9,7 +10,8 @@ import {DocumentsPageComponent} from './documents-page.component';
     DocumentsPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ]
 })
 export class DocumentsPageModule { }

@@ -4,21 +4,21 @@
   <section class="page-section">
     <h2 class="title title--md">Реальные примеры:</h2>
     <div class="row row--cards">
-<!--      <app-card title="Доставка цветов из аэропорта по Приморскому краю за 24 часа" img="portfolio-1">-->
-<!--        Доставка цветов из аэропорта по Приморскому краю за 24 часа" text="Крупная оптовая компания поставщик цветов из-->
-<!--        Москвы запросила организовать поставку своей продукции из аэропорта г. Владивосток в 21 населенный пункт...-->
-<!--        <app-link href="#" mods="blue, no-underline">Читать далее</app-link>-->
-<!--      </app-card>-->
-<!--      <app-card title="Подарки для близких, которые сейчас далеко" img="portfolio-2">-->
-<!--        В «BUS-Курьер» поступила заявка на доставку спортивного велосипеда из Владивостока в Находку. Но столь большой-->
-<!--        груз нужно было не только забрать у отправителя...-->
-<!--        <app-link href="#" mods="blue, no-underline">Читать далее</app-link>-->
-<!--      </app-card>-->
-<!--      <app-card title="Доставим даже в тайгу" img="portfolio-3">-->
-<!--        С нестандартной задачей обратился клиент, который поехал на охоту в Лазовский район. В тайге у него сломалась машина,-->
-<!--        а подходящей запчасти в округе не нашлось...-->
-<!--        <app-link href="#" mods="blue, no-underline">Читать далее</app-link>-->
-<!--      </app-card>-->
+      <app-card title="Доставка цветов из аэропорта по Приморскому краю за 24 часа" img="portfolio-1">
+        Доставка цветов из аэропорта по Приморскому краю за 24 часа" text="Крупная оптовая компания поставщик цветов из
+        Москвы запросила организовать поставку своей продукции из аэропорта г. Владивосток в 21 населенный пункт...
+        <app-link href="#" mods="blue, no-underline">Читать далее</app-link>
+      </app-card>
+      <app-card title="Подарки для близких, которые сейчас далеко" img="portfolio-2">
+        В «BUS-Курьер» поступила заявка на доставку спортивного велосипеда из Владивостока в Находку. Но столь большой
+        груз нужно было не только забрать у отправителя...
+        <app-link href="#" mods="blue, no-underline">Читать далее</app-link>
+      </app-card>
+      <app-card title="Доставим даже в тайгу" img="portfolio-3">
+        С нестандартной задачей обратился клиент, который поехал на охоту в Лазовский район. В тайге у него сломалась машина,
+        а подходящей запчасти в округе не нашлось...
+        <app-link href="#" mods="blue, no-underline">Читать далее</app-link>
+      </app-card>
     </div>
   </section>
 </div>
@@ -26,11 +26,26 @@
   <div class="page-section__container">
     <h2 class="title title--md">Закажите звонок менеджера</h2>
     <p class="subtitle subtitle--md">Оставьте свой номер телефона и мы перезвоним вам в ближайшее время</p>
-    <form action="#" class="form form--max-w-820" autocomplete="off">
+    <form action="#" class="form form--max-w-820" autocomplete="off" [formGroup]="form" (submit)="onSubmit()">
       <div class="form__fieldset form__fieldset--2-col-sm">
         <div class="form__field">
-          <label for="tel" class="form__label form__label--light">Номер телефона</label>
-<!--          {{{ input type="tel" id="tel" name="tel" placeholder="+7 ( __ ) __ - __ - __" error="Не заполнено"}}}-->
+          <label for="tel" class="form__label form__label--light">{{FormFieldMeta[FormControlName.Tel].label}}</label>
+          <app-input
+            id="tel"
+            [type]="FormFieldMeta[FormControlName.Tel].type"
+            [formControlName]="FormControlName.Tel"
+            [mask]="FormFieldMeta[FormControlName.Tel].mask"
+            [prefix]="FormFieldMeta[FormControlName.Tel].prefix"
+            [isInvalid]="(form.get(FormControlName.Tel).invalid
+           && form.get(FormControlName.Tel).touched) && 'invalid'"
+            mods="clean"
+          >
+            <ng-container class="errors">
+              <small *ngIf="utils.getObjectKey(form.get(FormControlName.Tel).errors).length">
+                {{FormFieldError[utils.getObjectKey(form.get(FormControlName.Tel).errors)[0]]}}
+              </small>
+            </ng-container>
+          </app-input>
         </div>
         <div class="form__field">
           <app-btn mods="lg, black">Отправить заявку</app-btn>
@@ -38,9 +53,11 @@
       </div>
       <div class="form__fieldset form__fieldset--2-col-sm">
         <div class="form__field form__field--full">
-          <app-checkbox name="personal-data" mods="md">
-            Нажимая кнопку «Отправить», я даю свое согласие на
-            <app-link href="#">обработку моих персональных данных</app-link>
+          <app-checkbox [formControlName]="FormControlName.Agree" mods="md">
+            <ng-container class="text">
+              Нажимая кнопку «Отправить», я даю свое согласие на
+              <app-link href="#">обработку моих персональных данных</app-link>
+            </ng-container>
           </app-checkbox>
         </div>
       </div>
