@@ -1,11 +1,9 @@
-<!--<article [class]="cssClass" media&#45;&#45;theme-two">-->
-<!--  ${imgName ? renderImg() : ``}-->
-<!--  ${title ? `<h1 class="media__title">${title}</h1>` : ''}-->
-<!--  ${text ? `<p class="media__text">${text}</p>` : ''}-->
-<!--  <div class="media__link">-->
-<!--    ${link ? `<a href="${link.href}" class="link link&#45;&#45;lg">-->
-<!--              <span class="link__text">${link.text}</span>-->
-<!--          </a>` : ''}-->
-<!--  </div>-->
-<!--</article>-->
-<p>media works</p>
+<article class="media media--under-list">
+  <div class="media__img">
+    <svg-icon class="icon" src="assets/img/svg/pdf.svg" width="42px" height="42px"></svg-icon>
+  </div>
+  <h1 class="media__title">Как отправить посылку</h1>
+  <div class="media__link">
+    <app-link href="#" mods="lg, blue">Скачать в PDF (80 кб)</app-link>
+  </div>
+</article>
