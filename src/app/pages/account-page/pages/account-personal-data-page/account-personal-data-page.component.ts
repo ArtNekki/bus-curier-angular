@@ -27,8 +27,7 @@ export class AccountPersonalDataPageComponent implements OnInit {
     {name: 'ФИО:', value: 'Петров Иван Александрович'},
     {name: 'Email:', value: 'tafibuchgalter@mail.ru'},
     {name: 'Телефон:', value: '+7 (900) 434 34 54'},
-    {name: 'Паспортные данные:', value: '8013 902456'},
-    {name: 'Пароль:', value: '********'}
+    {name: 'Паспортные данные:', value: '8013 902456'}
   ];
 
   public organization = [
@@ -122,5 +121,10 @@ export class AccountPersonalDataPageComponent implements OnInit {
     this.router.navigate(url, {
       queryParams
     });
+  }
+
+  editIndividual(e: MouseEvent) {
+    e.preventDefault();
+    this.activateEditMode(IndividualModType.Edit);
   }
 }

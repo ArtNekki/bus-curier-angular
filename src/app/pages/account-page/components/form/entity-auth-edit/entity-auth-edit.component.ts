@@ -49,5 +49,6 @@ export class EntityAuthEditComponent implements OnInit {
 
   onSubmit() {
     console.log('entity auth edit', this.form.value);
+    this.goBack();
   }
 }

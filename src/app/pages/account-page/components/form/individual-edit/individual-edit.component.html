@@ -26,7 +26,7 @@
       <app-btn type="submit" mods="lg">Сохранить данные</app-btn>
     </div>
     <div class="form__field form__field--cancel">
-      <app-link href="#" mods="lg, blue">Отменить</app-link>
+      <app-link mods="lg, blue" (click)="cancel($event)">Отменить</app-link>
     </div>
   </div>
 </form>

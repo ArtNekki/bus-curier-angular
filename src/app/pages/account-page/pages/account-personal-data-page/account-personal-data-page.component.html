@@ -16,8 +16,20 @@
     <app-entity-auth-edit *ngIf="entityMod.editAuth" [queryParams]="currentQueryParams"></app-entity-auth-edit>
   </section>
   <section *ngIf="individualMod.active" class="form__section form__section--w-underline form__section--account">
-    <app-data-list *ngIf="!individualMod.edit" [data]="individual" mods="account"></app-data-list>
-    <app-individual-edit *ngIf="individualMod.edit"></app-individual-edit>
+    <app-data-list *ngIf="!individualMod.edit" [data]="individual" mods="account">
+      <ng-container class="add">
+        <li class="data-list__item">
+          <span class="data-list__name">Пароль:</span>
+          <div class="data-list__value">
+            <span>***********</span>
+            <span style="display: inline-block; margin-left: 5px;">
+              <app-link mods="blue" (click)="editIndividual($event)">Изменить</app-link>
+            </span>
+          </div>
+        </li>
+      </ng-container>
+    </app-data-list>
+    <app-individual-edit *ngIf="individualMod.edit" [queryParams]="currentQueryParams"></app-individual-edit>
   </section>
   <section *ngIf="entityMod.active" class="form__section form__section--w-underline form__section--account">
     <h2 class="form__heading">Данные организации</h2>

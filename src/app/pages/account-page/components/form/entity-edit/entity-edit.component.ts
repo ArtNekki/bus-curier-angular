@@ -42,16 +42,6 @@ export class EntityEditComponent implements OnInit {
   ngOnInit( ): void {
   }
 
-  onSubmit() {
-    console.log('edit entity', this.form.value);
-
-    if (!this.form.invalid) {
-      return false;
-    }
-
-    this.goBack();
-  }
-
   goBack() {
     delete this.queryParams['editCompany'];
 
@@ -64,6 +54,16 @@ export class EntityEditComponent implements OnInit {
 
   cancel(e) {
     e.preventDefault();
+    this.goBack();
+  }
+
+  onSubmit() {
+    console.log('edit entity', this.form.value);
+
+    // if (!this.form.invalid) {
+    //   return false;
+    // }
+
     this.goBack();
   }
 }

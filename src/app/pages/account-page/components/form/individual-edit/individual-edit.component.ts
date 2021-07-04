@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../core/form/fieldError';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UtilsService} from '../../../../../core/services/utils.service';
 import {FormUtilsService} from '../../../../../core/services/form-utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-individual-edit',
@@ -12,6 +13,7 @@ import FormControlName from 'src/app/core/maps/FormControlName';
   styleUrls: ['./individual-edit.component.scss']
 })
 export class IndividualEditComponent implements OnInit {
+  @Input() queryParams;
 
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
@@ -26,12 +28,29 @@ export class IndividualEditComponent implements OnInit {
 
   constructor(
     public utils: UtilsService,
-    public formUtils: FormUtilsService) { }
+    public formUtils: FormUtilsService,
+    private router: Router) { }
 
   ngOnInit( ): void {
   }
 
+  goBack() {
+    delete this.queryParams['edit'];
+
+    const url = this.utils.formatUrl(this.router.url);
+
+    this.router.navigate(url, {
+      queryParams: this.queryParams
+    });
+  }
+
+  cancel(e) {
+    e.preventDefault();
+    this.goBack();
+  }
+
   onSubmit() {
     console.log('Individual edit', this.form.value);
+    this.goBack();
   }
 }
