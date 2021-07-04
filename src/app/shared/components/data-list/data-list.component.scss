@@ -24,7 +24,7 @@
     border-bottom: 2px solid $gray-light-color--up-5;
   }
 
-  &__item {
+  ::ng-deep &__item {
     display: grid;
     grid-template-columns: auto 1fr 50%;
     grid-template-areas: "name dots value";
@@ -61,12 +61,12 @@
     }
   }
 
-  &__name {
+  ::ng-deep &__name {
     grid-area: name;
     color: $gray-color--down-11;
   }
 
-  &__value {
+  ::ng-deep &__value {
     grid-area: value;
     justify-self: start;
   }

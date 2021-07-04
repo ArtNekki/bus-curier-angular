@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import UserType from '../../../../core/maps/UserType';
+import {UtilsService} from '../../../../core/services/utils.service';
 
 const EntityModType = {
   Active: 'active',
@@ -20,8 +21,7 @@ const IndividualModType = {
 })
 export class AccountPersonalDataPageComponent implements OnInit {
   public authEntity = [
-    {name: 'Логин:', value: 'tafibuchgalter@mail.ru'},
-    {name: 'Пароль:', value: '********'}];
+    {name: 'Логин:', value: 'tafibuchgalter@mail.ru'}];
 
   public individual = [
     {name: 'ФИО:', value: 'Петров Иван Александрович'},
@@ -57,10 +57,17 @@ export class AccountPersonalDataPageComponent implements OnInit {
     [IndividualModType.Edit]: false
   };
 
-  constructor(private route: ActivatedRoute) { }
+  public currentQueryParams;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    public utils: UtilsService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
+      this.currentQueryParams = this.utils.copyObject(params);
+
       if (params[UserType.Entity]) {
         this.entityMod[EntityModType.Active] = true;
 
@@ -69,6 +76,9 @@ export class AccountPersonalDataPageComponent implements OnInit {
           this.entityMod[EntityModType.EditCompany] = false;
         } else if (params[EntityModType.EditCompany]) {
           this.entityMod[EntityModType.EditCompany] = true;
+          this.entityMod[EntityModType.EditAuth] = false;
+        } else {
+          this.entityMod[EntityModType.EditCompany] = false;
           this.entityMod[EntityModType.EditAuth] = false;
         }
 
@@ -81,6 +91,36 @@ export class AccountPersonalDataPageComponent implements OnInit {
           this.individualMod[IndividualModType.Edit] = false;
         }
       }
+    });
+  }
+
+  editCompany() {
+    this.activateEditMode(EntityModType.EditCompany);
+  }
+
+  editEntityAuth(e: MouseEvent) {
+    e.preventDefault();
+    this.activateEditMode(EntityModType.EditAuth);
+  }
+
+  activateEditMode(modType) {
+    const queryParams = Object.assign(this.currentQueryParams, {
+      [modType]: 'true'
+    });
+
+    switch (modType) {
+      case EntityModType.EditCompany:
+        delete queryParams[EntityModType.EditAuth];
+        break;
+      case EntityModType.EditAuth:
+        delete queryParams[EntityModType.EditCompany];
+        break;
+    }
+
+    const url = this.utils.formatUrl(this.router.url);
+
+    this.router.navigate(url, {
+      queryParams
     });
   }
 }

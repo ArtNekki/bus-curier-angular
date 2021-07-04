@@ -1,7 +1,19 @@
 <form action="#" class="form" autocomplete="off">
   <section *ngIf="entityMod.active" class="form__section form__section--w-underline form__section--account">
-    <app-data-list *ngIf="!entityMod.editAuth" [data]="authEntity" mods="account"></app-data-list>
-    <app-entity-auth-edit *ngIf="entityMod.editAuth"></app-entity-auth-edit>
+    <app-data-list *ngIf="!entityMod.editAuth" [data]="authEntity" mods="account">
+      <ng-container class="add">
+        <li class="data-list__item">
+          <span class="data-list__name">Пароль:</span>
+          <div class="data-list__value">
+            <span>***********</span>
+            <span style="display: inline-block; margin-left: 5px;">
+              <app-link mods="blue" (click)="editEntityAuth($event)">Изменить</app-link>
+            </span>
+          </div>
+        </li>
+      </ng-container>
+    </app-data-list>
+    <app-entity-auth-edit *ngIf="entityMod.editAuth" [queryParams]="currentQueryParams"></app-entity-auth-edit>
   </section>
   <section *ngIf="individualMod.active" class="form__section form__section--w-underline form__section--account">
     <app-data-list *ngIf="!individualMod.edit" [data]="individual" mods="account"></app-data-list>
@@ -12,10 +24,10 @@
     <ng-container *ngIf="!entityMod.editCompany">
       <app-data-list [data]="organization" mods="account"></app-data-list>
       <div style="margin-top: 30px;">
-        <app-btn type="button" mods="lg, max-w-270">Изменить данные</app-btn>
+        <app-btn type="button" mods="lg, max-w-270" (click)="editCompany()">Изменить данные</app-btn>
       </div>
     </ng-container>
-    <app-entity-edit *ngIf="entityMod.editCompany"></app-entity-edit>
+    <app-entity-edit *ngIf="entityMod.editCompany" [queryParams]="currentQueryParams"></app-entity-edit>
   </section>
   <app-proxy-man-group *ngIf="entityMod.active"></app-proxy-man-group>
   <app-checkbox *ngIf="entityMod.active || individualMod.active">

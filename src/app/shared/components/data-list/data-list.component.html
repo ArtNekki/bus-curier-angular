@@ -3,4 +3,5 @@
     <span class="data-list__name">{{item.name}}</span>
     <span class="data-list__value" [innerHTML]="item.value"></span>
   </li>
+  <ng-content select=".add"></ng-content>
 </ul>
