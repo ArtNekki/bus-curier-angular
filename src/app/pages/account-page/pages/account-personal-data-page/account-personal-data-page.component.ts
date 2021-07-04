@@ -91,6 +91,18 @@ export class AccountPersonalDataPageComponent implements OnInit {
         }
       }
     });
+
+    this.loadUserTypeData();
+  }
+
+  loadUserTypeData() {
+    const url = this.utils.formatUrl(this.router.url);
+
+    this.router.navigate(url, {
+      queryParams: {
+        [UserType.Entity]: true
+      }
+    });
   }
 
   editCompany() {
