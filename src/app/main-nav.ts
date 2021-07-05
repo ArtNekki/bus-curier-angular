@@ -15,7 +15,7 @@ export default [
       {link: 'info/rules-of-send', name: 'Правила приемки и отправки грузов'},
       {link: 'info/transportation-rates', name: 'Тарифы на перевозку'},
       {link: 'info/packing', name: 'Упаковки грузов и виды упаковки'},
-      {link: 'no', name: 'Хранение груза на складах Bus-курьер'},
+      {link: 'info/storage-cargo', name: 'Хранение груза на складах Bus-курьер'},
       {link: 'info/delivery-from-airport', name: 'Доставка грузов и багажа из Аэропорта'},
   ]},
   {link: 'documents', name: 'Документы'},
