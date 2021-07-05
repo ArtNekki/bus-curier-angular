@@ -50,7 +50,7 @@ export class SelectComponent implements  ControlValueAccessor, OnInit, OnChanges
   changeValue(value) {
     this.value = value;
     this.onChange(value);
-
+    this.change.emit(value);
     this.setFieldValue();
   }
 

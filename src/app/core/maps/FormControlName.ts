@@ -57,6 +57,8 @@ export default {
   DateEnd: 'date-end',
   CityStart: 'city-start',
   CityEnd: 'city-end',
+  PickpointStart: 'pickpoint-start',
+  PickpointEnd: 'pickpoint-end',
   Status: 'status',
   ProxyNumber: 'proxy-number',
   Inn: 'inn',

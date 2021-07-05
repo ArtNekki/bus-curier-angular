@@ -47,6 +47,11 @@
       border-top-color: transparent;
       border-right-color: transparent;
       transform: rotate3d(0, 0, 1, -45deg) translateY(-6px);
+
+      .select--invalid & {
+        border-bottom-color: $red-color;
+        border-left-color: $red-color;
+      }
     }
   }
 

@@ -2,23 +2,46 @@
   <h2 class="form__title">Рассчитайте стоимость</h2>
   <label for="delivery-from" class="form__label form__label--light">Откуда отправляем?</label>
   <div class="form__fieldset form__fieldset--row-gap-sm" style="margin-bottom: 15px;">
-    <div class="form__field" [class.form-field--invalid]="form.get('cityFrom').invalid && form.get('cityFrom').touched">
-      <app-select [items]="cities" formControlName="cityFrom"  mods="no-shadow" (change)="toNextField('from', 1)"></app-select>
+    <div class="form__field">
+      <app-select [items]="cities"
+        [formControlName]="FormControlName.CityStart"
+        (change)="toNextField('from', 1)"
+        [isInvalid]="(form.get(FormControlName.CityStart).invalid
+        && form.get(FormControlName.CityStart).touched) && 'invalid'"
+        mods="no-shadow"
+      >
+      </app-select>
     </div>
     <div class="form__field" *ngIf="step.from === 1" [@dropdown]="">
-      <app-select [items]="cities" formControlName="pointFrom" mods="no-shadow"></app-select>
+      <app-select [items]="cities"
+        [formControlName]="FormControlName.PickpointStart"
+        [isInvalid]="(form.get(FormControlName.PickpointStart).invalid
+        && form.get(FormControlName.PickpointStart).touched) && 'invalid'"
+        mods="no-shadow">
+      </app-select>
     </div>
   </div>
   <label for="delivery-to" class="form__label form__label--light">Куда отправляем?</label>
   <div class="form__fieldset form__fieldset--row-gap-sm">
     <div class="form__field">
-      <app-select [items]="cities" formControlName="cityTo" mods="no-shadow" (change)="toNextField('to', 1)"></app-select>
+      <app-select [items]="cities"
+          [formControlName]="FormControlName.CityEnd"
+          (change)="toNextField('to', 1)"
+          [isInvalid]="(form.get(FormControlName.CityEnd).invalid
+          && form.get(FormControlName.CityEnd).touched) && 'invalid'"
+          mods="no-shadow"
+      ></app-select>
     </div>
     <div class="form__field" *ngIf="step.to === 1" [@dropdown]="">
-      <app-select [items]="cities" formControlName="pointTo" mods="no-shadow"></app-select>
+      <app-select [items]="cities"
+        [formControlName]="FormControlName.PickpointEnd"
+        [isInvalid]="(form.get(FormControlName.PickpointEnd).invalid
+        && form.get(FormControlName.PickpointEnd).touched) && 'invalid'"
+        mods="no-shadow">
+      </app-select>
     </div>
   </div>
   <div style="margin-top: 30px;">
-    <app-btn mods="lg, black, w-full">Рассчитать</app-btn>
+    <app-btn type="submit" mods="lg, black, w-full">Рассчитать</app-btn>
   </div>
 </form>
