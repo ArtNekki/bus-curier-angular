@@ -11,7 +11,7 @@ export default [
   ]},
   {link: 'info/how-to-send', name: 'Информация', dropdown: [
       {link: 'info/how-to-send', name: 'Как отправить посылку'},
-      {link: 'no', name: 'Как получить посылку'},
+      {link: 'info/how-to-get', name: 'Как получить посылку'},
       {link: 'info/rules-of-send', name: 'Правила приемки и отправки грузов'},
       {link: 'info/transportation-rates', name: 'Тарифы на перевозку'},
       {link: 'info/packing', name: 'Упаковки грузов и виды упаковки'},

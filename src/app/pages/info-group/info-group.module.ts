@@ -8,10 +8,12 @@ import {HowToSendPageModule} from './how-to-send-page/how-to-send-page.module';
 import {PackingPageModule} from './packing-page/packing-page.module';
 import {RulesOfSendPageModule} from './rules-of-send-page/rules-of-send-page.module';
 import {TransportationRatesPageModule} from './transportation-rates-page/transportation-rates-page.module';
+import { HowToGetPageComponent } from './how-to-get-page/how-to-get-page.component';
 
 @NgModule({
   declarations: [
-    InfoGroupComponent
+    InfoGroupComponent,
+    HowToGetPageComponent
   ],
   imports: [
     CommonModule,

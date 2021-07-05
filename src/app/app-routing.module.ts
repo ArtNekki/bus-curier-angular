@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'send-parcel', component: SendParcelPageComponent, data: { title: 'Отправка посылки' }},
   {path: 'documents', component: DocumentsPageComponent, data: { title: 'Документы' }},
   {path: 'work-in-team', component: WorkInTeamPageComponent, data: { title: 'Работа в команде' }},
-  {path: 'feedback', component: FeedbackPageComponent},
+  {path: 'feedback', component: FeedbackPageComponent, data: { title: 'Обратная связь' }},
   // {path: 'how-to-get', component: HowToGetPageComponent},
   {path: 'about', component: AboutPageComponent},
   // {path: 'cargo-storage', component: CargoStoragePageComponent},
