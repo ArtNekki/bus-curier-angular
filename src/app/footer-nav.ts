@@ -2,7 +2,7 @@ export const topNav = [
   {link: 'widgets/track-order', name: 'Отследить посылку'},
   {link: 'widgets/calc-rate', name: 'Рассчет тарифа по Приморью'},
   {link: 'our-services', name: 'Услуги'},
-  {link: 'no', name: 'Информация'},
+  {link: 'useful-info', name: 'Информация'},
   {link: 'documents', name: 'Документы'},
   {link: 'contacts', name: 'Контакты'}
 ]
@@ -17,7 +17,7 @@ export const mainNav = [
     {link: 'services/non-standard-tasks', name: 'Решение нестандартных логистических задач'},
     {link: 'services/cargo-insurance', name: 'Страхование груза'}
   ]},
-  {link: 'no', name: 'Информация', dropdown: [
+  {link: 'useful-info', name: 'Информация', dropdown: [
     {link: 'info/how-to-send', name: 'Как отправить посылку', sm: true},
     {link: 'no', name: 'Как получить посылку', sm: true},
     {link: 'info/rules-of-send', name: 'Правила приемки и отправки грузов', sm: true},

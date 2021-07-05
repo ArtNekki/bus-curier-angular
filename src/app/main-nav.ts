@@ -9,7 +9,7 @@ export default [
       {link: 'services/non-standard-tasks', name: 'Реализация нестандартных логистических задач'},
       {link: 'services/cargo-insurance', name: 'Страхование груза'},
   ]},
-  {link: 'info/how-to-send', name: 'Информация', dropdown: [
+  {link: 'useful-info', name: 'Информация', dropdown: [
       {link: 'info/how-to-send', name: 'Как отправить посылку'},
       {link: 'info/how-to-get', name: 'Как получить посылку'},
       {link: 'info/rules-of-send', name: 'Правила приемки и отправки грузов'},
