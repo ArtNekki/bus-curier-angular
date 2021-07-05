@@ -1,30 +1,40 @@
 <form action="#" class="form form--max-w-820" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="form__fieldset form__fieldset--3-col-md">
-    <div class="form__field">
-      <label for="city" class="form__label">Ваш город <sup>*</sup></label>
-      <app-select id="city" [items]="cities" formControlName="city" mods="no-shadow"></app-select>
-    </div>
-    <div class="form__field">
-      <label for="email" class="form__label">E-mail<sup>*</sup></label>
-      <app-input type="email" id="email" name="email" formControlName="email">
-        <div class="input__error" *ngIf="form.get('email').invalid && form.get('email').touched">
-          <small *ngIf="form.get('email').errors.required">Не заполнено</small>
-        </div>
-      </app-input>
-    </div>
-    <div class="form__field">
-      <label for="tel" class="form__label">Телефон<sup>*</sup></label>
-      <app-input type="text" id="tel" name="tel" formControlName="tel"></app-input>
-    </div>
+    <ng-container *ngFor="let control of formUtils.getGroupControls(form)
+    | keyvalue: formUtils.originalOrder; let i = index">
+      <div *ngIf="i <= 3" class="form__field" [class.form__field--full]="control.key === FormControlName.Question">
+        <label [for]="control.key" class="form__label">
+          {{FormFieldMeta[control.key].label}}
+          <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
+        </label>
+        <app-select
+          *ngIf="control.key === FormControlName.Location; else input"
+          [formControlName]="control.key"
+          [items]="cities"
+          [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+        ></app-select>
+        <ng-template #input>
+          <app-input
+            [type]="FormFieldMeta[control.key].type"
+            [id]="control.key"
+            [formControlName]="control.key"
+            [mask]="FormFieldMeta[control.key].mask" [prefix]="FormFieldMeta[control.key].prefix"
+            [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+          >
+            <ng-container class="errors">
+              <small *ngIf="utils.getObjectKey(control.value.errors).length">
+                {{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}
+              </small>
+            </ng-container>
+          </app-input>
+        </ng-template>
+      </div>
+    </ng-container>
     <div class="form__field form__field--full">
-      <label for="question" class="form__label">Напишите ваш вопрос</label>
-      <app-input type="textarea" id="question" name="question" formControlName="question"></app-input>
-    </div>
-    <div class="form__field form__field--full">
-      <app-checkbox name="personal-data" formControlName="subscribe" mods="md">
+      <app-checkbox [formControlName]="FormControlName.Agree" mods="md">
         <ng-container class="text">
           Нажимая кнопку «Отправить», я даю свое согласие на
-          <app-link href="#" mods="blue">обработку моих персональных данных</app-link>
+          <app-link href="#" mods="in-text, blue">обработку моих персональных данных</app-link>
         </ng-container>
       </app-checkbox>
     </div>
