@@ -20,10 +20,18 @@
       <li class="list__item">
         <div class="list__content">
           <p>Вам потребуется заполнить рекомендуемую форму <br class="br br--show-md">доверенности.</p>
-          media
-          media
-<!--          {{{ media href="#" title="Рекомендуемая форма доверенности для физ. лиц" link='{"href": "#", "text": "Скачать в PDF (80 кб)"}' imgName="pdf" imgWidth="42" imgHeight="42" }}}-->
-<!--          {{{ media href="#" title="Рекомендуемая форма доверенности для юр. лиц" link='{"href": "#", "text": "Скачать в PDF (80 кб)"}' imgName="pdf" imgWidth="42" imgHeight="42" }}}-->
+          <app-media [data]="{title: 'Рекомендуемая форма доверенности для физ. лиц'}">
+            <ng-container class="link">
+              <app-link href="#" mods="lg, blue">Скачать в PDF (80 кб)</app-link>
+            </ng-container>
+          </app-media>
+          <div style="margin-top: 20px">
+            <app-media [data]="{title: 'Рекомендуемая форма доверенности для юр. лиц'}">
+              <ng-container class="link">
+                <app-link href="#" mods="lg, blue">Скачать в PDF (80 кб)</app-link>
+              </ng-container>
+            </app-media>
+          </div>
         </div>
       </li>
       <li class="list__item">
@@ -33,14 +41,21 @@
     </ol>
   </div>
   <aside class="page__sidebar">
-    media
-<!--    {{{ media href="#" title="Доставка грузов из аэропорта в другом регионе" link='{"href": "#", "text": "Приморский край"}' imgName="pdf" imgWidth="42" imgHeight="42" }}}-->
+    <app-media [data]="{title: 'Доставка грузов из аэропорта в другом регионе'}">
+      <ng-container class="link">
+        <app-link href="#" mods="lg, blue">Скачать в PDF (80 кб)</app-link>
+      </ng-container>
+    </app-media>
   </aside>
 </div>
 
 <div class="page-section page-section--top-line">
   <div class="page-section__container">
     <h2 class="title title--md">Авиакомпании, с которыми мы сотрудничаем</h2>
-    <app-slider></app-slider>
+    <app-slider>
+      <div *ngFor="let shop of shops" class="swiper-slide">
+        <app-box [data]="shop" [mods]="shop.mods"></app-box>
+      </div>
+    </app-slider>
   </div>
 </div>

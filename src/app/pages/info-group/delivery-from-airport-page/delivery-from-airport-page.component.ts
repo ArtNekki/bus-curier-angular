@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { shops } from 'src/app/mock-data/slider';
 
 @Component({
   selector: 'app-delivery-from-airport-page',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./delivery-from-airport-page.component.scss']
 })
 export class DeliveryFromAirportPageComponent implements OnInit {
+  public shops = shops;
 
   constructor() { }
 
