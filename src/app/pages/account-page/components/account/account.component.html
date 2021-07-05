@@ -23,7 +23,7 @@
 <!--      <app-btn type="button" mods="lg, w-full, black" (click)="showInvoiceModal()">Сформировать отчет</app-btn>-->
 <!--    </div>-->
     <div class="account__logout">
-      <app-link  href="" mods="lg, no-underline">
+      <app-link mods="lg, no-underline" (click)="logout()">
         Выйти из личного кабинета
         <svg-icon class="icon" src="assets/img/svg/user-logged-in.svg" width="27" height="27"></svg-icon>
       </app-link>

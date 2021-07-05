@@ -6,6 +6,7 @@ import {ManagerCallModalComponent} from '../../../../modals/manager-call-modal/m
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import UserType from '../../../../core/maps/UserType';
 import {UtilsService} from '../../../../core/services/utils.service';
+import {AuthService} from '../../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-account',
@@ -18,7 +19,8 @@ export class AccountComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private utils: UtilsService,
-    private modalService: SimpleModalService) { }
+    private modalService: SimpleModalService,
+    public auth: AuthService) { }
 
   ngOnInit(): void {
 
@@ -38,5 +40,10 @@ export class AccountComponent implements OnInit {
   showOrderModal() {
     this.modalService.addModal(OrderModalComponent);
     // this.modalService.addModal(ManagerCallModalComponent);
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/'], {});
   }
 }
