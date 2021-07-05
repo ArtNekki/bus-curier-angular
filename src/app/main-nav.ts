@@ -1,7 +1,7 @@
 export default [
   {link: 'widgets/track-order', name: 'Отследить посылку'},
   {link: 'widgets/calc-rate', name: 'Расчет тарифа по Приморью'},
-  {link: 'services', name: 'Услуги', dropdown: [
+  {link: 'our-services', name: 'Услуги', dropdown: [
       {link: 'no', name: 'Грузоперевозки по Приморскому краю'},
       {link: 'services/delivery-russia', name: 'Грузоперевозки по России'},
       {link: 'services/courier', name: 'Забор и доставка курьером'},

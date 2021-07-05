@@ -10,6 +10,7 @@ import {AboutPageComponent} from './pages/about-page/about-page.component';
 import {UsefulInfoPageComponent} from './pages/useful-info-page/useful-info-page.component';
 import {FeedbackLinksPageComponent} from './pages/feedback-links-page/feedback-links-page.component';
 import {ContactsPageComponent} from './pages/contacts-page/contacts-page.component';
+import {OurServicesPageComponent} from './pages/our-services-page/our-services-page.component';
 
 const routes: Routes = [
   {path: '', component: IndexPageComponent, data: { title: 'Главная' }},
@@ -21,7 +22,7 @@ const routes: Routes = [
   // {path: 'how-to-get', component: HowToGetPageComponent},
   {path: 'about', component: AboutPageComponent},
   // {path: 'cargo-storage', component: CargoStoragePageComponent},
-  // {path: 'our-services', component: OurServicesPageComponent},
+  {path: 'our-services', component: OurServicesPageComponent, data: { title: 'Наши услуги' }},
   {path: 'useful-info', component: UsefulInfoPageComponent},
   {path: 'feedback-links', component: FeedbackLinksPageComponent},
   {path: 'contacts', component: ContactsPageComponent},

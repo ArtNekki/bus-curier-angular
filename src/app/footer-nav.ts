@@ -1,14 +1,14 @@
 export const topNav = [
   {link: 'widgets/track-order', name: 'Отследить посылку'},
   {link: 'widgets/calc-rate', name: 'Рассчет тарифа по Приморью'},
-  {link: 'services', name: 'Услуги'},
+  {link: 'our-services', name: 'Услуги'},
   {link: 'no', name: 'Информация'},
   {link: 'documents', name: 'Документы'},
   {link: 'contacts', name: 'Контакты'}
 ]
 
 export const mainNav = [
-  {link: 'no', name: 'Услуги', dropdown: [
+  {link: 'our-services', name: 'Услуги', dropdown: [
     {link: 'no', name: 'Грузоперевозки по Приморскому краю'},
     {link: 'no', name: 'Грузоперевозки в республике Татарстан'},
     {link: 'services/delivery-russia', name: 'Грузоперевозки по России'},
