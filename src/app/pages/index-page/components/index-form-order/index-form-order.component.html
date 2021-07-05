@@ -1,21 +1,46 @@
-<form action="#" class="form form--no-margin form--send-cargo">
+<form class="form form--no-margin form--send-cargo" [formGroup]="form" (submit)="onSubmit()">
   <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--1-col-lg form__fieldset--2-col-xl">
     <div class="form__field">
-      <label for="delivery-from-2" class="form__label form__label--light">Откуда отправляем?</label>
-      <app-select [items]="cities" mods="no-shadow"></app-select>
+      <label class="form__label form__label--light">Откуда отправляем?</label>
+      <app-select [items]="cities"
+        [formControlName]="FormControlName.CityStart"
+        [isInvalid]="(form.get(FormControlName.CityStart).invalid
+        && form.get(FormControlName.CityStart).touched) && 'invalid'"
+        mods="no-shadow"
+      >
+      </app-select>
     </div>
     <div class="form__field">
-      <label for="delivery-to-2" class="form__label form__label--light">Куда отправляем?</label>
-      <app-select [items]="cities" mods="no-shadow"></app-select>
+      <label class="form__label form__label--light">Куда отправляем?</label>
+      <app-select [items]="cities"
+        [formControlName]="FormControlName.CityEnd"
+        [isInvalid]="(form.get(FormControlName.CityEnd).invalid
+        && form.get(FormControlName.CityEnd).touched) && 'invalid'"
+        mods="no-shadow"
+      ></app-select>
     </div>
     <div class="form__field form__field--full">
-      <label for="describe-task" class="form__label form__label--light">Куда отправляем?</label>
-      <!--            {{{ textarea id="describe-task" name="describe-task" }}}-->
+      <label for="question" class="form__label form__label--light">Куда отправляем?</label>
+      <app-input
+        id="question"
+        type="textarea"
+        [formControlName]="FormControlName.Question"
+        [isInvalid]="(form.get(FormControlName.Question).invalid
+           && form.get(FormControlName.Question).touched) && 'invalid'"
+      >
+        <ng-container class="errors">
+          <small *ngIf="utils.getObjectKey(form.get(FormControlName.Question).errors).length">
+            {{FormFieldError[utils.getObjectKey(form.get(FormControlName.Question).errors)[0]]}}
+          </small>
+        </ng-container>
+      </app-input>
     </div>
     <div class="form__field form__field--full">
-      <app-checkbox name="personal-data" mods="md, inverted">
-        Нажимая кнопку «Отправить», я даю свое согласие на
-        <app-link href="#">обработку моих персональных данных</app-link>
+      <app-checkbox [formControlName]="FormControlName.Agree" mods="md, inverted">
+        <ng-container class="text">
+          Нажимая кнопку «Отправить», я даю свое согласие на
+          <app-link href="#">обработку моих персональных данных</app-link>
+        </ng-container>
       </app-checkbox>
     </div>
   </div>

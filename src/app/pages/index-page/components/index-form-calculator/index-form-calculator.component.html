@@ -1,6 +1,6 @@
 <form action="#" class="form form--promo form--no-margin" [formGroup]="form" (ngSubmit)="onSubmit()">
   <h2 class="form__title">Рассчитайте стоимость</h2>
-  <label for="delivery-from" class="form__label form__label--light">Откуда отправляем?</label>
+  <label class="form__label form__label--light">Откуда отправляем?</label>
   <div class="form__fieldset form__fieldset--row-gap-sm" style="margin-bottom: 15px;">
     <div class="form__field">
       <app-select [items]="cities"
@@ -21,7 +21,7 @@
       </app-select>
     </div>
   </div>
-  <label for="delivery-to" class="form__label form__label--light">Куда отправляем?</label>
+  <label class="form__label form__label--light">Куда отправляем?</label>
   <div class="form__fieldset form__fieldset--row-gap-sm">
     <div class="form__field">
       <app-select [items]="cities"
