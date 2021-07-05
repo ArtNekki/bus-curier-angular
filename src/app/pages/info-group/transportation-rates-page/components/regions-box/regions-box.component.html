@@ -1,16 +1,28 @@
 <div class="rates-box">
   <h2 class="rates-box__heading">Регион:</h2>
   <div class="rates-box__col">
-    <app-radio></app-radio>
-    <!--      {{{ radio id="prim"  name="regions" label="Приморский край" checked="true"}}}-->
-    <!--      {{{ radio id="tat"  name="regions" label="Республика Татарстан"}}}-->
+    <app-radio *ngFor="let region of regions" name="regions"
+     (change)="setCurrentRegion(region.id)" [checked]="region.id === currentRegion">
+      <ng-container class="text">
+        {{region.name}}
+      </ng-container>
+    </app-radio>
   </div>
   <h2 class="rates-box__heading">Город:</h2>
   <div class="rates-box__col rates-box__col--cities">
-    <!--      {{{ radio id="vladivostok" name="cities" label="Владивосток" checked="true"}}}-->
-    <!--      {{{ radio id="ussurysk" name="cities" label="Уссурийск"}}}-->
-    <!--      {{{ radio id="artem" name="cities" label="Артем"}}}-->
-    <!--      {{{ radio id="nakhodka" name="cities" label="Находка"}}}-->
-    <!--      {{{ radio id="dalnegorsk" name="cities" label="Дальнегорск"}}}-->
+    <ng-container *ngIf="currentRegion === Region.Primorye" [@fadeIn]="">
+      <app-radio *ngFor="let city of cities[Region.Primorye]" name="cities" (change)="setCurrentCity(city.id)" [checked]="city.id === currentCity">
+        <ng-container class="text">
+          {{city.name}}
+        </ng-container>
+      </app-radio>
+    </ng-container>
+    <ng-container *ngIf="currentRegion === Region.Tatarstan" [@fadeIn]="">
+      <app-radio *ngFor="let city of cities[Region.Tatarstan]" name="cities" (change)="setCurrentCity(city.id)" [checked]="true">
+        <ng-container class="text">
+          {{city.name}}
+        </ng-container>
+      </app-radio>
+    </ng-container>
   </div>
 </div>

@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './transportation-rates-page.component.html',
   styleUrls: ['./transportation-rates-page.component.scss']
 })
+
 export class TransportationRatesPageComponent implements OnInit {
 
   constructor() { }
@@ -12,4 +13,7 @@ export class TransportationRatesPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  setCurrentCity(id: any) {
+    console.log('cityId', id);
+  }
 }
