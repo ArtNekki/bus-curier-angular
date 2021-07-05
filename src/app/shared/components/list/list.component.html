@@ -1,1 +1,6 @@
-<p>list works!</p>
+<ul [class]="cssClass">
+  <li *ngFor="let item of data" class="list__item">
+    <svg-icon class="icon" src="assets/img/svg/check.svg" width="24" height="20"></svg-icon>
+    <span>{{item}}</span>
+  </li>
+</ul>
