@@ -4,7 +4,7 @@
 @import "src/variables";
 @import "src/assets/scss/settings";
 
-.link {
+::ng-deep .link {
   text-decoration: none;
 
   &__text {
@@ -16,7 +16,7 @@
     border-bottom: 1px dashed #948003;
     vertical-align: middle;
 
-    .link--in-text & {
+    ::ng-deep .link--in-text & {
       font-family: inherit;
       font-size: inherit;
       //line-height: inherit;
@@ -35,12 +35,12 @@
       border-bottom-color: lighten($gray-dark-color, 10%);
     }
 
-    .link--blue & {
+    ::ng-deep .link--blue & {
       color: $blue-color;
       border-bottom-color: $blue-color;
     }
 
-    .link--no-underline & {
+    ::ng-deep .link--no-underline & {
       border: none;
     }
 

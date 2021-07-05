@@ -12,12 +12,7 @@
           <p><b>Списком городов, где есть услуга «Вызов курьера»
             <br class="br br--show-md">в Приморском крае:</b>
           </p>
-<!--          {{{ list items='[-->
-<!--          "Владивосток (забор и доставка груза)",-->
-<!--          "Уссурийск (забор и доставка груза)",-->
-<!--          "Находка (забор и доставка груза)",-->
-<!--          "Дальнегорск (только доставка груза)"-->
-<!--          ]' }}}-->
+          <app-list [data]="list[0]"></app-list>
         </div>
       </li>
       <li class="list__item">
@@ -33,17 +28,16 @@
       <li class="list__item">
         <div class="list__content">
           <p>Отследить доставку вашего груза вы можете:</p>
-<!--          {{{ list items='[-->
-<!--          "на сайте, в разделе <a href=\"#\" class=\"link link&#45;&#45;blue link&#45;&#45;no-underline link&#45;&#45;in-text\"><span class=\"link__text\">«Отследить посылку»</span></a>",-->
-<!--          "при отправлении посылки оформить дополнительную <br>услугу «смс-уведомление отправителю»;",-->
-<!--          "позвонить по номеру телефона: <a href=\"tel: 8(423)2937879\" class=\"link link&#45;&#45;blue link&#45;&#45;no-underline link&#45;&#45;in-text\"><span class=\"link__text\">8 (423) 293 78 79</span></a>"-->
-<!--          ]' }}}-->
+          <app-list [data]="list[1]"></app-list>
         </div>
       </li>
     </ol>
   </div>
   <aside class="page__sidebar">
-    media
-<!--    {{{ media href="#" title="Вызов курьера в Приморском крае" link='{"href": "#", "text": "Приморский край"}' imgName="pdf" imgWidth="42" imgHeight="42" }}}-->
+    <app-media [data]="{title: 'Вызов курьера в Приморском крае'}">
+      <ng-container class="link">
+        <app-link href="#" mods="lg, blue">Приморский край</app-link>
+      </ng-container>
+    </app-media>
   </aside>
 </div>
