@@ -22,7 +22,7 @@
   }
 
   @include media-breakpoint-up(md) {
-    margin-top: 40px;
+    margin-top: 0;
     padding: 40px 0 40px 0;
     grid-column-gap: 130px;
     //max-width: 770px;
