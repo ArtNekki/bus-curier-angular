@@ -6,6 +6,7 @@ import {CourierPageComponent} from './courier-page/courier-page.component';
 import {DeliveryRussiaPageComponent} from './delivery-russia-page/delivery-russia-page.component';
 import {ServicesPageComponent} from './services-page/services-page.component';
 import {NonStandardTasksPageComponent} from './non-standard-tasks-page/non-standard-tasks-page.component';
+import {NonStandardTasksPageModule} from './non-standard-tasks-page/non-standard-tasks-page.module';
 
 
 const routes: Routes = [
@@ -15,8 +16,8 @@ const routes: Routes = [
       { path: 'cargo-insurance', component:  CargoInsurancePageComponent, data: { title: 'Страхование груза' }},
       { path: 'courier', component:  CourierPageComponent, data: { title: 'Забор и доставка курьером' }},
       { path: 'delivery-russia', component:  DeliveryRussiaPageComponent, data: { title: 'Грузоперевозки по России' }},
-      { path: 'non-standard-tasks', component:  NonStandardTasksPageComponent, data: { title: 'Реализация нестандартных логистических задач' }},
-  ]}
+      { path: 'non-standard-tasks', loadChildren: () => import('./non-standard-tasks-page/non-standard-tasks-page.module').then((m) => m.NonStandardTasksPageModule)},
+    ]}
 ];
 
 @NgModule({
