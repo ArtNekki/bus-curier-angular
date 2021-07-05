@@ -252,5 +252,9 @@ export default {
     type: 'text',
     mask: '0000 000000',
     prefix: ''
-  }
+  },
+  [FormControlName.Question]: {
+    label: 'Опишите ваш вопрос',
+    type: 'textarea'
+  },
 };

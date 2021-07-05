@@ -68,5 +68,6 @@ export default {
   Carrier: 'carrier',
   Leader: 'leader',
   Bank: 'bank',
-  PassportNumber: 'passport-number'
+  PassportNumber: 'passport-number',
+  Question: 'question'
 };

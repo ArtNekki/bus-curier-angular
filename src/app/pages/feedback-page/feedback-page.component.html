@@ -1,52 +1,82 @@
 <div class="page__container">
   <h1 class="page__title">Обратная связь</h1>
   <p class="page__subtitle">Вы можете задать нам вопрос, оставить отзыв, а также написать свое предложение или замечание. <br class="br br--show-lg"/>Воспользуйтесь формой обратной связи, которая расположена ниже.</p>
-  <form action="#" class="form" autocomplete="off">
+  <form action="#" class="form" autocomplete="off" [formGroup]="form" (submit)="onSubmit()">
     <span class="form__label form__label--light">Выберите отделение:</span>
     <div class="form__fieldset form__fieldset--feedback">
       <div class="form__field">
-<!--        {{{ radio id="goods-type-docs" name="feedback" label="Вопрос" checked="true"}}}-->
+        <app-radio name="feedback" checked="true">Вопрос</app-radio>
       </div>
       <div class="form__field">
-<!--        {{{ radio id="goods-type-package" name="feedback" label="Отзыв" }}}-->
+        <app-radio name="feedback">Отзыв</app-radio>
       </div>
       <div class="form__field">
-<!--        {{{ radio id="goods-type-auto" name="feedback" label="Предложение или замечание" }}}-->
+        <app-radio name="feedback">Предложение или замечание</app-radio>
       </div>
       <div class="form__field">
-<!--        {{{ radio id="goods-type-other" name="feedback" label="Вопросы сотрудничества"}}}-->
+        <app-radio name="feedback">Вопросы сотрудничества</app-radio>
       </div>
     </div>
     <div class="form__fieldset form__fieldset--row-gap-lg form__fieldset--col-gap-lg form__fieldset--2-col-sm form__fieldset--w-575">
-      <div class="form__field">
-        <label for="name" class="form__label form__label--light">Ваше имя<sup>*</sup></label>
-<!--        {{{ input type="text" id="fio" name="fio" error="Не заполнено"}}}-->
-      </div>
-      <div class="form__field">
-        <label for="tel" class="form__label form__label--light">Телефон<sup>*</sup></label>
-<!--        {{{ input type="tel" id="tel" name="tel" error="Не заполнено"}}}-->
-      </div>
-      <div class="form__field">
-        <label for="city" class="form__label form__label--light">Населенный пункт<sup>*</sup></label>
-          <app-select [items]="cities" mods="no-shadow"></app-select>
-      </div>
-      <div class="form__field">
-        <label for="email" class="form__label form__label--light">Email<sup>*</sup></label>
-<!--        {{{ input type="email" id="email" name="email" error="Не заполнено"}}}-->
+      <ng-container *ngFor="let control of formUtils.getGroupControls(form) | keyvalue: formUtils.originalOrder; let i = index">
+        <div *ngIf="i <= 3" class="form__field">
+          <label [for]="control.key" class="form__label">
+            {{FormFieldMeta[control.key].label}}
+            <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
+          </label>
+          <app-select
+            *ngIf="control.key === FormControlName.Location; else input"
+            [formControlName]="control.key"
+            [items]="cities"
+            [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+          ></app-select>
+          <ng-template #input>
+            <app-input
+              [type]="FormFieldMeta[control.key].type"
+              [id]="control.key"
+              [formControlName]="control.key"
+              [mask]="FormFieldMeta[control.key].mask" [prefix]="FormFieldMeta[control.key].prefix"
+              [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+            >
+              <ng-container class="errors">
+                <small *ngIf="utils.getObjectKey(control.value.errors).length">
+                  {{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}
+                </small>
+              </ng-container>
+            </app-input>
+          </ng-template>
+        </div>
+      </ng-container>
+      <div class="form__field form__field--span-2">
+        <label [for]="" class="form__label">
+          {{FormFieldMeta[FormControlName.Question].label}}
+          <sup *ngIf="form.get(FormControlName.Question).errors &&
+           form.get(FormControlName.Question).hasError('required')">*</sup>
+        </label>
+        <app-input
+          [type]="FormFieldMeta[FormControlName.Question].type"
+          [id]="FormControlName.Question"
+          [formControlName]="FormControlName.Question"
+          [isInvalid]="(form.get(FormControlName.Question).invalid && form.get(FormControlName.Question).touched) && 'invalid'"
+        >
+          <ng-container class="errors">
+            <small *ngIf="utils.getObjectKey(form.get(FormControlName.Question).errors).length">
+              {{FormFieldError[utils.getObjectKey(form.get(FormControlName.Question).errors)[0]]}}
+            </small>
+          </ng-container>
+        </app-input>
       </div>
       <div class="form__field form__field--span-2">
-        <label class="form__label form__label--light">Опишите ваш вопрос<sup>*</sup></label>
-<!--        {{{ textarea id="user-comment" name="user-comment" }}}-->
-      </div>
-      <div class="form__field form__field--span-2">
-        <app-checkbox name="personal-data" mods="sm">
-          Нажимая кнопку «Отправить», я даю свое согласие на
-          <app-link href="#">обработку моих персональных данных</app-link>
+        <app-checkbox [formControlName]="FormControlName.Agree" mods="sm">
+          <ng-container class="text">
+            Нажимая кнопку «Отправить», я даю свое согласие на
+            <app-link href="#" mods="blue, in-text">обработку моих персональных данных</app-link>
+          </ng-container>
         </app-checkbox>
       </div>
     </div>
     <div class="form__action" style="margin-top: 35px;">
-      <app-btn mods="lg, w-270">Отправить заявку</app-btn>
+      <app-btn mods="lg, max-w-270">Отправить заявку</app-btn>
     </div>
   </form>
 </div>
