@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FeedbackLinksPageComponent} from './feedback-links-page.component';
+import {SharedModule} from '../../shared/shared.module';
 
 
 
@@ -9,7 +10,8 @@ import {FeedbackLinksPageComponent} from './feedback-links-page.component';
     FeedbackLinksPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ]
 })
 export class FeedbackLinksPageModule { }
