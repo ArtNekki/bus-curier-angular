@@ -16,7 +16,7 @@ interface Breakpoints {
 export class ImgComponent implements OnInit {
   @Input() width: number;
   @Input() height: number;
-  @Input() maxWidth: number;
+  @Input() maxWidth: string;
   @Input() name: string;
   @Input() ext = 'jpg';
   @Input() alt: string;
