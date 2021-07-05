@@ -27,7 +27,10 @@
     </li>
   </ol>
   <aside class="page__sidebar">
-    <app-media></app-media>
-<!--    {{{ media href="account&#45;&#45;orders.html" title="Как отправить посылку" link='{"href": "#", "text": "Скачать в PDF (80 кб)"}' imgName="pdf" imgWidth="42" imgHeight="42" mods="under-list" }}}-->
+    <app-media [data]="{title: 'Как отправить посылку'}">
+      <ng-container class="link">
+        <app-link href="#" mods="lg, blue">Скачать в PDF (80 кб)</app-link>
+      </ng-container>
+    </app-media>
   </aside>
 </div>

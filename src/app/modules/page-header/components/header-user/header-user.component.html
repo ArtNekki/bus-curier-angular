@@ -1,27 +1,31 @@
 <div class="header-user" [class.header-user--logged-in]="loggedIn">
   <i class="header-user__icon">
-    <svg-icon  *ngIf="loggedIn" class="icon" src="assets/img/svg/user-logged-in.svg" width="27" height="27"></svg-icon>
-    <svg-icon *ngIf="!loggedIn" class="icon" src="assets/img/svg/user.svg" width="40" height="40"></svg-icon>
+    <svg-icon  *ngIf="auth.isAuthenticated()"
+       class="icon" src="assets/img/svg/user-logged-in.svg" width="27" height="27"></svg-icon>
+    <svg-icon *ngIf="!auth.isAuthenticated()"
+       class="icon" src="assets/img/svg/user.svg" width="40" height="40"></svg-icon>
   </i>
-  <button type="button" class="header-user__btn" (click)="toggleDropdown()">{{ loggedIn ? 'Личный кабинет' : 'Пользователь' }}</button>
+  <button type="button" class="header-user__btn" (click)="toggleDropdown()">
+    {{ auth.isAuthenticated() ? 'Личный кабинет' : 'Пользователь' }}
+  </button>
   <ul *ngIf="isOpen" class="header-user__dropdown" [@dropdown]="">
-    <ng-template [ngIf]="loggedIn">
+    <ng-template [ngIf]="auth.isAuthenticated()">
       <li class="header-user__item">
-        <a href="#" class="header-user__link">Заказать доставку</a>
+        <a [routerLink]="['widgets', 'order']" class="header-user__link">Заказать доставку</a>
       </li>
       <li class="header-user__item">
-        <a href="#" class="header-user__link">Персональные данные</a>
+        <a [routerLink]="['account', 'inner', 'personal']" class="header-user__link">Персональные данные</a>
       </li>
       <li class="header-user__item">
-        <a href="#" class="header-user__link">Выйти</a>
+        <a class="header-user__link" (click)="logout()">Выйти</a>
       </li>
     </ng-template>
-    <ng-template [ngIf]="!loggedIn">
+    <ng-template [ngIf]="!auth.isAuthenticated()">
       <li class="header-user__item">
-        <a href="#" class="header-user__link">Вход</a>
+        <a class="header-user__link" (click)="showLoginModal($event)">Вход</a>
       </li>
       <li class="header-user__item">
-        <a href="#" class="header-user__link">Регистрация</a>
+        <a class="header-user__link" (click)="showSignInModal($event)">Регистрация</a>
       </li>
     </ng-template>
   </ul>

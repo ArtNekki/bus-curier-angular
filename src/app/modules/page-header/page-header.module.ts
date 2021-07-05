@@ -10,6 +10,7 @@ import { LocationSelectorComponent } from './components/location-selector/locati
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from '../../app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ModalsModule} from '../../modals/modals.module';
 
 @NgModule({
   declarations: [PageHeaderComponent, MainNavComponent, MobileNavComponent, HeaderUserComponent, BreadcrumbsComponent, LocationSelectorComponent],
@@ -17,6 +18,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     CommonModule,
     SharedModule,
     AppRoutingModule,
+    ModalsModule,
     BrowserAnimationsModule
   ],
   exports: [

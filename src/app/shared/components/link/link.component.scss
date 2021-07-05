@@ -6,6 +6,7 @@
 
 ::ng-deep .link {
   text-decoration: none;
+  cursor: pointer;
 
   &__text {
     display: inline-block;

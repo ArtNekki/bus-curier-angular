@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
+import {Routes, RouterModule, PreloadAllModules, ExtraOptions} from '@angular/router';
 import {IndexPageComponent} from './pages/index-page/index-page.component';
 import {ParcelsPageComponent} from './pages/parcels-page/parcels-page.component';
 import {SendParcelPageComponent} from './pages/send-parcel-page/send-parcel-page.component';
@@ -11,6 +11,15 @@ import {UsefulInfoPageComponent} from './pages/useful-info-page/useful-info-page
 import {FeedbackLinksPageComponent} from './pages/feedback-links-page/feedback-links-page.component';
 import {ContactsPageComponent} from './pages/contacts-page/contacts-page.component';
 import {OurServicesPageComponent} from './pages/our-services-page/our-services-page.component';
+
+const routerOptions: ExtraOptions = {
+  // scrollPositionRestoration: 'enabled',
+  // anchorScrolling: 'enabled',
+  scrollOffset: [0, 0],
+  scrollPositionRestoration: 'enabled',
+  preloadingStrategy: PreloadAllModules
+  // onSameUrlNavigation: 'reload'
+};
 
 const routes: Routes = [
   {path: '', component: IndexPageComponent, data: { title: 'Главная' }},
@@ -33,9 +42,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules
-  })],
+  imports: [RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -19,7 +19,7 @@ export const mainNav = [
   ]},
   {link: 'useful-info', name: 'Информация', dropdown: [
     {link: 'info/how-to-send', name: 'Как отправить посылку', sm: true},
-    {link: 'no', name: 'Как получить посылку', sm: true},
+    {link: 'info/how-to-get', name: 'Как получить посылку', sm: true},
     {link: 'info/rules-of-send', name: 'Правила приемки и отправки грузов', sm: true},
     {link: 'info/transportation-rates', name: 'Тарифы на перевозку', sm: true},
     {link: 'info/packing', name: 'Упаковки грузов и виды упаковки', sm: true},
