@@ -70,11 +70,11 @@ export class EndpointFactory {
   protected getRequestHeaders(): { headers: HttpHeaders | { [header: string]: string | string[]; } } {
     const headers = new HttpHeaders({
       // 'Authorization': this.authService.accessToken,
-      'Content-Type': 'application/json',
-      Accept: `application/json, text/plain, */*`,
-      'App-Version': EndpointFactory.appVersion
+      // 'Content-Type': 'application/json',
+      Accept: `application/json`,
+      // Accept: `application/vnd.iman.v${EndpointFactory.apiVersion}+json, application/json, text/plain, */*`,
+      // 'App-Version': EndpointFactory.appVersion
     });
-    // Accept: `application/vnd.iman.v${EndpointFactory.apiVersion}+json, application/json, text/plain, */*`,
 
     return { headers };
   }
