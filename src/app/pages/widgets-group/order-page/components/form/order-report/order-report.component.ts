@@ -132,7 +132,8 @@ export class OrderReportComponent implements OnInit {
     }
   }
 
-  setCargoType(type: string) {
+  setCargoType(type: any) {
+    console.log('type', type);
     return [{name: 'Характер груза', value: type}];
   }
 

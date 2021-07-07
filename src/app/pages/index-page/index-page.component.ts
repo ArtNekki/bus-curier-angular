@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CalculatorService} from '../../core/services/calculator/calculator.service';
 
 @Component({
   selector: 'app-index-page',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private calculatorService: CalculatorService) { }
 
   ngOnInit(): void {
+    this.calculatorService.getDistricts('1').subscribe((result) => {
+      console.log('result', result);
+    });
   }
 
 }
