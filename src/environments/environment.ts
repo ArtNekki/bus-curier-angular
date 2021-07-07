@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   api_url: 'https://api.busbox.guru',
+  api_key: '',
   firebaseConfig: {
     apiKey: 'AIzaSyBn4my8mkySLnBi2fbuZZcmadCdycF9AsI',
     authDomain: 'bus-curier.firebaseapp.com',
