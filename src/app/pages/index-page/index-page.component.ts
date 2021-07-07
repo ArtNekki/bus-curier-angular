@@ -11,8 +11,8 @@ export class IndexPageComponent implements OnInit {
   constructor(private calculatorService: CalculatorService) { }
 
   ngOnInit(): void {
-    this.calculatorService.getDistricts('1').subscribe((result) => {
-      console.log('result', result);
+    this.calculatorService.getServices('1').subscribe((result) => {
+      console.log('result1', result);
     });
   }
 

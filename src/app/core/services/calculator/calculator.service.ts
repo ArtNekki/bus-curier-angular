@@ -14,4 +14,20 @@ export class CalculatorService {
   getDistricts(id) {
     return this.endpoint.getDistricts(id);
   }
+
+  getCityTo(cityId, districtId) {
+    return this.endpoint.getCityTo(cityId, districtId);
+  }
+
+  getTypes(cityFromId, cityToId) {
+    return this.endpoint.getTypes(cityFromId, cityToId);
+  }
+
+  getServices(id) {
+    return this.endpoint.getServices(id);
+  }
+
+  getResult(cityFromId, cityToId, typeId, services, weight, dim) {
+    return this.endpoint.getResult(cityFromId, cityToId, typeId, services, weight, dim);
+  }
 }

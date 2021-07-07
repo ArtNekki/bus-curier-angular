@@ -17,9 +17,29 @@ export class CalculatorEndpointService extends EndpointFactory {
   }
 
   getDistricts<T>(id: string): Observable<T> {
-    console.log('${this.url}/getdistricts/${id}', `${this.url}/getdistricts/${id}`);
     return this.execute(this.http.get<T>(`${this.url}/getdistricts/${id}`, this.getRequestHeaders()),
       () => this.getDistricts(id));
+  }
+
+  getCityTo<T>(cityId: string, distrId: string): Observable<T> {
+    return this.execute(this.http.get<T>(`${this.url}/getcityto/${cityId}/${distrId}`, this.getRequestHeaders()),
+      () => this.getCityTo(cityId, distrId));
+  }
+
+  getTypes<T>(cityFromId: string, cityToId: string): Observable<T> {
+    return this.execute(this.http.get<T>(`${this.url}/gettypes/${cityFromId}/${cityToId}`, this.getRequestHeaders()),
+      () => this.getTypes(cityFromId, cityToId));
+  }
+
+  getServices<T>(id: string): Observable<T> {
+    return this.execute(this.http.get<T>(`${this.url}/getservices/${id}`, this.getRequestHeaders()),
+      () => this.getServices(id));
+  }
+
+  getResult<T>(cityFromId: string, cityToId: string,
+               typeId: string, services: any, weight: any, dim: any): Observable<T> {
+    return this.execute(this.http.get<T>(`${this.url}/${cityFromId}/${cityToId}/${typeId}/${services}/${weight}/${dim}`, this.getRequestHeaders()),
+      () => this.getResult(cityFromId, cityToId, typeId, services, weight, dim));
   }
 
   // getTaskAllAmountEndpoint<T>(start: Date, end: Date): Observable<T> {
