@@ -34,6 +34,8 @@ export class OrderResultComponent implements OnInit, OnChanges {
     if (changes.data.currentValue) {
       this.currentData = changes.data.currentValue;
     }
+
+    console.log('nekki');
   }
 
   getCargoList(data) {
@@ -53,6 +55,14 @@ export class OrderResultComponent implements OnInit, OnChanges {
     } else {
       return {};
     }
+  }
+
+  getDepartureCity(data) {
+    return data.steps[1][FormControlName.DeparturePoint].location;
+  }
+
+  getPickupCity(data) {
+    return data.steps[2][FormControlName.PickupPoint].location;
   }
 
   formatDocs(item: any) {
