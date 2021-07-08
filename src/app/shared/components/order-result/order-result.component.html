@@ -2,12 +2,23 @@
   <div class="order-result__scroll">
     <p class="gray">Тип груза:</p>
     <dl>
-      <dt><b>Груз 1:</b></dt>
-      <dd>Запчасти: бампер (мест: 1), капот (мест: 2), стекло (мест: 1) </dd>
-      <dt><b>Груз 2:</b></dt>
-      <dd>Посылку (мест: 1)</dd>
-      <dt><b>Груз 3:</b></dt>
-      <dd>Документы (мест: 1)</dd>
+      <ng-container *ngFor="let cargo of getCargoList(currentData); let groupIndex = index">
+        <dt>
+          <b>Груз {{groupIndex + 1}}:</b>
+        </dt>
+        <dd>
+          {{FormFieldMeta[getCurrentCargo(cargo.type).type].label}}:
+          <ng-container *ngIf="getCurrentCargo(cargo.type).type === FormControlName.Docs">
+            {{formatDocs(getCurrentCargo(cargo.type).items)}}
+          </ng-container>
+          <ng-container *ngIf="getCurrentCargo(cargo.type).type === FormControlName.Parcels">
+            {{formatParcels(getCurrentCargo(cargo.type).items)}}
+          </ng-container>
+          <ng-container *ngIf="getCurrentCargo(cargo.type).type === FormControlName.AutoParts">
+            {{formatAutoparts(getCurrentCargo(cargo.type).items)}}
+          </ng-container>
+        </dd>
+      </ng-container>
     </dl>
     <p class="gray">Направление перевозки:</p>
     <p>г. Владивосток — г. Уссурийск <b class="lg">500 руб.</b></p>

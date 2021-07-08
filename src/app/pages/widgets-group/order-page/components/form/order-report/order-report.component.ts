@@ -106,7 +106,6 @@ export class OrderReportComponent implements OnInit {
 
   get cargoList() {
     const cargoItems =  this.data.steps[2]['cargo-group'];
-    // console.log('cargo', cargoItems);
     return cargoItems;
   }
 
@@ -122,7 +121,6 @@ export class OrderReportComponent implements OnInit {
     });
 
     if (cargo.length) {
-      console.log('cargo', cargo);
       return {
         type: cargo[0][0],
         items: cargo[0][1]

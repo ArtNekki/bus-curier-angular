@@ -17,8 +17,9 @@
            <app-link href="#" mods="blue">расчет перевозки по России.</app-link>
         </p>
     </div>
-    <div *ngIf="currentStep === FormStep.Four" class="sidebar-result__details">
-      <app-order-result></app-order-result>
+    <div *ngIf="true" class="sidebar-result__details">
+<!--      currentStep === FormStep.Four-->
+      <app-order-result [data]="data"></app-order-result>
     </div>
     <div *ngIf="currentStep === FormStep.Four" class="sidebar-result__total">
       <p><span class="gray">Итого: </span><b>1 550 руб.</b></p>
