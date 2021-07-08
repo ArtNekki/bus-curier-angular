@@ -1,22 +1,22 @@
 <section class="form__section form__section--w-underline">
   <h2 class="form__heading form__heading--w-counter">Автор</h2>
-<!--  <app-data-list [data]="author"></app-data-list>-->
+  <app-data-list [data]="author"></app-data-list>
 </section>
 <section class="form__section form__section--w-underline">
   <h2 class="form__heading form__heading--w-counter">Отправитель</h2>
-<!--  <app-data-list [data]="sender"></app-data-list>-->
+  <app-data-list [data]="sender"></app-data-list>
 </section>
 <section class="form__section form__section--w-underline">
   <h2 class="form__heading form__heading--w-counter">Пункт отправления</h2>
-<!--  <app-data-list [data]="departurePoint"></app-data-list>-->
+  <app-data-list [data]="departurePoint"></app-data-list>
 </section>
 <section class="form__section form__section--w-underline">
   <h2 class="form__heading form__heading--w-counter">Получатель</h2>
-<!--  <app-data-list [data]="recipient"></app-data-list>-->
+  <app-data-list [data]="recipient"></app-data-list>
 </section>
 <section class="form__section form__section--w-underline">
   <h2 class="form__heading form__heading--w-counter">Пункт получения</h2>
-<!--  <app-data-list [data]="pickupPoint"></app-data-list>-->
+  <app-data-list [data]="pickupPoint"></app-data-list>
 </section>
 <section *ngFor="let cargo of cargoList; let cargoIndex = index" class="form__section form__section--w-underline">
   <h2 class="form__heading form__heading--w-counter">Груз №{{cargoIndex + 1}}</h2>
