@@ -14,11 +14,13 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
+import fadeIn from '../../../../../../core/animations/fadeIn';
 
 @Component({
   selector: 'app-packaging',
   templateUrl: './packaging.component.html',
   styleUrls: ['./packaging.component.scss'],
+  animations: [fadeIn],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -43,17 +45,34 @@ export class PackagingComponent implements OnInit, ControlValueAccessor, Validat
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-        [FormControlName.CardboardBox]: new FormControl(''),
-        [FormControlName.TransparentFilm]: new FormControl(''),
-        [FormControlName.SafePack]: new FormControl(''),
-        [FormControlName.BlackFilm]: new FormControl(''),
-        [FormControlName.BagWithSeal]: new FormControl(''),
+      items: new FormArray([
+        new FormGroup({
+          [FormControlName.CardboardBox]: new FormControl(''),
+          [FormControlName.Counter]: new FormControl('')
+        }),
+        new FormGroup({
+          [FormControlName.TransparentFilm]: new FormControl(''),
+          [FormControlName.Counter]: new FormControl('')
+        }),
+        new FormGroup({
+          [FormControlName.SafePack]: new FormControl(''),
+          [FormControlName.Counter]: new FormControl('')
+        }),
+        new FormGroup({
+          [FormControlName.BlackFilm]: new FormControl(''),
+          [FormControlName.Counter]: new FormControl('')
+        }),
+        new FormGroup({
+          [FormControlName.BagWithSeal]: new FormControl(''),
+          [FormControlName.Counter]: new FormControl('')
+        })
+      ])
     });
   }
 
-  // public get items(): FormArray {
-  //   return this.formGroup.get('items') as FormArray;
-  // }
+  public get items(): FormArray {
+    return this.formGroup.get('items') as FormArray;
+  }
 
   public onTouched: () => void = () => {};
 
