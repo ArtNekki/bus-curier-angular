@@ -368,6 +368,7 @@
 
     grid-row-gap: 10px;
     grid-template-columns: 1fr;
+    align-items: start;
 
     @include media-breakpoint-up(sm) {
       grid-template-columns: repeat(2, 1fr);

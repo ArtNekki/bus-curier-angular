@@ -1,35 +1,16 @@
 <section class="form__section" [formGroup]="formGroup">
   <h2 class="form__heading">Упаковка:</h2>
   <div class="form__fieldset form__fieldset--boxing">
-    <div class="form__field">
-      <app-checkbox [formControlName]="FormControlName.CardboardBox">
-        <div class="text">{{FormFieldMeta[FormControlName.CardboardBox].label}}</div>
-        <div class="meta">{{FormFieldMeta[FormControlName.CardboardBox].meta}}</div>
+    <div *ngFor="let control of formUtils.getGroupControls(formGroup) | keyvalue: formUtils.originalOrder; let i = index"
+         class="form__field" [class.form__field--span-2]="control.key === FormControlName.BagWithSeal">
+      <app-checkbox [formControlName]="control.key" (customChange)="showCounter($event)">
+        <div class="text">{{FormFieldMeta[control.key].label}}</div>
+        <div class="meta">{{FormFieldMeta[control.key].meta}}</div>
       </app-checkbox>
-    </div>
-    <div class="form__field">
-      <app-checkbox [formControlName]="FormControlName.TransparentFilm">
-        <div class="text">{{FormFieldMeta[FormControlName.TransparentFilm].label}}</div>
-        <div class="meta">{{FormFieldMeta[FormControlName.TransparentFilm].meta}}</div>
-      </app-checkbox>
-    </div>
-    <div class="form__field">
-      <app-checkbox [formControlName]="FormControlName.SafePack">
-        <div class="text">{{FormFieldMeta[FormControlName.SafePack].label}}</div>
-        <div class="meta">{{FormFieldMeta[FormControlName.SafePack].meta}}</div>
-      </app-checkbox>
-    </div>
-    <div class="form__field">
-      <app-checkbox [formControlName]="FormControlName.BlackFilm">
-        <div class="text">{{FormFieldMeta[FormControlName.BlackFilm].label}}</div>
-        <div class="meta">{{FormFieldMeta[FormControlName.BlackFilm].meta}}</div>
-      </app-checkbox>
-    </div>
-    <div class="form__field form__field--span-2">
-      <app-checkbox [formControlName]="FormControlName.BagWithSeal">
-        <div class="text">{{FormFieldMeta[FormControlName.BagWithSeal].label}}</div>
-        <div class="meta">{{FormFieldMeta[FormControlName.BagWithSeal].meta}}</div>
-      </app-checkbox>
+      <div *ngIf="control.value.value" style="margin-top: 10px">
+        <span class="form__label">Количество:</span>
+        <app-counter></app-counter>
+      </div>
     </div>
   </div>
 </section>

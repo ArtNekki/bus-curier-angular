@@ -12,6 +12,8 @@ import {
 import {map} from 'rxjs/operators';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
+import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
+import {UtilsService} from '../../../../../../core/services/utils.service';
 
 @Component({
   selector: 'app-packaging',
@@ -36,7 +38,8 @@ export class PackagingComponent implements OnInit, ControlValueAccessor, Validat
 
   public formGroup: FormGroup;
 
-  constructor() { }
+  constructor(public formUtils: FormUtilsService,
+              public utils: UtilsService) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -73,5 +76,9 @@ export class PackagingComponent implements OnInit, ControlValueAccessor, Validat
 
   validate(c: AbstractControl): ValidationErrors | null {
     return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'packaging are invalid'}};
+  }
+
+  showCounter(data: any) {
+    console.log('$event', data);
   }
 }

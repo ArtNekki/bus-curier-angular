@@ -8,7 +8,7 @@
            <b>Груз {{groupIndex + 1}}:</b>
          </dt>
          <dd>
-           {{FormFieldMeta[getCurrentCargo(cargo.type).type].label}}:
+           {{FormFieldMeta[getCurrentCargo(cargo.type).type] && FormFieldMeta[getCurrentCargo(cargo.type).type].label}}:
            <ng-container *ngIf="getCurrentCargo(cargo.type).type === FormControlName.Docs">
              {{formatDocs(getCurrentCargo(cargo.type).items)}}
            </ng-container>
