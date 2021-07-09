@@ -65,6 +65,66 @@ export class OrderResultComponent implements OnInit, OnChanges {
     return data.steps[2][FormControlName.PickupPoint].location;
   }
 
+  getDispatchMethod(data) {
+    let dispatchData = data.steps[1][FormControlName.DeparturePoint][FormControlName.DispatchData];
+    let text = `Забор посылки у отправителя - `;
+
+    if (!dispatchData) {
+      return;
+    }
+
+    dispatchData = Object.entries(dispatchData).filter((item: [string, string]) => {
+      return (item.length && item[1]) && item;
+    });
+
+    const dispatchType = dispatchData[0][0];
+
+    if (!dispatchType) {
+      return;
+    }
+
+    switch (dispatchType) {
+      case FormControlName.Department:
+        text = `${text} сдача в отделение`;
+        break;
+      case FormControlName.Courier:
+        text = `${text} вызов курьера`;
+        break;
+    }
+
+    return text;
+  }
+
+  getReceiveMethod(data) {
+    let pickupData = data.steps[2][FormControlName.PickupPoint][FormControlName.ReceiveData];
+    let text = `Доставка посылки до получателя - `;
+
+    if (!pickupData) {
+      return;
+    }
+
+    pickupData = Object.entries(pickupData).filter((item: [string, string]) => {
+      return (item.length && item[1]) && item;
+    });
+
+    const pickupType = pickupData[0][0];
+
+    if (!pickupType) {
+      return;
+    }
+
+    switch (pickupType) {
+      case FormControlName.Department:
+        text = `${text} забор в отделении`;
+        break;
+      case FormControlName.Courier:
+        text = `${text} вызов курьера`;
+        break;
+    }
+
+    return text;
+  }
+
   formatDocs(item: any) {
     return `(мест: ${item[FormControlName.PlaceCount]})`;
   }

@@ -26,10 +26,16 @@
      <p class="gray">Направление перевозки:</p>
      <p>{{getDepartureCity(currentData)}} — {{getPickupCity(currentData)}} <b class="lg">500 руб.</b></p>
    </ng-container>
-    <p class="gray">Забор посылки у отправителя - вызов курьера</p>
-    <p><b class="lg">300 руб.</b></p>
-    <p class="gray">Доставка посылки до получателя - вызов курьера</p>
-    <p><b class="lg">300 руб.</b></p>
+    <ng-container *ngIf="getDispatchMethod(currentData)">
+      <p class="gray">{{getDispatchMethod(currentData)}}</p>
+      <p><b class="lg">300 руб.</b></p>
+    </ng-container>
+<!--    nekki: {{getReceiveMethod(currentData)}}-->
+    <ng-container *ngIf="getReceiveMethod(currentData)">
+      <p class="gray">{{getReceiveMethod(currentData)}}</p>
+      <p><b class="lg">300 руб.</b></p>
+    </ng-container>
+
     <p class="gray">Упаковка груза:</p>
     <dl>
       <dt>Коробка картонная (4 шт):</dt>
