@@ -2,12 +2,13 @@
   <h2 class="form__heading">Упаковка:</h2>
   <div class="form__fieldset form__fieldset--boxing" formArrayName="items">
     <ng-container *ngFor="let itemGroup of items.controls; let i = index">
-      <div class="form__field" [formGroupName]="i">
+      <div class="form__field" [class.form__field--span-2]="itemGroup.get(FormControlName.BagWithSeal)" [formGroupName]="i">
         <ng-container
-          *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder; let controlIndex = index;">
+          *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;
+          let controlIndex = index;">
           <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
-            <div *ngIf="true" style="margin-top: 10px" [@fadeIn]="">
-<!--              control.value.value-->
+            <div *ngIf="(formUtils.getGroupControls(itemGroup) | keyvalue: formUtils.originalOrder)[0].value.value"
+                 style="margin-top: 10px" [@fadeIn]="">
               <span class="form__label">Количество:</span>
               <app-counter [formControlName]="control.key"></app-counter>
             </div>
@@ -23,4 +24,3 @@
     </ng-container>
   </div>
 </section>
-<!--[class.form__field&#45;&#45;span-2]="control.key === FormControlName.BagWithSeal"-->

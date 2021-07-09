@@ -100,4 +100,8 @@ export class PackagingComponent implements OnInit, ControlValueAccessor, Validat
   showCounter(data: any) {
     console.log('$event', data);
   }
+
+  ch(groupControl: any) {
+    console.log('groupControl', groupControl);
+  }
 }
