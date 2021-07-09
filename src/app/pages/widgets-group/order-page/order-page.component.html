@@ -14,6 +14,7 @@
         </div>
         <div *ngIf="currentStep === FormStep.Three" [formGroup]="steps[FormStep.Three]" [@panel]="">
           <app-cargo-group formControlName="cargo-group"></app-cargo-group>
+          <app-packaging [formControlName]="FormControlName.Packaging"></app-packaging>
           <app-services formControlName="services"></app-services>
           <app-recipient [formControlName]="FormControlName.Recipient"></app-recipient>
           <app-pickup-point [formControlName]="FormControlName.PickupPoint"></app-pickup-point>
