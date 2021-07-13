@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -41,27 +41,64 @@ export class CargoComponent implements OnInit, ControlValueAccessor, Validator {
 
   constructor(public formUtils: FormUtilsService,
               private orderForm: OrderFormService,
-              public utils: UtilsService) { }
+              public utils: UtilsService,
+              private readonly changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.Type]: new FormGroup({
+      activeItem: new FormControl('docs'),
+      items: new FormGroup({
         [FormControlName.Docs]: new FormControl(''),
         [FormControlName.Parcels]: new FormControl(''),
         [FormControlName.AutoParts]: new FormControl(''),
         // other: new FormGroup({})
       })
     });
-
-    this.currentCargoType = FormControlName.Docs;
   }
 
   get cargo() {
     return this.formGroup.get(FormControlName.Cargo) as FormArray;
   }
 
-  selectCargoType(type: string) {
-    this.currentCargoType = type;
+  changeCargoType(type: string) {
+    switch (type) {
+      case FormControlName.Docs:
+        this.formGroup.get('items')
+          .get(FormControlName.Parcels)
+          .patchValue('', {
+            onlySelf: true
+          });
+        this.formGroup.get('items')
+          .get(FormControlName.AutoParts)
+          .patchValue('', {
+            onlySelf: true
+          });
+        break;
+      case FormControlName.Parcels:
+        this.formGroup.get('items')
+          .get(FormControlName.Docs)
+          .patchValue('', {
+          onlySelf: true
+        });
+        this.formGroup.get('items')
+          .get(FormControlName.AutoParts)
+          .patchValue('', {
+          onlySelf: true
+        });
+        break;
+      case FormControlName.AutoParts:
+        this.formGroup.get('items')
+          .get(FormControlName.Parcels)
+          .patchValue('', {
+            onlySelf: true
+          });
+        this.formGroup.get('items')
+          .get(FormControlName.Docs)
+          .patchValue('', {
+            onlySelf: true
+          });
+        break;
+    }
   }
 
 
@@ -71,9 +108,6 @@ export class CargoComponent implements OnInit, ControlValueAccessor, Validator {
     if (value) {
       this.formGroup.setValue(value, { emitEvent: false });
     }
-    // this.cdr.detectChanges();
-    // this.cdr.markForCheck();
-    // this.formGroup.markAllAsTouched();
   }
 
   registerOnChange(fn: any): void {

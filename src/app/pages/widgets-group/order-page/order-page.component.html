@@ -20,7 +20,7 @@
           <app-pickup-point [formControlName]="FormControlName.PickupPoint"></app-pickup-point>
         </div>
         <div *ngIf="currentStep === FormStep.Four" [formGroup]="steps[FormStep.Four]" [@panel]="">
-          <app-order-report [data]="form.value"></app-order-report>
+<!--          <app-order-report [data]="form.value"></app-order-report>-->
           <section class="form__section">
             <div class="form__fieldset">
               <div class="form__field">
@@ -49,5 +49,5 @@
       </div>
     </form>
   </div>
-  <app-sidebar-result [currentStep]="currentStep" [data]="form.value"></app-sidebar-result>
+<!--  <app-sidebar-result [currentStep]="currentStep" [data]="form.value"></app-sidebar-result>-->
 </div>

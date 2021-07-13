@@ -3,18 +3,22 @@
     <div class="form__fieldset form__fieldset--goods-type">
       <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
       <app-radio *ngFor="let control of
-        formUtils.getGroupControls(formGroup.get(FormControlName.Type)) | keyvalue: formUtils.originalOrder;"
-                 [name]="'cargo-type'" (change)="selectCargoType(control.key)"
-                 [checked]="control.key === currentCargoType">{{FormFieldMeta[control.key].label}}</app-radio>
+        formUtils.getGroupControls(formGroup.get('items')) | keyvalue: formUtils.originalOrder;"
+        formControlName="activeItem"
+        [id]="control.key"
+        [name]="'cargo-type'" (change)="changeCargoType(control.key)"
+        [checked]="control.key === formGroup.get('activeItem').value">
+        {{FormFieldMeta[control.key].label}}
+      </app-radio>
     </div>
-    <div [formGroupName]="FormControlName.Type">
-      <div *ngIf="currentCargoType === FormControlName.Docs">
+    <div formGroupName="items">
+      <div *ngIf="formGroup.get('activeItem').value === FormControlName.Docs">
         <app-docs [formControlName]="FormControlName.Docs"></app-docs>
       </div>
-      <div *ngIf="currentCargoType === FormControlName.Parcels">
+      <div *ngIf="formGroup.get('activeItem').value === FormControlName.Parcels">
         <app-parcel-group [formControlName]="FormControlName.Parcels"></app-parcel-group>
       </div>
-      <div *ngIf="currentCargoType === FormControlName.AutoParts">
+      <div *ngIf="formGroup.get('activeItem').value === FormControlName.AutoParts">
         <app-auto-parts [formControlName]="FormControlName.AutoParts"></app-auto-parts>
       </div>
     </div>
