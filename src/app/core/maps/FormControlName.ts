@@ -72,5 +72,6 @@ export default {
   Bank: 'bank',
   PassportNumber: 'passport-number',
   Question: 'question',
-  Counter: 'counter'
+  Counter: 'counter',
+  CurrentItem: 'current-item'
 };

@@ -13,6 +13,7 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import {LoginComponent} from '../../../../../../modals/login/login.component';
 import {SignInComponent} from '../../../../../../modals/sign-in/sign-in.component';
 import {AuthService} from '../../../../../../core/services/auth/auth.service';
+import FormControlName from 'src/app/core/maps/FormControlName';
 
 @Component({
   selector: 'app-author',
@@ -34,6 +35,7 @@ import {AuthService} from '../../../../../../core/services/auth/auth.service';
 export class AuthorComponent implements OnInit, ControlValueAccessor, Validator {
   @Output() selectUser: EventEmitter<any> = new EventEmitter<any>();
 
+  public FormControlName = FormControlName;
   public UserType = UserType;
 
   public formGroup: FormGroup;
@@ -46,7 +48,7 @@ export class AuthorComponent implements OnInit, ControlValueAccessor, Validator 
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      currentUser: new FormControl(''),
+      [FormControlName.CurrentItem]: new FormControl(''),
       individual: new FormControl(''),
       entity: new FormControl('')
     });
