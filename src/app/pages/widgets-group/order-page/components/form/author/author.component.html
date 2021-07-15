@@ -6,16 +6,16 @@
          [checked]="formGroup.get('currentUser').value === UserType.Individual"
          name="currentUser"
          [value]="UserType.Individual"
-         formControlName="currentUser" />
-         <span>Физическое лицо</span>
+         formControlName="currentUser" hidden />
+         <div>Физическое лицо</div>
     </label>
     <label class="form__tab">
       <input type="radio"
          [checked]="formGroup.get('currentUser').value === UserType.Entity"
          name="currentUser"
          [value]="UserType.Entity"
-         formControlName="currentUser" />
-         <span>Юридическое лицо</span>
+         formControlName="currentUser" hidden />
+         <div>Юридическое лицо</div>
     </label>
 <!--    <input type="radio"-->
 <!--            [class.active]="currentUserType === UserType.Individual"-->

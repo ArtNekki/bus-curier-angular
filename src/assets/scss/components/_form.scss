@@ -782,32 +782,29 @@
     }
   }
 
-  &__tabs button {
-    @include btn-default();
+  &__tab {
 
-    position: relative;
-    padding: 10px;
-    min-height: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: $font-family--secondary;
-    font-size: 14px;
-    line-height: 16px;
-    text-align: center;
-    color: $black-color;
-    background-color: $gray-light-color--up-5;
-    text-align: center;
-    text-decoration: none;
-    white-space: nowrap;
-    user-select: none;
-    cursor: pointer;
-
-    @include focus {
-      outline: none;
+    div {
+      position: relative;
+      padding: 10px;
+      min-height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: $font-family--secondary;
+      font-size: 14px;
+      line-height: 16px;
+      text-align: center;
+      color: $black-color;
+      background-color: $gray-light-color--up-5;
+      text-align: center;
+      text-decoration: none;
+      white-space: nowrap;
+      user-select: none;
+      cursor: pointer;
     }
 
-    &.active {
+    input:checked ~ div {
       color: $black-color;
       background-color: $primary-color;
 
@@ -818,12 +815,12 @@
     }
   }
 
-  &__tabs button:first-child {
+  &__tab:first-child div {
     border-top-left-radius: $border-radius;
     border-bottom-left-radius: $border-radius;
   }
 
-  &__tabs button:last-child {
+  &__tab:last-child div {
     border-top-right-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
   }
