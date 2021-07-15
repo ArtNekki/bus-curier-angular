@@ -6,7 +6,7 @@
         formUtils.getGroupControls(formGroup.get('items')) | keyvalue: formUtils.originalOrder;"
         formControlName="activeItem"
         [id]="control.key"
-        [name]="'cargo-type'" (change)="changeCargoType(control.key)"
+        [name]="'cargo-type'"
         [checked]="control.key === formGroup.get('activeItem').value">
         {{FormFieldMeta[control.key].label}}
       </app-radio>

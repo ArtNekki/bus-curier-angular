@@ -12,7 +12,6 @@ import {
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
-import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-cargo-group',
@@ -36,19 +35,17 @@ export class CargoGroupComponent implements OnInit, ControlValueAccessor, Valida
 
   public formGroup: FormGroup;
   public currentCargoIndex = 0;
-  public tags = [];
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
+      activeItem: new FormControl(0),
       items: new FormArray([
         new FormControl('')
       ])
     });
-
-    // this.tags.push(`cargo-${this.tags.length + 1}`);
   }
 
   public get items(): FormArray {
@@ -57,16 +54,12 @@ export class CargoGroupComponent implements OnInit, ControlValueAccessor, Valida
 
   addCargo() {
     this.items.push(new FormControl(''));
-    this.currentCargoIndex = this.items.length - 1;
+    this.formGroup.get('activeItem').setValue(this.items.length - 1);
   }
 
   deleteCargo(index: number) {
     this.items.removeAt(index);
-    this.currentCargoIndex = this.items.length - 1;
-  }
-
-  selectCargo(index: number) {
-    this.currentCargoIndex = index;
+    this.formGroup.get('activeItem').setValue(this.items.length - 1);
   }
 
   public onTouched: () => void = () => {};
@@ -74,12 +67,13 @@ export class CargoGroupComponent implements OnInit, ControlValueAccessor, Valida
   writeValue(value: any): void {
     if (value) {
       this.items.clear();
-      value.forEach(item => this.items.push(new FormControl(item)));
+      value.items.forEach(item => this.items.push(new FormControl(item)));
+      this.formGroup.setValue(value, { emitEvent: false });
     }
   }
 
   registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.pipe( map(value => value.items)).subscribe(fn);
+    this.formGroup.valueChanges.subscribe(fn);
   }
 
   registerOnTouched(fn: any): void {
