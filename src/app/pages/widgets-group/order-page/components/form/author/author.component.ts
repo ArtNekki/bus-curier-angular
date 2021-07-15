@@ -46,6 +46,7 @@ export class AuthorComponent implements OnInit, ControlValueAccessor, Validator 
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
+      currentUser: new FormControl(''),
       individual: new FormControl(''),
       entity: new FormControl('')
     });
