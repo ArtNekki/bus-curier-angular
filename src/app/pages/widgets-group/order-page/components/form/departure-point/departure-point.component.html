@@ -27,15 +27,27 @@
     </div>
     <ng-container [formGroupName]="FormControlName.DispatchData">
       <div class="form__tabs">
-        <button type="button" [class.active]="currentTab === Tab.One"
-                (click)="setCurrentTab(Tab.One)">Cдать в отделение</button>
-        <button type="button" [class.active]="currentTab === Tab.Two"
-                (click)="setCurrentTab(Tab.Two)">Вызвыть курьера</button>
+        <label class="form__tab">
+          <input type="radio"
+                 [checked]="formGroup.get(FormControlName.DispatchData).get(FormControlName.CurrentItem).value === Tab.One"
+                 [name]="FormControlName.CurrentItem"
+                 [value]="Tab.One"
+                 [formControlName]="FormControlName.CurrentItem" hidden />
+          <div>Cдать в отделение</div>
+        </label>
+        <label class="form__tab">
+          <input type="radio"
+                 [checked]="formGroup.get(FormControlName.DispatchData).get(FormControlName.CurrentItem).value === Tab.Two"
+                 [name]="FormControlName.CurrentItem"
+                 [value]="Tab.Two"
+                 [formControlName]="FormControlName.CurrentItem"  hidden />
+          <div>Вызвать курьера</div>
+        </label>
       </div>
-      <div *ngIf="currentTab === Tab.One" class="form__panel">
+      <div *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.CurrentItem).value === Tab.One" class="form__panel">
         <app-department [formControlName]="FormControlName.Department"></app-department>
       </div>
-      <div *ngIf="currentTab === Tab.Two" class="form__panel">
+      <div *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.CurrentItem).value === Tab.Two" class="form__panel">
         <app-courier [formControlName]="FormControlName.Courier"></app-courier>
       </div>
     </ng-container>

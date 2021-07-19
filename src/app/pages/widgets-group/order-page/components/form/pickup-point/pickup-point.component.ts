@@ -50,6 +50,7 @@ export class PickupPointComponent implements OnInit, ControlValueAccessor, Valid
       [FormControlName.Location]: new FormControl('', []),
       [FormControlName.AddressPoints]: new FormControl('', []),
       [FormControlName.ReceiveData]: new FormGroup({
+        [FormControlName.CurrentItem]: new FormControl(this.Tab.One),
         [FormControlName.Department]: new FormControl(''),
         [FormControlName.Courier]: new FormControl('')
       })

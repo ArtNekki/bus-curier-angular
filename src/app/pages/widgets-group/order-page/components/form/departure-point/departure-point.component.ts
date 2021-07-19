@@ -52,6 +52,7 @@ export class DeparturePointComponent implements OnInit, ControlValueAccessor, Va
       [FormControlName.Location]: new FormControl('', [Validators.required]),
       [FormControlName.AddressPoints]: new FormControl('department-1', []),
       [FormControlName.DispatchData]: new FormGroup({
+        [FormControlName.CurrentItem]: new FormControl(this.Tab.One),
         [FormControlName.Department]: new FormControl('', [Validators.required]),
         [FormControlName.Courier]: new FormControl('', [Validators.required])
       }),
