@@ -2,7 +2,7 @@ import {Component, forwardRef, OnInit} from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {
   AbstractControl,
-  ControlValueAccessor,
+  ControlValueAccessor, FormArray,
   FormControl,
   FormGroup, NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
@@ -11,6 +11,8 @@ import {
 } from '@angular/forms';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
+import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-services',
@@ -42,15 +44,25 @@ export class ServicesComponent implements OnInit, ControlValueAccessor, Validato
   public formGroup: FormGroup;
   public currentService: string;
 
-  constructor() { }
+  constructor(public formUtils: FormUtilsService,
+              private orderForm: OrderFormService) { }
 
   ngOnInit(): void {
     // this.currentService = this.Service.Insurance;
 
     this.formGroup = new FormGroup({
-      [this.FormControlName.Insurance]: new FormControl(''),
-      [this.FormControlName.SmsForSender]: new FormControl(''),
-      [this.FormControlName.SmsForRecipient]: new FormControl('')
+      [FormControlName.Insurance]: new FormGroup({
+        [FormControlName.Active]: new FormControl(''),
+        [FormControlName.Sum]: new FormControl('')
+      }),
+      [FormControlName.SmsForSender]: new FormGroup({
+        [FormControlName.Active]: new FormControl(''),
+        [FormControlName.Tel]: new FormControl('')
+      }),
+      [FormControlName.SmsForRecipient]: new FormGroup({
+        [FormControlName.Active]: new FormControl(''),
+        [FormControlName.Tel]: new FormControl('')
+      })
     });
   }
 

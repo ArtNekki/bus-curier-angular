@@ -73,5 +73,6 @@ export default {
   PassportNumber: 'passport-number',
   Question: 'question',
   Counter: 'counter',
-  CurrentItem: 'current-item'
+  CurrentItem: 'current-item',
+  Active: 'active'
 };
