@@ -34,27 +34,10 @@ export class OrderResultComponent implements OnInit, OnChanges {
     if (changes.data.currentValue) {
       this.currentData = changes.data.currentValue;
     }
-
-    console.log('nekki');
   }
 
   getCargoList(data) {
-    return data.steps[2]['cargo-group'];
-  }
-
-  getCurrentCargo(items: any) {
-    const cargo = Object.entries(items).filter((item: [string, string]) => {
-      return (item.length && item[1]) && item;
-    });
-
-    if (cargo.length) {
-      return {
-        type: cargo[0][0],
-        items: cargo[0][1]
-      };
-    } else {
-      return {};
-    }
+    return data.steps[2]['cargo-group'] && data.steps[2]['cargo-group'].items;
   }
 
   getDepartureCity(data) {
@@ -126,14 +109,36 @@ export class OrderResultComponent implements OnInit, OnChanges {
   }
 
   formatDocs(item: any) {
-    return `(мест: ${item[FormControlName.PlaceCount]})`;
+    return `Документы (мест: ${item[FormControlName.PlaceCount]})`;
   }
 
   formatParcels(arr: any) {
-    return `(${arr.length} шт)`;
+    return `Посылки (мест: ${arr.length} шт)`;
   }
 
   formatAutoparts(item: any) {
+    if (!item) {
+      return;
+    }
+
     return item.join(', ');
+  }
+
+  formatCargo(cargo: any) {
+    let result = null;
+
+    switch (cargo.activeItem) {
+      case FormControlName.Docs:
+        result = this.formatDocs(cargo.items[FormControlName.Docs]);
+        break;
+      case FormControlName.Parcels:
+        result = this.formatParcels(cargo.items[FormControlName.Parcels]);
+        break;
+      case FormControlName.AutoParts:
+        result = this.formatAutoparts(cargo.items[FormControlName.AutoParts]);
+        break;
+    }
+
+    return result;
   }
 }

@@ -4,21 +4,14 @@
      <p class="gray">Тип груза:</p>
      <dl>
        <ng-container *ngFor="let cargo of getCargoList(currentData); let groupIndex = index">
-         <dt>
-           <b>Груз {{groupIndex + 1}}:</b>
-         </dt>
-         <dd>
-           {{FormFieldMeta[getCurrentCargo(cargo.type).type] && FormFieldMeta[getCurrentCargo(cargo.type).type].label}}:
-           <ng-container *ngIf="getCurrentCargo(cargo.type).type === FormControlName.Docs">
-             {{formatDocs(getCurrentCargo(cargo.type).items)}}
-           </ng-container>
-           <ng-container *ngIf="getCurrentCargo(cargo.type).type === FormControlName.Parcels">
-             {{formatParcels(getCurrentCargo(cargo.type).items)}}
-           </ng-container>
-           <ng-container *ngIf="getCurrentCargo(cargo.type).type === FormControlName.AutoParts">
-             {{formatAutoparts(getCurrentCargo(cargo.type).items)}}
-           </ng-container>
-         </dd>
+         <ng-container *ngIf="cargo">
+           <dt>
+             <b>Груз {{groupIndex + 1}}:</b>
+           </dt>
+           <dd>
+             {{formatCargo(cargo)}}
+           </dd>
+         </ng-container>
        </ng-container>
      </dl>
    </ng-container>

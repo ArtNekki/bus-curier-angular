@@ -2,6 +2,7 @@
   <div class="form__fieldset form__fieldset--tags">
     <app-tag *ngFor="let control of items.controls; let i = index;"
              [index]="i"
+             formControlName="activeItem"
              [checked]="formGroup.get('activeItem').value === i"
              (delete)="deleteCargo($event)">
       Груз №{{i + 1}}
