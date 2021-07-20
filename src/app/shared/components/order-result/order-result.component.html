@@ -30,9 +30,15 @@
       </p>
       <p><b class="lg">300 руб.</b></p>
     </ng-container>
-<!--    nekki: {{getReceiveMethod(currentData)}}-->
-    <ng-container *ngIf="getReceiveMethod(currentData)">
-      <p class="gray">{{getReceiveMethod(currentData)}}</p>
+    <ng-container *ngIf="getReceiveType(currentData)">
+      <p class="gray">Доставка посылки до получателя -
+        <ng-container *ngIf="getReceiveType(currentData) === FormControlName.Department">
+          в отделении
+        </ng-container>
+        <ng-container *ngIf="getReceiveType(currentData) === FormControlName.Courier">
+          вызов курьера
+        </ng-container>
+      </p>
       <p><b class="lg">300 руб.</b></p>
     </ng-container>
 

@@ -39,7 +39,7 @@ export class PickupPointComponent implements OnInit, ControlValueAccessor, Valid
 
   public formGroup: FormGroup;
   public addressPoints = addressPoints;
-  public Tab = {One: 'tab-1', Two: 'tab-2'};
+  public Tab = {One: 'department', Two: 'courier'};
   public currentTab = null;
 
   constructor(public formUtils: FormUtilsService,
@@ -50,7 +50,7 @@ export class PickupPointComponent implements OnInit, ControlValueAccessor, Valid
       [FormControlName.Location]: new FormControl('', []),
       [FormControlName.AddressPoints]: new FormControl('', []),
       [FormControlName.ReceiveData]: new FormGroup({
-        [FormControlName.CurrentItem]: new FormControl(this.Tab.One),
+        [FormControlName.Active]: new FormControl(this.Tab.One),
         [FormControlName.Department]: new FormControl(''),
         [FormControlName.Courier]: new FormControl('')
       })

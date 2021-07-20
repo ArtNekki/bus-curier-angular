@@ -58,34 +58,14 @@ export class OrderResultComponent implements OnInit, OnChanges {
     return dispatchData[FormControlName.Active];
   }
 
-  getReceiveMethod(data) {
-    let pickupData = data.steps[2][FormControlName.PickupPoint][FormControlName.ReceiveData];
-    let text = `Доставка посылки до получателя - `;
+  getReceiveType(data) {
+    const pickupData = data.steps[2][FormControlName.PickupPoint][FormControlName.ReceiveData];
 
     if (!pickupData) {
       return;
     }
 
-    pickupData = Object.entries(pickupData).filter((item: [string, string]) => {
-      return (item.length && item[1]) && item;
-    });
-
-    const pickupType = pickupData[0][0];
-
-    if (!pickupType) {
-      return;
-    }
-
-    switch (pickupType) {
-      case FormControlName.Department:
-        text = `${text} забор в отделении`;
-        break;
-      case FormControlName.Courier:
-        text = `${text} вызов курьера`;
-        break;
-    }
-
-    return text;
+    return pickupData[FormControlName.Active];
   }
 
   formatDocs(item: any) {
