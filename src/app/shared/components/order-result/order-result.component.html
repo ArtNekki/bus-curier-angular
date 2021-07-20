@@ -19,8 +19,15 @@
      <p class="gray">Направление перевозки:</p>
      <p>{{getDepartureCity(currentData)}} — {{getPickupCity(currentData)}} <b class="lg">500 руб.</b></p>
    </ng-container>
-    <ng-container *ngIf="getDispatchMethod(currentData)">
-      <p class="gray">{{getDispatchMethod(currentData)}}</p>
+    <ng-container *ngIf="getDispatchType(currentData)">
+      <p class="gray">Забор посылки у отправителя -
+        <ng-container *ngIf="getDispatchType(currentData) === FormControlName.Department">
+          в отделении
+        </ng-container>
+        <ng-container *ngIf="getDispatchType(currentData) === FormControlName.Courier">
+          вызов курьера
+        </ng-container>
+      </p>
       <p><b class="lg">300 руб.</b></p>
     </ng-container>
 <!--    nekki: {{getReceiveMethod(currentData)}}-->
