@@ -25,11 +25,9 @@ export class OrderReportComponent implements OnInit {
   }
 
   get author() {
-    for (const [key, value] of Object.entries(this.data.steps[0].author)) {
-      if (value) {
-        return this.formatData(value);
-      }
-    }
+    const author = this.data.steps[0].author;
+
+    return this.formatData(author[author.active]);
   }
 
   get sender() {
@@ -46,22 +44,20 @@ export class OrderReportComponent implements OnInit {
 
   get departurePoint() {
     let data =  this.data.steps[1][FormControlName.DeparturePoint];
-    const dispatchData = data[FormControlName.DispatchData];
 
-    let type = {};
-
-    for (const [key, value] of Object.entries(dispatchData)) {
-      if (value) {
-        type = {[key]: `
-        ул. ${(value as Address).street},
-        д. ${(value as Address).building},
-        кв. ${(value as Address).apartment}`};
-      }
+    if (!data) {
+      return;
     }
 
-    data = Object.assign(data, type);
+    const dispatchData = data[FormControlName.DispatchData];
+    const activeDispatch = dispatchData[dispatchData.active];
 
-    data = Object.entries(data)
+    const formattedDispatch = {[dispatchData.active]: `
+    ул. ${activeDispatch.street},
+    д. ${activeDispatch.building},
+    кв. ${activeDispatch.apartment}`};
+
+    data = Object.entries(Object.assign(data, formattedDispatch))
       .map((item: [string, string]) => {
         if ((item[0] === FormControlName.DispatchData) || (item[0] === FormControlName.AddressPoints)) {
           return null;
@@ -110,6 +106,10 @@ export class OrderReportComponent implements OnInit {
   }
 
   formatData(data) {
+    if (!data) {
+      return;
+    }
+
     return Object.entries(data).map((item: [string, string]) => {
       return {name: this.FormFieldMeta[item[0]].label, value: item[1] || 'нет'};
     });
