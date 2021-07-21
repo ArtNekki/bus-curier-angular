@@ -134,7 +134,6 @@ export class OrderResultComponent implements OnInit, OnChanges {
       return {id: el[0], label: this.FormFieldMeta[el[0]].label, value: Object.values(el[1])[1], sum: '200 руб.'};
     });
 
-    console.log('result', result);
     return result;
   }
 }

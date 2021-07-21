@@ -47,10 +47,10 @@ export class PickupPointComponent implements OnInit, ControlValueAccessor, Valid
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.Location]: new FormControl('', []),
+      [FormControlName.Location]: new FormControl('', { updateOn: 'blur' }),
       [FormControlName.AddressPoints]: new FormControl('', []),
       [FormControlName.ReceiveData]: new FormGroup({
-        [FormControlName.Active]: new FormControl(this.Tab.One),
+        [FormControlName.Active]: new FormControl(''),
         [FormControlName.Department]: new FormControl(''),
         [FormControlName.Courier]: new FormControl('')
       })
