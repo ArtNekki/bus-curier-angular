@@ -72,22 +72,20 @@ export class OrderReportComponent implements OnInit {
 
   get pickupPoint() {
     let data =  this.data.steps[2][FormControlName.PickupPoint];
-    const dispatchData = data[FormControlName.ReceiveData];
 
-    let type = {};
-
-    for (const [key, value] of Object.entries(dispatchData)) {
-      if (value) {
-        type = {[key]: `
-        ул. ${(value as Address).street},
-        д. ${(value as Address).building},
-        кв. ${(value as Address).apartment}`};
-      }
+    if (!data) {
+      return;
     }
 
-    data = Object.assign(data, type);
+    const receiveData = data[FormControlName.ReceiveData];
+    const activeReceive = receiveData[receiveData.active];
 
-    data = Object.entries(data)
+    const formatted = {[receiveData.active]: `
+    ул. ${activeReceive.street},
+    д. ${activeReceive.building},
+    кв. ${activeReceive.apartment}`};
+
+    data = Object.entries(Object.assign(data, formatted))
       .map((item: [string, string]) => {
         if ((item[0] === FormControlName.ReceiveData) || (item[0] === FormControlName.AddressPoints)) {
           return null;
