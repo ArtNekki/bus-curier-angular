@@ -120,8 +120,21 @@ export class OrderResultComponent implements OnInit, OnChanges {
         return {label: label.toString(), count: `(${el.counter} шт.)`, sum: `120 руб.`};
       });
 
-    console.log('result', result);
+    return result;
+  }
 
+  formatServices(data) {
+    const services = data.steps[2][FormControlName.Services];
+
+    if (!services) {
+      return;
+    }
+
+    const result = Object.entries(services).map((el) => {
+      return {id: el[0], label: this.FormFieldMeta[el[0]].label, value: Object.values(el[1])[1], sum: '200 руб.'};
+    });
+
+    console.log('result', result);
     return result;
   }
 }

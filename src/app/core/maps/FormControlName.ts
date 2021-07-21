@@ -74,5 +74,6 @@ export default {
   Question: 'question',
   Counter: 'counter',
   CurrentItem: 'current-item',
-  Active: 'active'
+  Active: 'active',
+  Services: 'services'
 };

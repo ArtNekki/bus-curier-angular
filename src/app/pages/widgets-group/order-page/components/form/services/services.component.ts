@@ -53,15 +53,15 @@ export class ServicesComponent implements OnInit, ControlValueAccessor, Validato
     this.formGroup = new FormGroup({
       [FormControlName.Insurance]: new FormGroup({
         [FormControlName.Active]: new FormControl(''),
-        [FormControlName.Sum]: new FormControl('')
+        [FormControlName.Sum]: new FormControl('', { updateOn: 'blur' })
       }),
       [FormControlName.SmsForSender]: new FormGroup({
         [FormControlName.Active]: new FormControl(''),
-        [FormControlName.Tel]: new FormControl('')
+        [FormControlName.Tel]: new FormControl('', { updateOn: 'blur' })
       }),
       [FormControlName.SmsForRecipient]: new FormGroup({
         [FormControlName.Active]: new FormControl(''),
-        [FormControlName.Tel]: new FormControl('')
+        [FormControlName.Tel]: new FormControl('', { updateOn: 'blur' })
       })
     });
   }

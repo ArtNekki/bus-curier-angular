@@ -58,7 +58,7 @@ export class OrderPageComponent implements OnInit {
         new FormGroup({
           ['cargo-group']: new FormControl(''),
           [FormControlName.Packaging]: new FormControl(''),
-          services: new FormControl(''),
+          [FormControlName.Services]: new FormControl(''),
           [FormControlName.Recipient]: new FormControl(''),
           [FormControlName.PickupPoint]: new FormControl('')
         }),

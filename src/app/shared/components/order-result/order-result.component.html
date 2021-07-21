@@ -42,7 +42,7 @@
       <p><b class="lg">300 руб.</b></p>
     </ng-container>
 
-    <ng-container>
+    <ng-container *ngIf="currentData.steps[2][FormControlName.Packaging]">
       <p class="gray">Упаковка груза:</p>
       <dl>
         <ng-container *ngFor="let obj of formatPackaging(currentData)">
@@ -61,8 +61,23 @@
         </ng-container>
       </dl>
     </ng-container>
-    <p class="gray">Страхование посылки на сумму 25 000 руб.</p>
-    <p><b class="lg">200 руб.</b></p>
+    <ng-container *ngFor="let obj of formatServices(currentData)">
+      <ng-container *ngIf="obj.value">
+        <p class="gray">
+          <ng-container *ngIf="obj.id === FormControlName.Insurance; else label">
+            Страхование посылки на сумму
+          </ng-container>
+          <ng-template #label>
+            {{obj.label}}
+          </ng-template>
+          <ng-container *ngIf="obj.id === FormControlName.Insurance">
+            {{obj.value}}
+          </ng-container>
+        </p>
+        <p><b class="lg">{{obj.sum}}</b></p>
+      </ng-container>
+    </ng-container>
+
   </div>
   <div class="order-result__total">
     <ng-content select=".total"></ng-content>
