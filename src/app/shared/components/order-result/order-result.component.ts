@@ -3,6 +3,7 @@ import {ModsService} from '../../../core/services/mods.service';
 import {OrderReportService} from '../../../core/services/order-report/order-report.service';
 import formFieldMeta from '../../../core/form/formFieldMeta';
 import FormControlName from 'src/app/core/maps/FormControlName';
+import {FormUtilsService} from '../../../core/services/form-utils.service';
 
 @Component({
   selector: 'app-order-result',
@@ -21,6 +22,7 @@ export class OrderResultComponent implements OnInit, OnChanges {
 
   constructor(
     public orderReport: OrderReportService,
+    public formUtils: FormUtilsService,
     private modsService: ModsService) {
 
     this.cssClass = this.modsService.setMods('order-result', this.mods);
@@ -98,6 +100,27 @@ export class OrderResultComponent implements OnInit, OnChanges {
         result = this.formatAutoparts(cargo.items[FormControlName.AutoParts]);
         break;
     }
+
+    return result;
+  }
+
+  formatPackaging(data) {
+    const packaging = data.steps[2][FormControlName.Packaging];
+
+    if (!packaging) {
+      return;
+    }
+
+    const result = packaging.items
+      .filter((item) => {
+        return item.counter > 0 && item;
+      })
+      .map((el) => {
+        const label = this.FormFieldMeta[Object.keys(el)[0]].label;
+        return {label: label.toString(), count: `(${el.counter} шт.)`, sum: `120 руб.`};
+      });
+
+    console.log('result', result);
 
     return result;
   }

@@ -42,13 +42,25 @@
       <p><b class="lg">300 руб.</b></p>
     </ng-container>
 
-    <p class="gray">Упаковка груза:</p>
-    <dl>
-      <dt>Коробка картонная (4 шт):</dt>
-      <dd><b class="lg">120 руб.</b></dd>
-      <dt>Сейф пакет (1 шт):</dt>
-      <dd><b class="lg">120 руб.</b></dd>
-    </dl>
+    <ng-container>
+      <p class="gray">Упаковка груза:</p>
+      <dl>
+        <ng-container *ngFor="let obj of formatPackaging(currentData)">
+          <dt>
+            <ng-container *ngFor="let el of obj | keyvalue: formUtils.originalOrder">
+              <ng-container *ngIf="el.key !== 'sum'">
+                {{el.value}}
+              </ng-container>
+            </ng-container>
+          </dt>
+          <ng-container *ngFor="let el of obj | keyvalue: formUtils.originalOrder">
+            <dd *ngIf="el.key === 'sum'">
+              <b class="lg">{{el.value}}</b>
+            </dd>
+          </ng-container>
+        </ng-container>
+      </dl>
+    </ng-container>
     <p class="gray">Страхование посылки на сумму 25 000 руб.</p>
     <p><b class="lg">200 руб.</b></p>
   </div>
