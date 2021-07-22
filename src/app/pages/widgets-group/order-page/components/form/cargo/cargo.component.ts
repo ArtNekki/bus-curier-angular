@@ -14,11 +14,13 @@ import {FormUtilsService} from '../../../../../../core/services/form-utils.servi
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
+import fadeIn from '../../../../../../core/animations/fadeIn';
 
 @Component({
   selector: 'app-cargo',
   templateUrl: './cargo.component.html',
   styleUrls: ['./cargo.component.scss'],
+  animations: [fadeIn],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

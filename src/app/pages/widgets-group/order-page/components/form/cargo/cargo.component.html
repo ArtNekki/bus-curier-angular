@@ -12,13 +12,13 @@
       </app-radio>
     </div>
     <div formGroupName="items">
-      <div *ngIf="formGroup.get('activeItem').value === FormControlName.Docs">
+      <div *ngIf="formGroup.get('activeItem').value === FormControlName.Docs" [@fadeIn]="">
         <app-docs [formControlName]="FormControlName.Docs"></app-docs>
       </div>
-      <div *ngIf="formGroup.get('activeItem').value === FormControlName.Parcels">
+      <div *ngIf="formGroup.get('activeItem').value === FormControlName.Parcels" [@fadeIn]="">
         <app-parcel-group [formControlName]="FormControlName.Parcels"></app-parcel-group>
       </div>
-      <div *ngIf="formGroup.get('activeItem').value === FormControlName.AutoParts">
+      <div *ngIf="formGroup.get('activeItem').value === FormControlName.AutoParts" [@fadeIn]="">
         <app-auto-parts [formControlName]="FormControlName.AutoParts"></app-auto-parts>
       </div>
     </div>
