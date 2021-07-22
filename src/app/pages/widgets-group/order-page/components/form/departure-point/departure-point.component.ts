@@ -53,8 +53,7 @@ export class DeparturePointComponent implements OnInit, ControlValueAccessor, Va
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.Location]: new FormControl('', { updateOn: 'blur' }),
-      [FormControlName.AddressPoints]: new FormControl('department-1', []),
+      [FormControlName.Location]: new FormControl(''),
       [FormControlName.DispatchData]: new FormGroup({
         [FormControlName.Active]: new FormControl(),
         [FormControlName.Department]: new FormControl('', [Validators.required]),

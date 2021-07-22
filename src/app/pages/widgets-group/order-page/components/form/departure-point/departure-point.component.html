@@ -18,14 +18,6 @@
         </ng-container>
       </app-select>
     </div>
-    <div class="form__fieldset form__fieldset--department">
-      <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
-      <app-radio-group
-        [items]="addressPoints"
-        [name]="FormControlName.AddressPoints"
-        [formControlName]="FormControlName.AddressPoints">
-      </app-radio-group>
-    </div>
     <ng-container [formGroupName]="FormControlName.DispatchData">
       <div class="form__tabs">
         <label class="form__tab">
@@ -45,8 +37,9 @@
           <div>Вызвать курьера</div>
         </label>
       </div>
-      <div *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.One" class="form__panel">
-        <app-department [formControlName]="FormControlName.Department"></app-department>
+      <div class="form__field" *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.One" class="form__panel">
+        <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
+        <app-select [items]="addressPoints" [formControlName]="FormControlName.Department"></app-select>
       </div>
       <div *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.Two" class="form__panel">
         <app-courier [formControlName]="FormControlName.Courier"></app-courier>

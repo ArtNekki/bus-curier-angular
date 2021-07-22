@@ -5,14 +5,6 @@
       <label for="departure-location" class="form__label">Населенный пункт<sup>*</sup></label>
       <app-select [items]="cities" id="departure-location" [formControlName]="FormControlName.Location"></app-select>
     </div>
-    <div class="form__fieldset form__fieldset--department">
-      <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
-      <app-radio-group
-        [items]="addressPoints"
-        [name]="FormControlName.AddressPoints"
-        [formControlName]="FormControlName.AddressPoints">
-      </app-radio-group>
-    </div>
     <ng-container [formGroupName]="FormControlName.ReceiveData">
       <div class="form__tabs">
         <label class="form__tab">
@@ -33,7 +25,13 @@
         </label>
       </div>
       <div *ngIf="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).value === Tab.One" class="form__panel">
-        <app-department [formControlName]="FormControlName.Department"></app-department>
+        <div class="form__field">
+          <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
+          <app-select
+            [items]="addressPoints"
+            [formControlName]="FormControlName.Department">
+          </app-select>
+        </div>
       </div>
       <div *ngIf="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).value === Tab.Two" class="form__panel">
         <app-courier [formControlName]="FormControlName.Courier"></app-courier>
