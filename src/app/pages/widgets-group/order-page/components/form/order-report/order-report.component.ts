@@ -39,7 +39,15 @@ export class OrderReportComponent implements OnInit {
   }
 
   get services() {
-    return this.formatData(this.data.steps[2].services);
+    const data = this.data.steps[2][FormControlName.Services];
+
+    if (!data) {
+      return;
+    }
+
+    return Object.entries(data).map((el) => {
+      return {name: this.FormFieldMeta[el[0]].label, value: Object.values(el[1])[1]};
+    });
   }
 
   get departurePoint() {
@@ -99,7 +107,8 @@ export class OrderReportComponent implements OnInit {
   }
 
   get cargoList() {
-    const cargoItems =  this.data.steps[2]['cargo-group'];
+    const cargoItems =  this.data.steps[2]['cargo-group'].items;
+
     return cargoItems;
   }
 
@@ -113,23 +122,7 @@ export class OrderReportComponent implements OnInit {
     });
   }
 
-  getCurrentCargo(items: any) {
-    const cargo = Object.entries(items).filter((item: [string, string]) => {
-      return (item.length && item[1]) && item;
-    });
-
-    if (cargo.length) {
-      return {
-        type: cargo[0][0],
-        items: cargo[0][1]
-      };
-    } else {
-      return {};
-    }
-  }
-
   setCargoType(type: any) {
-    console.log('type', type);
     return [{name: 'Характер груза', value: type}];
   }
 
@@ -141,7 +134,6 @@ export class OrderReportComponent implements OnInit {
         Высота: <b>${item.height} см</b>.,
         Длина: <b>${item.length} см</b>.`},
     {name: 'Вес', value: `${item.weight} кг.`}];
-    // {name: 'Упаковка', value: 'Коробка картонная (4 шт), Сейф пакет (1 шт)'}
   }
 
   formatDocs(item: any) {
@@ -152,13 +144,26 @@ export class OrderReportComponent implements OnInit {
     return [{name: 'Запчасть', value: item}];
   }
 
-  formatPackaging(items: any) {
-    const data = Object.entries(items)
-          .map((item: [string, string]) => {
-            return item[1] && this.FormFieldMeta[item[0]].label;
-          })
-          .filter((item: string) => item);
+  get packaging() {
+    const packaging = this.data.steps[2][FormControlName.Packaging];
 
-    return [{name: 'Упаковка', value: data.join(`, `)}];
+    if (!packaging) {
+      return;
+    }
+
+    const result = packaging.items
+      .filter((item) => {
+        return item.counter > 0 && item;
+      })
+      .map((el) => {
+        const label = this.FormFieldMeta[Object.keys(el)[0]].label;
+        return [label.toString(), `(${el.counter} шт.)`];
+      });
+
+    return [{name: 'Наименование', value: result.join(`, `)}];
+  }
+
+  ch(cargo: any) {
+    console.log('cargo', cargo);
   }
 }
