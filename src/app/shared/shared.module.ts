@@ -56,6 +56,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { OrderResultComponent } from './components/order-result/order-result.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ReportComponent } from './components/report/report.component';
+import { LocationComponent } from './components/location/location.component';
 
 // import { ɵs } from '@ng-select/ng-select;
 
@@ -148,7 +149,8 @@ import { ReportComponent } from './components/report/report.component';
     ModalComponent,
     OrderResultComponent,
     PaginationComponent,
-    ReportComponent
+    ReportComponent,
+    LocationComponent
   ]
   // providers: [NgSelectConfig, ɵs],
 })

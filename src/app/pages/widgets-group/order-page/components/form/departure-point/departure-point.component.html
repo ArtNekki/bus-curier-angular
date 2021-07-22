@@ -3,8 +3,9 @@
   <div class="form__fieldset form__fieldset--delivery-point form__fieldset--row-gap-lg">
     <div class="form__field form__field--location">
       <label for="departure-location" class="form__label">Населенный пункт<sup>*</sup></label>
-      <app-input
+      <app-select
         type="text"
+        [items]="cities"
         id="departure-location"
         [formControlName]="FormControlName.Location"
         [isInvalid]="(formGroup.get(FormControlName.Location).invalid
@@ -15,7 +16,7 @@
             {{FormFieldError[utils.getObjectKey(formGroup.get(FormControlName.Location).errors)[0]]}}
           </small>
         </ng-container>
-      </app-input>
+      </app-select>
     </div>
     <div class="form__fieldset form__fieldset--department">
       <label class="form__label form__label--light form__label--full">Выберите отделение:</label>

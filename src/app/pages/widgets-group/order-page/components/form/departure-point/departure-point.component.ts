@@ -15,6 +15,7 @@ import {UtilsService} from '../../../../../../core/services/utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import addressPoints from 'src/app/mock-data/address-points';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 
 @Component({
   selector: 'app-departure-point',
@@ -43,9 +44,12 @@ export class DeparturePointComponent implements OnInit, ControlValueAccessor, Va
   public Tab = {One: 'department', Two: 'courier'};
   public currentTab = null;
 
+  public cities = [];
+
   constructor(public formUtils: FormUtilsService,
               private orderForm: OrderFormService,
-              public utils: UtilsService) { }
+              public utils: UtilsService,
+              private calculatorService: CalculatorService) { }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -60,6 +64,12 @@ export class DeparturePointComponent implements OnInit, ControlValueAccessor, Va
     });
 
     this.currentTab = this.Tab.One;
+
+    this.calculatorService.getDistricts(1).subscribe((result: Array<{id: string, name: string}>) => {
+      this.cities = result.map((el: {id: string, name: string}) => {
+        return {value: el.id, name: el.name};
+      });
+    });
   }
 
   setCurrentTab(tab: string) {
