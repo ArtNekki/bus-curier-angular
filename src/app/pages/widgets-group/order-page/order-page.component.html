@@ -5,21 +5,21 @@
     <app-order-steps [invalidStep]="invalidStep" [currentStep]="currentStep"></app-order-steps>
     <form class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
       <ng-container formArrayName="steps">
-        <div *ngIf="currentStep === FormStep.One" [formGroup]="steps[FormStep.One]" [@panel]="">
+        <div *ngIf="currentStep === FormStep.One" [formGroup]="steps[FormStep.One]" [@fadeIn]="">
           <app-author [formControlName]="FormControlName.Author" (selectUser)="setCurrentUser($event)"></app-author>
         </div>
-        <div *ngIf="currentStep === FormStep.Two" [formGroup]="steps[FormStep.Two]" [@panel]="">
+        <div *ngIf="currentStep === FormStep.Two" [formGroup]="steps[FormStep.Two]" [@fadeIn]="">
           <app-sender [formControlName]="FormControlName.Sender"></app-sender>
           <app-departure-point [formControlName]="FormControlName.DeparturePoint"></app-departure-point>
         </div>
-        <div *ngIf="currentStep === FormStep.Three" [formGroup]="steps[FormStep.Three]" [@panel]="">
+        <div *ngIf="currentStep === FormStep.Three" [formGroup]="steps[FormStep.Three]" [@fadeIn]="">
           <app-cargo-group formControlName="cargo-group"></app-cargo-group>
           <app-packaging [formControlName]="FormControlName.Packaging"></app-packaging>
           <app-services formControlName="services"></app-services>
           <app-recipient [formControlName]="FormControlName.Recipient"></app-recipient>
           <app-pickup-point [formControlName]="FormControlName.PickupPoint"></app-pickup-point>
         </div>
-        <div *ngIf="currentStep === FormStep.Four" [formGroup]="steps[FormStep.Four]" [@panel]="">
+        <div *ngIf="currentStep === FormStep.Four" [formGroup]="steps[FormStep.Four]" [@fadeIn]="">
           <app-order-report [data]="form.value"></app-order-report>
           <section class="form__section">
             <div class="form__fieldset">

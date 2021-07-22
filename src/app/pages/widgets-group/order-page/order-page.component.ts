@@ -4,25 +4,13 @@ import {animate, style, transition, trigger} from '@angular/animations';
 import FormControlName from '../../../core/maps/FormControlName';
 import {OrderFormService} from '../../../core/services/order-form/order-form.service';
 import {AuthService} from '../../../core/services/auth/auth.service';
+import fadeIn from '../../../core/animations/fadeIn';
 
 @Component({
   selector: 'app-order-page',
   templateUrl: './order-page.component.html',
   styleUrls: ['./order-page.component.scss'],
-  animations: [
-    trigger('tag', [
-    transition('void => *', [
-      style({opacity: 0}),
-      animate('200ms')
-    ])
-  ]),
-    trigger('panel', [
-      transition('void => *', [
-        style({opacity: 0}),
-        animate('200ms')
-      ])
-    ])
-  ]
+  animations: [fadeIn]
 })
 
 export class OrderPageComponent implements OnInit {

@@ -37,11 +37,14 @@
           <div>Вызвать курьера</div>
         </label>
       </div>
-      <div class="form__field" *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.One" class="form__panel">
+      <div class="form__field"
+           *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.One"
+           class="form__panel" [@fadeIn]="">
         <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
         <app-select [items]="addressPoints" [formControlName]="FormControlName.Department"></app-select>
       </div>
-      <div *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.Two" class="form__panel">
+      <div *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.Two"
+           class="form__panel" [@fadeIn]="">
         <app-courier [formControlName]="FormControlName.Courier"></app-courier>
       </div>
     </ng-container>

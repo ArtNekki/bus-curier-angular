@@ -18,14 +18,18 @@
          <div>Юридическое лицо</div>
     </label>
   </div>
-  <div *ngIf="formGroup.get(FormControlName.Active).value === UserType.Individual" class="form__panel form__panel--mg-top">
+  <div *ngIf="formGroup.get(FormControlName.Active).value === UserType.Individual"
+       class="form__panel form__panel--mg-top" [@fadeIn]="">
     <app-individual [formControlName]="UserType.Individual"></app-individual>
   </div>
-  <div *ngIf="(formGroup.get(FormControlName.Active).value === UserType.Entity) && authService.isAuthenticated()" class="form__panel form__panel--mg-top">
+  <div *ngIf="(formGroup.get(FormControlName.Active).value === UserType.Entity) && authService.isAuthenticated()"
+       class="form__panel form__panel--mg-top" [@fadeIn]="">
     <app-entity [formControlName]="UserType.Entity"></app-entity>
   </div>
-   <p *ngIf="!formGroup.get(FormControlName.Active).value" class="form__help-text form__help-text--gray form__help-text--align-center">Выберите статус лица для перехода на следующий шаг</p>
-   <p *ngIf="!authService.isAuthenticated() && formGroup.get(FormControlName.Active).value === UserType.Entity" class="form__help-text ">Чтобы оформить заказ как юридическое лицо, вам необходимо
+   <p *ngIf="!formGroup.get(FormControlName.Active).value"
+      class="form__help-text form__help-text--gray form__help-text--align-center" [@fadeIn]="">Выберите статус лица для перехода на следующий шаг</p>
+   <p *ngIf="!authService.isAuthenticated() && formGroup.get(FormControlName.Active).value === UserType.Entity"
+      class="form__help-text" [@fadeIn]="">Чтобы оформить заказ как юридическое лицо, вам необходимо
      <app-link mods="blue, in-text" (click)="showLoginModal($event)">войти</app-link>
       <br /> или
      <app-link mods="blue, in-text" (click)="showSignInModal($event)">зарегистрироваться</app-link>

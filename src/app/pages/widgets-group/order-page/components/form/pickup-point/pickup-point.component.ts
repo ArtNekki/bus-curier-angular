@@ -15,11 +15,13 @@ import {UtilsService} from '../../../../../../core/services/utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import addressPoints from 'src/app/mock-data/address-points';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
+import fadeIn from '../../../../../../core/animations/fadeIn';
 
 @Component({
   selector: 'app-pickup-point',
   templateUrl: './pickup-point.component.html',
   styleUrls: ['./pickup-point.component.scss'],
+  animations: [fadeIn],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

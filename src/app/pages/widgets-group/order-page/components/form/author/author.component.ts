@@ -14,11 +14,13 @@ import {LoginComponent} from '../../../../../../modals/login/login.component';
 import {SignInComponent} from '../../../../../../modals/sign-in/sign-in.component';
 import {AuthService} from '../../../../../../core/services/auth/auth.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
+import fadeIn from '../../../../../../core/animations/fadeIn';
 
 @Component({
   selector: 'app-author',
   templateUrl: './author.component.html',
   styleUrls: ['./author.component.scss'],
+  animations: [fadeIn],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
