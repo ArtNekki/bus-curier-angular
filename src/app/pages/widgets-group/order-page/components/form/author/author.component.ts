@@ -15,6 +15,8 @@ import {SignInComponent} from '../../../../../../modals/sign-in/sign-in.componen
 import {AuthService} from '../../../../../../core/services/auth/auth.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {BasicGroupComponent} from '../basic-group/basic-group.component';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-author',
@@ -34,7 +36,7 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
     }
   ]
 })
-export class AuthorComponent implements OnInit, ControlValueAccessor, Validator {
+export class AuthorComponent extends BasicGroupComponent implements OnInit {
   @Output() selectUser: EventEmitter<any> = new EventEmitter<any>();
 
   public FormControlName = FormControlName;
@@ -45,8 +47,11 @@ export class AuthorComponent implements OnInit, ControlValueAccessor, Validator 
 
   constructor(
     private modalService: SimpleModalService,
-    public authService: AuthService
-    ) { }
+    public authService: AuthService,
+    orderForm: OrderFormService
+    ) {
+    super(orderForm);
+  }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -71,29 +76,14 @@ export class AuthorComponent implements OnInit, ControlValueAccessor, Validator 
     this.modalService.addModal(SignInComponent);
   }
 
-  public onTouched: () => void = () => {};
-
-  writeValue(value: any): void {
-    if (value) {
-      this.formGroup.setValue(value, { emitEvent: false });
+  changeUser(type: string) {
+    switch (type) {
+      case UserType.Individual:
+        this.formGroup.get(UserType.Entity).setValue('');
+        break;
+      case UserType.Entity:
+        this.formGroup.get(UserType.Individual).setValue('');
+        break;
     }
-    // this.cdr.detectChanges();
-    // this.cdr.markForCheck();
-    // this.formGroup.markAllAsTouched();
-  }
-
-  registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   isDisabled ? this.formGroup.disable() : this.formGroup.enable();
-  // }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'recipient are invalid'}};
   }
 }

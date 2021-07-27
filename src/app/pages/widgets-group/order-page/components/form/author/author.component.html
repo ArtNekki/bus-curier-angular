@@ -6,6 +6,7 @@
          [checked]="formGroup.get(FormControlName.Active).value === UserType.Individual"
          [name]="FormControlName.Active"
          [value]="UserType.Individual"
+         (change)="changeUser(UserType.Individual)"
          [formControlName]="FormControlName.Active" hidden />
          <div>Физическое лицо</div>
     </label>
@@ -14,6 +15,7 @@
          [checked]="formGroup.get(FormControlName.Active).value === UserType.Entity"
          [name]="FormControlName.Active"
          [value]="UserType.Entity"
+         (change)="changeUser(UserType.Entity)"
          [formControlName]="FormControlName.Active"  hidden />
          <div>Юридическое лицо</div>
     </label>
