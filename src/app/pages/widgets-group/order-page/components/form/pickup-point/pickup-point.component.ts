@@ -8,7 +8,7 @@ import {
   FormGroup, NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
-  Validator
+  Validator, Validators
 } from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
@@ -16,6 +16,8 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import addressPoints from 'src/app/mock-data/address-points';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {BasicGroupComponent} from '../basic-group/basic-group.component';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-pickup-point',
@@ -35,7 +37,7 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
     }
   ]
 })
-export class PickupPointComponent implements OnInit, ControlValueAccessor, Validator {
+export class PickupPointComponent extends BasicGroupComponent implements OnInit {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
@@ -43,57 +45,30 @@ export class PickupPointComponent implements OnInit, ControlValueAccessor, Valid
   public formGroup: FormGroup;
   public addressPoints = addressPoints;
   public Tab = {One: 'department', Two: 'courier'};
-  public currentTab = null;
 
   public cities = [];
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
-              private calculatorService: CalculatorService) { }
+              private calculatorService: CalculatorService,
+              orderForm: OrderFormService) {
+    super(orderForm);
+  }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.Location]: new FormControl(''),
+      [FormControlName.Location]: new FormControl('', [Validators.required]),
       [FormControlName.ReceiveData]: new FormGroup({
         [FormControlName.Active]: new FormControl(''),
-        [FormControlName.Department]: new FormControl(''),
-        [FormControlName.Courier]: new FormControl('')
+        [FormControlName.Department]: new FormControl('', [Validators.required]),
+        [FormControlName.Courier]: new FormControl('', [Validators.required])
       })
     });
-
-    this.currentTab = this.Tab.One;
 
     this.calculatorService.getDistricts(1).subscribe((result: Array<{id: string, name: string}>) => {
       this.cities = result.map((el: {id: string, name: string}) => {
         return {value: el.id, name: el.name};
       });
     });
-  }
-
-  setCurrentTab(tab: string) {
-    this.currentTab = tab;
-  }
-
-  public onTouched: () => void = () => {};
-
-  writeValue(value: any): void {
-    if (value) {
-      this.formGroup.setValue(value, { emitEvent: false });
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   isDisabled ? this.formGroup.disable() : this.formGroup.enable();
-  // }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'recipient are invalid'}};
   }
 }

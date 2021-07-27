@@ -1,6 +1,6 @@
-<ng-container [formGroup]="parcelGroup">
+<ng-container [formGroup]="formGroup">
   <div class="form__fieldset form__fieldset--package">
-    <div *ngFor="let parcelControl of formUtils.getGroupControls(parcelGroup) | keyvalue: formUtils.originalOrder" class="form__field">
+    <div *ngFor="let parcelControl of formUtils.getGroupControls(formGroup) | keyvalue: formUtils.originalOrder" class="form__field">
       <label
         [for]="'parcel-' + parcelControl.key"
         class="form__label">

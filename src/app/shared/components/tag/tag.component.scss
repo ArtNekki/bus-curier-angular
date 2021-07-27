@@ -72,4 +72,8 @@
     // flex-basis: 100%;
     margin-bottom: $bottom-space;
   }
+
+  &--invalid {
+    background-color: red;
+  }
 }

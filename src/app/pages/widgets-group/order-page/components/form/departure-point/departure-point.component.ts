@@ -17,6 +17,7 @@ import addressPoints from 'src/app/mock-data/address-points';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {BasicGroupComponent} from '../basic-group/basic-group.component';
 
 @Component({
   selector: 'app-departure-point',
@@ -36,7 +37,7 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
     }
   ]
 })
-export class DeparturePointComponent implements OnInit, ControlValueAccessor, Validator {
+export class DeparturePointComponent extends BasicGroupComponent implements OnInit {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
@@ -49,13 +50,15 @@ export class DeparturePointComponent implements OnInit, ControlValueAccessor, Va
   public cities = [];
 
   constructor(public formUtils: FormUtilsService,
-              private orderForm: OrderFormService,
               public utils: UtilsService,
-              private calculatorService: CalculatorService) { }
+              private calculatorService: CalculatorService,
+              orderForm: OrderFormService) {
+    super(orderForm);
+  }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.Location]: new FormControl(''),
+      [FormControlName.Location]: new FormControl('', [Validators.required]),
       [FormControlName.DispatchData]: new FormGroup({
         [FormControlName.Active]: new FormControl(),
         [FormControlName.Department]: new FormControl('', [Validators.required]),
@@ -71,46 +74,5 @@ export class DeparturePointComponent implements OnInit, ControlValueAccessor, Va
         return {value: el.id, name: el.name};
       });
     });
-  }
-
-  setCurrentTab(tab: string) {
-    this.currentTab = tab;
-  }
-
-
-  public onTouched: () => void = () => {};
-
-  writeValue(value: any): void {
-    if (value) {
-      this.formGroup.setValue(value, { emitEvent: false });
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   isDisabled ? this.formGroup.disable() : this.formGroup.enable();
-  // }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
-      if (c.errors) {
-        this.formGroup.markAllAsTouched();
-      }
-
-      if (c.errors) {
-        this.orderForm.setInvalidStep(result.step);
-      } else {
-        this.orderForm.setInvalidStep(null);
-      }
-
-    });
-
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'departure point are invalid'}};
   }
 }

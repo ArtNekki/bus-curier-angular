@@ -17,6 +17,7 @@ export class TagComponent implements ControlValueAccessor, OnInit {
   // @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() type: string;
+  @Input() isInvalid: boolean;
   @Input() index: any;
   @Input() checked: boolean;
   @Input() mods;

@@ -3,7 +3,18 @@
   <div class="form__fieldset form__fieldset--pickup-point form__fieldset--row-gap-lg">
     <div class="form__field form__field--location">
       <label for="departure-location" class="form__label">Населенный пункт<sup>*</sup></label>
-      <app-select [items]="cities" id="departure-location" [formControlName]="FormControlName.Location"></app-select>
+      <app-select
+        [items]="cities" id="departure-location"
+        [formControlName]="FormControlName.Location"
+        [isInvalid]="(formGroup.get(FormControlName.Location).invalid
+        && formGroup.get(FormControlName.Location).touched) && 'invalid'"
+      >
+        <ng-container class="errors">
+          <small *ngIf="utils.getObjectKey(formGroup.get(FormControlName.Location).errors).length">
+            {{FormFieldError[utils.getObjectKey(formGroup.get(FormControlName.Location).errors)[0]]}}
+          </small>
+        </ng-container>
+      </app-select>
     </div>
     <ng-container [formGroupName]="FormControlName.ReceiveData">
       <div class="form__tabs">
@@ -30,7 +41,14 @@
           <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
           <app-select
             [items]="addressPoints"
-            [formControlName]="FormControlName.Department">
+            [formControlName]="FormControlName.Department"
+            [isInvalid]="(formGroup.get(FormControlName.ReceiveData).get(FormControlName.Department).invalid
+          && formGroup.get(FormControlName.ReceiveData).get(FormControlName.Department).touched) && 'invalid'">
+            <ng-container class="errors">
+              <small *ngIf="utils.getObjectKey(formGroup.get(FormControlName.ReceiveData).get(FormControlName.Department).errors).length">
+                {{FormFieldError[utils.getObjectKey(formGroup.get(FormControlName.ReceiveData).get(FormControlName.Department).errors)[0]]}}
+              </small>
+            </ng-container>
           </app-select>
         </div>
       </div>

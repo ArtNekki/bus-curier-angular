@@ -41,7 +41,18 @@
            *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.One"
            class="form__panel" [@fadeIn]="">
         <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
-        <app-select [items]="addressPoints" [formControlName]="FormControlName.Department"></app-select>
+        <app-select
+          [items]="addressPoints"
+          [formControlName]="FormControlName.Department"
+          [isInvalid]="(formGroup.get(FormControlName.DispatchData).get(FormControlName.Department).invalid
+          && formGroup.get(FormControlName.DispatchData).get(FormControlName.Department).touched) && 'invalid'"
+        >
+          <ng-container class="errors">
+            <small *ngIf="utils.getObjectKey(formGroup.get(FormControlName.DispatchData).get(FormControlName.Department).errors).length">
+              {{FormFieldError[utils.getObjectKey(formGroup.get(FormControlName.DispatchData).get(FormControlName.Department).errors)[0]]}}
+            </small>
+          </ng-container>
+        </app-select>
       </div>
       <div *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.Two"
            class="form__panel" [@fadeIn]="">

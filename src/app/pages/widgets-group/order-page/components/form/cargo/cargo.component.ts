@@ -15,6 +15,7 @@ import {UtilsService} from '../../../../../../core/services/utils.service';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {BasicGroupComponent} from '../basic-group/basic-group.component';
 
 @Component({
   selector: 'app-cargo',
@@ -34,7 +35,7 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
     }
   ]
 })
-export class CargoComponent implements OnInit, ControlValueAccessor, Validator {
+export class CargoComponent extends BasicGroupComponent implements OnInit {
   public FormControlName = FormControlName;
   public FormFieldMeta = formFieldMeta;
 
@@ -42,9 +43,11 @@ export class CargoComponent implements OnInit, ControlValueAccessor, Validator {
   public currentCargoType = null;
 
   constructor(public formUtils: FormUtilsService,
-              private orderForm: OrderFormService,
               public utils: UtilsService,
-              private readonly changeDetectorRef: ChangeDetectorRef) { }
+              private readonly changeDetectorRef: ChangeDetectorRef,
+              orderForm: OrderFormService) {
+    super(orderForm);
+  }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -101,42 +104,5 @@ export class CargoComponent implements OnInit, ControlValueAccessor, Validator {
           });
         break;
     }
-  }
-
-
-  public onTouched: () => void = () => {};
-
-  writeValue(value: any): void {
-    if (value) {
-      this.formGroup.setValue(value, { emitEvent: false });
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   isDisabled ? this.formGroup.disable() : this.formGroup.enable();
-  // }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
-      if (c.errors) {
-        this.formGroup.markAllAsTouched();
-      }
-
-      if (c.errors) {
-        this.orderForm.setInvalidStep(result.step);
-      } else {
-        this.orderForm.setInvalidStep(null);
-      }
-
-    });
-
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'cargo are invalid'}};
   }
 }

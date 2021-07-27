@@ -14,7 +14,7 @@
             </div>
           </ng-container>
           <ng-template #checkbox>
-            <app-checkbox [formControlName]="control.key" (customChange)="showCounter($event)">
+            <app-checkbox [formControlName]="control.key">
               <div class="text">{{FormFieldMeta[control.key].label}}</div>
               <div class="meta">{{FormFieldMeta[control.key].meta}}</div>
             </app-checkbox>

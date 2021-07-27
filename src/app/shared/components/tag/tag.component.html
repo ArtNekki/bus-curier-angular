@@ -6,7 +6,7 @@
 </button>
 
 <ng-template #tag>
-  <label [class]="cssClass">
+  <label [class]="cssClass" [class.tag--invalid]="isInvalid">
     <input type="radio" name="tag" class="tag__input" (change)="changeValue(index)" [checked]="checked">
 <!--    <input type="radio" name="tag" class="tag__input" (change)="changeValue(index)" [checked]="checked">-->
 <!--    (change)="selectTag($event, index)"-->

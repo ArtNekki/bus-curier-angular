@@ -12,6 +12,8 @@ import {
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
+import {BasicGroupComponent} from '../basic-group/basic-group.component';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-cargo-group',
@@ -30,14 +32,17 @@ import {UtilsService} from '../../../../../../core/services/utils.service';
     }
   ]
 })
-export class CargoGroupComponent implements OnInit, ControlValueAccessor, Validator {
+export class CargoGroupComponent extends BasicGroupComponent implements OnInit  {
   public FormControlName = FormControlName;
 
   public formGroup: FormGroup;
   public currentCargoIndex = 0;
 
   constructor(public formUtils: FormUtilsService,
-              public utils: UtilsService) { }
+              public utils: UtilsService,
+              orderForm: OrderFormService) {
+    super(orderForm);
+  }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -62,29 +67,13 @@ export class CargoGroupComponent implements OnInit, ControlValueAccessor, Valida
     this.formGroup.get('activeItem').setValue(this.items.length - 1);
   }
 
-  public onTouched: () => void = () => {};
-
   writeValue(value: any): void {
+
     if (value) {
       this.items.clear();
       value.items.forEach(item => this.items.push(new FormControl(item)));
-      this.formGroup.setValue(value, { emitEvent: false });
     }
-  }
 
-  registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   isDisabled ? this.parcelGroup.disable() : this.parcelGroup.enable();
-  // }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    console.log("Basic Info validation", c);
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: "basicInfoForm fields are invalid"}};
+    super.writeValue(value);
   }
 }

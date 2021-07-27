@@ -3,6 +3,8 @@
     <label class="form__label">Количество мест</label>
     <app-counter
       [formControlName]="FormControlName.PlaceCount"
+      [isInvalid]="(formGroup.get(FormControlName.PlaceCount).invalid
+          && formGroup.get(FormControlName.PlaceCount).touched)"
     >
     </app-counter>
   </div>

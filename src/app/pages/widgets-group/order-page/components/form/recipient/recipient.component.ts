@@ -14,6 +14,8 @@ import {FormUtilsService} from '../../../../../../core/services/form-utils.servi
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import fieldError from '../../../../../../core/form/fieldError';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
+import {BasicGroupComponent} from '../basic-group/basic-group.component';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-recipient',
@@ -32,7 +34,7 @@ import formFieldMeta from '../../../../../../core/form/formFieldMeta';
     }
   ]
 })
-export class RecipientComponent implements OnInit, ControlValueAccessor, Validator {
+export class RecipientComponent extends BasicGroupComponent implements OnInit  {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
@@ -40,35 +42,15 @@ export class RecipientComponent implements OnInit, ControlValueAccessor, Validat
   public formGroup: FormGroup;
 
   constructor(public formUtils: FormUtilsService,
-              public utils: UtilsService) { }
+              public utils: UtilsService,
+              orderForm: OrderFormService) {
+    super(orderForm);
+  }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       [FormControlName.Fio]: new FormControl('', [Validators.required]),
       [FormControlName.Tel]: new FormControl('', [Validators.required])
     });
-  }
-
-  public onTouched: () => void = () => {};
-
-  writeValue(value: any): void {
-    if (value) {
-      this.formGroup.setValue(value, { emitEvent: false });
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   isDisabled ? this.formGroup.disable() : this.formGroup.enable();
-  // }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'recipient are invalid'}};
   }
 }

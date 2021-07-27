@@ -13,6 +13,7 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
+import {BasicGroupComponent} from '../basic-group/basic-group.component';
 
 @Component({
   selector: 'app-services',
@@ -37,7 +38,7 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
     ])
   ])]
 })
-export class ServicesComponent implements OnInit, ControlValueAccessor, Validator {
+export class ServicesComponent extends BasicGroupComponent implements OnInit {
   public FormControlName = FormControlName;
   public FormFieldMeta = formFieldMeta;
 
@@ -45,10 +46,11 @@ export class ServicesComponent implements OnInit, ControlValueAccessor, Validato
   public currentService: string;
 
   constructor(public formUtils: FormUtilsService,
-              private orderForm: OrderFormService) { }
+              orderForm: OrderFormService) {
+    super(orderForm);
+  }
 
   ngOnInit(): void {
-    // this.currentService = this.Service.Insurance;
 
     this.formGroup = new FormGroup({
       [FormControlName.Insurance]: new FormGroup({
@@ -66,30 +68,7 @@ export class ServicesComponent implements OnInit, ControlValueAccessor, Validato
     });
   }
 
-  showService(service: string) {
-    this.currentService = service;
-  }
-
-  public onTouched: () => void = () => {};
-
-  writeValue(value: any): void {
-    if (value) {
-      this.formGroup.setValue(value, { emitEvent: false });
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   isDisabled ? this.formGroup.disable() : this.formGroup.enable();
+  // showService(service: string) {
+  //   this.currentService = service;
   // }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'packaging are invalid'}};
-  }
 }

@@ -16,6 +16,7 @@ import {UtilsService} from '../../../../../../core/services/utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import roles from 'src/app/mock-data/roles';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
+import {BasicGroupComponent} from '../basic-group/basic-group.component';
 
 @Component({
   selector: 'app-sender',
@@ -35,7 +36,7 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
   ]
 })
 
-export class SenderComponent implements OnInit, ControlValueAccessor, Validator {
+export class SenderComponent extends BasicGroupComponent implements OnInit {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
@@ -45,8 +46,10 @@ export class SenderComponent implements OnInit, ControlValueAccessor, Validator 
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
-              private orderForm: OrderFormService,
-              private readonly cdr: ChangeDetectorRef) { }
+              private readonly cdr: ChangeDetectorRef,
+              orderForm: OrderFormService) {
+    super(orderForm);
+}
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -55,42 +58,5 @@ export class SenderComponent implements OnInit, ControlValueAccessor, Validator 
       [FormControlName.DocNumber]: new FormControl('', [Validators.required]),
       [FormControlName.Tel]: new FormControl('', [Validators.required]),
     });
-  }
-
-
-  public onTouched: () => void = () => {};
-
-  writeValue(value: any): void {
-    if (value) {
-      this.formGroup.setValue(value, { emitEvent: false });
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   isDisabled ? this.formGroup.disable() : this.formGroup.enable();
-  // }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
-      if (c.errors) {
-        this.formGroup.markAllAsTouched();
-      }
-
-      if (c.errors) {
-        this.orderForm.setInvalidStep(result.step);
-      } else {
-        this.orderForm.setInvalidStep(null);
-      }
-
-    });
-
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'sender group are invalid'}};
   }
 }

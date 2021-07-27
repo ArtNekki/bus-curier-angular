@@ -22,6 +22,7 @@ import { AuthorComponent } from './components/form/author/author.component';
 import { DocsComponent } from './components/form/docs/docs.component';
 import { SidebarResultComponent } from './components/sidebar-result/sidebar-result.component';
 import {ModalsModule} from '../../../modals/modals.module';
+import { BasicGroupComponent } from './components/form/basic-group/basic-group.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {ModalsModule} from '../../../modals/modals.module';
     CargoGroupComponent,
     AuthorComponent,
     DocsComponent,
-    SidebarResultComponent
+    SidebarResultComponent,
+    BasicGroupComponent
   ],
   imports: [
     CommonModule,

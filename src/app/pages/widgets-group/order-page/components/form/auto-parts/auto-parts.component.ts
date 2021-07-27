@@ -10,7 +10,10 @@ import {
   Validator
 } from '@angular/forms';
 import {map} from 'rxjs/operators';
+import FormControlName from 'src/app/core/maps/FormControlName';
 import cities from 'src/app/mock-data/cities';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
+import {BasicGroupComponent} from '../basic-group/basic-group.component';
 
 @Component({
   selector: 'app-auto-parts',
@@ -29,11 +32,15 @@ import cities from 'src/app/mock-data/cities';
     }
   ]
 })
-export class AutoPartsComponent implements OnInit, ControlValueAccessor, Validator {
+export class AutoPartsComponent extends BasicGroupComponent implements OnInit  {
+  public FormControlName = FormControlName;
+
   public formGroup: FormGroup;
   public cities = cities;
 
-  constructor() { }
+  constructor(orderForm: OrderFormService) {
+    super(orderForm);
+  }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -47,19 +54,17 @@ export class AutoPartsComponent implements OnInit, ControlValueAccessor, Validat
     return this.formGroup.get('parts') as FormArray;
   }
 
-  addAutoPart() {
+  add() {
     this.parts.push(new FormControl(''));
   }
 
-  removeAutoPart(index: number) {
+  delete(index: number) {
     if (this.parts.length <= 1) {
       return;
     }
 
     this.parts.removeAt(index);
   }
-
-  public onTouched: () => void = () => {};
 
   writeValue(value: any): void {
     if (value) {
@@ -70,16 +75,5 @@ export class AutoPartsComponent implements OnInit, ControlValueAccessor, Validat
 
   registerOnChange(fn: any): void {
     this.formGroup.valueChanges.pipe( map(value => value.parts)).subscribe(fn);
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   isDisabled ? this.formGroup.disable() : this.formGroup.enable();
-  // }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'auto-parts are invalid'}};
   }
 }

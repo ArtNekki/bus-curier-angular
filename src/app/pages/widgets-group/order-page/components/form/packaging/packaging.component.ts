@@ -15,6 +15,8 @@ import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {BasicGroupComponent} from '../basic-group/basic-group.component';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-packaging',
@@ -34,14 +36,17 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
     }
   ]
 })
-export class PackagingComponent implements OnInit, ControlValueAccessor, Validator {
+export class PackagingComponent extends BasicGroupComponent implements OnInit  {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
 
   public formGroup: FormGroup;
 
   constructor(public formUtils: FormUtilsService,
-              public utils: UtilsService) { }
+              public utils: UtilsService,
+              orderForm: OrderFormService) {
+    super(orderForm);
+  }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -72,36 +77,5 @@ export class PackagingComponent implements OnInit, ControlValueAccessor, Validat
 
   public get items(): FormArray {
     return this.formGroup.get('items') as FormArray;
-  }
-
-  public onTouched: () => void = () => {};
-
-  writeValue(value: any): void {
-    if (value) {
-      this.formGroup.setValue(value, { emitEvent: false });
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   isDisabled ? this.formGroup.disable() : this.formGroup.enable();
-  // }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'packaging are invalid'}};
-  }
-
-  showCounter(data: any) {
-    console.log('$event', data);
-  }
-
-  ch(groupControl: any) {
-    console.log('groupControl', groupControl);
   }
 }

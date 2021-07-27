@@ -16,6 +16,7 @@ import {FormUtilsService} from '../../../../../../core/services/form-utils.servi
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import roles from 'src/app/mock-data/roles';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
+import {BasicGroupComponent} from '../basic-group/basic-group.component';
 
 @Component({
   selector: 'app-individual',
@@ -34,7 +35,7 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
     }
   ]
 })
-export class IndividualComponent implements OnInit, ControlValueAccessor, Validator {
+export class IndividualComponent extends BasicGroupComponent implements OnInit {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
@@ -44,10 +45,13 @@ export class IndividualComponent implements OnInit, ControlValueAccessor, Valida
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
-              private orderForm: OrderFormService,
-              private readonly cdr: ChangeDetectorRef) { }
+              private readonly cdr: ChangeDetectorRef,
+              orderForm: OrderFormService) {
+    super(orderForm);
+  }
 
   ngOnInit(): void {
+
     this.formGroup = new FormGroup({
       [FormControlName.LastName]: new FormControl('', [Validators.required]),
       [FormControlName.FirstName]: new FormControl('', [Validators.required]),
@@ -59,43 +63,5 @@ export class IndividualComponent implements OnInit, ControlValueAccessor, Valida
 
     roles.unshift({value: '', name: 'Не выбрано'});
     this.roles = roles;
-  }
-
-  public onTouched: () => void = () => {};
-
-  writeValue(value: any): void {
-    if (value) {
-      this.formGroup.setValue(value, { emitEvent: false });
-    }
-    // this.cdr.detectChanges();
-    // this.cdr.markForCheck();
-    // this.formGroup.markAllAsTouched();
-  }
-
-  registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   isDisabled ? this.formGroup.disable() : this.formGroup.enable();
-  // }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
-      if (c.errors) {
-        this.formGroup.markAllAsTouched();
-      }
-
-      if (c.errors) {
-        this.orderForm.setInvalidStep(result.step);
-      } else {
-        this.orderForm.setInvalidStep(null);
-      }
-
-    });
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'individual group are invalid'}};
   }
 }

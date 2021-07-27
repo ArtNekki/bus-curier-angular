@@ -73,7 +73,7 @@ export class OrderPageComponent implements OnInit {
     this.orderForm.submit({submitted: true, step: this.currentStep});
 
     if (this.invalidStep != null) {
-      // return;
+      return;
     }
 
     this.currentStep++;

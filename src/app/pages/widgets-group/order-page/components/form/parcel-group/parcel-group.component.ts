@@ -15,6 +15,10 @@ import formGroupMeta from '../../../../../../core/form/formGroupMeta';
 import FormControlName from '../../../../../../core/maps/FormControlName';
 import fieldError from '../../../../../../core/form/fieldError';
 import {parcelGroup} from '../../../../../../core/form/groups';
+import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
+import {UtilsService} from '../../../../../../core/services/utils.service';
+import {BasicGroupComponent} from '../basic-group/basic-group.component';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 
 @Component({
   selector: 'app-parcel-group',
@@ -33,16 +37,20 @@ import {parcelGroup} from '../../../../../../core/form/groups';
     }
   ]
 })
-export class ParcelGroupComponent implements OnInit, ControlValueAccessor, Validator {
+export class ParcelGroupComponent extends BasicGroupComponent implements OnInit {
   public FormFieldError = fieldError;
 
-  public form: FormGroup;
+  public formGroup: FormGroup;
   public formGroupMeta = formGroupMeta;
 
-  constructor() { }
+  constructor(public formUtils: FormUtilsService,
+              public utils: UtilsService,
+              orderForm: OrderFormService) {
+    super(orderForm);
+  }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
+    this.formGroup = new FormGroup({
       parcels: new FormArray([
         new FormControl('')
       ])
@@ -50,18 +58,12 @@ export class ParcelGroupComponent implements OnInit, ControlValueAccessor, Valid
   }
 
   public get parcels(): FormArray {
-    return this.form.get('parcels') as FormArray;
+    return this.formGroup.get('parcels') as FormArray;
   }
 
   getGroupControls(group) {
     return (group as FormGroup).controls;
   }
-
-  originalOrder = (a: KeyValue<string, AbstractControl>, b: KeyValue<string, AbstractControl>): number => {
-    return 0;
-  }
-
-  public onTouched: () => void = () => {};
 
   writeValue(value: any): void {
     if (value) {
@@ -71,30 +73,14 @@ export class ParcelGroupComponent implements OnInit, ControlValueAccessor, Valid
   }
 
   registerOnChange(fn: any): void {
-    this.form.valueChanges.pipe( map(value => value.parcels)).subscribe(fn);
+    this.formGroup.valueChanges.pipe( map(value => value.parcels)).subscribe(fn);
   }
 
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   isDisabled ? this.parcelGroup.disable() : this.parcelGroup.enable();
-  // }
-
-  validate(c: AbstractControl): ValidationErrors | null {
-    console.log("Basic Info validation", c);
-    return this.form.valid ? null : { invalidForm: {valid: false, message: "basicInfoForm fields are invalid"}};
-  }
-
-  getObjectKey(object) {
-    return (object instanceof Object) && Object.keys(object);
-  }
-
-  addParcelParams() {
+  add() {
     this.parcels.push(new FormControl(''));
   }
 
-  deleteParcelParams(index: number) {
+  delete(index: number) {
     if (this.parcels.length <= 1) {
       return;
     }

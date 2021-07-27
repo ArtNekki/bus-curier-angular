@@ -4,8 +4,10 @@
              [index]="i"
              formControlName="activeItem"
              [checked]="formGroup.get('activeItem').value === i"
-             (delete)="deleteCargo($event)">
+             (delete)="deleteCargo($event)"
+             [isInvalid]="control.invalid && 'invalid'" >
       Груз №{{i + 1}}
+      invalid: {{control.invalid}}
     </app-tag>
     <app-tag type="add" (click)="addCargo()"></app-tag>
   </div>

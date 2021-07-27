@@ -13,7 +13,8 @@
         [type]="FormFieldMeta[control.key].type"
         [formControlName]="control.key"
         [mask]="FormFieldMeta[control.key].mask"
-        [prefix]="FormFieldMeta[control.key].prefix">
+        [prefix]="FormFieldMeta[control.key].prefix"
+        [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'">
         <ng-container class="errors">
           <small *ngIf="utils.getObjectKey(control.value.errors).length">
             {{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}
