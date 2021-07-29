@@ -70,38 +70,26 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
       case FormControlName.Docs:
         this.formGroup.get('items')
           .get(FormControlName.Parcels)
-          .patchValue('', {
-            onlySelf: true
-          });
+          .setValue('');
         this.formGroup.get('items')
           .get(FormControlName.AutoParts)
-          .patchValue('', {
-            onlySelf: true
-          });
+          .setValue('');
         break;
       case FormControlName.Parcels:
         this.formGroup.get('items')
           .get(FormControlName.Docs)
-          .patchValue('', {
-          onlySelf: true
-        });
+          .setValue('');
         this.formGroup.get('items')
           .get(FormControlName.AutoParts)
-          .patchValue('', {
-          onlySelf: true
-        });
+          .setValue('');
         break;
       case FormControlName.AutoParts:
         this.formGroup.get('items')
           .get(FormControlName.Parcels)
-          .patchValue('', {
-            onlySelf: true
-          });
+          .setValue('');
         this.formGroup.get('items')
           .get(FormControlName.Docs)
-          .patchValue('', {
-            onlySelf: true
-          });
+          .setValue('');
         break;
     }
   }
