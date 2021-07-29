@@ -38,8 +38,8 @@ export class OrderStepsComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const previousStep = changes.currentStep.previousValue;
-    const currentStep = changes.currentStep.currentValue;
+    const previousStep = changes.currentStep && changes.currentStep.previousValue;
+    const currentStep = changes.currentStep && changes.currentStep.currentValue; ;
 
     if (this.stepNodes && (currentStep > previousStep)) {
       this.stepNodes[previousStep].classList.add('calc-steps__item--done');

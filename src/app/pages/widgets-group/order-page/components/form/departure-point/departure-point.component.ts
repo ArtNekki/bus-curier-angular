@@ -61,8 +61,8 @@ export class DeparturePointComponent extends BasicGroupComponent implements OnIn
       [FormControlName.Location]: new FormControl('', [Validators.required]),
       [FormControlName.DispatchData]: new FormGroup({
         [FormControlName.Active]: new FormControl(),
-        [FormControlName.Department]: new FormControl('', [Validators.required]),
-        [FormControlName.Courier]: new FormControl('', [Validators.required])
+        [FormControlName.Department]: new FormControl(''),
+        [FormControlName.Courier]: new FormControl('')
       }),
       [FormControlName.Date]: new FormControl('', [Validators.required]),
     });
@@ -74,5 +74,16 @@ export class DeparturePointComponent extends BasicGroupComponent implements OnIn
         return {value: el.id, name: el.name};
       });
     });
+  }
+
+  changeType(type: string) {
+    switch (type) {
+      case this.Tab.One:
+        this.formGroup.get(FormControlName.DispatchData).get(this.Tab.Two).setValue('');
+        break;
+      case this.Tab.Two:
+        this.formGroup.get(FormControlName.DispatchData).get(this.Tab.One).setValue('');
+        break;
+    }
   }
 }
