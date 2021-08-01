@@ -8,7 +8,7 @@
          [value]="UserType.Individual"
          (change)="changeUser(UserType.Individual)"
          [formControlName]="FormControlName.Active" hidden />
-         <div>Физическое лицо</div>
+         <div [class.invalid]="formGroup.get(UserType.Individual).invalid && formGroup.get(UserType.Individual).dirty">Физическое лицо</div>
     </label>
     <label class="form__tab">
       <input type="radio"
@@ -17,7 +17,7 @@
          [value]="UserType.Entity"
          (change)="changeUser(UserType.Entity)"
          [formControlName]="FormControlName.Active"  hidden />
-         <div>Юридическое лицо</div>
+         <div [class.invalid]="formGroup.get(UserType.Entity).invalid && formGroup.get(UserType.Entity).dirty">Юридическое лицо</div>
     </label>
   </div>
   <div *ngIf="formGroup.get(FormControlName.Active).value === UserType.Individual"

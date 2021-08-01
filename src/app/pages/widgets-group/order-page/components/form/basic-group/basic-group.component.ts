@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -9,18 +9,25 @@ import {
   Validator
 } from '@angular/forms';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-basic-group',
   templateUrl: './basic-group.component.html',
   styleUrls: ['./basic-group.component.scss']
 })
-export class BasicGroupComponent implements OnInit, Validator, ControlValueAccessor {
+export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Validator, ControlValueAccessor {
   public formGroup: FormGroup;
+  public onChangeSub: Subscription;
 
-  constructor(protected orderForm: OrderFormService) { }
+
+  constructor(
+    protected orderForm: OrderFormService,
+    protected changeDetectorRef?: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
+
   }
 
   public onTouched: () => void = () => {};
@@ -32,7 +39,7 @@ export class BasicGroupComponent implements OnInit, Validator, ControlValueAcces
   }
 
   registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.subscribe(fn);
+    this.onChangeSub = this.formGroup.valueChanges.subscribe(fn);
   }
 
   registerOnTouched(fn: any): void {
@@ -40,19 +47,47 @@ export class BasicGroupComponent implements OnInit, Validator, ControlValueAcces
   }
 
   validate(c: AbstractControl): ValidationErrors | null {
+    const values = Object.values(this.formGroup.controls);
+
+    const isInvalid = values.some((value) => {
+       return value.errors;
+    });
+
+    console.log('formIsInvalid', values);
+
     this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
-      if (c.errors) {
+      if (isInvalid) {
         this.formGroup.markAllAsTouched();
       }
 
-      if (c.errors) {
+      if (isInvalid) {
         this.orderForm.setInvalidStep(result.step);
       } else {
         this.orderForm.setInvalidStep(null);
       }
 
     });
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'invalid'}};
+    return !isInvalid ? null : { invalidForm: {valid: false, message: 'invalid'}};
+  }
+
+  ngOnDestroy(): void {
+    this.onChangeSub.unsubscribe();
+  }
+
+  ngAfterViewInit(): void {
+    // this.formGroup.markAsTouched();
+
+    // if (this.changeDetectorRef) {
+    //   this.changeDetectorRef.detectChanges();
+    // }
+
+    console.log('form touched', this.formGroup.touched);
+
+    // if (this.formGroup.invalid && this.formGroup.touched) {
+    //   this.formGroup.markAllAsTouched();
+    // }
+    // setTimeout(() => );
+    console.log('touched', this.formGroup.touched);
   }
 
   // setDisabledState?(isDisabled: boolean): void {

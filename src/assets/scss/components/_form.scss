@@ -812,6 +812,16 @@
       &::after {
         background-color: $primary-color;
       }
+
+      &.invalid {
+        color: $white-color;
+        background-color: $red-color;
+
+        &::before,
+        &::after {
+          background-color: $red-color;
+        }
+      }
     }
   }
 

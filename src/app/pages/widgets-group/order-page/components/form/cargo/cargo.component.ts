@@ -44,7 +44,7 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
-              private readonly changeDetectorRef: ChangeDetectorRef,
+              // private readonly changeDetectorRef: ChangeDetectorRef,
               orderForm: OrderFormService) {
     super(orderForm);
   }

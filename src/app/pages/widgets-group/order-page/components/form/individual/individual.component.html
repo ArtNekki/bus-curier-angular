@@ -9,7 +9,7 @@
       *ngIf="control.key === FormControlName.Role; else input"
       [formControlName]="control.key"
       [items]="roles"
-      [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+      [isInvalid]="control.value.invalid && control.value.touched"
     ></app-select>
     <ng-template #input>
       <app-input
@@ -17,7 +17,7 @@
         [id]="'individual-' + control.key"
         [formControlName]="control.key"
         [mask]="FormFieldMeta[control.key].mask" [prefix]="FormFieldMeta[control.key].prefix"
-        [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+        [isInvalid]="control.value.invalid && control.value.touched"
       >
         <ng-container class="errors">
           <small *ngIf="utils.getObjectKey(control.value.errors).length">
