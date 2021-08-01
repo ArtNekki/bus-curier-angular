@@ -4,6 +4,10 @@
     <p class="page__subtitle">Заполните форму необходимыми данными и отправьте</p>
     <app-order-steps [invalidStep]="invalidStep" [currentStep]="currentStep"></app-order-steps>
     <form class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
+      step1: {{steps[FormStep.One].invalid}}
+      step2: {{steps[FormStep.Two].invalid}}
+      step3: {{steps[FormStep.Three].invalid}}
+      step4: {{steps[FormStep.Four].invalid}}
       <ng-container formArrayName="steps">
         <div *ngIf="currentStep === FormStep.One" [formGroup]="steps[FormStep.One]" [@fadeIn]="">
           <app-author [formControlName]="FormControlName.Author" (selectUser)="setCurrentUser($event)"></app-author>

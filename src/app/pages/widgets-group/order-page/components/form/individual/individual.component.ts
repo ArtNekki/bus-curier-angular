@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -33,7 +33,8 @@ import {BasicGroupComponent} from '../basic-group/basic-group.component';
       useExisting: forwardRef(() => IndividualComponent),
       multi: true
     }
-  ]
+  ],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IndividualComponent extends BasicGroupComponent implements OnInit {
   public FormFieldMeta = formFieldMeta;
@@ -60,6 +61,8 @@ export class IndividualComponent extends BasicGroupComponent implements OnInit {
       [FormControlName.Tel]: new FormControl('', [Validators.required]),
       [FormControlName.Role]: new FormControl('', [Validators.required]),
     });
+
+    super.ngOnInit();
 
     roles.unshift({value: '', name: 'Не выбрано'});
     this.roles = roles;

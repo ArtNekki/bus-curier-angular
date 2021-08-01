@@ -19,6 +19,7 @@ import {Subscription} from 'rxjs';
 export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Validator, ControlValueAccessor {
   public formGroup: FormGroup;
   public onChangeSub: Subscription;
+  private subscriptions: Subscription[] = [];
 
 
   constructor(
@@ -27,14 +28,26 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
   ) { }
 
   ngOnInit(): void {
-
+    this.subscriptions.push(
+      this.formGroup.valueChanges.subscribe(value => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
   }
 
   public onTouched: () => void = () => {};
+  public onChange: any = () => {};
 
   writeValue(value: any): void {
     if (value) {
       this.formGroup.setValue(value, { emitEvent: false });
+      this.onChange(value);
+      this.onTouched();
+    }
+
+    if (value === null) {
+      this.formGroup.reset();
     }
   }
 
@@ -57,8 +70,11 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
 
     this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
       if (isInvalid) {
-        this.formGroup.markAllAsTouched();
+
       }
+
+      this.formGroup.markAllAsTouched();
+      // this.formGroup.markAsDirty();
 
       if (isInvalid) {
         this.orderForm.setInvalidStep(result.step);
@@ -72,6 +88,7 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
 
   ngOnDestroy(): void {
     this.onChangeSub.unsubscribe();
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
   ngAfterViewInit(): void {
@@ -81,13 +98,13 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
     //   this.changeDetectorRef.detectChanges();
     // }
 
-    console.log('form touched', this.formGroup.touched);
+    // console.log('form touched', this.formGroup.touched);
 
     // if (this.formGroup.invalid && this.formGroup.touched) {
     //   this.formGroup.markAllAsTouched();
     // }
     // setTimeout(() => );
-    console.log('touched', this.formGroup.touched);
+    // console.log('touched', this.formGroup.touched);
   }
 
   // setDisabledState?(isDisabled: boolean): void {
