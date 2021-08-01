@@ -74,6 +74,12 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
       }
 
       this.formGroup.markAllAsTouched();
+      this.formGroup.markAsDirty();
+      this.formGroup.markAsTouched();
+
+      values.forEach((value) => {
+        value.markAsDirty();
+      });
       // this.formGroup.markAsDirty();
 
       if (isInvalid) {

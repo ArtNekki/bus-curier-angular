@@ -19,11 +19,12 @@ import {
 export class OrderStepsComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('stepsEl', {read: ElementRef}) stepsEl: ElementRef;
 
+  @Input() steps;
   @Input() currentStep: number;
   @Input() invalidStep: number;
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
-  public steps = ['Автор заявки', 'Отправитель груза', 'Параметры груза', 'Завершение'];
+  public stepLabels = ['Автор заявки', 'Отправитель груза', 'Параметры груза', 'Завершение'];
   public previousStep: number;
   public stepNodes;
 

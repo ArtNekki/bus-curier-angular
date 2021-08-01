@@ -23,6 +23,7 @@ export class OrderPageComponent implements OnInit {
   };
 
   public form: FormGroup;
+  public stepLabels = ['Автор заявки', 'Отправитель груза', 'Параметры груза', 'Завершение'];
   public currentStep = 0;
   public currentUser = null;
   public invalidStep;
