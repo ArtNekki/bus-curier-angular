@@ -26,9 +26,22 @@
     border-radius: 30px;
     box-sizing: border-box;
     cursor: pointer;
+    user-select: none;
 
     .tag__input:checked ~ & {
       background-color: $primary-color;
+    }
+
+    .tag__input:disabled ~ & {
+      background-color: $gray-light-color;
+      border-color: $gray-light-color;
+      cursor: not-allowed;
+    }
+
+    .tag--invalid .tag__input:checked ~ & {
+      color: $white-color;
+      background-color: $red-color;
+      border-color: $red-color;
     }
 
     .tag--add & {
@@ -59,9 +72,15 @@
   &__delete {
     position: relative;
 
-    @include close-button(12px, $gray-color, darken($gray-color, 8%));
-
     .tag__input:checked ~ .tag__body & {
+      @include close-button(12px, $black-color, darken($gray-color, 8%));
+    }
+
+    .tag--invalid .tag__input:checked ~ .tag__body & {
+      @include close-button(12px, $white-color, darken($gray-color, 8%));
+    }
+
+    .tag__input:disabled ~ .tag__body & {
       display: none;
     }
   }
@@ -71,9 +90,5 @@
 
     // flex-basis: 100%;
     margin-bottom: $bottom-space;
-  }
-
-  &--invalid {
-    background-color: red;
   }
 }

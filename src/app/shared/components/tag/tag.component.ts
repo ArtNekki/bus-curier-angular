@@ -20,6 +20,7 @@ export class TagComponent implements ControlValueAccessor, OnInit {
   @Input() isInvalid: boolean;
   @Input() index: any;
   @Input() checked: boolean;
+  @Input() disabled: boolean;
   @Input() mods;
 
   public cssClass;

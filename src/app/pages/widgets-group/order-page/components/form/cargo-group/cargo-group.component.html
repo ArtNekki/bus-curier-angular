@@ -4,12 +4,12 @@
              [index]="i"
              formControlName="activeItem"
              [checked]="formGroup.get('activeItem').value === i"
+             [disabled]="(formGroup.get('activeItem').value !== i) && isSomeControlInvalid"
              (delete)="deleteCargo($event)"
              [isInvalid]="control.invalid && 'invalid'" >
       Груз №{{i + 1}}
-      invalid: {{control.invalid}}
     </app-tag>
-    <app-tag type="add" (click)="addCargo()"></app-tag>
+    <app-tag type="add" (click)="addCargo()" [disabled]="isSomeControlInvalid"></app-tag>
   </div>
   <div formArrayName="items">
     <ng-template ngFor let-item [ngForOf]="items.controls" let-i = index>

@@ -1,4 +1,4 @@
-<button *ngIf="type === 'add'; else tag" type="button" [class]="cssClass + ' tag--add'">
+<button *ngIf="type === 'add'; else tag" type="button" [class]="cssClass + ' tag--add'" [disabled]="disabled">
   <div class="tag__body">
     <svg-icon class="icon" src="assets/img/svg/plus.svg" width="19" height="19"></svg-icon>
     <span class="tag__text">Добавить</span>
@@ -7,14 +7,14 @@
 
 <ng-template #tag>
   <label [class]="cssClass" [class.tag--invalid]="isInvalid">
-    <input type="radio" name="tag" class="tag__input" (change)="changeValue(index)" [checked]="checked">
+    <input type="radio" name="tag" class="tag__input" (change)="changeValue(index)" [checked]="checked" [disabled]="disabled">
 <!--    <input type="radio" name="tag" class="tag__input" (change)="changeValue(index)" [checked]="checked">-->
 <!--    (change)="selectTag($event, index)"-->
     <div class="tag__body">
       <span class="tag__text">
         <ng-content></ng-content>
       </span>
-      <button type="button" class="tag__delete" (click)="onDelete(index)">&#160;</button>
+      <button *ngIf="index" type="button" class="tag__delete" (click)="onDelete(index)">&#160;</button>
     </div>
   </label>
 </ng-template>

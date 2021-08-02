@@ -60,6 +60,10 @@ export class CargoGroupComponent extends BasicGroupComponent implements OnInit  
   }
 
   addCargo() {
+    if (this.isSomeControlInvalid) {
+      return;
+    }
+
     this.items.push(new FormControl(''));
     this.formGroup.get('activeItem').setValue(this.items.length - 1);
   }
@@ -67,6 +71,10 @@ export class CargoGroupComponent extends BasicGroupComponent implements OnInit  
   deleteCargo(index: number) {
     this.items.removeAt(index);
     this.formGroup.get('activeItem').setValue(this.items.length - 1);
+  }
+
+  get isSomeControlInvalid() {
+    return this.items.controls.some((control) => control.invalid);
   }
 
   writeValue(value: any): void {
