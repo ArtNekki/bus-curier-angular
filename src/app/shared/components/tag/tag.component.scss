@@ -88,6 +88,10 @@
   &--add {
     @include btn-default();
 
+    &:disabled {
+      cursor: not-allowed;
+    }
+
     // flex-basis: 100%;
     margin-bottom: $bottom-space;
   }

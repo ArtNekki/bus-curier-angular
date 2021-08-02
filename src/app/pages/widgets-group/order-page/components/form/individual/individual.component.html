@@ -3,7 +3,7 @@
        class="form__field">
     <label [for]="'individual-' + control.key" class="form__label">
       {{FormFieldMeta[control.key].label}}
-      <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
+      <sup class="form__required" *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
     </label>
     <app-select
       *ngIf="control.key === FormControlName.Role; else input"
@@ -18,6 +18,7 @@
         [formControlName]="control.key"
         [mask]="FormFieldMeta[control.key].mask" [prefix]="FormFieldMeta[control.key].prefix"
         [isInvalid]="control.value.invalid && control.value.touched"
+        [isValid]="!control.value.invalid && control.value.touched"
       >
         <ng-container class="errors">
           <small *ngIf="utils.getObjectKey(control.value.errors).length">

@@ -17,7 +17,7 @@
     </div>
   </div>
   <ng-template #simpleInput>
-    <div [class]="cssClass" [class.input--invalid]="isInvalid">
+    <div [class]="cssClass" [class.input--invalid]="isInvalid" [class.input--valid]="isValid">
       <input  *ngIf="mask; else withoutMask" #simpleInputField [type]="type" [id]="id" class="input__field" [placeholder]="placeholder" [mask]="mask" [prefix]="prefix" [ngModel]="value" (ngModelChange)="changeValue($event)" (blur)="markAsTouched()" />
       <ng-template #withoutMask>
         <input #simpleInputField [type]="type" [id]="id" class="input__field" [placeholder]="placeholder" [ngModel]="value" (ngModelChange)="changeValue($event)" (blur)="markAsTouched()"/>

@@ -284,6 +284,10 @@
     }
   }
 
+  .input--valid & {
+    border-color: rgba($green-color, 0.4);
+  }
+
   @include focus {
     outline: none;
     color: $black-color;
