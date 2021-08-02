@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {animate, style, transition, trigger} from '@angular/animations';
 import FormControlName from '../../../core/maps/FormControlName';
@@ -30,7 +30,8 @@ export class OrderPageComponent implements OnInit {
 
   constructor(
     public orderForm: OrderFormService,
-    public authService: AuthService
+    public authService: AuthService,
+    protected changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -79,6 +80,8 @@ export class OrderPageComponent implements OnInit {
 
     this.currentStep++;
     this.scrollToTop();
+
+    this.changeDetectorRef.detectChanges();
   }
 
   goPrev() {
