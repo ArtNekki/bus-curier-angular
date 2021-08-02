@@ -42,15 +42,15 @@ export class OrderPageComponent implements OnInit {
           author: new FormControl('', [Validators.required])
         }),
         new FormGroup({
-          [FormControlName.Sender]: new FormControl(''),
-          [FormControlName.DeparturePoint]: new FormControl('')
+          [FormControlName.Sender]: new FormControl('', [Validators.required]),
+          [FormControlName.DeparturePoint]: new FormControl('', [Validators.required])
         }),
         new FormGroup({
-          ['cargo-group']: new FormControl(''),
+          ['cargo-group']: new FormControl('', [Validators.required]),
           [FormControlName.Packaging]: new FormControl(''),
           [FormControlName.Services]: new FormControl(''),
-          [FormControlName.Recipient]: new FormControl(''),
-          [FormControlName.PickupPoint]: new FormControl('')
+          [FormControlName.Recipient]: new FormControl('', [Validators.required]),
+          [FormControlName.PickupPoint]: new FormControl('', [Validators.required])
         }),
         new FormGroup({
 
@@ -72,9 +72,7 @@ export class OrderPageComponent implements OnInit {
       return;
     }
 
-    this.orderForm.submit({submitted: true, step: this.currentStep});
-
-    if (this.invalidStep != null) {
+    if (this.steps[this.currentStep].invalid) {
       return;
     }
 

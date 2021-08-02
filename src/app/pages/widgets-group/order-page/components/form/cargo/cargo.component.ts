@@ -53,9 +53,9 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
     this.formGroup = new FormGroup({
       activeItem: new FormControl('docs'),
       items: new FormGroup({
-        [FormControlName.Docs]: new FormControl(''),
-        [FormControlName.Parcels]: new FormControl(''),
-        [FormControlName.AutoParts]: new FormControl(''),
+        [FormControlName.Docs]: new FormControl('', [Validators.required]),
+        [FormControlName.Parcels]: new FormControl('', [Validators.required]),
+        [FormControlName.AutoParts]: new FormControl('', [Validators.required]),
         // other: new FormGroup({})
       })
     });
@@ -70,28 +70,23 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
   changeCargoType(type: string) {
     switch (type) {
       case FormControlName.Docs:
-        this.formGroup.get('items')
-          .get(FormControlName.Parcels)
-          .setValue('');
-        this.formGroup.get('items')
-          .get(FormControlName.AutoParts)
-          .setValue('');
+        this.formGroup.get('items').get(FormControlName.Docs).setValidators([Validators.required]);
+        this.formGroup.get('items').get(FormControlName.Parcels).setValue('');
+        this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
+        this.formGroup.get('items').get(FormControlName.AutoParts).setValue('');
+        this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
         break;
       case FormControlName.Parcels:
-        this.formGroup.get('items')
-          .get(FormControlName.Docs)
-          .setValue('');
-        this.formGroup.get('items')
-          .get(FormControlName.AutoParts)
-          .setValue('');
+        this.formGroup.get('items').get(FormControlName.Parcels).setValidators([Validators.required]);
+        this.formGroup.get('items').get(FormControlName.Docs).setValue('');
+        this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
+        this.formGroup.get('items').get(FormControlName.AutoParts).setValue('');
+        this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
         break;
       case FormControlName.AutoParts:
-        this.formGroup.get('items')
-          .get(FormControlName.Parcels)
-          .setValue('');
-        this.formGroup.get('items')
-          .get(FormControlName.Docs)
-          .setValue('');
+        this.formGroup.get('items').get(FormControlName.AutoParts).setValidators([Validators.required]);
+        this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
+        this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
         break;
     }
   }

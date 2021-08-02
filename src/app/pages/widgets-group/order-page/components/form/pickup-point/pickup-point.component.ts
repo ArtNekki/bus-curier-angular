@@ -71,4 +71,19 @@ export class PickupPointComponent extends BasicGroupComponent implements OnInit 
       });
     });
   }
+
+  changeType(type: string) {
+    switch (type) {
+      case this.Tab.One:
+        this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.One).setValidators([Validators.required]);
+        this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.Two).clearValidators();
+        this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.Two).setValue('');
+        break;
+      case this.Tab.Two:
+        this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.Two).setValidators([Validators.required]);
+        this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.One).clearValidators();
+        this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.One).setValue('');
+        break;
+    }
+  }
 }

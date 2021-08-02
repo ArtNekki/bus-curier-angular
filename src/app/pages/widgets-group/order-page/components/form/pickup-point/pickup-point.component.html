@@ -23,6 +23,7 @@
                  [checked]="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).value === Tab.One"
                  [name]="FormControlName.Active"
                  [value]="Tab.One"
+                 (change)="changeType(Tab.One)"
                  [formControlName]="FormControlName.Active" hidden />
           <div>Cдать в отделение</div>
         </label>
@@ -31,6 +32,7 @@
                  [checked]="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).value === Tab.Two"
                  [name]="FormControlName.Active"
                  [value]="Tab.Two"
+                 (change)="changeType(Tab.Two)"
                  [formControlName]="FormControlName.Active"  hidden />
           <div>Вызвать курьера</div>
         </label>

@@ -31,7 +31,7 @@ import {BasicGroupComponent} from '../basic-group/basic-group.component';
       multi: true
     }
   ],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParcelComponent extends BasicGroupComponent implements OnInit {
   public formGroupMeta = formGroupMeta;

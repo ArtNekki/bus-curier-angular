@@ -44,7 +44,7 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
     if (value) {
       this.formGroup.setValue(value, { emitEvent: false });
       this.onChange(value);
-      // this.onTouched();
+      this.onTouched();
     }
 
     if (value === null) {
@@ -61,36 +61,40 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
   }
 
   validate(c: AbstractControl): ValidationErrors | null {
-    const values = Object.values(this.formGroup.controls);
+    // this.formGroup.markAllAsTouched();
+    this.formGroup.markAsDirty();
+    this.formGroup.markAsTouched();
 
-    const isInvalid = values.some((value) => {
-       return value.errors;
-    });
-
-    console.log('formIsInvalid', values);
-
-    this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
-      if (isInvalid) {
-
-      }
-
-      this.formGroup.markAllAsTouched();
-      // this.formGroup.markAsDirty();
-      // this.formGroup.markAsTouched();
-
-      values.forEach((value) => {
-        value.markAsDirty();
-      });
-      // this.formGroup.markAsDirty();
-
-      if (isInvalid) {
-        this.orderForm.setInvalidStep(result.step);
-      } else {
-        this.orderForm.setInvalidStep(null);
-      }
-
-    });
-    return !isInvalid ? null : { invalidForm: {valid: false, message: 'invalid'}};
+    // const values = Object.values(this.formGroup.controls);
+    //
+    // const isInvalid = values.some((value) => {
+    //    return value.errors;
+    // });
+    //
+    // console.log('formIsInvalid', values);
+    //
+    // this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
+    //   if (isInvalid) {
+    //
+    //   }
+    //
+    //   this.formGroup.markAllAsTouched();
+    //   this.formGroup.markAsDirty();
+    //   this.formGroup.markAsTouched();
+    //
+    //   values.forEach((value) => {
+    //     value.markAsDirty();
+    //   });
+    //   // this.formGroup.markAsDirty();
+    //
+    //   if (isInvalid) {
+    //     this.orderForm.setInvalidStep(result.step);
+    //   } else {
+    //     this.orderForm.setInvalidStep(null);
+    //   }
+    //
+    // });
+    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'invalid'}};
   }
 
   ngOnDestroy(): void {

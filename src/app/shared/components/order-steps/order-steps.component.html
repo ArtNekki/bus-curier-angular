@@ -2,7 +2,7 @@
   <li *ngFor="let step of steps; let i = index"
       class="calc-steps__item"
       [class.calc-steps__item--active]="currentStep === i"
-      [class.calc-steps__item--invalid]="step.invalid">
+      [class.calc-steps__item--invalid]="step.invalid && (currentStep === i)">
     <i class="calc-steps__point"></i>
     <div class="calc-steps__label">{{stepLabels[i]}}</div>
   </li>
