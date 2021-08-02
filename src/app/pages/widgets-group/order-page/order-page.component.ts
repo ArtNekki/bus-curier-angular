@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {animate, style, transition, trigger} from '@angular/animations';
 import FormControlName from '../../../core/maps/FormControlName';
 import {OrderFormService} from '../../../core/services/order-form/order-form.service';
@@ -38,7 +38,7 @@ export class OrderPageComponent implements OnInit {
     this.form = new FormGroup({
       steps: new FormArray([
         new FormGroup({
-          author: new FormControl('')
+          author: new FormControl('', [Validators.required])
         }),
         new FormGroup({
           [FormControlName.Sender]: new FormControl(''),

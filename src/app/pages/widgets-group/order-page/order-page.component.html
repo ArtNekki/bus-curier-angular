@@ -5,10 +5,6 @@
 <!--    <app-order-steps [invalidStep]="invalidStep" [currentStep]="currentStep"></app-order-steps>-->
     <app-order-steps [steps]="steps" [currentStep]="currentStep"></app-order-steps>
     <form class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
-      step1: {{steps[FormStep.One].invalid}}
-      step2: {{steps[FormStep.Two].invalid}}
-      step3: {{steps[FormStep.Three].invalid}}
-      step4: {{steps[FormStep.Four].invalid}}
       <ng-container formArrayName="steps">
         <div *ngIf="currentStep === FormStep.One" [formGroup]="steps[FormStep.One]" [@fadeIn]="">
           <app-author [formControlName]="FormControlName.Author" (selectUser)="setCurrentUser($event)"></app-author>
@@ -50,7 +46,7 @@
 <!--        {{{ btn id="backStep" type="back" disabled="true" hidden="true"}}}-->
         <!-- {{{ btn type="submit" text="Далее" mods="lg"}}} -->
 <!--        {{{ btn id="nextStep" type="button" text="Далее" mods="lg"}}}-->
-        <app-btn mods="lg" (click)="goNext()">Далее</app-btn>
+        <app-btn mods="lg" (click)="goNext()" [disabled]="steps[currentStep].invalid">Далее</app-btn>
       </div>
     </form>
   </div>

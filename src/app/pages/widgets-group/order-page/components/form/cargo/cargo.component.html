@@ -10,6 +10,7 @@
         (click)="changeCargoType(control.key)"
         [checked]="control.key === formGroup.get('activeItem').value">
         {{FormFieldMeta[control.key].label}}
+        invalid: {{control.key}}
       </app-radio>
     </div>
     <div formGroupName="items">

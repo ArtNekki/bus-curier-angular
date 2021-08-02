@@ -60,7 +60,7 @@ export class DeparturePointComponent extends BasicGroupComponent implements OnIn
     this.formGroup = new FormGroup({
       [FormControlName.Location]: new FormControl('', [Validators.required]),
       [FormControlName.DispatchData]: new FormGroup({
-        [FormControlName.Active]: new FormControl(),
+        [FormControlName.Active]: new FormControl('', [Validators.required]),
         [FormControlName.Department]: new FormControl(''),
         [FormControlName.Courier]: new FormControl('')
       }),
@@ -74,6 +74,8 @@ export class DeparturePointComponent extends BasicGroupComponent implements OnIn
         return {value: el.id, name: el.name};
       });
     });
+
+    super.ngOnInit();
   }
 
   changeType(type: string) {

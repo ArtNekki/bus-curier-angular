@@ -58,5 +58,7 @@ export class SenderComponent extends BasicGroupComponent implements OnInit {
       [FormControlName.DocNumber]: new FormControl('', [Validators.required]),
       [FormControlName.Tel]: new FormControl('', [Validators.required]),
     });
+
+    super.ngOnInit();
   }
 }

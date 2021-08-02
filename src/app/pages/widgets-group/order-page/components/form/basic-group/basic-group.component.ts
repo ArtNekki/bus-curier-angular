@@ -30,6 +30,7 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
   ngOnInit(): void {
     this.subscriptions.push(
       this.formGroup.valueChanges.subscribe(value => {
+        console.log('subscriptions', value);
         this.onChange(value);
         this.onTouched();
       })
@@ -43,7 +44,7 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
     if (value) {
       this.formGroup.setValue(value, { emitEvent: false });
       this.onChange(value);
-      this.onTouched();
+      // this.onTouched();
     }
 
     if (value === null) {
@@ -74,8 +75,8 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
       }
 
       this.formGroup.markAllAsTouched();
-      this.formGroup.markAsDirty();
-      this.formGroup.markAsTouched();
+      // this.formGroup.markAsDirty();
+      // this.formGroup.markAsTouched();
 
       values.forEach((value) => {
         value.markAsDirty();
@@ -93,8 +94,15 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
   }
 
   ngOnDestroy(): void {
-    this.onChangeSub.unsubscribe();
-    this.subscriptions.forEach(s => s.unsubscribe());
+
+    if (this.onChangeSub) {
+      this.onChangeSub.unsubscribe();
+    }
+
+    if (this.subscriptions.length) {
+      console.log('this.subscriptions.length', this.subscriptions.length);
+      // this.subscriptions.forEach(s => s.unsubscribe());
+    }
   }
 
   ngAfterViewInit(): void {

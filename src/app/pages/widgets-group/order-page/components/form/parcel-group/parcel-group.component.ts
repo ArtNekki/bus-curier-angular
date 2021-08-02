@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, forwardRef, OnInit} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor, FormArray,
@@ -35,7 +35,8 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
       useExisting: forwardRef(() => ParcelGroupComponent),
       multi: true
     }
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParcelGroupComponent extends BasicGroupComponent implements OnInit {
   public FormFieldError = fieldError;
@@ -55,6 +56,8 @@ export class ParcelGroupComponent extends BasicGroupComponent implements OnInit 
         new FormControl('')
       ])
     });
+
+    super.ngOnInit();
   }
 
   public get parcels(): FormArray {

@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, forwardRef, OnInit} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -30,7 +30,8 @@ import {BasicGroupComponent} from '../basic-group/basic-group.component';
       useExisting: forwardRef(() => ParcelComponent),
       multi: true
     }
-  ]
+  ],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParcelComponent extends BasicGroupComponent implements OnInit {
   public formGroupMeta = formGroupMeta;
@@ -51,5 +52,6 @@ export class ParcelComponent extends BasicGroupComponent implements OnInit {
   }
 
   ngOnInit( ): void {
+    super.ngOnInit();
   }
 }

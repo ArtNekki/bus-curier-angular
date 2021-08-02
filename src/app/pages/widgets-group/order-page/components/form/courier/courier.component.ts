@@ -56,5 +56,7 @@ export class CourierComponent extends BasicGroupComponent implements OnInit {
       [FormControlName.Apartment]: new FormControl('', [Validators.required]),
       [FormControlName.CourierTime]: new FormControl('time-1', [])
     });
+
+    super.ngOnInit();
   }
 }

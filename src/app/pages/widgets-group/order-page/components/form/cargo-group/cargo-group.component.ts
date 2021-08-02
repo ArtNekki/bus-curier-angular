@@ -51,6 +51,8 @@ export class CargoGroupComponent extends BasicGroupComponent implements OnInit  
         new FormControl('')
       ])
     });
+
+    super.ngOnInit();
   }
 
   public get items(): FormArray {

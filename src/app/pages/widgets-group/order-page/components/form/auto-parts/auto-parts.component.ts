@@ -48,6 +48,8 @@ export class AutoPartsComponent extends BasicGroupComponent implements OnInit  {
         new FormControl('')
       ])
     });
+
+    super.ngOnInit();
   }
 
   public get parts(): FormArray {

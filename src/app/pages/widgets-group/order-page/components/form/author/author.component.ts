@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, forwardRef, OnInit, Output} from '@angular/core';
 import UserType from 'src/app/core/maps/UserType';
 import {
   AbstractControl,
@@ -7,7 +7,7 @@ import {
   FormGroup, NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
-  Validator
+  Validator, Validators
 } from '@angular/forms';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {LoginComponent} from '../../../../../../modals/login/login.component';
@@ -34,7 +34,8 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
       useExisting: forwardRef(() => AuthorComponent),
       multi: true
     }
-  ]
+  ],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthorComponent extends BasicGroupComponent implements OnInit {
   @Output() selectUser: EventEmitter<any> = new EventEmitter<any>();
@@ -56,9 +57,11 @@ export class AuthorComponent extends BasicGroupComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       [FormControlName.Active]: new FormControl(''),
-      individual: new FormControl(''),
+      individual: new FormControl('', [Validators.required]),
       entity: new FormControl('')
     });
+
+    super.ngOnInit();
   }
 
   setCurrentUserType(type: string) {
@@ -79,9 +82,13 @@ export class AuthorComponent extends BasicGroupComponent implements OnInit {
   changeUser(type: string) {
     switch (type) {
       case UserType.Individual:
+        (this.formGroup.get(UserType.Individual) as FormGroup).setValidators([Validators.required]);
+        (this.formGroup.get(UserType.Entity) as FormGroup).clearValidators();
         this.formGroup.get(UserType.Entity).setValue('');
         break;
       case UserType.Entity:
+        (this.formGroup.get(UserType.Entity) as FormGroup).setValidators([Validators.required]);
+        (this.formGroup.get(UserType.Individual) as FormGroup).clearValidators();
         this.formGroup.get(UserType.Individual).setValue('');
         break;
     }

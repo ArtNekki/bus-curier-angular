@@ -52,6 +52,8 @@ export class EntityComponent extends BasicGroupComponent implements OnInit {
       [FormControlName.Address]: new FormControl('', [Validators.required]),
       [FormControlName.Tel]: new FormControl('', [Validators.required]),
     });
+
+    super.ngOnInit();
   }
 
   public onTouched: () => void = () => {};

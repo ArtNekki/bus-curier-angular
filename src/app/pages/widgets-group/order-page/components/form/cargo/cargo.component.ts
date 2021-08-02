@@ -59,6 +59,8 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
         // other: new FormGroup({})
       })
     });
+
+    super.ngOnInit();
   }
 
   get cargo() {
