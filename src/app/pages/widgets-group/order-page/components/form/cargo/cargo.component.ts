@@ -1,4 +1,4 @@
-import {AfterViewChecked, ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
+import {AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -33,7 +33,8 @@ import {BasicGroupComponent} from '../basic-group/basic-group.component';
       useExisting: forwardRef(() => CargoComponent),
       multi: true
     }
-  ]
+  ],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CargoComponent extends BasicGroupComponent implements OnInit {
   public FormControlName = FormControlName;
@@ -44,23 +45,30 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
-              // private readonly changeDetectorRef: ChangeDetectorRef,
+              private cdr: ChangeDetectorRef,
               orderForm: OrderFormService) {
     super(orderForm);
   }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      activeItem: new FormControl('docs'),
+      activeItem: new FormControl(FormControlName.Docs),
       items: new FormGroup({
-        [FormControlName.Docs]: new FormControl('', [Validators.required]),
-        [FormControlName.Parcels]: new FormControl('', [Validators.required]),
-        [FormControlName.AutoParts]: new FormControl('', [Validators.required]),
+        [FormControlName.Docs]: new FormControl(''),
+        [FormControlName.Parcels]: new FormControl(''),
+        [FormControlName.AutoParts]: new FormControl(''),
         // other: new FormGroup({})
       })
     });
 
     super.ngOnInit();
+    // console.log("this.formGroup.get('activeItem').value", this.formGroup.get('activeItem').value);
+    // this.changeCargoType(this.formGroup.get('activeItem').value);
+
+    // setTimeout(() => {
+    //   this.changeCargoType(this.formGroup.get('activeItem').value);
+    //   this.changeDetectorRef.detectChanges();
+    // }, 0);
   }
 
   get cargo() {
@@ -85,9 +93,16 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
         break;
       case FormControlName.AutoParts:
         this.formGroup.get('items').get(FormControlName.AutoParts).setValidators([Validators.required]);
+        this.formGroup.get('items').get(FormControlName.Parcels).setValue('');
         this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
         this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
+        this.formGroup.get('items').get(FormControlName.Docs).setValue('');
         break;
     }
+
+    // this.formGroup.markAllAsTouched();
+    // this.formGroup.markAsTouched();
+    // this.onTouched();
+    this.cdr.detectChanges();
   }
 }

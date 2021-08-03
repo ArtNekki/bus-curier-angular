@@ -53,9 +53,13 @@ export class ParcelGroupComponent extends BasicGroupComponent implements OnInit 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       parcels: new FormArray([
-        new FormControl('')
+        new FormControl('', [Validators.required])
       ])
     });
+
+    this.formGroup.markAllAsTouched();
+    this.formGroup.markAsTouched();
+    this.onTouched();
 
     super.ngOnInit();
   }
@@ -80,7 +84,7 @@ export class ParcelGroupComponent extends BasicGroupComponent implements OnInit 
   }
 
   add() {
-    this.parcels.push(new FormControl(''));
+    this.parcels.push(new FormControl('', [Validators.required]));
   }
 
   delete(index: number) {

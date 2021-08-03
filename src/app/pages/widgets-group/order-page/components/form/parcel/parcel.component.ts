@@ -37,13 +37,7 @@ export class ParcelComponent extends BasicGroupComponent implements OnInit {
   public formGroupMeta = formGroupMeta;
   public isInvalid = false;
 
-  public formGroup = new FormGroup({
-    [FormControlName.PlaceCount]: new FormControl('', [Validators.required]),
-    [FormControlName.Weight]: new FormControl('', [Validators.required]),
-    [FormControlName.Width]: new FormControl('', [Validators.required]),
-    [FormControlName.Height]: new FormControl('', [Validators.required]),
-    [FormControlName.Length]: new FormControl('', [Validators.required])
-  });
+  public formGroup: FormGroup;
 
   constructor(
     public formUtils: FormUtilsService,
@@ -52,6 +46,18 @@ export class ParcelComponent extends BasicGroupComponent implements OnInit {
   }
 
   ngOnInit( ): void {
+    this.formGroup = new FormGroup({
+      [FormControlName.PlaceCount]: new FormControl('', [Validators.required]),
+      [FormControlName.Weight]: new FormControl('', [Validators.required]),
+      [FormControlName.Width]: new FormControl('', [Validators.required]),
+      [FormControlName.Height]: new FormControl('', [Validators.required]),
+      [FormControlName.Length]: new FormControl('', [Validators.required])
+    });
+
+    this.formGroup.markAllAsTouched();
+    this.formGroup.markAsTouched();
+    this.onTouched();
+
     super.ngOnInit();
   }
 }

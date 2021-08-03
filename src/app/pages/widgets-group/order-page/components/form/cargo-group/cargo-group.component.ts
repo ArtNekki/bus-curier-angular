@@ -46,9 +46,9 @@ export class CargoGroupComponent extends BasicGroupComponent implements OnInit  
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      activeItem: new FormControl(0),
+      activeItem: new FormControl(0, [Validators.required]),
       items: new FormArray([
-        new FormControl('')
+        new FormControl('', [Validators.required])
       ])
     });
 
@@ -64,7 +64,7 @@ export class CargoGroupComponent extends BasicGroupComponent implements OnInit  
       return;
     }
 
-    this.items.push(new FormControl(''));
+    this.items.push(new FormControl('', [Validators.required]));
     this.formGroup.get('activeItem').setValue(this.items.length - 1);
   }
 

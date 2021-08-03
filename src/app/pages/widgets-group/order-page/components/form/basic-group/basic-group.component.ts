@@ -24,7 +24,7 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
 
   constructor(
     protected orderForm: OrderFormService,
-    protected changeDetectorRef?: ChangeDetectorRef
+    // protected changeDetectorRef?: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -47,9 +47,9 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
       this.onTouched();
     }
 
-    if (value === null) {
-      this.formGroup.reset();
-    }
+    // if (value === null) {
+    //   this.formGroup.reset();
+    // }
   }
 
   registerOnChange(fn: any): void {
