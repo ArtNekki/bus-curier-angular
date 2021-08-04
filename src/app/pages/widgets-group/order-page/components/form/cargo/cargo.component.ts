@@ -45,6 +45,7 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
 
   public formGroup: FormGroup;
   public currentCargoType = null;
+  public isOk = false;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -81,53 +82,61 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
     return this.formGroup.get(FormControlName.Cargo) as FormArray;
   }
 
-  changeCargoType(e, type: string) {
+  setCargoType(e, type: string) {
 
     if (!e.preventDefault) {
       return;
     }
 
     this.confirm().subscribe((result) => {
+
       if (!result) {
-        e.preventDefault();
         return;
       }
 
-      this.formGroup.get('activeItem').patchValue(type, {onlySelf: true});
+      this.changeCargoType(type);
 
-      setTimeout(() => {
-
-        switch (type) {
-          case FormControlName.Docs:
-            // this.formGroup.get('items').get(FormControlName.Docs).setValidators([Validators.required]);
-            this.formGroup.get('items').get(FormControlName.Parcels).patchValue('', {onlySelf: true});
-            // this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
-            this.formGroup.get('items').get(FormControlName.AutoParts).patchValue('', {onlySelf: true});
-            // this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
-            break;
-          case FormControlName.Parcels:
-            // this.formGroup.get('items').get(FormControlName.Parcels).setValidators([Validators.required]);
-            this.formGroup.get('items').get(FormControlName.Docs).setValue('', {onlySelf: true});
-            // this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
-            this.formGroup.get('items').get(FormControlName.AutoParts).setValue('', {onlySelf: true});
-            // this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
-            break;
-          case FormControlName.AutoParts:
-            // this.formGroup.get('items').get(FormControlName.AutoParts).setValidators([Validators.required]);
-            this.formGroup.get('items').get(FormControlName.Parcels).setValue('', {onlySelf: true});
-            // this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
-            // this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
-            this.formGroup.get('items').get(FormControlName.Docs).setValue('', {onlySelf: true});
-            break;
-        }
-
-      }, 0);
     });
 
     // this.formGroup.markAllAsTouched();
     // this.formGroup.markAsTouched();
     // this.onTouched();
     // this.cdr.detectChanges();
+  }
+
+  changeCargoType(type: string) {
+    this.formGroup.get('activeItem').patchValue(type, {onlySelf: true});
+
+    setTimeout(() => {
+
+      switch (type) {
+        case FormControlName.Docs:
+          this.formGroup.get('items')
+            .get(FormControlName.Parcels)
+            .patchValue('', {onlySelf: true});
+          this.formGroup.get('items')
+            .get(FormControlName.AutoParts)
+            .patchValue('', {onlySelf: true});
+          break;
+        case FormControlName.Parcels:
+          this.formGroup.get('items')
+            .get(FormControlName.Docs)
+            .setValue('', {onlySelf: true});
+          this.formGroup.get('items')
+            .get(FormControlName.AutoParts)
+            .setValue('', {onlySelf: true});
+          break;
+        case FormControlName.AutoParts:
+          this.formGroup
+            .get('items').get(FormControlName.Parcels)
+            .setValue('', {onlySelf: true});
+          this.formGroup.get('items')
+            .get(FormControlName.Docs)
+            .setValue('', {onlySelf: true});
+          break;
+      }
+
+    }, 0);
   }
 
   confirm() {

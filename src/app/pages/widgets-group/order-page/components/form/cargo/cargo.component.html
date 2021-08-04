@@ -6,7 +6,7 @@
         formUtils.getGroupControls(formGroup.get('items')) | keyvalue: formUtils.originalOrder;"
         [id]="control.key"
         [name]="'cargo-type'"
-        (change)="changeCargoType($event, control.key)"
+        (change)="setCargoType($event, control.key)"
         [checked]="control.key === formGroup.get('activeItem').value"
         [isInvalid]="control.value.invalid"
       >
