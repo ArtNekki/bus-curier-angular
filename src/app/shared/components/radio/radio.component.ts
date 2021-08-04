@@ -19,6 +19,7 @@ export class RadioComponent implements ControlValueAccessor, OnInit {
   @Input() data: any;
   @Input() name: string;
   @Input() mods;
+  @Input() isInvalid: boolean;
 
   public cssClass;
   public value;

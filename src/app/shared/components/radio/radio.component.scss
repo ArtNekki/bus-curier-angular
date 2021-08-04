@@ -43,6 +43,11 @@
         border-color: $primary-color;
       }
 
+      .radio--invalid .radio__input:checked ~ & {
+        border-width: 2px;
+        border-color: $red-color;
+      }
+
       .radio--no-indicator & {
         content: unset;
         display: none;
@@ -68,6 +73,10 @@
         display: block;
       }
 
+      .radio--invalid .radio__input:checked ~ & {
+        background-color: $red-color;
+      }
+
       .radio--no-indicator .radio__input:checked ~ & {
         content: unset;
         display: none;
@@ -81,6 +90,10 @@
     font-size: 16px;
     line-height: 1;
     cursor: pointer;
+
+    .radio--invalid & {
+      color: $red-color;
+    }
   }
 
   &__help {
