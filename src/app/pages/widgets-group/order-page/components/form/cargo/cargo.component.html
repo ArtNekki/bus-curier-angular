@@ -7,7 +7,7 @@
         formControlName="activeItem"
         [id]="control.key"
         [name]="'cargo-type'"
-        (change)="changeCargoType(control.key)"
+        (change)="changeCargoType($event, control.key)"
         [checked]="control.key === formGroup.get('activeItem').value"
         [isInvalid]="control.value.invalid"
       >
