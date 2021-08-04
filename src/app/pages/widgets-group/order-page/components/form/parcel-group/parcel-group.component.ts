@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor, FormArray,
@@ -19,6 +19,8 @@ import {FormUtilsService} from '../../../../../../core/services/form-utils.servi
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import {BasicGroupComponent} from '../basic-group/basic-group.component';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
+import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
+import {SimpleModalService} from 'ngx-simple-modal';
 
 @Component({
   selector: 'app-parcel-group',
@@ -46,6 +48,8 @@ export class ParcelGroupComponent extends BasicGroupComponent implements OnInit 
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
+              private simpleModal: SimpleModalService,
+              private cdr: ChangeDetectorRef,
               orderForm: OrderFormService) {
     super(orderForm);
   }
@@ -102,6 +106,23 @@ export class ParcelGroupComponent extends BasicGroupComponent implements OnInit 
       return;
     }
 
-    this.parcels.removeAt(index);
+    if (this.parcels.value[index]) {
+      this.confirm().subscribe((ok) => {
+        if (!ok) {
+          return;
+        }
+
+        this.parcels.removeAt(index);
+        this.cdr.detectChanges();
+      });
+    } else {
+      this.parcels.removeAt(index);
+    }
+  }
+
+  confirm() {
+    return this.simpleModal.addModal(ConfirmModalComponent, {
+      message: `Вы уверены? <br /> Данные будут потеряны.`
+    });
   }
 }
