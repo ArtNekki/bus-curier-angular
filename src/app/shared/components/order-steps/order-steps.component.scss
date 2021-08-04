@@ -64,6 +64,7 @@
 
     .calc-steps__item--invalid & {
       background-color: $red-color;
+      color: $white-color;
     }
 
     &::before {
@@ -112,6 +113,11 @@
       width: unset;
       opacity: 1;
       color: $black-color;
+    }
+
+    .calc-steps__item--invalid & {
+      color: $red-color;
+      font-weight: 500;
     }
 
     @include media-breakpoint-up(sm) {
