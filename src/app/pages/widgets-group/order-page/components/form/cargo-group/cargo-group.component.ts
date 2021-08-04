@@ -52,6 +52,8 @@ export class CargoGroupComponent extends BasicGroupComponent implements OnInit  
       ])
     });
 
+    this.formGroup.markAllAsTouched();
+
     super.ngOnInit();
   }
 

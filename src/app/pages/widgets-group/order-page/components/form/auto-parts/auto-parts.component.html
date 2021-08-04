@@ -15,7 +15,7 @@
      </app-btn>
    </div>
  </ng-container>
-  <app-btn type="button" (click)="add()">Добавить еще 1 позицию</app-btn>
+  <app-btn type="button" (click)="add()" [disabled]="isSomePartsInvalid">Добавить еще 1 позицию</app-btn>
   <dl class="form__details">
     <dt><b>Тип груза:</b></dt>
     <dd>Пожалуйста, выберите тип запчасти из списка. Если вы не нашли подходящей запчасти, рассчитайте стоимость обычной посылки.</dd>

@@ -58,6 +58,12 @@ export class AutoPartsComponent extends BasicGroupComponent implements OnInit  {
     return this.formGroup.get('parts') as FormArray;
   }
 
+  get isSomePartsInvalid() {
+    return this.parts.controls.some((control) => {
+      return control.invalid;
+    });
+  }
+
   add() {
     this.parts.push(new FormControl('', [Validators.required]));
   }
