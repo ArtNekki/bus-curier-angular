@@ -39,7 +39,7 @@ export class DocsComponent extends BasicGroupComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.PlaceCount]: new FormControl('', [Validators.required, Validators.min(1)])
+      [FormControlName.PlaceCount]: new FormControl('', [ Validators.min(1)])
     });
 
     super.ngOnInit();

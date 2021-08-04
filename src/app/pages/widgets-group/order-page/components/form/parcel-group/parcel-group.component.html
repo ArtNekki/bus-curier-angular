@@ -13,6 +13,6 @@
         </ng-container>
       </app-parcel>
     </div>
-    <app-btn type="button" (click)="add()">Добавить еще 1 позицию</app-btn>
+    <app-btn type="button" (click)="add()" [disabled]="isSomeParcelsInvalid">Добавить еще 1 позицию</app-btn>
   </div>
 </div>

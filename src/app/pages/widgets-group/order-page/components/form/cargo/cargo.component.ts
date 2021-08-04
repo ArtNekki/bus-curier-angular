@@ -78,31 +78,31 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
   changeCargoType(type: string) {
     switch (type) {
       case FormControlName.Docs:
-        this.formGroup.get('items').get(FormControlName.Docs).setValidators([Validators.required]);
-        this.formGroup.get('items').get(FormControlName.Parcels).setValue('');
-        this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
-        this.formGroup.get('items').get(FormControlName.AutoParts).setValue('');
-        this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
+        // this.formGroup.get('items').get(FormControlName.Docs).setValidators([Validators.required]);
+        // this.formGroup.get('items').get(FormControlName.Parcels).setValue('');
+        // this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
+        // this.formGroup.get('items').get(FormControlName.AutoParts).setValue('');
+        // this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
         break;
       case FormControlName.Parcels:
-        this.formGroup.get('items').get(FormControlName.Parcels).setValidators([Validators.required]);
-        this.formGroup.get('items').get(FormControlName.Docs).setValue('');
-        this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
-        this.formGroup.get('items').get(FormControlName.AutoParts).setValue('');
-        this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
+        // this.formGroup.get('items').get(FormControlName.Parcels).setValidators([Validators.required]);
+        // this.formGroup.get('items').get(FormControlName.Docs).setValue('');
+        // this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
+        // this.formGroup.get('items').get(FormControlName.AutoParts).setValue('');
+        // this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
         break;
       case FormControlName.AutoParts:
-        this.formGroup.get('items').get(FormControlName.AutoParts).setValidators([Validators.required]);
-        this.formGroup.get('items').get(FormControlName.Parcels).setValue('');
-        this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
-        this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
-        this.formGroup.get('items').get(FormControlName.Docs).setValue('');
+        // this.formGroup.get('items').get(FormControlName.AutoParts).setValidators([Validators.required]);
+        // this.formGroup.get('items').get(FormControlName.Parcels).setValue('');
+        // this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
+        // this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
+        // this.formGroup.get('items').get(FormControlName.Docs).setValue('');
         break;
     }
 
     // this.formGroup.markAllAsTouched();
     // this.formGroup.markAsTouched();
     // this.onTouched();
-    this.cdr.detectChanges();
+    // this.cdr.detectChanges();
   }
 }

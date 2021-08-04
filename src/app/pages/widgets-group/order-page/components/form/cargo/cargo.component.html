@@ -7,7 +7,7 @@
         formControlName="activeItem"
         [id]="control.key"
         [name]="'cargo-type'"
-        (click)="changeCargoType(control.key)"
+        (change)="changeCargoType(control.key)"
         [checked]="control.key === formGroup.get('activeItem').value">
         {{FormFieldMeta[control.key].label}}
         invalid: {{control.value.invalid}}

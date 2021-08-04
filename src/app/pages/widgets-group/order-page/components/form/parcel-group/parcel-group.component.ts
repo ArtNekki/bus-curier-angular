@@ -68,6 +68,12 @@ export class ParcelGroupComponent extends BasicGroupComponent implements OnInit 
     return this.formGroup.get('parcels') as FormArray;
   }
 
+  get isSomeParcelsInvalid() {
+    return this.parcels.controls.some((control) => {
+      return control.invalid;
+    });
+  }
+
   getGroupControls(group) {
     return (group as FormGroup).controls;
   }
@@ -84,6 +90,10 @@ export class ParcelGroupComponent extends BasicGroupComponent implements OnInit 
   }
 
   add() {
+    if (this.isSomeParcelsInvalid) {
+      return;
+    }
+
     this.parcels.push(new FormControl('', [Validators.required]));
   }
 
