@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -14,6 +14,8 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import cities from 'src/app/mock-data/cities';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {BasicGroupComponent} from '../basic-group/basic-group.component';
+import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
+import {SimpleModalService} from 'ngx-simple-modal';
 
 @Component({
   selector: 'app-auto-parts',
@@ -38,7 +40,10 @@ export class AutoPartsComponent extends BasicGroupComponent implements OnInit  {
   public formGroup: FormGroup;
   public cities = cities;
 
-  constructor(orderForm: OrderFormService) {
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private simpleModal: SimpleModalService,
+    orderForm: OrderFormService) {
     super(orderForm);
   }
 
@@ -73,7 +78,24 @@ export class AutoPartsComponent extends BasicGroupComponent implements OnInit  {
       return;
     }
 
-    this.parts.removeAt(index);
+    if (this.parts.value[index]) {
+      this.confirm().subscribe((ok) => {
+        if (!ok) {
+          return;
+        }
+
+        this.parts.removeAt(index);
+        this.cdr.detectChanges();
+      });
+    } else {
+      this.parts.removeAt(index);
+    }
+  }
+
+  confirm() {
+    return this.simpleModal.addModal(ConfirmModalComponent, {
+      message: `Вы уверены? <br /> Данные будут потеряны.`
+    });
   }
 
   writeValue(value: any): void {
