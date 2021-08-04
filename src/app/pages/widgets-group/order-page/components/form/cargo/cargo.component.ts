@@ -61,6 +61,8 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
       })
     });
 
+    this.formGroup.markAllAsTouched();
+
     super.ngOnInit();
     // console.log("this.formGroup.get('activeItem').value", this.formGroup.get('activeItem').value);
     // this.changeCargoType(this.formGroup.get('activeItem').value);
@@ -79,24 +81,24 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
     switch (type) {
       case FormControlName.Docs:
         // this.formGroup.get('items').get(FormControlName.Docs).setValidators([Validators.required]);
-        // this.formGroup.get('items').get(FormControlName.Parcels).setValue('');
+        this.formGroup.get('items').get(FormControlName.Parcels).setValue('');
         // this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
-        // this.formGroup.get('items').get(FormControlName.AutoParts).setValue('');
+        this.formGroup.get('items').get(FormControlName.AutoParts).setValue('');
         // this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
         break;
       case FormControlName.Parcels:
         // this.formGroup.get('items').get(FormControlName.Parcels).setValidators([Validators.required]);
-        // this.formGroup.get('items').get(FormControlName.Docs).setValue('');
+        this.formGroup.get('items').get(FormControlName.Docs).setValue('');
         // this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
-        // this.formGroup.get('items').get(FormControlName.AutoParts).setValue('');
+        this.formGroup.get('items').get(FormControlName.AutoParts).setValue('');
         // this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
         break;
       case FormControlName.AutoParts:
         // this.formGroup.get('items').get(FormControlName.AutoParts).setValidators([Validators.required]);
-        // this.formGroup.get('items').get(FormControlName.Parcels).setValue('');
+        this.formGroup.get('items').get(FormControlName.Parcels).setValue('');
         // this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
         // this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
-        // this.formGroup.get('items').get(FormControlName.Docs).setValue('');
+        this.formGroup.get('items').get(FormControlName.Docs).setValue('');
         break;
     }
 

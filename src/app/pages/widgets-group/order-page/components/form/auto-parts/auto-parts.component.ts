@@ -7,7 +7,7 @@ import {
   FormGroup, NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
-  Validator
+  Validator, Validators
 } from '@angular/forms';
 import {map} from 'rxjs/operators';
 import FormControlName from 'src/app/core/maps/FormControlName';
@@ -45,9 +45,11 @@ export class AutoPartsComponent extends BasicGroupComponent implements OnInit  {
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       parts: new FormArray([
-        new FormControl('')
+        new FormControl('', [Validators.required])
       ])
     });
+
+    this.formGroup.markAllAsTouched();
 
     super.ngOnInit();
   }
@@ -57,7 +59,7 @@ export class AutoPartsComponent extends BasicGroupComponent implements OnInit  {
   }
 
   add() {
-    this.parts.push(new FormControl(''));
+    this.parts.push(new FormControl('', [Validators.required]));
   }
 
   delete(index: number) {
@@ -71,7 +73,7 @@ export class AutoPartsComponent extends BasicGroupComponent implements OnInit  {
   writeValue(value: any): void {
     if (value) {
       this.parts.clear();
-      value.forEach(item => this.parts.push(new FormControl(item)));
+      value.forEach(item => this.parts.push(new FormControl(item, [Validators.required])));
     }
   }
 
