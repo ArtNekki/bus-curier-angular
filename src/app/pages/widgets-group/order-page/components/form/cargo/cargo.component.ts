@@ -16,6 +16,9 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {BasicGroupComponent} from '../basic-group/basic-group.component';
+import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
+import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
+import {SimpleModalService} from 'ngx-simple-modal';
 
 @Component({
   selector: 'app-cargo',
@@ -46,6 +49,7 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
               private cdr: ChangeDetectorRef,
+              private simpleModal: SimpleModalService,
               orderForm: OrderFormService) {
     super(orderForm);
   }
@@ -78,37 +82,57 @@ export class CargoComponent extends BasicGroupComponent implements OnInit {
   }
 
   changeCargoType(e, type: string) {
+
     if (!e.preventDefault) {
       return;
     }
 
-    switch (type) {
-      case FormControlName.Docs:
-        // this.formGroup.get('items').get(FormControlName.Docs).setValidators([Validators.required]);
-        this.formGroup.get('items').get(FormControlName.Parcels).patchValue('', {onlySelf: true});
-        // this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
-        this.formGroup.get('items').get(FormControlName.AutoParts).patchValue('', {onlySelf: true});
-        // this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
-        break;
-      case FormControlName.Parcels:
-        // this.formGroup.get('items').get(FormControlName.Parcels).setValidators([Validators.required]);
-        this.formGroup.get('items').get(FormControlName.Docs).setValue('', {onlySelf: true});
-        // this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
-        this.formGroup.get('items').get(FormControlName.AutoParts).setValue('', {onlySelf: true});
-        // this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
-        break;
-      case FormControlName.AutoParts:
-        // this.formGroup.get('items').get(FormControlName.AutoParts).setValidators([Validators.required]);
-        this.formGroup.get('items').get(FormControlName.Parcels).setValue('', {onlySelf: true});
-        // this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
-        // this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
-        this.formGroup.get('items').get(FormControlName.Docs).setValue('', {onlySelf: true});
-        break;
-    }
+    this.confirm().subscribe((result) => {
+      if (!result) {
+        e.preventDefault();
+        return;
+      }
+
+      this.formGroup.get('activeItem').patchValue(type, {onlySelf: true});
+
+      setTimeout(() => {
+
+        switch (type) {
+          case FormControlName.Docs:
+            // this.formGroup.get('items').get(FormControlName.Docs).setValidators([Validators.required]);
+            this.formGroup.get('items').get(FormControlName.Parcels).patchValue('', {onlySelf: true});
+            // this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
+            this.formGroup.get('items').get(FormControlName.AutoParts).patchValue('', {onlySelf: true});
+            // this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
+            break;
+          case FormControlName.Parcels:
+            // this.formGroup.get('items').get(FormControlName.Parcels).setValidators([Validators.required]);
+            this.formGroup.get('items').get(FormControlName.Docs).setValue('', {onlySelf: true});
+            // this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
+            this.formGroup.get('items').get(FormControlName.AutoParts).setValue('', {onlySelf: true});
+            // this.formGroup.get('items').get(FormControlName.AutoParts).clearValidators();
+            break;
+          case FormControlName.AutoParts:
+            // this.formGroup.get('items').get(FormControlName.AutoParts).setValidators([Validators.required]);
+            this.formGroup.get('items').get(FormControlName.Parcels).setValue('', {onlySelf: true});
+            // this.formGroup.get('items').get(FormControlName.Parcels).clearValidators();
+            // this.formGroup.get('items').get(FormControlName.Docs).clearValidators();
+            this.formGroup.get('items').get(FormControlName.Docs).setValue('', {onlySelf: true});
+            break;
+        }
+
+      }, 0);
+    });
 
     // this.formGroup.markAllAsTouched();
     // this.formGroup.markAsTouched();
     // this.onTouched();
     // this.cdr.detectChanges();
+  }
+
+  confirm() {
+    return this.simpleModal.addModal(ConfirmModalComponent, {
+      message: `Вы уверены? <br /> Данные этого груза будут потеряны.`
+    });
   }
 }

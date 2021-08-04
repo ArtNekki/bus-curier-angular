@@ -4,7 +4,6 @@
       <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
       <app-radio *ngFor="let control of
         formUtils.getGroupControls(formGroup.get('items')) | keyvalue: formUtils.originalOrder;"
-        formControlName="activeItem"
         [id]="control.key"
         [name]="'cargo-type'"
         (change)="changeCargoType($event, control.key)"
