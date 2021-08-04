@@ -14,7 +14,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 })
 export class TagComponent implements ControlValueAccessor, OnInit {
   @Output() delete: EventEmitter<any> = new EventEmitter<any>();
-  // @Output() change: EventEmitter<any> = new EventEmitter<any>();
+  @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() type: string;
   @Input() isInvalid: boolean;
@@ -56,8 +56,8 @@ export class TagComponent implements ControlValueAccessor, OnInit {
     this.onTouched = fn;
   }
 
-  // selectTag(e, index: any) {
-  //   e.stopPropagation();
-  //   this.change.emit(index);
-  // }
+  selectTag(e, index: any) {
+    e.stopPropagation();
+    this.change.emit(index);
+  }
 }

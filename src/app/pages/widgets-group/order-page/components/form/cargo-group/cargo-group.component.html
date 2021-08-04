@@ -3,6 +3,7 @@
     <app-tag *ngFor="let control of items.controls; let i = index;"
              [index]="i"
              formControlName="activeItem"
+             (change)="changeCargo($event)"
              [checked]="formGroup.get('activeItem').value === i"
              [disabled]="(formGroup.get('activeItem').value !== i) && isSomeControlInvalid"
              (delete)="deleteCargo($event)"

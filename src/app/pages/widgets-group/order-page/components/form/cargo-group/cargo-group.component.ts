@@ -88,4 +88,9 @@ export class CargoGroupComponent extends BasicGroupComponent implements OnInit  
 
     super.writeValue(value);
   }
+
+  changeCargo($event: any) {
+    // console.log('event', $event);
+    // $event.preventDefault();
+  }
 }
