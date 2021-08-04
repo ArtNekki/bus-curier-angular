@@ -38,14 +38,11 @@
           </section>
         </div>
       </ng-container>
-      <div class="form__actions">
+      <div *ngIf="steps[0].get(FormControlName.Author).value.active === FormControlName.Individual" class="form__actions">
         <app-btn type="button" disabled="true" mods="back" (click)="goPrev()">
           <svg-icon class="icon" src="assets/img/svg/back.svg" width="24" height="20"></svg-icon>
           Назад
         </app-btn>
-<!--        {{{ btn id="backStep" type="back" disabled="true" hidden="true"}}}-->
-        <!-- {{{ btn type="submit" text="Далее" mods="lg"}}} -->
-<!--        {{{ btn id="nextStep" type="button" text="Далее" mods="lg"}}}-->
         <app-btn mods="lg" (click)="goNext()" [disabled]="steps[currentStep].invalid">Далее</app-btn>
       </div>
     </form>
