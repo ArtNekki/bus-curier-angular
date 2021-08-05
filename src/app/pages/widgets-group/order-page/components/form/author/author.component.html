@@ -24,16 +24,21 @@
        class="form__panel form__panel--mg-top" [@fadeIn]="">
     <app-individual [formControlName]="UserType.Individual"></app-individual>
   </div>
-  <div *ngIf="(formGroup.get(FormControlName.Active).value === UserType.Entity) && authService.isAuthenticated()"
+<!--  *ngIf="(formGroup.get(FormControlName.Active).value === UserType.Entity) && authService.isAuthenticated()"-->
+  <div *ngIf="(formGroup.get(FormControlName.Active).value === UserType.Entity)"
        class="form__panel form__panel--mg-top" [@fadeIn]="">
-    <app-entity [formControlName]="UserType.Entity"></app-entity>
+    <app-entity *ngIf="authService.isAuthenticated()" [formControlName]="UserType.Entity"></app-entity>
+    <p *ngIf="!authService.isAuthenticated()"  class="form__help-text" [@fadeIn]="">Чтобы оформить заказ как юридическое лицо, вам необходимо
+      <app-link mods="blue, in-text" (click)="showLoginModal($event)">войти</app-link>
+      <br /> или
+      <app-link mods="blue, in-text" (click)="showSignInModal($event)">зарегистрироваться</app-link>
+    </p>
   </div>
    <p *ngIf="!formGroup.get(FormControlName.Active).value"
       class="form__help-text form__help-text--gray form__help-text--align-center" [@fadeIn]="">Выберите статус лица для перехода на следующий шаг</p>
-   <p *ngIf="!authService.isAuthenticated() && formGroup.get(FormControlName.Active).value === UserType.Entity"
-      class="form__help-text" [@fadeIn]="">Чтобы оформить заказ как юридическое лицо, вам необходимо
-     <app-link mods="blue, in-text" (click)="showLoginModal($event)">войти</app-link>
-      <br /> или
-     <app-link mods="blue, in-text" (click)="showSignInModal($event)">зарегистрироваться</app-link>
-   </p>
+<!--   <p class="form__help-text" [@fadeIn]="">Чтобы оформить заказ как юридическое лицо, вам необходимо-->
+<!--     <app-link mods="blue, in-text" (click)="showLoginModal($event)">войти</app-link>-->
+<!--      <br /> или-->
+<!--     <app-link mods="blue, in-text" (click)="showSignInModal($event)">зарегистрироваться</app-link>-->
+<!--   </p>-->
 </section>

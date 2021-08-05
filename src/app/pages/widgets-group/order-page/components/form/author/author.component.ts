@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, forwardRef, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, OnInit, Output} from '@angular/core';
 import UserType from 'src/app/core/maps/UserType';
 import {
   AbstractControl,
@@ -49,6 +49,7 @@ export class AuthorComponent extends BasicGroupComponent implements OnInit {
   constructor(
     private modalService: SimpleModalService,
     public authService: AuthService,
+    private cdr: ChangeDetectorRef,
     orderForm: OrderFormService
     ) {
     super(orderForm);
@@ -92,5 +93,7 @@ export class AuthorComponent extends BasicGroupComponent implements OnInit {
         this.formGroup.get(UserType.Individual).setValue('');
         break;
     }
+
+    // this.cdr.detectChanges();
   }
 }
