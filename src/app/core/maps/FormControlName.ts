@@ -75,5 +75,8 @@ export default {
   Counter: 'counter',
   CurrentItem: 'current-item',
   Active: 'active',
-  Services: 'services'
+  Services: 'services',
+  RusPassport: 'rus-passport',
+  DriverLicense: 'driver-license',
+  Other: 'other'
 };

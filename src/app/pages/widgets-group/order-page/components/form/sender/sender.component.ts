@@ -14,14 +14,16 @@ import {
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
-import roles from 'src/app/mock-data/roles';
+import userDocs from 'src/app/data/user-docs';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {BasicGroupComponent} from '../basic-group/basic-group.component';
+import fadeIn from '../../../../../../core/animations/fadeIn';
 
 @Component({
   selector: 'app-sender',
   templateUrl: './sender.component.html',
   styleUrls: ['./sender.component.scss'],
+  animations: [fadeIn],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -42,7 +44,8 @@ export class SenderComponent extends BasicGroupComponent implements OnInit {
   public FormFieldError = fieldError;
 
   public formGroup: FormGroup;
-  public roles = roles;
+  public userDocs = userDocs;
+  public isOtherUserDoc = false;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -54,11 +57,32 @@ export class SenderComponent extends BasicGroupComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       [FormControlName.Fio]: new FormControl('', [Validators.required]),
-      [FormControlName.Doc]: new FormControl('', [Validators.required]),
-      [FormControlName.DocNumber]: new FormControl('', [Validators.required]),
+      [FormControlName.Doc]: new FormControl(FormControlName.RusPassport, [Validators.required]),
       [FormControlName.Tel]: new FormControl('', [Validators.required]),
     });
 
+    this.changeUserDoc(this.formGroup.get(FormControlName.Doc).value);
+
     super.ngOnInit();
+  }
+
+  changeUserDoc(type: any) {
+    switch (type) {
+      case FormControlName.RusPassport:
+        this.formGroup.setControl(FormControlName.RusPassport, new FormControl('', [Validators.required]));
+        this.formGroup.removeControl(FormControlName.DriverLicense);
+        this.isOtherUserDoc = false;
+        break;
+      case FormControlName.DriverLicense:
+        this.formGroup.setControl(FormControlName.DriverLicense, new FormControl('', [Validators.required]));
+        this.formGroup.removeControl(FormControlName.RusPassport);
+        this.isOtherUserDoc = false;
+        break;
+      case FormControlName.Other:
+        this.formGroup.removeControl(FormControlName.RusPassport);
+        this.formGroup.removeControl(FormControlName.DriverLicense);
+        this.isOtherUserDoc = true;
+        break;
+    }
   }
 }

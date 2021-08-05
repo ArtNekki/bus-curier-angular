@@ -3,14 +3,16 @@
   <div class="form__fieldset form__fieldset--2-col-sm">
     <div *ngFor="let control of formUtils.getGroupControls(formGroup) | keyvalue: formUtils.originalOrder"
          class="form__field" [class.form__field--full]="control.key === FormControlName.Fio">
-      <label [for]="FormControlName.Sender + '-' + control.key" class="form__label">
+      <label [for]="FormControlName.Sender + '-' + control.key" class="form__label"
+             [class.form__label--invalid]="control.value.invalid">
         {{FormFieldMeta[control.key].label}}
         <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
       </label>
       <app-select *ngIf="control.key === FormControlName.Doc; else input"
                   [formControlName]="control.key"
                   [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
-                  [items]="roles">
+                  [items]="userDocs"
+                  (change)="changeUserDoc($event)">
         <ng-container class="errors">
           <small *ngIf="utils.getObjectKey(control.value.errors).length">{{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}</small>
         </ng-container>
@@ -29,5 +31,8 @@
         </app-input>
       </ng-template>
     </div>
+    <small *ngIf="isOtherUserDoc" style="color: red;">
+      Обратитесь в службу поддержки для консультации по номеру: 8 800 000 00
+    </small>
   </div>
 </section>

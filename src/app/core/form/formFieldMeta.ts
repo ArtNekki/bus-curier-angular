@@ -253,6 +253,24 @@ export default {
     mask: '0000 000000',
     prefix: ''
   },
+  [FormControlName.PassportNumber]: {
+    label: 'Номер документа',
+    type: 'text',
+    mask: '0000 000000',
+    prefix: ''
+  },
+  [FormControlName.RusPassport]: {
+    label: 'Номер документа',
+    type: 'text',
+    mask: '0000 000000',
+    prefix: ''
+  },
+  [FormControlName.DriverLicense]: {
+    label: 'Номер документа',
+    type: 'text',
+    mask: '00 00 000000',
+    prefix: ''
+  },
   [FormControlName.Question]: {
     label: 'Опишите ваш вопрос',
     type: 'textarea'
