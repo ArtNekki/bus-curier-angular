@@ -2,14 +2,11 @@
   <div formArrayName="parcels">
     <div *ngFor="let parcelGroup of parcels.controls; let i = index">
       <app-parcel [formControlName]="i">
-        <ng-container class="close">
-          <div *ngIf="parcels.length > 1" class="form__field form__field--align-center">
-            <label class="form__label">&#160;</label>
-            <app-btn type="button" mods="delete" (click)="delete(i)">
-              <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>
-              Удалить
-            </app-btn>
-          </div>
+        <ng-container *ngIf="parcels.length > 1" class="delete">
+          <app-btn type="button" mods="delete" (click)="delete(i)">
+            <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>
+            Удалить
+          </app-btn>
         </ng-container>
       </app-parcel>
     </div>

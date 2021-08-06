@@ -1,23 +1,30 @@
 <ng-container [formGroup]="formGroup">
-  <div class="form__fieldset form__fieldset--package">
-    <div *ngFor="let parcelControl of formUtils.getGroupControls(formGroup) | keyvalue: formUtils.originalOrder" class="form__field">
-      <label
-        [for]="'parcel-' + parcelControl.key"
-        class="form__label">
-        {{formGroupMeta.Parcel[parcelControl.key].label}}
-        <sup *ngIf="parcelControl.value.errors && parcelControl.value.hasError('required')">*</sup>
-      </label>
-      <app-input
-        type="text"
-        [formControlName]="parcelControl.key"
-        [isInvalid]="(parcelControl.value.invalid && parcelControl.value.touched) && 'invalid'"
-      >
-        <!--[unit]="formGroupMeta.Parcel[parcelControl.key].unit"-->
-      </app-input>
-    </div>
-    <ng-content select=".close"></ng-content>
+  <div class="parcel">
+   <div class="parcel__body">
+     <div *ngFor="let control of formUtils.getGroupControls(formGroup) | keyvalue: formUtils.originalOrder"
+          class="parcel__field">
+       <label
+         [for]="'parcel-' + control.key"
+         class="parcel__label"
+         [class.parcel__label--invalid]="control.value.invalid">
+         {{formGroupMeta.Parcel[control.key].label}}
+         <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
+       </label>
+       <app-input
+         type="text"
+         [formControlName]="control.key"
+         [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+       >
+         <!--[unit]="formGroupMeta.Parcel[parcelControl.key].unit"-->
+       </app-input>
+     </div>
+     <div class="parcel__delete">
+       <label class="parcel__label">&#160;</label>
+       <ng-content select=".delete"></ng-content>
+     </div>
+   </div>
+    <div *ngIf="this.formGroup.invalid" class="parcel__error">Параметры посылки заполнены не корректно</div>
   </div>
-  <div *ngIf="isInvalid">Данные заполнены не корректно</div>
 </ng-container>
 
 

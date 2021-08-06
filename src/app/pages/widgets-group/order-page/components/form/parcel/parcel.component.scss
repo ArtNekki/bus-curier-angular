@@ -1,0 +1,72 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.parcel {
+  $parcel-columns: repeat(5, 100px) 1fr;
+  $parcel-column-gap: $container-padding-x;
+  $parcel-row-gap: 10px;
+
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba($black-color, 0.15);
+  border-radius: $border-radius;
+
+  @include media-breakpoint-only(md) {
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  &__body {
+    margin-bottom: $parcel-row-gap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: $parcel-column-gap;
+    grid-row-gap: $parcel-row-gap;
+    align-items: center;
+
+    @include media-breakpoint-up(sm) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include media-breakpoint-only(md) {
+      grid-template-columns: $parcel-columns;
+    }
+
+    @include media-breakpoint-up(xl) {
+      grid-template-columns: $parcel-columns;
+    }
+  }
+
+  &__label {
+    margin-bottom: 3px;
+    display: block;
+    font-family: $font-family--secondary;
+    font-size: 14px;
+    line-height: 20px;
+    color: $font-color;
+    text-align: left;
+
+    &--invalid {
+      color: $red-color;
+    }
+  }
+
+  &__error {
+    font-family: $font-family--secondary;
+    color: $red-color;
+  }
+
+  &__delete {
+    align-items: start;
+  }
+}

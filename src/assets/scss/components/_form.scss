@@ -313,39 +313,6 @@
     }
   }
 
-  &__fieldset--package {
-    $template-columns-md: repeat(5, 100px) 1fr;
-    $row-gap-md: 10px;
-
-    margin-bottom: 20px;
-    padding: 20px;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: $form-column-gap;
-    align-items: center;
-    box-shadow: 0 0 10px rgba($black-color, 0.15);
-    border-radius: $border-radius;
-
-    @include media-breakpoint-up(sm) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @include media-breakpoint-only(md) {
-      padding: 0;
-      grid-template-columns: $template-columns-md;
-      grid-row-gap: $row-gap-md;
-      box-shadow: none;
-      border-radius: 0;
-    }
-
-    @include media-breakpoint-up(xl) {
-      padding: 0;
-      grid-template-columns: $template-columns-md;
-      grid-row-gap: $row-gap-md;
-      box-shadow: none;
-      border-radius: 0;
-    }
-  }
-
   &__fieldset--auto-part {
     margin-bottom: 10px;
     grid-template-columns: 1fr minmax(80px, min-content);
