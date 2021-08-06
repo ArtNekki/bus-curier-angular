@@ -14,7 +14,7 @@ import fieldError from '../../../../../../core/form/fieldError';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
-import roles from 'src/app/mock-data/roles';
+import userRoles from 'src/app/data/user-roles';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {BasicGroupComponent} from '../basic-group/basic-group.component';
 
@@ -42,7 +42,7 @@ export class IndividualComponent extends BasicGroupComponent implements OnInit {
   public FormFieldError = fieldError;
 
   public formGroup: FormGroup;
-  public roles = roles;
+  public userRoles = userRoles;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -59,12 +59,11 @@ export class IndividualComponent extends BasicGroupComponent implements OnInit {
       [FormControlName.MiddleName]: new FormControl('', [Validators.required]),
       [FormControlName.Email]: new FormControl('', [Validators.required, Validators.required]),
       [FormControlName.Tel]: new FormControl('', [Validators.required]),
-      [FormControlName.Role]: new FormControl('', [Validators.required]),
+      [FormControlName.Role]: new FormControl(FormControlName.Sender, [Validators.required]),
     });
 
     super.ngOnInit();
 
-    roles.unshift({value: '', name: 'Не выбрано'});
-    this.roles = roles;
+    this.userRoles = userRoles;
   }
 }

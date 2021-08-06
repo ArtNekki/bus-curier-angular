@@ -8,7 +8,7 @@
     <app-select
       *ngIf="control.key === FormControlName.Role; else input"
       [formControlName]="control.key"
-      [items]="roles"
+      [items]="userRoles"
       [isInvalid]="control.value.invalid && control.value.touched"
     ></app-select>
     <ng-template #input>
