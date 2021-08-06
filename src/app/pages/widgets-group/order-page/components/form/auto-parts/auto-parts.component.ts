@@ -71,6 +71,7 @@ export class AutoPartsComponent extends BasicGroupComponent implements OnInit  {
 
   add() {
     this.parts.push(new FormControl('', [Validators.required]));
+    this.formGroup.markAllAsTouched();
   }
 
   delete(index: number) {
