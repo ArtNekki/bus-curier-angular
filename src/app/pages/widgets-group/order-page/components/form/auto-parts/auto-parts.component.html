@@ -1,5 +1,9 @@
 <ng-container [formGroup]="formGroup">
-  <label class="form__label">Выберите тип запчасти</label>
+  <label class="form__label" style="margin-bottom: 15px"
+         [class.form__label--invalid]="isSomePartsInvalid">
+    Выберите тип запчасти
+    <sup *ngIf="isSomePartsInvalid">*</sup>
+  </label>
  <ng-container formArrayName="parts">
    <div *ngFor="let part of parts.controls; let i = index" class="form__fieldset form__fieldset--auto-part">
      <app-select
