@@ -6,7 +6,7 @@
       <label [for]="FormControlName.Sender + '-' + control.key" class="form__label"
              [class.form__label--invalid]="control.value.invalid">
         {{FormFieldMeta[control.key].label}}
-        <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
+        <sup *ngIf="control.value.errors && control.value.hasError('required')" class="form__required">*</sup>
       </label>
       <app-select *ngIf="control.key === FormControlName.Doc; else input"
                   [formControlName]="control.key"

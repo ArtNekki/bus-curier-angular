@@ -59,7 +59,7 @@ export class PickupPointComponent extends BasicGroupComponent implements OnInit 
     this.formGroup = new FormGroup({
       [FormControlName.Location]: new FormControl('', [Validators.required]),
       [FormControlName.ReceiveData]: new FormGroup({
-        [FormControlName.Active]: new FormControl(''),
+        [FormControlName.Active]: new FormControl('', [Validators.required]),
         [FormControlName.Department]: new FormControl('', [Validators.required]),
         [FormControlName.Courier]: new FormControl('')
       })

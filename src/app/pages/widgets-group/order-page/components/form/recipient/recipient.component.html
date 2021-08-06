@@ -4,9 +4,9 @@
     <div *ngFor="let control of formUtils.getGroupControls(formGroup) | keyvalue: formUtils.originalOrder"
          class="form__field" [class.form__field--full]="control.key === FormControlName.Fio">
       <label
-        [for]="'recipient-' + control.key" class="form__label">
+        [for]="'recipient-' + control.key" class="form__label" [class.form__label--invalid]="control.value.invalid">
         {{FormFieldMeta[control.key].label}}
-        <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
+        <sup *ngIf="control.value.errors && control.value.hasError('required')" class="form__required">*</sup>
       </label>
       <app-input
         [id]="'recipient-' + control.key"

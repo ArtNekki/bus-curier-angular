@@ -22,6 +22,15 @@
       </app-select>
     </div>
     <ng-container [formGroupName]="FormControlName.ReceiveData">
+       <span *ngIf="formGroup.get(FormControlName.ReceiveData)
+            .get(FormControlName.Active).invalid" class="form__label form__label--invalid"
+             style="position: relative; top: 20px;">
+               Выберите вариант
+        <sup *ngIf="formGroup.get(FormControlName.ReceiveData)
+            .get(FormControlName.Active).errors
+        && formGroup.get(FormControlName.ReceiveData)
+            .get(FormControlName.Active).hasError('required')">*</sup>
+      </span>
       <div class="form__tabs">
         <label class="form__tab">
           <input type="radio"
