@@ -56,7 +56,11 @@
       <div class="form__field"
            *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.One"
            class="form__panel" [@fadeIn]="">
-        <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
+        <label class="form__label form__label--full"
+               [class.form__label--invalid]="formGroup.get(FormControlName.DispatchData).get(FormControlName.Department).invalid">
+          Выберите отделение:
+        <sup *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Department).invalid">*</sup>
+        </label>
         <app-select
           [items]="addressPoints"
           [formControlName]="FormControlName.Department"

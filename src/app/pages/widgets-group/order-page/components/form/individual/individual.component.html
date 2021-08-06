@@ -1,7 +1,8 @@
 <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--3-col-xl" [formGroup]="formGroup">
   <div *ngFor="let control of formUtils.getGroupControls(formGroup)  | keyvalue: formUtils.originalOrder"
        class="form__field">
-    <label [for]="'individual-' + control.key" class="form__label" [class.form__label--invalid]="control.value.invalid">
+    <label [for]="'individual-' + control.key" class="form__label"
+           [class.form__label--invalid]="control.value.invalid">
       {{FormFieldMeta[control.key].label}}
       <sup class="form__required" *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
     </label>

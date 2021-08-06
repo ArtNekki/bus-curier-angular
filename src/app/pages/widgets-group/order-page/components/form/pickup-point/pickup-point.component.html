@@ -2,7 +2,12 @@
   <h2 class="form__heading">Пункт получения</h2>
   <div class="form__fieldset form__fieldset--pickup-point form__fieldset--row-gap-lg">
     <div class="form__field form__field--location">
-      <label for="departure-location" class="form__label">Населенный пункт<sup>*</sup></label>
+      <label for="departure-location" class="form__label"
+             [class.form__label--invalid]="formGroup.get(FormControlName.Location).invalid">
+        Населенный пункт
+        <sup *ngIf="formGroup.get(FormControlName.Location).errors
+        && formGroup.get(FormControlName.Location).hasError('required')">*</sup>
+      </label>
       <app-select
         [items]="cities" id="departure-location"
         [formControlName]="FormControlName.Location"
@@ -40,7 +45,12 @@
       <div *ngIf="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).value === Tab.One"
            class="form__panel" [@fadeIn]="">
         <div class="form__field">
-          <label class="form__label form__label--light form__label--full">Выберите отделение:</label>
+          <label class="form__label form__label--full"
+                 [class.form__label--invalid]="formGroup.get(FormControlName.ReceiveData)
+                 .get(FormControlName.Department).invalid">
+            Выберите отделение:
+            <sup *ngIf="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Department).invalid">*</sup>
+          </label>
           <app-select
             [items]="addressPoints"
             [formControlName]="FormControlName.Department"
