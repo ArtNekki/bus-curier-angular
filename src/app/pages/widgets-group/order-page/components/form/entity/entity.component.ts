@@ -56,38 +56,23 @@ export class EntityComponent extends BasicGroupComponent implements OnInit {
     super.ngOnInit();
   }
 
-  public onTouched: () => void = () => {};
-
-  writeValue(value: any): void {
-    if (value) {
-      this.formGroup.setValue(value, { emitEvent: false });
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.subscribe(fn);
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  // setDisabledState?(isDisabled: boolean): void {
-  //   isDisabled ? this.formGroup.disable() : this.formGroup.enable();
+  // public onTouched: () => void = () => {};
+  //
+  // writeValue(value: any): void {
+  //   if (value) {
+  //     this.formGroup.setValue(value, { emitEvent: false });
+  //   }
   // }
+  //
+  // registerOnChange(fn: any): void {
+  //   this.formGroup.valueChanges.subscribe(fn);
+  // }
+  //
+  // registerOnTouched(fn: any): void {
+  //   this.onTouched = fn;
+  // }
+  // // setDisabledState?(isDisabled: boolean): void {
+  // //   isDisabled ? this.formGroup.disable() : this.formGroup.enable();
+  // // }
 
-  validate(c: AbstractControl): ValidationErrors | null {
-    this.orderForm.formData$.subscribe((result: {submitted: boolean, step: number}) => {
-      if (c.errors) {
-        this.formGroup.markAllAsTouched();
-      }
-
-      if (c.errors) {
-        this.orderForm.setInvalidStep(result.step);
-      } else {
-        this.orderForm.setInvalidStep(null);
-      }
-
-    });
-    return this.formGroup.valid ? null : { invalidForm: {valid: false, message: 'individual group are invalid'}};
-  }
 }

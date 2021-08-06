@@ -63,6 +63,25 @@ export class SenderComponent extends BasicGroupComponent implements OnInit {
 
     this.changeUserDoc(this.formGroup.get(FormControlName.Doc).value);
 
+    this.form$.subscribe((form: FormGroup) => {
+      const isIndividual = form.value.steps[0].author.active === FormControlName.Individual;
+      const isSender = form.value.steps[0].author.individual.role === FormControlName.Sender;
+
+      if (isIndividual && isSender) {
+
+        const individual = form.value.steps[0].author.individual;
+
+        this.formGroup.get(FormControlName.Fio)
+            .patchValue([
+              individual[FormControlName.LastName],
+              individual[FormControlName.FirstName],
+              individual[FormControlName.MiddleName]
+            ].join(` `));
+        this.formGroup.get(FormControlName.Tel).patchValue(individual.tel);
+      }
+
+    });
+
     super.ngOnInit();
   }
 

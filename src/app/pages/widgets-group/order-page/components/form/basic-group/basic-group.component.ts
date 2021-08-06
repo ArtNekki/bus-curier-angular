@@ -9,7 +9,7 @@ import {
   Validator
 } from '@angular/forms';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-basic-group',
@@ -21,6 +21,7 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
   public onChangeSub: Subscription;
   private subscriptions: Subscription[] = [];
 
+  public form$ = new Subject();
 
   constructor(
     protected orderForm: OrderFormService,
@@ -35,6 +36,12 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
         this.onTouched();
       })
     );
+
+    this.orderForm.$form.subscribe((data: FormGroup) => {
+      if (data) {
+        this.form$.next(data);
+      }
+    });
   }
 
   public onTouched: () => void = () => {};

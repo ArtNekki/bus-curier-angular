@@ -57,10 +57,6 @@ export class OrderPageComponent implements OnInit {
         }),
       ])
     });
-
-    this.orderForm.invalidStep$.subscribe((step) => {
-      this.invalidStep = step;
-    });
   }
 
   get steps() {
@@ -80,6 +76,8 @@ export class OrderPageComponent implements OnInit {
     this.scrollToTop();
 
     this.changeDetectorRef.detectChanges();
+
+    this.orderForm.$form.next(this.form);
   }
 
   goPrev() {
