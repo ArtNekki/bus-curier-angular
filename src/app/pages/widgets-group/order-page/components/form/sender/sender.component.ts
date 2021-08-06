@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {
@@ -18,6 +18,7 @@ import userDocs from 'src/app/data/user-docs';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {BasicGroupComponent} from '../basic-group/basic-group.component';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-sender',
@@ -38,12 +39,14 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
   ]
 })
 
-export class SenderComponent extends BasicGroupComponent implements OnInit {
+export class SenderComponent extends BasicGroupComponent implements OnInit, OnDestroy {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
 
+  public formSub: Subscription;
   public formGroup: FormGroup;
+
   public userDocs = userDocs;
   public isOtherUserDoc = false;
 
@@ -63,7 +66,7 @@ export class SenderComponent extends BasicGroupComponent implements OnInit {
 
     this.changeUserDoc(this.formGroup.get(FormControlName.Doc).value);
 
-    this.form$.subscribe((form: FormGroup) => {
+    this.formSub = this.form$.subscribe((form: FormGroup) => {
       const isIndividual = form.value.steps[0].author.active === FormControlName.Individual;
       const isSender = form.value.steps[0].author.individual.role === FormControlName.Sender;
 
@@ -83,6 +86,10 @@ export class SenderComponent extends BasicGroupComponent implements OnInit {
     });
 
     super.ngOnInit();
+  }
+
+  ngOnDestroy(): void {
+    this.formSub.unsubscribe();
   }
 
   changeUserDoc(type: any) {

@@ -17,7 +17,9 @@ import {Subject, Subscription} from 'rxjs';
   styleUrls: ['./basic-group.component.scss']
 })
 export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Validator, ControlValueAccessor {
+  public formSub: Subscription;
   public formGroup: FormGroup;
+
   public onChangeSub: Subscription;
   private subscriptions: Subscription[] = [];
 
@@ -37,7 +39,8 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
       })
     );
 
-    this.orderForm.$form.subscribe((data: FormGroup) => {
+    this.formSub = this.orderForm.$form.subscribe((data: FormGroup) => {
+
       if (data) {
         this.form$.next(data);
       }
@@ -114,6 +117,8 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
       console.log('this.subscriptions.length', this.subscriptions.length);
       // this.subscriptions.forEach(s => s.unsubscribe());
     }
+
+    this.formSub.unsubscribe();
   }
 
   ngAfterViewInit(): void {

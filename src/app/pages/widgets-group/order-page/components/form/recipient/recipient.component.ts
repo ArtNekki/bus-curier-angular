@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -16,6 +16,7 @@ import fieldError from '../../../../../../core/form/fieldError';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {BasicGroupComponent} from '../basic-group/basic-group.component';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-recipient',
@@ -34,11 +35,12 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
     }
   ]
 })
-export class RecipientComponent extends BasicGroupComponent implements OnInit  {
+export class RecipientComponent extends BasicGroupComponent implements OnInit, OnDestroy {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
 
+  public formSub: Subscription;
   public formGroup: FormGroup;
 
   constructor(public formUtils: FormUtilsService,
@@ -52,5 +54,29 @@ export class RecipientComponent extends BasicGroupComponent implements OnInit  {
       [FormControlName.Fio]: new FormControl('', [Validators.required]),
       [FormControlName.Tel]: new FormControl('', [Validators.required])
     });
+
+    this.formSub = this.form$.subscribe((form: FormGroup) => {
+      const isIndividual = form.value.steps[0].author.active === FormControlName.Individual;
+      const isRecipient = form.value.steps[0].author.individual.role === FormControlName.Recipient;
+
+      if (isIndividual && isRecipient) {
+
+        const individual = form.value.steps[0].author.individual;
+
+        this.formGroup.get(FormControlName.Fio)
+          .patchValue([
+            individual[FormControlName.LastName],
+            individual[FormControlName.FirstName],
+            individual[FormControlName.MiddleName]
+          ].join(` `));
+        this.formGroup.get(FormControlName.Tel).patchValue(individual.tel);
+      }
+    });
+
+    super.ngOnInit();
+  }
+
+  ngOnDestroy(): void {
+    this.formSub.unsubscribe();
   }
 }
