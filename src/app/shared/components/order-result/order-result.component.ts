@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ModsService} from '../../../core/services/mods.service';
 import {OrderReportService} from '../../../core/services/order-report/order-report.service';
 import formFieldMeta from '../../../core/form/formFieldMeta';
@@ -11,6 +11,8 @@ import {FormUtilsService} from '../../../core/services/form-utils.service';
   styleUrls: ['./order-result.component.scss']
 })
 export class OrderResultComponent implements OnInit, OnChanges {
+  @Output() change: EventEmitter<any> = new EventEmitter<any>();
+
   @Input() mods;
   @Input() data;
 
@@ -19,6 +21,8 @@ export class OrderResultComponent implements OnInit, OnChanges {
 
   public cssClass;
   public currentData;
+  public isLoading = false;
+  public isDirty = false;
 
   constructor(
     public orderReport: OrderReportService,
@@ -33,8 +37,22 @@ export class OrderResultComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+
     if (changes.data.currentValue) {
       this.currentData = changes.data.currentValue;
+
+      if ((this.getDepartureCity(this.currentData)
+          && this.getPickupCity(this.currentData)
+          && this.getCargoList(this.currentData)) && !this.isDirty
+      ) {
+        this.isLoading = true;
+        this.isDirty = true;
+        this.change.emit(true);
+
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1000);
+      }
     }
   }
 

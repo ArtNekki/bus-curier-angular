@@ -52,6 +52,13 @@
     overflow-y: auto;
   }
 
+  &__loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+
   &__total p {
     font-size: 28px;
   }

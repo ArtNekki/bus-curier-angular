@@ -18,6 +18,7 @@ export class SidebarResultComponent implements OnInit, OnChanges {
   };
 
   public cargoList;
+  public isOrderVisible = false;
 
   constructor() { }
 
@@ -42,4 +43,7 @@ export class SidebarResultComponent implements OnInit, OnChanges {
   // getCargoList(data) {
   //   return data.steps[2]['cargo-group'];
   // }
+  showOrder() {
+    this.isOrderVisible = true;
+  }
 }

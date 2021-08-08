@@ -57,6 +57,7 @@ import { OrderResultComponent } from './components/order-result/order-result.com
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ReportComponent } from './components/report/report.component';
 import { LocationComponent } from './components/location/location.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 // import { ɵs } from '@ng-select/ng-select;
 
@@ -113,7 +114,8 @@ import { LocationComponent } from './components/location/location.component';
     ModalComponent,
     OrderResultComponent,
     PaginationComponent,
-    ReportComponent
+    ReportComponent,
+    LoaderComponent
   ],
   declarations: [
     BtnComponent,
@@ -150,7 +152,8 @@ import { LocationComponent } from './components/location/location.component';
     OrderResultComponent,
     PaginationComponent,
     ReportComponent,
-    LocationComponent
+    LocationComponent,
+    LoaderComponent
   ]
   // providers: [NgSelectConfig, ɵs],
 })
