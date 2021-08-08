@@ -118,7 +118,10 @@ export class BasicGroupComponent implements OnInit, AfterViewInit, OnDestroy, Va
       // this.subscriptions.forEach(s => s.unsubscribe());
     }
 
-    this.formSub.unsubscribe();
+    if (this.formSub) {
+      this.formSub.unsubscribe();
+    }
+
   }
 
   ngAfterViewInit(): void {
