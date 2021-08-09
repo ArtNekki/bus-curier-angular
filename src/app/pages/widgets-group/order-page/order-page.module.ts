@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {SharedModule} from '../../../shared/shared.module';
 import {OrderPageComponent} from './order-page.component';
 import {ModalsModule} from '../../../modals/modals.module';
-import {OrderFormModule} from '../common-modules/order-form/order-form.module';
+import {OrderFormModule} from '../common/order-form/order-form.module';
 
 @NgModule({
   declarations: [
