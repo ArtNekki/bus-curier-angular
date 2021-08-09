@@ -1,0 +1,15 @@
+<div [formGroup]="formGroup">
+  <div formArrayName="parcels">
+    <div *ngFor="let parcelGroup of parcels.controls; let i = index">
+      <app-parcel-form [formControlName]="i">
+        <ng-container *ngIf="parcels.length > 1" class="delete">
+          <app-btn type="button" mods="delete" (click)="delete(i)">
+            <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>
+            Удалить
+          </app-btn>
+        </ng-container>
+      </app-parcel-form>
+    </div>
+    <app-btn type="button" (click)="add()" [disabled]="isSomeParcelsInvalid">Добавить еще 1 позицию</app-btn>
+  </div>
+</div>

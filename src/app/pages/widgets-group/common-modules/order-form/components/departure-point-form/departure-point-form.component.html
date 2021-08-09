@@ -1,0 +1,101 @@
+<section class="form__section" [formGroup]="formGroup">
+  <h2 class="form__heading">Пункт отправления</h2>
+  <div class="form__fieldset form__fieldset--delivery-point form__fieldset--row-gap-lg">
+    <div class="form__field form__field--location">
+      <label for="departure-location" class="form__label"
+             [class.form__label--invalid]="formGroup.get(FormControlName.Location).invalid">
+        Населенный пункт
+        <sup *ngIf="formGroup.get(FormControlName.Location).errors
+        && formGroup.get(FormControlName.Location).hasError('required')">*</sup>
+      </label>
+      <app-select
+        type="text"
+        [items]="cities"
+        id="departure-location"
+        [formControlName]="FormControlName.Location"
+        [isInvalid]="(formGroup.get(FormControlName.Location).invalid
+        && formGroup.get(FormControlName.Location).touched) && 'invalid'"
+      >
+        <ng-container class="errors">
+          <small *ngIf="utils.getObjectKey(formGroup.get(FormControlName.Location).errors).length">
+            {{FormFieldError[utils.getObjectKey(formGroup.get(FormControlName.Location).errors)[0]]}}
+          </small>
+        </ng-container>
+      </app-select>
+    </div>
+    <ng-container [formGroupName]="FormControlName.DispatchData">
+      <span *ngIf="formGroup.get(FormControlName.DispatchData)
+            .get(FormControlName.Active).invalid" class="form__label form__label--invalid"
+            style="position: relative; top: 20px;">
+               Выберите вариант
+        <sup *ngIf="formGroup.get(FormControlName.DispatchData)
+            .get(FormControlName.Active).errors
+        && formGroup.get(FormControlName.DispatchData)
+            .get(FormControlName.Active).hasError('required')">*</sup>
+      </span>
+      <div class="form__tabs">
+        <label class="form__tab">
+          <input type="radio"
+                 [checked]="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.One"
+                 [name]="FormControlName.Active"
+                 [value]="Tab.One"
+                 (change)="changeType(Tab.One)"
+                 [formControlName]="FormControlName.Active" hidden />
+          <div>Cдать в отделение</div>
+        </label>
+        <label class="form__tab">
+          <input type="radio"
+                 [checked]="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.Two"
+                 [name]="FormControlName.Active"
+                 [value]="Tab.Two"
+                 (change)="changeType(Tab.Two)"
+                 [formControlName]="FormControlName.Active"  hidden />
+          <div>Вызвать курьера</div>
+        </label>
+      </div>
+      <div class="form__field"
+           *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.One"
+           class="form__panel" [@fadeIn]="">
+        <label class="form__label form__label--full"
+               [class.form__label--invalid]="formGroup.get(FormControlName.DispatchData).get(FormControlName.Department).invalid">
+          Выберите отделение:
+          <sup *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Department).invalid">*</sup>
+        </label>
+        <app-select
+          [items]="addressPoints"
+          [formControlName]="FormControlName.Department"
+          [isInvalid]="(formGroup.get(FormControlName.DispatchData).get(FormControlName.Department).invalid
+          && formGroup.get(FormControlName.DispatchData).get(FormControlName.Department).touched) && 'invalid'"
+        >
+          <ng-container class="errors">
+            <small *ngIf="utils.getObjectKey(formGroup.get(FormControlName.DispatchData).get(FormControlName.Department).errors).length">
+              {{FormFieldError[utils.getObjectKey(formGroup.get(FormControlName.DispatchData).get(FormControlName.Department).errors)[0]]}}
+            </small>
+          </ng-container>
+        </app-select>
+      </div>
+      <div *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.Two"
+           class="form__panel" [@fadeIn]="">
+        <app-courier-form [formControlName]="FormControlName.Courier"></app-courier-form>
+      </div>
+    </ng-container>
+    <div class="form__field form__field--delivery-date">
+      <label for="departure-date" class="form__label"
+             [class.form__label--invalid]="formGroup.get(FormControlName.Date).invalid"
+      >Дата отправки
+        <sup *ngIf="formGroup.get(FormControlName.Date).errors
+        && formGroup.get(FormControlName.Date).hasError('required')">*</sup>
+      </label>
+      <app-datepicker
+        id="departure-date"
+        [formControlName]="FormControlName.Date"
+        [isInvalid]="formGroup.get(FormControlName.Date).invalid && formGroup.get(FormControlName.Date).touched && 'invalid'">
+        <ng-container class="errors">
+          <small *ngIf="utils.getObjectKey(formGroup.get(FormControlName.Date).errors).length">
+            {{FormFieldError[utils.getObjectKey(formGroup.get(FormControlName.Date).errors)[0]]}}
+          </small>
+        </ng-container>
+      </app-datepicker>
+    </div>
+  </div>
+</section>

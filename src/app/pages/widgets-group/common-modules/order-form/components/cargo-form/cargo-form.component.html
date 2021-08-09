@@ -1,0 +1,28 @@
+<ng-container [formGroup]="formGroup">
+  <section class="form__section">
+    <div class="form__fieldset form__fieldset--goods-type">
+      <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
+      <app-radio *ngFor="let control of
+        formUtils.getGroupControls(formGroup.get('items')) | keyvalue: formUtils.originalOrder;"
+                 [id]="control.key"
+                 [name]="'cargo-type'"
+                 (change)="setCargoType($event, control.key)"
+                 [checked]="control.key === formGroup.get('activeItem').value"
+                 [isInvalid]="control.value.invalid"
+      >
+        {{FormFieldMeta[control.key].label}}
+      </app-radio>
+    </div>
+    <div formGroupName="items">
+      <div *ngIf="formGroup.get('activeItem').value === FormControlName.Docs" [@fadeIn]="">
+        <app-docs-form [formControlName]="FormControlName.Docs"></app-docs-form>
+      </div>
+      <div *ngIf="formGroup.get('activeItem').value === FormControlName.Parcels" [@fadeIn]="">
+        <app-parcels-form [formControlName]="FormControlName.Parcels"></app-parcels-form>
+      </div>
+      <div *ngIf="formGroup.get('activeItem').value === FormControlName.AutoParts" [@fadeIn]="">
+        <app-auto-parts-form [formControlName]="FormControlName.AutoParts"></app-auto-parts-form>
+      </div>
+    </div>
+  </section>
+</ng-container>

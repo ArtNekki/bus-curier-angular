@@ -2,23 +2,22 @@
   <div class="page__content">
     <h1 class="page__title">Заявка на перевозку</h1>
     <p class="page__subtitle">Заполните форму необходимыми данными и отправьте</p>
-<!--    <app-order-steps [invalidStep]="invalidStep" [currentStep]="currentStep"></app-order-steps>-->
     <app-order-steps [steps]="steps" [currentStep]="currentStep"></app-order-steps>
     <form class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
       <ng-container formArrayName="steps">
         <div *ngIf="currentStep === FormStep.One" [formGroup]="steps[FormStep.One]" [@fadeIn]="">
-          <app-author [formControlName]="FormControlName.Author" (selectUser)="setCurrentUser($event)"></app-author>
+          <app-author-form [formControlName]="FormControlName.Author" (selectUser)="setCurrentUser($event)"></app-author-form>
         </div>
         <div *ngIf="currentStep === FormStep.Two" [formGroup]="steps[FormStep.Two]" [@fadeIn]="">
-          <app-sender [formControlName]="FormControlName.Sender"></app-sender>
-          <app-departure-point [formControlName]="FormControlName.DeparturePoint"></app-departure-point>
+          <app-sender-form [formControlName]="FormControlName.Sender"></app-sender-form>
+          <app-departure-point-form [formControlName]="FormControlName.DeparturePoint"></app-departure-point-form>
         </div>
         <div *ngIf="currentStep === FormStep.Three" [formGroup]="steps[FormStep.Three]" [@fadeIn]="">
-          <app-cargo-group formControlName="cargo-group"></app-cargo-group>
-          <app-packaging [formControlName]="FormControlName.Packaging"></app-packaging>
-          <app-services formControlName="services"></app-services>
-          <app-recipient [formControlName]="FormControlName.Recipient"></app-recipient>
-          <app-pickup-point [formControlName]="FormControlName.PickupPoint"></app-pickup-point>
+          <app-cargos-form formControlName="cargo-group"></app-cargos-form>
+          <app-packaging-form [formControlName]="FormControlName.Packaging"></app-packaging-form>
+          <app-services-form formControlName="services"></app-services-form>
+          <app-recipient-form [formControlName]="FormControlName.Recipient"></app-recipient-form>
+          <app-pickup-point-form [formControlName]="FormControlName.PickupPoint"></app-pickup-point-form>
         </div>
         <div *ngIf="currentStep === FormStep.Four" [formGroup]="steps[FormStep.Four]" [@fadeIn]="">
           <app-order-report [data]="form.value"></app-order-report>
@@ -47,5 +46,5 @@
       </div>
     </form>
   </div>
-  <app-sidebar-result [currentStep]="currentStep" [data]="form.value"></app-sidebar-result>
+<!--  <app-sidebar-result [currentStep]="currentStep" [data]="form.value"></app-sidebar-result>-->
 </div>
