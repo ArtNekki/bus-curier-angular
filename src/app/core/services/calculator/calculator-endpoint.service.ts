@@ -16,6 +16,11 @@ export class CalculatorEndpointService extends EndpointFactory {
     super(http, injector);
   }
 
+  getCitiesFrom<T>(): Observable<T> {
+    return this.execute(this.http.get<T>(`${this.url}/getcitiesfrom`, this.getRequestHeaders()),
+      () => this.getCitiesFrom());
+  }
+
   getDistricts<T>(id: string): Observable<T> {
     return this.execute(this.http.get<T>(`${this.url}/getdistricts/${id}`, this.getRequestHeaders()),
       () => this.getDistricts(id));

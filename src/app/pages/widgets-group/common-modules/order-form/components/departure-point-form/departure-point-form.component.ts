@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
@@ -10,6 +10,13 @@ import addressPoints from 'src/app/mock-data/address-points';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import { SubFormComponent } from '../sub-form/sub-form.component';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {Subscription} from 'rxjs';
+
+interface CityFrom {
+  id: string;
+  name: string;
+  site_id: string;
+}
 
 @Component({
   selector: 'app-departure-point-form',
@@ -29,7 +36,7 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
     }
   ]
 })
-export class DeparturePointFormComponent extends SubFormComponent implements OnInit {
+export class DeparturePointFormComponent extends SubFormComponent implements OnInit, OnDestroy {
   @Input() noLabel: boolean;
 
   public FormFieldMeta = formFieldMeta;
@@ -43,10 +50,12 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
   public cities = [];
 
+  private citiesFromSub: Subscription;
+
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
               private calculatorService: CalculatorService,
-              orderForm: OrderFormService) {
+              protected orderForm: OrderFormService) {
     super(orderForm);
   }
 
@@ -63,13 +72,21 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
     this.currentTab = this.Tab.One;
 
-    this.calculatorService.getDistricts(1).subscribe((result: Array<{id: string, name: string}>) => {
-      this.cities = result.map((el: {id: string, name: string}) => {
-        return {value: el.id, name: el.name};
-      });
+    this.citiesFromSub = this.calculatorService.getCitiesFrom().subscribe((result: Array<CityFrom>) => {
+      this.cities = result
+        .filter((city: CityFrom) => (city.site_id !== '7' && city.site_id !== '15') && city)
+        .map((el: CityFrom) => {
+          return {value: el.id, name: el.name};
+        });
     });
 
     super.ngOnInit();
+  }
+
+  ngOnDestroy(): void {
+    if (this.citiesFromSub) {
+      this.citiesFromSub.unsubscribe();
+    }
   }
 
   changeType(type: string) {
@@ -85,5 +102,9 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         this.formGroup.get(FormControlName.DispatchData).get(this.Tab.One).setValue('');
         break;
     }
+  }
+
+  setCity(id: string) {
+    this.orderForm.cityFrom$.next(id);
   }
 }

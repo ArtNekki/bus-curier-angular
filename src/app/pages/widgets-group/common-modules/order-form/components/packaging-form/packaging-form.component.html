@@ -1,8 +1,8 @@
-<section class="form__section" [formGroup]="formGroup">
+<section *ngIf="items.length" class="form__section" [formGroup]="formGroup">
   <h2 class="form__heading">Упаковка:</h2>
   <div class="form__fieldset form__fieldset--boxing" formArrayName="items">
     <ng-container *ngFor="let itemGroup of items.controls; let i = index">
-      <div class="form__field" [class.form__field--span-2]="itemGroup.get(FormControlName.BagWithSeal)" [formGroupName]="i">
+      <div class="form__field" [formGroupName]="i">
         <ng-container
           *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;
           let controlIndex = index;">
@@ -15,8 +15,8 @@
           </ng-container>
           <ng-template #checkbox>
             <app-checkbox [formControlName]="control.key">
-              <div class="text">{{FormFieldMeta[control.key].label}}</div>
-              <div class="meta">{{FormFieldMeta[control.key].meta}}</div>
+              <div class="text">{{control.key}}</div>
+              <div class="meta">{{control.key}} руб.</div>
             </app-checkbox>
           </ng-template>
         </ng-container>

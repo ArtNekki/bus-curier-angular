@@ -11,6 +11,10 @@ export class CalculatorService {
   constructor(private http: HttpClient,
               private endpoint: CalculatorEndpointService) { }
 
+  getCitiesFrom() {
+    return this.endpoint.getCitiesFrom();
+  }
+
   getDistricts(id) {
     return this.endpoint.getDistricts(id);
   }

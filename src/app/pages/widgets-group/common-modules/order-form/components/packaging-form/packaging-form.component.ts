@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
@@ -7,6 +7,15 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {switchMap} from 'rxjs/operators';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
+
+interface Service {
+  id: string;
+  name: string;
+  price: string;
+  group_id: string;
+}
 
 @Component({
   selector: 'app-packaging-form',
@@ -31,37 +40,36 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
   public FormControlName = FormControlName;
 
   public formGroup: FormGroup;
+  public data = {};
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
-              orderForm: OrderFormService) {
+              private calcService: CalculatorService,
+              private cdr: ChangeDetectorRef,
+              protected orderForm: OrderFormService) {
     super(orderForm);
   }
 
   ngOnInit(): void {
+
     this.formGroup = new FormGroup({
-      items: new FormArray([
-        new FormGroup({
-          [FormControlName.CardboardBox]: new FormControl(''),
-          [FormControlName.Counter]: new FormControl('')
-        }),
-        new FormGroup({
-          [FormControlName.TransparentFilm]: new FormControl(''),
-          [FormControlName.Counter]: new FormControl('')
-        }),
-        new FormGroup({
-          [FormControlName.SafePack]: new FormControl(''),
-          [FormControlName.Counter]: new FormControl('')
-        }),
-        new FormGroup({
-          [FormControlName.BlackFilm]: new FormControl(''),
-          [FormControlName.Counter]: new FormControl('')
-        }),
-        new FormGroup({
-          [FormControlName.BagWithSeal]: new FormControl(''),
-          [FormControlName.Counter]: new FormControl('')
-        })
-      ])
+      items: new FormArray([])
+    });
+
+    this.orderForm.cityFrom$.pipe(
+      switchMap((id: string) => {
+        return this.calcService.getServices(id);
+      })
+    ).subscribe((arr: Array<Service>) => {
+      arr.filter((item: Service) => item.group_id === '1')
+         .forEach((item: Service) => {
+          this.data[item.id] = { name: item.name, price: item.price };
+
+          (this.formGroup.get('items') as FormArray).push(new FormGroup({
+            [item.id]: new FormControl(''),
+            [FormControlName.Counter]: new FormControl('')
+          }));
+        });
     });
   }
 

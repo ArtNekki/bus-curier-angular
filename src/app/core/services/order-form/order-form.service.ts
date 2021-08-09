@@ -6,6 +6,8 @@ import {Subject} from 'rxjs';
 })
 export class OrderFormService {
   public $form = new Subject();
+  public cityFrom$ = new Subject();
+  public cityTo$ = new Subject();
   public isTouched$ = new Subject();
   public formData$ = new Subject();
   public invalidStep$ = new Subject();
