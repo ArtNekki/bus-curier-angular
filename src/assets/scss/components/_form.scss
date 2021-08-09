@@ -183,69 +183,8 @@
   }
 
   &__fieldset--delivery {
-    $areas: label-from, select-from, label-to, select-to, form-refresh, switcher-from, switcher-to, details-from, details-to;
-    $template-columns-md: repeat(2, 1fr) 18px repeat(2, 1fr);
-    $template-areas-md:
-      "label-from label-from . label-to label-to"
-      "select-from select-from form-refresh select-to select-to"
-      "switcher-from switcher-from . switcher-to switcher-to"
-      "details-from details-from . details-to details-to";
-    $details-top-md: 20px;
-    $label-top-md: 0;
-
-    @for $i from 1 through length($areas) {
-      & > *:nth-child(#{$i}) {
-        grid-area: nth($areas, $i);
-      }
-    }
-
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-      "label-from label-from"
-      "select-from select-from"
-      "switcher-from switcher-from"
-      "details-from details-from"
-      "label-to form-refresh"
-      "select-to select-to"
-      "switcher-to switcher-to"
-      "details-to details-to";
+    grid-template-columns: 1fr auto 1fr;
     align-items: start;
-
-
-    @include media-breakpoint-only(md) {
-      grid-template-columns: $template-columns-md;
-      grid-template-areas: $template-areas-md;
-    }
-
-    @include media-breakpoint-up(xl) {
-      grid-template-columns: $template-columns-md;
-      grid-template-areas: $template-areas-md;
-    }
-
-    & > *:nth-child(#{index($areas, details-from)}),
-    & > *:nth-child(#{index($areas, details-to)}) {
-      margin-top: 7px;
-
-      @include media-breakpoint-only(md) {
-        margin-top: $details-top-md;
-      }
-
-      @include media-breakpoint-up(xl) {
-        margin-top: $details-top-md;
-      }
-    }
-
-    & > *:nth-child(#{index($areas, label-to)}) {
-      margin-top: 15px;
-
-      @include media-breakpoint-only(md) {
-        margin-top: $label-top-md;
-      }
-
-      @include media-breakpoint-up(xl) {
-        margin-top: $label-top-md;
-      }
-    }
   }
 
   &__fieldset--department {
@@ -731,7 +670,8 @@
     }
 
     @include media-breakpoint-only(xl) {
-      align-self: center;
+      align-self: start;
+      margin-top: 37px;
     }
   }
 

@@ -6,14 +6,14 @@
         <div class="form__fieldset form__fieldset--delivery">
           <div>
             <h2 class="form__heading form__heading--no-mgb">Откуда</h2>
-            <app-departure-point-form [formControlName]="FormControlName.DeparturePoint"></app-departure-point-form>
+            <app-departure-point-form noLabel="true" [formControlName]="FormControlName.DeparturePoint"></app-departure-point-form>
           </div>
           <button type="button" class="form__refresh">
             <svg-icon class="icon" src="assets/img/svg/refresh.svg" width="18" height="18"></svg-icon>
           </button>
           <div>
             <h2 class="form__heading form__heading--no-mgb">Куда</h2>
-            <app-pickup-point-form [formControlName]="FormControlName.DeparturePoint"></app-pickup-point-form>
+            <app-pickup-point-form noLabel="true" [formControlName]="FormControlName.DeparturePoint"></app-pickup-point-form>
           </div>
         </div>
       </div>
