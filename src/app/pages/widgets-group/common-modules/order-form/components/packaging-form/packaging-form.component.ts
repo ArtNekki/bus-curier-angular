@@ -40,7 +40,7 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
   public FormControlName = FormControlName;
 
   public formGroup: FormGroup;
-  public data = {};
+  public formattedData = {};
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -63,7 +63,7 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
     ).subscribe((arr: Array<Service>) => {
       arr.filter((item: Service) => item.group_id === '1')
          .forEach((item: Service) => {
-          this.data[item.id] = { name: item.name, price: item.price };
+          this.formattedData[item.id] = { name: item.name, price: item.price };
 
           (this.formGroup.get('items') as FormArray).push(new FormGroup({
             [item.id]: new FormControl(''),

@@ -15,8 +15,8 @@
           </ng-container>
           <ng-template #checkbox>
             <app-checkbox [formControlName]="control.key">
-              <div class="text">{{control.key}}</div>
-              <div class="meta">{{control.key}} руб.</div>
+              <div class="text">{{formattedData[control.key].name}}</div>
+              <div class="meta">{{formattedData[control.key].price}} руб.</div>
             </app-checkbox>
           </ng-template>
         </ng-container>
