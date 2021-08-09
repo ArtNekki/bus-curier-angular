@@ -1,6 +1,7 @@
 <section *ngIf="items.length" class="form__section" [formGroup]="formGroup">
   <h2 class="form__heading">Упаковка:</h2>
   <div class="form__fieldset form__fieldset--boxing" formArrayName="items">
+<!--    class="form__fieldset form__fieldset&#45;&#45;boxing"-->
     <ng-container *ngFor="let itemGroup of items.controls; let i = index">
       <div class="form__field" [formGroupName]="i">
         <ng-container

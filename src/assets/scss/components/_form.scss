@@ -268,30 +268,30 @@
   }
 
   &__fieldset--boxing {
-    $template-columns-md: repeat(3, minmax(max-content, auto));
-    $column-gap-md: 35px;
-    $row-gap-md: 35px;
+    //$template-columns-md: repeat(3, minmax(max-content, auto));
+    //$column-gap-md: 35px;
+    //$row-gap-md: 35px;
 
-    grid-row-gap: 10px;
-    grid-template-columns: 1fr;
+    //grid-row-gap: 10px;
+    grid-template-columns: repeat(auto-fill, calc(50% - 15px));
     align-items: start;
-
-    @include media-breakpoint-up(sm) {
-      grid-template-columns: repeat(2, 1fr);
-      grid-row-gap: 15px;
-    }
-
-    @include media-breakpoint-only(md) {
-      grid-template-columns: $template-columns-md;
-      grid-column-gap: $column-gap-md;
-      grid-row-gap: $row-gap-md;
-    }
-
-    @include media-breakpoint-up(xl) {
-      grid-template-columns: $template-columns-md;
-      grid-column-gap: $column-gap-md;
-      grid-row-gap: $row-gap-md;
-    }
+    //
+    //@include media-breakpoint-up(sm) {
+    //  grid-template-columns: repeat(2, 1fr);
+    //  grid-row-gap: 15px;
+    //}
+    //
+    //@include media-breakpoint-only(md) {
+    //  grid-template-columns: $template-columns-md;
+    //  grid-column-gap: $column-gap-md;
+    //  grid-row-gap: $row-gap-md;
+    //}
+    //
+    //@include media-breakpoint-up(xl) {
+    //  grid-template-columns: $template-columns-md;
+    //  grid-column-gap: $column-gap-md;
+    //  grid-row-gap: $row-gap-md;
+    //}
   }
 
   &__fieldset--delivery-point {
