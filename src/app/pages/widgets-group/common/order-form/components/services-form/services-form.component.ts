@@ -1,11 +1,21 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
-import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {animate, style, transition, trigger} from '@angular/animations';
+import {switchMap} from 'rxjs/operators';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
+import {UtilsService} from '../../../../../../core/services/utils.service';
+
+interface Service {
+  id: string;
+  name: string;
+  price: string;
+  group_id: string;
+}
 
 @Component({
   selector: 'app-services-form',
@@ -38,6 +48,8 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
   public currentService: string;
 
   constructor(public formUtils: FormUtilsService,
+              public utils: UtilsService,
+              private calcService: CalculatorService,
               orderForm: OrderFormService) {
     super(orderForm);
   }
@@ -57,6 +69,24 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
         [FormControlName.Active]: new FormControl(''),
         [FormControlName.Tel]: new FormControl('', { updateOn: 'blur' })
       })
+    });
+
+    this.orderForm.cityFrom$.pipe(
+      switchMap((id: string) => {
+        return this.calcService.getServices(id);
+      })
+    ).subscribe((arr: Array<Service>) => {
+      arr.filter((item: Service) => item.group_id === '3')
+        .forEach((item: Service) => {
+          // this.formattedData[item.id] = { name: item.name, price: item.price };
+          console.log('service', item);
+          // this.formGroup.addControl(item.id, new FormGroup({
+          //   [FormControlName.Active]: new FormControl(''),
+          //   [FormControlName.Tel]: new FormControl('')
+          // }));
+        });
+
+
     });
   }
 }
