@@ -21,6 +21,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
   @Output() customChange: EventEmitter<any> = new EventEmitter<any>();
 
   public cssClass = 'checkbox';
+  public isDisabled = false;
   value = false;
 
   constructor() {
@@ -64,5 +65,11 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
     }
 
     this.cssClass += allMods;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    // console.log('diiiis');
+    this.isDisabled = isDisabled;
+    // isDisabled ? this.parcelGroup.disable() : this.parcelGroup.enable();
   }
 }

@@ -41,6 +41,11 @@
         border-color: $primary-color;
       }
 
+      .checkbox__input:disabled ~ & {
+        background-color: $gray-light-color;
+        border-color: $gray-light-color;
+      }
+
       .checkbox--inverted .checkbox__input:checked ~ & {
         background-color: $white-color;
       }
@@ -64,6 +69,11 @@
       .checkbox__input:checked ~ & {
         display: block;
       }
+
+      .checkbox__input:disabled ~ & {
+        border-bottom-color: $gray-color;
+        border-left-color: $gray-color;
+      }
     }
   }
 
@@ -74,6 +84,10 @@
     line-height: 20px;
     cursor: pointer;
     //color: #988300;
+
+    .checkbox__input:disabled ~ .checkbox__body & {
+      color: $gray-light-color;
+    }
 
     .checkbox--sm & {
       font-size: 12px;
@@ -111,6 +125,10 @@
     font-size: 14px;
     line-height: 1.2;
     color: $gray-dark-color;
+
+    .checkbox__input:disabled ~ .checkbox__body & {
+      color: $gray-light-color;
+    }
   }
 }
 

@@ -1,5 +1,7 @@
 <label [class]="cssClass">
-  <input #checkbox type="checkbox" [id]="id" [name]="name" class="checkbox__input" [ngModel]="value" (ngModelChange)="changeValue($event)">
+  <input #checkbox type="checkbox"
+         [id]="id" [name]="name" class="checkbox__input"
+         [ngModel]="value" (ngModelChange)="changeValue($event)" [disabled]="isDisabled">
   <div class="checkbox__body">
     <span  class="checkbox__label">
       <ng-content select=".text"></ng-content>

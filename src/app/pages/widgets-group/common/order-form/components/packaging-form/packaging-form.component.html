@@ -15,7 +15,7 @@
             </app-package-modal>
           </ng-container>
           <ng-template #checkbox>
-            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(control.key)">
+            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(control.key); disableCheckbox(control.value)">
               <div class="text">{{formattedData[control.key].site_name}}</div>
               <div class="meta">{{formattedData[control.key].price}} руб за 1 шт.</div>
             </app-checkbox>

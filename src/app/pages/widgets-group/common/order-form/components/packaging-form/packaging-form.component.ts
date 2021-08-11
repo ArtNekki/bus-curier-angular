@@ -143,4 +143,9 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
   getId(i: number, arr: any) {
     return Object.keys((arr.at(i) as FormGroup).controls)[0];
   }
+
+  disableCheckbox(control) {
+    control.disable();
+    console.log('disable checkbox', control);
+  }
 }
