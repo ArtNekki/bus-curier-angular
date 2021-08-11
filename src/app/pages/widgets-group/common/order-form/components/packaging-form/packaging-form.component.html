@@ -5,18 +5,17 @@
     <ng-container *ngFor="let itemGroup of boxes.controls; let i = index">
       <div class="form__field" [formGroupName]="i">
         <ng-container
-          *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;
-          let controlIndex = index;">
+          *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;">
           <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
             <app-package-modal
-              *ngIf="activeCheckboxId === i"
+              *ngIf="activeCheckboxId === getId(i, boxes.controls)"
               [formControlName]="control.key"
               (close)="closeModal(i)"
             >
             </app-package-modal>
           </ng-container>
           <ng-template #checkbox>
-            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(i)">
+            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(control.key)">
               <div class="text">{{formattedData[control.key].site_name}}</div>
               <div class="meta">{{formattedData[control.key].price}} руб за 1 шт.</div>
             </app-checkbox>
@@ -34,14 +33,14 @@
           let controlIndex = index;">
           <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
             <app-package-modal
-              *ngIf="activeCheckboxId === i"
+              *ngIf="activeCheckboxId === getId(i, savePacks.controls)"
               [formControlName]="control.key"
               (close)="closeModal(i)"
             >
             </app-package-modal>
           </ng-container>
           <ng-template #checkbox>
-            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(i)">
+            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(control.key)">
               <div class="text">{{formattedData[control.key].site_name}}</div>
               <div class="meta">{{formattedData[control.key].price}} руб за 1 шт.</div>
             </app-checkbox>
@@ -59,14 +58,14 @@
           let controlIndex = index;">
           <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
             <app-package-modal
-              *ngIf="activeCheckboxId === i"
+              *ngIf="activeCheckboxId === getId(i, plasticPacks.controls)"
               [formControlName]="control.key"
               (close)="closeModal(i)"
             >
             </app-package-modal>
           </ng-container>
           <ng-template #checkbox>
-            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(i)">
+            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(control.key)">
               <div class="text">{{formattedData[control.key].site_name}}</div>
               <div class="meta">{{formattedData[control.key].price}} руб за 1 шт.</div>
             </app-checkbox>
@@ -84,14 +83,14 @@
           let controlIndex = index;">
           <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
             <app-package-modal
-              *ngIf="activeCheckboxId === i"
+              *ngIf="activeCheckboxId === getId(i, skins.controls)"
               [formControlName]="control.key"
               (close)="closeModal(i)"
             >
             </app-package-modal>
           </ng-container>
           <ng-template #checkbox>
-            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(i)">
+            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(control.key)">
               <div class="text">{{formattedData[control.key].site_name}}</div>
               <div class="meta">{{formattedData[control.key].price}} руб за 1 м.</div>
             </app-checkbox>
@@ -109,14 +108,14 @@
           let controlIndex = index;">
           <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
             <app-package-modal
-              *ngIf="activeCheckboxId === i"
+              *ngIf="activeCheckboxId === getId(i, other.controls)"
               [formControlName]="control.key"
               (close)="closeModal(i)"
             >
             </app-package-modal>
           </ng-container>
           <ng-template #checkbox>
-            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(i)">
+            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(control.key)">
               <div class="text">{{formattedData[control.key].site_name}}</div>
               <div class="meta">{{formattedData[control.key].price}} руб за 1шт.</div>
             </app-checkbox>

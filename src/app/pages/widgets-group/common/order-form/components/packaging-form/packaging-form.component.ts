@@ -136,6 +136,11 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
   }
 
   setActiveCheckbox(id: number) {
+    console.log('active', id);
     this.activeCheckboxId = id;
+  }
+
+  getId(i: number, arr: any) {
+    return Object.keys((arr.at(i) as FormGroup).controls)[0];
   }
 }
