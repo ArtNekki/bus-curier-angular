@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ModsService} from '../../../core/services/mods.service';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import State from '../../../core/maps/State';
@@ -16,6 +16,7 @@ import State from '../../../core/maps/State';
   ]
 })
 export class CounterComponent implements ControlValueAccessor, OnInit, OnChanges {
+  @Output() change: EventEmitter<any> = new EventEmitter<any>();
   @Input() mods;
   @Input() isInvalid = false;
 
@@ -41,6 +42,7 @@ export class CounterComponent implements ControlValueAccessor, OnInit, OnChanges
   changeValue(count) {
     this.currentCount = count;
     this.onChange(count);
+    this.change.emit(count);
   }
 
   writeValue(count) {

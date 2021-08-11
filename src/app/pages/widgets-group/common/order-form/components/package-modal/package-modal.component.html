@@ -1,0 +1,7 @@
+<article [class]="cssClass" [@fadeIn]="">
+  <div class="package-modal__content">
+    <button type="button" class="package-modal__close" (click)="onClose()">&#160;</button>
+<!--    <h1 class="package-modal__title">{{title}}</h1>-->
+    <app-counter (change)="changeValue($event)"></app-counter>
+  </div>
+</article>

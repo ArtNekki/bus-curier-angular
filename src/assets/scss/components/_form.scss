@@ -267,14 +267,18 @@
     }
   }
 
-  &__fieldset--boxing {
+  &__fieldset--package {
     //$template-columns-md: repeat(3, minmax(max-content, auto));
     //$column-gap-md: 35px;
     //$row-gap-md: 35px;
 
     //grid-row-gap: 10px;
+    position: relative;
+    padding: 30px 25px 25px;
     grid-template-columns: repeat(auto-fill, calc(50% - 15px));
     align-items: start;
+    border: 1px solid $gray-light-color;
+    border-radius: 5px;
     //
     //@include media-breakpoint-up(sm) {
     //  grid-template-columns: repeat(2, 1fr);
@@ -881,5 +885,13 @@
     &:focus {
       outline: none;
     }
+  }
+
+  &__fieldset-label {
+    position: absolute;
+    top: -13px;
+    left: 20px;
+    padding: 5px;
+    background-color: $white-color;
   }
 }

@@ -76,15 +76,15 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
         return this.calcService.getServices(id);
       })
     ).subscribe((arr: Array<Service>) => {
-      arr.filter((item: Service) => item.group_id === '3')
-        .forEach((item: Service) => {
-          // this.formattedData[item.id] = { name: item.name, price: item.price };
-          console.log('service', item);
-          // this.formGroup.addControl(item.id, new FormGroup({
-          //   [FormControlName.Active]: new FormControl(''),
-          //   [FormControlName.Tel]: new FormControl('')
-          // }));
-        });
+      // arr.filter((item: Service) => item.group_id === '3')
+      //   .forEach((item: Service) => {
+      //     // this.formattedData[item.id] = { name: item.name, price: item.price };
+      //     console.log('service', item);
+      //     // this.formGroup.addControl(item.id, new FormGroup({
+      //     //   [FormControlName.Active]: new FormControl(''),
+      //     //   [FormControlName.Tel]: new FormControl('')
+      //     // }));
+      //   });
 
 
     });
