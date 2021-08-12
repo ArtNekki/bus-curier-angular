@@ -16,7 +16,11 @@
             </app-package-modal>
           </ng-container>
           <ng-template #checkbox>
-            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(control.key);">
+            <app-checkbox
+              isClear="true"
+              [formControlName]="control.key"
+              (change)="setActiveCheckbox(control.key)"
+              (clear)="clear($event, getCounterControl(i, boxes.controls), control.value)">
               <div class="text">{{formattedData[control.key].site_name}}</div>
               <div class="meta">{{formattedData[control.key].price}} руб за 1 шт.</div>
 <!--              <div class="other" *ngIf="true">-->
@@ -29,9 +33,6 @@
               </small>
               <small style="display: inline-block; margin-left: 5px; color: red; text-decoration: underline" (click)="setActiveCheckbox(control.key)">изменить</small>
             </div>
-            <button
-              *ngIf="getCounterControl(i, boxes.controls).value"
-              type="button" class="form__clear" (click)="clear(getCounterControl(i, boxes.controls), control.value)">&#160;</button>
           </ng-template>
 <!--                      value: {{ control.value.value }}-->
         </ng-container>

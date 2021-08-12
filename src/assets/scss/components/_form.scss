@@ -900,12 +900,4 @@
     padding: 5px;
     background-color: $white-color;
   }
-
-  &__clear {
-    @include close-button(10px, lighten($red-color, 5%), darken($red-color, 8%));
-
-    position: absolute;
-    top: 5px;
-    right: 5px;
-  }
 }

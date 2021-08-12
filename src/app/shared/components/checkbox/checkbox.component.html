@@ -11,5 +11,7 @@
     </span>
     <ng-content select=".help"></ng-content>
     <ng-content select=".other"></ng-content>
+    <button
+      *ngIf="isClear && isDisabled" type="button" class="checkbox__clear" (click)="onClear($event)" alt="Очистить">&#160;</button>
   </div>
 </label>

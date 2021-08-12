@@ -137,7 +137,6 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
   }
 
   setActiveCheckbox(id: number) {
-    console.log('active', id);
     this.activeCheckboxId = id;
   }
 
@@ -168,7 +167,8 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
     return Object.values((arr.at(i) as FormGroup).controls)[1];
   }
 
-  clear(counter: AbstractControl, checkbox: AbstractControl) {
+  clear(event, counter: AbstractControl, checkbox: AbstractControl) {
+    event.preventDefault();
     counter.patchValue(0);
     checkbox.patchValue(false);
     checkbox.enable();

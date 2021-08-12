@@ -17,8 +17,10 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
   @Input() name;
   @Input() mods;
   @Input() isInvalid;
+  @Input() isClear;
 
   @Output() customChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() clear: EventEmitter<any> = new EventEmitter<any>();
 
   public cssClass = 'checkbox';
   public isDisabled = false;
@@ -52,6 +54,10 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit(): void {
     this.setMods();
+  }
+
+  onClear(event) {
+    this.clear.emit(event);
   }
 
   setMods() {

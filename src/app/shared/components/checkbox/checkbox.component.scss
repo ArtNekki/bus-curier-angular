@@ -130,5 +130,13 @@
       color: $gray-light-color;
     }
   }
+
+  &__clear {
+    @include close-button(12px, lighten($red-color, 5%), darken($red-color, 8%));
+
+    position: absolute;
+    top: 0;
+    right: 5px;
+  }
 }
 
