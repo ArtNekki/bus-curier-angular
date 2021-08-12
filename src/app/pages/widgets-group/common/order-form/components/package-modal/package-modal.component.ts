@@ -21,6 +21,7 @@ export class PackageModalComponent implements OnInit {
   @Input() mods;
 
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
+  @Output() ok: EventEmitter<any> = new EventEmitter<any>();
 
   public cssClass;
   public currentValue = '';
@@ -30,6 +31,13 @@ export class PackageModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.cssClass = this.modsService.setMods('package-modal', this.mods);
+  }
+
+  onOk() {
+    const value = this.currentValue || this.value;
+
+    this.changeValue(value);
+    this.ok.emit(value);
   }
 
   onClose() {

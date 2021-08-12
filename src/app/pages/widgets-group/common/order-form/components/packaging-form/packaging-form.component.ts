@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
-import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {AbstractControl, FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
@@ -147,5 +147,15 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
   disableCheckbox(control) {
     // control.disable();
     console.log('disable checkbox', control);
+  }
+
+  changeControlState(control, count: any) {
+    if (count > 0) {
+      control.disable();
+    }
+  }
+
+  getCheckboxControl(i: number, arr: any) {
+    return Object.values((arr.at(i) as FormGroup).controls)[0];
   }
 }

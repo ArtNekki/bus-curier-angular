@@ -3,6 +3,6 @@
     <button type="button" class="package-modal__close" (click)="onClose()">&#160;</button>
 <!--    <h1 class="package-modal__title">{{title}}</h1>-->
     <app-counter [value]="value" (change)="currentValue = $event"></app-counter>
-    <button type="button" (click)="changeValue(currentValue || value)">Ok</button>
+    <button type="button" (click)="onOk()">Ok</button>
   </div>
 </article>
