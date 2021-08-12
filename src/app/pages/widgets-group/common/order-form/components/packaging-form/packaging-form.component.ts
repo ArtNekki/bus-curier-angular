@@ -130,7 +130,8 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
     return this.formGroup.get('other') as FormArray;
   }
 
-  closeModal(i: number) {
+  closeModal(control: AbstractControl) {
+    control.patchValue(false);
     this.activeCheckboxId = null;
     // Object.values((this.items.at(i) as FormGroup).controls)[0].patchValue(false);
   }
@@ -153,6 +154,8 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
     if (count > 0) {
       control.disable();
     }
+
+    this.activeCheckboxId = null;
   }
 
   getCheckboxControl(i: number, arr: any) {
@@ -161,7 +164,13 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
 
   // controls: AbstractControl[]
 
-  getCounterValue(i: number, arr: any) {
+  getCounterControl(i: number, arr: any) {
     return Object.values((arr.at(i) as FormGroup).controls)[1];
+  }
+
+  clear(counter: AbstractControl, checkbox: AbstractControl) {
+    counter.patchValue(0);
+    checkbox.patchValue(false);
+    checkbox.enable();
   }
 }

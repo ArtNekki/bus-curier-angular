@@ -10,7 +10,7 @@
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, boxes.controls)"
               [formControlName]="control.key"
-              (close)="closeModal(i)"
+              (close)="closeModal(getCheckboxControl(i, boxes.controls))"
               (ok)="changeControlState(getCheckboxControl(i, boxes.controls), control.value.value)"
             >
             </app-package-modal>
@@ -23,12 +23,15 @@
 <!--value: -->
 <!--              </div>-->
             </app-checkbox>
-            <div *ngIf="getCounterValue(i, boxes.controls).value" >
+            <div *ngIf="getCounterControl(i, boxes.controls).value">
               <small style="color: red;">
-                Выбрано: {{getCounterValue(i, boxes.controls).value}} шт.
+                Выбрано: {{getCounterControl(i, boxes.controls).value}} шт.
               </small>
               <small style="display: inline-block; margin-left: 5px; color: red; text-decoration: underline" (click)="setActiveCheckbox(control.key)">изменить</small>
             </div>
+            <button
+              *ngIf="getCounterControl(i, boxes.controls).value"
+              type="button" class="form__clear" (click)="clear(getCounterControl(i, boxes.controls), control.value)">&#160;</button>
           </ng-template>
 <!--                      value: {{ control.value.value }}-->
         </ng-container>
