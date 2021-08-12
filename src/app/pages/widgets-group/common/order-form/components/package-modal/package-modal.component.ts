@@ -23,6 +23,7 @@ export class PackageModalComponent implements OnInit {
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
 
   public cssClass;
+  public currentValue = '';
   public value = '';
 
   constructor(private modsService: ModsService) { }

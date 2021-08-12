@@ -145,7 +145,7 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
   }
 
   disableCheckbox(control) {
-    control.disable();
+    // control.disable();
     console.log('disable checkbox', control);
   }
 }

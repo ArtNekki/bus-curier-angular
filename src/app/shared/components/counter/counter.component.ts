@@ -17,6 +17,7 @@ import State from '../../../core/maps/State';
 })
 export class CounterComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
+  @Input() value: any;
   @Input() mods;
   @Input() isInvalid = false;
 
@@ -26,6 +27,11 @@ export class CounterComponent implements ControlValueAccessor, OnInit, OnChanges
   constructor(private modsService: ModsService) { }
 
   ngOnInit(): void {
+
+    if (this.value > 0) {
+      this.currentCount = this.value;
+    }
+
     this.cssClass = this.modsService.setMods('counter', this.mods);
   }
 
