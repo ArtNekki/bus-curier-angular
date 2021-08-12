@@ -7,7 +7,6 @@
         <ng-container
           *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;">
           <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
-            value: {{ control.value.value }}
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, boxes.controls)"
               [formControlName]="control.key"
@@ -17,11 +16,21 @@
             </app-package-modal>
           </ng-container>
           <ng-template #checkbox>
-            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(control.key); disableCheckbox(control.value)">
+            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(control.key);">
               <div class="text">{{formattedData[control.key].site_name}}</div>
               <div class="meta">{{formattedData[control.key].price}} руб за 1 шт.</div>
+<!--              <div class="other" *ngIf="true">-->
+<!--value: -->
+<!--              </div>-->
             </app-checkbox>
+            <div *ngIf="getCounterValue(i, boxes.controls).value" >
+              <small style="color: red;">
+                Выбрано: {{getCounterValue(i, boxes.controls).value}} шт.
+              </small>
+              <small style="display: inline-block; margin-left: 5px; color: red; text-decoration: underline" (click)="setActiveCheckbox(control.key)">изменить</small>
+            </div>
           </ng-template>
+<!--                      value: {{ control.value.value }}-->
         </ng-container>
       </div>
     </ng-container>

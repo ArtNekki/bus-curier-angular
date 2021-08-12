@@ -158,4 +158,10 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
   getCheckboxControl(i: number, arr: any) {
     return Object.values((arr.at(i) as FormGroup).controls)[0];
   }
+
+  // controls: AbstractControl[]
+
+  getCounterValue(i: number, arr: any) {
+    return Object.values((arr.at(i) as FormGroup).controls)[1];
+  }
 }
