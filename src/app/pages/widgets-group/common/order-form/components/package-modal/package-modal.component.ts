@@ -38,6 +38,8 @@ export class PackageModalComponent implements OnInit {
 
     this.changeValue(value);
     this.ok.emit(value);
+
+    this.onClose();
   }
 
   onClose() {
