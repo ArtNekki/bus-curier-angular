@@ -9,6 +9,9 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {switchMap} from 'rxjs/operators';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
+import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
+import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
+import {SimpleModalService} from 'ngx-simple-modal';
 
 interface Service {
   id: string;
@@ -49,6 +52,7 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
               public utils: UtilsService,
               private calcService: CalculatorService,
               private cdr: ChangeDetectorRef,
+              private simpleModal: SimpleModalService,
               protected orderForm: OrderFormService) {
     super(orderForm);
   }
@@ -169,8 +173,18 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
 
   clear(event, counter: AbstractControl, checkbox: AbstractControl) {
     event.preventDefault();
-    counter.patchValue(0);
-    checkbox.patchValue(false);
-    checkbox.enable();
+    this.confirmClear(counter, checkbox);
+  }
+
+  confirmClear(counter: AbstractControl, checkbox: AbstractControl) {
+    this.simpleModal.addModal(ConfirmModalComponent, {
+      message: 'Вы уверены?'
+    }).subscribe((isConfirmed) => {
+      if (isConfirmed) {
+        counter.patchValue(0);
+        checkbox.patchValue(false);
+        checkbox.enable();
+      }
+    });
   }
 }
