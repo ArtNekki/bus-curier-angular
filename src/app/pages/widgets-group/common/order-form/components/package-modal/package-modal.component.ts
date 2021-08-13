@@ -17,6 +17,8 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
   ]
 })
 export class PackageModalComponent implements OnInit {
+  @Input() data;
+  @Input() type;
   @Input() title: string;
   @Input() mods;
 
@@ -24,8 +26,9 @@ export class PackageModalComponent implements OnInit {
   @Output() ok: EventEmitter<any> = new EventEmitter<any>();
 
   public cssClass;
-  public currentValue = '';
-  public value = '';
+  public currentValue = 0;
+  public value = 0;
+  public sum = 0;
 
   constructor(private modsService: ModsService) { }
 
@@ -52,6 +55,7 @@ export class PackageModalComponent implements OnInit {
 
   writeValue(value) {
     this.value = value;
+    this.currentValue = value;
   }
 
   onChange: any = (data) => {

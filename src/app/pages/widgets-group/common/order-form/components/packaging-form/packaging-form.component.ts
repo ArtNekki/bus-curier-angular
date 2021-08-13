@@ -78,13 +78,11 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
       packages.forEach((item: Service) => {
         this.formattedData[item.id] = { name: item.name, site_name: item.site_name, params: item.property, price: item.price };
 
-        console.log('formatted data', this.formattedData);
-
         switch (item.subgroup_id) {
           case '1':
             (this.formGroup.get('boxes') as FormArray).push(new FormGroup({
               [item.id]: new FormControl(''),
-              [FormControlName.Counter]: new FormControl('')
+              [FormControlName.Counter]: new FormControl(0)
             }));
             break;
           case '2':

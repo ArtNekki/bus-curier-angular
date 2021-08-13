@@ -15,6 +15,10 @@
   border-radius: $border-radius;
   box-sizing: border-box;
 
+  &--full {
+    width: 100%;
+  }
+
   &--invalid {
     border: 1px solid $red-color;
     background-color: rgba($red-color, 0.5);

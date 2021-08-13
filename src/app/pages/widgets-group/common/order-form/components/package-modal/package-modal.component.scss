@@ -30,7 +30,6 @@
     box-sizing: border-box;
     border-radius: 10px;
     background-color: $white-color;
-    text-align: center;
   }
 
   &__close {
@@ -54,7 +53,7 @@
     }
   }
 
-  &__subtitle {
+  &__text {
     margin: -12px 0 23px 0;
     font-family: $font-family--secondary;
     font-size: 14px;
@@ -63,14 +62,31 @@
     text-align: left;
   }
 
+  &__label {
+    margin-bottom: 3px;
+    display: block;
+    font-family: $font-family--secondary;
+    font-size: 14px;
+    line-height: 20px;
+    color: $font-color;
+  }
+
+  &__sum {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-family--secondary;
+    font-size: 30px;
+    color: $primary-color;
+  }
+
   &__btn {
     margin-top: 15px;
   }
 
-  &__actions {
-    margin-top: 25px;
+  &__row {
     display: grid;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 10px;
   }
 }

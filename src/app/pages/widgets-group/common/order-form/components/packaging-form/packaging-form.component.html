@@ -10,6 +10,8 @@
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, boxes.controls)"
               [formControlName]="control.key"
+              type="Коробка"
+              [data]="formattedData[getId(i, boxes.controls)]"
               (close)="closeModal(getCheckboxControl(i, boxes.controls))"
               (ok)="changeControlState(getCheckboxControl(i, boxes.controls), control.value.value)"
             >
