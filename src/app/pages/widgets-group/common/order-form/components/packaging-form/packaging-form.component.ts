@@ -18,6 +18,7 @@ interface Service {
   name: string;
   site_name: string;
   price: string;
+  property: string;
   group_id: string;
   subgroup_id: string;
 }
@@ -75,7 +76,9 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
       const packages = arr.filter((item: Service) => item.group_id === '1');
 
       packages.forEach((item: Service) => {
-        this.formattedData[item.id] = { name: item.name, site_name: item.site_name, price: item.price };
+        this.formattedData[item.id] = { name: item.name, site_name: item.site_name, params: item.property, price: item.price };
+
+        console.log('formatted data', this.formattedData);
 
         switch (item.subgroup_id) {
           case '1':

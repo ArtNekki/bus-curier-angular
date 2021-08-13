@@ -21,7 +21,10 @@
               [formControlName]="control.key"
               (change)="setActiveCheckbox(control.key)"
               (clear)="clear($event, getCounterControl(i, boxes.controls), control.value)">
-              <div class="text">{{formattedData[control.key].site_name}}</div>
+              <div class="text">
+                {{formattedData[control.key].params}}
+<!--                <span style="color: gray; font-size: 14px;">({{formattedData[control.key].params}})</span>-->
+              </div>
               <ng-container class="meta">
                 <div>
                   {{ getCounterControl(i, boxes.controls).value ?
@@ -33,8 +36,11 @@
 <!--                    Выбрано: {{getCounterControl(i, boxes.controls).value}} шт.-->
 <!--                  </span>-->
                   <span style="margin-top: 5px; display: inline-block;
-                        text-decoration: underline; color: #FFDC00; cursor: pointer;"
+                        color: #FFDC00; cursor: pointer;"
                         (click)="setActiveCheckbox(control.key)">изменить</span>
+<!--                  <span style="margin-top: 5px; margin-left: 5px; display: inline-block;-->
+<!--                        color: red; cursor: pointer;"-->
+<!--                        (click)="setActiveCheckbox(control.key)">очистить</span>-->
                 </div>
               </ng-container>
             </app-checkbox>
