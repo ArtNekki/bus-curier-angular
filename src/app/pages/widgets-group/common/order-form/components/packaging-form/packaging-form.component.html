@@ -22,17 +22,22 @@
               (change)="setActiveCheckbox(control.key)"
               (clear)="clear($event, getCounterControl(i, boxes.controls), control.value)">
               <div class="text">{{formattedData[control.key].site_name}}</div>
-              <div class="meta">{{formattedData[control.key].price}} руб за 1 шт.</div>
-<!--              <div class="other" *ngIf="true">-->
-<!--value: -->
-<!--              </div>-->
+              <ng-container class="meta">
+                <div>
+                  {{ getCounterControl(i, boxes.controls).value ?
+                  getCounterControl(i, boxes.controls).value * formattedData[control.key].price : formattedData[control.key].price}}
+                  руб за {{ getCounterControl(i, boxes.controls).value || '1' }} шт.
+                </div>
+                <div *ngIf="getCounterControl(i, boxes.controls).value" style="font-size: 10px;">
+<!--                  <span style="margin-top: 5px; display: inline-block; color: #FFDC00;">-->
+<!--                    Выбрано: {{getCounterControl(i, boxes.controls).value}} шт.-->
+<!--                  </span>-->
+                  <span style="margin-top: 5px; display: inline-block;
+                        text-decoration: underline; color: #FFDC00; cursor: pointer;"
+                        (click)="setActiveCheckbox(control.key)">изменить</span>
+                </div>
+              </ng-container>
             </app-checkbox>
-            <div *ngIf="getCounterControl(i, boxes.controls).value">
-              <small style="color: red;">
-                Выбрано: {{getCounterControl(i, boxes.controls).value}} шт.
-              </small>
-              <small style="display: inline-block; margin-left: 5px; color: red; text-decoration: underline" (click)="setActiveCheckbox(control.key)">изменить</small>
-            </div>
           </ng-template>
 <!--                      value: {{ control.value.value }}-->
         </ng-container>
