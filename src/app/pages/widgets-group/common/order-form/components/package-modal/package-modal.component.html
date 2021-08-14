@@ -14,8 +14,8 @@
       </div>
     </div>
     <div class="package-modal__row" style="margin-top: 25px;">
-      <app-btn type="button" (click)="onOk()">Ok</app-btn>
-      <app-btn type="button" mods="black" (click)="onOk()">Oтмена</app-btn>
+      <app-btn type="button" (click)="onOk()" [disabled]="!currentValue">Ok</app-btn>
+      <app-btn type="button" mods="black" (click)="onClose()">Oтмена</app-btn>
     </div>
   </div>
 </article>
