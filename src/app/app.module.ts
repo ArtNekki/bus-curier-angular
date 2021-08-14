@@ -25,6 +25,11 @@ import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore'
 import {environment} from '../environments/environment';
 import {ModalsModule} from './modals/modals.module';
 
+import {registerLocaleData} from '@angular/common';
+import ruLocale from '@angular/common/locales/ru';
+
+registerLocaleData(ruLocale, 'ru');
+
 @NgModule({
   declarations: [
     AppComponent,

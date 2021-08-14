@@ -5,11 +5,16 @@
     <button type="button" class="package-modal__close" (click)="onClose()">&#160;</button>
     <span class="package-modal__label">Количество:</span>
     <div class="package-modal__row">
-      <app-counter [value]="value" (change)="currentValue = $event" mods="full"></app-counter>
-      <div class="package-modal__sum">{{this.data.price * this.currentValue }}</div>
+      <div class="package-modal__counter">
+        <app-counter [value]="value" (change)="currentValue = $event" mods="full"></app-counter>
+        <small>шт.</small>
+      </div>
+      <div class="package-modal__sum">
+        {{(this.data.price * this.currentValue) | currency: 'RUB':'symbol-narrow':'1.0':'ru'}}
+      </div>
     </div>
     <div class="package-modal__row" style="margin-top: 25px;">
-      <app-btn type="button" mods="red" (click)="onOk()">Ok</app-btn>
+      <app-btn type="button" (click)="onOk()">Ok</app-btn>
       <app-btn type="button" mods="black" (click)="onOk()">Oтмена</app-btn>
     </div>
   </div>
