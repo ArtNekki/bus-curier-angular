@@ -74,7 +74,11 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
         return this.calcService.getServices(id);
       }),
       tap(() => {
-        // this.ngOnInit();
+        this.boxes.clear();
+        this.safePacks.clear();
+        this.plasticPacks.clear();
+        this.skins.clear();
+        this.other.clear();
       })
     ).subscribe((arr: Array<Service>) => {
       const packages = arr.filter((item: Service) => item.group_id === '1');
