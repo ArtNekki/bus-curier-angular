@@ -25,7 +25,6 @@
               (clear)="clear($event, getCounterControl(i, boxes.controls), control.value)">
               <div class="text">
                 {{formattedData[control.key].params}}
-<!--                <span style="color: gray; font-size: 14px;">({{formattedData[control.key].params}})</span>-->
               </div>
               <ng-container class="meta">
                 <div>
@@ -34,15 +33,9 @@
                   руб за {{ getCounterControl(i, boxes.controls).value || '1' }} шт.
                 </div>
                 <div *ngIf="getCounterControl(i, boxes.controls).value" style="font-size: 10px;">
-<!--                  <span style="margin-top: 5px; display: inline-block; color: #FFDC00;">-->
-<!--                    Выбрано: {{getCounterControl(i, boxes.controls).value}} шт.-->
-<!--                  </span>-->
                   <span style="margin-top: 5px; display: inline-block;
                         color: #FFDC00; cursor: pointer;"
                         (click)="setActiveCheckbox(control.key)">изменить</span>
-<!--                  <span style="margin-top: 5px; margin-left: 5px; display: inline-block;-->
-<!--                        color: red; cursor: pointer;"-->
-<!--                        (click)="setActiveCheckbox(control.key)">очистить</span>-->
                 </div>
               </ng-container>
             </app-checkbox>
@@ -63,15 +56,32 @@
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, safePacks.controls)"
               [type]="FormControlName.SafePack"
+              [data]="formattedData[getId(i, safePacks.controls)]"
               [formControlName]="control.key"
-              (close)="closeModal(i)"
+              (close)="closeModal(getCheckboxControl(i, safePacks.controls))"
+              (ok)="changeControlState(getCheckboxControl(i, safePacks.controls), control.value.value)"
             >
             </app-package-modal>
           </ng-container>
           <ng-template #checkbox>
-            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(control.key)">
-              <div class="text">{{formattedData[control.key].site_name}}</div>
-              <div class="meta">{{formattedData[control.key].price}} руб за 1 шт.</div>
+            <app-checkbox
+              isClear="true"
+              [formControlName]="control.key"
+              (change)="setActiveCheckbox(control.key)"
+              (clear)="clear($event, getCounterControl(i, safePacks.controls), control.value)">
+              <div class="text">{{formattedData[control.key].params}}</div>
+              <ng-container class="meta">
+                <div>
+                  {{ getCounterControl(i, safePacks.controls).value ?
+                  getCounterControl(i, safePacks.controls).value * formattedData[control.key].price : formattedData[control.key].price}}
+                  руб за {{ getCounterControl(i, safePacks.controls).value || '1' }} шт.
+                </div>
+                <div *ngIf="getCounterControl(i, safePacks.controls).value" style="font-size: 10px;">
+                  <span style="margin-top: 5px; display: inline-block;
+                        color: #FFDC00; cursor: pointer;"
+                        (click)="setActiveCheckbox(control.key)">изменить</span>
+                </div>
+              </ng-container>
             </app-checkbox>
           </ng-template>
         </ng-container>
