@@ -141,7 +141,6 @@
           <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, skins.controls)"
-              [type]="FormControlName.Skin"
               [formControlName]="control.key"
               [data]="formattedData[getId(i, skins.controls)]"
               (close)="closeModal(getCheckboxControl(i, skins.controls))"
@@ -185,7 +184,6 @@
           <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, other.controls)"
-              [type]="FormControlName.Other"
               [formControlName]="control.key"
               [data]="formattedData[getId(i, other.controls)]"
               (close)="closeModal(getCheckboxControl(i, other.controls))"

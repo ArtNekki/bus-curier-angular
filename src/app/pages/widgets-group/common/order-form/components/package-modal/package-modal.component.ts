@@ -3,14 +3,6 @@ import {ModsService} from '../../../../../../core/services/mods.service';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 
-const Package = {
-  box: 'Коробка',
-  savePack: 'Сейв-пакет',
-  plasticPack: 'Пластиковый пакет',
-  skins: 'Пленка',
-  other: 'Другое'
-};
-
 @Component({
   selector: 'app-package-modal',
   templateUrl: './package-modal.component.html',
@@ -38,11 +30,19 @@ export class PackageModalComponent implements OnInit {
   public value = 0;
   public sum = 0;
 
+  public Package = {
+    box: 'Коробка',
+    ['safe-pack']: 'Сейв-пакет',
+    ['plastic-pack']: 'Пластиковый пакет',
+    skins: 'Пленка',
+    other: 'Другое'
+  };
+
   constructor(private modsService: ModsService) { }
 
   ngOnInit(): void {
     this.cssClass = this.modsService.setMods('package-modal', this.mods);
-    console.log('data', this.data);
+    console.log('data', this.data, this.type);
   }
 
   onOk() {

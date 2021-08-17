@@ -1,6 +1,6 @@
 <article [class]="cssClass" [@fadeIn]="">
   <div class="package-modal__content">
-    <div class="package-modal__title">{{type}} {{data.site_name}}</div>
+    <div class="package-modal__title">{{Package[type]}} {{data.site_name}}</div>
     <div class="package-modal__text">{{data.params}}</div>
     <button type="button" class="package-modal__close" (click)="onClose()">&#160;</button>
     <span class="package-modal__label">Количество:</span>
