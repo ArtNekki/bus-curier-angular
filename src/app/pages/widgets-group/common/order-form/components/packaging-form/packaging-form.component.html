@@ -111,7 +111,7 @@
               isClear="true"
               [formControlName]="control.key"
               (change)="setActiveCheckbox(control.key)"
-              (clear)="clear($event, getCounterControl(i, boxes.controls), control.value)">
+              (clear)="clear($event, getCounterControl(i, plasticPacks.controls), control.value)">
               <div class="text">{{formattedData[control.key].params}}</div>
               <ng-container class="meta">
                 <div>
@@ -143,14 +143,32 @@
               *ngIf="activeCheckboxId === getId(i, skins.controls)"
               [type]="FormControlName.Skin"
               [formControlName]="control.key"
-              (close)="closeModal(i)"
+              [data]="formattedData[getId(i, skins.controls)]"
+              (close)="closeModal(getCheckboxControl(i, skins.controls))"
+              (ok)="changeControlState(getCheckboxControl(i, skins.controls), control.value.value)"
             >
             </app-package-modal>
           </ng-container>
           <ng-template #checkbox>
-            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(control.key)">
+            <app-checkbox
+              isClear="true"
+              [formControlName]="control.key"
+              (change)="setActiveCheckbox(control.key)"
+              (clear)="clear($event, getCounterControl(i, skins.controls), control.value)"
+            >
               <div class="text">{{formattedData[control.key].site_name}}</div>
-              <div class="meta">{{formattedData[control.key].price}} руб за 1 м.</div>
+              <ng-container class="meta">
+                <div>
+                  {{ getCounterControl(i, skins.controls).value ?
+                  getCounterControl(i, skins.controls).value * formattedData[control.key].price : formattedData[control.key].price}}
+                  руб за {{ getCounterControl(i, skins.controls).value || '1' }} шт.
+                </div>
+                <div *ngIf="getCounterControl(i, skins.controls).value" style="font-size: 10px;">
+                  <span style="margin-top: 5px; display: inline-block;
+                        color: #FFDC00; cursor: pointer;"
+                        (click)="setActiveCheckbox(control.key)">изменить</span>
+                </div>
+              </ng-container>
             </app-checkbox>
           </ng-template>
         </ng-container>
