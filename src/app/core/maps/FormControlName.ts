@@ -78,5 +78,8 @@ export default {
   Services: 'services',
   RusPassport: 'rus-passport',
   DriverLicense: 'driver-license',
-  Other: 'other'
+  Other: 'other',
+  Box: 'box',
+  PlasticPack: 'plastic-pack',
+  Skin: 'skin'
 };

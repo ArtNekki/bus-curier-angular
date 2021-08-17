@@ -7,7 +7,7 @@
     <div class="package-modal__row">
       <div class="package-modal__counter">
         <app-counter [value]="value" (change)="currentValue = $event" mods="full"></app-counter>
-        <small>шт.</small>
+        <small>{{ type === 'skin' ? 'м.' : 'шт.' }}</small>
       </div>
       <div class="package-modal__sum">
         {{(this.data.price * this.currentValue) | currency: 'RUB':'symbol-narrow':'1.0':'ru'}}

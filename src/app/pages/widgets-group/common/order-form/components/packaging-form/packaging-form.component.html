@@ -1,6 +1,6 @@
 <section class="form__section" [formGroup]="formGroup">
   <h2 class="form__heading">Упаковка:</h2>
-  <div *ngIf="boxes.length" class="form__fieldset form__fieldset--package" formArrayName="boxes">
+  <div *ngIf="boxes.length" class="form__fieldset form__fieldset--package" [formArrayName]="FormControlName.Box">
     <div class="form__fieldset-label">Коробка</div>
     <ng-container *ngFor="let itemGroup of boxes.controls; let i = index">
       <div class="form__field" [formGroupName]="i">
@@ -10,7 +10,7 @@
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, boxes.controls)"
               [formControlName]="control.key"
-              type="Коробка"
+              [type]="FormControlName.Box"
               [data]="formattedData[getId(i, boxes.controls)]"
               (close)="closeModal(getCheckboxControl(i, boxes.controls))"
               (ok)="changeControlState(getCheckboxControl(i, boxes.controls), control.value.value)"
@@ -52,16 +52,17 @@
       </div>
     </ng-container>
   </div>
-  <div *ngIf="savePacks.length" class="form__fieldset form__fieldset--package" formArrayName="save-packs">
+  <div *ngIf="safePacks.length" class="form__fieldset form__fieldset--package" [formArrayName]="FormControlName.SafePack">
     <div class="form__fieldset-label">Сейв-пакет</div>
-    <ng-container *ngFor="let itemGroup of savePacks.controls; let i = index">
+    <ng-container *ngFor="let itemGroup of safePacks.controls; let i = index">
       <div class="form__field" [formGroupName]="i">
         <ng-container
           *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;
           let controlIndex = index;">
           <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
             <app-package-modal
-              *ngIf="activeCheckboxId === getId(i, savePacks.controls)"
+              *ngIf="activeCheckboxId === getId(i, safePacks.controls)"
+              [type]="FormControlName.SafePack"
               [formControlName]="control.key"
               (close)="closeModal(i)"
             >
@@ -77,7 +78,7 @@
       </div>
     </ng-container>
   </div>
-  <div *ngIf="plasticPacks.length" class="form__fieldset form__fieldset--package" formArrayName="plastic-packs">
+  <div *ngIf="plasticPacks.length" class="form__fieldset form__fieldset--package" [formArrayName]="FormControlName.PlasticPack">
     <div class="form__fieldset-label">Пластиковый пакет</div>
     <ng-container *ngFor="let itemGroup of plasticPacks.controls; let i = index">
       <div class="form__field" [formGroupName]="i">
@@ -87,6 +88,7 @@
           <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, plasticPacks.controls)"
+              [type]="FormControlName.PlasticPack"
               [formControlName]="control.key"
               (close)="closeModal(i)"
             >
@@ -102,7 +104,7 @@
       </div>
     </ng-container>
   </div>
-  <div *ngIf="skins.length" class="form__fieldset form__fieldset--package" formArrayName="skins">
+  <div *ngIf="skins.length" class="form__fieldset form__fieldset--package" [formArrayName]="FormControlName.Skin">
     <div class="form__fieldset-label">Пленка</div>
     <ng-container *ngFor="let itemGroup of skins.controls; let i = index">
       <div class="form__field" [formGroupName]="i">
@@ -112,6 +114,7 @@
           <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, skins.controls)"
+              [type]="FormControlName.Skin"
               [formControlName]="control.key"
               (close)="closeModal(i)"
             >
@@ -127,7 +130,7 @@
       </div>
     </ng-container>
   </div>
-  <div *ngIf="other.length" class="form__fieldset form__fieldset--package" formArrayName="other">
+  <div *ngIf="other.length" class="form__fieldset form__fieldset--package" [formArrayName]="FormControlName.Other">
     <div class="form__fieldset-label">Другое</div>
     <ng-container *ngFor="let itemGroup of other.controls; let i = index">
       <div class="form__field" [formGroupName]="i">
@@ -137,6 +140,7 @@
           <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, other.controls)"
+              [type]="FormControlName.Other"
               [formControlName]="control.key"
               (close)="closeModal(i)"
             >

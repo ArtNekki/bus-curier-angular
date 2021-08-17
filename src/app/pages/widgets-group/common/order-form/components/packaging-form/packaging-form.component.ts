@@ -62,11 +62,11 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
   ngOnInit(): void {
 
     this.formGroup = new FormGroup({
-      boxes: new FormArray([]),
-      ['save-packs']: new FormArray([]),
-      ['plastic-packs']: new FormArray([]),
-      skins: new FormArray([]),
-      other: new FormArray([])
+      [FormControlName.Box]: new FormArray([]),
+      [FormControlName.SafePack]: new FormArray([]),
+      [FormControlName.PlasticPack]: new FormArray([]),
+      [FormControlName.Skin]: new FormArray([]),
+      [FormControlName.Other]: new FormArray([])
     });
 
     this.orderForm.cityFrom$.pipe(
@@ -74,7 +74,7 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
         return this.calcService.getServices(id);
       }),
       tap(() => {
-        this.ngOnInit();
+        // this.ngOnInit();
       })
     ).subscribe((arr: Array<Service>) => {
       const packages = arr.filter((item: Service) => item.group_id === '1');
@@ -84,32 +84,32 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
 
         switch (item.subgroup_id) {
           case '1':
-            (this.formGroup.get('boxes') as FormArray).push(new FormGroup({
+            (this.formGroup.get(FormControlName.Box) as FormArray).push(new FormGroup({
               [item.id]: new FormControl(''),
               [FormControlName.Counter]: new FormControl(0)
             }));
             break;
           case '2':
-            (this.formGroup.get('save-packs') as FormArray).push(new FormGroup({
+            (this.formGroup.get(FormControlName.SafePack) as FormArray).push(new FormGroup({
               [item.id]: new FormControl(''),
               [FormControlName.Counter]: new FormControl('')
             }));
             break;
           case '3':
-            (this.formGroup.get('plastic-packs') as FormArray).push(new FormGroup({
+            (this.formGroup.get(FormControlName.PlasticPack) as FormArray).push(new FormGroup({
               [item.id]: new FormControl(''),
               [FormControlName.Counter]: new FormControl('')
             }));
             break;
           case '4':
           case '5':
-            (this.formGroup.get('other') as FormArray).push(new FormGroup({
+            (this.formGroup.get(FormControlName.Other) as FormArray).push(new FormGroup({
               [item.id]: new FormControl(''),
               [FormControlName.Counter]: new FormControl('')
             }));
             break;
           case '6':
-            (this.formGroup.get('skins') as FormArray).push(new FormGroup({
+            (this.formGroup.get(FormControlName.Skin) as FormArray).push(new FormGroup({
               [item.id]: new FormControl(''),
               [FormControlName.Counter]: new FormControl('')
             }));
@@ -120,23 +120,23 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
   }
 
   public get boxes(): FormArray {
-    return this.formGroup.get('boxes') as FormArray;
+    return this.formGroup.get(FormControlName.Box) as FormArray;
   }
 
-  public get savePacks(): FormArray {
-    return this.formGroup.get('save-packs') as FormArray;
+  public get safePacks(): FormArray {
+    return this.formGroup.get(FormControlName.SafePack) as FormArray;
   }
 
   public get plasticPacks(): FormArray {
-    return this.formGroup.get('plastic-packs') as FormArray;
+    return this.formGroup.get(FormControlName.PlasticPack) as FormArray;
   }
 
   public get skins(): FormArray {
-    return this.formGroup.get('skins') as FormArray;
+    return this.formGroup.get(FormControlName.Skin) as FormArray;
   }
 
   public get other(): FormArray {
-    return this.formGroup.get('other') as FormArray;
+    return this.formGroup.get(FormControlName.Other) as FormArray;
   }
 
   closeModal(control: AbstractControl) {

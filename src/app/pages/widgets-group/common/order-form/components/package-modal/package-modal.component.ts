@@ -3,6 +3,14 @@ import {ModsService} from '../../../../../../core/services/mods.service';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 
+const Package = {
+  box: 'Коробка',
+  savePack: 'Сейв-пакет',
+  plasticPack: 'Пластиковый пакет',
+  skins: 'Пленка',
+  other: 'Другое'
+};
+
 @Component({
   selector: 'app-package-modal',
   templateUrl: './package-modal.component.html',
@@ -34,6 +42,7 @@ export class PackageModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.cssClass = this.modsService.setMods('package-modal', this.mods);
+    console.log('data', this.data);
   }
 
   onOk() {
