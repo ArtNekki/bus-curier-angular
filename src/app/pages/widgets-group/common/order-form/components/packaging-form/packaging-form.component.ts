@@ -7,11 +7,12 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import fadeIn from '../../../../../../core/animations/fadeIn';
-import {switchMap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
+import {Router} from '@angular/router';
 
 interface Service {
   id: string;
@@ -71,6 +72,9 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
     this.orderForm.cityFrom$.pipe(
       switchMap((id: string) => {
         return this.calcService.getServices(id);
+      }),
+      tap(() => {
+        this.ngOnInit();
       })
     ).subscribe((arr: Array<Service>) => {
       const packages = arr.filter((item: Service) => item.group_id === '1');
