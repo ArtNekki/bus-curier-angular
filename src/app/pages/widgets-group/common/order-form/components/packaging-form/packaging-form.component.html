@@ -100,14 +100,31 @@
               *ngIf="activeCheckboxId === getId(i, plasticPacks.controls)"
               [type]="FormControlName.PlasticPack"
               [formControlName]="control.key"
-              (close)="closeModal(i)"
+              [data]="formattedData[getId(i, plasticPacks.controls)]"
+              (close)="closeModal(getCheckboxControl(i, plasticPacks.controls))"
+              (ok)="changeControlState(getCheckboxControl(i, plasticPacks.controls), control.value.value)"
             >
             </app-package-modal>
           </ng-container>
           <ng-template #checkbox>
-            <app-checkbox [formControlName]="control.key" (change)="setActiveCheckbox(control.key)">
-              <div class="text">{{formattedData[control.key].site_name}}</div>
-              <div class="meta">{{formattedData[control.key].price}} руб за 1 шт.</div>
+            <app-checkbox
+              isClear="true"
+              [formControlName]="control.key"
+              (change)="setActiveCheckbox(control.key)"
+              (clear)="clear($event, getCounterControl(i, boxes.controls), control.value)">
+              <div class="text">{{formattedData[control.key].params}}</div>
+              <ng-container class="meta">
+                <div>
+                  {{ getCounterControl(i, plasticPacks.controls).value ?
+                  getCounterControl(i, plasticPacks.controls).value * formattedData[control.key].price : formattedData[control.key].price}}
+                  руб за {{ getCounterControl(i, plasticPacks.controls).value || '1' }} шт.
+                </div>
+                <div *ngIf="getCounterControl(i, plasticPacks.controls).value" style="font-size: 10px;">
+                  <span style="margin-top: 5px; display: inline-block;
+                        color: #FFDC00; cursor: pointer;"
+                        (click)="setActiveCheckbox(control.key)">изменить</span>
+                </div>
+              </ng-container>
             </app-checkbox>
           </ng-template>
         </ng-container>
