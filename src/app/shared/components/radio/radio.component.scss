@@ -43,6 +43,11 @@
         border-color: $primary-color;
       }
 
+      .radio__input:disabled ~ & {
+        background-color: $gray-light-color;
+        border-color: $gray-light-color;
+      }
+
       .radio--invalid .radio__input:checked ~ & {
         border-width: 2px;
         border-color: $red-color;

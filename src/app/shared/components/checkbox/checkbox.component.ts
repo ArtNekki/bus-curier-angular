@@ -74,8 +74,6 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    // console.log('diiiis');
     this.isDisabled = isDisabled;
-    // isDisabled ? this.parcelGroup.disable() : this.parcelGroup.enable();
   }
 }

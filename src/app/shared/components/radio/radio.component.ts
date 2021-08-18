@@ -23,6 +23,7 @@ export class RadioComponent implements ControlValueAccessor, OnInit {
 
   public cssClass;
   public value;
+  public isDisabled = false;
 
   constructor(private modsService: ModsService) { }
 
@@ -50,5 +51,10 @@ export class RadioComponent implements ControlValueAccessor, OnInit {
 
   registerOnTouched(fn) {
     this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
+    console.log('isDsss');
   }
 }
