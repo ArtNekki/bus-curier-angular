@@ -12,17 +12,7 @@ import {CalculatorService} from '../../../../../../core/services/calculator/calc
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
-import {Router} from '@angular/router';
-
-interface Service {
-  id: string;
-  name: string;
-  site_name: string;
-  price: string;
-  property: string;
-  group_id: string;
-  subgroup_id: string;
-}
+import Service from 'src/app/core/models/Service';
 
 @Component({
   selector: 'app-packaging-form',

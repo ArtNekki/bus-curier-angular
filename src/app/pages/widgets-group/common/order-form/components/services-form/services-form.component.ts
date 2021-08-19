@@ -9,13 +9,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
 import {switchMap} from 'rxjs/operators';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
-
-interface Service {
-  id: string;
-  name: string;
-  price: string;
-  group_id: string;
-}
+import Service from '../../../../../../core/models/Service';
 
 @Component({
   selector: 'app-services-form',
@@ -46,6 +40,7 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
 
   public formGroup: FormGroup;
   public currentService: string;
+  public formattedData = {};
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -57,18 +52,7 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
   ngOnInit(): void {
 
     this.formGroup = new FormGroup({
-      [FormControlName.Insurance]: new FormGroup({
-        [FormControlName.Active]: new FormControl(''),
-        [FormControlName.Sum]: new FormControl('', { updateOn: 'blur' })
-      }),
-      [FormControlName.SmsForSender]: new FormGroup({
-        [FormControlName.Active]: new FormControl(''),
-        [FormControlName.Tel]: new FormControl('', { updateOn: 'blur' })
-      }),
-      [FormControlName.SmsForRecipient]: new FormGroup({
-        [FormControlName.Active]: new FormControl(''),
-        [FormControlName.Tel]: new FormControl('', { updateOn: 'blur' })
-      })
+      items: new FormArray([])
     });
 
     this.orderForm.cityFrom$.pipe(
@@ -76,17 +60,29 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
         return this.calcService.getServices(id);
       })
     ).subscribe((arr: Array<Service>) => {
-      // arr.filter((item: Service) => item.group_id === '3')
-      //   .forEach((item: Service) => {
-      //     // this.formattedData[item.id] = { name: item.name, price: item.price };
-      //     console.log('service', item);
-      //     // this.formGroup.addControl(item.id, new FormGroup({
-      //     //   [FormControlName.Active]: new FormControl(''),
-      //     //   [FormControlName.Tel]: new FormControl('')
-      //     // }));
-      //   });
+      arr.filter((item: Service) => item.group_id === '3')
+        .forEach((item: Service) => {
+          this.formattedData[item.id] = { name: item.name, site_name: item.site_name, params: item.property, price: item.price };
 
-
+          if (item.name.indexOf('СМС') !== -1) {
+            this.items.push(new FormGroup({
+              [item.id]: new FormControl(''),
+              [FormControlName.Tel]: new FormControl(0)
+            }));
+          } else if (item.name.indexOf('Страхование') !== -1) {
+            this.items.push(new FormGroup({
+              [item.id]: new FormControl(''),
+              [FormControlName.Sum]: new FormControl(0)
+            }));
+          }});
     });
+  }
+
+  public get items(): FormArray {
+    return this.formGroup.get('items') as FormArray;
+  }
+
+  setActiveCheckbox(i) {
+
   }
 }
