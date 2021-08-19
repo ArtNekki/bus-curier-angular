@@ -7,13 +7,8 @@
           *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;">
           <ng-container *ngIf="(control.key === FormControlName.Sum)
           || (control.key === FormControlName.Tel); else checkbox">
-            <app-input *ngIf="activeCheckboxId === getId(i, items.controls)"
+            <app-input *ngIf="getCheckbox(i, items.controls).value"
               [formControlName]="control.key"></app-input>
-<!--            <app-input-->
-<!--              *ngIf="activeCheckboxId === getId(i, boxes.controls)"-->
-<!--              [formControlName]="control.key"-->
-<!--            >-->
-<!--            </app-input>-->
           </ng-container>
           <ng-template #checkbox>
             <app-checkbox

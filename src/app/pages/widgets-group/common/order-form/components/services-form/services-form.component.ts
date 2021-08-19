@@ -86,8 +86,8 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
     return this.formGroup.get('items') as FormArray;
   }
 
-  getId(i: number, arr: any) {
-    return Object.keys((arr.at(i) as FormGroup).controls)[0];
+  getCheckbox(i: number, arr: any) {
+    return Object.values((arr.at(i) as FormGroup).controls)[0];
   }
 
   setActiveCheckbox(id: string) {
