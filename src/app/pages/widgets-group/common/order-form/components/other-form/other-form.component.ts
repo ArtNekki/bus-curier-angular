@@ -6,7 +6,10 @@ import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/conf
 import {map} from 'rxjs/operators';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
-import cities from 'src/app/mock-data/cities';
+import {Subscription} from 'rxjs';
+import Select from 'src/app/core/models/Select';
+import CargoType from '../../../../../../core/models/CargoType';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 
 @Component({
   selector: 'app-other-form',
@@ -29,11 +32,13 @@ export class OtherFormComponent extends SubFormComponent implements OnInit {
   public FormControlName = FormControlName;
 
   public formGroup: FormGroup;
-  public cities = cities;
+  public parts: Array<Select> = [];
+  public partsSub: Subscription;
 
   constructor(
     private cdr: ChangeDetectorRef,
     private simpleModal: SimpleModalService,
+    private calcService: CalculatorService,
     orderForm: OrderFormService) {
     super(orderForm);
   }
@@ -46,6 +51,14 @@ export class OtherFormComponent extends SubFormComponent implements OnInit {
     });
 
     this.formGroup.markAllAsTouched();
+
+    this.partsSub = this.calcService.getTypes(1, 1).subscribe((result: Array<CargoType>) => {
+      if (result.length) {
+
+        this.parts = result.filter((item: CargoType) => item.parent_id === '21' && item)
+          .map((item: CargoType) => ({value: item.id, name: item.name}));
+      }
+    });
 
     super.ngOnInit();
   }

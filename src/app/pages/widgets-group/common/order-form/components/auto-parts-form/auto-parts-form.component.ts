@@ -8,18 +8,8 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {Subscription} from 'rxjs';
-
-interface Type {
-  id: string;
-  name: string;
-  parent_id: string;
-  use_dimensions: string;
-}
-
-interface Select {
-  value: string;
-  name: string;
-}
+import Select from '../../../../../../core/models/Select';
+import CargoType from '../../../../../../core/models/CargoType';
 
 @Component({
   selector: 'app-auto-parts-form',
@@ -62,11 +52,11 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
 
     this.formGroup.markAllAsTouched();
 
-    this.partsSub = this.calcService.getTypes(1, 1).subscribe((result: Array<Type>) => {
+    this.partsSub = this.calcService.getTypes(1, 1).subscribe((result: Array<CargoType>) => {
       if (result.length) {
 
-        this.parts = result.filter((item: Type) => item.parent_id === '5' && item)
-                      .map((item: Type) => ({value: item.id, name: item.name}));
+        this.parts = result.filter((item: CargoType) => item.parent_id === '5' && item)
+                      .map((item: CargoType) => ({value: item.id, name: item.name}));
       }
     });
 
