@@ -4,7 +4,6 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {map} from 'rxjs/operators';
-import cities from 'src/app/mock-data/cities';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
@@ -43,8 +42,7 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
   public FormControlName = FormControlName;
 
   public formGroup: FormGroup;
-  public cities = cities;
-  public aParts: Array<Select>;
+  public parts: Array<Select> = [];
   public partsSub: Subscription;
 
   constructor(
@@ -57,7 +55,7 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      parts: new FormArray([
+      items: new FormArray([
         new FormControl('', [Validators.required])
       ])
     });
@@ -67,7 +65,7 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
     this.partsSub = this.calcService.getTypes(1, 1).subscribe((result: Array<Type>) => {
       if (result.length) {
 
-        this.aParts = result.filter((item: Type) => item.parent_id === '5' && item)
+        this.parts = result.filter((item: Type) => item.parent_id === '5' && item)
                       .map((item: Type) => ({value: item.id, name: item.name}));
       }
     });
@@ -79,37 +77,37 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
     this.partsSub.unsubscribe();
   }
 
-  public get parts(): FormArray {
-    return this.formGroup.get('parts') as FormArray;
+  public get items(): FormArray {
+    return this.formGroup.get('items') as FormArray;
   }
 
-  get isSomePartsInvalid() {
-    return this.parts.controls.some((control) => {
+  get isSomeItemsInvalid() {
+    return this.items.controls.some((control) => {
       return control.invalid;
     });
   }
 
   add() {
-    this.parts.push(new FormControl('', [Validators.required]));
+    this.items.push(new FormControl('', [Validators.required]));
     this.formGroup.markAllAsTouched();
   }
 
   delete(index: number) {
-    if (this.parts.length <= 1) {
+    if (this.items.length <= 1) {
       return;
     }
 
-    if (this.parts.value[index]) {
+    if (this.items.value[index]) {
       this.confirm().subscribe((ok) => {
         if (!ok) {
           return;
         }
 
-        this.parts.removeAt(index);
+        this.items.removeAt(index);
         this.cdr.detectChanges();
       });
     } else {
-      this.parts.removeAt(index);
+      this.items.removeAt(index);
     }
   }
 
@@ -121,12 +119,12 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
 
   writeValue(value: any): void {
     if (value) {
-      this.parts.clear();
-      value.forEach(item => this.parts.push(new FormControl(item, [Validators.required])));
+      this.items.clear();
+      value.forEach(item => this.items.push(new FormControl(item, [Validators.required])));
     }
   }
 
   registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.pipe( map(value => value.parts)).subscribe(fn);
+    this.formGroup.valueChanges.pipe( map(value => value.items)).subscribe(fn);
   }
 }
