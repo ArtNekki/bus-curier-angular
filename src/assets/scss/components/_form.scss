@@ -233,7 +233,7 @@
     grid-template-columns: repeat(2, auto);
     justify-content: start;
     align-items: center;
-    grid-column-gap: $form-column-gap * 2;
+    grid-column-gap: $form-column-gap;
 
     @include media-breakpoint-up(sm) {
       grid-template-columns: repeat(4, auto);
