@@ -1,4 +1,4 @@
-<section class="form__section" [formGroup]="formGroup">
+<section *ngIf="dataLoaded" class="form__section" [formGroup]="formGroup">
   <h2 class="form__heading">Упаковка:</h2>
   <div *ngIf="boxes.length" class="form__fieldset form__fieldset--package" [formArrayName]="FormControlName.Box">
     <div class="form__fieldset-label">Коробка</div>

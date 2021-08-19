@@ -78,32 +78,32 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
 
         switch (item.subgroup_id) {
           case '1':
-            (this.formGroup.get(FormControlName.Box) as FormArray).push(new FormGroup({
+            this.boxes.push(new FormGroup({
               [item.id]: new FormControl(''),
               [FormControlName.Counter]: new FormControl(0)
             }));
             break;
           case '2':
-            (this.formGroup.get(FormControlName.SafePack) as FormArray).push(new FormGroup({
+            this.safePacks.push(new FormGroup({
               [item.id]: new FormControl(''),
               [FormControlName.Counter]: new FormControl('')
             }));
             break;
           case '3':
-            (this.formGroup.get(FormControlName.PlasticPack) as FormArray).push(new FormGroup({
+            this.plasticPacks.push(new FormGroup({
               [item.id]: new FormControl(''),
               [FormControlName.Counter]: new FormControl('')
             }));
             break;
           case '4':
           case '5':
-            (this.formGroup.get(FormControlName.Other) as FormArray).push(new FormGroup({
+            this.other.push(new FormGroup({
               [item.id]: new FormControl(''),
               [FormControlName.Counter]: new FormControl('')
             }));
             break;
           case '6':
-            (this.formGroup.get(FormControlName.Skin) as FormArray).push(new FormGroup({
+            this.skins.push(new FormGroup({
               [item.id]: new FormControl(''),
               [FormControlName.Counter]: new FormControl('')
             }));
@@ -168,6 +168,10 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
 
   getCounterControl(i: number, arr: any) {
     return Object.values((arr.at(i) as FormGroup).controls)[1];
+  }
+
+  get dataLoaded() {
+    return this.boxes.length || this.safePacks.length || this.plasticPacks.length || this.skins.length || this.other.length;
   }
 
   clear(event, counter: AbstractControl, checkbox: AbstractControl) {

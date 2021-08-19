@@ -1,4 +1,4 @@
-<section class="form__section" [formGroup]="formGroup">
+<section *ngIf="items.length" class="form__section" [formGroup]="formGroup">
   <h2 class="form__heading">Дополнительные услуги:</h2>
   <dl class="form__fieldset" formArrayName="items">
     <ng-container *ngFor="let itemGroup of items.controls; let i = index">
@@ -34,81 +34,6 @@
     </ng-container>
   </dl>
 </section>
-
-<!--<section class="form__section" [formGroup]="formGroup">-->
-<!--  <h2 class="form__heading">Дополнительные услуги:</h2>-->
-<!--  <dl class="form__fieldset">-->
-<!--    <ng-container [formGroupName]="FormControlName.Insurance">-->
-<!--      <dt>-->
-<!--        <app-checkbox name="add-service" [formControlName]="FormControlName.Active">-->
-<!--          <ng-container class="text">-->
-<!--            {{FormFieldMeta[FormControlName.Insurance].label}}-->
-<!--          </ng-container>-->
-<!--          &lt;!&ndash;                   <div class='tooltip'>&ndash;&gt;-->
-<!--          &lt;!&ndash;                     <p class='tooltip__text'>Страхование грузов</p>&ndash;&gt;-->
-<!--          &lt;!&ndash;                     <app-link href="#" mods="blue, sm">&ndash;&gt;-->
-<!--          &lt;!&ndash;                       Страхование грузов в Приморском крае&ndash;&gt;-->
-<!--          &lt;!&ndash;                     </app-link>&ndash;&gt;-->
-<!--          &lt;!&ndash;                   </div>&ndash;&gt;-->
-<!--        </app-checkbox>-->
-<!--      </dt>-->
-<!--      <dd *ngIf="formGroup.get(FormControlName.Insurance).get(FormControlName.Active).value" [@panel]="">-->
-<!--        <label for="insurance" class="form__label">Объявленная ценность</label>-->
-<!--        <app-input type="text" id="insurance" [formControlName]="FormControlName.Sum"></app-input>-->
-<!--      </dd>-->
-<!--    </ng-container>-->
-<!--    <ng-container [formGroupName]="FormControlName.SmsForSender">-->
-<!--      <dt>-->
-<!--        <app-checkbox name="add-service" [formControlName]="FormControlName.Active">-->
-<!--          <ng-container class="text">-->
-<!--            {{FormFieldMeta[FormControlName.SmsForSender].label}}-->
-<!--          </ng-container>-->
-<!--          &lt;!&ndash;                   <div class='tooltip'>&ndash;&gt;-->
-<!--          &lt;!&ndash;                     <p class='tooltip__text'>Вся информация об отправке груза: гос. номер автобуса, маршрут, приблизительное&ndash;&gt;-->
-<!--          &lt;!&ndash;                       время прибытия - отправляется не только получателю, но и отправителю</p>&ndash;&gt;-->
-<!--          &lt;!&ndash;                     <div class='tooltip__meta'>Стоимость 30 ₽</div>&ndash;&gt;-->
-<!--          &lt;!&ndash;                   </div>&ndash;&gt;-->
-<!--        </app-checkbox>-->
-<!--      </dt>-->
-<!--      <dd *ngIf="formGroup.get(FormControlName.SmsForSender).get(FormControlName.Active).value" [@panel]="">-->
-<!--        <label [for]="FormControlName.Tel" class="form__label">-->
-<!--          {{FormFieldMeta[FormControlName.Tel].label}}-->
-<!--        </label>-->
-<!--        <app-input-->
-<!--          [type]="FormFieldMeta[FormControlName.Tel].type"-->
-<!--          [id]="FormControlName.Tel"-->
-<!--          [mask]="FormFieldMeta[FormControlName.Tel].mask"-->
-<!--          [prefix]="FormFieldMeta[FormControlName.Tel].prefix"-->
-<!--          [formControlName]="FormControlName.Tel">-->
-<!--        </app-input>-->
-<!--      </dd>-->
-<!--    </ng-container>-->
-<!--    <ng-container [formGroupName]="FormControlName.SmsForRecipient">-->
-<!--      <dt>-->
-<!--        <app-checkbox name="add-service" [formControlName]="FormControlName.Active">-->
-<!--          <ng-container class="text">-->
-<!--            {{FormFieldMeta[FormControlName.SmsForRecipient].label}}-->
-<!--          </ng-container>-->
-<!--          &lt;!&ndash;                   <div class='tooltip'>&ndash;&gt;-->
-<!--          &lt;!&ndash;                     <p class='tooltip__text'>К информации об отправке груза: гос. номер автобуса, маршрут, приблизительное&ndash;&gt;-->
-<!--          &lt;!&ndash;                       время прибытия - добавляется ФИО отправителя и описание груза.</p>&ndash;&gt;-->
-<!--          &lt;!&ndash;                     <div class='tooltip__meta'>Стоимость 30 ₽</div>&ndash;&gt;-->
-<!--          &lt;!&ndash;                   </div>&ndash;&gt;-->
-<!--        </app-checkbox>-->
-<!--      </dt>-->
-<!--      <dd *ngIf="formGroup.get(FormControlName.SmsForRecipient).get(FormControlName.Active).value" [@panel]="">-->
-<!--        <label [for]="FormControlName.Tel" class="form__label">-->
-<!--          {{FormFieldMeta[FormControlName.Tel].label}}-->
-<!--        </label>-->
-<!--        <app-input-->
-<!--          [type]="FormFieldMeta[FormControlName.Tel].type"-->
-<!--          [id]="FormControlName.Tel"-->
-<!--          [mask]="FormFieldMeta[FormControlName.Tel].mask"-->
-<!--          [prefix]="FormFieldMeta[FormControlName.Tel].prefix"-->
-<!--          [formControlName]="FormControlName.Tel"-->
-<!--        >-->
-<!--        </app-input>-->
-<!--      </dd>-->
-<!--    </ng-container>-->
-<!--  </dl>-->
-<!--</section>-->
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>

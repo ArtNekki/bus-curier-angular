@@ -6,7 +6,7 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {animate, style, transition, trigger} from '@angular/animations';
-import {switchMap, tap} from 'rxjs/operators';
+import {delay, switchMap, tap} from 'rxjs/operators';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import Service from '../../../../../../core/models/Service';
@@ -42,6 +42,7 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
   public currentService: string;
   public activeCheckboxId: string;
   public formattedData = {};
+  public isLoading = false;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -61,9 +62,13 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
         return this.calcService.getServices(id);
       }),
       tap(() => {
+        this.isLoading = true;
         this.items.clear();
-      })
+      }),
+      // delay(5000)
     ).subscribe((arr: Array<Service>) => {
+      this.isLoading = false;
+
       arr.filter((item: Service) => item.group_id === '3')
         .forEach((item: Service) => {
           this.formattedData[item.id] = {
