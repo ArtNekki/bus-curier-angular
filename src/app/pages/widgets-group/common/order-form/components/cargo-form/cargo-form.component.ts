@@ -51,7 +51,7 @@ export class CargoFormComponent extends SubFormComponent implements OnInit  {
         [FormControlName.Docs]: new FormControl(''),
         [FormControlName.Parcels]: new FormControl(''),
         [FormControlName.AutoParts]: new FormControl(''),
-        // other: new FormGroup({})
+        [FormControlName.Other]: new FormControl('')
       })
     });
 
@@ -99,6 +99,9 @@ export class CargoFormComponent extends SubFormComponent implements OnInit  {
           this.formGroup.get('items')
             .get(FormControlName.AutoParts)
             .patchValue('', {onlySelf: true});
+          this.formGroup.get('items')
+            .get(FormControlName.Other)
+            .patchValue('', {onlySelf: true});
           break;
         case FormControlName.Parcels:
           this.formGroup.get('items')
@@ -107,6 +110,9 @@ export class CargoFormComponent extends SubFormComponent implements OnInit  {
           this.formGroup.get('items')
             .get(FormControlName.AutoParts)
             .setValue('', {onlySelf: true});
+          this.formGroup.get('items')
+            .get(FormControlName.Other)
+            .patchValue('', {onlySelf: true});
           break;
         case FormControlName.AutoParts:
           this.formGroup
@@ -115,6 +121,20 @@ export class CargoFormComponent extends SubFormComponent implements OnInit  {
           this.formGroup.get('items')
             .get(FormControlName.Docs)
             .setValue('', {onlySelf: true});
+          this.formGroup.get('items')
+            .get(FormControlName.Other)
+            .patchValue('', {onlySelf: true});
+          break;
+        case FormControlName.Other:
+          this.formGroup
+            .get('items').get(FormControlName.Parcels)
+            .setValue('', {onlySelf: true});
+          this.formGroup.get('items')
+            .get(FormControlName.Docs)
+            .setValue('', {onlySelf: true});
+          this.formGroup.get('items')
+            .get(FormControlName.AutoParts)
+            .patchValue('', {onlySelf: true});
           break;
       }
 

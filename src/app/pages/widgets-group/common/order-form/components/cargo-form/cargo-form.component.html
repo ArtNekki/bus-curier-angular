@@ -23,6 +23,9 @@
       <div *ngIf="formGroup.get('activeItem').value === FormControlName.AutoParts" [@fadeIn]="">
         <app-auto-parts-form [formControlName]="FormControlName.AutoParts"></app-auto-parts-form>
       </div>
+      <div *ngIf="formGroup.get('activeItem').value === FormControlName.Other" [@fadeIn]="">
+        <app-other-form [formControlName]="FormControlName.Other"></app-other-form>
+      </div>
     </div>
   </section>
 </ng-container>

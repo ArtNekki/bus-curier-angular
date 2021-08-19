@@ -275,4 +275,8 @@ export default {
     label: 'Опишите ваш вопрос',
     type: 'textarea'
   },
+  [FormControlName.Other]: {
+    label: 'Другое',
+    type: 'radio'
+  },
 };
