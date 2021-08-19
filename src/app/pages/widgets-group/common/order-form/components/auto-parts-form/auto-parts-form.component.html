@@ -7,7 +7,8 @@
   <ng-container formArrayName="parts">
     <div *ngFor="let part of parts.controls; let i = index" class="form__fieldset form__fieldset--auto-part">
       <app-select
-        [items]="cities"
+        *ngIf="aParts.length"
+        [items]="aParts"
         [formControlName]="i"
         [isInvalid]="(part.invalid && part.touched) && 'invalid'"
       >

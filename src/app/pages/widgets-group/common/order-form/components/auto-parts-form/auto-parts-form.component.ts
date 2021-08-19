@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
@@ -7,6 +7,20 @@ import {map} from 'rxjs/operators';
 import cities from 'src/app/mock-data/cities';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
+import {Subscription} from 'rxjs';
+
+interface Type {
+  id: string;
+  name: string;
+  parent_id: string;
+  use_dimensions: string;
+}
+
+interface Select {
+  value: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-auto-parts-form',
@@ -25,15 +39,18 @@ import {SubFormComponent} from '../sub-form/sub-form.component';
     }
   ]
 })
-export class AutoPartsFormComponent extends SubFormComponent implements OnInit {
+export class AutoPartsFormComponent extends SubFormComponent implements OnInit, OnDestroy {
   public FormControlName = FormControlName;
 
   public formGroup: FormGroup;
   public cities = cities;
+  public aParts: Array<Select>;
+  public partsSub: Subscription;
 
   constructor(
     private cdr: ChangeDetectorRef,
     private simpleModal: SimpleModalService,
+    private calcService: CalculatorService,
     orderForm: OrderFormService) {
     super(orderForm);
   }
@@ -47,7 +64,19 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit {
 
     this.formGroup.markAllAsTouched();
 
+    this.partsSub = this.calcService.getTypes(1, 1).subscribe((result: Array<Type>) => {
+      if (result.length) {
+
+        this.aParts = result.filter((item: Type) => item.parent_id === '5' && item)
+                      .map((item: Type) => ({value: item.id, name: item.name}));
+      }
+    });
+
     super.ngOnInit();
+  }
+
+  ngOnDestroy(): void {
+    this.partsSub.unsubscribe();
   }
 
   public get parts(): FormArray {
