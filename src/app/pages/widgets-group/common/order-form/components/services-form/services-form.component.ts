@@ -66,17 +66,23 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
     ).subscribe((arr: Array<Service>) => {
       arr.filter((item: Service) => item.group_id === '3')
         .forEach((item: Service) => {
-          this.formattedData[item.id] = { name: item.name, site_name: item.site_name, params: item.property, price: item.price };
+          this.formattedData[item.id] = {
+            name: item.name,
+            site_name: item.site_name,
+            params: item.property,
+            price: item.price,
+            type: this.checkSms(item.name) ? 'tel' : this.checkInsurance(item.name) ? 'sum' : null
+          };
 
-          if (item.name.indexOf('СМС') !== -1) {
+          if (this.checkSms(item.name)) {
             this.items.push(new FormGroup({
               [item.id]: new FormControl(''),
-              [FormControlName.Tel]: new FormControl(0)
+              [FormControlName.Tel]: new FormControl('')
             }));
-          } else if (item.name.indexOf('Страхование') !== -1) {
+          } else if (this.checkInsurance(item.name)) {
             this.items.push(new FormGroup({
               [item.id]: new FormControl(''),
-              [FormControlName.Sum]: new FormControl(0)
+              [FormControlName.Sum]: new FormControl('')
             }));
           }});
     });
@@ -84,6 +90,14 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
 
   public get items(): FormArray {
     return this.formGroup.get('items') as FormArray;
+  }
+
+  checkSms(name: string) {
+    return name.indexOf('СМС') !== -1;
+  }
+
+  checkInsurance(name: string) {
+    return name.indexOf('Страхование') !== -1;
   }
 
   getCheckbox(i: number, arr: any) {

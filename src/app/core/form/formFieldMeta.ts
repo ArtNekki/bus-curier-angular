@@ -42,6 +42,12 @@ export default {
     mask: '(000) 000-0000',
     prefix: '+7'
   },
+  [FormControlName.Sum]: {
+    label: 'Сумма',
+    type: 'text',
+    mask: '',
+    prefix: ''
+  },
   [FormControlName.Street]: {
     label: 'Улица',
     type: 'text'

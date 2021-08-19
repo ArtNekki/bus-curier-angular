@@ -1,28 +1,35 @@
 <section class="form__section" [formGroup]="formGroup">
   <h2 class="form__heading">Дополнительные услуги:</h2>
-  <div class="form__fieldset" formArrayName="items">
+  <dl class="form__fieldset" formArrayName="items">
     <ng-container *ngFor="let itemGroup of items.controls; let i = index">
       <div class="form__field" [formGroupName]="i">
         <ng-container
           *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;">
           <ng-container *ngIf="(control.key === FormControlName.Sum)
           || (control.key === FormControlName.Tel); else checkbox">
-            <app-input *ngIf="getCheckbox(i, items.controls).value"
-              [formControlName]="control.key"></app-input>
+            <dd *ngIf="getCheckbox(i, items.controls).value">
+              <app-input
+                [formControlName]="control.key"
+                [mask]="FormFieldMeta[control.key].mask"
+                [prefix]="FormFieldMeta[control.key].prefix"
+              ></app-input>
+            </dd>
           </ng-container>
           <ng-template #checkbox>
-            <app-checkbox
-              [formControlName]="control.key"
-              (change)="setActiveCheckbox(control.key)">
-              <div class="text">
-                {{formattedData[control.key].name}}
-              </div>
-            </app-checkbox>
+            <dt>
+              <app-checkbox
+                [formControlName]="control.key"
+                (change)="setActiveCheckbox(control.key)">
+                <div class="text">
+                  {{formattedData[control.key].name}}
+                </div>
+              </app-checkbox>
+            </dt>
           </ng-template>
         </ng-container>
       </div>
     </ng-container>
-  </div>
+  </dl>
 </section>
 
 <!--<section class="form__section" [formGroup]="formGroup">-->
