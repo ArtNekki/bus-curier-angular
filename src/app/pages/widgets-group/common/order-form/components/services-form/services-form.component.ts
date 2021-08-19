@@ -6,7 +6,7 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {animate, style, transition, trigger} from '@angular/animations';
-import {switchMap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import Service from '../../../../../../core/models/Service';
@@ -40,6 +40,7 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
 
   public formGroup: FormGroup;
   public currentService: string;
+  public activeCheckboxId: string;
   public formattedData = {};
 
   constructor(public formUtils: FormUtilsService,
@@ -58,6 +59,9 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
     this.orderForm.cityFrom$.pipe(
       switchMap((id: string) => {
         return this.calcService.getServices(id);
+      }),
+      tap(() => {
+        this.items.clear();
       })
     ).subscribe((arr: Array<Service>) => {
       arr.filter((item: Service) => item.group_id === '3')
@@ -82,7 +86,11 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
     return this.formGroup.get('items') as FormArray;
   }
 
-  setActiveCheckbox(i) {
+  getId(i: number, arr: any) {
+    return Object.keys((arr.at(i) as FormGroup).controls)[0];
+  }
 
+  setActiveCheckbox(id: string) {
+    this.activeCheckboxId = id;
   }
 }
