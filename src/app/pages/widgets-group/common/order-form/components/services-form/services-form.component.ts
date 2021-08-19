@@ -70,8 +70,7 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
             name: item.name,
             site_name: item.site_name,
             params: item.property,
-            price: item.price,
-            type: this.checkSms(item.name) ? 'tel' : this.checkInsurance(item.name) ? 'sum' : null
+            price: item.price
           };
 
           if (this.checkSms(item.name)) {

@@ -2,12 +2,15 @@
   <h2 class="form__heading">Дополнительные услуги:</h2>
   <dl class="form__fieldset" formArrayName="items">
     <ng-container *ngFor="let itemGroup of items.controls; let i = index">
-      <div class="form__field" [formGroupName]="i">
+      <ng-container [formGroupName]="i">
         <ng-container
           *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;">
           <ng-container *ngIf="(control.key === FormControlName.Sum)
           || (control.key === FormControlName.Tel); else checkbox">
             <dd *ngIf="getCheckbox(i, items.controls).value">
+              <label [for]="control.key" class="form__label">
+                {{control.key === FormControlName.Sum ? 'Объявленная ценность:' : 'Номер телефона:'}}
+              </label>
               <app-input
                 [formControlName]="control.key"
                 [mask]="FormFieldMeta[control.key].mask"
@@ -27,7 +30,7 @@
             </dt>
           </ng-template>
         </ng-container>
-      </div>
+      </ng-container>
     </ng-container>
   </dl>
 </section>
