@@ -20,18 +20,22 @@
       <app-cargos-form formControlName="cargo-group"></app-cargos-form>
       <app-packaging-form [formControlName]="FormControlName.Packaging"></app-packaging-form>
       <app-services-form formControlName="services"></app-services-form>
-      <app-btn mods="lg, max-w-300">Рассчитать стоимость</app-btn>
+      <app-btn mods="lg, max-w-300" [disabled]="this.form.invalid">Рассчитать стоимость</app-btn>
     </form>
-    <section class="text-box">
-      <div class="text-box__content">
-        <p>Компания «Баскурьер»  - это современная курьерская служба экспресс-доставки на Дальнем Востоке. Ежедневно мы успешно организовываем курьерскую доставку посылок, документов и различных грузов из г. Владивостока в г. Хабаровск, Уссурийск, Находку, Дальнегорск, Кавалерово и др. с помощью РЕЙСОВЫХ АВТОБУСОВ!</p>
-        <p>Мы предлагаем приемлемые тарифы...</p>
+    <app-text-box>
+      <p>Компания «Баскурьер»  - это современная курьерская служба экспресс-доставки на Дальнем Востоке. Ежедневно мы успешно организовываем курьерскую доставку посылок, документов и различных грузов из г. Владивостока в г. Хабаровск, Уссурийск, Находку, Дальнегорск, Кавалерово и др. с помощью РЕЙСОВЫХ АВТОБУСОВ!</p>
+      <p>Мы предлагаем приемлемые тарифы...</p>
+      <div class="hidden">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolores nobis quas. Ab accusantium
+          alias asperiores assumenda autem debitis dolores earum, eos facere facilis hic id maiores natus
+          necessitatibus odit officiis pariatur perspiciatis, porro possimus praesentium quae quaerat recusandae
+          rem rerum saepe tempore totam vitae! Accusamus blanditiis cum itaque natus repellendus? Adipisci beatae,
+          dolorem dolorum iure nobis pariatur perferendis praesentium qui quisquam ratione recusandae reiciendis
+          repudiandae saepe soluta sunt? Ad alias aliquid at dolores, dolorum eius facere harum id laudantium maiores
+          maxime minima neque optio quia, quibusdam reprehenderit sapiente temporibus veritatis? Amet asperiores
+          distinctio eos libero, molestiae quis sint voluptate.</p>
       </div>
-      <button type="button" class="text-box__more">
-        Читать подробнее
-        <svg-icon class="icon" src="assets/img/svg/more.svg" width="32" height="32"></svg-icon>
-      </button>
-    </section>
+    </app-text-box>
   </div>
   <app-sidebar></app-sidebar>
 </div>
