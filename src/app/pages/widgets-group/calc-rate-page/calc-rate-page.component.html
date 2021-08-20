@@ -17,10 +17,12 @@
           </div>
         </div>
       </div>
-      <app-cargos-form formControlName="cargo-group"></app-cargos-form>
-      <app-packaging-form [formControlName]="FormControlName.Packaging"></app-packaging-form>
-      <app-services-form formControlName="services"></app-services-form>
-      <app-btn mods="lg, max-w-300" [disabled]="this.form.invalid">Рассчитать стоимость</app-btn>
+      <div >
+        <app-cargos-form formControlName="cargo-group"></app-cargos-form>
+        <app-packaging-form [formControlName]="FormControlName.Packaging"></app-packaging-form>
+        <app-services-form formControlName="services"></app-services-form>
+        <app-btn mods="lg, max-w-300" [disabled]="this.form.invalid">Рассчитать стоимость</app-btn>
+      </div>
     </form>
     <app-text-box>
       <p>Компания «Баскурьер»  - это современная курьерская служба экспресс-доставки на Дальнем Востоке. Ежедневно мы успешно организовываем курьерскую доставку посылок, документов и различных грузов из г. Владивостока в г. Хабаровск, Уссурийск, Находку, Дальнегорск, Кавалерово и др. с помощью РЕЙСОВЫХ АВТОБУСОВ!</p>
