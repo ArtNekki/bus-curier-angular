@@ -181,7 +181,7 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
 
   confirmClear(counter: AbstractControl, checkbox: AbstractControl) {
     this.simpleModal.addModal(ConfirmModalComponent, {
-      message: 'Вы уверены?'
+      message: 'Данные будут потеряны! <br> Вы уверены?'
     }).subscribe((isConfirmed) => {
       if (isConfirmed) {
         counter.patchValue(0);

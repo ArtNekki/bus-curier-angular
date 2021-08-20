@@ -1,90 +1,90 @@
-<div class="order-result">
-  <div *ngIf="isLoading" class="order-result__loader">
-    <app-loader></app-loader>
-  </div>
-  <ng-container *ngIf="!isLoading">
-    <div class="order-result__scroll">
-      <ng-container *ngIf="getCargoList(currentData).length">
-        <p class="gray">Тип груза:</p>
-        <dl>
-          <ng-container *ngFor="let cargo of getCargoList(currentData); let groupIndex = index">
-            <ng-container *ngIf="cargo">
-              <dt>
-                <b>Груз {{groupIndex + 1}}:</b>
-              </dt>
-              <dd>
-                {{formatCargo(cargo)}}
-              </dd>
-            </ng-container>
-          </ng-container>
-        </dl>
-      </ng-container>
-      <ng-container *ngIf="getDepartureCity(currentData) && getPickupCity(currentData)">
-        <p class="gray">Направление перевозки:</p>
-        <p>{{getDepartureCity(currentData)}} — {{getPickupCity(currentData)}} <b class="lg">500 руб.</b></p>
-      </ng-container>
-      <ng-container *ngIf="getDispatchType(currentData) === FormControlName.Department || getDispatchType(currentData) === FormControlName.Courier">
-        <p class="gray">Забор посылки у отправителя -
-          <ng-container *ngIf="getDispatchType(currentData) === FormControlName.Department">
-            в отделении
-          </ng-container>
-          <ng-container *ngIf="getDispatchType(currentData) === FormControlName.Courier">
-            вызов курьера
-          </ng-container>
-        </p>
-        <p><b class="lg">300 руб.</b></p>
-      </ng-container>
-      <ng-container *ngIf="getReceiveType(currentData)">
-        <p class="gray">Доставка посылки до получателя -
-          <ng-container *ngIf="getReceiveType(currentData) === FormControlName.Department">
-            в отделении
-          </ng-container>
-          <ng-container *ngIf="getReceiveType(currentData) === FormControlName.Courier">
-            вызов курьера
-          </ng-container>
-        </p>
-        <p><b class="lg">300 руб.</b></p>
-      </ng-container>
+<!--<div class="order-result">-->
+<!--  <div *ngIf="isLoading" class="order-result__loader">-->
+<!--    <app-loader></app-loader>-->
+<!--  </div>-->
+<!--  <ng-container *ngIf="!isLoading">-->
+<!--    <div class="order-result__scroll">-->
+<!--      <ng-container *ngIf="getCargoList(currentData).length">-->
+<!--        <p class="gray">Тип груза:</p>-->
+<!--        <dl>-->
+<!--          <ng-container *ngFor="let cargo of getCargoList(currentData); let groupIndex = index">-->
+<!--            <ng-container *ngIf="cargo">-->
+<!--              <dt>-->
+<!--                <b>Груз {{groupIndex + 1}}:</b>-->
+<!--              </dt>-->
+<!--              <dd>-->
+<!--                {{formatCargo(cargo)}}-->
+<!--              </dd>-->
+<!--            </ng-container>-->
+<!--          </ng-container>-->
+<!--        </dl>-->
+<!--      </ng-container>-->
+<!--      <ng-container *ngIf="getDepartureCity(currentData) && getPickupCity(currentData)">-->
+<!--        <p class="gray">Направление перевозки:</p>-->
+<!--        <p>{{getDepartureCity(currentData)}} — {{getPickupCity(currentData)}} <b class="lg">500 руб.</b></p>-->
+<!--      </ng-container>-->
+<!--      <ng-container *ngIf="getDispatchType(currentData) === FormControlName.Department || getDispatchType(currentData) === FormControlName.Courier">-->
+<!--        <p class="gray">Забор посылки у отправителя - -->
+<!--          <ng-container *ngIf="getDispatchType(currentData) === FormControlName.Department">-->
+<!--            в отделении-->
+<!--          </ng-container>-->
+<!--          <ng-container *ngIf="getDispatchType(currentData) === FormControlName.Courier">-->
+<!--            вызов курьера-->
+<!--          </ng-container>-->
+<!--        </p>-->
+<!--        <p><b class="lg">300 руб.</b></p>-->
+<!--      </ng-container>-->
+<!--      <ng-container *ngIf="getReceiveType(currentData)">-->
+<!--        <p class="gray">Доставка посылки до получателя - -->
+<!--          <ng-container *ngIf="getReceiveType(currentData) === FormControlName.Department">-->
+<!--            в отделении-->
+<!--          </ng-container>-->
+<!--          <ng-container *ngIf="getReceiveType(currentData) === FormControlName.Courier">-->
+<!--            вызов курьера-->
+<!--          </ng-container>-->
+<!--        </p>-->
+<!--        <p><b class="lg">300 руб.</b></p>-->
+<!--      </ng-container>-->
 
-      <ng-container *ngIf="currentData.steps[2][FormControlName.Packaging]">
-        <p class="gray">Упаковка груза:</p>
-        <dl>
-          <ng-container *ngFor="let obj of formatPackaging(currentData)">
-            <dt>
-              <ng-container *ngFor="let el of obj | keyvalue: formUtils.originalOrder">
-                <ng-container *ngIf="el.key !== 'sum'">
-                  {{el.value}}
-                </ng-container>
-              </ng-container>
-            </dt>
-            <ng-container *ngFor="let el of obj | keyvalue: formUtils.originalOrder">
-              <dd *ngIf="el.key === 'sum'">
-                <b class="lg">{{el.value}}</b>
-              </dd>
-            </ng-container>
-          </ng-container>
-        </dl>
-      </ng-container>
-      <ng-container *ngFor="let obj of formatServices(currentData)">
-        <ng-container *ngIf="obj.value">
-          <p class="gray">
-            <ng-container *ngIf="obj.id === FormControlName.Insurance; else label">
-              Страхование посылки на сумму
-            </ng-container>
-            <ng-template #label>
-              {{obj.label}}
-            </ng-template>
-            <ng-container *ngIf="obj.id === FormControlName.Insurance">
-              {{obj.value}}
-            </ng-container>
-          </p>
-          <p><b class="lg">{{obj.sum}}</b></p>
-        </ng-container>
-      </ng-container>
+<!--      <ng-container *ngIf="currentData.steps[2][FormControlName.Packaging]">-->
+<!--        <p class="gray">Упаковка груза:</p>-->
+<!--        <dl>-->
+<!--          <ng-container *ngFor="let obj of formatPackaging(currentData)">-->
+<!--            <dt>-->
+<!--              <ng-container *ngFor="let el of obj | keyvalue: formUtils.originalOrder">-->
+<!--                <ng-container *ngIf="el.key !== 'sum'">-->
+<!--                  {{el.value}}-->
+<!--                </ng-container>-->
+<!--              </ng-container>-->
+<!--            </dt>-->
+<!--            <ng-container *ngFor="let el of obj | keyvalue: formUtils.originalOrder">-->
+<!--              <dd *ngIf="el.key === 'sum'">-->
+<!--                <b class="lg">{{el.value}}</b>-->
+<!--              </dd>-->
+<!--            </ng-container>-->
+<!--          </ng-container>-->
+<!--        </dl>-->
+<!--      </ng-container>-->
+<!--      <ng-container *ngFor="let obj of formatServices(currentData)">-->
+<!--        <ng-container *ngIf="obj.value">-->
+<!--          <p class="gray">-->
+<!--            <ng-container *ngIf="obj.id === FormControlName.Insurance; else label">-->
+<!--              Страхование посылки на сумму-->
+<!--            </ng-container>-->
+<!--            <ng-template #label>-->
+<!--              {{obj.label}}-->
+<!--            </ng-template>-->
+<!--            <ng-container *ngIf="obj.id === FormControlName.Insurance">-->
+<!--              {{obj.value}}-->
+<!--            </ng-container>-->
+<!--          </p>-->
+<!--          <p><b class="lg">{{obj.sum}}</b></p>-->
+<!--        </ng-container>-->
+<!--      </ng-container>-->
 
-    </div>
-    <div class="order-result__total">
-      <ng-content select=".total"></ng-content>
-    </div>
-  </ng-container>
-</div>
+<!--    </div>-->
+<!--    <div class="order-result__total">-->
+<!--      <ng-content select=".total"></ng-content>-->
+<!--    </div>-->
+<!--  </ng-container>-->
+<!--</div>-->
