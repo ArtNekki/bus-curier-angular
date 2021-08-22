@@ -10,22 +10,19 @@
                  [checked]="control.key === formGroup.get('activeItem').value"
                  [isInvalid]="control.value.invalid"
       >
-        {{FormFieldMeta[control.key].label}}
+        {{control.key}}
       </app-radio>
     </div>
     <div formGroupName="items">
-      <div *ngIf="formGroup.get('activeItem').value === FormControlName.Docs" [@fadeIn]="">
-        <app-docs-form [formControlName]="FormControlName.Docs"></app-docs-form>
-      </div>
-      <div *ngIf="formGroup.get('activeItem').value === FormControlName.Parcels" [@fadeIn]="">
-        <app-parcels-form [formControlName]="FormControlName.Parcels"></app-parcels-form>
-      </div>
-      <div *ngIf="formGroup.get('activeItem').value === FormControlName.AutoParts" [@fadeIn]="">
-        <app-auto-parts-form [formControlName]="FormControlName.AutoParts"></app-auto-parts-form>
-      </div>
-      <div *ngIf="formGroup.get('activeItem').value === FormControlName.Other" [@fadeIn]="">
-        <app-other-form [formControlName]="FormControlName.Other"></app-other-form>
-      </div>
+      <ng-container *ngFor="let control of
+        formUtils.getGroupControls(formGroup.get('items')) | keyvalue: formUtils.originalOrder;">
+        <div *ngIf="formGroup.get('activeItem').value === control.key" [@fadeIn]="">
+          <app-docs-form *ngIf="control.key === Cargo.Docs" [formControlName]="control.key"></app-docs-form>
+          <app-parcels-form *ngIf="control.key === Cargo.Parcels" [formControlName]="control.key"></app-parcels-form>
+          <app-auto-parts-form *ngIf="control.key === Cargo.AutoParts" [formControlName]="control.key"></app-auto-parts-form>
+          <app-other-form *ngIf="control.key === Cargo.Other" [formControlName]="control.key"></app-other-form>
+        </div>
+      </ng-container>
     </div>
   </section>
 </ng-container>

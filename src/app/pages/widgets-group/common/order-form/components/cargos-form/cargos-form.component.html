@@ -7,7 +7,7 @@
              [checked]="formGroup.get('activeItem').value === i"
              [disabled]="(formGroup.get('activeItem').value !== i) && isSomeControlInvalid"
              (delete)="deleteCargo($event)"
-             [isInvalid]="control.invalid" >
+             [isInvalid]="control.invalid">
       Груз №{{i + 1}}
     </app-tag>
     <app-tag type="add" (click)="addCargo()" [disabled]="isSomeControlInvalid"></app-tag>
