@@ -78,6 +78,8 @@ export class OrderPageComponent implements OnInit {
     this.changeDetectorRef.detectChanges();
 
     this.orderForm.$form.next(this.form);
+
+    console.log('this.form', this.form);
   }
 
   goPrev() {
