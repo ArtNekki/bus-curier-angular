@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
@@ -33,7 +33,9 @@ import {delay} from 'rxjs/operators';
     }
   ]
 })
-export class CargoFormComponent extends SubFormComponent implements OnInit  {
+export class CargoFormComponent extends SubFormComponent implements OnInit, OnChanges {
+  @Input() types;
+
   public Cargo = {
     Docs: '1',
     Parcels: '2',
@@ -67,21 +69,29 @@ export class CargoFormComponent extends SubFormComponent implements OnInit  {
 
     super.ngOnInit();
 
-    this.itemsSub = this.calcService.getTypes(1, 1)
-      .pipe(delay(500))
-      .subscribe((result: Array<CargoType>) => {
-        if (result.length) {
+    if (this.types.length) {
+      this.setTypes(this.types);
+    }
 
-          result.forEach((item: CargoType) => {
-            if (item.parent_id === '0') {
-              this.items.addControl(item.id, new FormControl(''));
-            }
-          });
-        }
+    // this.itemsSub = this.calcService.getTypes(1, 1)
+    //   .pipe(delay(500))
+    //   .subscribe((result: Array<CargoType>) => {
+    //     if (result.length) {
+    //
+    //
+    //     }
+    //
+    //     this.cdr.detectChanges();
+    //     this.formGroup.reset(this.formGroup.value);
+    // });
+  }
 
-        this.cdr.detectChanges();
-        this.formGroup.reset(this.formGroup.value);
-    });
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    if (changes.types.currentValue.length  && !changes.types.firstChange) {
+      this.setTypes(changes.types.currentValue);
+    }
   }
 
   get items() {
@@ -112,6 +122,17 @@ export class CargoFormComponent extends SubFormComponent implements OnInit  {
     // this.formGroup.markAsTouched();
     // this.onTouched();
     // this.cdr.detectChanges();
+  }
+
+  setTypes(types) {
+    console.log('setTypes', types);
+
+    types.forEach((item: CargoType) => {
+      this.items.addControl(item.id, new FormControl(''));
+    });
+
+    this.cdr.detectChanges();
+    this.formGroup.reset(this.formGroup.value);
   }
 
   changeCargoType(type: string) {

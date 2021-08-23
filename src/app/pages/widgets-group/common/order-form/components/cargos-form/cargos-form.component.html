@@ -12,10 +12,11 @@
     </app-tag>
     <app-tag type="add" (click)="addCargo()" [disabled]="isSomeControlInvalid"></app-tag>
   </div>
-  <div formArrayName="items">
+  ee: {{ items.controls.length}}
+  <div *ngIf="items.controls.length" formArrayName="items">
     <ng-template ngFor let-item [ngForOf]="items.controls" let-i = index>
       <ng-container *ngIf="formGroup.get('activeItem').value === i">
-        <app-cargo-form [formControlName]="i"></app-cargo-form>
+        <app-cargo-form [types]="types" [formControlName]="i"></app-cargo-form>
       </ng-container>
     </ng-template>
   </div>

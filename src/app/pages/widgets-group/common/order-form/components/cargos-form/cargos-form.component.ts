@@ -5,6 +5,10 @@ import {UtilsService} from '../../../../../../core/services/utils.service';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
+import {Subscription} from 'rxjs';
+import {delay} from 'rxjs/operators';
+import CargoType from '../../../../../../core/models/CargoType';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 
 @Component({
   selector: 'app-cargos-form',
@@ -28,9 +32,12 @@ export class CargosFormComponent extends SubFormComponent implements OnInit {
 
   public formGroup: FormGroup;
   public currentCargoIndex = 0;
+  public types: Array<any> = [];
+  public itemsSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
+              private calcService: CalculatorService,
               orderForm: OrderFormService) {
     super(orderForm);
   }
@@ -42,6 +49,21 @@ export class CargosFormComponent extends SubFormComponent implements OnInit {
         new FormControl('', [Validators.required])
       ])
     });
+
+    this.itemsSub = this.calcService.getTypes(1, 1)
+      // .pipe(delay(500))
+      .subscribe((result: Array<CargoType>) => {
+        if (result.length) {
+
+          this.types = result.filter((item: CargoType) => item.parent_id === '0' && item)
+            .map((item: CargoType) => ({id: item.id, name: item.name}));
+        }
+
+        console.log('nekki', this.types);
+
+        // this.cdr.detectChanges();
+        // this.formGroup.reset(this.formGroup.value);
+      });
 
     this.formGroup.markAllAsTouched();
 
@@ -71,7 +93,6 @@ export class CargosFormComponent extends SubFormComponent implements OnInit {
   }
 
   writeValue(value: any): void {
-
     if (value) {
       this.items.clear();
       value.items.forEach(item => this.items.push(new FormControl(item)));
