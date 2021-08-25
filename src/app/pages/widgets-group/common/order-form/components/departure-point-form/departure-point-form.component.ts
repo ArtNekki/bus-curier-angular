@@ -51,12 +51,13 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
   public formGroup: FormGroup;
   public addressPoints = addressPoints;
-  public Tab = {One: 'department', Two: 'courier'};
+  public Tab = {One: 'give', Two: 'pickup'};
   public currentTab = null;
 
   public cities = [];
   public offices = [];
   public office: any;
+  public tabs: string[] = [];
   public formattedData = {};
 
   private citiesFromSub: Subscription;
@@ -75,8 +76,8 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       [FormControlName.Location]: new FormControl('', [Validators.required]),
       [FormControlName.DispatchData]: new FormGroup({
         [FormControlName.Active]: new FormControl('', [Validators.required]),
-        [FormControlName.Department]: new FormControl('', [Validators.required]),
-        [FormControlName.Courier]: new FormControl('')
+        [this.Tab.One]: new FormControl('', [Validators.required]),
+        [this.Tab.Two]: new FormControl('')
       }, [Validators.required]),
       [FormControlName.Date]: new FormControl('', [Validators.required]),
     });
@@ -140,7 +141,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         })
       )
       .subscribe((tabs: string[]) => {
-        console.log('result', tabs);
+        this.tabs = tabs;
       });
   }
 

@@ -32,24 +32,15 @@
         && formGroup.get(FormControlName.DispatchData)
             .get(FormControlName.Active).hasError('required')">*</sup>
       </span>
-    <div class="form__tabs">
-      <label class="form__tab">
+    <div *ngIf="tabs.length" class="form__tabs">
+      <label *ngFor="let tab of tabs; let i = index" class="form__tab">
         <input type="radio"
-               [checked]="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.One"
+               [checked]="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === i"
                [name]="FormControlName.Active"
-               [value]="Tab.One"
-               (change)="changeType(Tab.One)"
+               [value]="tab"
+               (change)="changeType(tab)"
                [formControlName]="FormControlName.Active" hidden />
-        <div>Cдать в отделение</div>
-      </label>
-      <label class="form__tab">
-        <input type="radio"
-               [checked]="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.Two"
-               [name]="FormControlName.Active"
-               [value]="Tab.Two"
-               (change)="changeType(Tab.Two)"
-               [formControlName]="FormControlName.Active"  hidden />
-        <div>Вызвать курьера</div>
+        <div>{{tab}}</div>
       </label>
     </div>
     <div *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === Tab.One"
@@ -77,7 +68,7 @@
       <app-courier-form [formControlName]="FormControlName.Courier"></app-courier-form>
     </div>
   </ng-container>
-  <div class="form__field">
+  <div *ngIf="tabs.length" class="form__field">
     <label for="departure-date" class="form__label"
            [class.form__label--invalid]="formGroup.get(FormControlName.Date).invalid"
     >Дата отправки
