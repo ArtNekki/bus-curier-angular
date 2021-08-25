@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CalculatorEndpointService} from './calculator-endpoint.service';
+import {Observable} from 'rxjs';
+import CityFrom from '../../models/CityFrom';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class CalculatorService {
   constructor(private http: HttpClient,
               private endpoint: CalculatorEndpointService) { }
 
-  getCitiesFrom() {
+  getCitiesFrom(): Observable<CityFrom> {
     return this.endpoint.getCitiesFrom();
   }
 
@@ -29,6 +31,10 @@ export class CalculatorService {
 
   getServices(id) {
     return this.endpoint.getServices(id);
+  }
+
+  getOffices() {
+    return this.endpoint.getOffices();
   }
 
   getResult(cityFromId, cityToId, typeId, services, weight, dim) {

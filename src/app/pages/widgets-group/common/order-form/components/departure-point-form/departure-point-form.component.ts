@@ -10,13 +10,19 @@ import addressPoints from 'src/app/mock-data/address-points';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import { SubFormComponent } from '../sub-form/sub-form.component';
 import fadeIn from '../../../../../../core/animations/fadeIn';
-import {Subscription} from 'rxjs';
+import {Observable, PartialObserver, Subscription} from 'rxjs';
+import { filter } from 'rxjs/internal/operators/filter';
+import Office from '../../../../../../core/models/Office';
+import {map} from 'rxjs/operators';
+import Select from 'src/app/core/models/Select';
+import CityFrom from 'src/app/core/models/CityFrom';
+import City from '../../../../../../core/maps/City';
+import {fromArray} from 'rxjs/internal/observable/fromArray';
 
-interface CityFrom {
-  id: string;
-  name: string;
-  site_id: string;
-}
+const Department = {
+  Aleutskaya: '15',
+  Gogolya: '7'
+};
 
 @Component({
   selector: 'app-departure-point-form',
@@ -49,8 +55,11 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   public currentTab = null;
 
   public cities = [];
+  public offices = [];
+  public office: any;
 
   private citiesFromSub: Subscription;
+  private officesSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -72,21 +81,19 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
     this.currentTab = this.Tab.One;
 
-    this.citiesFromSub = this.calculatorService.getCitiesFrom().subscribe((result: Array<CityFrom>) => {
-      this.cities = result
-        .filter((city: CityFrom) => (city.site_id !== '7' && city.site_id !== '15') && city)
-        .map((el: CityFrom) => {
-          return {value: el.id, name: el.name};
-        });
-    });
+    this.citiesFromSub = this.calculatorService.getCitiesFrom()
+      .pipe(
+        map<CityFrom, Select>((cities: any) => {
+          return cities
+            .filter((city) => city.site_id !== Department.Aleutskaya && city.site_id !== Department.Gogolya)
+            .map((city) => ({value: city.id, name: city.name}));
+        })
+      )
+      .subscribe((cities: any) => {
+        this.cities = cities;
+      });
 
     super.ngOnInit();
-  }
-
-  ngOnDestroy(): void {
-    if (this.citiesFromSub) {
-      this.citiesFromSub.unsubscribe();
-    }
   }
 
   changeType(type: string) {
@@ -106,5 +113,17 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
   setCity(id: string) {
     this.orderForm.cityFrom$.next(id);
+
+    this.calculatorService.getOffices()
+      .pipe(filter((item: Office) => item.office_id === id))
+      .subscribe((result: Office) => {
+        console.log('result', result);
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.citiesFromSub) {
+      this.citiesFromSub.unsubscribe();
+    }
   }
 }
