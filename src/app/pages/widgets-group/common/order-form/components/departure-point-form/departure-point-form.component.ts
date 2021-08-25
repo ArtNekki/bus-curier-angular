@@ -13,7 +13,7 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
 import {Observable, PartialObserver, Subscription} from 'rxjs';
 import { filter } from 'rxjs/internal/operators/filter';
 import Office from '../../../../../../core/models/Office';
-import {map} from 'rxjs/operators';
+import {concatAll, first, map, take} from 'rxjs/operators';
 import Select from 'src/app/core/models/Select';
 import CityFrom from 'src/app/core/models/CityFrom';
 import City from '../../../../../../core/maps/City';
@@ -57,6 +57,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   public cities = [];
   public offices = [];
   public office: any;
+  public formattedData = {};
 
   private citiesFromSub: Subscription;
   private officesSub: Subscription;
@@ -86,7 +87,10 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         map<CityFrom, Select>((cities: any) => {
           return cities
             .filter((city) => city.site_id !== Department.Aleutskaya && city.site_id !== Department.Gogolya)
-            .map((city) => ({value: city.id, name: city.name}));
+            .map((city) => {
+              this.formattedData[city.id] = city;
+              return {value: city.id, name: city.name};
+            });
         })
       )
       .subscribe((cities: any) => {
@@ -113,11 +117,29 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
   setCity(id: string) {
     this.orderForm.cityFrom$.next(id);
+    this.getTabs(id);
+  }
 
+  getTabs(id: string) {
     this.calculatorService.getOffices()
-      .pipe(filter((item: Office) => item.office_id === id))
-      .subscribe((result: Office) => {
-        console.log('result', result);
+      .pipe(
+        map((offices: any) => {
+          return offices.filter((office) => office.office_id === this.formattedData[id].office_id);
+        }),
+        concatAll(),
+        first(),
+        map((office: any) => {
+          return Object.entries(office)
+            .filter((item: [string, any]) => {
+              return item[0] === 'give' && item[1] === '1' || item[0] === 'pickup' && item[1] === '1';
+            })
+            .map((item: [string, any]) => {
+              return item[0];
+            });
+        })
+      )
+      .subscribe((tabs: string[]) => {
+        console.log('result', tabs);
       });
   }
 
