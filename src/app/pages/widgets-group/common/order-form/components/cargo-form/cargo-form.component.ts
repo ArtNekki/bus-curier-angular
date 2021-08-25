@@ -67,10 +67,12 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
       items: new FormGroup({}, [Validators.required])
     });
 
+    console.log('currentItem', this.formGroup.get('activeItem').value);
+
     super.ngOnInit();
 
     if (this.types.length) {
-      this.setTypes(this.types);
+      this.setTypes(this.types, false);
     }
 
     // this.itemsSub = this.calcService.getTypes(1, 1)
@@ -84,13 +86,65 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
     //     this.cdr.detectChanges();
     //     this.formGroup.reset(this.formGroup.value);
     // });
+
+    this.formGroup.get('activeItem').valueChanges
+      .pipe(delay(10))
+      .subscribe((id: string) => {
+
+        switch (id) {
+          case this.Cargo.Docs:
+            this.formGroup.get('items')
+              .get(this.Cargo.Parcels)
+              .patchValue('', {onlySelf: true});
+            this.formGroup.get('items')
+              .get(this.Cargo.AutoParts)
+              .patchValue('', {onlySelf: true});
+            this.formGroup.get('items')
+              .get(this.Cargo.Other)
+              .patchValue('', {onlySelf: true});
+            break;
+          case this.Cargo.Parcels:
+            this.formGroup.get('items')
+              .get(this.Cargo.Docs)
+              .setValue('', {onlySelf: true});
+            this.formGroup.get('items')
+              .get(this.Cargo.AutoParts)
+              .setValue('', {onlySelf: true});
+            this.formGroup.get('items')
+              .get(this.Cargo.Other)
+              .patchValue('', {onlySelf: true});
+            break;
+          case this.Cargo.AutoParts:
+            this.formGroup
+              .get('items').get(this.Cargo.Parcels)
+              .setValue('', {onlySelf: true});
+            this.formGroup.get('items')
+              .get(this.Cargo.Docs)
+              .setValue('', {onlySelf: true});
+            this.formGroup.get('items')
+              .get(this.Cargo.Other)
+              .patchValue('', {onlySelf: true});
+            break;
+          case this.Cargo.Other:
+            this.formGroup
+              .get('items').get(this.Cargo.Parcels)
+              .setValue('', {onlySelf: true});
+            this.formGroup.get('items')
+              .get(this.Cargo.Docs)
+              .setValue('', {onlySelf: true});
+            this.formGroup.get('items')
+              .get(this.Cargo.AutoParts)
+              .patchValue('', {onlySelf: true});
+            break;
+        }
+    });
   }
 
 
   ngOnChanges(changes: SimpleChanges): void {
 
     if (changes.types.currentValue.length  && !changes.types.firstChange) {
-      this.setTypes(changes.types.currentValue);
+      this.setTypes(changes.types.currentValue, true);
     }
   }
 
@@ -114,7 +168,7 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
         return;
       }
 
-      this.changeCargoType(type);
+      this.formGroup.get('activeItem').setValue(type);
 
     });
 
@@ -124,69 +178,24 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
     // this.cdr.detectChanges();
   }
 
-  setTypes(types) {
-    console.log('setTypes', types);
+  setTypes(types, onChanges) {
 
     types.forEach((item: CargoType) => {
       this.items.addControl(item.id, new FormControl(''));
     });
 
-    this.cdr.detectChanges();
-    this.formGroup.reset(this.formGroup.value);
+    if (onChanges) {
+      this.cdr.detectChanges();
+      this.formGroup.reset(this.formGroup.value);
+    }
   }
 
   changeCargoType(type: string) {
-    this.formGroup.get('activeItem').patchValue(type, {onlySelf: true});
 
-    setTimeout(() => {
 
-      switch (type) {
-        case this.Cargo.Docs:
-          this.formGroup.get('items')
-            .get(this.Cargo.Parcels)
-            .patchValue('', {onlySelf: true});
-          this.formGroup.get('items')
-            .get(this.Cargo.AutoParts)
-            .patchValue('', {onlySelf: true});
-          this.formGroup.get('items')
-            .get(this.Cargo.Other)
-            .patchValue('', {onlySelf: true});
-          break;
-        case this.Cargo.Parcels:
-          this.formGroup.get('items')
-            .get(this.Cargo.Docs)
-            .setValue('', {onlySelf: true});
-          this.formGroup.get('items')
-            .get(this.Cargo.AutoParts)
-            .setValue('', {onlySelf: true});
-          this.formGroup.get('items')
-            .get(this.Cargo.Other)
-            .patchValue('', {onlySelf: true});
-          break;
-        case this.Cargo.AutoParts:
-          this.formGroup
-            .get('items').get(this.Cargo.Parcels)
-            .setValue('', {onlySelf: true});
-          this.formGroup.get('items')
-            .get(this.Cargo.Docs)
-            .setValue('', {onlySelf: true});
-          this.formGroup.get('items')
-            .get(this.Cargo.Other)
-            .patchValue('', {onlySelf: true});
-          break;
-        case this.Cargo.Other:
-          this.formGroup
-            .get('items').get(this.Cargo.Parcels)
-            .setValue('', {onlySelf: true});
-          this.formGroup.get('items')
-            .get(this.Cargo.Docs)
-            .setValue('', {onlySelf: true});
-          this.formGroup.get('items')
-            .get(this.Cargo.AutoParts)
-            .patchValue('', {onlySelf: true});
-          break;
-      }
-    }, 0);
+
+    // this.cdr.detectChanges();
+    // console.log('formGroup1111', );
   }
 
   confirm() {

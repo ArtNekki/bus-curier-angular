@@ -2,8 +2,7 @@
   <section class="form__section">
     <div class="form__fieldset form__fieldset--goods-type">
       <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
-      <app-radio *ngFor="let control of
-        formUtils.getGroupControls(formGroup.get('items')) | keyvalue: formUtils.originalOrder;"
+      <app-radio *ngFor="let control of items.controls | keyvalue: formUtils.originalOrder;"
                  [id]="control.key"
                  [name]="'cargo-type'"
                  (change)="setCargoType($event, control.key)"
