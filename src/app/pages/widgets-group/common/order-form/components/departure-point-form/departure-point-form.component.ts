@@ -60,6 +60,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   public formattedData = {};
 
   private citiesFromSub: Subscription;
+  private tabsSub: Subscription;
   private officesSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
@@ -121,7 +122,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   getTabs(id: string) {
-    this.calculatorService.getOffices()
+    this.tabsSub = this.calculatorService.getOffices()
       .pipe(
         map((offices: any) => {
           return offices.filter((office) => office.office_id === this.formattedData[id].office_id);
@@ -146,6 +147,10 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   ngOnDestroy(): void {
     if (this.citiesFromSub) {
       this.citiesFromSub.unsubscribe();
+    }
+
+    if (this.tabsSub) {
+      this.tabsSub.unsubscribe();
     }
   }
 }
