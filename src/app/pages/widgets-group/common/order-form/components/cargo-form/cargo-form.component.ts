@@ -43,6 +43,13 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
     Other: '21'
   };
 
+  public CargoName = {
+    1: 'Документы',
+    2: 'Посылки',
+    5: 'Автозапчасти',
+    21: 'Другое'
+  };
+
   public FormControlName = FormControlName;
   public FormFieldMeta = formFieldMeta;
 
@@ -67,25 +74,11 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
       items: new FormGroup({}, [Validators.required])
     });
 
-    console.log('currentItem', this.formGroup.get('activeItem').value);
-
     super.ngOnInit();
 
     if (this.types.length) {
       this.setTypes(this.types, false);
     }
-
-    // this.itemsSub = this.calcService.getTypes(1, 1)
-    //   .pipe(delay(500))
-    //   .subscribe((result: Array<CargoType>) => {
-    //     if (result.length) {
-    //
-    //
-    //     }
-    //
-    //     this.cdr.detectChanges();
-    //     this.formGroup.reset(this.formGroup.value);
-    // });
 
     this.formGroup.get('activeItem').valueChanges
       .pipe(delay(10))
@@ -93,46 +86,46 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
 
         switch (id) {
           case this.Cargo.Docs:
-            this.formGroup.get('items')
+            this.items
               .get(this.Cargo.Parcels)
               .patchValue('', {onlySelf: true});
-            this.formGroup.get('items')
+            this.items
               .get(this.Cargo.AutoParts)
               .patchValue('', {onlySelf: true});
-            this.formGroup.get('items')
+            this.items
               .get(this.Cargo.Other)
               .patchValue('', {onlySelf: true});
             break;
           case this.Cargo.Parcels:
-            this.formGroup.get('items')
+            this.items
               .get(this.Cargo.Docs)
               .setValue('', {onlySelf: true});
-            this.formGroup.get('items')
+            this.items
               .get(this.Cargo.AutoParts)
               .setValue('', {onlySelf: true});
-            this.formGroup.get('items')
+            this.items
               .get(this.Cargo.Other)
               .patchValue('', {onlySelf: true});
             break;
           case this.Cargo.AutoParts:
-            this.formGroup
-              .get('items').get(this.Cargo.Parcels)
+            this.items
+              .get(this.Cargo.Parcels)
               .setValue('', {onlySelf: true});
-            this.formGroup.get('items')
+            this.items
               .get(this.Cargo.Docs)
               .setValue('', {onlySelf: true});
-            this.formGroup.get('items')
+            this.items
               .get(this.Cargo.Other)
               .patchValue('', {onlySelf: true});
             break;
           case this.Cargo.Other:
-            this.formGroup
-              .get('items').get(this.Cargo.Parcels)
+            this.items
+              .get(this.Cargo.Parcels)
               .setValue('', {onlySelf: true});
-            this.formGroup.get('items')
+            this.items
               .get(this.Cargo.Docs)
               .setValue('', {onlySelf: true});
-            this.formGroup.get('items')
+            this.items
               .get(this.Cargo.AutoParts)
               .patchValue('', {onlySelf: true});
             break;
@@ -171,11 +164,6 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
       this.formGroup.get('activeItem').setValue(type);
 
     });
-
-    // this.formGroup.markAllAsTouched();
-    // this.formGroup.markAsTouched();
-    // this.onTouched();
-    // this.cdr.detectChanges();
   }
 
   setTypes(types, onChanges) {
@@ -188,14 +176,6 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
       this.cdr.detectChanges();
       this.formGroup.reset(this.formGroup.value);
     }
-  }
-
-  changeCargoType(type: string) {
-
-
-
-    // this.cdr.detectChanges();
-    // console.log('formGroup1111', );
   }
 
   confirm() {

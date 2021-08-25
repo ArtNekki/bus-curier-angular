@@ -9,7 +9,7 @@
                  [checked]="control.key === formGroup.get('activeItem').value"
                  [isInvalid]="control.value.invalid"
       >
-        {{control.key}}
+        {{CargoName[control.key]}}
       </app-radio>
     </div>
     <div formGroupName="items">
