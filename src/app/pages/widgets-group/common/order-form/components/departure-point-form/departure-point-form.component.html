@@ -23,7 +23,7 @@
       </ng-container>
     </app-select>
   </div>
-  <ng-container *ngIf="tabsReceived">
+  <ng-container *ngIf="tabsReceived && !dataLoading">
     <ng-container [formGroupName]="FormControlName.DispatchData">
       <div class="form__tabs">
         <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.DispatchData)) | keyvalue: formUtils.originalOrder">
@@ -84,4 +84,7 @@
       </app-datepicker>
     </div>
   </ng-container>
+  <div *ngIf="dataLoading" style="display: flex; justify-content: center">
+    <app-loader></app-loader>
+  </div>
 </div>

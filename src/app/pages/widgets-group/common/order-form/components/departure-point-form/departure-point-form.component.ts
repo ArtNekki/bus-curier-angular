@@ -13,7 +13,7 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
 import {Observable, PartialObserver, Subscription} from 'rxjs';
 import { filter } from 'rxjs/internal/operators/filter';
 import Office from '../../../../../../core/models/Office';
-import {concatAll, first, map, take} from 'rxjs/operators';
+import {concatAll, first, map, take, tap} from 'rxjs/operators';
 import Select from 'src/app/core/models/Select';
 import CityFrom from 'src/app/core/models/CityFrom';
 import City from '../../../../../../core/maps/City';
@@ -53,7 +53,9 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   public addressPoints = addressPoints;
   public Tab = {One: 'give', Two: 'pickup'};
   public currentTab = null;
+
   public tabsReceived = false;
+  public dataLoading = false;
 
   public cities = [];
   public offices = [];
@@ -118,6 +120,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     this.orderForm.cityFrom$.next(id);
     this.getTabs(id);
     this.getOffices(id);
+    this.dataLoading = true;
   }
 
   getTabs(id: string) {
@@ -146,6 +149,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
           });
 
           this.tabsReceived = true;
+          this.dataLoading = false;
         }
       });
   }
