@@ -31,6 +31,8 @@ export class SelectComponent implements  ControlValueAccessor, OnInit, OnChanges
   public fieldValue = null;
   public value: string;
 
+  public isDisabled = false;
+
   constructor(public deviceService: DeviceDetectorService, private modsService: ModsService) {}
 
   ngOnInit(): void {
@@ -76,6 +78,10 @@ export class SelectComponent implements  ControlValueAccessor, OnInit, OnChanges
   }
 
   openSelect() {
+    if (this.isDisabled) {
+      return;
+    }
+
     this.isSelectOpened = true;
   }
 
@@ -91,5 +97,9 @@ export class SelectComponent implements  ControlValueAccessor, OnInit, OnChanges
     if (selectItem) {
       this.fieldValue = selectItem.name;
     }
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
   }
 }

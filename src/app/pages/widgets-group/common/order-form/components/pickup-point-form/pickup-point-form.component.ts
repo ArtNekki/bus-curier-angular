@@ -10,6 +10,10 @@ import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import addressPoints from 'src/app/mock-data/address-points';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {map, switchMap} from 'rxjs/operators';
+import CityFrom from '../../../../../../core/models/CityFrom';
+import Select from '../../../../../../core/models/Select';
+import CityTo from '../../../../../../core/models/CityTo';
 
 @Component({
   selector: 'app-pickup-point-form',
@@ -41,17 +45,18 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   public Tab = {One: 'department', Two: 'courier'};
 
   public cities = [];
+  public cityData = {};
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
-              private calculatorService: CalculatorService,
+              private calcService: CalculatorService,
               orderForm: OrderFormService) {
     super(orderForm);
   }
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.Location]: new FormControl('', [Validators.required]),
+      [FormControlName.Location]: new FormControl({value: '', disabled: true}, [Validators.required]),
       [FormControlName.ReceiveData]: new FormGroup({
         [FormControlName.Active]: new FormControl('', [Validators.required]),
         [FormControlName.Department]: new FormControl('', [Validators.required]),
@@ -59,11 +64,32 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       })
     });
 
-    this.calculatorService.getDistricts(1).subscribe((result: Array<{id: string, name: string}>) => {
-      this.cities = result.map((el: {id: string, name: string}) => {
-        return {value: el.id, name: el.name};
+    this.orderForm.cityFrom$
+      .pipe(
+        switchMap((id: string) => {
+          return this.calcService.getCityTo(id, 0);
+        }),
+        map<CityTo, Select>((cities: any) => {
+          return cities
+            // .filter((city) => city.site_id !== Department.Aleutskaya && city.site_id !== Department.Gogolya)
+            .map((city) => {
+              this.cityData[city.id] = city;
+              return {value: city.id, name: city.name};
+            });
+        })
+      )
+      .subscribe((cities: any) => {
+        if (cities.length) {
+          this.cities = cities;
+          this.formGroup.get(FormControlName.Location).enable();
+        }
       });
-    });
+
+    // this.calculatorService.getDistricts(1).subscribe((result: Array<{id: string, name: string}>) => {
+    //   this.cities = result.map((el: {id: string, name: string}) => {
+    //     return {value: el.id, name: el.name};
+    //   });
+    // });
   }
 
   changeType(type: string) {

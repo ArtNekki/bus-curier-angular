@@ -1,5 +1,6 @@
 <div *ngIf="deviceService.isMobile() || deviceService.isTablet()" class="select" [class.select--invalid]="isInvalid">
-  <select #select [name]="id" [id]="id" class="select__field" [ngModel]="value" (ngModelChange)="changeValue($event)">
+  <select #select [name]="id" [id]="id"
+          class="select__field" [ngModel]="value" (ngModelChange)="changeValue($event)" [disabled]="isDisabled">
     <option *ngFor="let item of items" [value]="item.value">{{ item.name }}</option>
   </select>
 <!--  <div *ngIf="isInvalid" class="select__errors">-->
@@ -10,8 +11,8 @@
 <!--</ng-select>-->
 
 <div *ngIf="deviceService.isDesktop()" class="select" [class.select--invalid]="isInvalid" [class.select--opened]="isSelectOpened">
- <ng-container *ngIf="items.length; else loader">
-   <div class="select__field" (click)="openSelect()">
+ <ng-container *ngIf="items.length || isDisabled; else loader">
+   <div class="select__field" (click)="openSelect()" [class.select__field--disabled]="isDisabled">
      <span>{{fieldValue}}</span>
      <i class="fa fa-chevron-down" data-type="arrow"></i>
    </div>

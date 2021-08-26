@@ -53,6 +53,13 @@
         border-left-color: $red-color;
       }
     }
+
+    &:disabled,
+    &--disabled {
+      opacity: 0.3;
+      background-color: $gray-light-color;
+      cursor: not-allowed;
+    }
   }
 
   &__field span {
