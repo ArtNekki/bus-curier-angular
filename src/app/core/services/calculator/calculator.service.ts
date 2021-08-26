@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {CalculatorEndpointService} from './calculator-endpoint.service';
 import {Observable} from 'rxjs';
 import CityFrom from '../../models/CityFrom';
+import Office from '../../models/Office';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class CalculatorService {
     return this.endpoint.getServices(id);
   }
 
-  getOffices() {
+  getOffices(): Observable<Office> {
     return this.endpoint.getOffices();
   }
 

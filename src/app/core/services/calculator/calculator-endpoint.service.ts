@@ -3,6 +3,7 @@ import {EndpointFactory} from '../endpoint-factory/endpoint-factory.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import CityFrom from '../../models/CityFrom';
+import Office from '../../models/Office';
 
 @Injectable({
   providedIn: 'root'
@@ -42,8 +43,8 @@ export class CalculatorEndpointService extends EndpointFactory {
       () => this.getServices(id));
   }
 
-  getOffices<T>(): Observable<T> {
-    return this.execute(this.http.get<T>(`${this.url}/getoffices`, this.getRequestHeaders()),
+  getOffices(): Observable<Office> {
+    return this.execute(this.http.get<Office>(`${this.url}/getoffices`, this.getRequestHeaders()),
       () => this.getOffices());
   }
 
