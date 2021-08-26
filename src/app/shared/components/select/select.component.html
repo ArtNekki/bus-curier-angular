@@ -10,17 +10,21 @@
 <!--</ng-select>-->
 
 <div *ngIf="deviceService.isDesktop()" class="select" [class.select--invalid]="isInvalid" [class.select--opened]="isSelectOpened">
-  <div class="select__field" (click)="openSelect()">
-    <span>{{fieldValue}}</span>
-    <i class="fa fa-chevron-down" data-type="arrow"></i>
-  </div>
-  <div *ngIf="isSelectOpened" class="select__dropdown">
-    <ul class="select__list">
-      <li *ngFor="let item of items" class="select__item" [attr.data-value]="item.value" (click)="closeSelect();changeValue(item.value)">{{ item.name }}</li>
-    </ul>
-  </div>
-  <div *ngIf="isSelectOpened" class="select__backdrop" (click)="closeSelect()"></div>
-<!--  <div *ngIf="isInvalid" class="select__errors">-->
-<!--    <ng-content select=".errors"></ng-content>-->
-<!--  </div>-->
+ <ng-container *ngIf="items.length; else loader">
+   <div class="select__field" (click)="openSelect()">
+     <span>{{fieldValue}}</span>
+     <i class="fa fa-chevron-down" data-type="arrow"></i>
+   </div>
+   <div *ngIf="isSelectOpened" class="select__dropdown">
+     <ul class="select__list">
+       <li *ngFor="let item of items" class="select__item" [attr.data-value]="item.value" (click)="closeSelect();changeValue(item.value)">{{ item.name }}</li>
+     </ul>
+   </div>
+   <div *ngIf="isSelectOpened" class="select__backdrop" (click)="closeSelect()"></div>
+ </ng-container>
+ <ng-template #loader>
+   <div class="select__loader">
+     <app-loader></app-loader>
+   </div>
+ </ng-template>
 </div>

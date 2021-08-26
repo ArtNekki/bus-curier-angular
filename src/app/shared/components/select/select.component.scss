@@ -122,4 +122,10 @@
       color: $gray-dark-color;
     }
   }
+
+  &__loader {
+    display: flex;
+    justify-content: center;
+    background-color: lighten($gray-light-color, 7%);
+  }
 }
