@@ -22,9 +22,18 @@
   </div>
   <ng-container>
     <ng-container [formGroupName]="FormControlName.ReceiveData">
+      <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.ReceiveData)) | keyvalue: formUtils.originalOrder">
+        <ng-container *ngIf="control.key === 'need-to-meet'">
+          <app-checkbox [formControlName]="control.key">
+            <div class="text">
+              {{control.key}}
+            </div>
+          </app-checkbox>
+        </ng-container>
+      </ng-container>
       <div class="form__tabs">
         <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.ReceiveData)) | keyvalue: formUtils.originalOrder">
-          <label *ngIf="control.key !== FormControlName.Active" class="form__tab">
+          <label *ngIf="control.key !== FormControlName.Active && control.key !== 'need-to-meet'" class="form__tab">
             <input type="radio"
                    [checked]="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).value === control.key"
                    [name]="FormControlName.Active"
@@ -55,9 +64,6 @@
                 </small>
               </ng-container>
             </app-select>
-          </ng-container>
-          <ng-container *ngIf="control.key === 'need-to-meet'">
-            <p>Встретить с автобуса</p>
           </ng-container>
           <ng-container *ngIf="control.key === 'delivery'">
             <app-courier-form [formControlName]="control.key"></app-courier-form>
