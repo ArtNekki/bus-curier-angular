@@ -188,8 +188,12 @@
   }
 
   &__fieldset--department {
-    grid-area: department;
-    grid-template-columns: repeat(auto-fill, minmax(230px, max-content));
+    margin-top: 15px;
+    display: block;
+
+    & > * {
+      margin-bottom: 15px !important;
+    }
   }
 
   &__fieldset--address {

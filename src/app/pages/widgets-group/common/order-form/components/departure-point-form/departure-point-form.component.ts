@@ -148,6 +148,8 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
             (this.formGroup.get(FormControlName.DispatchData) as FormGroup).addControl(name, new FormControl(''));
           });
 
+          this.formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).setValue(tabs[0]);
+
           this.tabsReceived = true;
           this.dataLoading = false;
         }

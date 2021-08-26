@@ -1,4 +1,4 @@
-<div class="" [formGroup]="formGroup">
+<div class="form__fieldset form__fieldset--department" [formGroup]="formGroup">
 <!--  form__fieldset form__fieldset&#45;&#45;row-gap-lg-->
   <div class="form__field">
     <label *ngIf="!noLabel" for="departure-location" class="form__label"
@@ -23,7 +23,7 @@
       </ng-container>
     </app-select>
   </div>
-  <ng-container *ngIf="tabsReceived && !dataLoading">
+  <ng-container *ngIf="tabsReceived && offices.length && !dataLoading">
     <ng-container [formGroupName]="FormControlName.DispatchData">
       <div class="form__tabs">
         <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.DispatchData)) | keyvalue: formUtils.originalOrder">

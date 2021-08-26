@@ -1,5 +1,4 @@
-<div class="" [formGroup]="formGroup">
-<!--  form__fieldset form__fieldset&#45;&#45;row-gap-lg-->
+<div class="form__fieldset form__fieldset--department" [formGroup]="formGroup">
   <div class="form__field form__field--location">
     <label *ngIf="!noLabel" for="departure-location" class="form__label"
            [class.form__label--invalid]="formGroup.get(FormControlName.Location).invalid">
