@@ -118,6 +118,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
   setCity(id: string) {
     this.getOffices(id);
+    this.createNeedToMeetControl(id);
   }
 
   getOffices(id: string) {
@@ -140,6 +141,19 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
         this.offices = offices;
       });
+  }
+
+  createNeedToMeetControl(id) {
+    if (this.cityData[id].need_to_meet !== '0') {
+      (this.formGroup.get(FormControlName.ReceiveData) as FormGroup).addControl('need-to-meet', new FormControl(''));
+
+      const active = this.formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active);
+
+      if (!active.value) {
+        active.setValue('need-to-meet');
+      }
+
+    }
   }
 
   ngOnDestroy(): void {
