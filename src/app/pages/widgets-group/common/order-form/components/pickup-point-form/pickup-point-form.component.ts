@@ -128,7 +128,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
           return offices
             .filter((office) => office.office_id === this.cityData[id].office_id)
             .map((office) => {
-              return {value: office.id, name: office.address};
+              return {value: office.id, name: office.address, delivery: office.delivery};
             });
         })
 
@@ -137,6 +137,10 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
         if (offices.length) {
           (this.formGroup.get(FormControlName.ReceiveData) as FormGroup).addControl('get', new FormControl(''));
           this.formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).setValue('get');
+
+          if (+offices[0].delivery) {
+            (this.formGroup.get(FormControlName.ReceiveData) as FormGroup).addControl('delivery', new FormControl(''));
+          }
         }
 
         this.offices = offices;
