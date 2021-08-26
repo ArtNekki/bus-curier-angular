@@ -47,7 +47,8 @@
               <sup *ngIf="control.value.invalid">*</sup>
             </label>
             <app-select
-              [items]="addressPoints"
+              *ngIf="offices.length"
+              [items]="offices"
               [formControlName]="control.key"
               [isInvalid]="control.value.invalid && control.value.touched"
             >

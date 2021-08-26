@@ -57,12 +57,11 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
   public cities = [];
   public offices = [];
-  public office: any;
   public formattedData = {};
 
-  private citiesFromSub: Subscription;
-  private tabsSub: Subscription;
+  private citiesSub: Subscription;
   private officesSub: Subscription;
+  private tabsSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -76,15 +75,13 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       [FormControlName.Location]: new FormControl('', [Validators.required]),
       [FormControlName.DispatchData]: new FormGroup({
         [FormControlName.Active]: new FormControl('', [Validators.required]),
-        // [this.Tab.One]: new FormControl('', [Validators.required]),
-        // [this.Tab.Two]: new FormControl('')
       }, [Validators.required]),
       [FormControlName.Date]: new FormControl('', [Validators.required]),
     });
 
     this.currentTab = this.Tab.One;
 
-    this.citiesFromSub = this.calculatorService.getCitiesFrom()
+    this.citiesSub = this.calculatorService.getCitiesFrom()
       .pipe(
         map<CityFrom, Select>((cities: any) => {
           return cities
@@ -120,6 +117,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   setCity(id: string) {
     this.orderForm.cityFrom$.next(id);
     this.getTabs(id);
+    this.getOffices(id);
   }
 
   getTabs(id: string) {
@@ -149,16 +147,32 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
           this.tabsReceived = true;
         }
+      });
+  }
 
-
-
-        console.log('asdasdasd', (this.formGroup.get(FormControlName.DispatchData) as FormGroup));
+  getOffices(id: string) {
+    this.officesSub = this.calculatorService.getOffices()
+      .pipe(
+        map((offices: any) => {
+          return offices
+                  .filter((office) => office.office_id === this.formattedData[id].office_id)
+                  .map((office) => {
+                    return {value: office.id, name: office.address};
+                  });
+        })
+      )
+      .subscribe((offices: any) => {
+        this.offices = offices;
       });
   }
 
   ngOnDestroy(): void {
-    if (this.citiesFromSub) {
-      this.citiesFromSub.unsubscribe();
+    if (this.citiesSub) {
+      this.citiesSub.unsubscribe();
+    }
+
+    if (this.officesSub) {
+      this.officesSub.unsubscribe();
     }
 
     if (this.tabsSub) {
