@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
@@ -10,10 +10,11 @@ import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import addressPoints from 'src/app/mock-data/address-points';
 import fadeIn from '../../../../../../core/animations/fadeIn';
-import {map, switchMap} from 'rxjs/operators';
+import {concatAll, first, map, switchMap} from 'rxjs/operators';
 import CityFrom from '../../../../../../core/models/CityFrom';
 import Select from '../../../../../../core/models/Select';
 import CityTo from '../../../../../../core/models/CityTo';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-pickup-point-form',
@@ -33,7 +34,7 @@ import CityTo from '../../../../../../core/models/CityTo';
     }
   ]
 })
-export class PickupPointFormComponent extends SubFormComponent implements OnInit {
+export class PickupPointFormComponent extends SubFormComponent implements OnInit, OnDestroy {
   @Input() noLabel: boolean;
 
   public FormFieldMeta = formFieldMeta;
@@ -44,8 +45,16 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   public addressPoints = addressPoints;
   public Tab = {One: 'department', Two: 'courier'};
 
+  public tabsReceived = false;
+  public dataLoading = false;
+
   public cities = [];
+  public offices = [];
   public cityData = {};
+
+  private citiesSub: Subscription;
+  private officesSub: Subscription;
+  private tabsSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -59,12 +68,12 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       [FormControlName.Location]: new FormControl({value: '', disabled: true}, [Validators.required]),
       [FormControlName.ReceiveData]: new FormGroup({
         [FormControlName.Active]: new FormControl('', [Validators.required]),
-        [FormControlName.Department]: new FormControl('', [Validators.required]),
-        [FormControlName.Courier]: new FormControl('')
+        // [FormControlName.Department]: new FormControl('', [Validators.required]),
+        // [FormControlName.Courier]: new FormControl('')
       })
     });
 
-    this.orderForm.cityFrom$
+    this.citiesSub = this.orderForm.cityFrom$
       .pipe(
         switchMap((id: string) => {
           return this.calcService.getCityTo(id, 0);
@@ -104,6 +113,46 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
         this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.One).clearValidators();
         this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.One).setValue('');
         break;
+    }
+  }
+
+  setCity(id: string) {
+    this.getOffices(id);
+  }
+
+  getOffices(id: string) {
+    this.tabsSub = this.calcService.getOffices()
+      .pipe(
+        map((offices: any) => {
+          return offices
+            .filter((office) => office.office_id === this.cityData[id].office_id)
+            .map((office) => {
+              return {value: office.id, name: office.address};
+            });
+        })
+
+      )
+      .subscribe((offices: any) => {
+        if (offices.length) {
+          (this.formGroup.get(FormControlName.ReceiveData) as FormGroup).addControl('get', new FormControl(''));
+          this.formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).setValue('get');
+        }
+
+        this.offices = offices;
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.citiesSub) {
+      this.citiesSub.unsubscribe();
+    }
+
+    if (this.officesSub) {
+      this.officesSub.unsubscribe();
+    }
+
+    if (this.tabsSub) {
+      this.tabsSub.unsubscribe();
     }
   }
 }
