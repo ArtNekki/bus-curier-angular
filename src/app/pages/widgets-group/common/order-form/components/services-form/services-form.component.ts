@@ -57,10 +57,7 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
       items: new FormArray([])
     });
 
-    this.orderForm.cityFrom$.pipe(
-      switchMap((id: string) => {
-        return this.calcService.getServices(id);
-      }),
+    this.calcService.getServices('1').pipe(
       tap(() => {
         this.isLoading = true;
         this.items.clear();

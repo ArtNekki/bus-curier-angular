@@ -59,10 +59,7 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
       [FormControlName.Other]: new FormArray([])
     });
 
-    this.orderForm.cityFrom$.pipe(
-      switchMap((id: string) => {
-        return this.calcService.getServices(id);
-      }),
+    this.calcService.getServices('1').pipe(
       tap(() => {
         this.boxes.clear();
         this.safePacks.clear();

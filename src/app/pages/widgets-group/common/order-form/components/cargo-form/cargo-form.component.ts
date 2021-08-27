@@ -71,7 +71,9 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       activeItem: new FormControl(this.Cargo.Docs),
-      items: new FormGroup({}, [Validators.required])
+      items: new FormGroup({}, [Validators.required]),
+      [FormControlName.Packaging]: new FormControl(''),
+      [FormControlName.Services]: new FormControl('')
     });
 
     super.ngOnInit();

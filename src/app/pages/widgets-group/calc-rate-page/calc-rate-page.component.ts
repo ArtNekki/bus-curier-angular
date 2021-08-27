@@ -26,9 +26,7 @@ export class CalcRatePageComponent implements OnInit, DoCheck {
     this.form = new FormGroup({
       [FormControlName.DeparturePoint]: new FormControl('', [Validators.required]),
       [FormControlName.PickupPoint]: new FormControl({value: '', disabled: true}, [Validators.required]),
-      ['cargo-group']: new FormControl('', [Validators.required]),
-      [FormControlName.Packaging]: new FormControl(''),
-      [FormControlName.Services]: new FormControl('')
+      ['cargo-group']: new FormControl('', [Validators.required])
     });
 
     this.orderForm.cityFrom$.pipe(
