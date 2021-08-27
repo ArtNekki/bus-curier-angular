@@ -1,7 +1,7 @@
 import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
-import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
@@ -102,18 +102,16 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   }
 
   changeType(type: string) {
-    switch (type) {
-      case this.Tab.One:
-        this.formGroup.get(FormControlName.Options).get(this.Tab.One).setValidators([Validators.required]);
-        this.formGroup.get(FormControlName.Options).get(this.Tab.Two).clearValidators();
-        this.formGroup.get(FormControlName.Options).get(this.Tab.Two).setValue('');
-        break;
-      case this.Tab.Two:
-        this.formGroup.get(FormControlName.Options).get(this.Tab.Two).setValidators([Validators.required]);
-        this.formGroup.get(FormControlName.Options).get(this.Tab.One).clearValidators();
-        this.formGroup.get(FormControlName.Options).get(this.Tab.One).setValue('');
-        break;
-    }
+
+    Object.entries((this.formGroup.get(FormControlName.Options) as FormGroup).controls)
+      .forEach(([key, control]: [string, AbstractControl]) => {
+        if (key !== FormControlName.Active) {
+          control.clearValidators();
+          control.setValue('');
+        }
+    });
+
+    this.formGroup.get(FormControlName.Options).get(type).setValidators([Validators.required]);
   }
 
   setCity(id: string) {
