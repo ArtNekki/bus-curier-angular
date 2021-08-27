@@ -21,8 +21,8 @@
     </app-select>
   </div>
   <ng-container>
-    <ng-container [formGroupName]="FormControlName.ReceiveData">
-      <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.ReceiveData)) | keyvalue: formUtils.originalOrder">
+    <ng-container [formGroupName]="FormControlName.Options">
+      <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
         <ng-container *ngIf="control.key === 'need-to-meet'">
           <app-checkbox [formControlName]="control.key" [@fadeIn]="">
             <div class="text">
@@ -32,10 +32,10 @@
         </ng-container>
       </ng-container>
       <div class="form__tabs" [@fadeIn]="">
-        <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.ReceiveData)) | keyvalue: formUtils.originalOrder">
+        <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
           <label *ngIf="control.key !== FormControlName.Active && control.key !== 'need-to-meet'" class="form__tab">
             <input type="radio"
-                   [checked]="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).value === control.key"
+                   [checked]="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === control.key"
                    [name]="FormControlName.Active"
                    [value]="control.key"
                    (change)="changeType(control.key)"
@@ -44,8 +44,8 @@
           </label>
         </ng-container>
       </div>
-      <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.ReceiveData)) | keyvalue: formUtils.originalOrder">
-        <div class="form__panel" *ngIf="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).value === control.key" [@fadeIn]="">
+      <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
+        <div class="form__panel" *ngIf="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === control.key" [@fadeIn]="">
           <ng-container *ngIf="control.key === 'get'">
             <label class="form__label form__label--full"
                    [class.form__label--invalid]="control.value.invalid">
@@ -76,19 +76,19 @@
 
 
 
-<!--  <ng-container [formGroupName]="FormControlName.ReceiveData">-->
-<!--       <span *ngIf="formGroup.get(FormControlName.ReceiveData)-->
+<!--  <ng-container [formGroupName]="FormControlName.Options">-->
+<!--       <span *ngIf="formGroup.get(FormControlName.Options)-->
 <!--            .get(FormControlName.Active).invalid" class="form__label form__label&#45;&#45;invalid">-->
 <!--               Выберите вариант-->
-<!--        <sup *ngIf="formGroup.get(FormControlName.ReceiveData)-->
+<!--        <sup *ngIf="formGroup.get(FormControlName.Options)-->
 <!--            .get(FormControlName.Active).errors-->
-<!--        && formGroup.get(FormControlName.ReceiveData)-->
+<!--        && formGroup.get(FormControlName.Options)-->
 <!--            .get(FormControlName.Active).hasError('required')">*</sup>-->
 <!--      </span>-->
 <!--    <div class="form__tabs">-->
 <!--      <label class="form__tab">-->
 <!--        <input type="radio"-->
-<!--               [checked]="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).value === Tab.One"-->
+<!--               [checked]="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === Tab.One"-->
 <!--               [name]="FormControlName.Active"-->
 <!--               [value]="Tab.One"-->
 <!--               (change)="changeType(Tab.One)"-->
@@ -97,7 +97,7 @@
 <!--      </label>-->
 <!--      <label class="form__tab">-->
 <!--        <input type="radio"-->
-<!--               [checked]="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).value === Tab.Two"-->
+<!--               [checked]="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === Tab.Two"-->
 <!--               [name]="FormControlName.Active"-->
 <!--               [value]="Tab.Two"-->
 <!--               (change)="changeType(Tab.Two)"-->
@@ -105,29 +105,29 @@
 <!--        <div>Вызвать курьера</div>-->
 <!--      </label>-->
 <!--    </div>-->
-<!--    <div *ngIf="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).value === Tab.One"-->
+<!--    <div *ngIf="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === Tab.One"-->
 <!--         class="form__panel" [@fadeIn]="">-->
 <!--      <div class="form__field">-->
 <!--        <label class="form__label form__label&#45;&#45;full"-->
-<!--               [class.form__label&#45;&#45;invalid]="formGroup.get(FormControlName.ReceiveData)-->
+<!--               [class.form__label&#45;&#45;invalid]="formGroup.get(FormControlName.Options)-->
 <!--                 .get(FormControlName.Department).invalid">-->
 <!--          Выберите отделение:-->
-<!--          <sup *ngIf="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Department).invalid">*</sup>-->
+<!--          <sup *ngIf="formGroup.get(FormControlName.Options).get(FormControlName.Department).invalid">*</sup>-->
 <!--        </label>-->
 <!--        <app-select-->
 <!--          [items]="addressPoints"-->
 <!--          [formControlName]="FormControlName.Department"-->
-<!--          [isInvalid]="(formGroup.get(FormControlName.ReceiveData).get(FormControlName.Department).invalid-->
-<!--          && formGroup.get(FormControlName.ReceiveData).get(FormControlName.Department).touched) && 'invalid'">-->
+<!--          [isInvalid]="(formGroup.get(FormControlName.Options).get(FormControlName.Department).invalid-->
+<!--          && formGroup.get(FormControlName.Options).get(FormControlName.Department).touched) && 'invalid'">-->
 <!--          <ng-container class="errors">-->
-<!--            <small *ngIf="utils.getObjectKey(formGroup.get(FormControlName.ReceiveData).get(FormControlName.Department).errors).length">-->
-<!--              {{FormFieldError[utils.getObjectKey(formGroup.get(FormControlName.ReceiveData).get(FormControlName.Department).errors)[0]]}}-->
+<!--            <small *ngIf="utils.getObjectKey(formGroup.get(FormControlName.Options).get(FormControlName.Department).errors).length">-->
+<!--              {{FormFieldError[utils.getObjectKey(formGroup.get(FormControlName.Options).get(FormControlName.Department).errors)[0]]}}-->
 <!--            </small>-->
 <!--          </ng-container>-->
 <!--        </app-select>-->
 <!--      </div>-->
 <!--    </div>-->
-<!--    <div *ngIf="formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).value === Tab.Two"-->
+<!--    <div *ngIf="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === Tab.Two"-->
 <!--         class="form__panel" [@fadeIn]="">-->
 <!--      <app-courier-form [formControlName]="FormControlName.Courier"></app-courier-form>-->
 <!--    </div>-->

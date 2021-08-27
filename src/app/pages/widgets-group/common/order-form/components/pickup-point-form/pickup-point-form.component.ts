@@ -67,7 +67,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       [FormControlName.Location]: new FormControl({value: '', disabled: true}, [Validators.required]),
-      [FormControlName.ReceiveData]: new FormGroup({
+      [FormControlName.Options]: new FormGroup({
         [FormControlName.Active]: new FormControl('', [Validators.required]),
         // [FormControlName.Department]: new FormControl('', [Validators.required]),
         // [FormControlName.Courier]: new FormControl('')
@@ -104,14 +104,14 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   changeType(type: string) {
     switch (type) {
       case this.Tab.One:
-        this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.One).setValidators([Validators.required]);
-        this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.Two).clearValidators();
-        this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.Two).setValue('');
+        this.formGroup.get(FormControlName.Options).get(this.Tab.One).setValidators([Validators.required]);
+        this.formGroup.get(FormControlName.Options).get(this.Tab.Two).clearValidators();
+        this.formGroup.get(FormControlName.Options).get(this.Tab.Two).setValue('');
         break;
       case this.Tab.Two:
-        this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.Two).setValidators([Validators.required]);
-        this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.One).clearValidators();
-        this.formGroup.get(FormControlName.ReceiveData).get(this.Tab.One).setValue('');
+        this.formGroup.get(FormControlName.Options).get(this.Tab.Two).setValidators([Validators.required]);
+        this.formGroup.get(FormControlName.Options).get(this.Tab.One).clearValidators();
+        this.formGroup.get(FormControlName.Options).get(this.Tab.One).setValue('');
         break;
     }
   }
@@ -135,11 +135,11 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       )
       .subscribe((offices: any) => {
         if (offices.length) {
-          (this.formGroup.get(FormControlName.ReceiveData) as FormGroup).addControl('get', new FormControl('', [Validators.required]));
-          this.formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).setValue('get');
+          (this.formGroup.get(FormControlName.Options) as FormGroup).addControl('get', new FormControl('', [Validators.required]));
+          this.formGroup.get(FormControlName.Options).get(FormControlName.Active).setValue('get');
 
           if (+offices[0].delivery) {
-            (this.formGroup.get(FormControlName.ReceiveData) as FormGroup).addControl('delivery', new FormControl(''));
+            (this.formGroup.get(FormControlName.Options) as FormGroup).addControl('delivery', new FormControl(''));
           }
         }
 
@@ -149,9 +149,9 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
   createNeedToMeetControl(id) {
     if (this.cityData[id].need_to_meet !== '0') {
-      (this.formGroup.get(FormControlName.ReceiveData) as FormGroup).addControl('need-to-meet', new FormControl(''));
+      (this.formGroup.get(FormControlName.Options) as FormGroup).addControl('need-to-meet', new FormControl(''));
 
-      const active = this.formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active);
+      const active = this.formGroup.get(FormControlName.Options).get(FormControlName.Active);
 
       if (!active.value) {
         active.setValue('need-to-meet');
