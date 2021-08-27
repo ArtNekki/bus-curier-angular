@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import cities from 'src/app/mock-data/cities';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import FormControlName from '../../../core/maps/FormControlName';
@@ -12,7 +12,7 @@ import {CalculatorService} from '../../../core/services/calculator/calculator.se
   templateUrl: './calc-rate-page.component.html',
   styleUrls: ['./calc-rate-page.component.scss']
 })
-export class CalcRatePageComponent implements OnInit {
+export class CalcRatePageComponent implements OnInit, DoCheck {
   public FormControlName = FormControlName;
 
   public form: FormGroup;
@@ -25,7 +25,7 @@ export class CalcRatePageComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup({
       [FormControlName.DeparturePoint]: new FormControl('', [Validators.required]),
-      [FormControlName.PickupPoint]: new FormControl('', [Validators.required]),
+      [FormControlName.PickupPoint]: new FormControl({value: '', disabled: true}, [Validators.required]),
       ['cargo-group']: new FormControl('', [Validators.required]),
       [FormControlName.Packaging]: new FormControl(''),
       [FormControlName.Services]: new FormControl('')
@@ -45,5 +45,13 @@ export class CalcRatePageComponent implements OnInit {
 
   onSubmit() {
     console.log('quick order', this.form.value);
+  }
+
+  ngDoCheck(): void {
+    if (this.form.get(FormControlName.DeparturePoint).invalid) {
+      this.form.get(FormControlName.PickupPoint).disable();
+    } else {
+      this.form.get(FormControlName.PickupPoint).enable();
+    }
   }
 }

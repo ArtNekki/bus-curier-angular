@@ -45,6 +45,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   public addressPoints = addressPoints;
   public Tab = {One: 'department', Two: 'courier'};
 
+  public isFormGroupDisabled = false;
   public tabsReceived = false;
   public dataLoading = false;
 
@@ -90,7 +91,6 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       .subscribe((cities: any) => {
         if (cities.length) {
           this.cities = cities;
-          this.formGroup.get(FormControlName.Location).enable();
         }
       });
 
@@ -157,6 +157,16 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
         active.setValue('need-to-meet');
       }
 
+    }
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.isFormGroupDisabled = isDisabled;
+
+    if (isDisabled) {
+      this.formGroup.get(FormControlName.Location).disable();
+    } else {
+      this.formGroup.get(FormControlName.Location).enable();
     }
   }
 
