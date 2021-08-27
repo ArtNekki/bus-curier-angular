@@ -135,7 +135,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       )
       .subscribe((offices: any) => {
         if (offices.length) {
-          (this.formGroup.get(FormControlName.ReceiveData) as FormGroup).addControl('get', new FormControl(''));
+          (this.formGroup.get(FormControlName.ReceiveData) as FormGroup).addControl('get', new FormControl('', [Validators.required]));
           this.formGroup.get(FormControlName.ReceiveData).get(FormControlName.Active).setValue('get');
 
           if (+offices[0].delivery) {
