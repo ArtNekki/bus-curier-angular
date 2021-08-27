@@ -24,14 +24,14 @@
     <ng-container [formGroupName]="FormControlName.ReceiveData">
       <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.ReceiveData)) | keyvalue: formUtils.originalOrder">
         <ng-container *ngIf="control.key === 'need-to-meet'">
-          <app-checkbox [formControlName]="control.key">
+          <app-checkbox [formControlName]="control.key" [@fadeIn]="">
             <div class="text">
               {{control.key}}
             </div>
           </app-checkbox>
         </ng-container>
       </ng-container>
-      <div class="form__tabs">
+      <div class="form__tabs" [@fadeIn]="">
         <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.ReceiveData)) | keyvalue: formUtils.originalOrder">
           <label *ngIf="control.key !== FormControlName.Active && control.key !== 'need-to-meet'" class="form__tab">
             <input type="radio"

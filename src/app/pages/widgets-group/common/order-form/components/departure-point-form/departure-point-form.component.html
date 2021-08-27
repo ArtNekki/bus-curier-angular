@@ -25,7 +25,7 @@
   </div>
   <ng-container *ngIf="tabsReceived && offices.length && !dataLoading">
     <ng-container [formGroupName]="FormControlName.Options">
-      <div class="form__tabs">
+      <div class="form__tabs" [@fadeIn]="">
         <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
           <label *ngIf="control.key !== FormControlName.Active" class="form__tab">
             <input type="radio"
@@ -65,7 +65,7 @@
         </div>
       </ng-container>
     </ng-container>
-    <div class="form__field">
+    <div class="form__field" [@fadeIn]="">
       <label for="departure-date" class="form__label"
              [class.form__label--invalid]="formGroup.get(FormControlName.Date).invalid"
       >Дата отправки
