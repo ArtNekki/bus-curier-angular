@@ -59,7 +59,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
   public cities = [];
   public offices = [];
-  public formattedData = {};
+  public cityData = {};
 
   private citiesSub: Subscription;
   private officesSub: Subscription;
@@ -75,7 +75,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       [FormControlName.Location]: new FormControl('', [Validators.required]),
-      [FormControlName.DispatchData]: new FormGroup({
+      [FormControlName.Options]: new FormGroup({
         [FormControlName.Active]: new FormControl('', [Validators.required]),
       }, [Validators.required]),
       [FormControlName.Date]: new FormControl('', [Validators.required]),
@@ -89,7 +89,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
           return cities
             .filter((city) => city.site_id !== Department.Aleutskaya && city.site_id !== Department.Gogolya)
             .map((city) => {
-              this.formattedData[city.id] = city;
+              this.cityData[city.id] = city;
               return {value: city.id, name: city.name};
             });
         })
@@ -104,14 +104,14 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   changeType(type: string) {
     switch (type) {
       case this.Tab.One:
-        this.formGroup.get(FormControlName.DispatchData).get(this.Tab.One).setValidators([Validators.required]);
-        this.formGroup.get(FormControlName.DispatchData).get(this.Tab.Two).clearValidators();
-        this.formGroup.get(FormControlName.DispatchData).get(this.Tab.Two).setValue('');
+        this.formGroup.get(FormControlName.Options).get(this.Tab.One).setValidators([Validators.required]);
+        this.formGroup.get(FormControlName.Options).get(this.Tab.Two).clearValidators();
+        this.formGroup.get(FormControlName.Options).get(this.Tab.Two).setValue('');
         break;
       case this.Tab.Two:
-        this.formGroup.get(FormControlName.DispatchData).get(this.Tab.Two).setValidators([Validators.required]);
-        this.formGroup.get(FormControlName.DispatchData).get(this.Tab.One).clearValidators();
-        this.formGroup.get(FormControlName.DispatchData).get(this.Tab.One).setValue('');
+        this.formGroup.get(FormControlName.Options).get(this.Tab.Two).setValidators([Validators.required]);
+        this.formGroup.get(FormControlName.Options).get(this.Tab.One).clearValidators();
+        this.formGroup.get(FormControlName.Options).get(this.Tab.One).setValue('');
         break;
     }
   }
@@ -127,7 +127,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     this.tabsSub = this.calculatorService.getOffices()
       .pipe(
         map((offices: any) => {
-          return offices.filter((office) => office.office_id === this.formattedData[id].office_id);
+          return offices.filter((office) => office.office_id === this.cityData[id].office_id);
         }),
         concatAll(),
         first(),
@@ -145,10 +145,10 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         if (tabs.length) {
 
           tabs.forEach((name: string) => {
-            (this.formGroup.get(FormControlName.DispatchData) as FormGroup).addControl(name, new FormControl(''));
+            (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(name, new FormControl(''));
           });
 
-          this.formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).setValue(tabs[0]);
+          this.formGroup.get(FormControlName.Options).get(FormControlName.Active).setValue(tabs[0]);
 
           this.tabsReceived = true;
           this.dataLoading = false;
@@ -161,7 +161,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       .pipe(
         map((offices: any) => {
           return offices
-                  .filter((office) => office.office_id === this.formattedData[id].office_id)
+                  .filter((office) => office.office_id === this.cityData[id].office_id)
                   .map((office) => {
                     return {value: office.id, name: office.address};
                   });

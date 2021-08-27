@@ -81,5 +81,6 @@ export default {
   Other: 'other',
   Box: 'box',
   PlasticPack: 'plastic-pack',
-  Skin: 'skin'
+  Skin: 'skin',
+  Options: 'options'
 };

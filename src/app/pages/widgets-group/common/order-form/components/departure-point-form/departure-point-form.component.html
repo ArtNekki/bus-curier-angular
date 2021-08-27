@@ -24,12 +24,12 @@
     </app-select>
   </div>
   <ng-container *ngIf="tabsReceived && offices.length && !dataLoading">
-    <ng-container [formGroupName]="FormControlName.DispatchData">
+    <ng-container [formGroupName]="FormControlName.Options">
       <div class="form__tabs">
-        <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.DispatchData)) | keyvalue: formUtils.originalOrder">
+        <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
           <label *ngIf="control.key !== FormControlName.Active" class="form__tab">
             <input type="radio"
-                   [checked]="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === control.key"
+                   [checked]="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === control.key"
                    [name]="FormControlName.Active"
                    [value]="control.key"
                    (change)="changeType(control.key)"
@@ -38,8 +38,8 @@
           </label>
         </ng-container>
       </div>
-      <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.DispatchData)) | keyvalue: formUtils.originalOrder">
-        <div class="form__panel" *ngIf="formGroup.get(FormControlName.DispatchData).get(FormControlName.Active).value === control.key" [@fadeIn]="">
+      <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
+        <div class="form__panel" *ngIf="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === control.key" [@fadeIn]="">
           <ng-container *ngIf="control.key === 'give'; else pickup">
             <label class="form__label form__label--full"
                    [class.form__label--invalid]="control.value.invalid">
