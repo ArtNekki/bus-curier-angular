@@ -20,7 +20,7 @@
       </div>
       <div *ngIf="!form.get(FormControlName.DeparturePoint).invalid
           && !(form.get(FormControlName.PickupPoint).invalid || form.get(FormControlName.PickupPoint).disabled)">
-        <app-cargos-form formControlName="cargo-group"></app-cargos-form>
+        <app-orders-form formControlName="orders"></app-orders-form>
         <app-btn mods="lg, max-w-300" [disabled]="">Рассчитать стоимость</app-btn>
       </div>
     </form>

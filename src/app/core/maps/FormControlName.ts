@@ -82,5 +82,6 @@ export default {
   Box: 'box',
   PlasticPack: 'plastic-pack',
   Skin: 'skin',
-  Options: 'options'
+  Options: 'options',
+  Orders: 'orders'
 };

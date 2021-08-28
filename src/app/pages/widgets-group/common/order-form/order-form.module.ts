@@ -22,6 +22,8 @@ import {SharedModule} from '../../../../shared/shared.module';
 import { OrderReportComponent } from './components/order-report/order-report.component';
 import { PackageModalComponent } from './components/package-modal/package-modal.component';
 import { OtherFormComponent } from './components/other-form/other-form.component';
+import { OrdersFormComponent } from './components/orders-form/orders-form.component';
+import { OrderFormComponent } from './components/order-form/order-form.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { OtherFormComponent } from './components/other-form/other-form.component
     ServicesFormComponent,
     OrderReportComponent,
     PackageModalComponent,
-    OtherFormComponent
+    OtherFormComponent,
+    OrdersFormComponent,
+    OrderFormComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +74,9 @@ import { OtherFormComponent } from './components/other-form/other-form.component
     RecipientFormComponent,
     SenderFormComponent,
     ServicesFormComponent,
-    OrderReportComponent
+    OrderReportComponent,
+    OrdersFormComponent,
+    OrderFormComponent
   ]
 })
 export class OrderFormModule { }

@@ -1,0 +1,22 @@
+<ng-container [formGroup]="formGroup">
+  <div class="form__fieldset form__fieldset--tags">
+    <app-tag *ngFor="let control of orders.controls; let i = index;"
+             [index]="i"
+             [formControlName]="FormControlName.Active"
+             (change)="changeOrder($event)"
+             [checked]="formGroup.get(FormControlName.Active).value === i"
+             [disabled]="(formGroup.get(FormControlName.Active).value !== i) && isSomeControlInvalid"
+             (delete)="deleteOrder($event)"
+             [isInvalid]="control.invalid">
+      Заказ №{{i + 1}}
+    </app-tag>
+    <app-tag type="add" (click)="addOrder()" [disabled]="isSomeControlInvalid"></app-tag>
+  </div>
+  <div *ngIf="orders.controls.length" [formArrayName]="FormControlName.Orders">
+    <ng-template ngFor let-item [ngForOf]="orders.controls" let-i = index>
+      <ng-container *ngIf="formGroup.get(FormControlName.Active).value === i">
+        <app-cargo-form [types]="types" [formControlName]="i"></app-cargo-form>
+      </ng-container>
+    </ng-template>
+  </div>
+</ng-container>
