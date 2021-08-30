@@ -151,7 +151,7 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
   }
 
   getId(i: number, arr: any) {
-    return Object.keys((arr.at(i) as FormGroup).controls)[0];
+    return Object.keys((arr[i] as FormGroup).controls)[0];
   }
 
   disableCheckbox(control) {
@@ -168,13 +168,13 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
   }
 
   getCheckboxControl(i: number, arr: any) {
-    return Object.values((arr.at(i) as FormGroup).controls)[0];
+    return Object.values((arr[i] as FormGroup).controls)[0];
   }
 
   // controls: AbstractControl[]
 
   getCounterControl(i: number, arr: any) {
-    return Object.values((arr.at(i) as FormGroup).controls)[1];
+    return Object.values((arr[i] as FormGroup).controls)[1];
   }
 
   get dataLoaded() {
