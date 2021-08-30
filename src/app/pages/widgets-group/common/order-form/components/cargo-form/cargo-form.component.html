@@ -25,5 +25,5 @@
     </div>
   </section>
   <app-packaging-form [cityFromId]="cityFromId" [formControlName]="FormControlName.Packaging"></app-packaging-form>
-  <app-services-form formControlName="services"></app-services-form>
+  <app-services-form [cityFromId]="cityFromId" formControlName="services"></app-services-form>
 </ng-container>

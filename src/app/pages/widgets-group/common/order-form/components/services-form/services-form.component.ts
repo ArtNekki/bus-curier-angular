@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
@@ -34,7 +34,9 @@ import Service from '../../../../../../core/models/Service';
     ])
   ])]
 })
-export class ServicesFormComponent extends SubFormComponent implements OnInit {
+export class ServicesFormComponent extends SubFormComponent implements OnInit, OnChanges {
+  @Input() cityFromId: string;
+
   public FormControlName = FormControlName;
   public FormFieldMeta = formFieldMeta;
 
@@ -56,8 +58,16 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
     this.formGroup = new FormGroup({
       items: new FormArray([])
     });
+  }
 
-    this.calcService.getServices('1').pipe(
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.cityFromId && changes.cityFromId.currentValue) {
+      this.setServices(changes.cityFromId.currentValue);
+    }
+  }
+
+  setServices(id: string) {
+    this.calcService.getServices(id).pipe(
       tap(() => {
         this.isLoading = true;
         this.items.clear();
