@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {AbstractControl, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
@@ -35,6 +35,7 @@ import {Subscription} from 'rxjs';
   ]
 })
 export class PickupPointFormComponent extends SubFormComponent implements OnInit, OnDestroy {
+  @Output() onChangeCity: EventEmitter<string> = new EventEmitter<string>();
   @Input() noLabel: boolean;
 
   public FormFieldMeta = formFieldMeta;
@@ -117,6 +118,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   setCity(id: string) {
     this.getOffices(id);
     this.createNeedToMeetControl(id);
+    this.onChangeCity.emit(id);
   }
 
   getOffices(id: string) {

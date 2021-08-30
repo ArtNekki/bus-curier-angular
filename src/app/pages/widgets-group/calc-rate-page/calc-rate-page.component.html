@@ -6,7 +6,7 @@
         <div class="form__fieldset form__fieldset--delivery">
           <div>
             <h2 class="form__heading form__heading--no-mgb">Откуда</h2>
-            <app-departure-point-form noLabel="true" [formControlName]="FormControlName.DeparturePoint"></app-departure-point-form>
+            <app-departure-point-form noLabel="true" (onChangeCity)="cityFromId = $event" [formControlName]="FormControlName.DeparturePoint"></app-departure-point-form>
           </div>
           <span></span>
 <!--          <button type="button" class="form__refresh">-->
@@ -14,13 +14,13 @@
 <!--          </button>-->
           <div>
             <h2 class="form__heading form__heading--no-mgb">Куда</h2>
-            <app-pickup-point-form noLabel="true" [formControlName]="FormControlName.PickupPoint"></app-pickup-point-form>
+            <app-pickup-point-form noLabel="true" (onChangeCity)="cityToId = $event" [formControlName]="FormControlName.PickupPoint"></app-pickup-point-form>
           </div>
         </div>
       </div>
       <div *ngIf="!form.get(FormControlName.DeparturePoint).invalid
           && !(form.get(FormControlName.PickupPoint).invalid || form.get(FormControlName.PickupPoint).disabled)">
-        <app-orders-form formControlName="orders"></app-orders-form>
+        <app-orders-form [cityFromId]="cityFromId" [cityToId]="cityToId" formControlName="orders"></app-orders-form>
         <app-btn mods="lg, max-w-300" [disabled]="">Рассчитать стоимость</app-btn>
       </div>
     </form>

@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
@@ -26,7 +26,9 @@ import FormControlName from 'src/app/core/maps/FormControlName';
     }
   ]
 })
-export class OrdersFormComponent extends SubFormComponent implements OnInit, OnDestroy {
+export class OrdersFormComponent extends SubFormComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() cityFromId: string;
+  @Input() cityToId: string;
 
   public FormControlName = FormControlName;
 
@@ -50,24 +52,27 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnD
       ])
     });
 
-    this.typesSub = this.calcService.getTypes(1, 1)
-      // .pipe(delay(500))
-      .subscribe((result: Array<CargoType>) => {
-        if (result.length) {
-
-          this.types = result.filter((item: CargoType) => item.parent_id === '0' && item)
-            .map((item: CargoType) => ({id: item.id, name: item.name}));
-        }
-
-        console.log('nekki', this.types);
-
-        // this.cdr.detectChanges();
-        // this.formGroup.reset(this.formGroup.value);
-      });
-
     this.formGroup.markAllAsTouched();
 
     super.ngOnInit();
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.cityFromId.currentValue && changes.cityToId.currentValue) {
+      this.typesSub = this.calcService.getTypes(changes.cityFromId.currentValue, changes.cityToId.currentValue)
+        // .pipe(delay(500))
+        .subscribe((result: Array<CargoType>) => {
+          if (result.length) {
+
+            this.types = result.filter((item: CargoType) => item.parent_id === '0' && item)
+              .map((item: CargoType) => ({id: item.id, name: item.name}));
+          }
+
+          // this.cdr.detectChanges();
+          // this.formGroup.reset(this.formGroup.value);
+        });
+    }
   }
 
   public get orders(): FormArray {

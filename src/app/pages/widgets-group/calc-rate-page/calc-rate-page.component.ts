@@ -20,6 +20,9 @@ export class CalcRatePageComponent implements OnInit, DoCheck {
   public cityId: string;
   public loading = false;
 
+  public cityFromId: string;
+  public cityToId: string;
+
   constructor(protected orderForm: OrderFormService, private calcService: CalculatorService) { }
 
   ngOnInit(): void {

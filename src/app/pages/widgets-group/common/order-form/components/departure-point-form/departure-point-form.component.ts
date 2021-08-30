@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {AbstractControl, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
@@ -43,6 +43,7 @@ const Department = {
   ]
 })
 export class DeparturePointFormComponent extends SubFormComponent implements OnInit, OnDestroy {
+  @Output() onChangeCity: EventEmitter<string> = new EventEmitter<string>();
   @Input() noLabel: boolean;
 
   public FormFieldMeta = formFieldMeta;
@@ -118,6 +119,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     this.getTabs(id);
     this.getOffices(id);
     this.dataLoading = true;
+    this.onChangeCity.emit(id);
   }
 
   getTabs(id: string) {
