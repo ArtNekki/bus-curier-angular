@@ -102,7 +102,11 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         })
       )
       .subscribe((cities: any) => {
-        this.cities = cities;
+        this.cities = [{value: '0', name: 'Выберите город'}, ...cities];
+
+        setTimeout(() => {
+          this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
+        }, 0);
       });
 
     super.ngOnInit();
