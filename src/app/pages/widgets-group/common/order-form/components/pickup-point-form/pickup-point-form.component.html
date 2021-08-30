@@ -47,23 +47,7 @@
       <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
         <div class="form__panel" *ngIf="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === control.key" [@fadeIn]="">
           <ng-container *ngIf="control.key === 'get'">
-            <label class="form__label form__label--full"
-                   [class.form__label--invalid]="control.value.invalid">
-              Выберите отделение:
-              <sup *ngIf="control.value.invalid">*</sup>
-            </label>
-            <app-select
-              *ngIf="offices.length"
-              [items]="offices"
-              [formControlName]="control.key"
-              [isInvalid]="control.value.invalid && control.value.touched"
-            >
-              <ng-container class="errors">
-                <small *ngIf="utils.getObjectKey(control.value.errors).length">
-                  {{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}
-                </small>
-              </ng-container>
-            </app-select>
+            <app-department-form [offices]="offices" [formControlName]="control.key"></app-department-form>
           </ng-container>
           <ng-container *ngIf="control.key === 'delivery'">
             <app-courier-form [formControlName]="control.key"></app-courier-form>

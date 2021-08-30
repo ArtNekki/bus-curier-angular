@@ -96,7 +96,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       )
       .subscribe((cities: any) => {
         if (cities.length) {
-          this.cities = cities;
+          this.cities = [{value: '0', name: 'Выберите город'}, ...cities];
         }
       });
 
@@ -172,6 +172,10 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       this.formGroup.get(FormControlName.Location).disable();
     } else {
       this.formGroup.get(FormControlName.Location).enable();
+
+      // setTimeout(() => {
+      //   this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
+      // }, 0);
     }
   }
 

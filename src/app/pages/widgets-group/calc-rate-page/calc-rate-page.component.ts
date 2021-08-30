@@ -55,4 +55,12 @@ export class CalcRatePageComponent implements OnInit, DoCheck {
       this.form.get(FormControlName.PickupPoint).enable();
     }
   }
+
+  setCityFromId(id: string) {
+    this.cityFromId = id;
+  }
+
+  setCityToId(id: string) {
+    this.cityToId = id;
+  }
 }
