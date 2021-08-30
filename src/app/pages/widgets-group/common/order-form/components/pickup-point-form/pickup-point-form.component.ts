@@ -44,7 +44,12 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
   public formGroup: FormGroup;
   public addressPoints = addressPoints;
+
   public Tab = {One: 'department', Two: 'courier'};
+  public TabName = {
+    get: 'Забрать в отделении',
+    delivery: 'Вызвать курьера'
+  };
 
   public isFormGroupDisabled = false;
   public tabsReceived = false;

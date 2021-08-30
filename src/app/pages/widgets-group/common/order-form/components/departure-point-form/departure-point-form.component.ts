@@ -52,7 +52,13 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
   public formGroup: FormGroup;
   public addressPoints = addressPoints;
+
+
   public Tab = {One: 'give', Two: 'pickup'};
+  public TabName = {
+    give: 'Cдать в отделение',
+    pickup: 'Вызвать курьера'
+  };
   public currentTab = null;
 
   public tabsReceived = false;
