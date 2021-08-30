@@ -1,16 +1,19 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ModsService} from '../../../core/services/mods.service';
 import {OrderReportService} from '../../../core/services/order-report/order-report.service';
 import formFieldMeta from '../../../core/form/formFieldMeta';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {FormUtilsService} from '../../../core/services/form-utils.service';
+import CargoType from '../../../core/models/CargoType';
+import {Subscription} from 'rxjs';
+import {CalculatorService} from '../../../core/services/calculator/calculator.service';
 
 @Component({
   selector: 'app-order-result',
   templateUrl: './order-result.component.html',
   styleUrls: ['./order-result.component.scss']
 })
-export class OrderResultComponent implements OnInit, OnChanges {
+export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() mods;
@@ -24,16 +27,41 @@ export class OrderResultComponent implements OnInit, OnChanges {
   public isLoading = false;
   public isDirty = false;
 
+  private types = {};
+  private typesSub: Subscription;
+
+  private services = {};
+  private servicesSub: Subscription;
+
   constructor(
     public orderReport: OrderReportService,
     public formUtils: FormUtilsService,
+    private calcService: CalculatorService,
     private modsService: ModsService) {
 
     this.cssClass = this.modsService.setMods('order-result', this.mods);
   }
 
   ngOnInit(): void {
+    this.typesSub = this.calcService.getTypes('1', '1')
+      .subscribe((types: Array<CargoType>) => {
+        if (types.length) {
+          types.forEach((type: any) => {
+            this.types[type.id] = type;
+          });
+        }
+      });
 
+    this.servicesSub = this.calcService.getServices('1')
+      .subscribe((services: Array<CargoType>) => {
+        if (services.length) {
+          services.forEach((service: any) => {
+            this.services[service.id] = service;
+          });
+
+          console.log('services', this.services);
+        }
+      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -55,10 +83,17 @@ export class OrderResultComponent implements OnInit, OnChanges {
     //   }
     // }
   }
+
+  ngOnDestroy(): void {
+    this.typesSub.unsubscribe();
+    this.servicesSub.unsubscribe();
+  }
   //
-  // getCargoList(data) {
-  //   return data.steps[2]['cargo-group'] && data.steps[2]['cargo-group'].items;
-  // }
+  getCargoList(data) {
+    // console.log('getOrder', this.data);
+    return [];
+  }
+
   //
   // getDepartureCity(data) {
   //   return data.steps[1][FormControlName.DeparturePoint].location;

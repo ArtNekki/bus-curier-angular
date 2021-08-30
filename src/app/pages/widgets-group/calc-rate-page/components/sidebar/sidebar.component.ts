@@ -29,7 +29,6 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes', changes);
 
     if (changes.pickupInvalid) {
       this.pickupFormInvalid = changes.pickupInvalid.currentValue;

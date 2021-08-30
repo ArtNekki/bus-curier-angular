@@ -12,7 +12,17 @@ export class OrderFormService {
   public formData$ = new Subject();
   public invalidStep$ = new Subject();
 
+  private ordersList$ = new Subject();
+
   constructor() { }
+
+  set orders(data: any) {
+    this.ordersList$.next(data);
+  }
+
+  get orders() {
+    return this.ordersList$;
+  }
   //
   // setInvalidStep(num: any) {
   //   this.invalidStep$.next(num);

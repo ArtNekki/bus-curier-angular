@@ -1,24 +1,24 @@
-<!--<div class="order-result">-->
-<!--  <div *ngIf="isLoading" class="order-result__loader">-->
-<!--    <app-loader></app-loader>-->
-<!--  </div>-->
-<!--  <ng-container *ngIf="!isLoading">-->
-<!--    <div class="order-result__scroll">-->
-<!--      <ng-container *ngIf="getCargoList(currentData).length">-->
-<!--        <p class="gray">Тип груза:</p>-->
-<!--        <dl>-->
-<!--          <ng-container *ngFor="let cargo of getCargoList(currentData); let groupIndex = index">-->
-<!--            <ng-container *ngIf="cargo">-->
-<!--              <dt>-->
-<!--                <b>Груз {{groupIndex + 1}}:</b>-->
-<!--              </dt>-->
-<!--              <dd>-->
+<div class="order-result">
+  <div *ngIf="isLoading" class="order-result__loader">
+    <app-loader></app-loader>
+  </div>
+  <ng-container *ngIf="!isLoading">
+    <div class="order-result__scroll">
+      <ng-container *ngIf="getCargoList(currentData).length">
+        <p class="gray">Тип груза:</p>
+        <dl>
+          <ng-container *ngFor="let cargo of getCargoList(currentData); let groupIndex = index">
+            <ng-container *ngIf="cargo">
+              <dt>
+                <b>Груз {{groupIndex + 1}}:</b>
+              </dt>
+              <dd>
 <!--                {{formatCargo(cargo)}}-->
-<!--              </dd>-->
-<!--            </ng-container>-->
-<!--          </ng-container>-->
-<!--        </dl>-->
-<!--      </ng-container>-->
+              </dd>
+            </ng-container>
+          </ng-container>
+        </dl>
+      </ng-container>
 <!--      <ng-container *ngIf="getDepartureCity(currentData) && getPickupCity(currentData)">-->
 <!--        <p class="gray">Направление перевозки:</p>-->
 <!--        <p>{{getDepartureCity(currentData)}} — {{getPickupCity(currentData)}} <b class="lg">500 руб.</b></p>-->
@@ -82,9 +82,9 @@
 <!--        </ng-container>-->
 <!--      </ng-container>-->
 
-<!--    </div>-->
-<!--    <div class="order-result__total">-->
-<!--      <ng-content select=".total"></ng-content>-->
-<!--    </div>-->
-<!--  </ng-container>-->
-<!--</div>-->
+    </div>
+    <div class="order-result__total">
+      <ng-content select=".total"></ng-content>
+    </div>
+  </ng-container>
+</div>
