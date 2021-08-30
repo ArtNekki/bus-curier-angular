@@ -7,7 +7,8 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 })
 export class SidebarComponent implements OnInit, OnChanges {
   @Input() currentStep;
-  @Input() data;
+  @Input() form;
+  @Input() pickupInvalid;
 
   public FormStep = {
     One: 0,
@@ -19,19 +20,24 @@ export class SidebarComponent implements OnInit, OnChanges {
   public cargoList;
   public isOrderVisible = false;
 
+  public pickupFormInvalid: boolean;
+
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.carrentStep) {
-      this.currentStep = changes.currentStep.currentValue;
+    console.log('changes', changes);
+
+    if (changes.pickupInvalid) {
+      this.pickupFormInvalid = changes.pickupInvalid.currentValue;
     }
 
-    if (changes.data) {
+    if (changes.form) {
       // this.cargoList = this.getCargoList(changes.data.currentValue);
-      console.log('cargoList', this.cargoList);
+      // console.log('form', changes.form.currentValue);
     }
 
     // const firstName = changes.data.currentValue.steps[0].author.individual['first-name'];

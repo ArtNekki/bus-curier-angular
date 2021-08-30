@@ -10,16 +10,26 @@
   </div>
   <section class="sidebar-result__main">
     <h2 class="sidebar-result__title">Расчет</h2>
-    <div *ngIf="!isOrderVisible" class="sidebar-result__info">
+    <div *ngIf="pickupFormInvalid" class="sidebar-result__info">
       <p>Для расчета стоимости отправления, укажите место отправления и прибытия, а также тип груза.</p>
       <p><b>Внимание!</b> Информация, приведенная в калькуляторе справочная, точную информацию по доставкам в населенные пункты вы можете уточнить в чате на сайте или у диспетчера.</p>
       <p>Если вам необходимо отправить посылку между разными регионами России, воспользуйтесь другим калькулятором -
         <app-link href="#" mods="blue">расчет перевозки по России.</app-link>
       </p>
     </div>
-    <div class="sidebar-result__details" [style]="{display: isOrderVisible ? 'block' : 'none'}">
-      <app-order-result [data]="data" (change)="showOrder()"></app-order-result>
+    <div class="sidebar-result__details" *ngIf="!pickupFormInvalid">
+      <app-order-result [data]="form"></app-order-result>
     </div>
+<!--    <div *ngIf="!isOrderVisible" class="sidebar-result__info">-->
+<!--      <p>Для расчета стоимости отправления, укажите место отправления и прибытия, а также тип груза.</p>-->
+<!--      <p><b>Внимание!</b> Информация, приведенная в калькуляторе справочная, точную информацию по доставкам в населенные пункты вы можете уточнить в чате на сайте или у диспетчера.</p>-->
+<!--      <p>Если вам необходимо отправить посылку между разными регионами России, воспользуйтесь другим калькулятором - -->
+<!--        <app-link href="#" mods="blue">расчет перевозки по России.</app-link>-->
+<!--      </p>-->
+<!--    </div>-->
+<!--    <div class="sidebar-result__details" [style]="{display: isOrderVisible ? 'block' : 'none'}">-->
+<!--      <app-order-result [data]="form.value" (change)="showOrder()"></app-order-result>-->
+<!--    </div>-->
     <div *ngIf="currentStep === FormStep.Four" class="sidebar-result__total">
       <p><span class="gray">Итого: </span><b>1 550 руб.</b></p>
       <button type="button" class="sidebar-result__collapse">&#160;</button>
