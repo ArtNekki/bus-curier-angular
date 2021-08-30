@@ -19,6 +19,20 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
   @Input() mods;
   @Input() data;
 
+  public Cargo = {
+    Docs: '1',
+    Parcels: '2',
+    AutoParts: '5',
+    Other: '21'
+  };
+
+  public CargoName = {
+    1: 'Документы',
+    2: 'Посылки',
+    5: 'Автозапчасти',
+    21: 'Другое'
+  };
+
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
 
@@ -58,30 +72,15 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
           services.forEach((service: any) => {
             this.services[service.id] = service;
           });
-
-          console.log('services', this.services);
         }
       });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
 
-    // if (changes.data.currentValue) {
-    //   this.currentData = changes.data.currentValue;
-    //
-    //   if ((this.getDepartureCity(this.currentData)
-    //       && this.getPickupCity(this.currentData)
-    //       && this.getCargoList(this.currentData)) && !this.isDirty
-    //   ) {
-    //     this.isLoading = true;
-    //     this.isDirty = true;
-    //     this.change.emit(true);
-    //
-    //     setTimeout(() => {
-    //       this.isLoading = false;
-    //     }, 1000);
-    //   }
-    // }
+    if (changes.data.currentValue) {
+      this.currentData = changes.data.currentValue;
+    }
   }
 
   ngOnDestroy(): void {
@@ -89,9 +88,50 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
     this.servicesSub.unsubscribe();
   }
   //
-  getCargoList(data) {
-    // console.log('getOrder', this.data);
-    return [];
+  getOrders(data) {
+    return data.orders.orders;
+  }
+
+  formatOrder(order: any) {
+    console.log('order', order);
+  }
+
+  getCargo(data) {
+    console.log('cargo', data);
+  }
+
+  formatDocs(data: any) {
+    return `Документы (мест: ${data[FormControlName.Counter]})`;
+  }
+
+  formatParcels(arr: any) {
+    return `Посылки (мест: ${arr.length} шт)`;
+  }
+
+  formatAutoparts(arr: any) {
+
+    if (!arr.length) {
+      return;
+    }
+
+    const formatted = arr.map((id) => {
+      return this.types[id].name;
+    }).join(`, `);
+
+    return `Автозапчасти: ${formatted}`;
+  }
+
+  formatOther(arr: any) {
+
+    if (!arr.length) {
+      return;
+    }
+
+    const formatted = arr.map((id) => {
+      return this.types[id].name;
+    }).join(`, `);
+
+    return `Другое: ${formatted}`;
   }
 
   //
@@ -123,9 +163,7 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
   //   return pickupData[FormControlName.Active];
   // }
   //
-  // formatDocs(item: any) {
-  //   return `Документы (мест: ${item[FormControlName.PlaceCount]})`;
-  // }
+  //
   //
   // formatParcels(arr: any) {
   //   return `Посылки (мест: ${arr.length} шт)`;
@@ -189,4 +227,5 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
   //
   //   return result;
   // }
+
 }

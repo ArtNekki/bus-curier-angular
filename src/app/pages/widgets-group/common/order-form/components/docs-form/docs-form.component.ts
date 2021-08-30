@@ -31,7 +31,7 @@ export class DocsFormComponent extends SubFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.PlaceCount]: new FormControl('', [Validators.required, Validators.min(1)])
+      [FormControlName.Counter]: new FormControl('', [Validators.required, Validators.min(1)])
     });
 
     this.formGroup.markAllAsTouched();

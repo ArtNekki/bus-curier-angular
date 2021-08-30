@@ -2,18 +2,32 @@
   <div *ngIf="isLoading" class="order-result__loader">
     <app-loader></app-loader>
   </div>
-  <ng-container *ngIf="!isLoading">
+  <ng-container>
     <div class="order-result__scroll">
-      <ng-container *ngIf="getCargoList(currentData).length">
-        <p class="gray">Тип груза:</p>
+      <ng-container>
         <dl>
-          <ng-container *ngFor="let cargo of getCargoList(currentData); let groupIndex = index">
-            <ng-container *ngIf="cargo">
-              <dt>
-                <b>Груз {{groupIndex + 1}}:</b>
-              </dt>
-              <dd>
-<!--                {{formatCargo(cargo)}}-->
+          <ng-container *ngFor="let order of getOrders(currentData); let groupIndex = index">
+            <ng-container *ngIf="order">
+              <h3>Заказ №{{groupIndex + 1}}</h3>
+              <p class="gray">Тип груза:</p>
+<!--              <dt>-->
+<!--                <b>Тип груза:</b>-->
+<!--              </dt>-->
+              <dd *ngFor="let cargo of order.items | keyvalue: formUtils.originalOrder;">
+                <ng-container *ngIf="cargo.value">
+                  <ng-container *ngIf="cargo.key === Cargo.Docs">
+                    {{formatDocs(cargo.value)}}
+                  </ng-container>
+                  <ng-container *ngIf="cargo.key === Cargo.Parcels">
+                    {{formatParcels(cargo.value)}}
+                  </ng-container>
+                  <ng-container *ngIf="cargo.key === Cargo.AutoParts">
+                    {{formatAutoparts(cargo.value)}}
+                  </ng-container>
+                  <ng-container *ngIf="cargo.key === Cargo.Other">
+                    {{formatOther(cargo.value)}}
+                  </ng-container>
+                </ng-container>
               </dd>
             </ng-container>
           </ng-container>
