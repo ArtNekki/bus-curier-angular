@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {AbstractControl, FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
@@ -32,7 +32,9 @@ import Service from 'src/app/core/models/Service';
     }
   ]
 })
-export class PackagingFormComponent extends SubFormComponent implements OnInit {
+export class PackagingFormComponent extends SubFormComponent implements OnInit, OnChanges {
+  @Input() cityFromId: string;
+
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
 
@@ -58,8 +60,16 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit {
       [FormControlName.Skin]: new FormArray([]),
       [FormControlName.Other]: new FormArray([])
     });
+  }
 
-    this.calcService.getServices('1').pipe(
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.cityFromId && changes.cityFromId.currentValue) {
+      this.setPackage(changes.cityFromId.currentValue);
+    }
+  }
+
+  setPackage(id: string) {
+    this.calcService.getServices(id).pipe(
       tap(() => {
         this.boxes.clear();
         this.safePacks.clear();

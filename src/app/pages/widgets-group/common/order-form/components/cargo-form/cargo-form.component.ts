@@ -34,6 +34,7 @@ import {delay} from 'rxjs/operators';
   ]
 })
 export class CargoFormComponent extends SubFormComponent implements OnInit, OnChanges {
+  @Input() cityFromId: string;
   @Input() types;
 
   public Cargo = {
@@ -138,7 +139,7 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
 
   ngOnChanges(changes: SimpleChanges): void {
 
-    if (changes.types.currentValue.length  && !changes.types.firstChange) {
+    if (changes.types && changes.types.currentValue.length  && !changes.types.firstChange) {
       this.setTypes(changes.types.currentValue, true);
     }
   }

@@ -59,7 +59,7 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.cityFromId.currentValue && changes.cityToId.currentValue) {
+    if ((changes.cityFromId && changes.cityFromId.currentValue) && (changes.cityToId && changes.cityToId.currentValue)) {
       this.typesSub = this.calcService.getTypes(changes.cityFromId.currentValue, changes.cityToId.currentValue)
         // .pipe(delay(500))
         .subscribe((result: Array<CargoType>) => {
