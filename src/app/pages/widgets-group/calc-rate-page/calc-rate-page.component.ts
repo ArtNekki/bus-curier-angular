@@ -1,11 +1,13 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
 import cities from 'src/app/mock-data/cities';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import FormControlName from '../../../core/maps/FormControlName';
 import {delay, switchMap, tap} from 'rxjs/operators';
 import Service from '../../../core/models/Service';
 import {OrderFormService} from '../../../core/services/order-form/order-form.service';
 import {CalculatorService} from '../../../core/services/calculator/calculator.service';
+import {ConfirmModalComponent} from '../../../modals/confirm-modal/confirm-modal.component';
+import {SimpleModalService} from 'ngx-simple-modal';
 
 @Component({
   selector: 'app-calc-rate-page',
@@ -23,7 +25,10 @@ export class CalcRatePageComponent implements OnInit, DoCheck {
   public cityFromId: string;
   public cityToId: string;
 
-  constructor(protected orderForm: OrderFormService, private calcService: CalculatorService) { }
+  constructor(
+              protected orderForm: OrderFormService,
+              private calcService: CalculatorService,
+              private simpleModal: SimpleModalService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -57,10 +62,25 @@ export class CalcRatePageComponent implements OnInit, DoCheck {
   }
 
   setCityFromId(id: string) {
+
+    if (id !== this.cityFromId) {
+
+    }
+
     this.cityFromId = id;
   }
 
   setCityToId(id: string) {
     this.cityToId = id;
+  }
+
+  confirmClear() {
+    this.simpleModal.addModal(ConfirmModalComponent, {
+      message: 'Данные будут потеряны! <br> Вы уверены?'
+    }).subscribe((isConfirmed) => {
+      if (isConfirmed) {
+
+      }
+    });
   }
 }
