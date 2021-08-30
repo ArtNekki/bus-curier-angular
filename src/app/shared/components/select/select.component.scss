@@ -64,6 +64,9 @@
 
   &__field span {
     //user-select: ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     pointer-events: none;
   }
 
