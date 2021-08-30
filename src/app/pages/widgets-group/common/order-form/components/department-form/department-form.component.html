@@ -1,18 +1,17 @@
 <div class="form__fieldset form__fieldset--address" [formGroup]="formGroup">
   <div *ngFor="let control of formUtils.getGroupControls(formGroup)  | keyvalue: formUtils.originalOrder" class="form__field">
-    <label [for]="FormControlName.Department + '-' + control.key"
-           class="form__label" [class.form__label--invalid]="control.value.invalid">
-      {{ FormFieldMeta[control.key].label }}
+    <label class="form__label" [class.form__label--invalid]="control.value.invalid">
+      {{ TabName[control.key] }}
       <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
     </label>
-    <app-input [id]="FormControlName.Department + '-' + control.key"
-               [type]="FormFieldMeta[control.key].type"
-               [formControlName]="control.key"
-               [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+    <app-select
+         [items]="offices"
+         [formControlName]="control.key"
+         [isInvalid]="control.value.invalid && control.value.touched"
     >
       <ng-container class="errors">
         <small *ngIf="utils.getObjectKey(control.value.errors).length">{{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}</small>
       </ng-container>
-    </app-input>
+    </app-select>
   </div>
 </div>
