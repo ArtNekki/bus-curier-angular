@@ -7,23 +7,37 @@
       <ng-container *ngFor="let order of getOrders(currentData); let groupIndex = index">
         <ng-container *ngIf="order">
           <h3>Заказ №{{groupIndex + 1}}</h3>
-          <p class="gray">Тип груза:</p>
-          <div *ngFor="let cargo of order.items | keyvalue: formUtils.originalOrder;">
-            <ng-container *ngIf="cargo.value">
-              <ng-container *ngIf="cargo.key === Cargo.Docs">
-                {{formatDocs(cargo.value)}}
+          <ng-container>
+            <p class="gray">Тип груза:</p>
+            <div *ngFor="let cargo of order.items | keyvalue: formUtils.originalOrder;">
+              <ng-container *ngIf="cargo.value">
+                <ng-container *ngIf="cargo.key === Cargo.Docs">
+                  <p>{{formatDocs(cargo.value)}}</p>
+                </ng-container>
+                <ng-container *ngIf="cargo.key === Cargo.Parcels">
+                  <p>{{formatParcels(cargo.value)}}</p>
+                </ng-container>
+                <ng-container *ngIf="cargo.key === Cargo.AutoParts">
+                  <p>{{formatAutoparts(cargo.value)}}</p>
+                </ng-container>
+                <ng-container *ngIf="cargo.key === Cargo.Other">
+                  <p>{{formatOther(cargo.value)}}</p>
+                </ng-container>
               </ng-container>
-              <ng-container *ngIf="cargo.key === Cargo.Parcels">
-                {{formatParcels(cargo.value)}}
-              </ng-container>
-              <ng-container *ngIf="cargo.key === Cargo.AutoParts">
-                {{formatAutoparts(cargo.value)}}
-              </ng-container>
-              <ng-container *ngIf="cargo.key === Cargo.Other">
-                {{formatOther(cargo.value)}}
-              </ng-container>
-            </ng-container>
-          </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="utils.getObjectKey(cities).length">
+            <p class="gray">Направление перевозки:</p>
+            <p>г. {{formatCityFrom(currentData)}} - г. {{formatCityTo(currentData)}}</p>
+          </ng-container>
+          <ng-container *ngIf="formatDepartureOption(currentData)">
+            <p class="gray">Забор посылки у отправителя - {{OptionName[formatDepartureOption(currentData).type]}}</p>
+            <p><b class="lg">{{formatDepartureOption(currentData).price}} руб.</b></p>
+          </ng-container>
+          <ng-container *ngIf="formatPickupOption(currentData)">
+            <p class="gray">Доставка посылки до получателя - {{OptionName[formatPickupOption(currentData).type]}}</p>
+            <p><b class="lg">{{formatPickupOption(currentData).price}} руб.</b></p>
+          </ng-container>
           <div *ngIf="formatPackage(order.packaging).length">
             <p class="gray">Упаковка:</p>
             <dl>

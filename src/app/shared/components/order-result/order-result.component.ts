@@ -7,6 +7,8 @@ import {FormUtilsService} from '../../../core/services/form-utils.service';
 import CargoType from '../../../core/models/CargoType';
 import {Subscription} from 'rxjs';
 import {CalculatorService} from '../../../core/services/calculator/calculator.service';
+import CityTo from '../../../core/models/CityTo';
+import {UtilsService} from '../../../core/services/utils.service';
 
 @Component({
   selector: 'app-order-result',
@@ -33,6 +35,14 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
     21: 'Другое'
   };
 
+  public OptionName = {
+    give: 'Cдать в отделение',
+    pickup: 'Вызвать курьера',
+    get: 'Забрать в отделении',
+    delivery: 'Вызвать курьера',
+    'need-to-meet': 'Встерить с автобуса'
+  };
+
   private PackageName = {
     1: 'Коробка',
     2: 'Сейф-пакет',
@@ -56,9 +66,13 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
   private services = {};
   private servicesSub: Subscription;
 
+  public cities = {};
+  private citiesSub: Subscription;
+
   constructor(
     public orderReport: OrderReportService,
     public formUtils: FormUtilsService,
+    public utils: UtilsService,
     private calcService: CalculatorService,
     private modsService: ModsService) {
 
@@ -66,6 +80,15 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit(): void {
+    this.citiesSub = this.calcService.getCityTo('1', 0)
+      .subscribe((cities: Array<CityTo>) => {
+        if (cities.length) {
+          cities.forEach((city: any) => {
+            this.cities[city.id] = city;
+          });
+        }
+      });
+
     this.typesSub = this.calcService.getTypes('1', '1')
       .subscribe((types: Array<CargoType>) => {
         if (types.length) {
@@ -95,6 +118,7 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
   ngOnDestroy(): void {
     this.typesSub.unsubscribe();
     this.servicesSub.unsubscribe();
+    this.citiesSub.unsubscribe();
   }
   //
   getOrders(data) {
@@ -169,6 +193,54 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
            });
 
     return list;
+  }
+
+  formatServices(services: any) {
+    if (!services.items || !services.items.length) {
+      return;
+    }
+
+    const list = services.items.map((obj) => {
+      const selected = Object.values(obj)[0];
+      const id = Object.keys(obj)[0];
+      const value = Object.values(obj)[1];
+
+      return selected ? {
+        id,
+        value,
+        name: this.services[id].name,
+        price: this.services[id].price,
+      } : null;
+    })
+      .filter((item) => item);
+
+    return list;
+  }
+
+  formatCityFrom(data) {
+    const id = data[FormControlName.DeparturePoint].location;
+    return this.cities[id].name;
+  }
+
+  formatCityTo(data) {
+    const id = data[FormControlName.PickupPoint].location;
+    return this.cities[id].name;
+  }
+
+  formatDepartureOption(data) {
+    const options = data[FormControlName.DeparturePoint].options;
+    return {
+      type: options.active,
+      price: 300
+    };
+  }
+
+  formatPickupOption(data) {
+    const options = data[FormControlName.PickupPoint].options;
+    return {
+      type: options.active,
+      price: 300
+    };
   }
 
   //
@@ -264,25 +336,5 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
   //
   //   return result;
   // }
-  formatServices(services: any) {
-    if (!services.items || !services.items.length) {
-      return;
-    }
 
-    const list = services.items.map((obj) => {
-      const selected = Object.values(obj)[0];
-      const id = Object.keys(obj)[0];
-      const value = Object.values(obj)[1];
-
-      return selected ? {
-        id,
-        value,
-        name: this.services[id].name,
-        price: this.services[id].price,
-      } : null;
-    })
-    .filter((item) => item);
-
-    return list;
-  }
 }
