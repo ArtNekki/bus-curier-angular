@@ -4,34 +4,38 @@
   </div>
   <ng-container>
     <div class="order-result__scroll">
-      <ng-container>
-        <dl>
-          <ng-container *ngFor="let order of getOrders(currentData); let groupIndex = index">
-            <ng-container *ngIf="order">
-              <h3>Заказ №{{groupIndex + 1}}</h3>
-              <p class="gray">Тип груза:</p>
-<!--              <dt>-->
-<!--                <b>Тип груза:</b>-->
-<!--              </dt>-->
-              <dd *ngFor="let cargo of order.items | keyvalue: formUtils.originalOrder;">
-                <ng-container *ngIf="cargo.value">
-                  <ng-container *ngIf="cargo.key === Cargo.Docs">
-                    {{formatDocs(cargo.value)}}
-                  </ng-container>
-                  <ng-container *ngIf="cargo.key === Cargo.Parcels">
-                    {{formatParcels(cargo.value)}}
-                  </ng-container>
-                  <ng-container *ngIf="cargo.key === Cargo.AutoParts">
-                    {{formatAutoparts(cargo.value)}}
-                  </ng-container>
-                  <ng-container *ngIf="cargo.key === Cargo.Other">
-                    {{formatOther(cargo.value)}}
-                  </ng-container>
-                </ng-container>
-              </dd>
+      <ng-container *ngFor="let order of getOrders(currentData); let groupIndex = index">
+        <ng-container *ngIf="order">
+          <h3>Заказ №{{groupIndex + 1}}</h3>
+          <p class="gray">Тип груза:</p>
+          <div *ngFor="let cargo of order.items | keyvalue: formUtils.originalOrder;">
+            <ng-container *ngIf="cargo.value">
+              <ng-container *ngIf="cargo.key === Cargo.Docs">
+                {{formatDocs(cargo.value)}}
+              </ng-container>
+              <ng-container *ngIf="cargo.key === Cargo.Parcels">
+                {{formatParcels(cargo.value)}}
+              </ng-container>
+              <ng-container *ngIf="cargo.key === Cargo.AutoParts">
+                {{formatAutoparts(cargo.value)}}
+              </ng-container>
+              <ng-container *ngIf="cargo.key === Cargo.Other">
+                {{formatOther(cargo.value)}}
+              </ng-container>
             </ng-container>
-          </ng-container>
-        </dl>
+          </div>
+          <div *ngIf="formatPackage(order.packaging).length">
+            <p class="gray">Упаковка:</p>
+            <dl>
+              <ng-container *ngFor="let package of formatPackage(order.packaging)">
+                <dt>{{package.type}} {{package.size}} ({{package.count}} шт.):</dt>
+                <dd>
+                  <b>{{package.count * package.price | currency: 'RUB':'symbol-narrow':'1.0':'ru'}}</b>
+                </dd>
+              </ng-container>
+            </dl>
+          </div>
+        </ng-container>
       </ng-container>
 <!--      <ng-container *ngIf="getDepartureCity(currentData) && getPickupCity(currentData)">-->
 <!--        <p class="gray">Направление перевозки:</p>-->

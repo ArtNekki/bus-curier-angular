@@ -33,6 +33,15 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
     21: 'Другое'
   };
 
+  private PackageName = {
+    1: 'Коробка',
+    2: 'Сейф-пакет',
+    3: 'Пластиковый пакет',
+    4: 'Другое',
+    5: 'Другое',
+    6: 'Пленка'
+  };
+
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
 
@@ -134,6 +143,34 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
     return `Другое: ${formatted}`;
   }
 
+  formatPackage(arr) {
+    const list = Object.entries(arr)
+          .map(([key, value]: [string, any]) => {
+              return value.filter((item) => {
+                return item.counter;
+              });
+          })
+          .filter((array) => {
+            return array.length;
+          })
+          .reduce((acc, val) => acc.concat(val), [])
+          .map((obj) => {
+            const id = Object.keys(obj)[0];
+
+            return {
+              id,
+              name: this.services[id].name,
+              count: obj.counter,
+              price: this.services[id].price,
+              params: this.services[id].property,
+              type: this.PackageName[this.services[id].subgroup_id],
+              size: this.services[id].site_name
+            };
+           });
+
+    return list;
+  }
+
   //
   // getDepartureCity(data) {
   //   return data.steps[1][FormControlName.DeparturePoint].location;
@@ -227,5 +264,4 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
   //
   //   return result;
   // }
-
 }
