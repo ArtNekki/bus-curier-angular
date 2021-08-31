@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {AbstractControl, FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
@@ -13,6 +13,7 @@ import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/conf
 import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
 import Service from 'src/app/core/models/Service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-packaging-form',
@@ -32,7 +33,7 @@ import Service from 'src/app/core/models/Service';
     }
   ]
 })
-export class PackagingFormComponent extends SubFormComponent implements OnInit, OnChanges {
+export class PackagingFormComponent extends SubFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() cityFromId: string;
 
   public FormFieldMeta = formFieldMeta;
@@ -41,6 +42,8 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
   public formGroup: FormGroup;
   public formattedData = {};
   public activeCheckboxId;
+
+  public packagesSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -69,7 +72,7 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
   }
 
   setPackage(id: string) {
-    this.calcService.getServices(id).pipe(
+   this.packagesSub = this.calcService.getServices(id).pipe(
       tap(() => {
         this.boxes.clear();
         this.safePacks.clear();
@@ -196,5 +199,9 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
         checkbox.enable();
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.packagesSub.unsubscribe();
   }
 }

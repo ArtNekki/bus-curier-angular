@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
@@ -10,6 +10,7 @@ import {delay, switchMap, tap} from 'rxjs/operators';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import Service from '../../../../../../core/models/Service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-services-form',
@@ -34,7 +35,7 @@ import Service from '../../../../../../core/models/Service';
     ])
   ])]
 })
-export class ServicesFormComponent extends SubFormComponent implements OnInit, OnChanges {
+export class ServicesFormComponent extends SubFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() cityFromId: string;
 
   public FormControlName = FormControlName;
@@ -45,6 +46,8 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
   public activeCheckboxId: string;
   public formattedData = {};
   public isLoading = false;
+
+  public servicesSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -67,7 +70,7 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
   }
 
   setServices(id: string) {
-    this.calcService.getServices(id).pipe(
+    this.servicesSub = this.calcService.getServices(id).pipe(
       tap(() => {
         this.isLoading = true;
         this.items.clear();
@@ -117,5 +120,9 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
 
   setActiveCheckbox(id: string) {
     this.activeCheckboxId = id;
+  }
+
+  ngOnDestroy() {
+    this.servicesSub.unsubscribe();
   }
 }
