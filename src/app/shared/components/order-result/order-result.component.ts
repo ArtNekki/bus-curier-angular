@@ -143,7 +143,7 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
 
   formatAutoparts(arr: any) {
 
-    if (!arr.length) {
+    if (!arr || !arr.length) {
       return;
     }
 

@@ -4,6 +4,20 @@
   </div>
   <ng-container>
     <div class="order-result__scroll">
+      <div>
+        <ng-container *ngIf="utils.getObjectKey(cities).length">
+          <p class="gray">Направление перевозки:</p>
+          <p>г. {{formatCityFrom(currentData)}} - г. {{formatCityTo(currentData)}}</p>
+        </ng-container>
+        <ng-container *ngIf="formatDepartureOption(currentData)">
+          <p class="gray">Забор посылки у отправителя - {{OptionName[formatDepartureOption(currentData).type]}}</p>
+          <p><b class="lg">{{formatDepartureOption(currentData).price}} руб.</b></p>
+        </ng-container>
+        <ng-container *ngIf="formatPickupOption(currentData)">
+          <p class="gray">Доставка посылки до получателя - {{OptionName[formatPickupOption(currentData).type]}}</p>
+          <p><b class="lg">{{formatPickupOption(currentData).price}} руб.</b></p>
+        </ng-container>
+      </div>
       <ng-container *ngFor="let order of getOrders(currentData); let groupIndex = index">
         <ng-container *ngIf="order">
           <h3>Заказ №{{groupIndex + 1}}</h3>
@@ -25,18 +39,6 @@
                 </ng-container>
               </ng-container>
             </div>
-          </ng-container>
-          <ng-container *ngIf="utils.getObjectKey(cities).length">
-            <p class="gray">Направление перевозки:</p>
-            <p>г. {{formatCityFrom(currentData)}} - г. {{formatCityTo(currentData)}}</p>
-          </ng-container>
-          <ng-container *ngIf="formatDepartureOption(currentData)">
-            <p class="gray">Забор посылки у отправителя - {{OptionName[formatDepartureOption(currentData).type]}}</p>
-            <p><b class="lg">{{formatDepartureOption(currentData).price}} руб.</b></p>
-          </ng-container>
-          <ng-container *ngIf="formatPickupOption(currentData)">
-            <p class="gray">Доставка посылки до получателя - {{OptionName[formatPickupOption(currentData).type]}}</p>
-            <p><b class="lg">{{formatPickupOption(currentData).price}} руб.</b></p>
           </ng-container>
           <div *ngIf="formatPackage(order.packaging).length">
             <p class="gray">Упаковка:</p>

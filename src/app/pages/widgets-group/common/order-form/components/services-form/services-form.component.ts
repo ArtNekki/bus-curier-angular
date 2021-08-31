@@ -88,12 +88,12 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
           if (this.checkSms(item.name)) {
             this.items.push(new FormGroup({
               [item.id]: new FormControl(''),
-              [FormControlName.Tel]: new FormControl('')
+              [FormControlName.Tel]: new FormControl('', {updateOn: 'blur'})
             }));
           } else if (this.checkInsurance(item.name)) {
             this.items.push(new FormGroup({
               [item.id]: new FormControl(''),
-              [FormControlName.Sum]: new FormControl('')
+              [FormControlName.Sum]: new FormControl('', {updateOn: 'blur'})
             }));
           }});
     });
