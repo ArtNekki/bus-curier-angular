@@ -283,8 +283,6 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
     })
     .filter((item) => item);
 
-    console.log('services', list);
-
     return list;
   }
 }
