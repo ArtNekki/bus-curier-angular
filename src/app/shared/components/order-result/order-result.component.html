@@ -30,11 +30,17 @@
               <ng-container *ngFor="let package of formatPackage(order.packaging)">
                 <dt>{{package.type}} {{package.size}} ({{package.count}} шт.):</dt>
                 <dd>
-                  <b>{{package.count * package.price | currency: 'RUB':'symbol-narrow':'1.0':'ru'}}</b>
+                  <b>{{package.count * package.price}} руб.</b>
                 </dd>
               </ng-container>
             </dl>
           </div>
+          <ng-container *ngIf="formatServices(order.services).length">
+            <ng-container *ngFor="let service of formatServices(order.services)">
+              <p class="gray">{{service.name}}</p>
+              <p><b class="lg">{{service.price}} руб.</b></p>
+            </ng-container>
+          </ng-container>
         </ng-container>
       </ng-container>
 <!--      <ng-container *ngIf="getDepartureCity(currentData) && getPickupCity(currentData)">-->

@@ -264,4 +264,27 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
   //
   //   return result;
   // }
+  formatServices(services: any) {
+    if (!services.items || !services.items.length) {
+      return;
+    }
+
+    const list = services.items.map((obj) => {
+      const selected = Object.values(obj)[0];
+      const id = Object.keys(obj)[0];
+      const value = Object.values(obj)[1];
+
+      return selected ? {
+        id,
+        value,
+        name: this.services[id].name,
+        price: this.services[id].price,
+      } : null;
+    })
+    .filter((item) => item);
+
+    console.log('services', list);
+
+    return list;
+  }
 }
