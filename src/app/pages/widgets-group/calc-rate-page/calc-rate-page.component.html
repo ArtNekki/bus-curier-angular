@@ -40,8 +40,5 @@
       </div>
     </app-text-box>
   </div>
-  <app-sidebar
-    [form]="form.value"
-    [pickupInvalid]="form.controls[FormControlName.PickupPoint].invalid || form.controls[FormControlName.PickupPoint].disabled"
-  ></app-sidebar>
+  <app-sidebar [form]="formData"></app-sidebar>
 </div>

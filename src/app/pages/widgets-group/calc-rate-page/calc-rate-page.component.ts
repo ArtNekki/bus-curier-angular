@@ -22,6 +22,8 @@ export class CalcRatePageComponent implements OnInit, DoCheck {
   public cityId: string;
   public loading = false;
 
+  public formData;
+
   public cityFromId: string;
   public cityToId: string;
 
@@ -50,7 +52,7 @@ export class CalcRatePageComponent implements OnInit, DoCheck {
   }
 
   onSubmit() {
-    console.log('quick order', this.form.value);
+    this.formData = this.form.value;
   }
 
   ngDoCheck(): void {
