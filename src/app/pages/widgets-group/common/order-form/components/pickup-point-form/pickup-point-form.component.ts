@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {AbstractControl, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
@@ -15,6 +15,7 @@ import CityFrom from '../../../../../../core/models/CityFrom';
 import Select from '../../../../../../core/models/Select';
 import CityTo from '../../../../../../core/models/CityTo';
 import {Subscription} from 'rxjs';
+import CargoType from '../../../../../../core/models/CargoType';
 
 @Component({
   selector: 'app-pickup-point-form',
@@ -34,7 +35,9 @@ import {Subscription} from 'rxjs';
     }
   ]
 })
-export class PickupPointFormComponent extends SubFormComponent implements OnInit, OnDestroy {
+export class PickupPointFormComponent extends SubFormComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() cityFromId: string;
+
   @Output() onChangeCity: EventEmitter<string> = new EventEmitter<string>();
   @Input() noLabel: boolean;
 
@@ -72,19 +75,22 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.Location]: new FormControl({value: '', disabled: true}, [Validators.required]),
+      [FormControlName.Location]: new FormControl({value: '', disabled: false}, [Validators.required]),
       [FormControlName.Options]: new FormGroup({
         [FormControlName.Active]: new FormControl('', [Validators.required]),
-        // [FormControlName.Department]: new FormControl('', [Validators.required]),
-        // [FormControlName.Courier]: new FormControl('')
       })
     });
+  }
 
-    this.citiesSub = this.orderForm.cityFrom$
+  ngOnChanges(changes: SimpleChanges): void {
+    if ((changes.cityFromId && changes.cityFromId.currentValue)) {
+      this.getCityTo(changes.cityFromId.currentValue);
+    }
+  }
+
+  getCityTo(id: string) {
+    this.citiesSub = this.calcService.getCityTo(id, 0)
       .pipe(
-        switchMap((id: string) => {
-          return this.calcService.getCityTo(id, 0);
-        }),
         map<CityTo, Select>((cities: any) => {
           return cities
             // .filter((city) => city.site_id !== Department.Aleutskaya && city.site_id !== Department.Gogolya)
@@ -97,14 +103,9 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       .subscribe((cities: any) => {
         if (cities.length) {
           this.cities = [{value: '0', name: 'Выберите город'}, ...cities];
+          console.log('this.cities', this.cities);
         }
       });
-
-    // this.calculatorService.getDistricts(1).subscribe((result: Array<{id: string, name: string}>) => {
-    //   this.cities = result.map((el: {id: string, name: string}) => {
-    //     return {value: el.id, name: el.name};
-    //   });
-    // });
   }
 
   changeType(type: string) {
@@ -169,9 +170,9 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
     this.isFormGroupDisabled = isDisabled;
 
     if (isDisabled) {
-      this.formGroup.get(FormControlName.Location).disable();
+      // this.formGroup.get(FormControlName.Location).disable();
     } else {
-      this.formGroup.get(FormControlName.Location).enable();
+      // this.formGroup.get(FormControlName.Location).enable();
 
       // setTimeout(() => {
       //   this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
