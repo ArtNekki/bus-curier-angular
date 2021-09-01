@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
@@ -28,14 +28,13 @@ import {CalculatorService} from '../../../../../../core/services/calculator/calc
     }
   ]
 })
-export class OtherFormComponent extends SubFormComponent implements OnInit {
+export class OtherFormComponent extends SubFormComponent implements OnInit, OnChanges {
   @Input() types: Array<CargoType> = [];
 
   public FormControlName = FormControlName;
 
   public formGroup: FormGroup;
   public parts: Array<Select> = [];
-  public partsSub: Subscription;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -52,17 +51,21 @@ export class OtherFormComponent extends SubFormComponent implements OnInit {
       ])
     });
 
+    this.setParts(this.types);
     this.formGroup.markAllAsTouched();
 
-    this.partsSub = this.calcService.getTypes(1, 1).subscribe((result: Array<CargoType>) => {
-      if (result.length) {
-
-        this.parts = result.filter((item: CargoType) => item.parent_id === '21' && item)
-          .map((item: CargoType) => ({value: item.id, name: item.name}));
-      }
-    });
-
     super.ngOnInit();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.types && changes.types.currentValue.length && this.formGroup) {
+      this.setParts(changes.types.currentValue);
+    }
+  }
+
+  setParts(arr: Array<CargoType>) {
+    this.parts = arr.filter((item: CargoType) => item.parent_id === '21' && item)
+      .map((item: CargoType) => ({value: item.id, name: item.name}));
   }
 
   public get items(): FormArray {
