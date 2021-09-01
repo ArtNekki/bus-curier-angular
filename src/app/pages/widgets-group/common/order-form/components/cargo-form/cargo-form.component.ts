@@ -173,8 +173,10 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
   }
 
   setTypes(types, onChanges) {
+    const cargoTypes = types.filter((item: CargoType) => item.parent_id === '0' && item)
+      .map((item: CargoType) => ({id: item.id, name: item.name}));
 
-    types.forEach((item: CargoType) => {
+    cargoTypes.forEach((item: CargoType) => {
       this.items.addControl(item.id, new FormControl(''));
     });
 

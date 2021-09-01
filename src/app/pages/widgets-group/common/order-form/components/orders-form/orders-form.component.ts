@@ -71,8 +71,7 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
         .subscribe((result: Array<CargoType>) => {
           if (result.length) {
 
-            this.types = result.filter((item: CargoType) => item.parent_id === '0' && item)
-              .map((item: CargoType) => ({id: item.id, name: item.name}));
+            this.types = result;
           }
 
           // this.cdr.detectChanges();
