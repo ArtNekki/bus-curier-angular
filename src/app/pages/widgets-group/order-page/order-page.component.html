@@ -28,6 +28,7 @@
           <app-recipient-form [formControlName]="FormControlName.Recipient"></app-recipient-form>
         </div>
         <div *ngIf="currentStep === FormStep.Four" [formGroup]="steps[FormStep.Four]" [@fadeIn]="">
+          {{formatFormValue(form.value)}}
 <!--          <app-order-report [data]="form.value"></app-order-report>-->
           <section class="form__section">
             <div class="form__fieldset">

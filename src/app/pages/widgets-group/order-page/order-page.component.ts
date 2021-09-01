@@ -119,4 +119,16 @@ export class OrderPageComponent implements OnInit {
   setCityToId(id: string) {
     this.cityToId = id;
   }
+
+  formatFormValue(obj) {
+    const newObj = {
+      author: obj.steps[0].author,
+      sender: obj.steps[1].sender,
+      ['departure-point']: obj.steps[1]['departure-point'],
+      orders: obj.steps[2].orders,
+      ['pickup-point']: obj.steps[2]['pickup-point'],
+      recipient: obj.steps[2].recipient
+    };
+    console.log('formValue', newObj);
+  }
 }
