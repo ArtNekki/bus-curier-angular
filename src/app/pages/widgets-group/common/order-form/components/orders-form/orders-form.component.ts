@@ -70,7 +70,6 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
         // .pipe(delay(500))
         .subscribe((result: Array<CargoType>) => {
           if (result.length) {
-
             this.types = result;
           }
 
