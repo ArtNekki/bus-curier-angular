@@ -34,7 +34,6 @@ import {Subscription} from 'rxjs';
   ]
 })
 export class PackagingFormComponent extends SubFormComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() cityFromId: string;
   @Input() services: Array<Service> = [];
 
   public FormFieldMeta = formFieldMeta;
@@ -163,7 +162,6 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
 
   disableCheckbox(control) {
     // control.disable();
-    console.log('disable checkbox', control);
   }
 
   changeControlState(control, count: any) {
@@ -177,8 +175,6 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
   getCheckboxControl(i: number, arr: any) {
     return Object.values((arr[i] as FormGroup).controls)[0];
   }
-
-  // controls: AbstractControl[]
 
   getCounterControl(i: number, arr: any) {
     return Object.values((arr[i] as FormGroup).controls)[1];
@@ -206,6 +202,5 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
   }
 
   ngOnDestroy() {
-    // this.packagesSub.unsubscribe();
   }
 }

@@ -35,8 +35,8 @@ import {Subscription} from 'rxjs';
     ])
   ])]
 })
-export class ServicesFormComponent extends SubFormComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() cityFromId: string;
+export class ServicesFormComponent extends SubFormComponent implements OnInit, OnChanges {
+  @Input() services: Array<Service> = [];
 
   public FormControlName = FormControlName;
   public FormFieldMeta = formFieldMeta;
@@ -45,9 +45,6 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
   public currentService: string;
   public activeCheckboxId: string;
   public formattedData = {};
-  public isLoading = false;
-
-  public servicesSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -57,49 +54,41 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
   }
 
   ngOnInit(): void {
-
     this.formGroup = new FormGroup({
       items: new FormArray([])
     });
+
+    this.setServices(this.services);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.cityFromId && changes.cityFromId.currentValue) {
-      this.setServices(changes.cityFromId.currentValue);
+    if (changes.services && changes.services.currentValue.length && this.formGroup) {
+      this.items.clear();
+      this.setServices(changes.services.currentValue);
     }
   }
 
-  setServices(id: string) {
-    this.servicesSub = this.calcService.getServices(id).pipe(
-      tap(() => {
-        this.isLoading = true;
-        this.items.clear();
-      }),
-      // delay(5000)
-    ).subscribe((arr: Array<Service>) => {
-      this.isLoading = false;
+  setServices(arr: Array<Service>) {
+    arr.filter((item: Service) => item.group_id === '3')
+      .forEach((item: Service) => {
+        this.formattedData[item.id] = {
+          name: item.name,
+          site_name: item.site_name,
+          params: item.property,
+          price: item.price
+        };
 
-      arr.filter((item: Service) => item.group_id === '3')
-        .forEach((item: Service) => {
-          this.formattedData[item.id] = {
-            name: item.name,
-            site_name: item.site_name,
-            params: item.property,
-            price: item.price
-          };
-
-          if (this.checkSms(item.name)) {
-            this.items.push(new FormGroup({
-              [item.id]: new FormControl(''),
-              [FormControlName.Tel]: new FormControl('', {updateOn: 'blur'})
-            }));
-          } else if (this.checkInsurance(item.name)) {
-            this.items.push(new FormGroup({
-              [item.id]: new FormControl(''),
-              [FormControlName.Sum]: new FormControl('', {updateOn: 'blur'})
-            }));
-          }});
-    });
+        if (this.checkSms(item.name)) {
+          this.items.push(new FormGroup({
+            [item.id]: new FormControl(''),
+            [FormControlName.Tel]: new FormControl('', {updateOn: 'blur'})
+          }));
+        } else if (this.checkInsurance(item.name)) {
+          this.items.push(new FormGroup({
+            [item.id]: new FormControl(''),
+            [FormControlName.Sum]: new FormControl('', {updateOn: 'blur'})
+          }));
+        }});
   }
 
   public get items(): FormArray {
@@ -120,9 +109,5 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
 
   setActiveCheckbox(id: string) {
     this.activeCheckboxId = id;
-  }
-
-  ngOnDestroy() {
-    this.servicesSub.unsubscribe();
   }
 }
