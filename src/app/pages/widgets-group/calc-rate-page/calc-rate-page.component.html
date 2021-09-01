@@ -18,8 +18,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="!form.get(FormControlName.DeparturePoint).invalid
-          && !(form.get(FormControlName.PickupPoint).invalid || form.get(FormControlName.PickupPoint).disabled)">
+      <div *ngIf="cityFromId && cityToId">
         <app-orders-form [cityFromId]="cityFromId" [cityToId]="cityToId" formControlName="orders"></app-orders-form>
       </div>
       <div class="form__fieldset form__fieldset--delivery">

@@ -79,10 +79,12 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
         });
     }
 
-    this.servicesSub = this.calcService.getServices(changes.cityFromId.currentValue)
-      .subscribe((arr: Array<Service>) => {
-        this.services = [...arr];
-      });
+    if (changes.cityFromId && changes.cityFromId.currentValue) {
+      this.servicesSub = this.calcService.getServices(changes.cityFromId.currentValue)
+        .subscribe((arr: Array<Service>) => {
+          this.services = [...arr];
+        });
+    }
   }
 
   public get orders(): FormArray {

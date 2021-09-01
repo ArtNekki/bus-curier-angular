@@ -28,6 +28,9 @@ export class OrderPageComponent implements OnInit {
   public currentUser = null;
   public invalidStep;
 
+  public cityFromId: string;
+  public cityToId: string;
+
   constructor(
     public orderForm: OrderFormService,
     public authService: AuthService,
@@ -46,9 +49,7 @@ export class OrderPageComponent implements OnInit {
           [FormControlName.DeparturePoint]: new FormControl('', [Validators.required])
         }),
         new FormGroup({
-          ['cargo-group']: new FormControl('', [Validators.required]),
-          [FormControlName.Packaging]: new FormControl(''),
-          [FormControlName.Services]: new FormControl(''),
+          ['orders']: new FormControl('', [Validators.required]),
           [FormControlName.Recipient]: new FormControl('', [Validators.required]),
           [FormControlName.PickupPoint]: new FormControl('', [Validators.required])
         }),
@@ -109,5 +110,13 @@ export class OrderPageComponent implements OnInit {
 
   setCurrentUser(user: any) {
     this.currentUser = user;
+  }
+
+  setCityFromId(id: string) {
+    this.cityFromId = id;
+  }
+
+  setCityToId(id: string) {
+    this.cityToId = id;
   }
 }
