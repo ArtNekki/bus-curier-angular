@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
@@ -10,6 +10,7 @@ import {CalculatorService} from '../../../../../../core/services/calculator/calc
 import {Subscription} from 'rxjs';
 import Select from '../../../../../../core/models/Select';
 import CargoType from '../../../../../../core/models/CargoType';
+import Service from '../../../../../../core/models/Service';
 
 @Component({
   selector: 'app-auto-parts-form',
@@ -28,12 +29,13 @@ import CargoType from '../../../../../../core/models/CargoType';
     }
   ]
 })
-export class AutoPartsFormComponent extends SubFormComponent implements OnInit, OnDestroy {
+export class AutoPartsFormComponent extends SubFormComponent implements OnInit, OnChanges {
+  @Input() types: Array<CargoType> = [];
+
   public FormControlName = FormControlName;
 
   public formGroup: FormGroup;
   public parts: Array<Select> = [];
-  public partsSub: Subscription;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -50,21 +52,21 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
       ])
     });
 
+    this.setParts(this.types);
     this.formGroup.markAllAsTouched();
-
-    this.partsSub = this.calcService.getTypes(1, 1).subscribe((result: Array<CargoType>) => {
-      if (result.length) {
-
-        this.parts = result.filter((item: CargoType) => item.parent_id === '5' && item)
-                      .map((item: CargoType) => ({value: item.id, name: item.name}));
-      }
-    });
 
     super.ngOnInit();
   }
 
-  ngOnDestroy(): void {
-    this.partsSub.unsubscribe();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.types && changes.types.currentValue.length && this.formGroup) {
+      this.setParts(changes.types.currentValue);
+    }
+  }
+
+  setParts(arr: Array<CargoType>) {
+    this.parts = arr.filter((item: CargoType) => item.parent_id === '5' && item)
+      .map((item: CargoType) => ({value: item.id, name: item.name}));
   }
 
   public get items(): FormArray {

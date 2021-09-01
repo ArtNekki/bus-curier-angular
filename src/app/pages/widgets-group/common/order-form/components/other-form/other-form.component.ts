@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, Input, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
@@ -29,6 +29,8 @@ import {CalculatorService} from '../../../../../../core/services/calculator/calc
   ]
 })
 export class OtherFormComponent extends SubFormComponent implements OnInit {
+  @Input() types: Array<CargoType> = [];
+
   public FormControlName = FormControlName;
 
   public formGroup: FormGroup;

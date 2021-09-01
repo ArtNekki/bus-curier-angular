@@ -140,8 +140,6 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes changes', changes);
-
     if (changes.types && changes.types.currentValue.length  && !changes.types.firstChange) {
       this.setTypes(changes.types.currentValue, true);
     }
