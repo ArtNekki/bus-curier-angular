@@ -8,6 +8,8 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
 import CargoType from '../../../../../../core/models/CargoType';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
+import {tap} from 'rxjs/operators';
+import Service from '../../../../../../core/models/Service';
 
 @Component({
   selector: 'app-orders-form',
@@ -34,8 +36,12 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
 
   public formGroup: FormGroup;
   public currentCargoIndex = 0;
+
   public types: Array<any> = [];
   public typesSub: Subscription;
+
+  public services: Array<Service> = [];
+  public servicesSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -73,6 +79,11 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
           // this.formGroup.reset(this.formGroup.value);
         });
     }
+
+    this.servicesSub = this.calcService.getServices(changes.cityFromId.currentValue)
+      .subscribe((arr: Array<Service>) => {
+        this.services = [...arr];
+      });
   }
 
   public get orders(): FormArray {

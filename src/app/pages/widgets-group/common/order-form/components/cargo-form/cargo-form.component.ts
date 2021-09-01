@@ -14,6 +14,7 @@ import Select from '../../../../../../core/models/Select';
 import {Subscription} from 'rxjs';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {delay} from 'rxjs/operators';
+import Service from '../../../../../../core/models/Service';
 
 @Component({
   selector: 'app-cargo-form',
@@ -35,7 +36,8 @@ import {delay} from 'rxjs/operators';
 })
 export class CargoFormComponent extends SubFormComponent implements OnInit, OnChanges {
   @Input() cityFromId: string;
-  @Input() types;
+  @Input() types: Array<CargoType>;
+  @Input() services: Array<Service>;
 
   public Cargo = {
     Docs: '1',
@@ -138,6 +140,7 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
 
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes changes', changes);
 
     if (changes.types && changes.types.currentValue.length  && !changes.types.firstChange) {
       this.setTypes(changes.types.currentValue, true);

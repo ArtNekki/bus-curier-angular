@@ -35,6 +35,7 @@ import {Subscription} from 'rxjs';
 })
 export class PackagingFormComponent extends SubFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() cityFromId: string;
+  @Input() services: Array<Service> = [];
 
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
@@ -63,64 +64,67 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
       [FormControlName.Skin]: new FormArray([]),
       [FormControlName.Other]: new FormArray([])
     });
+
+    this.setPackage(this.services);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.cityFromId && changes.cityFromId.currentValue) {
-      this.setPackage(changes.cityFromId.currentValue);
+
+    if (changes.services && changes.services.currentValue.length && this.formGroup) {
+      this.clearPackage();
+      this.setPackage(changes.services.currentValue);
     }
   }
 
-  setPackage(id: string) {
-   this.packagesSub = this.calcService.getServices(id).pipe(
-      tap(() => {
-        this.boxes.clear();
-        this.safePacks.clear();
-        this.plasticPacks.clear();
-        this.skins.clear();
-        this.other.clear();
-      })
-    ).subscribe((arr: Array<Service>) => {
-      const packages = arr.filter((item: Service) => item.group_id === '1');
+  setPackage(arr: Array<Service>) {
 
-      packages.forEach((item: Service) => {
-        this.formattedData[item.id] = { name: item.name, site_name: item.site_name, params: item.property, price: item.price };
+    const packages = arr.filter((item: Service) => item.group_id === '1');
 
-        switch (item.subgroup_id) {
-          case '1':
-            this.boxes.push(new FormGroup({
-              [item.id]: new FormControl(''),
-              [FormControlName.Counter]: new FormControl(0)
-            }));
-            break;
-          case '2':
-            this.safePacks.push(new FormGroup({
-              [item.id]: new FormControl(''),
-              [FormControlName.Counter]: new FormControl('')
-            }));
-            break;
-          case '3':
-            this.plasticPacks.push(new FormGroup({
-              [item.id]: new FormControl(''),
-              [FormControlName.Counter]: new FormControl('')
-            }));
-            break;
-          case '4':
-          case '5':
-            this.other.push(new FormGroup({
-              [item.id]: new FormControl(''),
-              [FormControlName.Counter]: new FormControl('')
-            }));
-            break;
-          case '6':
-            this.skins.push(new FormGroup({
-              [item.id]: new FormControl(''),
-              [FormControlName.Counter]: new FormControl('')
-            }));
-            break;
-        }
-      });
+    packages.forEach((item: Service) => {
+      this.formattedData[item.id] = { name: item.name, site_name: item.site_name, params: item.property, price: item.price };
+
+      switch (item.subgroup_id) {
+        case '1':
+          this.boxes.push(new FormGroup({
+            [item.id]: new FormControl(''),
+            [FormControlName.Counter]: new FormControl(0)
+          }));
+          break;
+        case '2':
+          this.safePacks.push(new FormGroup({
+            [item.id]: new FormControl(''),
+            [FormControlName.Counter]: new FormControl('')
+          }));
+          break;
+        case '3':
+          this.plasticPacks.push(new FormGroup({
+            [item.id]: new FormControl(''),
+            [FormControlName.Counter]: new FormControl('')
+          }));
+          break;
+        case '4':
+        case '5':
+          this.other.push(new FormGroup({
+            [item.id]: new FormControl(''),
+            [FormControlName.Counter]: new FormControl('')
+          }));
+          break;
+        case '6':
+          this.skins.push(new FormGroup({
+            [item.id]: new FormControl(''),
+            [FormControlName.Counter]: new FormControl('')
+          }));
+          break;
+      }
     });
+  }
+
+  clearPackage() {
+    this.boxes.clear();
+    this.safePacks.clear();
+    this.plasticPacks.clear();
+    this.skins.clear();
+    this.other.clear();
   }
 
   public get boxes(): FormArray {
@@ -202,6 +206,6 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
   }
 
   ngOnDestroy() {
-    this.packagesSub.unsubscribe();
+    // this.packagesSub.unsubscribe();
   }
 }
