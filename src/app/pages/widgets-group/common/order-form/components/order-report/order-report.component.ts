@@ -47,6 +47,20 @@ export class OrderReportComponent implements OnInit {
     ['office']: 'Отделение',
   };
 
+  public Cargo = {
+    Docs: '1',
+    Parcels: '2',
+    AutoParts: '5',
+    Other: '21'
+  };
+
+  public CargoName = {
+    1: 'Документы',
+    2: 'Посылки',
+    5: 'Автозапчасти',
+    21: 'Другое'
+  };
+
   constructor(public formUtils: FormUtilsService) { }
 
   ngOnInit(): void {
@@ -130,8 +144,8 @@ export class OrderReportComponent implements OnInit {
     return result;
   }
 
-  setCargoType(type: any) {
-    return [{name: 'Характер груза', value: type}];
+  get orders() {
+    return this.data.orders;
   }
 
   formatCourier(data, target) {
@@ -167,6 +181,10 @@ export class OrderReportComponent implements OnInit {
       .filter((item) => item);
   }
 
+  setCargoType(type: any) {
+    return [{name: 'Тип груза', value: type}];
+  }
+
   formatParcel(item: any) {
     return [
       {name: 'Габариты',
@@ -183,6 +201,10 @@ export class OrderReportComponent implements OnInit {
 
   formatAutoparts(item: any) {
     return [{name: 'Запчасть', value: item}];
+  }
+
+  formatOther(item: any) {
+    return [{name: 'Другое', value: item}];
   }
 
   formatData(data) {
