@@ -115,22 +115,24 @@ export class OrderReportComponent implements OnInit {
   }
 
   formatCourier(data, target, name) {
-    const address = {[name]: `
+    const address = {[FormControlName.Address]: `
       ул. ${target.street},
       д. ${target.building},
       кв. ${target.apartment}`};
 
     data = Object.entries(Object.assign(data, address))
       .map((item: [string, string]) => {
-        if ((item[0] === FormControlName.Options) || (item[0] === FormControlName.Location)) {
-          return null;
+        if ((item[0] === FormControlName.Options)) {
+          const time = item[1][item[1][FormControlName.Active]][FormControlName.CourierTime];
+          return time ? {name: 'Вызов курьера', value: time} : null;
         } else {
           return {name: this.FormFieldMeta[item[0]].label, value: item[1]};
         }
       })
       .filter((item) => item);
 
-    console.log('data666', data);
+    console.log('data 5555', data);
+
     return data;
   }
 
