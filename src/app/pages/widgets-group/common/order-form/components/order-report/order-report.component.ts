@@ -17,96 +17,88 @@ export class OrderReportComponent implements OnInit {
   constructor(public formUtils: FormUtilsService) { }
 
   ngOnInit(): void {
-    console.log('services', this.services);
+
   }
 
   get author() {
-    const author = this.data.steps[0].author;
+    const author = this.data.author;
 
     return this.formatData(author[author.active]);
   }
 
   get sender() {
-    return this.formatData(this.data.steps[1].sender);
+    return this.formatData(this.data.sender);
   }
 
   get recipient() {
-    return this.formatData(this.data.steps[2].recipient);
+    return this.formatData(this.data.recipient);
   }
 
-  get services() {
-    const data = this.data.steps[2][FormControlName.Services];
-
-    if (!data) {
-      return;
-    }
-
-    return Object.entries(data).map((el) => {
-      return {name: this.FormFieldMeta[el[0]].label, value: Object.values(el[1])[1]};
-    });
-  }
+  // get services() {
+  //   const data = this.data.steps[2][FormControlName.Services];
+  //
+  //   if (!data) {
+  //     return;
+  //   }
+  //
+  //   return Object.entries(data).map((el) => {
+  //     return {name: this.FormFieldMeta[el[0]].label, value: Object.values(el[1])[1]};
+  //   });
+  // }
 
   get departurePoint() {
-    let data =  this.data.steps[1][FormControlName.DeparturePoint];
+    const data =  this.data[FormControlName.DeparturePoint];
 
     if (!data) {
       return;
     }
 
-    const dispatchData = data[FormControlName.DispatchData];
-    const activeDispatch = dispatchData[dispatchData.active];
+    let result;
 
-    const formattedDispatch = {[dispatchData.active]: `
-    ул. ${activeDispatch.street},
-    д. ${activeDispatch.building},
-    кв. ${activeDispatch.apartment}`};
+    const options = data[FormControlName.Options];
+    const target = options[options.active];
 
-    data = Object.entries(Object.assign(data, formattedDispatch))
-      .map((item: [string, string]) => {
-        if ((item[0] === FormControlName.DispatchData) || (item[0] === FormControlName.AddressPoints)) {
-          return null;
-        } else {
-          return {name: this.FormFieldMeta[item[0]].label, value: item[1]};
-        }
-      })
-      .filter((item) => item);
+    switch (options.active) {
+      case FormControlName.Give:
+        break;
+      case FormControlName.Pickup:
+        result = this.formatCourier(data, target, options.active);
+        break;
+    }
 
-    return data;
+    return result;
   }
 
   get pickupPoint() {
-    let data =  this.data.steps[2][FormControlName.PickupPoint];
+    const data =  this.data[FormControlName.PickupPoint];
 
     if (!data) {
       return;
     }
 
-    const receiveData = data[FormControlName.ReceiveData];
-    const activeReceive = receiveData[receiveData.active];
+    let result;
 
-    const formatted = {[receiveData.active]: `
-    ул. ${activeReceive.street},
-    д. ${activeReceive.building},
-    кв. ${activeReceive.apartment}`};
+    const options = data[FormControlName.Options];
+    const target = options[options.active];
 
-    data = Object.entries(Object.assign(data, formatted))
-      .map((item: [string, string]) => {
-        if ((item[0] === FormControlName.ReceiveData) || (item[0] === FormControlName.AddressPoints)) {
-          return null;
-        } else {
-          return {name: this.FormFieldMeta[item[0]].label, value: item[1]};
-        }
-      })
-      .filter((item) => item);
+    switch (options.active) {
+      case FormControlName.Get:
+        break;
+      case FormControlName.Delivery:
+        result = this.formatCourier(data, target, options.active);
+        break;
+      case FormControlName.NeedToMeet:
+        break;
+    }
 
-    return data;
+    return result;
   }
 
-  get cargoList() {
-    const cargoItems =  this.data.steps[2]['cargo-group'].items;
-
-    return cargoItems;
-  }
+  // get cargoList() {
+  //   const cargoItems =  this.data.steps[2]['cargo-group'].items;
+  //
+  //   return cargoItems;
+  // }
 
   formatData(data) {
     if (!data) {
@@ -120,6 +112,26 @@ export class OrderReportComponent implements OnInit {
 
   setCargoType(type: any) {
     return [{name: 'Характер груза', value: type}];
+  }
+
+  formatCourier(data, target, name) {
+    const address = {[name]: `
+      ул. ${target.street},
+      д. ${target.building},
+      кв. ${target.apartment}`};
+
+    data = Object.entries(Object.assign(data, address))
+      .map((item: [string, string]) => {
+        if ((item[0] === FormControlName.Options) || (item[0] === FormControlName.Location)) {
+          return null;
+        } else {
+          return {name: this.FormFieldMeta[item[0]].label, value: item[1]};
+        }
+      })
+      .filter((item) => item);
+
+    console.log('data666', data);
+    return data;
   }
 
   formatParcel(item: any) {
@@ -140,22 +152,22 @@ export class OrderReportComponent implements OnInit {
     return [{name: 'Запчасть', value: item}];
   }
 
-  get packaging() {
-    const packaging = this.data.steps[2][FormControlName.Packaging];
-
-    if (!packaging) {
-      return;
-    }
-
-    const result = packaging.items
-      .filter((item) => {
-        return item.counter > 0 && item;
-      })
-      .map((el) => {
-        const label = this.FormFieldMeta[Object.keys(el)[0]].label;
-        return [label.toString(), `(${el.counter} шт.)`];
-      });
-
-    return [{name: 'Наименование', value: result.join(`, `)}];
-  }
+  // get packaging() {
+  //   const packaging = this.data.steps[2][FormControlName.Packaging];
+  //
+  //   if (!packaging) {
+  //     return;
+  //   }
+  //
+  //   const result = packaging.items
+  //     .filter((item) => {
+  //       return item.counter > 0 && item;
+  //     })
+  //     .map((el) => {
+  //       const label = this.FormFieldMeta[Object.keys(el)[0]].label;
+  //       return [label.toString(), `(${el.counter} шт.)`];
+  //     });
+  //
+  //   return [{name: 'Наименование', value: result.join(`, `)}];
+  // }
 }

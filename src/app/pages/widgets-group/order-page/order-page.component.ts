@@ -121,14 +121,13 @@ export class OrderPageComponent implements OnInit {
   }
 
   formatFormValue(obj) {
-    const newObj = {
-      author: obj.steps[0].author,
-      sender: obj.steps[1].sender,
-      ['departure-point']: obj.steps[1]['departure-point'],
+    return {
+      [FormControlName.Author]: obj.steps[0].author,
+      [FormControlName.Sender]: obj.steps[1].sender,
+      [FormControlName.DeparturePoint]: obj.steps[1][FormControlName.DeparturePoint],
       orders: obj.steps[2].orders,
-      ['pickup-point']: obj.steps[2]['pickup-point'],
-      recipient: obj.steps[2].recipient
+      [FormControlName.PickupPoint]: obj.steps[2][FormControlName.PickupPoint],
+      [FormControlName.Recipient]: obj.steps[2].recipient
     };
-    console.log('formValue', newObj);
   }
 }

@@ -84,5 +84,10 @@ export default {
   Skin: 'skin',
   Options: 'options',
   Orders: 'orders',
-  Office: 'office'
+  Office: 'office',
+  Give: 'give',
+  Get: 'get',
+  NeedToMeet: 'need-to-meet',
+  Pickup: 'pickup',
+  Delivery: 'delivery'
 };

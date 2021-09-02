@@ -285,4 +285,24 @@ export default {
     label: 'Другое',
     type: 'radio'
   },
+  [FormControlName.Give]: {
+    label: 'Cдать в отделение',
+    type: 'text'
+  },
+  [FormControlName.Get]: {
+    label: 'Забрать в отделении',
+    type: 'text'
+  },
+  [FormControlName.Pickup]: {
+    label: 'Вызвать курьера',
+    type: 'text'
+  },
+  [FormControlName.Delivery]: {
+    label: 'Вызвать курьера',
+    type: 'text'
+  },
+  [FormControlName.NeedToMeet]: {
+    label: 'Встретить с автобуса',
+    type: 'text'
+  },
 };
