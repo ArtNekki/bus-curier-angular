@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-order-report',
@@ -13,6 +14,38 @@ export class OrderReportComponent implements OnInit {
 
   public FormControlName = FormControlName;
   public FormFieldMeta = formFieldMeta;
+
+  public Label = {
+    [FormControlName.Fio]: 'ФИО',
+    [FormControlName.FirstName]: 'Имя',
+    [FormControlName.MiddleName]: 'Отчество',
+    [FormControlName.LastName]: 'Фамилия',
+    [FormControlName.Role]: 'Роль',
+    [FormControlName.Tel]: 'Телефон',
+    [FormControlName.Email]: 'Email',
+    [FormControlName.Date]: 'Дата',
+    [FormControlName.Location]: 'Город',
+    [FormControlName.Give]: 'Сдать в отделение',
+    [FormControlName.Pickup]: 'Вызвать курьера',
+    [FormControlName.Get]: 'Забрать в отделении',
+    [FormControlName.Delivery]: 'Вызвать курьера',
+    [FormControlName.NeedToMeet]: 'Встретить с автобуса',
+    [FormControlName.Doc]: 'Документ',
+    [FormControlName.RusPassport]: 'Паспорт РФ',
+    [FormControlName.Box]: 'Коробка',
+    [FormControlName.PlasticPack]: 'Пластиковый пакет',
+    [FormControlName.SafePack]: 'Сейф-пакет',
+    [FormControlName.Packaging]: 'Упаковка',
+    [FormControlName.Skin]: 'Пленка',
+    [FormControlName.Other]: 'Другое',
+    [FormControlName.Services]: 'Услуги',
+    [FormControlName.Street]: 'Улица',
+    [FormControlName.Building]: 'Строение',
+    [FormControlName.Apartment]: 'Квартира',
+    [FormControlName.CourierTime]: 'Время приезда курьера',
+    [FormControlName.Address]: 'Адрес',
+    ['office']: 'Отделение',
+  };
 
   constructor(public formUtils: FormUtilsService) { }
 
@@ -60,9 +93,10 @@ export class OrderReportComponent implements OnInit {
 
     switch (options.active) {
       case FormControlName.Give:
+        result = this.formatOffice(data, target);
         break;
       case FormControlName.Pickup:
-        result = this.formatCourier(data, target, options.active);
+        result = this.formatCourier(data, target);
         break;
     }
 
@@ -83,57 +117,54 @@ export class OrderReportComponent implements OnInit {
 
     switch (options.active) {
       case FormControlName.Get:
+        result = this.formatOffice(data, target);
         break;
       case FormControlName.Delivery:
-        result = this.formatCourier(data, target, options.active);
+        result = this.formatCourier(data, target);
         break;
       case FormControlName.NeedToMeet:
+        result = this.formatNeedToMeet(data, target);
         break;
     }
 
     return result;
   }
 
-  // get cargoList() {
-  //   const cargoItems =  this.data.steps[2]['cargo-group'].items;
-  //
-  //   return cargoItems;
-  // }
-
-  formatData(data) {
-    if (!data) {
-      return;
-    }
-
-    return Object.entries(data).map((item: [string, string]) => {
-      return {name: this.FormFieldMeta[item[0]].label, value: item[1] || 'нет'};
-    });
-  }
-
   setCargoType(type: any) {
     return [{name: 'Характер груза', value: type}];
   }
 
-  formatCourier(data, target, name) {
-    const address = {[FormControlName.Address]: `
-      ул. ${target.street},
-      д. ${target.building},
-      кв. ${target.apartment}`};
+  formatCourier(data, target) {
+    const obj =
+      {
+        [FormControlName.Address]: `ул. ${target.street}, д. ${target.building},кв. ${target.apartment}`,
+        [FormControlName.CourierTime]: target[FormControlName.CourierTime]
+      };
 
-    data = Object.entries(Object.assign(data, address))
+    return this.formatPointData(Object.assign(data, obj));
+  }
+
+  formatOffice(data, target) {
+    const obj = {[FormControlName.Office]: target.office};
+
+    return this.formatPointData(Object.assign(data, obj));
+  }
+
+  formatNeedToMeet(data, target) {
+    const obj = {[FormControlName.NeedToMeet]: 'Да'};
+    return this.formatPointData(Object.assign(data, obj));
+  }
+
+  formatPointData(obj) {
+    return Object.entries(obj)
       .map((item: [string, string]) => {
         if ((item[0] === FormControlName.Options)) {
-          const time = item[1][item[1][FormControlName.Active]][FormControlName.CourierTime];
-          return time ? {name: 'Вызов курьера', value: time} : null;
+          return null;
         } else {
-          return {name: this.FormFieldMeta[item[0]].label, value: item[1]};
+          return {name: this.Label[item[0]], value: item[1]};
         }
       })
       .filter((item) => item);
-
-    console.log('data 5555', data);
-
-    return data;
   }
 
   formatParcel(item: any) {
@@ -152,6 +183,16 @@ export class OrderReportComponent implements OnInit {
 
   formatAutoparts(item: any) {
     return [{name: 'Запчасть', value: item}];
+  }
+
+  formatData(data) {
+    if (!data) {
+      return;
+    }
+
+    return Object.entries(data).map((item: [string, string]) => {
+      return {name: this.Label[item[0]], value: item[1] || 'нет'};
+    });
   }
 
   // get packaging() {
