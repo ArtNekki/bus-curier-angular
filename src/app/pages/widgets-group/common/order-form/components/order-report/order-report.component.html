@@ -44,6 +44,9 @@
       </ng-container>
     </ng-container>
     <app-data-list [data]="formatPackage(order.packaging)"></app-data-list>
+    <ng-container *ngIf="order.services && formatServices(order.services).length">
+      <app-data-list [data]="formatServices(order.services)"></app-data-list>
+    </ng-container>
   </section>
   <section class="form__section form__section--w-underline">
     <h2 class="form__heading form__heading--w-counter">Упаковка</h2>

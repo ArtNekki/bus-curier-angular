@@ -302,4 +302,30 @@ export class OrderReportComponent implements OnInit, OnDestroy {
 
     return [{name: 'Упаковка', value: list.join(', ')}];
   }
+
+  formatServices(services: any) {
+    if (!services.items || !services.items.length) {
+      return;
+    }
+
+    const list = services.items
+      .map((obj) => {
+        const selected = Object.values(obj)[0];
+        const id = Object.keys(obj)[0];
+        const value = Object.values(obj)[1];
+
+        return selected ? {
+          id,
+          value,
+          name: this.services[id].name,
+          price: this.services[id].price,
+        } : null;
+      })
+      .filter((item) => item)
+      .map((item) => {
+        return `${item.name}`;
+      });
+
+    return [{name: 'Доп. услуги', value: list.join(', ')}];
+  }
 }
