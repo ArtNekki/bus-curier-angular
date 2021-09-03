@@ -3,33 +3,31 @@
     <app-link href="#" mods="gray">
       Расписание движения рейсовых автобусов
       <svg-icon class="icon"
-        src="assets/img/svg/info.svg" width="22" height="21"
+                src="assets/img/svg/info.svg" width="22" height="21"
       ></svg-icon>
     </app-link>
-<!--    {{{ link href="#" text="" type="help" mods="gray, align-start"}}}-->
+    <!--    {{{ link href="#" text="" type="help" mods="gray, align-start"}}}-->
   </div>
   <section class="sidebar-result__main">
-    <h2 class="sidebar-result__title">Расчет</h2>
-    <div *ngIf="!isOrderVisible" class="sidebar-result__info">
-        <p>Для расчета стоимости отправления, укажите место отправления и прибытия, а также тип груза.</p>
-        <p><b>Внимание!</b> Информация, приведенная в калькуляторе справочная, точную информацию по доставкам в населенные пункты вы можете уточнить в чате на сайте или у диспетчера.</p>
-        <p>Если вам необходимо отправить посылку между разными регионами России, воспользуйтесь другим калькулятором -
-           <app-link href="#" mods="blue">расчет перевозки по России.</app-link>
-        </p>
+    <div *ngIf="!form" class="sidebar-result__info">
+      <p>Для расчета стоимости отправления, укажите место отправления и прибытия, а также тип груза.</p>
+      <p><b>Внимание!</b> Информация, приведенная в калькуляторе справочная, точную информацию по доставкам в населенные пункты вы можете уточнить в чате на сайте или у диспетчера.</p>
+      <p>Если вам необходимо отправить посылку между разными регионами России, воспользуйтесь другим калькулятором -
+        <app-link href="#" mods="blue">расчет перевозки по России.</app-link>
+      </p>
     </div>
-    <div class="sidebar-result__details" [style]="{display: isOrderVisible ? 'block' : 'none'}">
-      <app-order-result [data]="data" (change)="showOrder()"></app-order-result>
-    </div>
-    <div *ngIf="currentStep === FormStep.Four" class="sidebar-result__total">
-      <p><span class="gray">Итого: </span><b>1 550 руб.</b></p>
-      <button type="button" class="sidebar-result__collapse">&#160;</button>
-    </div>
-    <div *ngIf="currentStep === FormStep.Four" class="sidebar-result__footer">
-      <small>Срок отправки: от 2 до 24 часов<br />*в направлении Владивосток-Находка возможна задержка   сроков до 24 часов.</small>
-      <div class="sidebar-result__submit">
-        <app-btn type="button" mods="lg">Оформить заказ</app-btn>
+    <ng-container *ngIf="form">
+      <div class="sidebar-result__details">
+        <h2 class="sidebar-result__title">Расчет</h2>
+        <app-order-result [data]="form"></app-order-result>
       </div>
-      <button type="button" class="sidebar-result__reset">Сбросить расчет</button>
-    </div>
+      <div class="sidebar-result__total">
+        <p><span class="gray">Итого: </span><b>1 550 руб.</b></p>
+        <button type="button" class="sidebar-result__collapse">&#160;</button>
+      </div>
+      <div class="sidebar-result__footer">
+        <small>Срок отправки: от 2 до 24 часов<br />*в направлении Владивосток-Находка возможна задержка   сроков до 24 часов.</small>
+      </div>
+    </ng-container>
   </section>
 </aside>

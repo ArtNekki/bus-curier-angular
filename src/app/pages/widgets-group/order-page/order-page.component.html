@@ -50,9 +50,11 @@
           <svg-icon class="icon" src="assets/img/svg/back.svg" width="24" height="20"></svg-icon>
           Назад
         </app-btn>
-        <app-btn mods="lg" (click)="goNext()" [disabled]="steps[currentStep].invalid">Далее</app-btn>
+        <app-btn mods="lg" (click)="goNext()" [disabled]="steps[currentStep].invalid">
+          {{currentStep === FormStep.Four ? 'Оформить заявку' : 'Далее'}}
+        </app-btn>
       </div>
     </form>
   </div>
-<!--  <app-sidebar-result [currentStep]="currentStep" [data]="form.value"></app-sidebar-result>-->
+  <app-sidebar-result [form]="formData"></app-sidebar-result>
 </div>

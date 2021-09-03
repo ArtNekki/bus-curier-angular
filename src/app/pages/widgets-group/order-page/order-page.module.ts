@@ -4,10 +4,12 @@ import {SharedModule} from '../../../shared/shared.module';
 import {OrderPageComponent} from './order-page.component';
 import {ModalsModule} from '../../../modals/modals.module';
 import {OrderFormModule} from '../common/order-form/order-form.module';
+import {SidebarResultComponent} from './components/sidebar-result/sidebar-result.component';
 
 @NgModule({
   declarations: [
-    OrderPageComponent
+    OrderPageComponent,
+    SidebarResultComponent
   ],
   imports: [
     CommonModule,

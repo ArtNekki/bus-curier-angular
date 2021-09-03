@@ -31,6 +31,8 @@ export class OrderPageComponent implements OnInit {
   public cityFromId: string;
   public cityToId: string;
 
+  public formData;
+
   constructor(
     public orderForm: OrderFormService,
     public authService: AuthService,
@@ -80,7 +82,13 @@ export class OrderPageComponent implements OnInit {
 
     this.orderForm.$form.next(this.form);
 
-    console.log('this.form', this.form);
+    // console.log('this.form', this.form);
+
+    if (this.currentStep === this.FormStep.Four) {
+      this.formData = this.formatFormValue(this.form.value);
+    } else {
+      this.formData = null;
+    }
   }
 
   goPrev() {
@@ -90,11 +98,17 @@ export class OrderPageComponent implements OnInit {
 
     this.currentStep--;
     this.scrollToTop();
+
+    if (this.currentStep === this.FormStep.Four) {
+      this.formData = this.formatFormValue(this.form.value);
+    } else {
+      this.formData = null;
+    }
   }
 
-  get formData() {
-    return this.form.value;
-  }
+  // get formData() {
+  //   return this.form.value;
+  // }
 
   scrollToTop() {
     window.scrollTo({
