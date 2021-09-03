@@ -1,15 +1,19 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {FormControl, Validators} from '@angular/forms';
+import {Subscription} from 'rxjs';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
+import CityTo from '../../../../../../core/models/CityTo';
+import CargoType from '../../../../../../core/models/CargoType';
 
 @Component({
   selector: 'app-order-report',
   templateUrl: './order-report.component.html',
   styleUrls: ['./order-report.component.scss']
 })
-export class OrderReportComponent implements OnInit {
+export class OrderReportComponent implements OnInit, OnDestroy {
   @Input() data;
 
   public FormControlName = FormControlName;
@@ -61,10 +65,61 @@ export class OrderReportComponent implements OnInit {
     21: 'Другое'
   };
 
-  constructor(public formUtils: FormUtilsService) { }
+  private PackageName = {
+    1: 'Коробка',
+    2: 'Сейф-пакет',
+    3: 'Пластиковый пакет',
+    4: 'Другое',
+    5: 'Другое',
+    6: 'Пленка'
+  };
+
+  public types = [];
+  private typesSub: Subscription;
+
+  public services = [];
+  private servicesSub: Subscription;
+
+  public cities = [];
+  private citiesSub: Subscription;
+
+  constructor(
+    private calcService: CalculatorService,
+    public formUtils: FormUtilsService) { }
 
   ngOnInit(): void {
+    this.citiesSub = this.calcService.getCityTo('1', 0)
+      .subscribe((cities: Array<CityTo>) => {
+        if (cities.length) {
+          cities.forEach((city: any) => {
+            this.cities[city.id] = city;
+          });
+        }
+      });
 
+    this.typesSub = this.calcService.getTypes('1', '1')
+      .subscribe((types: Array<CargoType>) => {
+        if (types.length) {
+          types.forEach((type: any) => {
+            this.types[type.id] = type;
+          });
+        }
+      });
+
+    this.servicesSub = this.calcService.getServices('1')
+      .subscribe((services: Array<CargoType>) => {
+        if (services.length) {
+          services.forEach((service: any) => {
+            this.services[service.id] = service;
+          });
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.typesSub.unsubscribe();
+    this.servicesSub.unsubscribe();
+    this.citiesSub.unsubscribe();
   }
 
   get author() {
@@ -217,22 +272,34 @@ export class OrderReportComponent implements OnInit {
     });
   }
 
-  // get packaging() {
-  //   const packaging = this.data.steps[2][FormControlName.Packaging];
-  //
-  //   if (!packaging) {
-  //     return;
-  //   }
-  //
-  //   const result = packaging.items
-  //     .filter((item) => {
-  //       return item.counter > 0 && item;
-  //     })
-  //     .map((el) => {
-  //       const label = this.FormFieldMeta[Object.keys(el)[0]].label;
-  //       return [label.toString(), `(${el.counter} шт.)`];
-  //     });
-  //
-  //   return [{name: 'Наименование', value: result.join(`, `)}];
-  // }
+  formatPackage(data) {
+    const list = Object.entries(data)
+      .map(([key, value]: [string, any]) => {
+        return value.filter((item) => {
+          return item.counter;
+        });
+      })
+      .filter((array) => {
+        return array.length;
+      })
+      .reduce((acc, val) => acc.concat(val), [])
+      .map((obj) => {
+        const id = Object.keys(obj)[0];
+
+        return {
+          id,
+          name: this.services[id].name,
+          count: obj.counter,
+          price: this.services[id].price,
+          params: this.services[id].property,
+          type: this.PackageName[this.services[id].subgroup_id],
+          size: this.services[id].site_name
+        };
+      })
+      .map((obj) => {
+        return `${obj.type} ${obj.size} (${obj.count} шт.)`;
+      });
+
+    return [{name: 'Упаковка', value: list.join(', ')}];
+  }
 }

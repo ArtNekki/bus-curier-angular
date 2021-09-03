@@ -1,53 +1,56 @@
-<section class="form__section form__section--w-underline">
-  <h2 class="form__heading form__heading--w-counter">Автор</h2>
-  <app-data-list [data]="author"></app-data-list>
-</section>
-<section class="form__section form__section--w-underline">
-  <h2 class="form__heading form__heading--w-counter">Отправитель</h2>
-  <app-data-list [data]="sender"></app-data-list>
-</section>
-<section class="form__section form__section--w-underline">
-  <h2 class="form__heading form__heading--w-counter">Пункт отправления</h2>
+<ng-container *ngIf="cities.length && types.length && services.length">
+  <section class="form__section form__section--w-underline">
+    <h2 class="form__heading form__heading--w-counter">Автор</h2>
+    <app-data-list [data]="author"></app-data-list>
+  </section>
+  <section class="form__section form__section--w-underline">
+    <h2 class="form__heading form__heading--w-counter">Отправитель</h2>
+    <app-data-list [data]="sender"></app-data-list>
+  </section>
+  <section class="form__section form__section--w-underline">
+    <h2 class="form__heading form__heading--w-counter">Пункт отправления</h2>
     <app-data-list [data]="departurePoint"></app-data-list>
-</section>
-<section class="form__section form__section--w-underline">
-  <h2 class="form__heading form__heading--w-counter">Получатель</h2>
-  <app-data-list [data]="recipient"></app-data-list>
-</section>
-<section class="form__section form__section--w-underline">
-  <h2 class="form__heading form__heading--w-counter">Пункт получения</h2>
+  </section>
+  <section class="form__section form__section--w-underline">
+    <h2 class="form__heading form__heading--w-counter">Получатель</h2>
+    <app-data-list [data]="recipient"></app-data-list>
+  </section>
+  <section class="form__section form__section--w-underline">
+    <h2 class="form__heading form__heading--w-counter">Пункт получения</h2>
     <app-data-list [data]="pickupPoint"></app-data-list>
-</section>
-<section *ngFor="let order of orders.orders; let orderIndex = index" class="form__section form__section--w-underline">
-  <h2 class="form__heading form__heading--w-counter">Заказ №{{orderIndex + 1}}</h2>
-  <app-data-list [data]="setCargoType(CargoName[order.activeItem])"></app-data-list>
-  <ng-container *ngIf="order.activeItem === Cargo.Parcels">
-    <ng-container *ngFor="let parcels of order.items[order.activeItem]; let i = index">
-      <div class="form__mark">Место №{{i + 1}}</div>
-      <app-data-list [data]="formatParcel(parcels)"></app-data-list>
+  </section>
+  <section *ngFor="let order of orders.orders; let orderIndex = index" class="form__section form__section--w-underline">
+    <h2 class="form__heading form__heading--w-counter">Заказ №{{orderIndex + 1}}</h2>
+    <app-data-list [data]="setCargoType(CargoName[order.activeItem])"></app-data-list>
+    <ng-container *ngIf="order.activeItem === Cargo.Parcels">
+      <ng-container *ngFor="let parcels of order.items[order.activeItem]; let i = index">
+        <div class="form__mark">Место №{{i + 1}}</div>
+        <app-data-list [data]="formatParcel(parcels)"></app-data-list>
+      </ng-container>
     </ng-container>
-  </ng-container>
-  <ng-container *ngIf="order.activeItem === Cargo.Docs">
-    <app-data-list [data]="formatDocs(order.items[order.activeItem][FormControlName.Counter])"></app-data-list>
-  </ng-container>
-  <ng-container *ngIf="order.activeItem === Cargo.AutoParts">
-    <ng-container *ngFor="let part of order.items[order.activeItem]; let i = index">
-      <div class="form__mark">Место №{{i + 1}}</div>
-      <app-data-list [data]="formatAutoparts(part)"></app-data-list>
+    <ng-container *ngIf="order.activeItem === Cargo.Docs">
+      <app-data-list [data]="formatDocs(order.items[order.activeItem][FormControlName.Counter])"></app-data-list>
     </ng-container>
-  </ng-container>
-  <ng-container *ngIf="order.activeItem === Cargo.Other">
-    <ng-container *ngFor="let part of order.items[order.activeItem]; let i = index">
-      <div class="form__mark">Место №{{i + 1}}</div>
-      <app-data-list [data]="formatOther(part)"></app-data-list>
+    <ng-container *ngIf="order.activeItem === Cargo.AutoParts">
+      <ng-container *ngFor="let part of order.items[order.activeItem]; let i = index">
+        <div class="form__mark">Место №{{i + 1}}</div>
+        <app-data-list [data]="formatAutoparts(part)"></app-data-list>
+      </ng-container>
     </ng-container>
-  </ng-container>
-</section>
-<section class="form__section form__section--w-underline">
-  <h2 class="form__heading form__heading--w-counter">Упаковка</h2>
-<!--  <app-data-list [data]="packaging"></app-data-list>-->
-</section>
-<section class="form__section form__section--w-underline">
-  <h2 class="form__heading form__heading--w-counter">Дополнительные услуги</h2>
-<!--  <app-data-list [data]="services"></app-data-list>-->
-</section>
+    <ng-container *ngIf="order.activeItem === Cargo.Other">
+      <ng-container *ngFor="let part of order.items[order.activeItem]; let i = index">
+        <div class="form__mark">Место №{{i + 1}}</div>
+        <app-data-list [data]="formatOther(part)"></app-data-list>
+      </ng-container>
+    </ng-container>
+    <app-data-list [data]="formatPackage(order.packaging)"></app-data-list>
+  </section>
+  <section class="form__section form__section--w-underline">
+    <h2 class="form__heading form__heading--w-counter">Упаковка</h2>
+    <!--  <app-data-list [data]="packaging"></app-data-list>-->
+  </section>
+  <section class="form__section form__section--w-underline">
+    <h2 class="form__heading form__heading--w-counter">Дополнительные услуги</h2>
+    <!--  <app-data-list [data]="services"></app-data-list>-->
+  </section>
+</ng-container>
