@@ -4,6 +4,7 @@ import {WidgetsGroupComponent} from './widgets-group.component';
 import {TrackOrderPageComponent} from './track-order-page/track-order-page.component';
 import {CalcRatePageComponent} from './calc-rate-page/calc-rate-page.component';
 import {OrderPageComponent} from './order-page/order-page.component';
+import {OrderDonePageComponent} from './order-done-page/order-done-page.component';
 
 const routes: Routes = [
   {path: '', component: WidgetsGroupComponent, data: { title: 'Сервисы' }, children: [
@@ -11,6 +12,7 @@ const routes: Routes = [
       { path: 'track-order', component: TrackOrderPageComponent, data: { title: 'Отследить посылку' }},
       { path: 'calc-rate', component:  CalcRatePageComponent, data: { title: 'Расчет тарифа по Приморью' }},
       { path: 'order', component:  OrderPageComponent, data: { title: 'Онлайн-заявка' }},
+      { path: 'order-done', component:  OrderDonePageComponent, data: { title: 'Заявка оформлена' }},
       { path: 'search-order', component: null, data: { title: 'Поиск заказа' }}
   ]}
 ];

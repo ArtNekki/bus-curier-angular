@@ -5,6 +5,7 @@ import FormControlName from '../../../core/maps/FormControlName';
 import {OrderFormService} from '../../../core/services/order-form/order-form.service';
 import {AuthService} from '../../../core/services/auth/auth.service';
 import fadeIn from '../../../core/animations/fadeIn';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-order-page',
@@ -36,6 +37,7 @@ export class OrderPageComponent implements OnInit {
   constructor(
     public orderForm: OrderFormService,
     public authService: AuthService,
+    private router: Router,
     protected changeDetectorRef: ChangeDetectorRef
   ) { }
 
@@ -143,5 +145,9 @@ export class OrderPageComponent implements OnInit {
       [FormControlName.PickupPoint]: obj.steps[2][FormControlName.PickupPoint],
       [FormControlName.Recipient]: obj.steps[2].recipient
     };
+  }
+
+  completeOrder() {
+    this.router.navigate(['widgets', 'order-done']);
   }
 }

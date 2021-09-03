@@ -6,10 +6,12 @@ import {CalcRatePageModule} from './calc-rate-page/calc-rate-page.module';
 import {OrderPageModule} from './order-page/order-page.module';
 import {TrackOrderPageModule} from './track-order-page/track-order-page.module';
 import {SharedModule} from '../../shared/shared.module';
+import { OrderDonePageComponent } from './order-done-page/order-done-page.component';
 
 @NgModule({
   declarations: [
-    WidgetsGroupComponent
+    WidgetsGroupComponent,
+    OrderDonePageComponent
   ],
   imports: [
     CommonModule,

@@ -50,9 +50,14 @@
           <svg-icon class="icon" src="assets/img/svg/back.svg" width="24" height="20"></svg-icon>
           Назад
         </app-btn>
-        <app-btn mods="lg" (click)="goNext()" [disabled]="steps[currentStep].invalid">
-          {{currentStep === FormStep.Four ? 'Оформить заявку' : 'Далее'}}
+        <app-btn *ngIf="currentStep === FormStep.Four; else next" mods="lg" (click)="completeOrder()">
+          Оформить заявку
         </app-btn>
+        <ng-template #next>
+          <app-btn mods="lg" (click)="goNext()" [disabled]="steps[currentStep].invalid">
+            Далее
+          </app-btn>
+        </ng-template>
       </div>
     </form>
   </div>
