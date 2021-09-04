@@ -30,7 +30,7 @@ export const mainNav = [
       {link: 'no', name: 'Поиск заказа', sm: true},
       {link: 'account', name: 'Личный кабинет', sm: true},
       {link: 'orders/order', name: 'Онлайн-заявка', sm: true},
-      {link: 'orders/calc-rate', name: 'Расчет тарифа по Приморью', sm: true},
+      {link: 'orders/quick-order', name: 'Расчет тарифа по Приморью', sm: true},
       {link: 'no', name: 'Расчет тарифа по Республике Татарстан', sm: true},
       {link: 'no', name: 'Расчет тарифа по России', sm: true},
       {link: 'about', name: 'О компании'},

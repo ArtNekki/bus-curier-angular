@@ -10,11 +10,11 @@ import {ConfirmModalComponent} from '../../../modals/confirm-modal/confirm-modal
 import {SimpleModalService} from 'ngx-simple-modal';
 
 @Component({
-  selector: 'app-calc-rate-page',
-  templateUrl: './calc-rate-page.component.html',
-  styleUrls: ['./calc-rate-page.component.scss']
+  selector: 'app-quick-order-page',
+  templateUrl: './quick-order-page.component.html',
+  styleUrls: ['./quick-order-page.component.scss']
 })
-export class CalcRatePageComponent implements OnInit, DoCheck {
+export class QuickOrderPageComponent implements OnInit, DoCheck {
   public FormControlName = FormControlName;
 
   public form: FormGroup;
