@@ -37,6 +37,7 @@ import CargoType from '../../../../../../core/models/CargoType';
 })
 export class PickupPointFormComponent extends SubFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() cityFromId: string;
+  @Input() defaultCity: string;
 
   @Output() onChangeCity: EventEmitter<string> = new EventEmitter<string>();
   @Input() noLabel: boolean;
@@ -103,7 +104,15 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       .subscribe((cities: any) => {
         if (cities.length) {
           this.cities = [{value: '0', name: 'Выберите город'}, ...cities];
-          console.log('this.cities', this.cities);
+
+          setTimeout(() => {
+            if (this.defaultCity) {
+              this.formGroup.get(FormControlName.Location).setValue(this.defaultCity);
+              this.setCity(this.defaultCity);
+            } else {
+              this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
+            }
+          }, 0);
         }
       });
   }

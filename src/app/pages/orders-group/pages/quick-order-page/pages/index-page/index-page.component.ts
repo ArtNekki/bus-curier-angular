@@ -6,7 +6,7 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import {delay, tap} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'app-index-page',
@@ -26,11 +26,15 @@ export class IndexPageComponent implements OnInit, DoCheck {
   public cityFromId: string;
   public cityToId: string;
 
+  public defaultCityFromId = null;
+  public defaultCityToId = null;
+
   constructor(
     protected orderForm: OrderFormService,
     private calcService: CalculatorService,
     private simpleModal: SimpleModalService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -39,15 +43,9 @@ export class IndexPageComponent implements OnInit, DoCheck {
       ['orders']: new FormControl('', [Validators.required])
     });
 
-    this.orderForm.cityFrom$.pipe(
-      tap(() => {
-        this.loading = true;
-        this.cityId = null;
-      }),
-      delay(1000)
-    ).subscribe((id: string) => {
-      this.loading = false;
-      this.cityId = id;
+    this.route.queryParams.subscribe((params: Params) => {
+      this.defaultCityFromId = params.cityFromId;
+      this.defaultCityToId = params.cityToId;
     });
   }
 

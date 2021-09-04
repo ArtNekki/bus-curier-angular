@@ -44,7 +44,9 @@ const Department = {
 })
 export class DeparturePointFormComponent extends SubFormComponent implements OnInit, OnDestroy {
   @Output() onChangeCity: EventEmitter<string> = new EventEmitter<string>();
+
   @Input() noLabel: boolean;
+  @Input() defaultCity: string;
 
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
@@ -105,7 +107,12 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         this.cities = [{value: '0', name: 'Выберите город'}, ...cities];
 
         setTimeout(() => {
-          this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
+          if (this.defaultCity) {
+            this.formGroup.get(FormControlName.Location).setValue(this.defaultCity);
+            this.setCity(this.defaultCity);
+          } else {
+            this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
+          }
         }, 0);
       });
 
