@@ -5,12 +5,10 @@ import {OrdersGroupComponent} from './orders-group.component';
 import {QuickOrderPageModule} from './quick-order-page/quick-order-page.module';
 import {TrackOrderPageModule} from './track-order-page/track-order-page.module';
 import {SharedModule} from '../../shared/shared.module';
-import { OrderDonePageComponent } from './order-done-page/order-done-page.component';
 
 @NgModule({
   declarations: [
-    OrdersGroupComponent,
-    OrderDonePageComponent
+    OrdersGroupComponent
   ],
   imports: [
     CommonModule,
