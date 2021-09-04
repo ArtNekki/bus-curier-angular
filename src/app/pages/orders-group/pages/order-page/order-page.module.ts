@@ -4,7 +4,7 @@ import {SharedModule} from '../../../../shared/shared.module';
 import {OrderPageComponent} from './order-page.component';
 import {ModalsModule} from '../../../../modals/modals.module';
 import {OrderFormModule} from '../../common/order-form/order-form.module';
-import {SidebarResultComponent} from './components/sidebar-result/sidebar-result.component';
+import {SidebarComponent} from './components/sidebar/sidebar.component';
 import { DonePageComponent } from './pages/done-page/done-page.component';
 import { IndexPageComponent } from './pages/index-page/index-page.component';
 import {OrderRoutingModule} from './order-routing.module';
@@ -14,7 +14,7 @@ import { FailPageComponent } from './pages/fail-page/fail-page.component';
 @NgModule({
   declarations: [
     OrderPageComponent,
-    SidebarResultComponent,
+    SidebarComponent,
     DonePageComponent,
     IndexPageComponent,
     FailPageComponent

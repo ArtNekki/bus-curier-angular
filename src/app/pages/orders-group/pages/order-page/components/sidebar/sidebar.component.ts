@@ -2,11 +2,11 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {first} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-sidebar-result',
-  templateUrl: './sidebar-result.component.html',
-  styleUrls: ['./sidebar-result.component.scss']
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarResultComponent implements OnInit, OnChanges {
+export class SidebarComponent implements OnInit, OnChanges {
   @Input() currentStep;
   @Input() form;
   @Input() pickupInvalid;
