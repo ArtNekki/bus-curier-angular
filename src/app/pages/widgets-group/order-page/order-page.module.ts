@@ -5,17 +5,25 @@ import {OrderPageComponent} from './order-page.component';
 import {ModalsModule} from '../../../modals/modals.module';
 import {OrderFormModule} from '../common/order-form/order-form.module';
 import {SidebarResultComponent} from './components/sidebar-result/sidebar-result.component';
+import { DonePageComponent } from './pages/done-page/done-page.component';
+import { FormPageComponent } from './pages/form-page/form-page.component';
+import {OrderRoutingModule} from './order-routing.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     OrderPageComponent,
-    SidebarResultComponent
+    SidebarResultComponent,
+    DonePageComponent,
+    FormPageComponent
   ],
   imports: [
-    CommonModule,
+    // BrowserAnimationsModule,
+    // CommonModule,
     ModalsModule,
     SharedModule,
-    OrderFormModule
+    OrderFormModule,
+    OrderRoutingModule
   ]
 })
 export class OrderPageModule { }

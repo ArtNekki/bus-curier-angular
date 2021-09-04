@@ -1,0 +1,65 @@
+<div class="page__container page__container--col-2 page__container--calculator">
+  <div class="page__content">
+    <h1 class="page__title">Заявка на перевозку</h1>
+    <p class="page__subtitle">Заполните форму необходимыми данными и отправьте</p>
+    <app-order-steps [steps]="steps" [currentStep]="currentStep"></app-order-steps>
+    <form class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ng-container formArrayName="steps">
+        <div *ngIf="currentStep === FormStep.One" [formGroup]="steps[FormStep.One]" [@fadeIn]="">
+          <app-author-form [formControlName]="FormControlName.Author" (selectUser)="setCurrentUser($event)"></app-author-form>
+        </div>
+        <div *ngIf="currentStep === FormStep.Two" [formGroup]="steps[FormStep.Two]" [@fadeIn]="">
+          <app-sender-form [formControlName]="FormControlName.Sender"></app-sender-form>
+          <section class="form__section">
+            <h2 class="form__heading">Пункт отправления</h2>
+            <app-departure-point-form (onChangeCity)="setCityFromId($event)" [formControlName]="FormControlName.DeparturePoint"></app-departure-point-form>
+          </section>
+        </div>
+        <div *ngIf="currentStep === FormStep.Three" [formGroup]="steps[FormStep.Three]" [@fadeIn]="">
+          <section class="form__section">
+            <h2 class="form__heading">Пункт получения</h2>
+            <div class="form__fieldset form__fieldset--row-gap-lg">
+              <app-pickup-point-form [cityFromId]="cityFromId" (onChangeCity)="setCityToId($event)" [formControlName]="FormControlName.PickupPoint"></app-pickup-point-form>
+            </div>
+          </section>
+          <div *ngIf="cityFromId && cityToId">
+            <app-orders-form [cityFromId]="cityFromId" [cityToId]="cityToId" formControlName="orders"></app-orders-form>
+          </div>
+          <app-recipient-form [formControlName]="FormControlName.Recipient"></app-recipient-form>
+        </div>
+        <div *ngIf="currentStep === FormStep.Four" [formGroup]="steps[FormStep.Four]" [@fadeIn]="">
+          <app-order-report [data]="formatFormValue(form.value)"></app-order-report>
+          <section class="form__section">
+            <div class="form__fieldset">
+              <div class="form__field">
+                <label class="form__label">Комментарий к заявке</label>
+                <app-input type="textarea"></app-input>
+              </div>
+              <app-checkbox mods="sm">
+                <ng-container class="text">
+                  Нажимая кнопку «Отправить», я даю свое согласие на
+                  <app-link href="#" mods="blue, in-text">обработку моих персональных данных</app-link>
+                </ng-container>
+              </app-checkbox>
+            </div>
+          </section>
+        </div>
+      </ng-container>
+      <div *ngIf="steps[0].get(FormControlName.Author).value.active === FormControlName.Individual" class="form__actions">
+        <app-btn type="button" disabled="true" mods="back" (click)="goPrev()">
+          <svg-icon class="icon" src="assets/img/svg/back.svg" width="24" height="20"></svg-icon>
+          Назад
+        </app-btn>
+        <app-btn *ngIf="currentStep === FormStep.Four; else next" mods="lg" (click)="completeOrder()">
+          Оформить заявку
+        </app-btn>
+        <ng-template #next>
+          <app-btn mods="lg" (click)="goNext()" [disabled]="steps[currentStep].invalid">
+            Далее
+          </app-btn>
+        </ng-template>
+      </div>
+    </form>
+  </div>
+  <app-sidebar-result [form]="formData"></app-sidebar-result>
+</div>

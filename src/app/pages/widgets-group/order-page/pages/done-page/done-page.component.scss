@@ -1,0 +1,90 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.thanks-block {
+  @include container();
+
+  margin-top: 30px;
+  //margin-bottom: 00px;
+  display: grid;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "icon main"
+      " . aside";
+    grid-column-gap: 55px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 125px;
+    margin-bottom: 145px;
+    grid-template-columns: auto 1fr minmax(min-content, 325px);
+    grid-template-areas: "icon main aside";
+    grid-column-gap: 75px;
+  }
+
+  &__icon {
+    display: none;
+
+    @include media-breakpoint-up(md) {
+      grid-area: icon;
+      display: block;
+    }
+  }
+
+  &__title {
+    margin: 0 0 0.45em 0;
+    font-family: $font-family;
+    font-size: 32px;
+    line-height: 1.4;
+
+    @include media-breakpoint-up(lg) {
+      font-size: 42px;
+    }
+  }
+
+  &__main {
+    @include media-breakpoint-up(md) {
+      grid-area: main;
+    }
+  }
+
+  &__main p {
+    margin: 0 0 0.85em 0;
+    font-size: 16px;
+    line-height: 1.2;
+    color: $gray-dark-color;
+
+    @include media-breakpoint-up(lg) {
+      font-size: 18px;
+    }
+
+    &:last-of-type {
+      margin-bottom: 1.75em;
+    }
+  }
+
+  &__main b {
+    color: $black-color;
+  }
+
+  &__aside {
+    margin-top: 40px;
+
+    @include media-breakpoint-up(md) {
+      grid-area: aside;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 65px;
+    }
+  }
+
+  &__aside p {
+    margin-bottom: 1.25em;
+  }
+}
