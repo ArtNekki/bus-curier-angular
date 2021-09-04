@@ -1,9 +1,11 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {OrderFormService} from '../../../../../core/services/order-form/order-form.service';
 import {AuthService} from '../../../../../core/services/auth/auth.service';
 import {Router} from '@angular/router';
 import FormControlName from 'src/app/core/maps/FormControlName';
+import {ConfirmModalComponent} from '../../../../../modals/confirm-modal/confirm-modal.component';
+import {SimpleModalService} from 'ngx-simple-modal';
 
 @Component({
   selector: 'app-form-page',
@@ -29,11 +31,13 @@ export class FormPageComponent implements OnInit {
   public cityToId: string;
 
   public formData;
+  public orderSuccess = false;
 
   constructor(
     public orderForm: OrderFormService,
     public authService: AuthService,
     private router: Router,
+    private simpleModal: SimpleModalService,
     protected changeDetectorRef: ChangeDetectorRef
   ) { }
 
@@ -117,7 +121,6 @@ export class FormPageComponent implements OnInit {
 
   onSubmit() {
     console.log('form', this.form.value);
-
   }
 
   setCurrentUser(user: any) {
@@ -144,7 +147,22 @@ export class FormPageComponent implements OnInit {
   }
 
   completeOrder() {
-    this.router.navigate(['widgets', 'order', '111', 'done']);
+    if (this.orderSuccess) {
+      this.router.navigate(['widgets', 'order', '111', 'done']);
+    } else {
+      this.confirmRetry();
+    }
+  }
+
+  confirmRetry() {
+    this.simpleModal.addModal(ConfirmModalComponent, {
+      message: 'Не удалось оформить заявкую  <br> Попробовать еще раз?'
+    }).subscribe((isConfirmed) => {
+      if (isConfirmed) {
+        // try
+      } else {
+        this.router.navigate(['widgets', 'order', 'fail']);
+      }
+    });
   }
 }
-// ['/admin', 'post', post.id, 'edit']
