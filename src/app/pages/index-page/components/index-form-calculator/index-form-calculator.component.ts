@@ -108,14 +108,15 @@ export class IndexFormCalculatorComponent implements OnInit, OnDestroy {
       });
   }
 
-  sentData(from, to) {
+  sentData(cityFromId, cityToId) {
     this.simpleModal.addModal(ConfirmModalComponent, {
       message: 'Вы будете перенаправлены<br> на страницу расчета. Продолжить?'
     }).subscribe((isConfirmed) => {
       if (isConfirmed) {
-        // try
+        this.router.navigate(['orders', 'quick-order', 'new'],
+          { queryParams: { cityFromId, cityToId }});
       } else {
-        this.router.navigate(['orders', 'quick-order', 'new']);
+
       }
     });
   }
