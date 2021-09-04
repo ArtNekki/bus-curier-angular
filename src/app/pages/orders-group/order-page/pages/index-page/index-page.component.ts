@@ -8,11 +8,11 @@ import {ConfirmModalComponent} from '../../../../../modals/confirm-modal/confirm
 import {SimpleModalService} from 'ngx-simple-modal';
 
 @Component({
-  selector: 'app-form-page',
-  templateUrl: './form-page.component.html',
-  styleUrls: ['./form-page.component.scss']
+  selector: 'app-index-page',
+  templateUrl: './index-page.component.html',
+  styleUrls: ['./index-page.component.scss']
 })
-export class FormPageComponent implements OnInit {
+export class IndexPageComponent implements OnInit {
   public FormControlName = FormControlName;
   public FormStep = {
     One: 0,

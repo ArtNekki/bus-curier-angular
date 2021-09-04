@@ -6,7 +6,7 @@ import {ModalsModule} from '../../../modals/modals.module';
 import {OrderFormModule} from '../common/order-form/order-form.module';
 import {SidebarResultComponent} from './components/sidebar-result/sidebar-result.component';
 import { DonePageComponent } from './pages/done-page/done-page.component';
-import { FormPageComponent } from './pages/form-page/form-page.component';
+import { IndexPageComponent } from './pages/index-page/index-page.component';
 import {OrderRoutingModule} from './order-routing.module';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { FailPageComponent } from './pages/fail-page/fail-page.component';
@@ -16,7 +16,7 @@ import { FailPageComponent } from './pages/fail-page/fail-page.component';
     OrderPageComponent,
     SidebarResultComponent,
     DonePageComponent,
-    FormPageComponent,
+    IndexPageComponent,
     FailPageComponent
   ],
   imports: [
