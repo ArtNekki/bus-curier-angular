@@ -31,7 +31,7 @@ export class FormPageComponent implements OnInit {
   public cityToId: string;
 
   public formData;
-  public orderSuccess = false;
+  public orderSuccess = true;
 
   constructor(
     public orderForm: OrderFormService,
@@ -148,7 +148,7 @@ export class FormPageComponent implements OnInit {
 
   completeOrder() {
     if (this.orderSuccess) {
-      this.router.navigate(['widgets', 'order', '111', 'done']);
+      this.router.navigate(['orders', 'order', 'new', 'id', 'done']);
     } else {
       this.confirmRetry();
     }
@@ -161,7 +161,7 @@ export class FormPageComponent implements OnInit {
       if (isConfirmed) {
         // try
       } else {
-        this.router.navigate(['widgets', 'order', 'fail']);
+        this.router.navigate(['orders', 'order', 'new', 'fail']);
       }
     });
   }

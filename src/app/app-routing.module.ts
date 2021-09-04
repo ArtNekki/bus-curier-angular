@@ -37,7 +37,7 @@ const routes: Routes = [
   {path: 'contacts', component: ContactsPageComponent},
   {path: 'services', loadChildren: () => import('./pages/services-group/services-group.module').then((m) => m.ServicesGroupModule)},
   {path: 'info', loadChildren: () => import('./pages/info-group/info-group.module').then((m) => m.InfoGroupModule)},
-  {path: 'widgets', loadChildren: () => import('./pages/widgets-group/widgets-group.module').then((m) => m.WidgetsGroupModule)},
+  {path: 'orders', loadChildren: () => import('./pages/orders-group/orders-group.module').then((m) => m.OrdersGroupModule)},
   {path: 'account', loadChildren: () => import('./pages/account-page/account-page.module').then((m) => m.AccountPageModule)}
 ];
 

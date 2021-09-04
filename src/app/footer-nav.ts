@@ -1,11 +1,11 @@
 export const topNav = [
-  {link: 'widgets/track-order', name: 'Отследить посылку'},
-  {link: 'widgets/calc-rate', name: 'Рассчет тарифа по Приморью'},
+  {link: 'orders/track-order', name: 'Отследить посылку'},
+  {link: 'orders/calc-rate', name: 'Рассчет тарифа по Приморью'},
   {link: 'our-services', name: 'Услуги'},
   {link: 'useful-info', name: 'Информация'},
   {link: 'documents', name: 'Документы'},
   {link: 'contacts', name: 'Контакты'}
-]
+];
 
 export const mainNav = [
   {link: 'our-services', name: 'Услуги', dropdown: [
@@ -29,8 +29,8 @@ export const mainNav = [
   {link: 'no', name: 'Сервисы', dropdown: [
       {link: 'no', name: 'Поиск заказа', sm: true},
       {link: 'account', name: 'Личный кабинет', sm: true},
-      {link: 'widgets/order', name: 'Онлайн-заявка', sm: true},
-      {link: 'widgets/calc-rate', name: 'Расчет тарифа по Приморью', sm: true},
+      {link: 'orders/order', name: 'Онлайн-заявка', sm: true},
+      {link: 'orders/calc-rate', name: 'Расчет тарифа по Приморью', sm: true},
       {link: 'no', name: 'Расчет тарифа по Республике Татарстан', sm: true},
       {link: 'no', name: 'Расчет тарифа по России', sm: true},
       {link: 'about', name: 'О компании'},

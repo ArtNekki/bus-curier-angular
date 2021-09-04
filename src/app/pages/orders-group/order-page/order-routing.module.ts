@@ -6,11 +6,11 @@ import {DonePageComponent} from './pages/done-page/done-page.component';
 import {FailPageComponent} from './pages/fail-page/fail-page.component';
 
 const routes: Routes = [
-  {path: '', component: OrderPageComponent, data: { title: 'Оформление заявки' }, children: [
-      { path: '', redirectTo: 'order', pathMatch: 'full'},
-      { path: 'order', component: FormPageComponent, data: { title: 'Новая заявка' }},
-      { path: 'order/:id/done', component: DonePageComponent, data: { title: 'Заявка оформлена' }},
-      { path: 'order/fail', component: FailPageComponent, data: { title: 'Заявка не оформлена' }},
+  {path: '', component: OrderPageComponent, data: { title: 'Заявка' }, children: [
+      { path: '', redirectTo: 'new', pathMatch: 'full'},
+      { path: 'new', component: FormPageComponent, data: { title: 'Новая' }},
+      { path: 'new/:id/done', component: DonePageComponent, data: { title: 'Заявка оформлена' }},
+      { path: 'new/fail', component: FailPageComponent, data: { title: 'Заявка не оформлена' }},
   ]}
 ];
 
