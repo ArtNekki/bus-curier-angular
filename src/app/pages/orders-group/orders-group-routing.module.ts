@@ -9,12 +9,10 @@ const routes: Routes = [
   {path: '', component: OrdersGroupComponent, data: { title: 'Заявки' }, children: [
       { path: '', redirectTo: '/orders/track-order', pathMatch: 'full'},
       { path: 'track-order', component: TrackOrderPageComponent, data: { title: 'Отследить заказ' }},
-      { path: 'quick-order', component:  QuickOrderPageComponent, data: { title: 'Быстрый расчет' }},
-      // { path: 'order', component:  OrderPageComponent, data: { title: 'Онлайн-заявка' }},
       { path: 'order-done', component:  OrderDonePageComponent, data: { title: 'Заявка оформлена' }},
       { path: 'search-order', component: null, data: { title: 'Поиск заказа' }},
+      {path: 'quick-order', loadChildren: () => import('./quick-order-page/quick-order-page.module').then((m) => m.QuickOrderPageModule)},
       {path: 'order', loadChildren: () => import('./order-page/order-page.module').then((m) => m.OrderPageModule)},
-
     ]}
 ];
 

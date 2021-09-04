@@ -1,4 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ConfirmModalComponent} from '../../../../../modals/confirm-modal/confirm-modal.component';
+import {SimpleModalService} from 'ngx-simple-modal';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,10 +22,13 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   public cargoList;
   public isOrderVisible = false;
+  private orderSuccess = false;
 
   public pickupFormInvalid: boolean;
 
-  constructor() { }
+  constructor(
+    private simpleModal: SimpleModalService,
+    private router: Router) { }
 
   ngOnInit(): void {
 
@@ -49,5 +55,25 @@ export class SidebarComponent implements OnInit, OnChanges {
   // }
   showOrder() {
     this.isOrderVisible = true;
+  }
+
+  completeOrder() {
+    if (this.orderSuccess) {
+      this.router.navigate(['orders', 'quick-order', 'new', 'id', 'done']);
+    } else {
+      this.confirmRetry();
+    }
+  }
+
+  confirmRetry() {
+    this.simpleModal.addModal(ConfirmModalComponent, {
+      message: 'Не удалось произвести расчет  <br> Попробовать еще раз?'
+    }).subscribe((isConfirmed) => {
+      if (isConfirmed) {
+        // try
+      } else {
+        this.router.navigate(['orders', 'quick-order', 'new', 'fail']);
+      }
+    });
   }
 }
