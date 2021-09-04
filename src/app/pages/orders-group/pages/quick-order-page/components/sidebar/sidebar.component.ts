@@ -22,7 +22,7 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   public cargoList;
   public isOrderVisible = false;
-  private orderSuccess = false;
+  private orderSuccess = true;
 
   public pickupFormInvalid: boolean;
 

@@ -1,18 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import cities from '../../../../mock-data/cities';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import dropdown from '../../../../core/animations/dropdown';
 import formFieldMeta from '../../../../core/form/formFieldMeta';
 import fieldError from '../../../../core/form/fieldError';
 import FormControlName from 'src/app/core/maps/FormControlName';
+import {map} from 'rxjs/operators';
+import CityFrom from '../../../../core/models/CityFrom';
+import Select from '../../../../core/models/Select';
+import {CalculatorService} from '../../../../core/services/calculator/calculator.service';
+import {Subscription} from 'rxjs';
+import CityTo from '../../../../core/models/CityTo';
+import fadeIn from '../../../../core/animations/fadeIn';
+import {ConfirmModalComponent} from '../../../../modals/confirm-modal/confirm-modal.component';
+import {SimpleModalService} from 'ngx-simple-modal';
+import {Router} from '@angular/router';
+
+const Department = {
+  Aleutskaya: '15',
+  Gogolya: '7'
+};
 
 @Component({
   selector: 'app-index-form-calculator',
   templateUrl: './index-form-calculator.component.html',
   styleUrls: ['./index-form-calculator.component.scss'],
-  animations: [dropdown]
+  animations: [fadeIn]
 })
-export class IndexFormCalculatorComponent implements OnInit {
+export class IndexFormCalculatorComponent implements OnInit, OnDestroy {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
@@ -24,26 +38,99 @@ export class IndexFormCalculatorComponent implements OnInit {
     to: 0
   };
 
-  constructor() { }
+  public citiesFrom = [];
+  private citiesFromSub: Subscription;
+
+  public citiesTo = [];
+  private citiesToSub: Subscription;
+
+  public currentCityFrom: string;
+  public currentCityTo: string;
+
+  constructor(
+    private calcService: CalculatorService,
+    private simpleModal: SimpleModalService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      [FormControlName.CityStart]: new FormControl('', [Validators.required]),
-      [FormControlName.PickpointStart]: new FormControl('', [Validators.required]),
-      [FormControlName.CityEnd]: new FormControl('', [Validators.required]),
-      [FormControlName.PickpointEnd]: new FormControl('', [Validators.required]),
+      [FormControlName.CityFrom]: new FormControl('', [Validators.required]),
+      [FormControlName.CityTo]: new FormControl('', [Validators.required]),
     });
 
-    cities.unshift({value: '', name: 'Не выбрано'});
-    this.cities = cities;
+    this.citiesFromSub = this.calcService.getCitiesFrom()
+      .pipe(
+        map<CityFrom, Select>((cities: any) => {
+          return cities
+            .filter((city) => city.site_id !== Department.Aleutskaya && city.site_id !== Department.Gogolya)
+            .map((city) => {
+              // this.cityData[city.id] = city;
+              return {value: city.id, name: city.name};
+            });
+        })
+      )
+      .subscribe((cities: any) => {
+        this.citiesFrom = [{value: '0', name: 'Выберите город'}, ...cities];
+
+        setTimeout(() => {
+          this.form.get(FormControlName.CityFrom).setValue(this.citiesFrom[0].value);
+        }, 0);
+      });
   }
 
-  toNextField(dir, num) {
-    this.step[dir] = num;
+  setCityFrom(id: string) {
+    this.currentCityFrom = id;
+
+    if (id) {
+      this.getCityTo(id);
+    }
+  }
+
+  setCityTo(id: string) {
+    this.currentCityTo = id;
+    // console.log('curr', this.currentCityFrom, this.currentCityTo);
+  }
+
+  getCityTo(id: string) {
+    this.citiesToSub = this.calcService.getCityTo(id, 0)
+      .pipe(
+        map<CityTo, Select>((cities: any) => {
+          return cities
+            .map((city) => {
+              return {value: city.id, name: city.name};
+            });
+        })
+      )
+      .subscribe((cities: any) => {
+        if (cities.length) {
+          this.citiesTo = [{value: '0', name: 'Выберите город'}, ...cities];
+        }
+      });
+  }
+
+  sentData(from, to) {
+    this.simpleModal.addModal(ConfirmModalComponent, {
+      message: 'Вы будете перенаправлены<br> на страницу расчета. Продолжить?'
+    }).subscribe((isConfirmed) => {
+      if (isConfirmed) {
+        // try
+      } else {
+        this.router.navigate(['orders', 'quick-order', 'new']);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.citiesFromSub.unsubscribe();
+    this.citiesToSub.unsubscribe();
   }
 
   onSubmit() {
     this.form.markAllAsTouched();
-    console.log('index calc form', this.form.value);
+
+    if (this.currentCityFrom && this.currentCityTo) {
+      this.sentData(this.currentCityFrom, this.currentCityTo);
+    }
   }
+
 }

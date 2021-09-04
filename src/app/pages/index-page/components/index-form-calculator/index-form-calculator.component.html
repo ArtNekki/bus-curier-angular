@@ -1,44 +1,30 @@
 <form action="#" class="form form--promo form--no-margin" [formGroup]="form" (ngSubmit)="onSubmit()">
   <h2 class="form__title">Рассчитайте стоимость</h2>
   <label class="form__label form__label--light">Откуда отправляем?</label>
-  <div class="form__fieldset form__fieldset--row-gap-sm" style="margin-bottom: 15px;">
+  <div class="form__fieldset form__fieldset--row-gap-sm" [style]="{marginBottom: citiesTo.length ? '15px' : 0}">
     <div class="form__field">
-      <app-select [items]="cities"
-        [formControlName]="FormControlName.CityStart"
-        (change)="toNextField('from', 1)"
-        [isInvalid]="(form.get(FormControlName.CityStart).invalid
-        && form.get(FormControlName.CityStart).touched) && 'invalid'"
+      <app-select [items]="citiesFrom"
+        [formControlName]="FormControlName.CityFrom"
+        (change)="setCityFrom(form.get(FormControlName.CityFrom).value)"
+        [isInvalid]="(form.get(FormControlName.CityFrom).invalid
+        && form.get(FormControlName.CityFrom).touched) && 'invalid'"
         mods="no-shadow"
       >
       </app-select>
     </div>
-    <div class="form__field" *ngIf="step.from === 1" [@dropdown]="">
-      <app-select [items]="cities"
-        [formControlName]="FormControlName.PickpointStart"
-        [isInvalid]="(form.get(FormControlName.PickpointStart).invalid
-        && form.get(FormControlName.PickpointStart).touched) && 'invalid'"
-        mods="no-shadow">
-      </app-select>
-    </div>
   </div>
-  <label class="form__label form__label--light">Куда отправляем?</label>
-  <div class="form__fieldset form__fieldset--row-gap-sm">
-    <div class="form__field">
-      <app-select [items]="cities"
-          [formControlName]="FormControlName.CityEnd"
-          (change)="toNextField('to', 1)"
-          [isInvalid]="(form.get(FormControlName.CityEnd).invalid
-          && form.get(FormControlName.CityEnd).touched) && 'invalid'"
-          mods="no-shadow"
-      ></app-select>
-    </div>
-    <div class="form__field" *ngIf="step.to === 1" [@dropdown]="">
-      <app-select [items]="cities"
-        [formControlName]="FormControlName.PickpointEnd"
-        [isInvalid]="(form.get(FormControlName.PickpointEnd).invalid
-        && form.get(FormControlName.PickpointEnd).touched) && 'invalid'"
-        mods="no-shadow">
-      </app-select>
+  <div *ngIf="citiesTo.length" [@fadeIn]="">
+    <label class="form__label form__label--light">Куда отправляем?</label>
+    <div class="form__fieldset form__fieldset--row-gap-sm">
+      <div class="form__field">
+        <app-select [items]="citiesTo"
+                    [formControlName]="FormControlName.CityTo"
+                    (change)="setCityTo(form.get(FormControlName.CityTo).value)"
+                    [isInvalid]="(form.get(FormControlName.CityTo).invalid
+          && form.get(FormControlName.CityTo).touched) && 'invalid'"
+                    mods="no-shadow"
+        ></app-select>
+      </div>
     </div>
   </div>
   <div style="margin-top: 30px;">

@@ -89,5 +89,7 @@ export default {
   Get: 'get',
   NeedToMeet: 'need-to-meet',
   Pickup: 'pickup',
-  Delivery: 'delivery'
+  Delivery: 'delivery',
+  CityFrom: 'city-from',
+  CityTo: 'city-to'
 };

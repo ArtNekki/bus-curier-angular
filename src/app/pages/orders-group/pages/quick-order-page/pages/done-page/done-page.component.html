@@ -1,1 +1,15 @@
-<p>done-page works!</p>
+<section class="thanks-block">
+  <div class="thanks-block__icon">
+    <svg-icon class="icon" src="assets/img/svg/thanks.svg" width="135" height="150"></svg-icon>
+  </div>
+  <div class="thanks-block__main">
+    <h2 class="thanks-block__title">Спасибо за заявку!</h2>
+    <p>Заявка на перевозку <b>№2174373</b> успешно оформлена!</p>
+    <p>В ближайшее время с вами свяжется наш менеджер, чтобы подтвердить детали отправления.</p>
+    <app-btn type="button" mods="lg" (click)="goToIndex()">Вернуться на главную</app-btn>
+  </div>
+  <div class="thanks-block__aside">
+    <p>Зарегистрируйтесь на сайте и вам не придется заполнять форму снова, а данные о вашем заказе сохранятся в личном кабинете!</p>
+    <app-btn type="button" mods="lg" (click)="showLoginModal()">Зарегистрироваться на сайте</app-btn>
+  </div>
+</section>
