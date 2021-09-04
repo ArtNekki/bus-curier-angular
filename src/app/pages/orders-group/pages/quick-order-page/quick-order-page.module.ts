@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {QuickOrderPageComponent} from './quick-order-page.component';
-import {SharedModule} from '../../../shared/shared.module';
-import {OrderFormModule} from '../common/order-form/order-form.module';
+import {SharedModule} from '../../../../shared/shared.module';
+import {OrderFormModule} from '../../common/order-form/order-form.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FailPageComponent } from './pages/fail-page/fail-page.component';
 import { DonePageComponent } from './pages/done-page/done-page.component';

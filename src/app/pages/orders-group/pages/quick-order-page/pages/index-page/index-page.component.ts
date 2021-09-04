@@ -1,10 +1,10 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {OrderFormService} from '../../../../../core/services/order-form/order-form.service';
-import {CalculatorService} from '../../../../../core/services/calculator/calculator.service';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {delay, tap} from 'rxjs/operators';
-import {ConfirmModalComponent} from '../../../../../modals/confirm-modal/confirm-modal.component';
+import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {Router} from '@angular/router';
 

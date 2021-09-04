@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {Router} from '@angular/router';
-import {LoginComponent} from '../../../../../modals/login/login.component';
+import {LoginComponent} from '../../../../../../modals/login/login.component';
 
 @Component({
   selector: 'app-done-page',

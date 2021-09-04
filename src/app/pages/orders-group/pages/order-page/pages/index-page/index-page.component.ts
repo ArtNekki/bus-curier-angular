@@ -1,10 +1,10 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {OrderFormService} from '../../../../../core/services/order-form/order-form.service';
-import {AuthService} from '../../../../../core/services/auth/auth.service';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
+import {AuthService} from '../../../../../../core/services/auth/auth.service';
 import {Router} from '@angular/router';
 import FormControlName from 'src/app/core/maps/FormControlName';
-import {ConfirmModalComponent} from '../../../../../modals/confirm-modal/confirm-modal.component';
+import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
 
 @Component({
