@@ -10,7 +10,7 @@ import addressPoints from 'src/app/mock-data/address-points';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import { SubFormComponent } from '../sub-form/sub-form.component';
 import fadeIn from '../../../../../../core/animations/fadeIn';
-import {Observable, PartialObserver, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, PartialObserver, Subject, Subscription} from 'rxjs';
 import { filter } from 'rxjs/internal/operators/filter';
 import Office from '../../../../../../core/models/Office';
 import {concatAll, first, map, take, tap} from 'rxjs/operators';
@@ -67,11 +67,13 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   public dataLoading = false;
 
   public cities = [];
-  public offices = [];
+  public departments = [];
+  public offices$ = new BehaviorSubject([]);
   public cityData = {};
 
   private citiesSub: Subscription;
   private officesSub: Subscription;
+  private departmentsSub: Subscription;
   private tabsSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
@@ -90,8 +92,14 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       [FormControlName.Date]: new FormControl('', [Validators.required]),
     });
 
-    this.currentTab = this.Tab.One;
+    this.loadCities();
+    this.loadOffices();
 
+    this.currentTab = this.Tab.One;
+    super.ngOnInit();
+  }
+
+  loadCities() {
     this.citiesSub = this.calculatorService.getCitiesFrom()
       .pipe(
         map<CityFrom, Select>((cities: any) => {
@@ -115,8 +123,22 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
           }
         }, 0);
       });
+  }
 
-    super.ngOnInit();
+  loadOffices() {
+    this.officesSub = this.calculatorService.getOffices()
+      .subscribe((arr: any) => {
+        this.offices$.next(arr);
+      });
+  }
+
+  getOfficesById(id) {
+    return this.offices$
+      .pipe(
+          map((offices: any) => {
+            return offices.filter((office) => office.office_id === this.cityData[id].office_id);
+          })
+      );
   }
 
   changeType(type: string) {
@@ -132,19 +154,15 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   setCity(id: string) {
-    this.orderForm.cityFrom$.next(id);
+    // this.orderForm.cityFrom$.next(id);
     this.getTabs(id);
-    this.getOffices(id);
     this.dataLoading = true;
     this.onChangeCity.emit(id);
   }
 
   getTabs(id: string) {
-    this.tabsSub = this.calculatorService.getOffices()
+    this.getOfficesById(id)
       .pipe(
-        map((offices: any) => {
-          return offices.filter((office) => office.office_id === this.cityData[id].office_id);
-        }),
         concatAll(),
         first(),
         map((office: any) => {
@@ -159,32 +177,30 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       )
       .subscribe((tabs: string[]) => {
         if (tabs.length) {
-
           tabs.forEach((name: string) => {
             (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(name, new FormControl(''));
           });
 
           this.formGroup.get(FormControlName.Options).get(FormControlName.Active).setValue(tabs[0]);
 
-          this.tabsReceived = true;
-          this.dataLoading = false;
+          // this.tabsReceived = true;
+          // this.dataLoading = false;
+          this.getDepartments(id);
         }
       });
   }
 
-  getOffices(id: string) {
-    this.officesSub = this.calculatorService.getOffices()
+  getDepartments(id: string) {
+    this.departmentsSub = this.getOfficesById(id)
       .pipe(
         map((offices: any) => {
-          return offices
-                  .filter((office) => office.office_id === this.cityData[id].office_id)
-                  .map((office) => {
-                    return {value: office.id, name: office.address};
-                  });
+          return offices.map((office) => {
+            return {value: office.id, name: office.address};
+          });
         })
       )
       .subscribe((offices: any) => {
-        this.offices = offices;
+        this.departments = offices;
       });
   }
 
@@ -199,6 +215,10 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
     if (this.tabsSub) {
       this.tabsSub.unsubscribe();
+    }
+
+    if (this.departmentsSub) {
+      this.departmentsSub.unsubscribe();
     }
   }
 }

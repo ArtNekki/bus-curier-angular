@@ -23,7 +23,7 @@
       </ng-container>
     </app-select>
   </div>
-  <ng-container *ngIf="tabsReceived && offices.length && !dataLoading">
+  <ng-container>
     <ng-container [formGroupName]="FormControlName.Options">
       <div class="form__tabs" [@fadeIn]="">
         <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
@@ -41,7 +41,7 @@
       <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
         <div class="form__panel" *ngIf="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === control.key" [@fadeIn]="">
           <ng-container *ngIf="control.key === 'give'; else pickup">
-            <app-department-form [offices]="offices" [formControlName]="control.key"></app-department-form>
+            <app-department-form [offices]="departments" [formControlName]="control.key"></app-department-form>
           </ng-container>
           <ng-template #pickup>
             <app-courier-form [formControlName]="control.key"></app-courier-form>

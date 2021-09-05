@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
@@ -26,7 +26,7 @@ import Select from '../../../../../../core/models/Select';
     }
   ]
 })
-export class DepartmentFormComponent extends SubFormComponent implements OnInit {
+export class DepartmentFormComponent extends SubFormComponent implements OnInit, OnChanges {
   @Input() offices: Array<Select> = [];
 
   public FormFieldMeta = formFieldMeta;
@@ -53,5 +53,15 @@ export class DepartmentFormComponent extends SubFormComponent implements OnInit 
     setTimeout(() => {
       this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
     }, 0);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const offices = changes.offices.currentValue;
+
+    if (offices.length && this.formGroup) {
+      setTimeout(() => {
+        this.formGroup.get(FormControlName.Office).setValue(changes.offices.currentValue[0].value);
+      });
+    }
   }
 }
