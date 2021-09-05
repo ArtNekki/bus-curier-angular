@@ -16,8 +16,6 @@ import Office from '../../../../../../core/models/Office';
 import {concatAll, first, map, take, tap} from 'rxjs/operators';
 import Select from 'src/app/core/models/Select';
 import CityFrom from 'src/app/core/models/CityFrom';
-import City from '../../../../../../core/maps/City';
-import {fromArray} from 'rxjs/internal/observable/fromArray';
 
 const Department = {
   Aleutskaya: '15',
@@ -55,13 +53,10 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   public formGroup: FormGroup;
   public addressPoints = addressPoints;
 
-
-  public Tab = {One: 'give', Two: 'pickup'};
   public TabName = {
     give: 'Cдать в отделение',
     pickup: 'Вызвать курьера'
   };
-  public currentTab = null;
 
   public tabsReceived = false;
   public dataLoading = false;
@@ -95,7 +90,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     this.loadCities();
     this.loadOffices();
 
-    this.currentTab = this.Tab.One;
     super.ngOnInit();
   }
 
@@ -154,9 +148,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   setCity(id: string) {
-    // this.orderForm.cityFrom$.next(id);
     this.getTabs(id);
-    this.dataLoading = true;
     this.onChangeCity.emit(id);
   }
 
@@ -182,9 +174,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
           });
 
           this.formGroup.get(FormControlName.Options).get(FormControlName.Active).setValue(tabs[0]);
-
-          // this.tabsReceived = true;
-          // this.dataLoading = false;
           this.getDepartments(id);
         }
       });
