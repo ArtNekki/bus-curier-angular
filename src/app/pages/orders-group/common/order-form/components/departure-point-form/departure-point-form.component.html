@@ -49,7 +49,7 @@
         </div>
       </ng-container>
     </ng-container>
-    <div class="form__field" [@fadeIn]="">
+    <div *ngIf="cities.length && departments.length" class="form__field" [@fadeIn]="">
       <label for="departure-date" class="form__label"
              [class.form__label--invalid]="formGroup.get(FormControlName.Date).invalid"
       >Дата отправки
