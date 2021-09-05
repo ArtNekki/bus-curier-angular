@@ -6,11 +6,13 @@ import {Router} from '@angular/router';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
+import fadeIn from '../../../../../../core/animations/fadeIn';
 
 @Component({
   selector: 'app-index-page',
   templateUrl: './index-page.component.html',
-  styleUrls: ['./index-page.component.scss']
+  styleUrls: ['./index-page.component.scss'],
+  animations: [fadeIn]
 })
 export class IndexPageComponent implements OnInit {
   public FormControlName = FormControlName;
@@ -31,7 +33,7 @@ export class IndexPageComponent implements OnInit {
   public cityToId: string;
 
   public formData;
-  public orderSuccess = true;
+  public orderSuccess = false;
 
   constructor(
     public orderForm: OrderFormService,

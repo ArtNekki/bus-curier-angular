@@ -122,8 +122,13 @@ export class IndexFormCalculatorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.citiesFromSub.unsubscribe();
-    this.citiesToSub.unsubscribe();
+    if (this.citiesFromSub) {
+      this.citiesFromSub.unsubscribe();
+    }
+
+    if (this.citiesToSub) {
+      this.citiesToSub.unsubscribe();
+    }
   }
 
   onSubmit() {
