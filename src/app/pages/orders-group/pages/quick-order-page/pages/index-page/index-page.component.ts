@@ -51,6 +51,8 @@ export class IndexPageComponent implements OnInit, DoCheck {
 
   onSubmit() {
     this.formData = this.form.value;
+    this.scrollToTop();
+    console.log('quick form', this.formData);
   }
 
   ngDoCheck(): void {
@@ -81,6 +83,13 @@ export class IndexPageComponent implements OnInit, DoCheck {
       if (isConfirmed) {
 
       }
+    });
+  }
+
+  scrollToTop() {
+    window.scrollTo({
+      top: 45,
+      behavior: 'smooth'
     });
   }
 

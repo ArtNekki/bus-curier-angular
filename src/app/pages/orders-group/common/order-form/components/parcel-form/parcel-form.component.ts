@@ -43,7 +43,7 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit {
       [FormControlName.Width]: new FormControl('', [Validators.required]),
       [FormControlName.Height]: new FormControl('', [Validators.required]),
       [FormControlName.Length]: new FormControl('', [Validators.required])
-    }, {updateOn: 'blur'});
+    });
 
     this.formGroup.markAllAsTouched();
     this.formGroup.markAsTouched();
