@@ -63,6 +63,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   public dataLoading = false;
 
   private defaultCity: string;
+  private defaultActiveOption: string;
   private defaultFormData;
 
   public cities = [];
@@ -193,7 +194,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
             (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(name, new FormControl(''));
           });
 
-          this.formGroup.get(FormControlName.Options).get(FormControlName.Active).setValue(tabs[0]);
+          this.formGroup.get(FormControlName.Options).get(FormControlName.Active).setValue(this.defaultActiveOption || tabs[0]);
           this.getDepartments(id);
         }
       });
@@ -220,6 +221,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       this.defaultFormData = defaultData[FormControlName.DeparturePoint];
 
       this.defaultCity = this.defaultFormData[FormControlName.Location];
+      this.defaultActiveOption = this.defaultFormData[FormControlName.Options][FormControlName.Active];
     }
   }
 
