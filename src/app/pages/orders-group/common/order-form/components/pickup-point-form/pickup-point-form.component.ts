@@ -14,7 +14,7 @@ import {concatAll, first, map, switchMap} from 'rxjs/operators';
 import CityFrom from '../../../../../../core/models/CityFrom';
 import Select from '../../../../../../core/models/Select';
 import CityTo from '../../../../../../core/models/CityTo';
-import {Subscription} from 'rxjs';
+import {BehaviorSubject, Subscription} from 'rxjs';
 import CargoType from '../../../../../../core/models/CargoType';
 
 @Component({
@@ -56,16 +56,16 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   };
 
   public isFormGroupDisabled = false;
-  public tabsReceived = false;
-  public dataLoading = false;
 
   public cities = [];
-  public offices = [];
+  public departments = [];
   public cityData = {};
 
   private citiesSub: Subscription;
+  private departmentsSub: Subscription;
+
+  public offices$ = new BehaviorSubject([]);
   private officesSub: Subscription;
-  private tabsSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -81,20 +81,21 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
         [FormControlName.Active]: new FormControl('', [Validators.required]),
       })
     });
+
+    this.loadOffices();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if ((changes.cityFromId && changes.cityFromId.currentValue)) {
-      this.getCityTo(changes.cityFromId.currentValue);
+      this.loadCities(changes.cityFromId.currentValue);
     }
   }
 
-  getCityTo(id: string) {
+  loadCities(id: string) {
     this.citiesSub = this.calcService.getCityTo(id, 0)
       .pipe(
         map<CityTo, Select>((cities: any) => {
           return cities
-            // .filter((city) => city.site_id !== Department.Aleutskaya && city.site_id !== Department.Gogolya)
             .map((city) => {
               this.cityData[city.id] = city;
               return {value: city.id, name: city.name};
@@ -117,31 +118,33 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       });
   }
 
-  changeType(type: string) {
+  loadOffices() {
+    this.officesSub = this.calcService.getOffices()
+      .subscribe((arr: any) => {
+        this.offices$.next(arr);
+      });
+  }
 
-    Object.entries((this.formGroup.get(FormControlName.Options) as FormGroup).controls)
-      .forEach(([key, control]: [string, AbstractControl]) => {
-        if (key !== FormControlName.Active) {
-          control.clearValidators();
-          control.setValue('');
-        }
-    });
-
-    this.formGroup.get(FormControlName.Options).get(type).setValidators([Validators.required]);
+  getOfficesById(id) {
+    return this.offices$
+      .pipe(
+        map((offices: any) => {
+          return offices.filter((office) => office.office_id === this.cityData[id].office_id);
+        })
+      );
   }
 
   setCity(id: string) {
-    this.getOffices(id);
+    this.createTabs(id);
     this.createNeedToMeetControl(id);
     this.onChangeCity.emit(id);
   }
 
-  getOffices(id: string) {
-    this.tabsSub = this.calcService.getOffices()
+  createTabs(id: string) {
+    this.officesSub = this.getOfficesById(id)
       .pipe(
         map((offices: any) => {
           return offices
-            .filter((office) => office.office_id === this.cityData[id].office_id)
             .map((office) => {
               return {value: office.id, name: office.address, delivery: office.delivery};
             });
@@ -150,29 +153,40 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       )
       .subscribe((offices: any) => {
         if (offices.length) {
-          (this.formGroup.get(FormControlName.Options) as FormGroup).addControl('get', new FormControl('', [Validators.required]));
-          this.formGroup.get(FormControlName.Options).get(FormControlName.Active).setValue('get');
+          (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(FormControlName.Get, new FormControl('', [Validators.required]));
+          this.formGroup.get(FormControlName.Options).get(FormControlName.Active).setValue(FormControlName.Get);
 
           if (+offices[0].delivery) {
-            (this.formGroup.get(FormControlName.Options) as FormGroup).addControl('delivery', new FormControl(''));
+            (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(FormControlName.Delivery, new FormControl(''));
           }
         }
 
-        this.offices = offices;
+        this.departments = offices;
       });
   }
 
   createNeedToMeetControl(id) {
     if (this.cityData[id].need_to_meet !== '0') {
-      (this.formGroup.get(FormControlName.Options) as FormGroup).addControl('need-to-meet', new FormControl(''));
+      (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(FormControlName.NeedToMeet, new FormControl(''));
 
       const active = this.formGroup.get(FormControlName.Options).get(FormControlName.Active);
 
       if (!active.value) {
-        active.setValue('need-to-meet');
+        active.setValue(FormControlName.NeedToMeet);
       }
-
     }
+  }
+
+  changeType(type: string) {
+    Object.entries((this.formGroup.get(FormControlName.Options) as FormGroup).controls)
+      .forEach(([key, control]: [string, AbstractControl]) => {
+        if (key !== FormControlName.Active) {
+          control.clearValidators();
+          control.setValue('');
+        }
+      });
+
+    this.formGroup.get(FormControlName.Options).get(type).setValidators([Validators.required]);
   }
 
   setDisabledState?(isDisabled: boolean): void {
@@ -198,8 +212,8 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       this.officesSub.unsubscribe();
     }
 
-    if (this.tabsSub) {
-      this.tabsSub.unsubscribe();
+    if (this.departmentsSub) {
+      this.departmentsSub.unsubscribe();
     }
   }
 }
