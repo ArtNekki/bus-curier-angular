@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,4 +31,6 @@ export class OrderFormService {
   // submit(data: {submitted: boolean, step: number}) {
   //   this.formData$.next(data);
   // }
+
+  // quickOrderForm$ = new BehaviorSubject({});
 }

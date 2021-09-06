@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AfterContentInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {AuthService} from '../../../../../../core/services/auth/auth.service';

@@ -17,6 +17,7 @@ import {concatAll, first, map, take, tap} from 'rxjs/operators';
 import Select from 'src/app/core/models/Select';
 import CityFrom from 'src/app/core/models/CityFrom';
 import {ActivatedRoute, Params} from '@angular/router';
+import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
 
 const Department = {
   Aleutskaya: '15',
@@ -76,6 +77,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
               public utils: UtilsService,
               private calculatorService: CalculatorService,
               private route: ActivatedRoute,
+              private localStorage: LocalStorageService,
               protected orderForm: OrderFormService) {
     super(orderForm);
   }
@@ -93,6 +95,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       this.defaultCity = params.cityFromId;
     });
 
+    this.getDataFromStorage();
     this.initLocation();
     this.loadOffices();
 
@@ -206,6 +209,10 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       .subscribe((offices: any) => {
         this.departments = offices;
       });
+  }
+
+  getDataFromStorage() {
+    console.log('dep', this.localStorage.get('quick-form'));
   }
 
   ngOnDestroy(): void {

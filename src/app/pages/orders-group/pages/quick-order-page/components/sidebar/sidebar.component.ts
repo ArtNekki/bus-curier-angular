@@ -2,6 +2,8 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {Router} from '@angular/router';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
+import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -28,6 +30,8 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   constructor(
     private simpleModal: SimpleModalService,
+    private orderForm: OrderFormService,
+    private localStorage: LocalStorageService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -59,9 +63,10 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   completeOrder() {
     if (this.orderSuccess) {
-      this.router.navigate(['orders', 'quick-order', 'new', 'id', 'done']);
+      this.localStorage.set('quick-order', this.form);
+      this.router.navigate(['orders', 'order', 'new']);
     } else {
-      this.confirmRetry();
+      // this.confirmRetry();
     }
   }
 
