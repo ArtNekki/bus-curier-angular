@@ -23,17 +23,17 @@
   <ng-container>
     <ng-container [formGroupName]="FormControlName.Options">
       <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
-        <ng-container *ngIf="control.key === 'need-to-meet'">
+        <ng-container *ngIf="control.key === FormControlName.NeedToMeet">
           <app-checkbox [formControlName]="control.key" [@fadeIn]="">
             <div class="text">
-              {{control.key}}
+              {{FormFieldMeta[control.key].label}}
             </div>
           </app-checkbox>
         </ng-container>
       </ng-container>
       <div class="form__tabs" [@fadeIn]="">
         <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
-          <label *ngIf="control.key !== FormControlName.Active && control.key !== 'need-to-meet'" class="form__tab">
+          <label *ngIf="control.key !== FormControlName.Active && control.key !== FormControlName.NeedToMeet" class="form__tab">
             <input type="radio"
                    [checked]="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === control.key"
                    [name]="FormControlName.Active"
@@ -46,10 +46,10 @@
       </div>
       <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
         <div class="form__panel" *ngIf="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === control.key" [@fadeIn]="">
-          <ng-container *ngIf="control.key === 'get'">
+          <ng-container *ngIf="control.key === FormControlName.Get">
             <app-department-form [offices]="departments" [formControlName]="control.key"></app-department-form>
           </ng-container>
-          <ng-container *ngIf="control.key === 'delivery'">
+          <ng-container *ngIf="control.key === FormControlName.Delivery">
             <app-courier-form [formControlName]="control.key"></app-courier-form>
           </ng-container>
         </div>

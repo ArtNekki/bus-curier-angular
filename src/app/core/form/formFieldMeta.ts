@@ -303,6 +303,6 @@ export default {
   },
   [FormControlName.NeedToMeet]: {
     label: 'Встретить с автобуса',
-    type: 'text'
+    type: 'checkbox'
   },
 };
