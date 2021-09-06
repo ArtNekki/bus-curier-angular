@@ -16,6 +16,7 @@ import Select from '../../../../../../core/models/Select';
 import CityTo from '../../../../../../core/models/CityTo';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import CargoType from '../../../../../../core/models/CargoType';
+import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-pickup-point-form',
@@ -37,7 +38,6 @@ import CargoType from '../../../../../../core/models/CargoType';
 })
 export class PickupPointFormComponent extends SubFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() cityFromId: string;
-  @Input() defaultCity: string;
 
   @Output() onChangeCity: EventEmitter<string> = new EventEmitter<string>();
   @Input() noLabel: boolean;
@@ -57,6 +57,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
   public isFormGroupDisabled = false;
 
+  private defaultCity: string;
   public cities = [];
   public departments = [];
   public cityData = {};
@@ -69,6 +70,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
+              private route: ActivatedRoute,
               private calcService: CalculatorService,
               orderForm: OrderFormService) {
     super(orderForm);
@@ -82,16 +84,20 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       })
     });
 
+    this.route.queryParams.subscribe((params: Params) => {
+      this.defaultCity = params.cityToId;
+    });
+
     this.loadOffices();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if ((changes.cityFromId && changes.cityFromId.currentValue)) {
-      this.loadCities(changes.cityFromId.currentValue);
+      this.initLocation(changes.cityFromId.currentValue);
     }
   }
 
-  loadCities(id: string) {
+  initLocation(id: string) {
     this.citiesSub = this.calcService.getCityTo(id, 0)
       .pipe(
         map<CityTo, Select>((cities: any) => {

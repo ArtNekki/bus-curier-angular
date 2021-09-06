@@ -15,7 +15,6 @@
           <div>
             <h2 class="form__heading form__heading--no-mgb">Куда</h2>
             <app-pickup-point-form
-              [defaultCity]="defaultCityToId"
               [cityFromId]="cityFromId" noLabel="true"
               (onChangeCity)="setCityToId($event)"
               [formControlName]="FormControlName.PickupPoint"></app-pickup-point-form>

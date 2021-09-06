@@ -61,7 +61,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   public tabsReceived = false;
   public dataLoading = false;
 
-  public defaultCity: string;
+  private defaultCity: string;
   public cities = [];
   public departments = [];
   public offices$ = new BehaviorSubject([]);
@@ -93,7 +93,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       this.defaultCity = params.cityFromId;
     });
 
-    this.initCitiesSelect();
+    this.initLocation();
     this.loadOffices();
 
     super.ngOnInit();
@@ -125,7 +125,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       );
   }
 
-  initCitiesSelect() {
+  initLocation() {
     this.citiesSub = this.loadCities()
       .pipe(
         map<CityFrom, Select>((cities: any) => {
