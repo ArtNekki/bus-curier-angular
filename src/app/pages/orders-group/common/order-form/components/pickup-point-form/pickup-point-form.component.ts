@@ -159,21 +159,26 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
           if (+offices[0].delivery) {
             (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(FormControlName.Delivery, new FormControl(''));
           }
-        }
 
-        this.departments = offices;
+          this.departments = offices;
+        } else {
+          (this.formGroup.get(FormControlName.Options) as FormGroup).removeControl(FormControlName.Get);
+          (this.formGroup.get(FormControlName.Options) as FormGroup).removeControl(FormControlName.Delivery);
+        }
       });
   }
 
   createNeedToMeetControl(id) {
     if (this.cityData[id].need_to_meet !== '0') {
-      (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(FormControlName.NeedToMeet, new FormControl(''));
+      (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(FormControlName.NeedToMeet, new FormControl(true));
 
       const active = this.formGroup.get(FormControlName.Options).get(FormControlName.Active);
 
       if (!active.value) {
         active.setValue(FormControlName.NeedToMeet);
       }
+    } else {
+      (this.formGroup.get(FormControlName.Options) as FormGroup).removeControl(FormControlName.NeedToMeet);
     }
   }
 
