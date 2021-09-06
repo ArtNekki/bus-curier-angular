@@ -63,6 +63,8 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   public dataLoading = false;
 
   private defaultCity: string;
+  private defaultFormData;
+
   public cities = [];
   public departments = [];
   public offices$ = new BehaviorSubject([]);
@@ -95,7 +97,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       this.defaultCity = params.cityFromId;
     });
 
-    this.getDataFromStorage();
+    this.getDefaultFormData();
     this.initLocation();
     this.loadOffices();
 
@@ -211,8 +213,14 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       });
   }
 
-  getDataFromStorage() {
-    console.log('dep', this.localStorage.get('quick-form'));
+  getDefaultFormData() {
+    const defaultData = this.localStorage.get('quick-order');
+
+    if (defaultData) {
+      this.defaultFormData = defaultData[FormControlName.DeparturePoint];
+
+      this.defaultCity = this.defaultFormData[FormControlName.Location];
+    }
   }
 
   ngOnDestroy(): void {
