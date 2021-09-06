@@ -114,6 +114,8 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
               this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
             }
           }, 0);
+
+          this.clearOptions();
         }
       });
   }
@@ -192,6 +194,16 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       });
 
     this.formGroup.get(FormControlName.Options).get(type).setValidators([Validators.required]);
+  }
+
+  clearOptions() {
+    Object.entries((this.formGroup.get(FormControlName.Options) as FormGroup).controls)
+      .forEach(([key, control]: [string, AbstractControl]) => {
+        if (key !== FormControlName.Active) {
+          (this.formGroup.get(FormControlName.Options) as FormGroup).removeControl(key);
+        }
+      });
+
   }
 
   setDisabledState?(isDisabled: boolean): void {
