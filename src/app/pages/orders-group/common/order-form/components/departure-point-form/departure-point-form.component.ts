@@ -16,6 +16,7 @@ import Office from '../../../../../../core/models/Office';
 import {concatAll, first, map, take, tap} from 'rxjs/operators';
 import Select from 'src/app/core/models/Select';
 import CityFrom from 'src/app/core/models/CityFrom';
+import {ActivatedRoute, Params} from '@angular/router';
 
 const Department = {
   Aleutskaya: '15',
@@ -44,7 +45,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   @Output() onChangeCity: EventEmitter<string> = new EventEmitter<string>();
 
   @Input() noLabel: boolean;
-  @Input() defaultCity: string;
 
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
@@ -61,6 +61,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   public tabsReceived = false;
   public dataLoading = false;
 
+  public defaultCity: string;
   public cities = [];
   public departments = [];
   public offices$ = new BehaviorSubject([]);
@@ -74,6 +75,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
               private calculatorService: CalculatorService,
+              private route: ActivatedRoute,
               protected orderForm: OrderFormService) {
     super(orderForm);
   }
@@ -87,18 +89,47 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       [FormControlName.Date]: new FormControl('', [Validators.required]),
     });
 
-    this.loadCities();
+    this.route.queryParams.subscribe((params: Params) => {
+      this.defaultCity = params.cityFromId;
+    });
+
+    this.initCitiesSelect();
     this.loadOffices();
 
     super.ngOnInit();
   }
 
   loadCities() {
-    this.citiesSub = this.calculatorService.getCitiesFrom()
+    return this.calculatorService.getCitiesFrom()
+      .pipe(
+        map((cities: any) => {
+          return cities
+            .filter((city) => city.site_id !== Department.Aleutskaya && city.site_id !== Department.Gogolya);
+        })
+      );
+  }
+
+  loadOffices() {
+    this.officesSub = this.calculatorService.getOffices()
+      .subscribe((arr: any) => {
+        this.offices$.next(arr);
+      });
+  }
+
+  getOfficesById(id) {
+    return this.offices$
+      .pipe(
+          map((offices: any) => {
+            return offices.filter((office) => office.office_id === this.cityData[id].office_id);
+          })
+      );
+  }
+
+  initCitiesSelect() {
+    this.citiesSub = this.loadCities()
       .pipe(
         map<CityFrom, Select>((cities: any) => {
           return cities
-            .filter((city) => city.site_id !== Department.Aleutskaya && city.site_id !== Department.Gogolya)
             .map((city) => {
               this.cityData[city.id] = city;
               return {value: city.id, name: city.name};
@@ -117,22 +148,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
           }
         }, 0);
       });
-  }
-
-  loadOffices() {
-    this.officesSub = this.calculatorService.getOffices()
-      .subscribe((arr: any) => {
-        this.offices$.next(arr);
-      });
-  }
-
-  getOfficesById(id) {
-    return this.offices$
-      .pipe(
-          map((offices: any) => {
-            return offices.filter((office) => office.office_id === this.cityData[id].office_id);
-          })
-      );
   }
 
   changeType(type: string) {
