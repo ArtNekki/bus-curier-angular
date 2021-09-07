@@ -71,6 +71,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
     if (defaultData) {
       this.steps[this.FormStep.Two].get(FormControlName.DeparturePoint).setValue(defaultData[FormControlName.DeparturePoint]);
+      this.steps[this.FormStep.Three].get(FormControlName.PickupPoint).setValue(defaultData[FormControlName.PickupPoint]);
       this.steps[this.FormStep.Three].get('orders').setValue(defaultData.orders);
     }
   }

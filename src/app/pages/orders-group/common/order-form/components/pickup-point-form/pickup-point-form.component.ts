@@ -64,6 +64,8 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   public departments = [];
   public cityData = {};
 
+  private currentCityId = null;
+
   private citiesSub: Subscription;
   private departmentsSub: Subscription;
 
@@ -95,6 +97,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
   ngOnChanges(changes: SimpleChanges): void {
     if ((changes.cityFromId && changes.cityFromId.currentValue)) {
+      this.currentCityId = changes.cityFromId.currentValue;
       this.initLocation(changes.cityFromId.currentValue);
     }
   }
@@ -237,6 +240,16 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   //       });
   //   }
   // }
+
+  writeValue(value: any): void {
+    if (value) {
+      this.defaultCitySub = this.calcService.getCityTo(this.currentCityId, 0)
+        .subscribe((cities) => {
+          this.setCity(value.location);
+          super.writeValue(value);
+        });
+    }
+  }
 
   ngOnDestroy(): void {
     if (this.citiesSub) {
