@@ -187,6 +187,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.localStorage.remove('quick-order');
+    this.localStorage.remove('quick-order');
   }
 }

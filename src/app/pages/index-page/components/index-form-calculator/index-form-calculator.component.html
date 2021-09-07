@@ -1,7 +1,7 @@
 <form action="#" class="form form--promo form--no-margin" [formGroup]="form" (ngSubmit)="onSubmit()">
   <h2 class="form__title">Рассчитайте стоимость</h2>
   <label class="form__label form__label--light">Откуда отправляем?</label>
-  <div class="form__fieldset form__fieldset--row-gap-sm" [style]="{marginBottom: citiesTo.length ? '15px' : 0}">
+  <div class="form__fieldset form__fieldset--row-gap-sm" style="margin-bottom: 15px">
     <div class="form__field">
       <app-select [items]="citiesFrom"
         [formControlName]="FormControlName.CityFrom"
@@ -13,7 +13,7 @@
       </app-select>
     </div>
   </div>
-  <div *ngIf="citiesTo.length" [@fadeIn]="">
+  <div [@fadeIn]="">
     <label class="form__label form__label--light">Куда отправляем?</label>
     <div class="form__fieldset form__fieldset--row-gap-sm">
       <div class="form__field">

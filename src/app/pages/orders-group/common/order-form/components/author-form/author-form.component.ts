@@ -9,6 +9,7 @@ import {LoginComponent} from '../../../../../../modals/login/login.component';
 import {SignInComponent} from '../../../../../../modals/sign-in/sign-in.component';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
 
 @Component({
   selector: 'app-author-form',
@@ -39,6 +40,7 @@ export class AuthorFormComponent extends SubFormComponent implements OnInit {
 
   constructor(
     private modalService: SimpleModalService,
+    private simpleModal: SimpleModalService,
     public authService: AuthService,
     private cdr: ChangeDetectorRef,
     orderForm: OrderFormService
@@ -52,6 +54,8 @@ export class AuthorFormComponent extends SubFormComponent implements OnInit {
       individual: new FormControl('', [Validators.required]),
       entity: new FormControl('')
     });
+
+    this.showAlertModal();
 
     super.ngOnInit();
   }
@@ -69,6 +73,14 @@ export class AuthorFormComponent extends SubFormComponent implements OnInit {
   showSignInModal(e) {
     e.preventDefault();
     this.modalService.addModal(SignInComponent);
+  }
+
+  showAlertModal() {
+    this.simpleModal.addModal(AlertModalComponent, {
+      message: 'В данный момент оформление <br /> доступно только для физ. лица'
+    }).subscribe(() => {
+      // this.close();
+    });
   }
 
   changeUser(type: string) {
