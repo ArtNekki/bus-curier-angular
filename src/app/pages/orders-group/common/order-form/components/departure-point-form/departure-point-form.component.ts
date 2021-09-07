@@ -223,6 +223,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         .subscribe((cities) => {
           this.setCity(value.location);
           super.writeValue(value);
+          this.formGroup.reset(this.formGroup.value);
         });
     }
   }
