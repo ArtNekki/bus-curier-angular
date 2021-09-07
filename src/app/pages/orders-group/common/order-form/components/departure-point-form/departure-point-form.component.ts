@@ -75,6 +75,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   private officesSub: Subscription;
   private departmentsSub: Subscription;
   private tabsSub: Subscription;
+  private defaultCitySub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -216,6 +217,16 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       });
   }
 
+  writeValue(value: any): void {
+    if (value) {
+      this.defaultCitySub = this.loadCities()
+        .subscribe((cities) => {
+          this.setCity(value.location);
+          super.writeValue(value);
+        });
+    }
+  }
+
   ngOnDestroy(): void {
     if (this.citiesSub) {
       this.citiesSub.unsubscribe();
@@ -232,15 +243,9 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     if (this.departmentsSub) {
       this.departmentsSub.unsubscribe();
     }
-  }
 
-  writeValue(value: any): void {
-    if (value) {
-      this.loadCities()
-        .subscribe((cities) => {
-          this.setCity(value.location);
-          super.writeValue(value);
-        });
+    if (this.defaultCitySub) {
+      this.defaultCitySub.unsubscribe();
     }
   }
 }
