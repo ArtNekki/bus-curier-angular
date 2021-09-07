@@ -65,11 +65,11 @@ export class DepartmentFormComponent extends SubFormComponent implements OnInit,
     }
   }
 
-  writeValue(value: any): void {
-    if (value) {
-      super.writeValue(value);
-    } else if (this.formGroup) {
-      this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
-    }
-  }
+  // writeValue(value: any): void {
+  //   if (value) {
+  //     super.writeValue(value);
+  //   } else if (this.formGroup) {
+  //     this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
+  //   }
+  // }
 }

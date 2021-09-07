@@ -145,14 +145,14 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       .subscribe((cities: any) => {
         this.cities = [{value: '0', name: 'Выберите город'}, ...cities];
 
-        // setTimeout(() => {
-        //   if (this.defaultCity) {
-        //     // this.formGroup.get(FormControlName.Location).setValue(this.defaultCity);
-        //     // this.setCity(this.defaultCity);
-        //   } else {
-        //     this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
-        //   }
-        // }, 0);
+        setTimeout(() => {
+          if (this.defaultCity) {
+            this.formGroup.get(FormControlName.Location).setValue(this.defaultCity);
+            this.setCity(this.defaultCity);
+          } else {
+            this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
+          }
+        }, 0);
 
         this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
 
