@@ -70,9 +70,15 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     const defaultData = this.localStorage.get('quick-order');
 
     if (defaultData) {
-      this.steps[this.FormStep.Two].get(FormControlName.DeparturePoint).setValue(defaultData[FormControlName.DeparturePoint]);
-      this.steps[this.FormStep.Three].get(FormControlName.PickupPoint).setValue(defaultData[FormControlName.PickupPoint]);
-      this.steps[this.FormStep.Three].get('orders').setValue(defaultData.orders);
+      this.steps[this.FormStep.Two]
+        .get(FormControlName.DeparturePoint)
+        .setValue(defaultData[FormControlName.DeparturePoint]);
+      this.steps[this.FormStep.Three]
+        .get(FormControlName.PickupPoint)
+        .setValue(defaultData[FormControlName.PickupPoint]);
+      this.steps[this.FormStep.Three]
+        .get('orders')
+        .setValue(defaultData.orders);
     }
   }
 

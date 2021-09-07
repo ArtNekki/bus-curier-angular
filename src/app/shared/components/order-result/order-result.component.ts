@@ -9,13 +9,14 @@ import {Subscription} from 'rxjs';
 import {CalculatorService} from '../../../core/services/calculator/calculator.service';
 import CityTo from '../../../core/models/CityTo';
 import {UtilsService} from '../../../core/services/utils.service';
+import {LocalStorageService} from '../../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-order-result',
   templateUrl: './order-result.component.html',
   styleUrls: ['./order-result.component.scss']
 })
-export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
+export class OrderResultComponent implements OnInit, OnChanges {
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() mods;
@@ -61,51 +62,44 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
   public isDirty = false;
 
   private types = {};
-  private typesSub: Subscription;
-
   private services = {};
-  private servicesSub: Subscription;
-
   public cities = {};
-  private citiesSub: Subscription;
 
   constructor(
     public orderReport: OrderReportService,
     public formUtils: FormUtilsService,
     public utils: UtilsService,
-    private calcService: CalculatorService,
+    private localStorage: LocalStorageService,
     private modsService: ModsService) {
 
     this.cssClass = this.modsService.setMods('order-result', this.mods);
   }
 
   ngOnInit(): void {
-    this.citiesSub = this.calcService.getCityTo('1', 0)
-      .subscribe((cities: Array<CityTo>) => {
-        if (cities.length) {
-          cities.forEach((city: any) => {
-            this.cities[city.id] = city;
-          });
-        }
-      });
 
-    this.typesSub = this.calcService.getTypes('1', '1')
-      .subscribe((types: Array<CargoType>) => {
-        if (types.length) {
-          types.forEach((type: any) => {
-            this.types[type.id] = type;
-          });
-        }
-      });
+    if (this.localStorage.get('cities')) {
+      const cities = this.localStorage.get('cities');
 
-    this.servicesSub = this.calcService.getServices('1')
-      .subscribe((services: Array<CargoType>) => {
-        if (services.length) {
-          services.forEach((service: any) => {
-            this.services[service.id] = service;
-          });
-        }
+      cities.forEach((city: any) => {
+        this.cities[city.id] = city;
       });
+    }
+
+    if (this.localStorage.get('types')) {
+      const types = this.localStorage.get('types');
+
+      types.forEach((type: any) => {
+        this.types[type.id] = type;
+      });
+    }
+
+    if (this.localStorage.get('services')) {
+      const services = this.localStorage.get('services');
+
+      services.forEach((service: any) => {
+        this.services[service.id] = service;
+      });
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -115,11 +109,6 @@ export class OrderResultComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  ngOnDestroy(): void {
-    this.typesSub.unsubscribe();
-    this.servicesSub.unsubscribe();
-    this.citiesSub.unsubscribe();
-  }
   //
   getOrders(data) {
     return data.orders.orders;

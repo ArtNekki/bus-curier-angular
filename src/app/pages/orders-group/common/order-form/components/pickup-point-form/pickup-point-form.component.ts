@@ -264,5 +264,9 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
     if (this.departmentsSub) {
       this.departmentsSub.unsubscribe();
     }
+
+    if (this.defaultCitySub) {
+      this.defaultCitySub.unsubscribe();
+    }
   }
 }
