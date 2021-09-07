@@ -66,7 +66,8 @@ export class IndexPageComponent implements OnInit {
     });
 
     const local = JSON.parse(localStorage.getItem('quick-order'));
-    console.log('local', local.orders);
+
+    this.steps[this.FormStep.Two].get(FormControlName.DeparturePoint).setValue(local[FormControlName.DeparturePoint]);
     this.steps[this.FormStep.Three].get('orders').setValue(local.orders);
   }
 

@@ -98,7 +98,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       this.defaultCity = params.cityFromId;
     });
 
-    this.getDefaultFormData();
     this.initLocation();
     this.loadOffices();
 
@@ -145,14 +144,17 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       .subscribe((cities: any) => {
         this.cities = [{value: '0', name: 'Выберите город'}, ...cities];
 
-        setTimeout(() => {
-          if (this.defaultCity) {
-            this.formGroup.get(FormControlName.Location).setValue(this.defaultCity);
-            this.setCity(this.defaultCity);
-          } else {
-            this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
-          }
-        }, 0);
+        // setTimeout(() => {
+        //   if (this.defaultCity) {
+        //     // this.formGroup.get(FormControlName.Location).setValue(this.defaultCity);
+        //     // this.setCity(this.defaultCity);
+        //   } else {
+        //     this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
+        //   }
+        // }, 0);
+
+        this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
+
       });
   }
 
@@ -194,7 +196,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
             (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(name, new FormControl(''));
           });
 
-          this.formGroup.get(FormControlName.Options).get(FormControlName.Active).setValue(this.defaultActiveOption || tabs[0]);
+          this.formGroup.get(FormControlName.Options).get(FormControlName.Active).setValue(tabs[0]);
           this.getDepartments(id);
         }
       });
@@ -214,17 +216,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       });
   }
 
-  getDefaultFormData() {
-    const defaultData = this.localStorage.get('quick-order');
-
-    if (defaultData) {
-      this.defaultFormData = defaultData[FormControlName.DeparturePoint];
-
-      this.defaultCity = this.defaultFormData[FormControlName.Location];
-      this.defaultActiveOption = this.defaultFormData[FormControlName.Options][FormControlName.Active];
-    }
-  }
-
   ngOnDestroy(): void {
     if (this.citiesSub) {
       this.citiesSub.unsubscribe();
@@ -241,5 +232,25 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     if (this.departmentsSub) {
       this.departmentsSub.unsubscribe();
     }
+  }
+
+  writeValue(value: any): void {
+    this.loadCities()
+      .subscribe((cities) => {
+        console.log('cities666', cities);
+        console.log('value666', value);
+        this.setCity(value.location);
+
+        this.formGroup.setValue(value, { emitEvent: false });
+        this.onChange(value);
+        this.onTouched();
+
+      });
+    // if (value) {
+    //   console.log('value', value);
+    //   this.formGroup.setValue(value, { emitEvent: false });
+    //   this.onChange(value);
+    //   this.onTouched();
+    // }
   }
 }
