@@ -1,4 +1,4 @@
-import {AfterContentInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AfterContentInit, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {AuthService} from '../../../../../../core/services/auth/auth.service';
@@ -7,6 +7,7 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-index-page',
@@ -14,7 +15,7 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
   styleUrls: ['./index-page.component.scss'],
   animations: [fadeIn]
 })
-export class IndexPageComponent implements OnInit {
+export class IndexPageComponent implements OnInit, OnDestroy {
   public FormControlName = FormControlName;
   public FormStep = {
     One: 0,
@@ -40,6 +41,7 @@ export class IndexPageComponent implements OnInit {
     public authService: AuthService,
     private router: Router,
     private simpleModal: SimpleModalService,
+    private localStorage: LocalStorageService,
     protected changeDetectorRef: ChangeDetectorRef
   ) { }
 
@@ -65,10 +67,12 @@ export class IndexPageComponent implements OnInit {
       ])
     });
 
-    const local = JSON.parse(localStorage.getItem('quick-order'));
+    const defaultData = this.localStorage.get('quick-order');
 
-    this.steps[this.FormStep.Two].get(FormControlName.DeparturePoint).setValue(local[FormControlName.DeparturePoint]);
-    this.steps[this.FormStep.Three].get('orders').setValue(local.orders);
+    if (defaultData) {
+      this.steps[this.FormStep.Two].get(FormControlName.DeparturePoint).setValue(defaultData[FormControlName.DeparturePoint]);
+      this.steps[this.FormStep.Three].get('orders').setValue(defaultData.orders);
+    }
   }
 
   get steps() {
@@ -171,5 +175,9 @@ export class IndexPageComponent implements OnInit {
         this.router.navigate(['orders', 'order', 'new', 'fail']);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    // this.localStorage.remove('quick-order');
   }
 }

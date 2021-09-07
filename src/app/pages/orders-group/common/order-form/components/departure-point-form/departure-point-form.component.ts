@@ -235,22 +235,12 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   writeValue(value: any): void {
-    this.loadCities()
-      .subscribe((cities) => {
-        console.log('cities666', cities);
-        console.log('value666', value);
-        this.setCity(value.location);
-
-        this.formGroup.setValue(value, { emitEvent: false });
-        this.onChange(value);
-        this.onTouched();
-
-      });
-    // if (value) {
-    //   console.log('value', value);
-    //   this.formGroup.setValue(value, { emitEvent: false });
-    //   this.onChange(value);
-    //   this.onTouched();
-    // }
+    if (value) {
+      this.loadCities()
+        .subscribe((cities) => {
+          this.setCity(value.location);
+          super.writeValue(value);
+        });
+    }
   }
 }
