@@ -58,6 +58,8 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   public isFormGroupDisabled = false;
 
   private defaultCity: string;
+  private defaultCitySub: Subscription;
+
   public cities = [];
   public departments = [];
   public cityData = {};
@@ -225,6 +227,16 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       // }, 0);
     }
   }
+
+  // writeValue(value: any): void {
+  //   if (value) {
+  //     this.defaultCitySub = this.calcService.getCityTo(id, 0)
+  //       .subscribe((cities) => {
+  //         this.setCity(value.location);
+  //         super.writeValue(value);
+  //       });
+  //   }
+  // }
 
   ngOnDestroy(): void {
     if (this.citiesSub) {
