@@ -7,13 +7,14 @@ import {Subscription} from 'rxjs';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import CityTo from '../../../../../../core/models/CityTo';
 import CargoType from '../../../../../../core/models/CargoType';
+import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-order-report',
   templateUrl: './order-report.component.html',
   styleUrls: ['./order-report.component.scss']
 })
-export class OrderReportComponent implements OnInit, OnDestroy {
+export class OrderReportComponent implements OnInit {
   @Input() data;
 
   public FormControlName = FormControlName;
@@ -74,52 +75,38 @@ export class OrderReportComponent implements OnInit, OnDestroy {
     6: 'Пленка'
   };
 
-  public types = [];
-  private typesSub: Subscription;
-
-  public services = [];
-  private servicesSub: Subscription;
-
-  public cities = [];
-  private citiesSub: Subscription;
+  public types = {};
+  public services = {};
+  public cities = {};
 
   constructor(
-    private calcService: CalculatorService,
+    private localStorage: LocalStorageService,
     public formUtils: FormUtilsService) { }
 
   ngOnInit(): void {
-    this.citiesSub = this.calcService.getCityTo('1', 0)
-      .subscribe((cities: Array<CityTo>) => {
-        if (cities.length) {
-          cities.forEach((city: any) => {
-            this.cities[city.id] = city;
-          });
-        }
-      });
+    if (this.localStorage.get('cities')) {
+      const cities = this.localStorage.get('cities');
 
-    this.typesSub = this.calcService.getTypes('1', '1')
-      .subscribe((types: Array<CargoType>) => {
-        if (types.length) {
-          types.forEach((type: any) => {
-            this.types[type.id] = type;
-          });
-        }
+      cities.forEach((city: any) => {
+        this.cities[city.id] = city;
       });
+    }
 
-    this.servicesSub = this.calcService.getServices('1')
-      .subscribe((services: Array<CargoType>) => {
-        if (services.length) {
-          services.forEach((service: any) => {
-            this.services[service.id] = service;
-          });
-        }
+    if (this.localStorage.get('types')) {
+      const types = this.localStorage.get('types');
+
+      types.forEach((type: any) => {
+        this.types[type.id] = type;
       });
-  }
+    }
 
-  ngOnDestroy(): void {
-    this.typesSub.unsubscribe();
-    this.servicesSub.unsubscribe();
-    this.citiesSub.unsubscribe();
+    if (this.localStorage.get('services')) {
+      const services = this.localStorage.get('services');
+
+      services.forEach((service: any) => {
+        this.services[service.id] = service;
+      });
+    }
   }
 
   get author() {
