@@ -4,6 +4,8 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import {Router} from '@angular/router';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
+import FormControlName from '../../../../../../core/maps/FormControlName';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -31,6 +33,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   constructor(
     private simpleModal: SimpleModalService,
     private orderForm: OrderFormService,
+    private calcService: CalculatorService,
     private localStorage: LocalStorageService,
     private router: Router) { }
 
@@ -39,19 +42,20 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
-    if (changes.pickupInvalid) {
-      this.pickupFormInvalid = changes.pickupInvalid.currentValue;
+    if (changes.form.currentValue) {
+      this.calculateTotalSum(changes.form.currentValue);
     }
+  }
 
-    if (changes.form) {
-      // this.cargoList = this.getCargoList(changes.data.currentValue);
-      // console.log('form', changes.form.currentValue);
-    }
+  calculateTotalSum(data) {
+    const cityFromId = data[FormControlName.DeparturePoint].location;
+    const cityToId = data[FormControlName.PickupPoint].location;
+    const typeId = '1';
 
-    // const firstName = changes.data.currentValue.steps[0].author.individual['first-name'];
-    //
-
+    this.calcService.getResult(cityFromId, cityToId, typeId)
+      .subscribe((sum) => {
+        console.log('sum', sum);
+      });
   }
 
   // getCargoList(data) {
@@ -70,14 +74,12 @@ export class SidebarComponent implements OnInit, OnChanges {
     }
   }
 
-  confirmRetry() {
+  confirmClear() {
     this.simpleModal.addModal(ConfirmModalComponent, {
-      message: 'Не удалось произвести расчет  <br> Попробовать еще раз?'
+      message: 'Вы уверены?'
     }).subscribe((isConfirmed) => {
       if (isConfirmed) {
-        // try
-      } else {
-        this.router.navigate(['orders', 'quick-order', 'new', 'fail']);
+        this.router.navigate(['orders', 'quick-order', 'new']);
       }
     });
   }

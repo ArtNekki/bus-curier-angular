@@ -38,7 +38,7 @@ export class CalculatorService {
     return this.endpoint.getOffices();
   }
 
-  getResult(cityFromId, cityToId, typeId, services, weight, dim) {
+  getResult(cityFromId, cityToId, typeId, services = null, weight = null, dim = null) {
     return this.endpoint.getResult(cityFromId, cityToId, typeId, services, weight, dim);
   }
 }
