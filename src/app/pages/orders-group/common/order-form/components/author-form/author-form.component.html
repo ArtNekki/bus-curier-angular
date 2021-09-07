@@ -16,6 +16,7 @@
              [name]="FormControlName.Active"
              [value]="UserType.Entity"
              (change)="changeUser(UserType.Entity)"
+             disabled="true"
              [formControlName]="FormControlName.Active"  hidden />
       <div [class.invalid]="formGroup.get(UserType.Entity).invalid && formGroup.get(UserType.Entity).dirty">Юридическое лицо</div>
     </label>

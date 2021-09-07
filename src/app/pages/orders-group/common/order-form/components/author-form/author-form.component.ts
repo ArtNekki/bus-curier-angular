@@ -48,7 +48,7 @@ export class AuthorFormComponent extends SubFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.Active]: new FormControl(''),
+      [FormControlName.Active]: new FormControl(FormControlName.Individual),
       individual: new FormControl('', [Validators.required]),
       entity: new FormControl('')
     });

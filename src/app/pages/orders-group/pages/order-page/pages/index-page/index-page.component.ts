@@ -79,6 +79,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       this.steps[this.FormStep.Three]
         .get('orders')
         .setValue(defaultData.orders);
+
+      this.formData = defaultData;
     }
   }
 
@@ -107,7 +109,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     if (this.currentStep === this.FormStep.Four) {
       this.formData = this.formatFormValue(this.form.value);
     } else {
-      this.formData = null;
+      // this.formData = null;
     }
   }
 
@@ -122,7 +124,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     if (this.currentStep === this.FormStep.Four) {
       this.formData = this.formatFormValue(this.form.value);
     } else {
-      this.formData = null;
+      // this.formData = null;
     }
   }
 

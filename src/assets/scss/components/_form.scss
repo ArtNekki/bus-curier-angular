@@ -749,6 +749,10 @@
       }
     }
 
+    input:disabled ~ div {
+      cursor: not-allowed;
+    }
+
     @include hover {
       //background-color: red;
     }
