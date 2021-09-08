@@ -23,7 +23,7 @@
           <h3>Заказ №{{groupIndex + 1}}</h3>
           <ng-container>
             <p class="gray">Тип груза:</p>
-            <div *ngFor="let cargo of order.items | keyvalue: formUtils.originalOrder;">
+            <div *ngFor="let cargo of order.cargo | keyvalue: formUtils.originalOrder;">
               <ng-container *ngIf="cargo.value">
                 <ng-container *ngIf="cargo.key === Cargo.Docs">
                   <p>{{formatDocs(cargo.value)}}</p>
