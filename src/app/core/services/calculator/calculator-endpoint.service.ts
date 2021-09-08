@@ -48,8 +48,7 @@ export class CalculatorEndpointService extends EndpointFactory {
       () => this.getOffices());
   }
 
-  getResult<T>(cityFromId: string, cityToId: string,
-               typeId: string, services: any, weight: any, dim: any): Observable<T> {
+  getResult<T>(cityFromId: string, cityToId: string, typeId: string, services: any, weight: any, dim: any): Observable<T> {
     return this.execute(this.http.get<T>(`${this.url}/${cityFromId}/${cityToId}/${typeId}/${services}/${weight}/${dim}`, this.getRequestHeaders()),
       () => this.getResult(cityFromId, cityToId, typeId, services, weight, dim));
   }

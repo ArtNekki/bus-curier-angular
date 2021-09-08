@@ -50,7 +50,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   calculateTotalSum(data) {
     const cityFromId = data[FormControlName.DeparturePoint].location;
     const cityToId = data[FormControlName.PickupPoint].location;
-    const typeId = '1';
+    const typeId = '2';
 
     this.calcService.getResult(cityFromId, cityToId, typeId)
       .subscribe((sum) => {
