@@ -57,8 +57,8 @@ export class OrderFormComponent extends SubFormComponent implements OnInit, OnCh
 
   public formGroup: FormGroup;
   public currentCargoType = null;
-  // public items: Array<Select> = [];
-  public itemsSub: Subscription;
+  // public cargo: Array<Select> = [];
+  public cargoSub: Subscription;
   public isOk = false;
 
   constructor(public formUtils: FormUtilsService,
@@ -72,8 +72,8 @@ export class OrderFormComponent extends SubFormComponent implements OnInit, OnCh
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      activeItem: new FormControl(this.Cargo.Docs),
-      items: new FormGroup({}, [Validators.required]),
+      activeCargo: new FormControl(this.Cargo.Docs),
+      cargo: new FormGroup({}, [Validators.required]),
       [FormControlName.Packaging]: new FormControl(''),
       [FormControlName.Services]: new FormControl('')
     });
@@ -84,52 +84,52 @@ export class OrderFormComponent extends SubFormComponent implements OnInit, OnCh
       this.setTypes(this.types, false);
     }
 
-    this.formGroup.get('activeItem').valueChanges
+    this.formGroup.get('activeCargo').valueChanges
       .pipe(delay(10))
       .subscribe((id: string) => {
 
         switch (id) {
           case this.Cargo.Docs:
-            this.items
+            this.cargo
               .get(this.Cargo.Parcels)
               .patchValue('', {onlySelf: true});
-            this.items
+            this.cargo
               .get(this.Cargo.AutoParts)
               .patchValue('', {onlySelf: true});
-            this.items
+            this.cargo
               .get(this.Cargo.Other)
               .patchValue('', {onlySelf: true});
             break;
           case this.Cargo.Parcels:
-            this.items
+            this.cargo
               .get(this.Cargo.Docs)
               .setValue('', {onlySelf: true});
-            this.items
+            this.cargo
               .get(this.Cargo.AutoParts)
               .setValue('', {onlySelf: true});
-            this.items
+            this.cargo
               .get(this.Cargo.Other)
               .patchValue('', {onlySelf: true});
             break;
           case this.Cargo.AutoParts:
-            this.items
+            this.cargo
               .get(this.Cargo.Parcels)
               .setValue('', {onlySelf: true});
-            this.items
+            this.cargo
               .get(this.Cargo.Docs)
               .setValue('', {onlySelf: true});
-            this.items
+            this.cargo
               .get(this.Cargo.Other)
               .patchValue('', {onlySelf: true});
             break;
           case this.Cargo.Other:
-            this.items
+            this.cargo
               .get(this.Cargo.Parcels)
               .setValue('', {onlySelf: true});
-            this.items
+            this.cargo
               .get(this.Cargo.Docs)
               .setValue('', {onlySelf: true});
-            this.items
+            this.cargo
               .get(this.Cargo.AutoParts)
               .patchValue('', {onlySelf: true});
             break;
@@ -144,13 +144,13 @@ export class OrderFormComponent extends SubFormComponent implements OnInit, OnCh
     }
   }
 
-  get items() {
-    return this.formGroup.get('items') as FormGroup;
+  get cargo() {
+    return this.formGroup.get('cargo') as FormGroup;
   }
 
-  get cargo() {
-    return this.formGroup.get(FormControlName.Cargo) as FormArray;
-  }
+  // get cargo() {
+  //   return this.formGroup.get(FormControlName.Cargo) as FormArray;
+  // }
 
   setCargoType(e, type: string) {
 
@@ -164,7 +164,7 @@ export class OrderFormComponent extends SubFormComponent implements OnInit, OnCh
         return;
       }
 
-      this.formGroup.get('activeItem').setValue(type);
+      this.formGroup.get('activeCargo').setValue(type);
 
     });
   }
@@ -174,7 +174,7 @@ export class OrderFormComponent extends SubFormComponent implements OnInit, OnCh
       .map((item: CargoType) => ({id: item.id, name: item.name}));
 
     cargoTypes.forEach((item: CargoType) => {
-      this.items.addControl(item.id, new FormControl(''));
+      this.cargo.addControl(item.id, new FormControl(''));
     });
 
     if (onChanges) {
