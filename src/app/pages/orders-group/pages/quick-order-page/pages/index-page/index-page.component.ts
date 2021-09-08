@@ -6,7 +6,7 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import {delay, tap} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'app-index-page',
@@ -47,6 +47,14 @@ export class IndexPageComponent implements OnInit, DoCheck {
       this.defaultCityFromId = params.cityFromId;
       this.defaultCityToId = params.cityToId;
     });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.loading = false;
+        console.log('fff');
+      }
+    });
+
   }
 
   onSubmit() {
@@ -94,6 +102,16 @@ export class IndexPageComponent implements OnInit, DoCheck {
   }
 
   clearForm() {
+    this.loading = true;
+    this.form.get(FormControlName.DeparturePoint).setValue('');
+    this.form.get(FormControlName.PickupPoint).setValue('');
+    this.form.get(FormControlName.Orders).setValue('');
+    this.form.reset({});
+    this.formData = null;
+    this.cityFromId = null;
+    this.cityToId = null;
 
+    this.router.navigate(['orders', 'quick-order']);
+    console.log('this.form', this.form.value);
   }
 }
