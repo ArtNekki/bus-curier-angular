@@ -93,4 +93,7 @@ export class IndexPageComponent implements OnInit, DoCheck {
     });
   }
 
+  clearForm() {
+
+  }
 }

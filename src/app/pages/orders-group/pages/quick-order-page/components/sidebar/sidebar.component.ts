@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {Router} from '@angular/router';
@@ -16,6 +16,8 @@ export class SidebarComponent implements OnInit, OnChanges {
   @Input() currentStep;
   @Input() form;
   @Input() pickupInvalid;
+
+  @Output() clear: EventEmitter<any> = new EventEmitter<any>();
 
   public FormStep = {
     One: 0,
@@ -79,7 +81,8 @@ export class SidebarComponent implements OnInit, OnChanges {
       message: 'Вы уверены?'
     }).subscribe((isConfirmed) => {
       if (isConfirmed) {
-        this.router.navigate(['orders', 'quick-order', 'new']);
+        this.clear.emit();
+        // this.router.navigate(['orders', 'quick-order', 'new']);
       }
     });
   }
