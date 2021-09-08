@@ -1,1 +1,29 @@
-<p>order-form works!</p>
+<ng-container [formGroup]="formGroup">
+  <section class="form__section">
+    <div class="form__fieldset form__fieldset--goods-type">
+      <h2 class="form__heading form__heading--no-mgb">Тип груза:</h2>
+      <app-radio *ngFor="let control of items.controls | keyvalue: formUtils.originalOrder;"
+                 [id]="control.key"
+                 [name]="'cargo-type'"
+                 (change)="setCargoType($event, control.key)"
+                 [checked]="control.key === formGroup.get('activeItem').value"
+                 [isInvalid]="control.value.invalid"
+      >
+        {{CargoName[control.key]}}
+      </app-radio>
+    </div>
+    <div formGroupName="items">
+      <ng-container *ngFor="let control of
+        formUtils.getGroupControls(formGroup.get('items')) | keyvalue: formUtils.originalOrder;">
+        <div *ngIf="formGroup.get('activeItem').value === control.key" [@fadeIn]="">
+          <app-docs-form *ngIf="control.key === Cargo.Docs" [formControlName]="control.key"></app-docs-form>
+          <app-parcels-form *ngIf="control.key === Cargo.Parcels" [formControlName]="control.key"></app-parcels-form>
+          <app-auto-parts-form [types]="types" *ngIf="control.key === Cargo.AutoParts" [formControlName]="control.key"></app-auto-parts-form>
+          <app-other-form [types]="types" *ngIf="control.key === Cargo.Other" [formControlName]="control.key"></app-other-form>
+        </div>
+      </ng-container>
+    </div>
+  </section>
+  <app-packaging-form [services]="services" [formControlName]="FormControlName.Packaging"></app-packaging-form>
+  <app-services-form [services]="services" formControlName="services"></app-services-form>
+</ng-container>
