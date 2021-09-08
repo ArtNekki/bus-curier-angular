@@ -40,10 +40,10 @@
               </ng-container>
             </div>
           </ng-container>
-          <div *ngIf="formatPackage(order.packaging).length">
+          <div *ngIf="formatPackage(order.package).length">
             <p class="gray">Упаковка:</p>
             <dl>
-              <ng-container *ngFor="let package of formatPackage(order.packaging)">
+              <ng-container *ngFor="let package of formatPackage(order.package)">
                 <dt>{{package.type}} {{package.size}} ({{package.count}} шт.):</dt>
                 <dd>
                   <b class="lg">{{package.count * package.price}} руб.</b>
@@ -86,7 +86,7 @@
 <!--        <p><b class="lg">300 руб.</b></p>-->
 <!--      </ng-container>-->
 
-<!--      <ng-container *ngIf="currentData.steps[2][FormControlName.Packaging]">-->
+<!--      <ng-container *ngIf="currentData.steps[2][FormControlName.Package]">-->
 <!--        <p class="gray">Упаковка груза:</p>-->
 <!--        <dl>-->
 <!--          <ng-container *ngFor="let obj of formatPackaging(currentData)">-->

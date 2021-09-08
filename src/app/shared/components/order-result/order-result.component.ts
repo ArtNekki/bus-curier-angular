@@ -294,7 +294,7 @@ export class OrderResultComponent implements OnInit, OnChanges {
   // }
   //
   // formatPackaging(data) {
-  //   const packaging = data.steps[2][FormControlName.Packaging];
+  //   const packaging = data.steps[2][FormControlName.Package];
   //
   //   if (!packaging) {
   //     return;

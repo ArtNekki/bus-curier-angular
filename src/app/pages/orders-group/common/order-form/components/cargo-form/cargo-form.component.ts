@@ -75,7 +75,7 @@ export class CargoFormComponent extends SubFormComponent implements OnInit, OnCh
     this.formGroup = new FormGroup({
       activeItem: new FormControl(this.Cargo.Docs),
       items: new FormGroup({}, [Validators.required]),
-      [FormControlName.Packaging]: new FormControl(''),
+      [FormControlName.Package]: new FormControl(''),
       [FormControlName.Services]: new FormControl('')
     });
 

@@ -40,7 +40,7 @@ export class OrderReportComponent implements OnInit {
     [FormControlName.Box]: 'Коробка',
     [FormControlName.PlasticPack]: 'Пластиковый пакет',
     [FormControlName.SafePack]: 'Сейф-пакет',
-    [FormControlName.Packaging]: 'Упаковка',
+    [FormControlName.Package]: 'Упаковка',
     [FormControlName.Skin]: 'Пленка',
     [FormControlName.Other]: 'Другое',
     [FormControlName.Services]: 'Услуги',

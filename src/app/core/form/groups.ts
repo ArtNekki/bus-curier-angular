@@ -53,7 +53,7 @@ export const cargoGroup = new FormArray([new FormGroup({
     [FormControlName.AutoParts]: new FormControl(''),
     other: new FormGroup({})
   }),
-  [FormControlName.Packaging]: new FormControl(''),
+  [FormControlName.Package]: new FormControl(''),
   services: new FormControl(''),
 })]);
 

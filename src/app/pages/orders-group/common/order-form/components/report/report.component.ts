@@ -141,7 +141,7 @@ export class ReportComponent implements OnInit {
   }
 
   get packaging() {
-    const packaging = this.data.steps[2][FormControlName.Packaging];
+    const packaging = this.data.steps[2][FormControlName.Package];
 
     if (!packaging) {
       return;

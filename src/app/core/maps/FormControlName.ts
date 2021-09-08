@@ -30,7 +30,7 @@ export default {
   Width: 'width',
   Height: 'height',
   Length: 'length',
-  Packaging: 'packaging',
+  Package: 'package',
   PickupPoint: 'pickup-point',
   Recipient: 'recipient',
   Individual: 'individual',

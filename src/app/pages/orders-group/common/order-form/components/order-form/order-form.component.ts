@@ -74,7 +74,7 @@ export class OrderFormComponent extends SubFormComponent implements OnInit, OnCh
     this.formGroup = new FormGroup({
       activeCargo: new FormControl(this.Cargo.Docs),
       cargo: new FormGroup({}, [Validators.required]),
-      [FormControlName.Packaging]: new FormControl(''),
+      [FormControlName.Package]: new FormControl(''),
       [FormControlName.Services]: new FormControl('')
     });
 

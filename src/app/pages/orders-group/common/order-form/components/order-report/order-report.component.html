@@ -43,7 +43,7 @@
         <app-data-list [data]="formatOther(part)"></app-data-list>
       </ng-container>
     </ng-container>
-    <app-data-list [data]="formatPackage(order.packaging)"></app-data-list>
+    <app-data-list [data]="formatPackage(order.package)"></app-data-list>
     <ng-container *ngIf="order.services && formatServices(order.services).length">
       <app-data-list [data]="formatServices(order.services)"></app-data-list>
     </ng-container>
