@@ -91,5 +91,6 @@ export default {
   Pickup: 'pickup',
   Delivery: 'delivery',
   CityFrom: 'city-from',
-  CityTo: 'city-to'
+  CityTo: 'city-to',
+  Item: 'item'
 };

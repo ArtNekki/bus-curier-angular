@@ -1,21 +1,21 @@
-import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
+import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
-import {map} from 'rxjs/operators';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
-import {Subscription} from 'rxjs';
 import Select from '../../../../../../core/models/Select';
 import CargoType from '../../../../../../core/models/CargoType';
-import Service from '../../../../../../core/models/Service';
+import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
+import fadeIn from '../../../../../../core/animations/fadeIn';
 
 @Component({
   selector: 'app-auto-parts-form',
   templateUrl: './auto-parts-form.component.html',
   styleUrls: ['./auto-parts-form.component.scss'],
+  animations: [fadeIn],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -38,6 +38,7 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
   public parts: Array<Select> = [];
 
   constructor(
+    public formUtils: FormUtilsService,
     private cdr: ChangeDetectorRef,
     private simpleModal: SimpleModalService,
     private calcService: CalculatorService,
@@ -47,9 +48,8 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      items: new FormArray([
-        new FormControl('', [Validators.required])
-      ])
+      [FormControlName.Item]: new FormControl('', [Validators.required]),
+      [FormControlName.Counter]: new FormControl('', [Validators.required])
     });
 
     this.setParts(this.types);
@@ -65,42 +65,18 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
   }
 
   setParts(arr: Array<CargoType>) {
-    this.parts = arr.filter((item: CargoType) => item.parent_id === '5' && item)
-      .map((item: CargoType) => ({value: item.id, name: item.name}));
-  }
-
-  public get items(): FormArray {
-    return this.formGroup.get('items') as FormArray;
-  }
-
-  get isSomeItemsInvalid() {
-    return this.items.controls.some((control) => {
-      return control.invalid;
-    });
-  }
-
-  add() {
-    this.items.push(new FormControl('', [Validators.required]));
-    this.formGroup.markAllAsTouched();
-  }
-
-  delete(index: number) {
-    if (this.items.length <= 1) {
-      return;
-    }
-
-    if (this.items.value[index]) {
-      this.confirm().subscribe((ok) => {
-        if (!ok) {
-          return;
-        }
-
-        this.items.removeAt(index);
-        this.cdr.detectChanges();
+    const parts = arr.filter((item: CargoType) => item.parent_id === '5' && item)
+      .map((item: CargoType) => {
+        return {value: item.id, name: item.name};
       });
-    } else {
-      this.items.removeAt(index);
-    }
+
+    this.parts = [{value: '', name: ''}, ...parts];
+  }
+
+  clear() {
+    this.formGroup.get(FormControlName.Item).setValue('');
+    this.formGroup.get(FormControlName.Item).enable();
+    this.formGroup.get(FormControlName.Counter).setValue('');
   }
 
   confirm() {
@@ -109,14 +85,7 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
     });
   }
 
-  writeValue(value: any): void {
-    if (value) {
-      this.items.clear();
-      value.forEach(item => this.items.push(new FormControl(item, [Validators.required])));
-    }
-  }
-
-  registerOnChange(fn: any): void {
-    this.formGroup.valueChanges.pipe( map(value => value.items)).subscribe(fn);
+  disableSelect(control) {
+    // control.disable({onlySelf: false, emitEvent: false});
   }
 }

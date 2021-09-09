@@ -261,13 +261,14 @@
     grid-template-columns: 1fr minmax(80px, min-content);
     grid-column-gap: 20px;
     justify-content: start;
+    align-items: center;
 
     &:last-of-type {
       margin-bottom: 20px;
     }
 
     @include media-breakpoint-up(md) {
-      grid-template-columns: 330px auto;
+      grid-template-columns: 330px auto auto;
     }
   }
 
