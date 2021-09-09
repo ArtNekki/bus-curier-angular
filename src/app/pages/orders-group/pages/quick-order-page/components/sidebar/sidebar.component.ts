@@ -67,18 +67,19 @@ export class SidebarComponent implements OnInit, OnChanges {
 
 
   calculateOrderSum(cityFromId, cityToId, order) {
-    const activeCargoType = order.activeCargo;
-    const cargo = order.cargo[activeCargoType];
+    const cargoId = order.activeCargo;
+    const cargo = order.cargo[cargoId];
 
     let dim = null;
     let weight = null;
 
-    if (activeCargoType === '2') {
+    if (cargoId === '2') {
       weight = this.getWeight(cargo);
       dim = this.getDim(cargo);
     }
 
-    console.log('dim', dim);
+    const servicesId = this.getServicesId(order);
+    console.log('servicesId', servicesId);
   }
 
   getDim(cargo) {
@@ -91,6 +92,30 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   getWeight(cargo) {
     return cargo.reduce((sum, {weight}) => sum + +weight, 0);
+  }
+
+  getServicesId(order) {
+    const packageIds = Object.entries(order.package)
+      .map(([key, value]: [string, any]) => {
+        return value.filter((item) => {
+          return item.counter;
+        });
+      })
+      .filter((array) => {
+        return array.length;
+      })
+      .reduce((acc, val) => acc.concat(val), [])
+      .map((obj) => {
+        return Object.keys(obj)[0];
+      });
+
+    const servicesIds = order.services.items
+      .map((obj) => {
+        return Object.entries(obj)[0][1] ?  Object.entries(obj)[0][0] : null;
+      })
+      .filter((id) => id);
+
+    return [...packageIds, ...servicesIds];
   }
 
   // getCargoList(data) {
