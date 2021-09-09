@@ -130,30 +130,12 @@ export class OrderResultComponent implements OnInit, OnChanges {
     return `Посылки (мест: ${arr.length} шт)`;
   }
 
-  formatAutoparts(arr: any) {
-
-    if (!arr || !arr.length) {
-      return;
-    }
-
-    const formatted = arr.map((id) => {
-      return this.types[id].name;
-    }).join(`, `);
-
-    return `Автозапчасти: ${formatted}`;
+  formatAutoparts(obj: any) {
+    return `Автозапчасть: ${this.types[obj.item].name} (${obj.counter}шт.)`;
   }
 
-  formatOther(arr: any) {
-
-    if (!arr.length) {
-      return;
-    }
-
-    const formatted = arr.map((id) => {
-      return this.types[id].name;
-    }).join(`, `);
-
-    return `Другое: ${formatted}`;
+  formatOther(obj: any) {
+    return `Другое: ${this.types[obj.item].name} (${obj.counter}шт.)`;
   }
 
   formatPackage(arr) {
