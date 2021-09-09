@@ -78,11 +78,15 @@ export class SidebarComponent implements OnInit, OnChanges {
       dim = this.getDim(cargo);
     }
 
-    console.log('dim', weight);
+    console.log('dim', dim);
   }
 
   getDim(cargo) {
-
+    return cargo.reduce((acc, obj) => ({
+        length: acc.length + +obj.length,
+        width: acc.width + +obj.width,
+        height: acc.height + +obj.height
+      }), {width: 0, height: 0, length: 0});
   }
 
   getWeight(cargo) {
