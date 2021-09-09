@@ -16,7 +16,7 @@
         <app-link href="#" mods="blue">расчет перевозки по России.</app-link>
       </p>
     </div>
-    <ng-container *ngIf="form">
+    <ng-container *ngIf="form && !isLoading;">
       <div class="sidebar-result__details">
         <h2 class="sidebar-result__title">Расчет</h2>
         <app-order-result [data]="form"></app-order-result>
@@ -33,5 +33,8 @@
         <button type="button" class="sidebar-result__reset" (click)="confirmClear()">Сбросить расчет</button>
       </div>
     </ng-container>
+    <div *ngIf="isLoading" style="height: 450px; display: flex; justify-content: center; align-items: center">
+      <app-loader></app-loader>
+    </div>
   </section>
 </aside>

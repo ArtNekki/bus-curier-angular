@@ -6,6 +6,7 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
 import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
 import FormControlName from '../../../../../../core/maps/FormControlName';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-sidebar',
@@ -33,6 +34,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   public pickupFormInvalid: boolean;
 
   public totalSum = 0;
+  public isLoading = false;
 
   constructor(
     private simpleModal: SimpleModalService,
@@ -52,6 +54,8 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
   calculateTotalSum(data) {
+    this.isLoading = true;
+
     const cityFromId = data[FormControlName.DeparturePoint].location;
     const cityToId = data[FormControlName.PickupPoint].location;
     const orders = data.orders.orders;
@@ -76,8 +80,10 @@ export class SidebarComponent implements OnInit, OnChanges {
     const servicesId = this.getServicesId(order);
 
     this.calcService.getResult(cityFromId, cityToId, cargoId, servicesId, weight, dim)
+      .pipe(delay(3000))
       .subscribe((sum: {price: number}) => {
         this.totalSum = sum.price;
+        this.isLoading = false;
       });
   }
 
