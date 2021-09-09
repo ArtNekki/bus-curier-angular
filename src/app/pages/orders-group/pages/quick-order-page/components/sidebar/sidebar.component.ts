@@ -32,6 +32,8 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   public pickupFormInvalid: boolean;
 
+  public totalSum = 0;
+
   constructor(
     private simpleModal: SimpleModalService,
     private orderForm: OrderFormService,
@@ -53,18 +55,11 @@ export class SidebarComponent implements OnInit, OnChanges {
     const cityFromId = data[FormControlName.DeparturePoint].location;
     const cityToId = data[FormControlName.PickupPoint].location;
     const orders = data.orders.orders;
-    const typeId = '2';
-
-    this.calcService.getResult(cityFromId, cityToId, typeId)
-      .subscribe((sum) => {
-        console.log('sum', sum);
-      });
 
     orders.forEach((order) => {
       this.calculateOrderSum(cityFromId, cityToId, order);
     });
   }
-
 
   calculateOrderSum(cityFromId, cityToId, order) {
     const cargoId = order.activeCargo;
@@ -79,15 +74,22 @@ export class SidebarComponent implements OnInit, OnChanges {
     }
 
     const servicesId = this.getServicesId(order);
-    console.log('servicesId', servicesId);
+
+    this.calcService.getResult(cityFromId, cityToId, cargoId, servicesId, weight, dim)
+      .subscribe((sum: {price: number}) => {
+        this.totalSum = sum.price;
+      });
   }
 
   getDim(cargo) {
-    return cargo.reduce((acc, obj) => ({
+    const objSum =  cargo.reduce((acc, obj) => ({
         length: acc.length + +obj.length,
         width: acc.width + +obj.width,
         height: acc.height + +obj.height
       }), {width: 0, height: 0, length: 0});
+
+    return Object.values(objSum)
+      .reduce((sum: number, val: number) => sum + val, 0);
   }
 
   getWeight(cargo) {
