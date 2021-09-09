@@ -241,12 +241,12 @@ export class OrderReportComponent implements OnInit {
     return [{name: 'Количество', value: `${item} шт.`}];
   }
 
-  formatAutoparts(item: any) {
-    return [{name: 'Запчасть', value: item}];
+  formatAutoparts(obj: any) {
+    return [{name: 'Автозапчасть', value: `${this.types[obj.item].name} (${obj.counter}шт.)`}];
   }
 
-  formatOther(item: any) {
-    return [{name: 'Другое', value: item}];
+  formatOther(obj: any) {
+    return [{name: 'Другое', value: `${this.types[obj.item].name} (${obj.counter}шт.)`}];
   }
 
   formatData(data) {
