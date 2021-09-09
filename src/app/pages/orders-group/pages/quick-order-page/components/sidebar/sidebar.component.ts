@@ -52,12 +52,41 @@ export class SidebarComponent implements OnInit, OnChanges {
   calculateTotalSum(data) {
     const cityFromId = data[FormControlName.DeparturePoint].location;
     const cityToId = data[FormControlName.PickupPoint].location;
+    const orders = data.orders.orders;
     const typeId = '2';
 
     this.calcService.getResult(cityFromId, cityToId, typeId)
       .subscribe((sum) => {
         console.log('sum', sum);
       });
+
+    orders.forEach((order) => {
+      this.calculateOrderSum(cityFromId, cityToId, order);
+    });
+  }
+
+
+  calculateOrderSum(cityFromId, cityToId, order) {
+    const activeCargoType = order.activeCargo;
+    const cargo = order.cargo[activeCargoType];
+
+    let dim = null;
+    let weight = null;
+
+    if (activeCargoType === '2') {
+      weight = this.getWeight(cargo);
+      dim = this.getDim(cargo);
+    }
+
+    console.log('dim', weight);
+  }
+
+  getDim(cargo) {
+
+  }
+
+  getWeight(cargo) {
+    return cargo.reduce((sum, {weight}) => sum + +weight, 0);
   }
 
   // getCargoList(data) {
