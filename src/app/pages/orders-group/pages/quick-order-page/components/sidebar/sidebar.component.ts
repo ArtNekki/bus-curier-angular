@@ -66,7 +66,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
   calculateOrderSum(cityFromId, cityToId, order) {
-    const cargoId = order.activeCargo;
+    let cargoId = order.activeCargo;
     const cargo = order.cargo[cargoId];
 
     let dim = null;
@@ -76,6 +76,12 @@ export class SidebarComponent implements OnInit, OnChanges {
       weight = this.getWeight(cargo);
       dim = this.getDim(cargo);
     }
+
+    if (cargoId === '5' || cargoId === '21') {
+      cargoId = cargo.item;
+    }
+
+    console.log('cargoId', cargoId);
 
     const servicesId = this.getServicesId(order);
 
