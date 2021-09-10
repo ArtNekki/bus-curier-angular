@@ -114,8 +114,13 @@ export class SidebarComponent implements OnInit, OnChanges {
       })
       .reduce((acc, val) => acc.concat(val), [])
       .map((obj) => {
-        return Object.keys(obj)[0];
-      });
+        const id = Object.keys(obj)[0];
+        const count = Object.values(obj)[1];
+
+        return Array(+count + 1).join(`${id} `).split(' ');
+      })
+      .reduce((acc, val) => acc.concat(val), [])
+      .filter((el) => el);
 
     const servicesIds = order.services.items
       .map((obj) => {
