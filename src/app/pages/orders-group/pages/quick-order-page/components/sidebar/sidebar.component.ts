@@ -109,7 +109,10 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
   getServicesId(order) {
-    const packageIds = Object.entries(order.package)
+    const packages = order.package || [];
+    const services = (order.services && order.services.items) || [];
+
+    const packageIds = Object.entries(packages)
       .map(([key, value]: [string, any]) => {
         return value.filter((item) => {
           return item.counter;
@@ -128,7 +131,7 @@ export class SidebarComponent implements OnInit, OnChanges {
       .reduce((acc, val) => acc.concat(val), [])
       .filter((el) => el);
 
-    const servicesIds = order.services.items
+    const servicesIds = services
       .map((obj) => {
         return Object.entries(obj)[0][1] ?  Object.entries(obj)[0][0] : null;
       })
