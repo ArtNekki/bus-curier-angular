@@ -165,9 +165,9 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
   }
 
   changeControlState(control, count: any) {
-    if (count > 0) {
-      control.disable({onlySelf: true});
-    }
+    // if (count > 0) {
+    //   control.disable({onlySelf: true});
+    // }
 
     this.activeCheckboxId = null;
   }

@@ -17,13 +17,15 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
   @Input() name;
   @Input() mods;
   @Input() isInvalid;
+  @Input() isDisabled = false;
   @Input() isClear;
 
   @Output() customChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() clear: EventEmitter<any> = new EventEmitter<any>();
 
   public cssClass = 'checkbox';
-  public isDisabled = false;
+  public isControlDisabled = false;
+
   value = false;
 
   constructor() {
@@ -74,6 +76,6 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
+    this.isControlDisabled = isDisabled;
   }
 }

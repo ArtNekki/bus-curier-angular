@@ -22,7 +22,8 @@
               isClear="true"
               [formControlName]="control.key"
               (change)="setActiveCheckbox(control.key)"
-              (clear)="clear($event, getCounterControl(i, boxes.controls), control.value)">
+              (clear)="clear($event, getCounterControl(i, boxes.controls), control.value)"
+              [isDisabled]="+getCounterControl(i, boxes.controls).value > 0">
               <div class="text">
                 {{formattedData[control.key].params}}
               </div>
@@ -68,7 +69,8 @@
               isClear="true"
               [formControlName]="control.key"
               (change)="setActiveCheckbox(control.key)"
-              (clear)="clear($event, getCounterControl(i, safePacks.controls), control.value)">
+              (clear)="clear($event, getCounterControl(i, safePacks.controls), control.value)"
+              [isDisabled]="+getCounterControl(i, safePacks.controls).value > 0">
               <div class="text">{{formattedData[control.key].params}}</div>
               <ng-container class="meta">
                 <div>
@@ -111,7 +113,8 @@
               isClear="true"
               [formControlName]="control.key"
               (change)="setActiveCheckbox(control.key)"
-              (clear)="clear($event, getCounterControl(i, plasticPacks.controls), control.value)">
+              (clear)="clear($event, getCounterControl(i, plasticPacks.controls), control.value)"
+              [isDisabled]="+getCounterControl(i, plasticPacks.controls).value > 0">
               <div class="text">{{formattedData[control.key].params}}</div>
               <ng-container class="meta">
                 <div>
@@ -154,7 +157,7 @@
               [formControlName]="control.key"
               (change)="setActiveCheckbox(control.key)"
               (clear)="clear($event, getCounterControl(i, skins.controls), control.value)"
-            >
+              [isDisabled]="+getCounterControl(i, skins.controls).value > 0">
               <div class="text">{{formattedData[control.key].site_name}}</div>
               <ng-container class="meta">
                 <div>
@@ -196,7 +199,8 @@
               isClear="true"
               [formControlName]="control.key"
               (change)="setActiveCheckbox(control.key)"
-              (clear)="clear($event, getCounterControl(i, other.controls), control.value)">
+              (clear)="clear($event, getCounterControl(i, other.controls), control.value)"
+              [isDisabled]="+getCounterControl(i, other.controls).value > 0">
               <div class="text">{{formattedData[control.key].site_name}}</div>
               <ng-container class="meta">
                 <div>
