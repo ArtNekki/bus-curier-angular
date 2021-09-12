@@ -75,7 +75,6 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
 
   clear() {
     this.formGroup.get(FormControlName.Item).setValue('');
-    this.formGroup.get(FormControlName.Item).enable();
     this.formGroup.get(FormControlName.Counter).setValue('');
   }
 
@@ -83,9 +82,5 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
     return this.simpleModal.addModal(ConfirmModalComponent, {
       message: `Вы уверены? <br /> Данные будут потеряны.`
     });
-  }
-
-  disableSelect(control) {
-    // control.disable({onlySelf: false, emitEvent: false});
   }
 }

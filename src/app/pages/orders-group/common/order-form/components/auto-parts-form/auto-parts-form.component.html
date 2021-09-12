@@ -13,7 +13,7 @@
          [items]="parts"
          [formControlName]="control.key"
          [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
-         (change)="disableSelect(control.value)"
+         [disabled]="control.value.value"
        >
        </app-select>
      </div>

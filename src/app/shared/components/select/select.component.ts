@@ -19,6 +19,8 @@ import {ModsService} from '../../../core/services/mods.service';
 export class SelectComponent implements  ControlValueAccessor, OnInit, OnChanges {
   @ViewChild('input', {read: ElementRef}) input: ElementRef;
 
+  @Input() disabled: boolean;
+
   @Input() id;
   @Input() items;
   @Input() mods;
@@ -31,7 +33,7 @@ export class SelectComponent implements  ControlValueAccessor, OnInit, OnChanges
   public fieldValue = null;
   public value: string;
 
-  public isDisabled = false;
+  public controlDisabled = false;
 
   constructor(public deviceService: DeviceDetectorService, private modsService: ModsService) {}
 
@@ -78,7 +80,7 @@ export class SelectComponent implements  ControlValueAccessor, OnInit, OnChanges
   }
 
   openSelect() {
-    if (this.isDisabled) {
+    if (this.controlDisabled) {
       return;
     }
 
@@ -99,7 +101,7 @@ export class SelectComponent implements  ControlValueAccessor, OnInit, OnChanges
     }
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled = isDisabled;
+  setDisabledState?(disabled: boolean): void {
+    this.controlDisabled = disabled;
   }
 }
