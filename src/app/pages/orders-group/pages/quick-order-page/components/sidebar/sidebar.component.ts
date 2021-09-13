@@ -14,24 +14,8 @@ import {delay} from 'rxjs/operators';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, OnChanges {
-  @Input() currentStep;
   @Input() form;
-  @Input() pickupInvalid;
-
   @Output() clear: EventEmitter<any> = new EventEmitter<any>();
-
-  public FormStep = {
-    One: 0,
-    Two: 1,
-    Three: 2,
-    Four: 3
-  };
-
-  public cargoList;
-  public isOrderVisible = false;
-  private orderSuccess = true;
-
-  public pickupFormInvalid: boolean;
 
   public totalSum = 0;
   public isLoading = false;
@@ -68,20 +52,9 @@ export class SidebarComponent implements OnInit, OnChanges {
       });
   }
 
-  // getCargoList(data) {
-  //   return data.steps[2]['cargo-group'];
-  // }
-  showOrder() {
-    this.isOrderVisible = true;
-  }
-
   completeOrder() {
-    if (this.orderSuccess) {
-      this.localStorage.set('quick-order', this.form);
-      this.router.navigate(['orders', 'order', 'new']);
-    } else {
-      // this.confirmRetry();
-    }
+    this.localStorage.set('quick-order', this.form);
+    this.router.navigate(['orders', 'order', 'new']);
   }
 
   confirmClear() {

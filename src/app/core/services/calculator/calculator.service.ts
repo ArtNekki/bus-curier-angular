@@ -16,7 +16,6 @@ interface TotalSum {
 })
 
 export class CalculatorService {
-  private totalSum$: BehaviorSubject<number> = new BehaviorSubject(0);
 
   constructor(private http: HttpClient,
               private endpoint: CalculatorEndpointService) { }
@@ -50,9 +49,6 @@ export class CalculatorService {
   }
 
   calculateTotalSum({cityFromId, cityToId, orders}) {
-    // const totalSum$: BehaviorSubject<any>
-    //   = new BehaviorSubject<any>([]);
-
     const arr = [];
 
     orders.forEach((order) => {
@@ -88,10 +84,6 @@ export class CalculatorService {
     const servicesId = this.getServicesId(order);
 
     return this.getResult(cityFromId, cityToId, cargoId, servicesId, weight, dim);
-      // .pipe(delay(3000))
-      // .subscribe((sum: {price: number}) => {
-      //   this.totalSum$.next(sum.price) ;
-      // });
   }
 
   getDim(cargo) {
