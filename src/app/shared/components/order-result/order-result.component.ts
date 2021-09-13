@@ -1,15 +1,11 @@
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ModsService} from '../../../core/services/mods.service';
-import {OrderReportService} from '../../../core/services/order-report/order-report.service';
 import formFieldMeta from '../../../core/form/formFieldMeta';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {FormUtilsService} from '../../../core/services/form-utils.service';
-import CargoType from '../../../core/models/CargoType';
-import {Subscription} from 'rxjs';
-import {CalculatorService} from '../../../core/services/calculator/calculator.service';
-import CityTo from '../../../core/models/CityTo';
 import {UtilsService} from '../../../core/services/utils.service';
 import {LocalStorageService} from '../../../core/services/local-storage.service';
+import {Cargo, OptionName, PackageName} from '../../../core/maps/order';
 
 @Component({
   selector: 'app-order-result',
@@ -22,51 +18,22 @@ export class OrderResultComponent implements OnInit, OnChanges {
   @Input() mods;
   @Input() data;
 
-  public Cargo = {
-    Docs: '1',
-    Parcels: '2',
-    AutoParts: '5',
-    Other: '21'
-  };
-
-  public CargoName = {
-    1: 'Документы',
-    2: 'Посылки',
-    5: 'Автозапчасти',
-    21: 'Другое'
-  };
-
-  public OptionName = {
-    give: 'Cдать в отделение',
-    pickup: 'Вызвать курьера',
-    get: 'Забрать в отделении',
-    delivery: 'Вызвать курьера',
-    'need-to-meet': 'Встерить с автобуса'
-  };
-
-  private PackageName = {
-    1: 'Коробка',
-    2: 'Сейф-пакет',
-    3: 'Пластиковый пакет',
-    4: 'Другое',
-    5: 'Другое',
-    6: 'Пленка'
-  };
 
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
 
+  public Cargo = Cargo;
+  public OptionName = OptionName;
+
   public cssClass;
   public currentData;
   public isLoading = false;
-  public isDirty = false;
 
-  private types = {};
-  private services = {};
+  public types = {};
+  public services = {};
   public cities = {};
 
   constructor(
-    public orderReport: OrderReportService,
     public formUtils: FormUtilsService,
     public utils: UtilsService,
     private localStorage: LocalStorageService,
@@ -76,30 +43,9 @@ export class OrderResultComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-
-    if (this.localStorage.get('cities')) {
-      const cities = this.localStorage.get('cities');
-
-      cities.forEach((city: any) => {
-        this.cities[city.id] = city;
-      });
-    }
-
-    if (this.localStorage.get('types')) {
-      const types = this.localStorage.get('types');
-
-      types.forEach((type: any) => {
-        this.types[type.id] = type;
-      });
-    }
-
-    if (this.localStorage.get('services')) {
-      const services = this.localStorage.get('services');
-
-      services.forEach((service: any) => {
-        this.services[service.id] = service;
-      });
-    }
+    this.cities = this.formUtils.getAllCities();
+    this.services = this.formUtils.getAllServices();
+    this.types = this.formUtils.getAllTypes();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -109,17 +55,8 @@ export class OrderResultComponent implements OnInit, OnChanges {
     }
   }
 
-  //
   getOrders(data) {
     return data.orders.orders;
-  }
-
-  formatOrder(order: any) {
-    console.log('order', order);
-  }
-
-  getCargo(data) {
-    console.log('cargo', data);
   }
 
   formatDocs(data: any) {
@@ -158,7 +95,7 @@ export class OrderResultComponent implements OnInit, OnChanges {
               count: obj.counter,
               price: this.services[id].price,
               params: this.services[id].property,
-              type: this.PackageName[this.services[id].subgroup_id],
+              type: PackageName[this.services[id].subgroup_id],
               size: this.services[id].site_name
             };
            });
@@ -213,99 +150,4 @@ export class OrderResultComponent implements OnInit, OnChanges {
       price: 300
     };
   }
-
-  //
-  // getDepartureCity(data) {
-  //   return data.steps[1][FormControlName.DeparturePoint].location;
-  // }
-  //
-  // getPickupCity(data) {
-  //   return data.steps[2][FormControlName.PickupPoint].location;
-  // }
-  //
-  // getDispatchType(data) {
-  //   const dispatchData = data.steps[1][FormControlName.DeparturePoint][FormControlName.DispatchData];
-  //
-  //   if (!dispatchData) {
-  //     return;
-  //   }
-  //
-  //   return dispatchData[FormControlName.Active];
-  // }
-  //
-  // getReceiveType(data) {
-  //   const pickupData = data.steps[2][FormControlName.PickupPoint][FormControlName.ReceiveData];
-  //
-  //   if (!pickupData) {
-  //     return;
-  //   }
-  //
-  //   return pickupData[FormControlName.Active];
-  // }
-  //
-  //
-  //
-  // formatParcels(arr: any) {
-  //   return `Посылки (мест: ${arr.length} шт)`;
-  // }
-  //
-  // formatAutoparts(item: any) {
-  //   if (!item) {
-  //     return;
-  //   }
-  //
-  //   return item.join(', ');
-  // }
-  //
-  // formatCargo(cargo: any) {
-  //   let result = null;
-  //
-  //   switch (cargo.activeItem) {
-  //     case FormControlName.Docs:
-  //       result = this.formatDocs(cargo.items[FormControlName.Docs]);
-  //       break;
-  //     case FormControlName.Parcels:
-  //       result = this.formatParcels(cargo.items[FormControlName.Parcels]);
-  //       break;
-  //     case FormControlName.AutoParts:
-  //       result = this.formatAutoparts(cargo.items[FormControlName.AutoParts]);
-  //       break;
-  //   }
-  //
-  //   return result;
-  // }
-  //
-  // formatPackaging(data) {
-  //   const packaging = data.steps[2][FormControlName.Package];
-  //
-  //   if (!packaging) {
-  //     return;
-  //   }
-  //
-  //   const result = packaging.items
-  //     .filter((item) => {
-  //       return item.counter > 0 && item;
-  //     })
-  //     .map((el) => {
-  //       const label = this.FormFieldMeta[Object.keys(el)[0]].label;
-  //       return {label: label.toString(), count: `(${el.counter} шт.)`, sum: `120 руб.`};
-  //     });
-  //
-  //   return result;
-  // }
-  //
-  // formatServices(data) {
-  //   const services = data.steps[2][FormControlName.Services];
-  //
-  //   if (!services) {
-  //     return;
-  //   }
-  //
-  //   const result = Object.entries(services).map((el) => {
-  //     return {id: el[0], label: this.FormFieldMeta[el[0]].label, value: Object.values(el[1])[1], sum: '200 руб.'};
-  //   });
-  //
-  //   return result;
-  // }
-
 }
