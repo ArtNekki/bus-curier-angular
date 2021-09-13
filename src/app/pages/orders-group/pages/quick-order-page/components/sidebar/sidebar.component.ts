@@ -60,84 +60,12 @@ export class SidebarComponent implements OnInit, OnChanges {
     const cityToId = data[FormControlName.PickupPoint].location;
     const orders = data.orders.orders;
 
-    orders.forEach((order) => {
-      this.calculateOrderSum(cityFromId, cityToId, order);
-    });
-  }
-
-  calculateOrderSum(cityFromId, cityToId, order) {
-    let cargoId = order.activeCargo;
-    const cargo = order.cargo[cargoId];
-
-    let dim = null;
-    let weight = null;
-
-    if (cargoId === '2') {
-      weight = this.getWeight(cargo);
-      dim = this.getDim(cargo);
-    }
-
-    if (cargoId === '5' || cargoId === '21') {
-      cargoId = cargo.item;
-    }
-
-    console.log('cargoId', cargoId);
-
-    const servicesId = this.getServicesId(order);
-
-    this.calcService.getResult(cityFromId, cityToId, cargoId, servicesId, weight, dim)
-      .pipe(delay(3000))
-      .subscribe((sum: {price: number}) => {
-        this.totalSum = sum.price;
+    this.calcService.calculateTotalSum({cityFromId, cityToId, orders})
+      .pipe(delay(2000))
+      .subscribe((sum: number) => {
+        this.totalSum = sum;
         this.isLoading = false;
       });
-  }
-
-  getDim(cargo) {
-    const objSum =  cargo.reduce((acc, obj) => ({
-        length: acc.length + +obj.length,
-        width: acc.width + +obj.width,
-        height: acc.height + +obj.height
-      }), {width: 0, height: 0, length: 0});
-
-    return Object.values(objSum)
-      .reduce((sum: number, val: number) => sum + val, 0);
-  }
-
-  getWeight(cargo) {
-    return cargo.reduce((sum, {weight}) => sum + +weight, 0);
-  }
-
-  getServicesId(order) {
-    const packages = order.package || [];
-    const services = (order.services && order.services.items) || [];
-
-    const packageIds = Object.entries(packages)
-      .map(([key, value]: [string, any]) => {
-        return value.filter((item) => {
-          return item.counter;
-        });
-      })
-      .filter((array) => {
-        return array.length;
-      })
-      .reduce((acc, val) => acc.concat(val), [])
-      .map((obj) => {
-        const id = Object.keys(obj)[0];
-        const count = Object.values(obj)[1];
-
-        return Array(+count + 1).join(`${id} `).split(' ');
-      })
-      .reduce((acc, val) => acc.concat(val), [])
-      .filter((el) => el);
-
-    const servicesIds = services
-      .map((obj) => {
-        return Object.entries(obj)[0][1] ?  Object.entries(obj)[0][0] : null;
-      })
-      .filter((id) => id);
-
-    return [...packageIds, ...servicesIds];
   }
 
   // getCargoList(data) {
