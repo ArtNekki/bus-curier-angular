@@ -16,18 +16,21 @@
         <app-link href="#" mods="blue">расчет перевозки по России.</app-link>
       </p>
     </div>
-    <ng-container *ngIf="form">
+    <ng-container *ngIf="form && !isLoading;">
       <div class="sidebar-result__details">
         <h2 class="sidebar-result__title">Расчет</h2>
         <app-order-result [data]="form"></app-order-result>
       </div>
       <div class="sidebar-result__total">
-        <p><span class="gray">Итого: </span><b>1 550 руб.</b></p>
+        <p><span class="gray">Итого: </span><b>{{totalSum}} руб.</b></p>
         <button type="button" class="sidebar-result__collapse">&#160;</button>
       </div>
       <div class="sidebar-result__footer">
         <small>Срок отправки: от 2 до 24 часов<br />*в направлении Владивосток-Находка возможна задержка   сроков до 24 часов.</small>
       </div>
     </ng-container>
+    <div *ngIf="isLoading" style="height: 450px; display: flex; justify-content: center; align-items: center">
+      <app-loader></app-loader>
+    </div>
   </section>
 </aside>

@@ -1,5 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {first} from 'rxjs/operators';
+import {delay} from 'rxjs/operators';
+import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
+import FormControlName from '../../../../../../core/maps/FormControlName';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,48 +10,37 @@ import {first} from 'rxjs/operators';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, OnChanges {
-  @Input() currentStep;
   @Input() form;
-  @Input() pickupInvalid;
 
-  public FormStep = {
-    One: 0,
-    Two: 1,
-    Three: 2,
-    Four: 3
-  };
+  public totalSum = 0;
+  public isLoading = false;
 
-  public cargoList;
-  public isOrderVisible = false;
-
-  public pickupFormInvalid: boolean;
-
-  constructor() { }
+  constructor(
+    private orderForm: OrderFormService,
+    private calcService: CalculatorService) { }
 
   ngOnInit(): void {
 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
-    if (changes.pickupInvalid) {
-      this.pickupFormInvalid = changes.pickupInvalid.currentValue;
+    if (changes.form.currentValue) {
+      this.calculateTotalSum(changes.form.currentValue);
     }
-
-    if (changes.form) {
-      // this.cargoList = this.getCargoList(changes.data.currentValue);
-      // console.log('form', changes.form.currentValue);
-    }
-
-    // const firstName = changes.data.currentValue.steps[0].author.individual['first-name'];
-    //
-
   }
 
-  // getCargoList(data) {
-  //   return data.steps[2]['cargo-group'];
-  // }
-  showOrder() {
-    this.isOrderVisible = true;
+  calculateTotalSum(data) {
+    this.isLoading = true;
+
+    const cityFromId = data[FormControlName.DeparturePoint].location;
+    const cityToId = data[FormControlName.PickupPoint].location;
+    const orders = data.orders.orders;
+
+    this.calcService.calculateTotalSum({cityFromId, cityToId, orders})
+      .pipe(delay(2000))
+      .subscribe((sum: number) => {
+        this.totalSum = sum;
+        this.isLoading = false;
+      });
   }
 }
