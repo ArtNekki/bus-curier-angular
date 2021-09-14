@@ -35,4 +35,8 @@ export class UtilsService {
   formatUrl(url) {
     return url.split('?')[0].split('/').filter(item => item);
   }
+
+  capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 }

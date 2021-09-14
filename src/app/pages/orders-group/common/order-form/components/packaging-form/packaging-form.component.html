@@ -25,7 +25,8 @@
               (clear)="clear($event, getCounterControl(i, boxes.controls), control.value)"
               [isDisabled]="+getCounterControl(i, boxes.controls).value > 0">
               <div class="text">
-                {{formattedData[control.key].params}}
+                {{utils.capitalizeFirstLetter(formattedData[control.key].site_name)}}<br />
+                ({{formattedData[control.key].params}})
               </div>
               <ng-container class="meta">
                 <div>
@@ -71,7 +72,10 @@
               (change)="setActiveCheckbox(control.key)"
               (clear)="clear($event, getCounterControl(i, safePacks.controls), control.value)"
               [isDisabled]="+getCounterControl(i, safePacks.controls).value > 0">
-              <div class="text">{{formattedData[control.key].params}}</div>
+              <div class="text">
+                {{utils.capitalizeFirstLetter(formattedData[control.key].site_name)}}<br />
+                ({{formattedData[control.key].params}})
+              </div>
               <ng-container class="meta">
                 <div>
                   {{ getCounterControl(i, safePacks.controls).value ?
@@ -115,7 +119,10 @@
               (change)="setActiveCheckbox(control.key)"
               (clear)="clear($event, getCounterControl(i, plasticPacks.controls), control.value)"
               [isDisabled]="+getCounterControl(i, plasticPacks.controls).value > 0">
-              <div class="text">{{formattedData[control.key].params}}</div>
+              <div class="text">
+                {{utils.capitalizeFirstLetter(formattedData[control.key].site_name)}}<br />
+                ({{formattedData[control.key].params}})
+              </div>
               <ng-container class="meta">
                 <div>
                   {{ getCounterControl(i, plasticPacks.controls).value ?
@@ -201,7 +208,7 @@
               (change)="setActiveCheckbox(control.key)"
               (clear)="clear($event, getCounterControl(i, other.controls), control.value)"
               [isDisabled]="+getCounterControl(i, other.controls).value > 0">
-              <div class="text">{{formattedData[control.key].site_name}}</div>
+              <div class="text">{{formattedData[control.key].name}}</div>
               <ng-container class="meta">
                 <div>
                   {{ getCounterControl(i, other.controls).value ?
