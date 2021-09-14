@@ -51,7 +51,7 @@ export class DepartmentFormComponent extends SubFormComponent implements OnInit,
     });
 
     setTimeout(() => {
-      // this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
+      this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
     }, 0);
   }
 
@@ -60,7 +60,7 @@ export class DepartmentFormComponent extends SubFormComponent implements OnInit,
 
     if (offices.length && this.formGroup) {
       setTimeout(() => {
-        // this.formGroup.get(FormControlName.Office).setValue(changes.offices.currentValue[0].value);
+        this.formGroup.get(FormControlName.Office).setValue(changes.offices.currentValue[0].value);
       });
     }
   }
