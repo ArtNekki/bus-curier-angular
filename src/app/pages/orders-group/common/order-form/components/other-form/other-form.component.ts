@@ -86,8 +86,4 @@ export class OtherFormComponent extends SubFormComponent implements OnInit, OnCh
       message: `Вы уверены? <br /> Данные будут потеряны.`
     });
   }
-
-  disableSelect(control) {
-    // control.disable({onlySelf: false, emitEvent: false});
-  }
 }
