@@ -127,12 +127,12 @@ export class OrderResultComponent implements OnInit, OnChanges {
 
   formatCityFrom(data) {
     const id = data[FormControlName.DeparturePoint].location;
-    return this.cities[id].name;
+    return this.cities[id] ? this.cities[id].name : '';
   }
 
   formatCityTo(data) {
     const id = data[FormControlName.PickupPoint].location;
-    return this.cities[id].name;
+    return this.cities[id] ? this.cities[id].name : '';
   }
 
   formatDepartureOption(data) {
