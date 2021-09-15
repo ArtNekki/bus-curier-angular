@@ -1,7 +1,8 @@
-<div *ngIf="deviceService.isMobile() || deviceService.isTablet()" class="select" [class.select--invalid]="isInvalid">
+<div *ngIf="deviceService.isMobile() || deviceService.isTablet()"
+     class="select" [class.select--invalid]="isInvalid">
   <select #select [name]="id" [id]="id"
           class="select__field" [ngModel]="value" (ngModelChange)="changeValue($event)"
-          [disabled]="controlDisabled" [attr.disabled]="disabled">
+          [disabled]="controlDisabled || disabled || !items.length" [attr.disabled]="disabled">
     <option *ngFor="let item of items" [value]="item.value">{{ item.name }}</option>
   </select>
 <!--  <div *ngIf="isInvalid" class="select__errors">-->
