@@ -143,7 +143,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         })
       )
       .subscribe((cities: any) => {
-        this.cities = [{value: '0', name: 'Выберите город'}, ...cities];
+        this.cities = [{value: '', name: 'Выберите город'}, ...cities];
 
         setTimeout(() => {
           if (this.defaultCity) {

@@ -2,7 +2,7 @@
   <div class="page__content">
     <h1 class="page__title">Расчет стоимости перевозки <br class="br br--show-sm">по Приморскому краю</h1>
     <form action="#" class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form__section" [class.form__section--w-underline]="cityFromId" [style]="{marginBottom: cityFromId ? '50px' : '0'}">
+      <div class="form__section" [class.form__section--w-underline]="cityFromId && cityToId" [style]="{marginBottom: cityFromId && cityToId ? '50px' : '0'}">
         <div class="form__fieldset form__fieldset--delivery">
           <div>
             <h2 class="form__heading form__heading--no-mgb">Откуда</h2>
@@ -11,7 +11,7 @@
               (onChangeCity)="setCityFromId($event)"
               [formControlName]="FormControlName.DeparturePoint"></app-departure-point-form>
           </div>
-          <span></span>
+<!--          <span></span>-->
           <div>
             <h2 class="form__heading form__heading--no-mgb">Куда</h2>
             <app-pickup-point-form
@@ -24,7 +24,7 @@
       <div *ngIf="cityFromId && cityToId">
         <app-orders-form [cityFromId]="cityFromId" [cityToId]="cityToId" formControlName="orders"></app-orders-form>
       </div>
-      <div class="form__fieldset form__fieldset--delivery">
+      <div *ngIf="cityFromId && cityToId" class="form__fieldset form__fieldset--delivery">
         <app-btn mods="lg" [disabled]="form.invalid">Рассчитать стоимость</app-btn>
       </div>
     </form>

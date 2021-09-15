@@ -20,7 +20,7 @@
       </ng-container>
     </app-select>
   </div>
-  <ng-container>
+  <ng-container *ngIf="formGroup.get(FormControlName.Location).value">
     <ng-container [formGroupName]="FormControlName.Options">
       <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
         <ng-container *ngIf="control.key === FormControlName.NeedToMeet">
