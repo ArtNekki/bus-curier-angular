@@ -1,5 +1,6 @@
-<div *ngFor="let item of items" class="radio-group">
+<div class="radio-group">
   <app-radio
+    *ngFor="let item of items"
     [id]="item.id"
     [name]="name"
     (change)="changeValue(item.id)"

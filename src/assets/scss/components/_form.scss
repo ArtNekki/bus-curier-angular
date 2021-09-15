@@ -186,10 +186,14 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto;
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(sm) {
       grid-template-columns: repeat(2, 1fr);
-      grid-column-gap: 30px;
+      grid-column-gap: 15px;
       align-items: start;
+    }
+
+    @include media-breakpoint-up(md) {
+      grid-column-gap: 30px;
     }
 
     @include media-breakpoint-up(lg) {
@@ -315,18 +319,25 @@
 
     position: relative;
     margin-top: 30px;
-    padding: 30px 25px 25px;
-    grid-template-columns: repeat(auto-fill, 135px);
+    padding: 30px 15px 25px;
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    grid-column-gap: 10px;
     align-items: start;
     border: 1px solid $gray-light-color;
     border-radius: 5px;
 
     @include media-breakpoint-up(sm) {
-      //grid-template-columns: repeat(2, 1fr);
+      padding-right: 25px;
+      padding-left: 25px;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
 
     @include media-breakpoint-up(md) {
-      //grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
     }
 
 
