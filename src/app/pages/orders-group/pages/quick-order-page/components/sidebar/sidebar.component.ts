@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {Router} from '@angular/router';
@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   public totalSum = 0;
   public isLoading = false;
   public isContentVisible = false;
+  public isBreakpointMatched = false;
 
   constructor(
     private simpleModal: SimpleModalService,
@@ -29,7 +30,8 @@ export class SidebarComponent implements OnInit, OnChanges {
     private router: Router) { }
 
   ngOnInit(): void {
-
+    this.isBreakpointMatched =  window.matchMedia(`(min-width: 992px)`).matches;
+    this.isContentVisible = this.isBreakpointMatched;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -73,4 +75,12 @@ export class SidebarComponent implements OnInit, OnChanges {
   toggle() {
     this.isContentVisible = !this.isContentVisible;
   }
+
+  @HostListener('window:resize', ['$event'])
+
+  resize() {
+    this.isBreakpointMatched =  window.matchMedia(`(min-width: 992px)`).matches;
+    this.isContentVisible = this.isBreakpointMatched;
+  }
+
 }

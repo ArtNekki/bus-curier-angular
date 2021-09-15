@@ -242,9 +242,9 @@
       background-color: $gray-light-color--up-5;
     }
 
-    @include media-breakpoint-up(lg) {
-      display: none;
-    }
+    //@include media-breakpoint-up(lg) {
+    //  display: none;
+    //}
 
     &::before {
       content: "";
