@@ -2,7 +2,7 @@
      class="select" [class.select--invalid]="isInvalid">
   <select #select [name]="id" [id]="id"
           class="select__field" [ngModel]="value" (ngModelChange)="changeValue($event)"
-          [disabled]="controlDisabled || disabled || !items.length" [attr.disabled]="disabled">
+          [disabled]="controlDisabled || disabled || !items.length" >
     <option *ngFor="let item of items" [value]="item.value">{{ item.name }}</option>
   </select>
 <!--  <div *ngIf="isInvalid" class="select__errors">-->

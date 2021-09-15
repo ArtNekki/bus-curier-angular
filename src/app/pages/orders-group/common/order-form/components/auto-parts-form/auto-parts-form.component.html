@@ -30,10 +30,13 @@
        </app-counter>
      </div>
    </ng-container>
-   <app-btn *ngIf="formGroup.get(FormControlName.Item).value" type="button" mods="delete" (click)="clear()">
-     <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>
-     Удалить
-   </app-btn>
+   <div *ngIf="formGroup.get(FormControlName.Item).value" class="form__field">
+     <div class="form__label">&#160;</div>
+     <app-btn  type="button" mods="delete" (click)="clear()">
+       <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>
+       Удалить
+     </app-btn>
+   </div>
  </div>
   <dl class="form__details">
     <dt><b>Тип груза:</b></dt>

@@ -274,17 +274,35 @@
 
   &__fieldset--auto-part {
     margin-bottom: 10px;
-    grid-template-columns: 1fr minmax(80px, min-content);
+    max-width: 400px;
+    grid-template-columns: 140px 1fr;
+    grid-template-areas:
+      "select select"
+      "count delete";
     grid-column-gap: 20px;
-    justify-content: start;
     align-items: center;
+
+    @include media-breakpoint-up(sm) {
+      max-width: 550px;
+      grid-template-columns: minmax(250px, 1fr) 140px auto;
+      grid-template-areas: "select count delete";
+    }
+
+    & > *:nth-child(1) {
+      grid-area: select;
+    }
+
+    & > *:nth-child(2) {
+      grid-area: count;
+    }
+
+    & > *:nth-child(3) {
+      grid-area: delete;
+      justify-self: start;
+    }
 
     &:last-of-type {
       margin-bottom: 20px;
-    }
-
-    @include media-breakpoint-up(md) {
-      grid-template-columns: 330px auto auto;
     }
   }
 
@@ -534,6 +552,7 @@
 
     &--full {
       grid-column: 1 / -1;
+      justify-self: normal;
     }
 
     &--align-center {

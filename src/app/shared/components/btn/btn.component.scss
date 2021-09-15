@@ -5,7 +5,7 @@
 @import "src/assets/scss/settings";
 
 :host {
-  display: contents;
+  //display: ;
 }
 
 .btn {
@@ -109,7 +109,7 @@
     --fill-color: none;
   }
 
-  &--delete:hover svg {
+  ::ng-deep &--delete:hover svg {
     --stroke-color: #FFFFFF;
     --fill-color: #C74141;
   }
