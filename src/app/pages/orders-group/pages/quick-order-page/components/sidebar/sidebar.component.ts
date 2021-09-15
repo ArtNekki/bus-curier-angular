@@ -19,6 +19,7 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   public totalSum = 0;
   public isLoading = false;
+  public isContentVisible = false;
 
   constructor(
     private simpleModal: SimpleModalService,
@@ -48,6 +49,7 @@ export class SidebarComponent implements OnInit, OnChanges {
       .pipe(delay(2000))
       .subscribe((sum: number) => {
         this.totalSum = sum;
+        this.isContentVisible = true;
         this.isLoading = false;
       });
   }
@@ -66,5 +68,9 @@ export class SidebarComponent implements OnInit, OnChanges {
         // this.router.navigate(['orders', 'quick-order', 'new']);
       }
     });
+  }
+
+  toggle() {
+    this.isContentVisible = !this.isContentVisible;
   }
 }
