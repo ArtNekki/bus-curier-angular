@@ -22,9 +22,12 @@
     </div>
     <div class="sidebar-result__total">
       <p>
-        <ng-container *ngIf="totalSum">
+        <ng-container *ngIf="totalSum; else info">
           <span class="gray">Итого: </span><b>{{totalSum}} руб.</b>
         </ng-container>
+        <ng-template #info>
+          <span class="gray">Информация</span>
+        </ng-template>
       </p>
       <button type="button" class="sidebar-result__collapse" (click)="toggle()">&#160;</button>
     </div>
