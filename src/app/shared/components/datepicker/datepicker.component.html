@@ -7,10 +7,12 @@
 <!--*ngIf="deviceService.isDesktop()"-->
 
 <div [class]="cssClass" [class.datepicker--invalid]="isInvalid">
-  <input type="text" [id]="id" [name]="name" [value]="value"
-         angular-mydatepicker [options]="dpOptions" locale="ru" #dp="angular-mydatepicker"
-         class="datepicker__field" (click)="dp.openCalendar()" (dateChanged)="changeValue($event)"
-         placeholder="дд.мм.гггг">
+  <div class="datepicker__field-wrap">
+    <input type="text" [id]="id" [name]="name" [value]="value"
+           angular-mydatepicker [options]="dpOptions" locale="ru" #dp="angular-mydatepicker"
+           class="datepicker__field" (click)="dp.openCalendar()" (dateChanged)="changeValue($event)"
+           placeholder="дд.мм.гггг">
+  </div>
   <div *ngIf="isInvalid" class="datepicker__errors">
     <ng-content select=".errors"></ng-content>
   </div>

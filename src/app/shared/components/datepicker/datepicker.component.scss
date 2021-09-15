@@ -7,6 +7,22 @@
 .datepicker {
   position: relative;
 
+  &__field-wrap {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      background-image: url("/assets/img/svg/calendar.svg");
+      background-repeat: no-repeat;
+    }
+  }
+
   &__field {
     @include input();
 
