@@ -8,6 +8,10 @@ body {
   //background-color: $gray;
 }
 
+body {
+  touch-action: pan-x pan-y;
+}
+
 p {
   margin: 0.55em 0;
   font-family: $font-family--secondary;

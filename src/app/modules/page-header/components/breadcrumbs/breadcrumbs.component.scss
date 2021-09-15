@@ -13,6 +13,10 @@
     display: none;
   }
 
+  @include mobile-open {
+    display: none;
+  }
+
   &__list {
     margin: 0;
     padding: 20px 0;

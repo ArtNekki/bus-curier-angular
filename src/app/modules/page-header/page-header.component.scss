@@ -30,8 +30,8 @@
   &__inner {
     @include container();
 
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 17px;
+    padding-bottom: 17px;
     display: grid;
     grid-template-columns: 68px 1fr;
     grid-template-rows: repeat(2, auto);

@@ -23,7 +23,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: $white-color;
+  background-color: #fafafa;
   //transition: all 0.2s ease-in;
 
   @include media-breakpoint-up(lg) {

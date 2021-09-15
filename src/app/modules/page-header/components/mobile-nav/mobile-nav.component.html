@@ -1,7 +1,7 @@
 <div class="mobile-nav" [@navBlock]="isOpen">
   <div class="mobile-nav__header">
     <a href="#" class="mobile-nav__logo">
-<!--      <svg-icon class="icon" src="assets/img/svg/logo.svg" width="68" height="40"></svg-icon>-->
+      <svg-icon class="icon" src="assets/img/svg/logo.svg" width="68" height="40"></svg-icon>
     </a>
     <a href="tel:" class="mobile-nav__contact">
       <svg-icon class="icon" src="assets/img/svg/tel.svg" width="15" height="15"></svg-icon>
@@ -11,20 +11,25 @@
   <div class="mobile-nav__scroll">
     <ul class="mobile-nav__list">
       <li *ngFor="let item of nav"  class="mobile-nav__item">
-        <a *ngIf="!item.dropdown" [routerLink]="item.link" routerLinkActive="mobile-nav__link--active" class="mobile-nav__link">
+        <a *ngIf="!item.dropdown" [routerLink]="item.link"
+           routerLinkActive="mobile-nav__link--active" class="mobile-nav__link" (click)="closeNav()">
           {{item.name}}
         </a>
         <span *ngIf="item.dropdown" class="mobile-nav__link mobile-nav__link--toggle" [class.mobile-nav__link--active]="activeItem === item" (click)="openDropdown(item)">{{item.name}}</span>
         <ul  *ngIf="item.dropdown && activeItem === item" class="mobile-nav__list mobile-nav__list--inner">
           <li *ngFor="let item of item.dropdown" class="mobile-nav__item">
-            <a [routerLink]="item.link" class="mobile-nav__link" routerLinkActive="mobile-nav__link--active">{{item.name}}</a>
+            <a [routerLink]="item.link" class="mobile-nav__link"
+               routerLinkActive="mobile-nav__link--active" (click)="closeNav()">{{item.name}}</a>
           </li>
         </ul>
       </li>
     </ul>
     <div class="mobile-nav__footer">
-      <a href="mailto: inbox@busbox.guru" class="mobile-nav__footer-link mobile-nav__footer-link--lg"><b>inbox@busbox.guru</b></a>
-      <a href="privacy-policy.html" class="mobile-nav__footer-link">Политика конфиденциальности</a>
+      <a href="mailto: inbox@busbox.guru"
+         class="mobile-nav__footer-link mobile-nav__footer-link--lg" (click)="closeNav()">
+        <b>inbox@busbox.guru</b>
+      </a>
+      <a href="privacy-policy.html" class="mobile-nav__footer-link" (click)="closeNav()">Политика конфиденциальности</a>
       <div class="mobile-nav__text">2013-2020 © ООО «Приморье»</div>
       <div class="mobile-nav__text">Идея и дизайн сайта: <app-link href="#">Lead Wave</app-link></div>
     </div>
