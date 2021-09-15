@@ -9,26 +9,29 @@
     <!--    {{{ link href="#" text="" type="help" mods="gray, align-start"}}}-->
   </div>
   <section class="sidebar-result__main">
-    <div *ngIf="!form" class="sidebar-result__info">
+    <div *ngIf="!form && isContentVisible" class="sidebar-result__info">
       <p>Для расчета стоимости отправления, укажите место отправления и прибытия, а также тип груза.</p>
       <p><b>Внимание!</b> Информация, приведенная в калькуляторе справочная, точную информацию по доставкам в населенные пункты вы можете уточнить в чате на сайте или у диспетчера.</p>
       <p>Если вам необходимо отправить посылку между разными регионами России, воспользуйтесь другим калькулятором -
         <app-link href="#" mods="blue">расчет перевозки по России.</app-link>
       </p>
     </div>
-    <ng-container *ngIf="form && !isLoading;">
-      <div class="sidebar-result__details">
-        <h2 class="sidebar-result__title">Расчет</h2>
-        <app-order-result [data]="form"></app-order-result>
-      </div>
-      <div class="sidebar-result__total">
-        <p><span class="gray">Итого: </span><b>{{totalSum}} руб.</b></p>
-        <button type="button" class="sidebar-result__collapse">&#160;</button>
-      </div>
-      <div class="sidebar-result__footer">
-        <small>Срок отправки: от 2 до 24 часов<br />*в направлении Владивосток-Находка возможна задержка   сроков до 24 часов.</small>
-      </div>
-    </ng-container>
+    <div *ngIf="form && isContentVisible && !isLoading;" class="sidebar-result__details">
+      <h2 class="sidebar-result__title">Расчет</h2>
+      <app-order-result [data]="form"></app-order-result>
+    </div>
+    <div class="sidebar-result__total">
+      <p>
+        <ng-container *ngIf="totalSum">
+          <span class="gray">Итого: </span><b>{{totalSum}} руб.</b>
+        </ng-container>
+        <span *ngIf="!isBreakpointMatched && !totalSum" class="gray">Информация</span>
+      </p>
+      <button *ngIf="!isBreakpointMatched" type="button" class="sidebar-result__collapse" (click)="toggle()">&#160;</button>
+    </div>
+    <div *ngIf="form && isContentVisible && !isLoading;" class="sidebar-result__footer">
+      <small>Срок отправки: от 2 до 24 часов<br />*в направлении Владивосток-Находка возможна задержка   сроков до 24 часов.</small>
+    </div>
     <div *ngIf="isLoading" style="height: 450px; display: flex; justify-content: center; align-items: center">
       <app-loader></app-loader>
     </div>

@@ -34,7 +34,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   public cityToId: string;
 
   public formData;
-  public orderSuccess = false;
+  public orderSuccess = true;
 
   constructor(
     public orderForm: OrderFormService,

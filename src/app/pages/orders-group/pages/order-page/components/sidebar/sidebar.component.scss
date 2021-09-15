@@ -86,7 +86,7 @@
 
   &__details {
     padding: 20px $container-padding-x 0;
-    display: none;
+    //display: none;
     height: 340px;
 
     @include media-breakpoint-up(lg) {
@@ -95,9 +95,9 @@
       height: auto;
     }
 
-    .sidebar-result.active & {
-      display: block;
-    }
+    //.sidebar-result.active & {
+    //  display: block;
+    //}
   }
 
   &__info {
@@ -171,12 +171,13 @@
   }
 
   &__footer {
+    margin-bottom: 15px;
     padding: 10px $container-padding-x 0 $container-padding-x;
-    display: none;
+    display: flex;
     flex-wrap: wrap;
 
     .sidebar-result.active & {
-      display: flex;
+      //display: flex;
 
       @include media-breakpoint-up(lg) {
         display: block;
@@ -241,9 +242,9 @@
       background-color: $gray-light-color--up-5;
     }
 
-    @include media-breakpoint-up(lg) {
-      display: none;
-    }
+    //@include media-breakpoint-up(lg) {
+    //  display: none;
+    //}
 
     &::before {
       content: "";
