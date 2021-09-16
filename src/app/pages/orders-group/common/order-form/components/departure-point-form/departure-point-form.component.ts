@@ -101,6 +101,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
     this.initLocation();
     this.loadOffices();
+    this.initDate();
 
     super.ngOnInit();
   }
@@ -157,6 +158,11 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
 
       });
+  }
+
+  initDate() {
+    this.formGroup.get(FormControlName.Date).setValue(new Intl.DateTimeFormat('ru-Ru').format(new Date()));
+    this.formGroup.get(FormControlName.Date).markAsDirty();
   }
 
   changeType(type: string) {
