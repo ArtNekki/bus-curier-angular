@@ -39,7 +39,7 @@ export class IndexPageComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup({
       [FormControlName.DeparturePoint]: new FormControl('', [Validators.required]),
-      [FormControlName.PickupPoint]: new FormControl({value: '', disabled: true}, [Validators.required]),
+      [FormControlName.PickupPoint]: new FormControl('', [Validators.required]),
       ['orders']: new FormControl('', [Validators.required])
     });
 

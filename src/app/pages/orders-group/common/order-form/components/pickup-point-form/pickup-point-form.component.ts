@@ -221,7 +221,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    this.isFormGroupDisabled = isDisabled;
+    // this.isFormGroupDisabled = isDisabled;
 
     if (isDisabled) {
       // this.formGroup.get(FormControlName.Location).disable();
