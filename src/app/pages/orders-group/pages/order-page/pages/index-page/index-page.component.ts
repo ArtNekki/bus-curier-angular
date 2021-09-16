@@ -95,7 +95,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       .subscribe((result) => {
         if (this.formData) {
           this.formData = this.formatFormValue(this.form.value);
-          this.scrollToTop();
+          // this.scrollToTop();
         }
     });
 
@@ -105,7 +105,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       .subscribe((result) => {
         if (this.formData) {
           this.formData = this.formatFormValue(this.form.value);
-          this.scrollToTop();
+          // this.scrollToTop();
         }
     });
 
@@ -115,7 +115,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       .subscribe((result) => {
         if (this.formData) {
           this.formData = this.formatFormValue(this.form.value);
-          this.scrollToTop();
+          // this.scrollToTop();
         }
     });
   }
