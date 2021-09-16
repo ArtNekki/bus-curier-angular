@@ -94,7 +94,7 @@
   &__details {
     padding: 20px $container-padding-x 0;
     //display: none;
-    height: 340px;
+    //height: 340px;
 
     @include media-breakpoint-up(lg) {
       padding: 0;
