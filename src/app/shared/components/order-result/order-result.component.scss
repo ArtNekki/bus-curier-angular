@@ -5,8 +5,9 @@
 @import "src/assets/scss/settings";
 
 .order-result {
-  //height: 340px;
-  height: 240px;
+  max-height: 340px;
+  display: flex;
+  flex-direction: column;
   text-align: left;
 
   p {
