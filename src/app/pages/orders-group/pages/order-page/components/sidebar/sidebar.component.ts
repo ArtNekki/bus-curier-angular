@@ -47,6 +47,10 @@ export class SidebarComponent implements OnInit, OnChanges {
         this.totalSum = sum;
         this.isContentVisible = true;
         this.isLoading = false;
+
+        setTimeout(() => {
+          this.isContentVisible = false;
+        }, 1250);
       });
   }
 

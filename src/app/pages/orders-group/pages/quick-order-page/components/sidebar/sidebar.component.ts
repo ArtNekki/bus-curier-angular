@@ -7,11 +7,13 @@ import {LocalStorageService} from '../../../../../../core/services/local-storage
 import FormControlName from '../../../../../../core/maps/FormControlName';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {delay} from 'rxjs/operators';
+import fadeIn from '../../../../../../core/animations/fadeIn';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
+  animations: [fadeIn]
 })
 export class SidebarComponent implements OnInit, OnChanges {
   @Input() form;
@@ -48,11 +50,15 @@ export class SidebarComponent implements OnInit, OnChanges {
     const orders = data.orders.orders;
 
     this.calcService.calculateTotalSum({cityFromId, cityToId, orders})
-      .pipe(delay(2000))
+      .pipe(delay(1000))
       .subscribe((sum: number) => {
         this.totalSum = sum;
         this.isContentVisible = true;
         this.isLoading = false;
+
+        // setTimeout(() => {
+        //   this.isContentVisible = false;
+        // }, 1000);
       });
   }
 
