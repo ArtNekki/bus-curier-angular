@@ -82,6 +82,25 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
       this.formData = defaultData;
     }
+
+    this.steps[this.FormStep.Two].get(FormControlName.DeparturePoint)
+      .valueChanges.subscribe((result) => {
+      // this.formData = null;
+      console.log('dep', result);
+    });
+
+    this.steps[this.FormStep.Three].get(FormControlName.PickupPoint)
+      .valueChanges.subscribe((result) => {
+      // this.formData = null;
+      console.log('pick', result);
+    });
+
+    this.steps[this.FormStep.Three]
+      .get('orders')
+      .valueChanges.subscribe((result) => {
+      // this.formData = null;
+      console.log('orders', result);
+    });
   }
 
   get steps() {

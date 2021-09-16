@@ -71,6 +71,8 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
   public offices$ = new BehaviorSubject([]);
   private officesSub: Subscription;
+  private officesByIdSub: Subscription;
+
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -155,7 +157,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   }
 
   createTabs(id: string) {
-    this.officesSub = this.getOfficesById(id)
+    this.officesByIdSub = this.getOfficesById(id)
       .pipe(
         map((offices: any) => {
           return offices
@@ -260,6 +262,10 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
     if (this.officesSub) {
       this.officesSub.unsubscribe();
+    }
+
+    if (this.officesByIdSub) {
+      this.officesByIdSub.unsubscribe();
     }
 
     if (this.departmentsSub) {

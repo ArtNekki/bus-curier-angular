@@ -13,7 +13,7 @@ import {ActivatedRoute, NavigationEnd, Params, Router} from '@angular/router';
   templateUrl: './index-page.component.html',
   styleUrls: ['./index-page.component.scss']
 })
-export class IndexPageComponent implements OnInit, DoCheck {
+export class IndexPageComponent implements OnInit {
 
   public FormControlName = FormControlName;
 
@@ -48,12 +48,27 @@ export class IndexPageComponent implements OnInit, DoCheck {
       this.defaultCityToId = params.cityToId;
     });
 
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.loading = false;
-        console.log('fff');
-      }
+    this.form.get(FormControlName.DeparturePoint).valueChanges.subscribe((result) => {
+      this.formData = null;
+      console.log('dep', result);
     });
+
+    this.form.get(FormControlName.PickupPoint).valueChanges.subscribe((result) => {
+      // this.formData = null;
+      console.log('pick', result);
+    });
+
+    this.form.get(FormControlName.Orders).valueChanges.subscribe((result) => {
+      this.formData = null;
+      console.log('orders', result);
+    });
+
+    // this.router.events.subscribe((event) => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.loading = false;
+    //     console.log('fff');
+    //   }
+    // });
 
   }
 
@@ -61,14 +76,6 @@ export class IndexPageComponent implements OnInit, DoCheck {
     this.formData = this.form.value;
     this.scrollToTop();
     console.log('quick form', this.formData);
-  }
-
-  ngDoCheck(): void {
-    if (this.form.get(FormControlName.DeparturePoint).invalid) {
-      this.form.get(FormControlName.PickupPoint).disable();
-    } else {
-      this.form.get(FormControlName.PickupPoint).enable();
-    }
   }
 
   setCityFromId(id: string) {
