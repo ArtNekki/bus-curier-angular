@@ -56,23 +56,19 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     this.departureSub = this.form.get(FormControlName.DeparturePoint).valueChanges
       .pipe(delay(0))
       .subscribe((result) => {
-      if (this.formData) {
         if (this.formData) {
           this.formData = this.form.value;
           this.scrollToTop();
         }
-      }
     });
 
     this.pickupSub = this.form.get(FormControlName.PickupPoint).valueChanges
       .pipe(delay(0))
       .subscribe((result) => {
-      if (this.formData) {
         if (this.formData) {
           this.formData = this.form.value;
           this.scrollToTop();
         }
-      }
     });
 
     this.ordersSub = this.form.get(FormControlName.Orders).valueChanges
