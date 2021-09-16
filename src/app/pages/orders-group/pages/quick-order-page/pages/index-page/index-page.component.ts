@@ -1,4 +1,4 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {Component, DoCheck, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
@@ -7,13 +7,14 @@ import {delay, tap} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {ActivatedRoute, NavigationEnd, Params, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-index-page',
   templateUrl: './index-page.component.html',
   styleUrls: ['./index-page.component.scss']
 })
-export class IndexPageComponent implements OnInit {
+export class IndexPageComponent implements OnInit, OnDestroy {
 
   public FormControlName = FormControlName;
 
@@ -28,6 +29,10 @@ export class IndexPageComponent implements OnInit {
 
   public defaultCityFromId = null;
   public defaultCityToId = null;
+
+  private departureSub: Subscription;
+  private pickupSub: Subscription;
+  private ordersSub: Subscription;
 
   constructor(
     protected orderForm: OrderFormService,
@@ -48,19 +53,35 @@ export class IndexPageComponent implements OnInit {
       this.defaultCityToId = params.cityToId;
     });
 
-    this.form.get(FormControlName.DeparturePoint).valueChanges.subscribe((result) => {
-      this.formData = null;
-      console.log('dep', result);
+    this.departureSub = this.form.get(FormControlName.DeparturePoint).valueChanges
+      .pipe(delay(0))
+      .subscribe((result) => {
+      if (this.formData) {
+        if (this.formData) {
+          this.formData = this.form.value;
+          this.scrollToTop();
+        }
+      }
     });
 
-    this.form.get(FormControlName.PickupPoint).valueChanges.subscribe((result) => {
-      // this.formData = null;
-      console.log('pick', result);
+    this.pickupSub = this.form.get(FormControlName.PickupPoint).valueChanges
+      .pipe(delay(0))
+      .subscribe((result) => {
+      if (this.formData) {
+        if (this.formData) {
+          this.formData = this.form.value;
+          this.scrollToTop();
+        }
+      }
     });
 
-    this.form.get(FormControlName.Orders).valueChanges.subscribe((result) => {
-      this.formData = null;
-      console.log('orders', result);
+    this.ordersSub = this.form.get(FormControlName.Orders).valueChanges
+      .pipe(delay(0))
+      .subscribe((result) => {
+        if (this.formData) {
+          this.formData = this.form.value;
+          this.scrollToTop();
+        }
     });
 
     // this.router.events.subscribe((event) => {
@@ -120,5 +141,20 @@ export class IndexPageComponent implements OnInit {
 
     this.router.navigate(['orders', 'quick-order']);
     console.log('this.form', this.form.value);
+  }
+
+  ngOnDestroy(): void {
+
+    if (this.departureSub) {
+      this.departureSub.unsubscribe();
+    }
+
+    if (this.pickupSub) {
+      this.pickupSub.unsubscribe();
+    }
+
+    if (this.ordersSub) {
+      this.ordersSub.unsubscribe();
+    }
   }
 }
