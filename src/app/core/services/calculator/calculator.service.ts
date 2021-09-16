@@ -67,6 +67,11 @@ export class CalculatorService {
 
   calculateOrderSum(cityFromId, cityToId, order): Observable<TotalSum> {
     let cargoId = order.activeCargo;
+
+    if (!order.cargo) {
+      return new Observable<TotalSum>();
+    }
+
     const cargo = order.cargo[cargoId];
 
     let dim = null;
