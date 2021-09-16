@@ -8,6 +8,8 @@ import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/conf
 import {SimpleModalService} from 'ngx-simple-modal';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
+import {delay} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-index-page',
@@ -35,6 +37,10 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   public formData;
   public orderSuccess = true;
+
+  private departureSub: Subscription;
+  private pickupSub: Subscription;
+  private ordersSub: Subscription;
 
   constructor(
     public orderForm: OrderFormService,
@@ -83,23 +89,34 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       this.formData = defaultData;
     }
 
-    this.steps[this.FormStep.Two].get(FormControlName.DeparturePoint)
-      .valueChanges.subscribe((result) => {
-      // this.formData = null;
-      console.log('dep', result);
+    this.departureSub = this.steps[this.FormStep.Two]
+      .get(FormControlName.DeparturePoint).valueChanges
+      .pipe(delay(0))
+      .subscribe((result) => {
+        if (this.formData) {
+          this.formData = this.formatFormValue(this.form.value);
+          this.scrollToTop();
+        }
     });
 
-    this.steps[this.FormStep.Three].get(FormControlName.PickupPoint)
-      .valueChanges.subscribe((result) => {
-      // this.formData = null;
-      console.log('pick', result);
+    this.pickupSub = this.steps[this.FormStep.Three]
+      .get(FormControlName.PickupPoint).valueChanges
+      .pipe(delay(0))
+      .subscribe((result) => {
+        if (this.formData) {
+          this.formData = this.formatFormValue(this.form.value);
+          this.scrollToTop();
+        }
     });
 
-    this.steps[this.FormStep.Three]
-      .get('orders')
-      .valueChanges.subscribe((result) => {
-      // this.formData = null;
-      console.log('orders', result);
+    this.ordersSub = this.steps[this.FormStep.Three]
+      .get('orders').valueChanges
+      .pipe(delay(0))
+      .subscribe((result) => {
+        if (this.formData) {
+          this.formData = this.formatFormValue(this.form.value);
+          this.scrollToTop();
+        }
     });
   }
 
@@ -125,11 +142,15 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
     // console.log('this.form', this.form);
 
-    if (this.currentStep === this.FormStep.Four) {
+    if (this.currentStep === this.FormStep.Three) {
       this.formData = this.formatFormValue(this.form.value);
     } else {
       // this.formData = null;
     }
+
+    // console.log('this.form.value', this.form.value);
+    //
+    // this.formData = this.formatFormValue(this.form.value);
   }
 
   goPrev() {
@@ -207,5 +228,17 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.localStorage.remove('quick-order');
+
+    if (this.departureSub) {
+      this.departureSub.unsubscribe();
+    }
+
+    if (this.pickupSub) {
+      this.pickupSub.unsubscribe();
+    }
+
+    if (this.ordersSub) {
+      this.ordersSub.unsubscribe();
+    }
   }
 }

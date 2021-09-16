@@ -22,7 +22,7 @@
     </div>
     <div class="sidebar-result__total">
       <p>
-        <ng-container *ngIf="totalSum">
+        <ng-container *ngIf="totalSum && !isLoading">
           <span class="gray">Итого: </span><b>{{totalSum}} руб.</b>
         </ng-container>
         <span *ngIf="!isBreakpointMatched && !totalSum" class="gray">Информация</span>
