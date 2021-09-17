@@ -49,7 +49,7 @@ export class SidebarComponent implements OnInit, OnChanges {
         this.isLoading = false;
 
         setTimeout(() => {
-          this.isContentVisible = false;
+          // this.isContentVisible = false;
         }, 1250);
       });
   }

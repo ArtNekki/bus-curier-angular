@@ -55,19 +55,30 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
     this.departureSub = this.form.get(FormControlName.DeparturePoint).valueChanges
       .pipe(delay(0))
-      .subscribe((result) => {
+      .subscribe((data) => {
         if (this.formData) {
           this.formData = this.form.value;
           // this.scrollToTop();
         }
+
+        if (this.cityFromId !== data.location) {
+          this.cityFromId = data.location;
+          this.formData = null;
+          console.log('this.form', this.form.value);
+        }
+
     });
 
     this.pickupSub = this.form.get(FormControlName.PickupPoint).valueChanges
       .pipe(delay(0))
-      .subscribe((result) => {
+      .subscribe((data) => {
         if (this.formData) {
           this.formData = this.form.value;
           // this.scrollToTop();
+        }
+
+        if (this.cityToId !== data.location) {
+          this.cityToId = data.location;
         }
     });
 
@@ -101,11 +112,11 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
     }
 
-    this.cityFromId = id;
+    // this.cityFromId = id;
   }
 
   setCityToId(id: string) {
-    this.cityToId = id;
+    // this.cityToId = id;
   }
 
   confirmClear() {
@@ -136,7 +147,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     this.cityToId = null;
 
     this.router.navigate(['orders', 'quick-order']);
-    console.log('this.form', this.form.value);
   }
 
   ngOnDestroy(): void {
