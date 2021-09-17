@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
@@ -31,6 +31,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   constructor(
     protected orderForm: OrderFormService,
     private calcService: CalculatorService,
+    private cdr: ChangeDetectorRef,
     private simpleModal: SimpleModalService,
     private router: Router) { }
 
@@ -46,7 +47,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         if (this.formData) {
           this.formData = this.form.value;
-          // this.scrollToTop();
         }
 
         if (data && (this.cityFromId !== data.location)) {
@@ -62,7 +62,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         if (this.formData) {
           this.formData = this.form.value;
-          // this.scrollToTop();
         }
 
         if (data && (this.cityToId !== data.location)) {
@@ -75,14 +74,12 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       .subscribe((result) => {
         if (this.formData) {
           this.formData = this.form.value;
-          // this.scrollToTop();
         }
     });
   }
 
   onSubmit() {
     this.formData = this.form.value;
-    // this.scrollToTop();
     console.log('quick form', this.formData);
   }
 
@@ -109,8 +106,12 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     this.formData = null;
     this.form.get(FormControlName.PickupPoint).reset();
     this.form.get(FormControlName.Orders).reset();
+  }
 
-    // this.router.navigate(['orders', 'quick-order']);
+  clearAllForm() {
+    this.router.navigate(['orders', 'quick-order', 'new']).then(() => {
+      window.location.reload();
+    });
   }
 
   ngOnDestroy(): void {
