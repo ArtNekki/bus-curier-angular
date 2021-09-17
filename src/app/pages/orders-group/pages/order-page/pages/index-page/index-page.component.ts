@@ -8,7 +8,7 @@ import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/conf
 import {SimpleModalService} from 'ngx-simple-modal';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
-import {delay} from 'rxjs/operators';
+import {debounceTime, delay, pairwise} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -91,15 +91,23 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
     this.departureSub = this.steps[this.FormStep.Two]
       .get(FormControlName.DeparturePoint).valueChanges
-      .pipe(delay(0))
-      .subscribe((data) => {
+      .pipe(
+        delay(0),
+        debounceTime(0),
+        pairwise()
+      )
+      .subscribe(([prev, next]) => {
         if (this.formData) {
           this.formData = this.formatFormValue(this.form.value);
         }
 
-        if (this.cityFromId !== data.location) {
-          this.cityFromId = data.location;
-          // this.formData = null;
+        if (prev.location && (prev.location !== next.location)) {
+            console.log('clear');
+            this.clearForm();
+        }
+
+        if (next && (this.cityFromId !== next.location)) {
+          this.cityFromId = next.location;
         }
     });
 
@@ -111,7 +119,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
           this.formData = this.formatFormValue(this.form.value);
         }
 
-        if (this.cityToId !== data.location) {
+        if (data && (this.cityToId !== data.location)) {
           this.cityToId = data.location;
         }
     });
@@ -219,6 +227,16 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         this.router.navigate(['orders', 'order', 'new', 'fail']);
       }
     });
+  }
+
+  clearForm() {
+    this.cityFromId = '';
+    this.cityToId = '';
+    this.formData = null;
+    this.steps[this.FormStep.Three]
+      .get(FormControlName.PickupPoint).reset();
+    this.steps[this.FormStep.Three]
+      .get('orders').reset();
   }
 
   ngOnDestroy(): void {

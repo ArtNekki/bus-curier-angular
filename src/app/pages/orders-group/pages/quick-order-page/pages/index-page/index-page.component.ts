@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {SimpleModalService} from 'ngx-simple-modal';
-import {delay} from 'rxjs/operators';
+import {debounceTime, delay, pairwise} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {Router} from '@angular/router';
@@ -43,16 +43,23 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     });
 
     this.departureSub = this.form.get(FormControlName.DeparturePoint).valueChanges
-      .pipe(delay(0))
-      .subscribe((data) => {
+      .pipe(
+        delay(0),
+        debounceTime(0),
+        pairwise()
+      )
+      .subscribe(([prev, next]) => {
         if (this.formData) {
           this.formData = this.form.value;
         }
 
-        if (data && (this.cityFromId !== data.location)) {
+        if (prev.location && (prev.location !== next.location)) {
+          console.log('clear');
           this.clearForm();
-          this.cityFromId = data.location;
-          console.log('this.q-form', this.form.value);
+        }
+
+        if (next && (this.cityFromId !== next.location)) {
+          this.cityFromId = next.location;
         }
 
     });
