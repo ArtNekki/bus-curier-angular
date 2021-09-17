@@ -49,10 +49,10 @@ export class IndexPageComponent implements OnInit, OnDestroy {
           // this.scrollToTop();
         }
 
-        if (this.cityFromId !== data.location) {
+        if (data && (this.cityFromId !== data.location)) {
+          this.clearForm();
           this.cityFromId = data.location;
-          this.formData = null;
-          console.log('this.form', this.form.value);
+          console.log('this.q-form', this.form.value);
         }
 
     });
@@ -65,7 +65,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
           // this.scrollToTop();
         }
 
-        if (this.cityToId !== data.location) {
+        if (data && (this.cityToId !== data.location)) {
           this.cityToId = data.location;
         }
     });
@@ -104,15 +104,13 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   }
 
   clearForm() {
-    this.form.get(FormControlName.DeparturePoint).setValue('');
-    this.form.get(FormControlName.PickupPoint).setValue('');
-    this.form.get(FormControlName.Orders).setValue('');
-    this.form.reset({});
+    this.cityFromId = '';
+    this.cityToId = '';
     this.formData = null;
-    this.cityFromId = null;
-    this.cityToId = null;
+    this.form.get(FormControlName.PickupPoint).reset();
+    this.form.get(FormControlName.Orders).reset();
 
-    this.router.navigate(['orders', 'quick-order']);
+    // this.router.navigate(['orders', 'quick-order']);
   }
 
   ngOnDestroy(): void {
