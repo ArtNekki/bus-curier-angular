@@ -1,12 +1,12 @@
-import {Component, DoCheck, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {SimpleModalService} from 'ngx-simple-modal';
-import {delay, tap} from 'rxjs/operators';
+import {delay} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
-import {ActivatedRoute, NavigationEnd, Params, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -19,16 +19,10 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   public FormControlName = FormControlName;
 
   public form: FormGroup;
-  public cityId: string;
-  public loading = false;
-
   public formData;
 
   public cityFromId: string;
   public cityToId: string;
-
-  public defaultCityFromId = null;
-  public defaultCityToId = null;
 
   private departureSub: Subscription;
   private pickupSub: Subscription;
@@ -38,19 +32,13 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     protected orderForm: OrderFormService,
     private calcService: CalculatorService,
     private simpleModal: SimpleModalService,
-    private router: Router,
-    private route: ActivatedRoute) { }
+    private router: Router) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
       [FormControlName.DeparturePoint]: new FormControl('', [Validators.required]),
       [FormControlName.PickupPoint]: new FormControl('', [Validators.required]),
       ['orders']: new FormControl('', [Validators.required])
-    });
-
-    this.route.queryParams.subscribe((params: Params) => {
-      this.defaultCityFromId = params.cityFromId;
-      this.defaultCityToId = params.cityToId;
     });
 
     this.departureSub = this.form.get(FormControlName.DeparturePoint).valueChanges
@@ -90,33 +78,12 @@ export class IndexPageComponent implements OnInit, OnDestroy {
           // this.scrollToTop();
         }
     });
-
-    // this.router.events.subscribe((event) => {
-    //   if (event instanceof NavigationEnd) {
-    //     this.loading = false;
-    //     console.log('fff');
-    //   }
-    // });
-
   }
 
   onSubmit() {
     this.formData = this.form.value;
     // this.scrollToTop();
     console.log('quick form', this.formData);
-  }
-
-  setCityFromId(id: string) {
-
-    if (id !== this.cityFromId) {
-
-    }
-
-    // this.cityFromId = id;
-  }
-
-  setCityToId(id: string) {
-    // this.cityToId = id;
   }
 
   confirmClear() {
@@ -137,7 +104,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   }
 
   clearForm() {
-    this.loading = true;
     this.form.get(FormControlName.DeparturePoint).setValue('');
     this.form.get(FormControlName.PickupPoint).setValue('');
     this.form.get(FormControlName.Orders).setValue('');

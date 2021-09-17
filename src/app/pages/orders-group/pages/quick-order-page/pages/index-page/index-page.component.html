@@ -1,4 +1,4 @@
-<div *ngIf="!loading" class="page__container page__container--col-2 page__container--calculator">
+<div class="page__container page__container--col-2 page__container--calculator">
   <div class="page__content">
     <h1 class="page__title">Расчет стоимости перевозки <br class="br br--show-sm">по Приморскому краю</h1>
     <form action="#" class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -10,7 +10,6 @@
               noLabel="true"
               [formControlName]="FormControlName.DeparturePoint"></app-departure-point-form>
           </div>
-<!--          <span></span>-->
           <div>
             <h2 class="form__heading form__heading--no-mgb">Куда</h2>
             <app-pickup-point-form
