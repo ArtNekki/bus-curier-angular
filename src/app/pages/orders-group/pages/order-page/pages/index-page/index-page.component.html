@@ -12,14 +12,14 @@
           <app-sender-form [formControlName]="FormControlName.Sender"></app-sender-form>
           <section class="form__section">
             <h2 class="form__heading">Пункт отправления</h2>
-            <app-departure-point-form (onChangeCity)="setCityFromId($event)" [formControlName]="FormControlName.DeparturePoint"></app-departure-point-form>
+            <app-departure-point-form [formControlName]="FormControlName.DeparturePoint"></app-departure-point-form>
           </section>
         </div>
         <div *ngIf="currentStep === FormStep.Three" [formGroup]="steps[FormStep.Three]" [@fadeIn]="">
           <section class="form__section">
             <h2 class="form__heading">Пункт получения</h2>
             <div class="form__fieldset form__fieldset--row-gap-lg">
-              <app-pickup-point-form [cityFromId]="cityFromId" (onChangeCity)="setCityToId($event)" [formControlName]="FormControlName.PickupPoint"></app-pickup-point-form>
+              <app-pickup-point-form [cityFromId]="cityFromId" [formControlName]="FormControlName.PickupPoint"></app-pickup-point-form>
             </div>
           </section>
           <div *ngIf="cityFromId && cityToId">

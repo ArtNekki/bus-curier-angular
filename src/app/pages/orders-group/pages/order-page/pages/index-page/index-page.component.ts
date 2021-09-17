@@ -92,20 +92,27 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     this.departureSub = this.steps[this.FormStep.Two]
       .get(FormControlName.DeparturePoint).valueChanges
       .pipe(delay(0))
-      .subscribe((result) => {
+      .subscribe((data) => {
         if (this.formData) {
           this.formData = this.formatFormValue(this.form.value);
-          // this.scrollToTop();
+        }
+
+        if (this.cityFromId !== data.location) {
+          this.cityFromId = data.location;
+          // this.formData = null;
         }
     });
 
     this.pickupSub = this.steps[this.FormStep.Three]
       .get(FormControlName.PickupPoint).valueChanges
       .pipe(delay(0))
-      .subscribe((result) => {
+      .subscribe((data) => {
         if (this.formData) {
           this.formData = this.formatFormValue(this.form.value);
-          // this.scrollToTop();
+        }
+
+        if (this.cityToId !== data.location) {
+          this.cityToId = data.location;
         }
     });
 
@@ -168,10 +175,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  // get formData() {
-  //   return this.form.value;
-  // }
-
   scrollToTop() {
     window.scrollTo({
       top: 5,
@@ -185,14 +188,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   setCurrentUser(user: any) {
     this.currentUser = user;
-  }
-
-  setCityFromId(id: string) {
-    this.cityFromId = id;
-  }
-
-  setCityToId(id: string) {
-    this.cityToId = id;
   }
 
   formatFormValue(obj) {
