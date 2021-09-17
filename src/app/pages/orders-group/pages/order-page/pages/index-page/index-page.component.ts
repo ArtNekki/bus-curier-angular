@@ -8,8 +8,9 @@ import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/conf
 import {SimpleModalService} from 'ngx-simple-modal';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
-import {debounceTime, delay, pairwise} from 'rxjs/operators';
-import {Subscription} from 'rxjs';
+import {debounceTime, delay, pairwise, take} from 'rxjs/operators';
+import {Observable, Subscription} from 'rxjs';
+import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
 
 @Component({
   selector: 'app-index-page',
@@ -102,8 +103,11 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         }
 
         if (prev.location && (prev.location !== next.location)) {
-            console.log('clear');
-            this.clearForm();
+          this.clearForm()
+            .pipe(take(1))
+            .subscribe(() => {
+              this.alertClear();
+          });
         }
 
         if (next && (this.cityFromId !== next.location)) {
@@ -230,13 +234,22 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   }
 
   clearForm() {
-    this.cityFromId = '';
-    this.cityToId = '';
-    this.formData = null;
-    this.steps[this.FormStep.Three]
-      .get(FormControlName.PickupPoint).reset();
-    this.steps[this.FormStep.Three]
-      .get('orders').reset();
+    return new Observable((sub) => {
+      this.cityFromId = '';
+      this.cityToId = '';
+      this.formData = null;
+      this.steps[this.FormStep.Three]
+        .get(FormControlName.PickupPoint).reset();
+      this.steps[this.FormStep.Three]
+        .get('orders').reset();
+      sub.next(true);
+    });
+  }
+
+  alertClear() {
+    this.simpleModal.addModal(AlertModalComponent, {
+      message: 'Город отправления изменен! <br />Город получения и заказы удалены!'
+    }).pipe(take(1)).subscribe(() => {});
   }
 
   ngOnDestroy(): void {

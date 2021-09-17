@@ -60,7 +60,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
             .pipe(take(1))
             .subscribe(() => {
               this.alertClear();
-            });
+          });
         }
 
         if (next && (this.cityFromId !== next.location)) {
@@ -94,12 +94,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     this.formData = this.form.value;
   }
 
-  alertClear() {
-    this.simpleModal.addModal(AlertModalComponent, {
-      message: 'Город отправления изменен! <br />Данные заказа удалены!'
-    }).pipe(take(1)).subscribe(() => {});
-  }
-
   // confirmClear(cityId, value) {
   //   const sub = this.simpleModal.addModal(ConfirmModalComponent, {
   //     message: 'Данные будут потеряны! <br> Вы уверены?'
@@ -131,6 +125,12 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       this.form.get(FormControlName.Orders).reset();
       sub.next(true);
     });
+  }
+
+  alertClear() {
+    this.simpleModal.addModal(AlertModalComponent, {
+      message: 'Город отправления изменен! <br />Данные заказа удалены!'
+    }).pipe(take(1)).subscribe(() => {});
   }
 
   clearAllForm() {
