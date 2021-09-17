@@ -43,8 +43,6 @@ const Department = {
   ]
 })
 export class DeparturePointFormComponent extends SubFormComponent implements OnInit, OnDestroy {
-  @Output() onChangeCity: EventEmitter<string> = new EventEmitter<string>();
-
   @Input() noLabel: boolean;
 
   public FormFieldMeta = formFieldMeta;
@@ -179,7 +177,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
   setCity(id: string) {
     this.getTabs(id);
-    this.onChangeCity.emit(id);
   }
 
   getTabs(id: string) {

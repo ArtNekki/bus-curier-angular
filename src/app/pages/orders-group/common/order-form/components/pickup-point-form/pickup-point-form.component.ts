@@ -38,8 +38,6 @@ import {ActivatedRoute, Params} from '@angular/router';
 })
 export class PickupPointFormComponent extends SubFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() cityFromId: string;
-
-  @Output() onChangeCity: EventEmitter<string> = new EventEmitter<string>();
   @Input() noLabel: boolean;
 
   public FormFieldMeta = formFieldMeta;
@@ -153,7 +151,6 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   setCity(id: string) {
     this.createTabs(id);
     this.createNeedToMeetControl(id);
-    this.onChangeCity.emit(id);
   }
 
   createTabs(id: string) {
