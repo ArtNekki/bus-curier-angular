@@ -13,7 +13,7 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
 import {BehaviorSubject, Observable, PartialObserver, Subject, Subscription} from 'rxjs';
 import { filter } from 'rxjs/internal/operators/filter';
 import Office from '../../../../../../core/models/Office';
-import {concatAll, first, map, take, tap} from 'rxjs/operators';
+import {concatAll, delay, first, map, take, tap} from 'rxjs/operators';
 import Select from 'src/app/core/models/Select';
 import CityFrom from 'src/app/core/models/CityFrom';
 import {ActivatedRoute, Params} from '@angular/router';
@@ -223,6 +223,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   writeValue(value: any): void {
     if (value) {
       this.defaultCitySub = this.loadCities()
+        .pipe(delay(0))
         .subscribe((cities) => {
           this.setCity(value.location);
           super.writeValue(value);

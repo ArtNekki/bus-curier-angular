@@ -10,7 +10,7 @@ import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import addressPoints from 'src/app/mock-data/address-points';
 import fadeIn from '../../../../../../core/animations/fadeIn';
-import {concatAll, first, map, switchMap} from 'rxjs/operators';
+import {concatAll, delay, first, map, switchMap} from 'rxjs/operators';
 import CityFrom from '../../../../../../core/models/CityFrom';
 import Select from '../../../../../../core/models/Select';
 import CityTo from '../../../../../../core/models/CityTo';
@@ -244,6 +244,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   writeValue(value: any): void {
     if (value) {
       this.defaultCitySub = this.calcService.getCityTo(this.currentCityId, 0)
+        .pipe(delay(0))
         .subscribe((cities) => {
           this.setCity(value.location);
           super.writeValue(value);
