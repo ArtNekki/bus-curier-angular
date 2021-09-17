@@ -50,6 +50,7 @@ export class OrderReportComponent implements OnInit {
     [FormControlName.CourierTime]: 'Время приезда курьера',
     [FormControlName.Address]: 'Адрес',
     ['office']: 'Отделение',
+    [FormControlName.Sender]: 'Отправитель'
   };
 
   public Cargo = {
@@ -78,6 +79,7 @@ export class OrderReportComponent implements OnInit {
   public types = {};
   public services = {};
   public cities = {};
+  public offices = {};
 
   constructor(
     private localStorage: LocalStorageService,
@@ -105,6 +107,14 @@ export class OrderReportComponent implements OnInit {
 
       services.forEach((service: any) => {
         this.services[service.id] = service;
+      });
+    }
+
+    if (this.localStorage.get('offices')) {
+      const offices = this.localStorage.get('offices');
+
+      offices.forEach((office: any) => {
+        this.offices[office.id] = office;
       });
     }
   }
@@ -217,7 +227,11 @@ export class OrderReportComponent implements OnInit {
         if ((item[0] === FormControlName.Options)) {
           return null;
         } else {
-          return {name: this.Label[item[0]], value: item[1]};
+          return {
+            name: this.Label[item[0]],
+            value: item[0] === FormControlName.Location && this.cities[item[1]].name
+                   || item[0] === FormControlName.Office && this.offices[item[1]].address
+                   || item[1]};
         }
       })
       .filter((item) => item);
@@ -255,7 +269,7 @@ export class OrderReportComponent implements OnInit {
     }
 
     return Object.entries(data).map((item: [string, string]) => {
-      return {name: this.Label[item[0]], value: item[1] || 'нет'};
+      return {name: this.Label[item[0]], value: this.Label[item[1]] || item[1] || 'нет'};
     });
   }
 
