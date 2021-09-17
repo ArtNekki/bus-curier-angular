@@ -103,11 +103,15 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         }
 
         if (prev.location && (prev.location !== next.location)) {
-          this.clearForm()
-            .pipe(take(1))
-            .subscribe(() => {
-              this.alertClear();
-          });
+
+          if (this.localStorage.get('quick-order')) {
+            this.clearForm()
+              .pipe(take(1))
+              .subscribe(() => {
+                this.alertClear();
+              });
+          }
+
         }
 
         if (next && (this.cityFromId !== next.location)) {
