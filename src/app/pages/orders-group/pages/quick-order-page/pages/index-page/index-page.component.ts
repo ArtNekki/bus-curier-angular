@@ -3,11 +3,12 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {SimpleModalService} from 'ngx-simple-modal';
-import {debounceTime, delay, pairwise} from 'rxjs/operators';
+import {debounceTime, delay, first, pairwise, take} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {Router} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
 
 @Component({
   selector: 'app-index-page',
@@ -27,6 +28,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   private departureSub: Subscription;
   private pickupSub: Subscription;
   private ordersSub: Subscription;
+  private confirmSub: Subscription;
 
   constructor(
     protected orderForm: OrderFormService,
@@ -54,8 +56,11 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         }
 
         if (prev.location && (prev.location !== next.location)) {
-          console.log('clear');
-          this.clearForm();
+          this.clearForm()
+            .pipe(take(1))
+            .subscribe(() => {
+              this.alertClear();
+            });
         }
 
         if (next && (this.cityFromId !== next.location)) {
@@ -87,18 +92,28 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.formData = this.form.value;
-    console.log('quick form', this.formData);
   }
 
-  confirmClear() {
-    this.simpleModal.addModal(ConfirmModalComponent, {
-      message: 'Данные будут потеряны! <br> Вы уверены?'
-    }).subscribe((isConfirmed) => {
-      if (isConfirmed) {
-
-      }
-    });
+  alertClear() {
+    this.simpleModal.addModal(AlertModalComponent, {
+      message: 'Город отправления изменен! <br />Данные заказа удалены!'
+    }).pipe(take(1)).subscribe(() => {});
   }
+
+  // confirmClear(cityId, value) {
+  //   const sub = this.simpleModal.addModal(ConfirmModalComponent, {
+  //     message: 'Данные будут потеряны! <br> Вы уверены?'
+  //   })
+  //     .subscribe((isConfirmed: boolean) => {
+  //       if (isConfirmed) {
+  //         this.clearForm();
+  //         console.log('ok');
+  //       } else {
+  //         this.form.get(FormControlName.DeparturePoint)
+  //           .setValue(value, {onlySelf: true, emitEvent: false});
+  //       }
+  //     });
+  // }
 
   scrollToTop() {
     window.scrollTo({
@@ -108,11 +123,14 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   }
 
   clearForm() {
-    this.cityFromId = '';
-    this.cityToId = '';
-    this.formData = null;
-    this.form.get(FormControlName.PickupPoint).reset();
-    this.form.get(FormControlName.Orders).reset();
+    return new Observable((sub) => {
+      this.cityFromId = '';
+      this.cityToId = '';
+      this.formData = null;
+      this.form.get(FormControlName.PickupPoint).reset();
+      this.form.get(FormControlName.Orders).reset();
+      sub.next(true);
+    });
   }
 
   clearAllForm() {
