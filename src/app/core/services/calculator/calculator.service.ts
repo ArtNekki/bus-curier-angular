@@ -77,6 +77,11 @@ export class CalculatorService {
     let dim = null;
     let weight = null;
 
+    // if (cargoId === '1') {
+    //   cargoId = Array(cargo.counter + 1).join(`${cargoId} `);
+    //     // .split(' ');
+    // }
+
     if (cargoId === '2') {
       weight = this.getWeight(cargo);
       dim = this.getDim(cargo);
