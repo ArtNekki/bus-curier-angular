@@ -115,6 +115,10 @@ export class CalculatorService {
     return cargo.reduce((sum, {weight}) => sum + +weight, 0);
   }
 
+  getParcelCount(cargo) {
+    return cargo.reduce((sum, obj) => sum + +obj['place-count'], 0);
+  }
+
   getServicesId(order) {
     const packages = order.package || [];
     const services = (order.services && order.services.items) || [];
