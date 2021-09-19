@@ -84,6 +84,10 @@ export class CalculatorService {
 
     if (cargoId === '5' || cargoId === '21') {
       cargoId = cargo.item;
+
+      // cargoId = Array(cargo.counter + 1).join(`${cargo.item} `)
+      //   .split(' ')
+      //   .filter((el: string) => el);
     }
 
     const servicesId = this.getServicesId(order);
