@@ -158,15 +158,17 @@ export class OrderFormComponent extends SubFormComponent implements OnInit, OnCh
       return;
     }
 
-    this.confirm().subscribe((result) => {
+    this.formGroup.get('activeCargo').setValue(type);
 
-      if (!result) {
-        return;
-      }
-
-      this.formGroup.get('activeCargo').setValue(type);
-
-    });
+    // this.confirm().subscribe((result) => {
+    //
+    //   if (!result) {
+    //     return;
+    //   }
+    //
+    //   this.formGroup.get('activeCargo').setValue(type);
+    //
+    // });
   }
 
   setTypes(types, onChanges) {
