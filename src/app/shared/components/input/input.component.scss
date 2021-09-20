@@ -40,6 +40,16 @@
     }
   }
 
+  &__field[type="number"] {
+    -moz-appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
   &__edit {
     display: inline-block;
     min-width: 1px;

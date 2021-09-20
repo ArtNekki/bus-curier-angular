@@ -139,7 +139,7 @@ export class OrderResultComponent implements OnInit, OnChanges {
     const options = data[FormControlName.DeparturePoint].options;
     return {
       type: options.active,
-      price: 300
+      price: ''
     };
   }
 
@@ -147,7 +147,7 @@ export class OrderResultComponent implements OnInit, OnChanges {
     const options = data[FormControlName.PickupPoint].options;
     return {
       type: options.active,
-      price: 300
+      price: ''
     };
   }
 }

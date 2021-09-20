@@ -12,7 +12,7 @@
           <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
         </label>
         <app-input
-          type="text"
+          type="number"
           [formControlName]="control.key"
           [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
         >
