@@ -46,7 +46,7 @@
         </div>
       </ng-container>
       <div *ngIf="steps[0].get(FormControlName.Author).value.active === FormControlName.Individual" class="form__actions">
-        <app-btn type="button" disabled="true" mods="back" (click)="goPrev()">
+        <app-btn *ngIf="currentStep !== FormStep.One" type="button" disabled="true" mods="back" style="display: block" (click)="goPrev()">
           <svg-icon class="icon" src="assets/img/svg/back.svg" width="24" height="20"></svg-icon>
           Назад
         </app-btn>
