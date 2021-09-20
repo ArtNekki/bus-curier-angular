@@ -1,10 +1,9 @@
-import {ChangeDetectorRef, Component, EventEmitter, forwardRef, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {SimpleModalService} from 'ngx-simple-modal';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import UserType from 'src/app/core/maps/UserType';
 import {AuthService} from '../../../../../../core/services/auth/auth.service';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {LoginComponent} from '../../../../../../modals/login/login.component';
 import {SignInComponent} from '../../../../../../modals/sign-in/sign-in.component';
 import {SubFormComponent} from '../sub-form/sub-form.component';
@@ -41,11 +40,9 @@ export class AuthorFormComponent extends SubFormComponent implements OnInit {
   constructor(
     private modalService: SimpleModalService,
     private simpleModal: SimpleModalService,
-    public authService: AuthService,
-    private cdr: ChangeDetectorRef,
-    orderForm: OrderFormService
+    public authService: AuthService
   ) {
-    super(orderForm);
+    super();
   }
 
   ngOnInit(): void {
@@ -96,7 +93,5 @@ export class AuthorFormComponent extends SubFormComponent implements OnInit {
         this.formGroup.get(UserType.Individual).setValue('');
         break;
     }
-
-    // this.cdr.detectChanges();
   }
 }

@@ -1,11 +1,9 @@
 import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {SimpleModalService} from 'ngx-simple-modal';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
-import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import Select from '../../../../../../core/models/Select';
 import CargoType from '../../../../../../core/models/CargoType';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
@@ -40,10 +38,8 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
   constructor(
     public formUtils: FormUtilsService,
     private cdr: ChangeDetectorRef,
-    private simpleModal: SimpleModalService,
-    private calcService: CalculatorService,
-    orderForm: OrderFormService) {
-    super(orderForm);
+    private simpleModal: SimpleModalService) {
+    super();
   }
 
   ngOnInit(): void {

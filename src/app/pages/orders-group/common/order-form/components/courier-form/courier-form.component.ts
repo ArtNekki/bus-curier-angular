@@ -4,7 +4,6 @@ import fieldError from '../../../../../../core/form/fieldError';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import schedule from 'src/app/mock-data/schedule';
@@ -35,9 +34,8 @@ export class CourierFormComponent extends SubFormComponent implements OnInit {
   public schedule = schedule;
 
   constructor(public formUtils: FormUtilsService,
-              public utils: UtilsService,
-              orderForm: OrderFormService) {
-    super(orderForm);
+              public utils: UtilsService) {
+    super();
   }
 
   ngOnInit(): void {

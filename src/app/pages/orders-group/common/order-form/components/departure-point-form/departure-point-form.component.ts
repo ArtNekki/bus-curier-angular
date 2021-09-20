@@ -1,23 +1,19 @@
-import {Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {AbstractControl, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import addressPoints from 'src/app/mock-data/address-points';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import { SubFormComponent } from '../sub-form/sub-form.component';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {BehaviorSubject, Observable, PartialObserver, Subject, Subscription} from 'rxjs';
-import { filter } from 'rxjs/internal/operators/filter';
-import Office from '../../../../../../core/models/Office';
 import {concatAll, delay, first, map, take, tap} from 'rxjs/operators';
 import Select from 'src/app/core/models/Select';
 import CityFrom from 'src/app/core/models/CityFrom';
 import {ActivatedRoute, Params} from '@angular/router';
-import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
 
 const Department = {
   Aleutskaya: '15',
@@ -57,12 +53,9 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     pickup: 'Вызвать курьера'
   };
 
-  public tabsReceived = false;
   public dataLoading = false;
 
   private defaultCity: string;
-  private defaultActiveOption: string;
-  private defaultFormData;
 
   public cities = [];
   public departments = [];
@@ -78,10 +71,8 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
               private calculatorService: CalculatorService,
-              private route: ActivatedRoute,
-              private localStorage: LocalStorageService,
-              protected orderForm: OrderFormService) {
-    super(orderForm);
+              private route: ActivatedRoute) {
+    super();
   }
 
   ngOnInit(): void {

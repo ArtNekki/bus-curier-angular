@@ -1,16 +1,12 @@
-import {Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {animate, style, transition, trigger} from '@angular/animations';
-import {delay, switchMap, tap} from 'rxjs/operators';
-import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import Service from '../../../../../../core/models/Service';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-services-form',
@@ -42,15 +38,12 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
   public FormFieldMeta = formFieldMeta;
 
   public formGroup: FormGroup;
-  public currentService: string;
   public activeCheckboxId: string;
   public formattedData = {};
 
   constructor(public formUtils: FormUtilsService,
-              public utils: UtilsService,
-              private calcService: CalculatorService,
-              orderForm: OrderFormService) {
-    super(orderForm);
+              public utils: UtilsService) {
+    super();
   }
 
   ngOnInit(): void {

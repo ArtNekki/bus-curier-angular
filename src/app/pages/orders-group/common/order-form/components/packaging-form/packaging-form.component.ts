@@ -1,16 +1,12 @@
-import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {AbstractControl, FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import fadeIn from '../../../../../../core/animations/fadeIn';
-import {switchMap, tap} from 'rxjs/operators';
-import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
-import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
 import Service from 'src/app/core/models/Service';
 import {Subscription} from 'rxjs';
@@ -47,15 +43,11 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
-              private calcService: CalculatorService,
-              private cdr: ChangeDetectorRef,
-              private simpleModal: SimpleModalService,
-              protected orderForm: OrderFormService) {
-    super(orderForm);
+              private simpleModal: SimpleModalService) {
+    super();
   }
 
   ngOnInit(): void {
-
     this.formGroup = new FormGroup({
       [FormControlName.Box]: new FormArray([]),
       [FormControlName.SafePack]: new FormArray([]),

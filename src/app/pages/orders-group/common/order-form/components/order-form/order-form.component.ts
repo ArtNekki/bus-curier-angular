@@ -2,13 +2,11 @@ import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, Simp
 import CargoType from '../../../../../../core/models/CargoType';
 import Service from '../../../../../../core/models/Service';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
-import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs';
+import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {SimpleModalService} from 'ngx-simple-modal';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {delay} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {SubFormComponent} from '../sub-form/sub-form.component';
@@ -57,17 +55,13 @@ export class OrderFormComponent extends SubFormComponent implements OnInit, OnCh
 
   public formGroup: FormGroup;
   public currentCargoType = null;
-  // public cargo: Array<Select> = [];
-  public cargoSub: Subscription;
-  public isOk = false;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
               private cdr: ChangeDetectorRef,
               private calcService: CalculatorService,
-              private simpleModal: SimpleModalService,
-              orderForm: OrderFormService) {
-    super(orderForm);
+              private simpleModal: SimpleModalService) {
+    super();
   }
 
   ngOnInit(): void {
@@ -147,10 +141,6 @@ export class OrderFormComponent extends SubFormComponent implements OnInit, OnCh
   get cargo() {
     return this.formGroup.get('cargo') as FormGroup;
   }
-
-  // get cargo() {
-  //   return this.formGroup.get(FormControlName.Cargo) as FormArray;
-  // }
 
   setCargoType(e, type: string) {
 

@@ -3,7 +3,6 @@ import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
@@ -40,9 +39,8 @@ export class DepartmentFormComponent extends SubFormComponent implements OnInit,
   };
 
   constructor(public formUtils: FormUtilsService,
-              orderForm: OrderFormService,
               public utils: UtilsService) {
-    super(orderForm);
+    super();
   }
 
   ngOnInit(): void {

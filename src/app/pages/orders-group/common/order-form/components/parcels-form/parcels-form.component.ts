@@ -4,11 +4,9 @@ import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Val
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import {SimpleModalService} from 'ngx-simple-modal';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {map} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {SubFormComponent} from '../sub-form/sub-form.component';
-import formGroupMeta from 'src/app/core/form/formGroupMeta';
 
 @Component({
   selector: 'app-parcels-form',
@@ -28,18 +26,17 @@ import formGroupMeta from 'src/app/core/form/formGroupMeta';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class ParcelsFormComponent extends SubFormComponent implements OnInit {
   public FormFieldError = fieldError;
 
   public formGroup: FormGroup;
-  public formGroupMeta = formGroupMeta;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
               private simpleModal: SimpleModalService,
-              private cdr: ChangeDetectorRef,
-              orderForm: OrderFormService) {
-    super(orderForm);
+              private cdr: ChangeDetectorRef) {
+    super();
   }
 
   ngOnInit(): void {

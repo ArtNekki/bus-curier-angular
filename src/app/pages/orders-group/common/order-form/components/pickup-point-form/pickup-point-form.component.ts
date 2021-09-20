@@ -1,21 +1,18 @@
-import {Component, EventEmitter, forwardRef, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {AbstractControl, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import addressPoints from 'src/app/mock-data/address-points';
 import fadeIn from '../../../../../../core/animations/fadeIn';
-import {concatAll, delay, first, map, switchMap} from 'rxjs/operators';
-import CityFrom from '../../../../../../core/models/CityFrom';
+import {delay, map} from 'rxjs/operators';
 import Select from '../../../../../../core/models/Select';
 import CityTo from '../../../../../../core/models/CityTo';
 import {BehaviorSubject, Subscription} from 'rxjs';
-import CargoType from '../../../../../../core/models/CargoType';
 import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
@@ -47,7 +44,6 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   public formGroup: FormGroup;
   public addressPoints = addressPoints;
 
-  public Tab = {One: 'department', Two: 'courier'};
   public TabName = {
     get: 'Забрать в отделении',
     delivery: 'Вызвать курьера'
@@ -75,9 +71,8 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
               private route: ActivatedRoute,
-              private calcService: CalculatorService,
-              orderForm: OrderFormService) {
-    super(orderForm);
+              private calcService: CalculatorService) {
+    super();
   }
 
   ngOnInit(): void {
@@ -218,28 +213,13 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    // this.isFormGroupDisabled = isDisabled;
 
     if (isDisabled) {
       // this.formGroup.get(FormControlName.Location).disable();
     } else {
       // this.formGroup.get(FormControlName.Location).enable();
-
-      // setTimeout(() => {
-      //   this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
-      // }, 0);
     }
   }
-
-  // writeValue(value: any): void {
-  //   if (value) {
-  //     this.defaultCitySub = this.calcService.getCityTo(id, 0)
-  //       .subscribe((cities) => {
-  //         this.setCity(value.location);
-  //         super.writeValue(value);
-  //       });
-  //   }
-  // }
 
   writeValue(value: any): void {
     if (value) {

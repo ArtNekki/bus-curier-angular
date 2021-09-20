@@ -1,15 +1,11 @@
 import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
+import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {SimpleModalService} from 'ngx-simple-modal';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
-import {map} from 'rxjs/operators';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
-import {Subscription} from 'rxjs';
 import Select from 'src/app/core/models/Select';
 import CargoType from '../../../../../../core/models/CargoType';
-import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 
@@ -41,11 +37,8 @@ export class OtherFormComponent extends SubFormComponent implements OnInit, OnCh
 
   constructor(
     public formUtils: FormUtilsService,
-    private cdr: ChangeDetectorRef,
-    private simpleModal: SimpleModalService,
-    private calcService: CalculatorService,
-    orderForm: OrderFormService) {
-    super(orderForm);
+    private simpleModal: SimpleModalService) {
+    super();
   }
 
   ngOnInit(): void {
