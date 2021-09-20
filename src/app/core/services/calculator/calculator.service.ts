@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable, zip} from 'rxjs';
 import FormControlName from '../../maps/FormControlName';
 import {delay, reduce} from 'rxjs/operators';
 import {CityFrom, Office, Parcel} from '../../interfaces/calculator';
+import {Cargo} from '../../maps/order';
 
 interface TotalSum {
   price: number;
@@ -76,22 +77,17 @@ export class CalculatorService {
     let dim = null;
     let weight = null;
 
-    // if (cargoId === '1') {
-    //   cargoId = Array(cargo.counter + 1).join(`${cargoId} `);
-    //     // .split(' ');
-    // }
+    if (cargoId === Cargo.Docs) {
+      cargoId = `${cargoId}, ${cargo.counter}`;
+    }
 
-    if (cargoId === '2') {
+    if (cargoId === Cargo.Parcels) {
       weight = this.getWeight(cargo);
       dim = this.getDim(cargo);
     }
 
-    if (cargoId === '5' || cargoId === '21') {
-      cargoId = cargo.item;
-
-      // cargoId = Array(cargo.counter + 1).join(`${cargo.item} `)
-      //   .split(' ')
-      //   .filter((el: string) => el);
+    if (cargoId === Cargo.AutoParts || cargoId === Cargo.Other) {
+      cargoId = `${cargo.item}, ${cargo.counter}`;
     }
 
     const servicesId = this.getServicesId(order);
