@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AuthorFormComponent } from './components/author-form/author-form.component';
 import { AutoPartsFormComponent } from './components/auto-parts-form/auto-parts-form.component';
 import { SubFormComponent } from './components/sub-form/sub-form.component';
-import { CargoFormComponent } from './components/cargo-form/cargo-form.component';
-import { CargosFormComponent } from './components/cargos-form/cargos-form.component';
 import { CourierFormComponent } from './components/courier-form/courier-form.component';
 import { DepartmentFormComponent } from './components/department-form/department-form.component';
 import { DeparturePointFormComponent } from './components/departure-point-form/departure-point-form.component';
@@ -30,8 +28,6 @@ import { OrderFormComponent } from './components/order-form/order-form.component
     AuthorFormComponent,
     AutoPartsFormComponent,
     SubFormComponent,
-    CargoFormComponent,
-    CargosFormComponent,
     CourierFormComponent,
     DepartmentFormComponent,
     DeparturePointFormComponent,
@@ -59,8 +55,6 @@ import { OrderFormComponent } from './components/order-form/order-form.component
     AuthorFormComponent,
     AutoPartsFormComponent,
     SubFormComponent,
-    CargoFormComponent,
-    CargosFormComponent,
     CourierFormComponent,
     DepartmentFormComponent,
     DeparturePointFormComponent,
