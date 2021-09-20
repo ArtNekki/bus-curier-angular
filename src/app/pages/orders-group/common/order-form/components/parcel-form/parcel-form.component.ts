@@ -5,6 +5,7 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
 import FormControlName from '../../../../../../core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import formGroupMeta from 'src/app/core/form/formGroupMeta';
+import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 
 @Component({
   selector: 'app-parcel-form',
@@ -25,7 +26,7 @@ import formGroupMeta from 'src/app/core/form/formGroupMeta';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParcelFormComponent extends SubFormComponent implements OnInit {
-  public formGroupMeta = formGroupMeta;
+  public FormFieldMeta = formFieldMeta;
   public isInvalid = false;
 
   public formGroup: FormGroup;

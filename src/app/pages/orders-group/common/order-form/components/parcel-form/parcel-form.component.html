@@ -7,7 +7,8 @@
           [for]="'parcel-' + control.key"
           class="parcel__label"
           [class.parcel__label--invalid]="control.value.invalid">
-          {{formGroupMeta.Parcel[control.key].label}}
+          {{FormFieldMeta[control.key].label}}
+          <span *ngIf="FormFieldMeta[control.key].unit" [style]="{color: control.value.invalid ? '#C74141' : '#808080'}">({{FormFieldMeta[control.key].unit}})</span>
           <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
         </label>
         <app-input
