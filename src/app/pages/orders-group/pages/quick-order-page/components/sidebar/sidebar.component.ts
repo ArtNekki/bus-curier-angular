@@ -4,7 +4,7 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import {Router} from '@angular/router';
 import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
 import FormControlName from '../../../../../../core/maps/FormControlName';
-import {CalculatorService} from '../../../../common/services/calculator/calculator.service';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {debounceTime, delay} from 'rxjs/operators';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 

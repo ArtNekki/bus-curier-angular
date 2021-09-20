@@ -3,11 +3,10 @@ import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Val
 import {Subscription} from 'rxjs';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
-import {CalculatorService} from '../../../services/calculator/calculator.service';
-import CargoType from '../../../../../../core/models/CargoType';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
-import Service from '../../../../../../core/models/Service';
+import {CargoType, Service} from '../../../../../../core/interfaces/calculator';
 
 @Component({
   selector: 'app-orders-form',

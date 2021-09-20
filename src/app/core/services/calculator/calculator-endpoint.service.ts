@@ -1,9 +1,8 @@
 import {Injectable, Injector} from '@angular/core';
-import {EndpointFactory} from '../../../../../core/services/endpoint-factory/endpoint-factory.service';
+import {EndpointFactory} from '../endpoint-factory/endpoint-factory.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import CityFrom from '../../../../../core/models/CityFrom';
-import Office from '../../../../../core/models/Office';
+import {CityFrom, Office} from '../../interfaces/calculator';
 
 @Injectable({
   providedIn: 'root'

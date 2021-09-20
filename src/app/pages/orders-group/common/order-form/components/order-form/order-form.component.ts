@@ -1,17 +1,16 @@
 import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import CargoType from '../../../../../../core/models/CargoType';
-import Service from '../../../../../../core/models/Service';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
-import {CalculatorService} from '../../../services/calculator/calculator.service';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {delay} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import FormControlName from 'src/app/core/maps/FormControlName';
+import {CargoType, Service} from '../../../../../../core/interfaces/calculator';
 
 @Component({
   selector: 'app-order-form',

@@ -6,7 +6,7 @@ import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {UtilsService} from '../../../../../../core/services/utils.service';
-import Service from '../../../../../../core/models/Service';
+import {Service} from '../../../../../../core/interfaces/calculator';
 
 @Component({
   selector: 'app-services-form',

@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CalculatorService} from '../../../../common/services/calculator/calculator.service';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {debounceTime, delay, pairwise, take} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';

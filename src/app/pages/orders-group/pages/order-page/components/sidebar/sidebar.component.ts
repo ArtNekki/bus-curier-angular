@@ -1,6 +1,6 @@
 import {Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {delay} from 'rxjs/operators';
-import {CalculatorService} from '../../../../common/services/calculator/calculator.service';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import FormControlName from '../../../../../../core/maps/FormControlName';
 import {SimpleModalService} from 'ngx-simple-modal';
 

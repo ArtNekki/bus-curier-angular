@@ -5,9 +5,9 @@ import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/conf
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import Select from 'src/app/core/models/Select';
-import CargoType from '../../../../../../core/models/CargoType';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {CargoType} from '../../../../../../core/interfaces/calculator';
 
 @Component({
   selector: 'app-other-form',

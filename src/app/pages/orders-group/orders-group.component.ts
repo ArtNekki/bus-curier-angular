@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CalculatorService} from './common/services/calculator/calculator.service';
+import {CalculatorService} from '../../core/services/calculator/calculator.service';
 import {forkJoin, Subscription, zip} from 'rxjs';
-import CityTo from '../../core/models/CityTo';
-import CargoType from '../../core/models/CargoType';
 import {LocalStorageService} from '../../core/services/local-storage.service';
 
 @Component({

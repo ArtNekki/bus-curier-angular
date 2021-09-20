@@ -8,8 +8,8 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
-import Service from 'src/app/core/models/Service';
 import {Subscription} from 'rxjs';
+import {Service} from '../../../../../../core/interfaces/calculator';
 
 @Component({
   selector: 'app-packaging-form',

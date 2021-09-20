@@ -5,15 +5,14 @@ import formFieldMeta from '../../../../core/form/formFieldMeta';
 import fieldError from '../../../../core/form/fieldError';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {map} from 'rxjs/operators';
-import CityFrom from '../../../../core/models/CityFrom';
 import Select from '../../../../core/models/Select';
-import {CalculatorService} from '../../../orders-group/common/services/calculator/calculator.service';
+import {CalculatorService} from '../../../../core/services/calculator/calculator.service';
 import {Subscription} from 'rxjs';
-import CityTo from '../../../../core/models/CityTo';
 import fadeIn from '../../../../core/animations/fadeIn';
 import {ConfirmModalComponent} from '../../../../modals/confirm-modal/confirm-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {Router} from '@angular/router';
+import {CityFrom, CityTo} from '../../../../core/interfaces/calculator';
 
 const Department = {
   Aleutskaya: '15',
