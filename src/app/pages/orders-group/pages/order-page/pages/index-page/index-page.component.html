@@ -9,7 +9,7 @@
           <app-author-form [formControlName]="FormControlName.Author" (selectUser)="setCurrentUser($event)"></app-author-form>
         </div>
         <div *ngIf="currentStep === FormStep.Two" [formGroup]="steps[FormStep.Two]" [@fadeIn]="">
-          <app-sender-form [formControlName]="FormControlName.Sender"></app-sender-form>
+          <app-sender-form [author]="form.value.steps[0].author" [formControlName]="FormControlName.Sender"></app-sender-form>
           <section class="form__section">
             <h2 class="form__heading">Пункт отправления</h2>
             <app-departure-point-form [formControlName]="FormControlName.DeparturePoint"></app-departure-point-form>
