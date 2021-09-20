@@ -39,6 +39,5 @@ export class SupportFormComponent implements OnInit {
   onSubmit() {
     this.form.markAllAsTouched();
     const formData = this.form;
-    console.log('support form', formData.value);
   }
 }

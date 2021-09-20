@@ -26,7 +26,5 @@ export class IndexPageComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    console.log('manager call', this.form.value);
-  }
+  onSubmit() {}
 }

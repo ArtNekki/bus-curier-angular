@@ -37,7 +37,6 @@ export class CreateInvoiceComponent extends SimpleModalComponent<null, null> imp
   }
 
   onSubmit() {
-    console.log('create invoice', this.form.value);
     setTimeout(() => {
       this.showDoneModal();
     }, 500);

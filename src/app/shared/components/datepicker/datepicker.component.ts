@@ -52,7 +52,6 @@ export class DatepickerComponent implements ControlValueAccessor, OnInit, OnChan
   changeValue(date) {
     date = (date.singleDate && date.singleDate.formatted) || new Intl.DateTimeFormat('ru-Ru').format(new Date(date));
     this.value = date;
-    console.log('date', this.value);
     this.onChange(date.toString());
   }
 

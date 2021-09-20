@@ -55,6 +55,5 @@ export class RadioComponent implements ControlValueAccessor, OnInit {
 
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
-    console.log('isDsss');
   }
 }

@@ -115,7 +115,6 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
   }
 
   changeOrder($event: any) {
-    // console.log('event', $event);
     // $event.preventDefault();
   }
 

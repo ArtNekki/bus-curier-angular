@@ -42,7 +42,6 @@ export class PackageModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.cssClass = this.modsService.setMods('package-modal', this.mods);
-    console.log('data', this.data, this.type);
   }
 
   onOk() {

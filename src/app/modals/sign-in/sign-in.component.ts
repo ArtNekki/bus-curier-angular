@@ -71,7 +71,5 @@ export class SignInComponent extends SimpleModalComponent<null, null> implements
     }
   }
 
-  onSubmit() {
-    console.log('sign-in form', this.form.value);
-  }
+  onSubmit() {}
 }

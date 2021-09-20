@@ -50,7 +50,6 @@ export class IndividualEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Individual edit', this.form.value);
     this.goBack();
   }
 }

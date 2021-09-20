@@ -27,7 +27,6 @@ export class AccountMediaComponent implements OnInit {
   }
 
   goTo() {
-    console.log('acc', this.path);
     this.router.navigate(['/account', ...this.path]);
   }
 }

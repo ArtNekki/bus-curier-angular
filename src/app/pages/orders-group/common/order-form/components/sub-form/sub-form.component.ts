@@ -58,7 +58,6 @@ export class SubFormComponent implements OnInit, OnDestroy, Validator, ControlVa
     }
 
     if (this.subscriptions.length) {
-      console.log('this.subscriptions.length', this.subscriptions.length);
       // this.subscriptions.forEach(s => s.unsubscribe());
     }
   }

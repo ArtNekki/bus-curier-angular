@@ -88,7 +88,6 @@ export class IndexFormCalculatorComponent implements OnInit, OnDestroy {
 
   setCityTo(id: string) {
     this.currentCityTo = id;
-    // console.log('curr', this.currentCityFrom, this.currentCityTo);
   }
 
   getCityTo(id: string) {

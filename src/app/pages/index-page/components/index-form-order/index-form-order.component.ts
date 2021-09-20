@@ -35,6 +35,5 @@ export class IndexFormOrderComponent implements OnInit {
 
   onSubmit() {
     this.form.markAllAsTouched();
-    console.log('index order form', this.form.value);
   }
 }

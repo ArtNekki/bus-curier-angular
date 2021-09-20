@@ -163,7 +163,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     this.scrollToTop();
     this.changeDetectorRef.detectChanges();
 
-
     if (this.currentStep === this.FormStep.Four) {
       this.formData = this.formatFormValue(this.form.value);
     }
@@ -189,9 +188,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSubmit() {
-    console.log('form', this.form.value);
-  }
+  onSubmit() {}
 
   setCurrentUser(user: any) {
     this.currentUser = user;

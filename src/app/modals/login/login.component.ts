@@ -50,7 +50,6 @@ export class LoginComponent extends SimpleModalComponent<null, null> implements 
     const user = this.form.value;
 
     this.auth.login(user).subscribe((response) => {
-      console.log('response', response);
       this.close();
     });
   }

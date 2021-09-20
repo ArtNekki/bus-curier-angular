@@ -26,7 +26,5 @@ export class NonStandardTasksPageComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    console.log('manager call', this.form.value);
-  }
+  onSubmit() {}
 }

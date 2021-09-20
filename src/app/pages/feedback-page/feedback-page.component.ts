@@ -36,6 +36,5 @@ export class FeedbackPageComponent implements OnInit {
 
   onSubmit() {
     this.form.markAllAsTouched();
-    console.log('feedback form', this.form.value);
   }
 }

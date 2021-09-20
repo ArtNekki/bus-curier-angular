@@ -36,7 +36,6 @@ export class ManagerCallModalComponent extends SimpleModalComponent<null, null> 
   }
 
   onSubmit() {
-    console.log('manager call', this.form.value);
     this.close();
   }
 }

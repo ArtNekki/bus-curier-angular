@@ -58,7 +58,6 @@ export class EntityEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('edit entity', this.form.value);
 
     // if (!this.form.invalid) {
     //   return false;

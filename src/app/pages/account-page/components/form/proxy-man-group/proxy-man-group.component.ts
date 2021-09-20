@@ -90,7 +90,5 @@ export class ProxyManGroupComponent implements OnInit, ControlValueAccessor, Val
     return this.form.valid ? null : { invalidForm: {valid: false, message: 'fields are invalid'}};
   }
 
-  onSubmit() {
-    console.log('proxy men', this.form.value);
-  }
+  onSubmit() {}
 }
