@@ -4,10 +4,10 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
-import Select from 'src/app/core/models/Select';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {CargoType} from '../../../../../../core/interfaces/calculator';
+import {Select} from '../../../../../../core/interfaces/form';
 
 @Component({
   selector: 'app-other-form',

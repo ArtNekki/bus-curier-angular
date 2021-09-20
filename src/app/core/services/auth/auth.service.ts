@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, Subject, throwError} from 'rxjs';
-import User from '../../models/User';
 import {environment} from '../../../../environments/environment';
 import {catchError, tap} from 'rxjs/operators';
-import FbAuthResponse from '../../models/FbAuthResponse';
+import {FbAuthResponse, User} from '../../interfaces/auth';
 
 @Injectable({
   providedIn: 'root'

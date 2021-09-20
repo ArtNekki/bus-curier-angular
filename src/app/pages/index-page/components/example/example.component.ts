@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import Example from '../../../../core/models/Example';
+import {Example} from '../../../../core/interfaces/common';
 
 @Component({
   selector: 'app-example',

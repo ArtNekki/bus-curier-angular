@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 import Swiper from 'swiper';
 import {indexSlider} from '../../../../core/config/slider';
 import examples from '../../../../mock-data/examples';
-import Example from '../../../../core/models/Example';
+import {Example} from '../../../../core/interfaces/common';
 
 @Component({
   selector: 'app-index-slider',

@@ -10,10 +10,10 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import addressPoints from 'src/app/mock-data/address-points';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {delay, map} from 'rxjs/operators';
-import Select from '../../../../../../core/models/Select';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
 import {CityTo} from '../../../../../../core/interfaces/calculator';
+import {Select} from '../../../../../../core/interfaces/form';
 
 @Component({
   selector: 'app-pickup-point-form',

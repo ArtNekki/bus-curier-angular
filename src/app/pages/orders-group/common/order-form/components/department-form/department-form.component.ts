@@ -6,7 +6,7 @@ import {FormUtilsService} from '../../../../../../core/services/form-utils.servi
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
-import Select from '../../../../../../core/models/Select';
+import {Select} from '../../../../../../core/interfaces/form';
 
 @Component({
   selector: 'app-department-form',

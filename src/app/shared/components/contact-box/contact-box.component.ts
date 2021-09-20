@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import ContactBox from '../../../core/models/Contact-box';
 import {ModsService} from '../../../core/services/mods.service';
 
 @Component({

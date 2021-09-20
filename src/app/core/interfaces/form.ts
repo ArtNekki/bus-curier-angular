@@ -1,4 +1,4 @@
-export default interface Select {
+export interface Select {
   value: string;
   name: string;
 }

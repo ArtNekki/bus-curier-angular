@@ -11,9 +11,9 @@ import { SubFormComponent } from '../sub-form/sub-form.component';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {BehaviorSubject, Observable, PartialObserver, Subject, Subscription} from 'rxjs';
 import {concatAll, delay, first, map, take, tap} from 'rxjs/operators';
-import Select from 'src/app/core/models/Select';
 import {ActivatedRoute, Params} from '@angular/router';
 import {CityFrom} from '../../../../../../core/interfaces/calculator';
+import {Select} from '../../../../../../core/interfaces/form';
 
 const Department = {
   Aleutskaya: '15',
@@ -46,7 +46,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   public FormFieldError = fieldError;
 
   public formGroup: FormGroup;
-  public addressPoints = addressPoints;
 
   public TabName = {
     give: 'Cдать в отделение',
