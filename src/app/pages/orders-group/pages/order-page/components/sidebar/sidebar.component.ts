@@ -1,7 +1,6 @@
 import {Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {delay} from 'rxjs/operators';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
-import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
+import {CalculatorService} from '../../../../common/services/calculator/calculator.service';
 import FormControlName from '../../../../../../core/maps/FormControlName';
 import {SimpleModalService} from 'ngx-simple-modal';
 
@@ -20,7 +19,6 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   constructor(
     private simpleModal: SimpleModalService,
-    private orderForm: OrderFormService,
     private calcService: CalculatorService) { }
 
   ngOnInit(): void {

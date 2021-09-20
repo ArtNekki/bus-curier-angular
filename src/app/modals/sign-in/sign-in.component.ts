@@ -7,7 +7,6 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import {UtilsService} from '../../core/services/utils.service';
 import UserType from 'src/app/core/maps/UserType';
 import {FormUtilsService} from '../../core/services/form-utils.service';
-import {OrderFormService} from '../../core/services/order-form/order-form.service';
 import firebase from 'firebase';
 import User = firebase.User;
 import fadeIn from '../../core/animations/fadeIn';

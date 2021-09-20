@@ -4,7 +4,7 @@ import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {FormControl, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
-import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
+import {CalculatorService} from '../../../services/calculator/calculator.service';
 import CityTo from '../../../../../../core/models/CityTo';
 import CargoType from '../../../../../../core/models/CargoType';
 import {LocalStorageService} from '../../../../../../core/services/local-storage.service';

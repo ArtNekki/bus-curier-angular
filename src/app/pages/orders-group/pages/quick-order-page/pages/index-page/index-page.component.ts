@@ -1,7 +1,6 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
-import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
+import {CalculatorService} from '../../../../common/services/calculator/calculator.service';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {debounceTime, delay, pairwise, take} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
@@ -31,7 +30,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   private confirmSub: Subscription;
 
   constructor(
-    protected orderForm: OrderFormService,
     private calcService: CalculatorService,
     private cdr: ChangeDetectorRef,
     private simpleModal: SimpleModalService,

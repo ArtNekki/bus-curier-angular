@@ -7,7 +7,7 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import {map} from 'rxjs/operators';
 import CityFrom from '../../../../core/models/CityFrom';
 import Select from '../../../../core/models/Select';
-import {CalculatorService} from '../../../../core/services/calculator/calculator.service';
+import {CalculatorService} from '../../../orders-group/common/services/calculator/calculator.service';
 import {Subscription} from 'rxjs';
 import CityTo from '../../../../core/models/CityTo';
 import fadeIn from '../../../../core/animations/fadeIn';

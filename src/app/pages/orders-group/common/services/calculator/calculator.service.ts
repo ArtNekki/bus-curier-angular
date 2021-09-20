@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CalculatorEndpointService} from './calculator-endpoint.service';
 import {BehaviorSubject, Observable, zip} from 'rxjs';
-import CityFrom from '../../models/CityFrom';
-import Office from '../../models/Office';
-import FormControlName from '../../maps/FormControlName';
+import CityFrom from '../../../../../core/models/CityFrom';
+import Office from '../../../../../core/models/Office';
+import FormControlName from '../../../../../core/maps/FormControlName';
 import {delay, reduce} from 'rxjs/operators';
-import Parcel from '../../models/Parcel';
+import Parcel from '../../../../../core/models/Parcel';
 
 interface TotalSum {
   price: number;

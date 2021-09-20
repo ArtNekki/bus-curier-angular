@@ -5,7 +5,7 @@ import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
-import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
+import {CalculatorService} from '../../../services/calculator/calculator.service';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {delay} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';

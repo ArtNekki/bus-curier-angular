@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CalculatorService} from '../../core/services/calculator/calculator.service';
+import {CalculatorService} from '../orders-group/common/services/calculator/calculator.service';
 
 @Component({
   selector: 'app-index-page',

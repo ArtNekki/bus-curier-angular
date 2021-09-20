@@ -1,6 +1,5 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {AuthService} from '../../../../../../core/services/auth/auth.service';
 import {Router} from '@angular/router';
 import FormControlName from 'src/app/core/maps/FormControlName';
@@ -43,7 +42,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   private ordersSub: Subscription;
 
   constructor(
-    public orderForm: OrderFormService,
     public authService: AuthService,
     private router: Router,
     private simpleModal: SimpleModalService,
