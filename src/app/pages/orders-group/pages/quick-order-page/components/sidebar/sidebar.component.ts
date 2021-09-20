@@ -6,7 +6,7 @@ import {OrderFormService} from '../../../../../../core/services/order-form/order
 import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
 import FormControlName from '../../../../../../core/maps/FormControlName';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
-import {delay} from 'rxjs/operators';
+import {debounceTime, delay} from 'rxjs/operators';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 
 @Component({

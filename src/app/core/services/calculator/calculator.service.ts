@@ -6,6 +6,7 @@ import CityFrom from '../../models/CityFrom';
 import Office from '../../models/Office';
 import FormControlName from '../../maps/FormControlName';
 import {delay, reduce} from 'rxjs/operators';
+import Parcel from '../../models/Parcel';
 
 interface TotalSum {
   price: number;
@@ -100,7 +101,11 @@ export class CalculatorService {
     return this.getResult(cityFromId, cityToId, cargoId, servicesId, weight, dim);
   }
 
-  getDim(cargo) {
+  getDim(cargo: Parcel[]) {
+    if (!cargo) {
+      return 0;
+    }
+
     const objSum =  cargo.reduce((acc, obj) => ({
       length: acc.length + +obj.length,
       width: acc.width + +obj.width,
@@ -111,11 +116,19 @@ export class CalculatorService {
       .reduce((sum: number, val: number) => sum + val, 0);
   }
 
-  getWeight(cargo) {
-    return cargo.reduce((sum, {weight}) => sum + +weight, 0);
+  getWeight(cargo: Parcel[]) {
+    if (!cargo) {
+      return 0;
+    }
+
+    return cargo.reduce((sum: number, {weight}) => sum + +weight, 0);
   }
 
-  getParcelCount(cargo) {
+  getParcelCount(cargo: Parcel[]) {
+    if (!cargo) {
+      return 0;
+    }
+
     return cargo.reduce((sum, obj) => sum + +obj['place-count'], 0);
   }
 

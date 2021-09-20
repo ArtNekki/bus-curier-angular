@@ -39,11 +39,16 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.PlaceCount]: new FormControl('', [Validators.required]),
-      [FormControlName.Weight]: new FormControl('', [Validators.required]),
-      [FormControlName.Width]: new FormControl('', [Validators.required]),
-      [FormControlName.Height]: new FormControl('', [Validators.required]),
-      [FormControlName.Length]: new FormControl('', [Validators.required])
+      [FormControlName.PlaceCount]:
+        new FormControl(1, [Validators.required, Validators.min(1)]),
+      [FormControlName.Weight]:
+        new FormControl( 0, [Validators.required, Validators.min(1)]),
+      [FormControlName.Width]:
+        new FormControl( 0, [Validators.required, Validators.min(1)]),
+      [FormControlName.Height]:
+        new FormControl( 0, [Validators.required, Validators.min(1)]),
+      [FormControlName.Length]:
+        new FormControl( 0, [Validators.required, Validators.min(1)])
     });
 
     this.formGroup.markAllAsTouched();
