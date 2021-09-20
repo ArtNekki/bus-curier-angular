@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {Subscription} from 'rxjs';
@@ -26,12 +26,13 @@ import FormControlName from 'src/app/core/maps/FormControlName';
     }
   ]
 })
-export class RecipientFormComponent extends SubFormComponent implements OnInit, OnDestroy {
+export class RecipientFormComponent extends SubFormComponent implements OnInit {
+  @Input() author;
+
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
 
-  public formSub: Subscription;
   public formGroup: FormGroup;
 
   constructor(public formUtils: FormUtilsService,
@@ -46,28 +47,25 @@ export class RecipientFormComponent extends SubFormComponent implements OnInit, 
       [FormControlName.Tel]: new FormControl('', [Validators.required])
     });
 
-    this.formSub = this.form$.subscribe((form: FormGroup) => {
-      const isIndividual = form.value.steps[0].author.active === FormControlName.Individual;
-      const isRecipient = form.value.steps[0].author.individual.role === FormControlName.Recipient;
-
-      if (isIndividual && isRecipient) {
-
-        const individual = form.value.steps[0].author.individual;
-
-        this.formGroup.get(FormControlName.Fio)
-          .patchValue([
-            individual[FormControlName.LastName],
-            individual[FormControlName.FirstName],
-            individual[FormControlName.MiddleName]
-          ].join(` `));
-        this.formGroup.get(FormControlName.Tel).patchValue(individual.tel);
-      }
-    });
-
+    this.setDefaultAuthor();
     super.ngOnInit();
   }
 
-  ngOnDestroy(): void {
-    this.formSub.unsubscribe();
+  setDefaultAuthor() {
+    const isIndividual = this.author.active === FormControlName.Individual;
+    const isRecipient = this.author.individual.role === FormControlName.Recipient;
+
+    if (isIndividual && isRecipient) {
+
+      const individual = this.author.individual;
+
+      this.formGroup.get(FormControlName.Fio)
+        .patchValue([
+          individual[FormControlName.LastName],
+          individual[FormControlName.FirstName],
+          individual[FormControlName.MiddleName]
+        ].join(` `));
+      this.formGroup.get(FormControlName.Tel).patchValue(individual.tel);
+    }
   }
 }
