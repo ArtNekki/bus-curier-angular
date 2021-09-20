@@ -1,5 +1,5 @@
-import {AfterContentInit, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {OrderFormService} from '../../../../../../core/services/order-form/order-form.service';
 import {AuthService} from '../../../../../../core/services/auth/auth.service';
 import {Router} from '@angular/router';
@@ -31,7 +31,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   public stepLabels = ['Автор заявки', 'Отправитель груза', 'Параметры груза', 'Завершение'];
   public currentStep = 0;
   public currentUser = null;
-  public invalidStep;
 
   public cityFromId: string;
   public cityToId: string;
@@ -74,21 +73,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       ])
     });
 
-    const defaultData = this.localStorage.get('quick-order');
-
-    if (defaultData) {
-      this.steps[this.FormStep.Two]
-        .get(FormControlName.DeparturePoint)
-        .setValue(defaultData[FormControlName.DeparturePoint]);
-      this.steps[this.FormStep.Three]
-        .get(FormControlName.PickupPoint)
-        .setValue(defaultData[FormControlName.PickupPoint]);
-      this.steps[this.FormStep.Three]
-        .get('orders')
-        .setValue(defaultData.orders);
-
-      this.formData = defaultData;
-    }
+    this.setDefaultData();
 
     this.departureSub = this.steps[this.FormStep.Two]
       .get(FormControlName.DeparturePoint).valueChanges
@@ -143,37 +128,45 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  setDefaultData() {
+    const defaultData = this.localStorage.get('quick-order');
+
+    if (defaultData) {
+      this.steps[this.FormStep.Two]
+        .get(FormControlName.DeparturePoint)
+        .setValue(defaultData[FormControlName.DeparturePoint]);
+      this.steps[this.FormStep.Three]
+        .get(FormControlName.PickupPoint)
+        .setValue(defaultData[FormControlName.PickupPoint]);
+      this.steps[this.FormStep.Three]
+        .get('orders')
+        .setValue(defaultData.orders);
+
+      this.formData = defaultData;
+    }
+  }
+
   get steps() {
     return (this.form.get('steps') as FormArray).controls;
   }
 
   goNext() {
-    if (this.currentStep >= 3 ) {
+    if (this.steps[this.currentStep].invalid) {
       return;
     }
 
-    if (this.steps[this.currentStep].invalid) {
+    if (this.currentStep >= 3 ) {
       return;
     }
 
     this.currentStep++;
     this.scrollToTop();
-
     this.changeDetectorRef.detectChanges();
 
-    this.orderForm.$form.next(this.form);
-
-    // console.log('this.form', this.form);
 
     if (this.currentStep === this.FormStep.Four) {
       this.formData = this.formatFormValue(this.form.value);
-    } else {
-      // this.formData = null;
     }
-
-    // console.log('this.form.value', this.form.value);
-    //
-    // this.formData = this.formatFormValue(this.form.value);
   }
 
   goPrev() {
@@ -186,8 +179,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
     if (this.currentStep === this.FormStep.Four) {
       this.formData = this.formatFormValue(this.form.value);
-    } else {
-      // this.formData = null;
     }
   }
 

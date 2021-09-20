@@ -24,7 +24,7 @@
 <!--    <app-data-list [data]="setCargoType(CargoName[order.activeCargo])"></app-data-list>-->
     <ng-container *ngIf="order.activeCargo === Cargo.Parcels">
       <ng-container *ngFor="let parcels of order.cargo[order.activeCargo]; let i = index">
-        <div class="form__mark">Место №{{i + 1}}</div>
+        <div class="form__mark">Посылка №{{i + 1}}</div>
         <app-data-list [data]="formatParcel(parcels)"></app-data-list>
       </ng-container>
     </ng-container>

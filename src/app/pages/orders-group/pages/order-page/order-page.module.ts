@@ -8,7 +8,6 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
 import { DonePageComponent } from './pages/done-page/done-page.component';
 import { IndexPageComponent } from './pages/index-page/index-page.component';
 import {OrderRoutingModule} from './order-routing.module';
-import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { FailPageComponent } from './pages/fail-page/fail-page.component';
 
 @NgModule({
@@ -20,9 +19,7 @@ import { FailPageComponent } from './pages/fail-page/fail-page.component';
     FailPageComponent
   ],
   imports: [
-    // BrowserAnimationsModule,
     CommonModule,
-    // NoopAnimationsModule,
     ModalsModule,
     SharedModule,
     OrderFormModule,
