@@ -42,13 +42,13 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit {
       [FormControlName.PlaceCount]:
         new FormControl(1, [Validators.required, Validators.min(1)]),
       [FormControlName.Weight]:
-        new FormControl( 0, [Validators.required, Validators.min(1)]),
+        new FormControl( '', [Validators.required, Validators.min(1)]),
       [FormControlName.Width]:
-        new FormControl( 0, [Validators.required, Validators.min(1)]),
+        new FormControl( '', [Validators.required, Validators.min(1)]),
       [FormControlName.Height]:
-        new FormControl( 0, [Validators.required, Validators.min(1)]),
+        new FormControl( '', [Validators.required, Validators.min(1)]),
       [FormControlName.Length]:
-        new FormControl( 0, [Validators.required, Validators.min(1)])
+        new FormControl( '', [Validators.required, Validators.min(1)])
     });
 
     this.formGroup.markAllAsTouched();

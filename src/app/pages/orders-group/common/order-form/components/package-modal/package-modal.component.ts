@@ -32,7 +32,7 @@ export class PackageModalComponent implements OnInit {
 
   public Package = {
     box: 'Коробка',
-    ['safe-pack']: 'Сейв-пакет',
+    ['safe-pack']: 'Сейф-пакет',
     ['plastic-pack']: 'Пластиковый пакет',
     skins: 'Пленка',
     other: 'Другое'

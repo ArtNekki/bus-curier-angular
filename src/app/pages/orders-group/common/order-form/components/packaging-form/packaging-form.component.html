@@ -48,7 +48,7 @@
     </ng-container>
   </div>
   <div *ngIf="safePacks.length" class="form__fieldset form__fieldset--package" [formArrayName]="FormControlName.SafePack">
-    <div class="form__fieldset-label">Сейв-пакет</div>
+    <div class="form__fieldset-label">Сейф-пакет</div>
     <ng-container *ngFor="let itemGroup of safePacks.controls; let i = index">
       <div class="form__field" [formGroupName]="i">
         <ng-container
