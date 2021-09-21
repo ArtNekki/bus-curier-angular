@@ -111,12 +111,21 @@ export class CalculatorService {
     const dim = this.getDim(cargo);
     const places = this.getParcelPlaces(cargo);
 
-    const sumWithoutServices = this.getResult(cityFromId, cityToId, cargoId, null, weight, dim)
+    const isWidthCorrect = this.checkParcelParams(cargo, 'width');
+    const isHeightCorrect = this.checkParcelParams(cargo, 'height');
+    const isPlacesCorrect = this.checkParcelParams(cargo, 'place-count');
+    const isLengthCorrect = this.checkParcelParams(cargo, 'length');
+    const isWeightCorrect = this.checkParcelParams(cargo, 'weight');
+
+    const paramsSuccess = [isWidthCorrect, isHeightCorrect, isPlacesCorrect, isLengthCorrect, isWeightCorrect]
+      .every((param: boolean) => param);
+
+    const sumWithoutServices = paramsSuccess ? this.getResult(cityFromId, cityToId, cargoId, null, weight, dim)
       .pipe(
         map(({price}) => {
           return { price: price * places };
         })
-      );
+      ) : of({price: 0});
 
     const sumWithoutParcels = this.getResult(cityFromId, cityToId, 0, servicesId, 0, 0);
 
@@ -154,6 +163,18 @@ export class CalculatorService {
     }
 
     return cargo.reduce((sum: number, {weight}) => sum + +weight, 0);
+  }
+
+  checkParcelParams(cargo: Parcel[], param: string) {
+    if (!cargo) {
+      return 0;
+    }
+
+    return cargo
+      .map((obj: Parcel) => {
+        return obj[param];
+      })
+      .every((num: number) => num > 0);
   }
 
   getParcelPlaces(cargo: Parcel[]) {
