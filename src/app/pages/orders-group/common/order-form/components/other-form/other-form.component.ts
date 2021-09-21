@@ -44,7 +44,7 @@ export class OtherFormComponent extends SubFormComponent implements OnInit, OnCh
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       [FormControlName.Item]: new FormControl('', [Validators.required]),
-      [FormControlName.Counter]: new FormControl('', [Validators.required])
+      [FormControlName.Counter]: new FormControl(1, [Validators.required])
     });
 
     this.setParts(this.types);

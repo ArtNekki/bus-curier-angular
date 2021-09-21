@@ -120,6 +120,12 @@ export class CalculatorService {
     const paramsSuccess = [isWidthCorrect, isHeightCorrect, isPlacesCorrect, isLengthCorrect, isWeightCorrect]
       .every((param: boolean) => param);
 
+    // console.log('isWidthCorrect', isWidthCorrect);
+    // console.log('isHeightCorrect', isHeightCorrect);
+    // console.log('isPlacesCorrect', isPlacesCorrect);
+    // console.log('isLengthCorrect', isLengthCorrect);
+    // console.log('isWeightCorrect', isWeightCorrect);
+
     const sumWithoutServices = paramsSuccess ? this.getResult(cityFromId, cityToId, cargoId, null, weight, dim)
       .pipe(
         map(({price}) => {

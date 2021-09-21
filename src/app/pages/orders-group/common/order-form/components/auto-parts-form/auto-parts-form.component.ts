@@ -45,7 +45,7 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       [FormControlName.Item]: new FormControl('', [Validators.required]),
-      [FormControlName.Counter]: new FormControl('', [Validators.required, Validators.min(1)])
+      [FormControlName.Counter]: new FormControl(1, [Validators.required, Validators.min(1)])
     });
 
     this.setParts(this.types);
