@@ -110,22 +110,17 @@ export class CalculatorService {
 
     const sumWithoutParcels = this.getResult(cityFromId, cityToId, 0, servicesId, 0, 0);
 
-    const result = zip(sumWithoutServices, sumWithoutParcels)
+    return zip(sumWithoutServices, sumWithoutParcels)
       .pipe(
         map((arr: Array<TotalSum>) => {
-          return arr.reduce((sum, {price}) => {
-            return sum + price;
-          }, 0);
-        }, 0),
-        map((price: number) => {
-          return of({ price });
-        }),
-        tap((data) => {
-          console.log('data', data);
-        })
-      );
 
-    return sumWithoutServices;
+          const sum = arr.reduce((acc, {price}) => {
+            return acc + price;
+          }, 0);
+
+          return {price: sum};
+        }, 0)
+      );
   }
 
   getDim(cargo: Parcel[]) {
