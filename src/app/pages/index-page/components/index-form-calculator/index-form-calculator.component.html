@@ -21,8 +21,9 @@
                     [formControlName]="FormControlName.CityTo"
                     (change)="setCityTo(form.get(FormControlName.CityTo).value)"
                     [isInvalid]="(form.get(FormControlName.CityTo).invalid
-          && form.get(FormControlName.CityTo).touched) && 'invalid'"
-                    mods="no-shadow"
+                     && form.get(FormControlName.CityTo).touched) && 'invalid'"
+                    [disabled]="!currentCityFrom"
+                    mods="no-shadow, inverted"
         ></app-select>
       </div>
     </div>

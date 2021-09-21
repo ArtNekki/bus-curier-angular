@@ -38,7 +38,7 @@ export class SelectComponent implements  ControlValueAccessor, OnInit, OnChanges
   constructor(public deviceService: DeviceDetectorService, private modsService: ModsService) {}
 
   ngOnInit(): void {
-    this.cssClass = this.modsService.setMods('input', this.mods);
+    this.cssClass = this.modsService.setMods('select', this.mods);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -80,7 +80,8 @@ export class SelectComponent implements  ControlValueAccessor, OnInit, OnChanges
   }
 
   openSelect() {
-    if (this.controlDisabled) {
+    console.log('this.disabled', this.disabled);
+    if (this.controlDisabled || this.disabled) {
       return;
     }
 

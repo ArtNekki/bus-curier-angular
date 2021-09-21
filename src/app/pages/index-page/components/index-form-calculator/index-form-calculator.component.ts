@@ -102,6 +102,10 @@ export class IndexFormCalculatorComponent implements OnInit, OnDestroy {
       .subscribe((cities: any) => {
         if (cities.length) {
           this.citiesTo = [{value: '0', name: 'Выберите город'}, ...cities];
+
+          setTimeout(() => {
+            this.form.get(FormControlName.CityTo).setValue(this.citiesTo[0].value);
+          }, 0);
         }
       });
   }

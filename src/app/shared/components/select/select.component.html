@@ -1,5 +1,5 @@
 <div *ngIf="deviceService.isMobile() || deviceService.isTablet()"
-     class="select" [class.select--invalid]="isInvalid">
+     [class]="cssClass" [class.select--invalid]="isInvalid">
   <select #select [name]="id" [id]="id"
           class="select__field" [ngModel]="value" (ngModelChange)="changeValue($event)"
           [disabled]="controlDisabled || disabled || !items.length" >
@@ -12,7 +12,7 @@
 <!--<ng-select  [id]="id" [items]="items" bindLabel="name" bindValue="value" [ngModel]="value" (change)="changeValue($event)">-->
 <!--</ng-select>-->
 
-<div *ngIf="deviceService.isDesktop()" class="select" [class.select--invalid]="isInvalid" [class.select--opened]="isSelectOpened">
+<div *ngIf="deviceService.isDesktop()" [class]="cssClass" [class.select--invalid]="isInvalid" [class.select--opened]="isSelectOpened">
  <ng-container>
    <div class="select__field" (click)="openSelect()"
         [class.select__field--disabled]="controlDisabled || disabled || !items.length">

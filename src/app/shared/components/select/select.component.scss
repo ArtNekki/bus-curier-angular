@@ -61,6 +61,12 @@
       background-color: $gray-light-color;
       cursor: not-allowed;
     }
+
+    .select--inverted &:disabled,
+    .select--inverted &--disabled {
+      background-color: $black-color;
+      cursor: not-allowed;
+    }
   }
 
   &__field span {
