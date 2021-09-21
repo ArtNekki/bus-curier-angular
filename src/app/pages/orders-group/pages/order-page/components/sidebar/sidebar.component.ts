@@ -40,11 +40,14 @@ export class SidebarComponent implements OnInit, OnChanges {
     const orders = data.orders.orders;
 
     this.calcService.calculateTotalSum({cityFromId, cityToId, orders})
-      .pipe(delay(2000))
+      .pipe(delay(1000))
       .subscribe((sum: number) => {
-        this.totalSum = sum;
-        this.isContentVisible = true;
-        this.isLoading = false;
+
+        if (sum) {
+          this.totalSum = sum;
+          this.isContentVisible = true;
+          this.isLoading = false;
+        }
 
         setTimeout(() => {
           // this.isContentVisible = false;
