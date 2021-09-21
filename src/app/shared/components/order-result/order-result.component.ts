@@ -64,7 +64,7 @@ export class OrderResultComponent implements OnInit, OnChanges {
   }
 
   formatParcels(arr: any) {
-    return `Посылки (мест: ${arr.length} шт)`;
+    return `Посылки (${arr.length} шт)`;
   }
 
   formatAutoparts(obj: any) {
