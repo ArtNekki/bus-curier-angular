@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CalculatorEndpointService} from './calculator-endpoint.service';
-import {BehaviorSubject, Observable, zip} from 'rxjs';
+import {BehaviorSubject, Observable, of, zip} from 'rxjs';
 import FormControlName from '../../maps/FormControlName';
-import {delay, reduce} from 'rxjs/operators';
+import {delay, map, reduce, tap} from 'rxjs/operators';
 import {CityFrom, Office, Parcel} from '../../interfaces/calculator';
 import {Cargo} from '../../maps/order';
 
@@ -67,6 +67,7 @@ export class CalculatorService {
 
   calculateOrderSum(cityFromId, cityToId, order): Observable<TotalSum> {
     let cargoId = order.activeCargo;
+    let result = null;
 
     if (!order.cargo) {
       return new Observable<TotalSum>();
@@ -74,16 +75,8 @@ export class CalculatorService {
 
     const cargo = order.cargo[cargoId];
 
-    let dim = null;
-    let weight = null;
-
     if (cargoId === Cargo.Docs) {
       cargoId = `${cargoId}, ${cargo.counter}`;
-    }
-
-    if (cargoId === Cargo.Parcels) {
-      weight = this.getWeight(cargo);
-      dim = this.getDim(cargo);
     }
 
     if (cargoId === Cargo.AutoParts || cargoId === Cargo.Other) {
@@ -92,7 +85,47 @@ export class CalculatorService {
 
     const servicesId = this.getServicesId(order);
 
-    return this.getResult(cityFromId, cityToId, cargoId, servicesId, weight, dim);
+    if (cargoId === Cargo.Parcels) {
+
+      result = this.getParcelsSum(cityFromId, cityToId, cargoId, servicesId, cargo);
+
+    } else {
+      result = this.getResult(cityFromId, cityToId, cargoId, servicesId, 0, 0);
+    }
+
+    return result;
+  }
+
+  getParcelsSum(cityFromId, cityToId, cargoId, servicesId, cargo) {
+    const weight = this.getWeight(cargo);
+    const dim = this.getDim(cargo);
+    const places = this.getParcelPlaces(cargo);
+
+    const sumWithoutServices = this.getResult(cityFromId, cityToId, cargoId, null, weight, dim)
+      .pipe(
+        map(({price}) => {
+          return { price: price * places };
+        })
+      );
+
+    const sumWithoutParcels = this.getResult(cityFromId, cityToId, 0, servicesId, 0, 0);
+
+    const result = zip(sumWithoutServices, sumWithoutParcels)
+      .pipe(
+        map((arr: Array<TotalSum>) => {
+          return arr.reduce((sum, {price}) => {
+            return sum + price;
+          }, 0);
+        }, 0),
+        map((price: number) => {
+          return of({ price });
+        }),
+        tap((data) => {
+          console.log('data', data);
+        })
+      );
+
+    return sumWithoutServices;
   }
 
   getDim(cargo: Parcel[]) {
@@ -118,7 +151,7 @@ export class CalculatorService {
     return cargo.reduce((sum: number, {weight}) => sum + +weight, 0);
   }
 
-  getParcelCount(cargo: Parcel[]) {
+  getParcelPlaces(cargo: Parcel[]) {
     if (!cargo) {
       return 0;
     }
