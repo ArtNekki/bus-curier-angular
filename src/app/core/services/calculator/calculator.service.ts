@@ -57,11 +57,20 @@ export class CalculatorService {
 
     return zip(...arr)
       .pipe(
-        reduce((totalSum: number, sumArr: Array<TotalSum>) => {
-          return sumArr.reduce((sum, {price}) => {
-            return +sum + +price;
-          }, 0);
-        }, 0)
+        map((prices: Array<TotalSum>) => {
+          const success = prices.every(({price}: TotalSum) => price > 0);
+          let totalSum: any;
+
+          if (success) {
+            totalSum = prices.reduce((sum, {price}) => {
+              return +sum + +price;
+            }, 0);
+          } else {
+            totalSum = 0;
+          }
+
+          return totalSum;
+        })
       );
   }
 
@@ -86,11 +95,12 @@ export class CalculatorService {
     const servicesId = this.getServicesId(order);
 
     if (cargoId === Cargo.Parcels) {
-
       result = this.getParcelsSum(cityFromId, cityToId, cargoId, servicesId, cargo);
-
     } else {
-      result = this.getResult(cityFromId, cityToId, cargoId, servicesId, 0, 0);
+
+      result = cargo.counter
+        ? this.getResult(cityFromId, cityToId, cargoId, servicesId, 0, 0)
+        : of({price: 0});
     }
 
     return result;
