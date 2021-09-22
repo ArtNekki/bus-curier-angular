@@ -133,7 +133,8 @@ export class CalculatorService {
         })
       ) : of({price: 0});
 
-    const sumWithoutParcels = this.getResult(cityFromId, cityToId, 0, servicesId, 0, 0);
+    const sumWithoutParcels = paramsSuccess ?
+      this.getResult(cityFromId, cityToId, 0, servicesId, 0, 0) : of({price: 0});
 
     return zip(sumWithoutServices, sumWithoutParcels)
       .pipe(
