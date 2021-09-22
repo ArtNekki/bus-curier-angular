@@ -121,6 +121,14 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       this.formData = null;
       this.form.get(FormControlName.PickupPoint).reset();
       this.form.get(FormControlName.Orders).reset();
+
+      this.router.navigate([], {
+        queryParams: {
+          cityFromId: null,
+          cityToId: null
+        },
+        queryParamsHandling: 'merge'});
+
       sub.next(true);
     });
   }
