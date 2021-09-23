@@ -8,6 +8,7 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
+import {CourierMode} from '../../../../../../core/interfaces/calculator';
 
 @Component({
   selector: 'app-index-page',
@@ -23,6 +24,11 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   public cityFromId: string;
   public cityToId: string;
+
+  public courier: CourierMode = {
+    pickup: false,
+    delivery: false
+  };
 
   private departureSub: Subscription;
   private pickupSub: Subscription;
@@ -65,6 +71,9 @@ export class IndexPageComponent implements OnInit, OnDestroy {
           this.cityFromId = next.location;
         }
 
+        this.courier = Object.assign({}, this.courier, {
+          pickup: (next.options.active === FormControlName.Pickup) || false
+        });
     });
 
     this.pickupSub = this.form.get(FormControlName.PickupPoint).valueChanges
@@ -77,6 +86,10 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         if (data && (this.cityToId !== data.location)) {
           this.cityToId = data.location;
         }
+
+        this.courier = Object.assign({}, this.courier, {
+          delivery: (data.options.active === FormControlName.Delivery) || false
+        });
     });
 
     this.ordersSub = this.form.get(FormControlName.Orders).valueChanges

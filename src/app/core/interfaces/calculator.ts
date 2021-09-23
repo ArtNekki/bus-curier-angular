@@ -62,6 +62,11 @@ export interface Address {
   apartment: string;
 }
 
+export interface CourierMode {
+  pickup?: boolean;
+  delivery?: boolean;
+}
+
 
 
 

@@ -10,7 +10,7 @@ import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/conf
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import FormControlName from 'src/app/core/maps/FormControlName';
-import {CargoType, Service} from '../../../../../../core/interfaces/calculator';
+import {CargoType, CourierMode, Service} from '../../../../../../core/interfaces/calculator';
 
 @Component({
   selector: 'app-order-form',
@@ -32,6 +32,7 @@ import {CargoType, Service} from '../../../../../../core/interfaces/calculator';
 })
 export class OrderFormComponent extends SubFormComponent implements OnInit, OnChanges {
   @Input() cityFromId: string;
+  @Input() courier: CourierMode;
   @Input() types: Array<CargoType>;
   @Input() services: Array<Service>;
 
@@ -58,7 +59,6 @@ export class OrderFormComponent extends SubFormComponent implements OnInit, OnCh
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
               private cdr: ChangeDetectorRef,
-              private calcService: CalculatorService,
               private simpleModal: SimpleModalService) {
     super();
   }

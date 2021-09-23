@@ -6,7 +6,7 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import fadeIn from '../../../../../../core/animations/fadeIn';
-import {CargoType} from '../../../../../../core/interfaces/calculator';
+import {CargoType, CourierMode} from '../../../../../../core/interfaces/calculator';
 import {Select} from '../../../../../../core/interfaces/form';
 
 @Component({
@@ -29,11 +29,15 @@ import {Select} from '../../../../../../core/interfaces/form';
 })
 export class AutoPartsFormComponent extends SubFormComponent implements OnInit, OnChanges {
   @Input() types: Array<CargoType> = [];
+  @Input() courier: CourierMode;
 
   public FormControlName = FormControlName;
 
   public formGroup: FormGroup;
   public parts: Array<Select> = [];
+
+  public pickup: boolean;
+  public delivery: boolean;
 
   constructor(
     public formUtils: FormUtilsService,
@@ -49,7 +53,7 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
     });
 
     this.setParts(this.types);
-    this.formGroup.markAllAsTouched();
+    this.toggleTouched();
 
     super.ngOnInit();
   }
@@ -58,6 +62,13 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
     if (changes.types && changes.types.currentValue.length && this.formGroup) {
       this.setParts(changes.types.currentValue);
     }
+
+    this.pickup = changes.courier.currentValue.pickup;
+    this.delivery = changes.courier.currentValue.delivery;
+    this.toggleTouched();
+
+    console.log('pickup', this.pickup);
+    console.log('delivery', this.delivery);
   }
 
   setParts(arr: Array<CargoType>) {
@@ -67,6 +78,16 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
       });
 
     this.parts = [{value: '', name: ''}, ...parts];
+  }
+
+  toggleTouched() {
+    if (!(this.pickup && this.delivery) && this.formGroup) {
+      this.formGroup.markAllAsTouched();
+    }
+
+    if ((this.pickup || this.delivery) && this.formGroup) {
+      this.formGroup.markAsUntouched();
+    }
   }
 
   clear() {

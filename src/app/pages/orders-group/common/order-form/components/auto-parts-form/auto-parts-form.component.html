@@ -3,8 +3,8 @@
    <ng-container *ngFor="let control of formUtils.getGroupControls(formGroup)  | keyvalue: formUtils.originalOrder;">
      <div *ngIf="control.key === FormControlName.Item" class="form__field">
        <label class="form__label"
-              [class.form__label--invalid]="control.value.invalid"
-              [class.form__label--light]="control.value.disabled">
+              [class.form__label--invalid]="control.value.invalid && !(pickup || delivery)"
+              [class.form__label--light]="control.value.disabled || (pickup || delivery)" >
          Выберите запчасть:
          <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
        </label>
@@ -13,7 +13,7 @@
          [items]="parts"
          [formControlName]="control.key"
          [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
-         [disabled]="control.value.value"
+         [disabled]="control.value.value || (pickup || delivery)"
        >
        </app-select>
      </div>
@@ -38,6 +38,19 @@
      </app-btn>
    </div>
  </div>
+  <small *ngIf="this.pickup || this.delivery" style="margin: 0; color: #C74141">
+    *Невозможно выбрать автозапчасти, т.к. габариты всех запчастей <br />слишком большие и курьер не может их перевозить.
+<!--    <ng-container *ngIf="pickup && !delivery">-->
+<!--      габариты все запчастей слишком большие и курьер не может их перевозить.-->
+<!--    </ng-container>-->
+<!--    <ng-container *ngIf="delivery && !pickup">-->
+<!--      заказ до получателя будет доставлять курьер.-->
+<!--    </ng-container>-->
+
+<!--    <ng-container *ngIf="pickup && delivery">-->
+<!--      забирать заказ у отправителя и доставлять его получателю будет курьер.-->
+<!--    </ng-container>-->
+  </small>
   <dl class="form__details">
     <dt><b>Тип груза:</b></dt>
     <dd>Пожалуйста, выберите тип запчасти из списка. Если вы не нашли подходящей запчасти, рассчитайте стоимость обычной посылки.</dd>

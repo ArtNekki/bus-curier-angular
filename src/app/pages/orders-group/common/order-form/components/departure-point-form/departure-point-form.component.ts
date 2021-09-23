@@ -163,6 +163,10 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       });
 
     this.formGroup.get(FormControlName.Options).get(type).setValidators([Validators.required]);
+
+    if (type === FormControlName.Pickup) {
+      this.calculatorService.courierDelivery$.next(type);
+    }
   }
 
   setCity(id: string) {

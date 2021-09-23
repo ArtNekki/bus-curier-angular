@@ -19,7 +19,7 @@
         </div>
       </div>
       <div *ngIf="cityFromId && cityToId">
-        <app-orders-form [cityFromId]="cityFromId" [cityToId]="cityToId" formControlName="orders"></app-orders-form>
+        <app-orders-form [cityFromId]="cityFromId" [cityToId]="cityToId" [courier]="courier" formControlName="orders"></app-orders-form>
       </div>
       <div *ngIf="cityFromId && cityToId" class="form__fieldset form__fieldset--delivery">
         <app-btn mods="lg" [disabled]="form.invalid">Рассчитать стоимость</app-btn>

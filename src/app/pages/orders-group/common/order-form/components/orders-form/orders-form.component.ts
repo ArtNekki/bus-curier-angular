@@ -6,7 +6,7 @@ import {UtilsService} from '../../../../../../core/services/utils.service';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
-import {CargoType, Service} from '../../../../../../core/interfaces/calculator';
+import {CargoType, CourierMode, Service} from '../../../../../../core/interfaces/calculator';
 
 @Component({
   selector: 'app-orders-form',
@@ -28,6 +28,7 @@ import {CargoType, Service} from '../../../../../../core/interfaces/calculator';
 export class OrdersFormComponent extends SubFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() cityFromId: string;
   @Input() cityToId: string;
+  @Input() courier: CourierMode;
 
   public FormControlName = FormControlName;
 

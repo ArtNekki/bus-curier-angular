@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, OnInit} from '@angular/core';
 import fieldError from '../../../../../../core/form/fieldError';
 import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
@@ -7,6 +7,7 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import {map} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {SubFormComponent} from '../sub-form/sub-form.component';
+import {CourierMode} from '../../../../../../core/interfaces/calculator';
 
 @Component({
   selector: 'app-parcels-form',
@@ -28,6 +29,8 @@ import {SubFormComponent} from '../sub-form/sub-form.component';
 })
 
 export class ParcelsFormComponent extends SubFormComponent implements OnInit {
+  @Input() courier: CourierMode;
+
   public FormFieldError = fieldError;
 
   public formGroup: FormGroup;

@@ -1,9 +1,10 @@
-import {ChangeDetectionStrategy, Component, forwardRef, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, forwardRef, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import FormControlName from '../../../../../../core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
+import {CourierMode} from '../../../../../../core/interfaces/calculator';
 
 @Component({
   selector: 'app-parcel-form',
@@ -24,6 +25,8 @@ import formFieldMeta from '../../../../../../core/form/formFieldMeta';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParcelFormComponent extends SubFormComponent implements OnInit {
+  @Input() courier: CourierMode;
+
   public FormFieldMeta = formFieldMeta;
   public isInvalid = false;
 

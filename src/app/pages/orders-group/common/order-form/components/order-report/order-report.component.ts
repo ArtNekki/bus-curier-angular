@@ -196,6 +196,8 @@ export class OrderReportComponent implements OnInit {
   }
 
   formatCourier(data, target) {
+    console.log('order-report', 'data', data);
+    console.log('order-report', 'target', target);
     const obj =
       {
         [FormControlName.Address]: `ул. ${target.street}, д. ${target.building},кв. ${target.apartment}`,

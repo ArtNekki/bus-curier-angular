@@ -16,6 +16,7 @@ interface TotalSum {
 })
 
 export class CalculatorService {
+  public courierDelivery$ = new BehaviorSubject('');
 
   constructor(private http: HttpClient,
               private endpoint: CalculatorEndpointService) { }
