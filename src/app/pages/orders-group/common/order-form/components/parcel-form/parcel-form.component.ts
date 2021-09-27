@@ -82,10 +82,13 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
 
       if (this.pickup || this.delivery) {
         this.formGroup.get(FormControlName.Weight).setValidators(Validators.max(30));
+        this.maxParamsSum = 130;
       } else {
         this.formGroup.get(FormControlName.Weight).setValidators(Validators.max(100));
+        this.maxParamsSum = 250;
       }
 
+      // this.toggleDimensionsError(this.formGroup.value);
       this.formGroup.reset(this.formGroup.value);
       this.formGroup.markAllAsTouched();
 
