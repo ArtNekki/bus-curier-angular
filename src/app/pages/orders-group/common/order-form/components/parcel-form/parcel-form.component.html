@@ -28,19 +28,31 @@
     </div>
     <div *ngIf="this.formGroup.invalid" class="parcel__error">
 <!--      Параметры посылки заполнены не корректно-->
-      <span *ngIf="this.formGroup.get(FormControlName.Weight).errors
+      <span *ngIf="(this.formGroup.get(FormControlName.Weight).errors
+      && (this.formGroup.get(FormControlName.Weight).errors.required || this.formGroup.get(FormControlName.Weight).errors.min))
+      || (this.formGroup.get(FormControlName.Width).errors
+      && (this.formGroup.get(FormControlName.Width).errors.required || this.formGroup.get(FormControlName.Width).errors.min))
+      || (this.formGroup.get(FormControlName.Height).errors
+      && (this.formGroup.get(FormControlName.Height).errors.required || this.formGroup.get(FormControlName.Height).errors.min))
+      || (this.formGroup.get(FormControlName.Length).errors
+      && (this.formGroup.get(FormControlName.Length).errors.required || this.formGroup.get(FormControlName.Length).errors.min))
+      || (this.formGroup.get(FormControlName.PlaceCount).errors
+      && (this.formGroup.get(FormControlName.PlaceCount).errors.required || this.formGroup.get(FormControlName.PlaceCount).errors.min)); else other">
+        Заполните все параметры для посылки
+      </span>
+     <ng-template #other>
+        <span *ngIf="this.formGroup.get(FormControlName.Weight).errors
       && this.formGroup.get(FormControlName.Weight).errors.max">
         Максимальный вес посылки {{this.formGroup.get(FormControlName.Weight).errors.max.max}} кг.
       </span>
-      <span *ngIf="this.formGroup.errors
+       <span *ngIf="this.formGroup.errors
       && this.formGroup.errors.dimensions">
         Габариты посылки превышают допустимые размеры на {{this.formGroup.errors.dimensions.diff}} см.
       </span>
+     </ng-template>
     </div>
   </div>
 </ng-container>
-
-
 <!--          <ng-container class="errors">-->
 <!--            <small *ngIf="getObjectKey(parcelControl.value.errors).length">{{FormFieldError[getObjectKey(parcelControl.value.errors)[0]]}}</small>-->
 <!--          </ng-container>-->
