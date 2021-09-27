@@ -14,7 +14,9 @@
         <app-input
           type="number"
           [formControlName]="control.key"
-          [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
+          [isInvalid]="(control.value.invalid && control.value.touched)
+          || (control.key === FormControlName.Width || control.key === FormControlName.Height
+          || control.key === FormControlName.Length) && (formGroup.errors && formGroup.errors.dimensions)"
         >
           <!--[unit]="formGroupMeta.Parcel[parcelControl.key].unit"-->
         </app-input>

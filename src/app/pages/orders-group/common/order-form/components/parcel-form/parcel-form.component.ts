@@ -114,7 +114,6 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
 
     if (paramsSum > this.maxParamsSum) {
       this.formGroup.setErrors({dimensions: { incorrect: true, diff: paramsSum - this.maxParamsSum}});
-      this.formGroup.markAllAsTouched();
     } else {
       this.formGroup.setErrors(null);
     }
