@@ -24,7 +24,17 @@
         <ng-content select=".delete"></ng-content>
       </div>
     </div>
-    <div *ngIf="this.formGroup.invalid" class="parcel__error">Параметры посылки заполнены не корректно</div>
+    <div *ngIf="this.formGroup.invalid" class="parcel__error">
+<!--      Параметры посылки заполнены не корректно-->
+      <span *ngIf="this.formGroup.get(FormControlName.Weight).errors
+      && this.formGroup.get(FormControlName.Weight).errors.max">
+        Максимальный вес посылки {{this.formGroup.get(FormControlName.Weight).errors.max.max}} кг.
+      </span>
+      <span *ngIf="this.formGroup.errors
+      && this.formGroup.errors.dimensions">
+        Габариты посылки превышают допустимые размеры на {{this.formGroup.errors.dimensions.diff}} см.
+      </span>
+    </div>
   </div>
 </ng-container>
 

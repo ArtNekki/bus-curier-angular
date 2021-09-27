@@ -66,9 +66,6 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
     this.pickup = changes.courier.currentValue.pickup;
     this.delivery = changes.courier.currentValue.delivery;
     this.toggleTouched();
-
-    console.log('pickup', this.pickup);
-    console.log('delivery', this.delivery);
   }
 
   setParts(arr: Array<CargoType>) {
