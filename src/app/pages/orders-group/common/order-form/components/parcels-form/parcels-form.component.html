@@ -1,7 +1,7 @@
 <div [formGroup]="formGroup">
   <div formArrayName="parcels">
     <div *ngFor="let parcelGroup of parcels.controls; let i = index">
-      <app-parcel-form [courier]="courier" [formControlName]="i">
+      <app-parcel-form [departure]="departure" [pickup]="pickup" [formControlName]="i">
         <ng-container *ngIf="parcels.length > 1" class="delete">
           <app-btn type="button" mods="delete" (click)="delete(i)">
             <svg-icon class="icon" src="assets/img/svg/delete.svg" width="18" height="18"></svg-icon>

@@ -80,11 +80,11 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         }
 
         if (next && (this.departure.cityId !== next.location)) {
-          this.departure = Object.assign(this.departure, {cityId: next.location});
+          this.departure = Object.assign({}, this.departure, {cityId: next.location});
         }
 
         if (next) {
-          this.departure = Object.assign(this.departure,
+          this.departure = Object.assign({}, this.departure,
             {
               courier: (next.options.active === FormControlName.Pickup) || false,
               officeId: (next.options.give && next.options.give.office) || null
@@ -100,11 +100,11 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         }
 
         if (data && (this.pickup.cityId !== data.location)) {
-          this.pickup = Object.assign(this.pickup, {cityId: data.location});
+          this.pickup = Object.assign({}, this.pickup, {cityId: data.location});
         }
 
         if (data) {
-          this.pickup = Object.assign(this.pickup,
+          this.pickup = Object.assign({}, this.pickup,
             {
               courier: (data.options.active === FormControlName.Delivery) || false,
               officeId: (data.options.get && data.options.get.office) || null

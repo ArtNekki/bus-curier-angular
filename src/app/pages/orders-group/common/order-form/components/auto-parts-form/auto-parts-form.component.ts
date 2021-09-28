@@ -29,15 +29,16 @@ import {Select} from '../../../../../../core/interfaces/form';
 })
 export class AutoPartsFormComponent extends SubFormComponent implements OnInit, OnChanges {
   @Input() types: Array<CargoType> = [];
-  @Input() courier: CourierMode;
+  @Input() departure: any;
+  @Input() pickup: any;
 
   public FormControlName = FormControlName;
 
   public formGroup: FormGroup;
   public parts: Array<Select> = [];
 
-  public pickup: boolean;
-  public delivery: boolean;
+  public pickupInner: boolean;
+  public departureInner: boolean;
 
   constructor(
     public formUtils: FormUtilsService,
@@ -63,8 +64,14 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
       this.setParts(changes.types.currentValue);
     }
 
-    this.pickup = changes.courier.currentValue.pickup;
-    this.delivery = changes.courier.currentValue.delivery;
+    if (changes.departure && changes.departure.currentValue) {
+      this.departure = changes.departure.currentValue;
+    }
+
+    if (changes.pickup && changes.pickup.currentValue) {
+      this.pickup = changes.pickup.currentValue;
+    }
+
     this.toggleTouched();
   }
 
@@ -78,11 +85,11 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
   }
 
   toggleTouched() {
-    if (!(this.pickup && this.delivery) && this.formGroup) {
+    if (!(this.pickup.courier && this.departure.courier) && this.formGroup) {
       this.formGroup.markAllAsTouched();
     }
 
-    if ((this.pickup || this.delivery) && this.formGroup) {
+    if ((this.pickup.courier || this.departure.courier) && this.formGroup) {
       this.formGroup.markAsUntouched();
     }
   }

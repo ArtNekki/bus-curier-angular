@@ -26,15 +26,16 @@ import {Subscription} from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParcelFormComponent extends SubFormComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() courier: CourierMode;
+  @Input() departure: any;
+  @Input() pickup: any;
 
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public isInvalid = false;
 
   public formGroup: FormGroup;
-  public pickup: boolean;
-  public delivery: boolean;
+  // public pickup: boolean;
+  // public delivery: boolean;
 
   private valueSub: Subscription;
 
@@ -75,25 +76,25 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.pickup = changes.courier.currentValue.pickup;
-    this.delivery = changes.courier.currentValue.delivery;
-
-    if (this.formGroup) {
-
-      if (this.pickup || this.delivery) {
-        this.formGroup.get(FormControlName.Weight)
-          .setValidators([Validators.max(30), Validators.required, Validators.min(1)]);
-        this.maxParamsSum = 130;
-      } else {
-        this.formGroup.get(FormControlName.Weight)
-          .setValidators([Validators.max(100), Validators.required, Validators.min(1)]);
-        this.maxParamsSum = 250;
-      }
-
-      // this.toggleDimensionsError(this.formGroup.value);
-      this.formGroup.reset(this.formGroup.value);
-      this.formGroup.markAllAsTouched();
-    }
+    // this.pickup = changes.courier.currentValue.pickup;
+    // this.delivery = changes.courier.currentValue.delivery;
+    //
+    // if (this.formGroup) {
+    //
+    //   if (this.pickup || this.delivery) {
+    //     this.formGroup.get(FormControlName.Weight)
+    //       .setValidators([Validators.max(30), Validators.required, Validators.min(1)]);
+    //     this.maxParamsSum = 130;
+    //   } else {
+    //     this.formGroup.get(FormControlName.Weight)
+    //       .setValidators([Validators.max(100), Validators.required, Validators.min(1)]);
+    //     this.maxParamsSum = 250;
+    //   }
+    //
+    //   // this.toggleDimensionsError(this.formGroup.value);
+    //   this.formGroup.reset(this.formGroup.value);
+    //   this.formGroup.markAllAsTouched();
+    // }
   }
 
   toggleDimensionsError(parcel) {
