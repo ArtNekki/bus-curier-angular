@@ -72,6 +72,8 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
       this.pickup = changes.pickup.currentValue;
     }
 
+    console.log('this....', this.pickup.cityId);
+
     this.toggleTouched();
   }
 
