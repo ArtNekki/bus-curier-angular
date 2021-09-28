@@ -15,7 +15,7 @@
   <div *ngIf="orders.controls.length" [formArrayName]="FormControlName.Orders">
     <ng-template ngFor let-item [ngForOf]="orders.controls" let-i = index>
       <ng-container *ngIf="formGroup.get(FormControlName.Active).value === i">
-        <app-order-form [cityFromId]="cityFromId" [courier]="courier" [types]="types" [services]="services" [formControlName]="i"></app-order-form>
+        <app-order-form  [types]="types" [services]="services" [formControlName]="i"></app-order-form>
       </ng-container>
     </ng-template>
   </div>

@@ -26,9 +26,8 @@ import {CargoType, CourierMode, Service} from '../../../../../../core/interfaces
   ]
 })
 export class OrdersFormComponent extends SubFormComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() cityFromId: string;
-  @Input() cityToId: string;
-  @Input() courier: CourierMode;
+  @Input() departure: any;
+  @Input() pickup: any;
 
   public FormControlName = FormControlName;
 
@@ -62,8 +61,8 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ((changes.cityFromId && changes.cityFromId.currentValue) && (changes.cityToId && changes.cityToId.currentValue)) {
-      this.typesSub = this.calcService.getTypes(changes.cityFromId.currentValue, changes.cityToId.currentValue)
+    if ((changes.departure && changes.departure.currentValue.cityId) && (changes.pickup && changes.pickup.currentValue.cityId)) {
+      this.typesSub = this.calcService.getTypes(changes.departure.currentValue.cityId, changes.pickup.currentValue.cityId)
         // .pipe(delay(500))
         .subscribe((result: Array<CargoType>) => {
           if (result.length) {
@@ -75,8 +74,8 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
         });
     }
 
-    if (changes.cityFromId && changes.cityFromId.currentValue) {
-      this.servicesSub = this.calcService.getServices(changes.cityFromId.currentValue)
+    if (changes.departure && changes.departure.currentValue.cityId) {
+      this.servicesSub = this.calcService.getServices(changes.departure.currentValue.cityId)
         .subscribe((arr: Array<Service>) => {
           this.services = [...arr];
         });

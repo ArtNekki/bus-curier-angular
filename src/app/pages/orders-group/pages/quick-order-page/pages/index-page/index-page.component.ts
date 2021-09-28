@@ -79,13 +79,17 @@ export class IndexPageComponent implements OnInit, OnDestroy {
           });
         }
 
-        if (next && (this.cityFromId !== next.location)) {
-          this.cityFromId = next.location;
+        if (next && (this.departure.cityId !== next.location)) {
+          this.departure = Object.assign(this.departure, {cityId: next.location});
         }
 
-        this.courier = Object.assign({}, this.courier, {
-          pickup: (next.options.active === FormControlName.Pickup) || false
-        });
+        if (next) {
+          this.departure = Object.assign(this.departure,
+            {
+              courier: (next.options.active === FormControlName.Pickup) || false,
+              officeId: (next.options.give && next.options.give.office) || null
+            });
+        }
     });
 
     this.pickupSub = this.form.get(FormControlName.PickupPoint).valueChanges
@@ -95,13 +99,17 @@ export class IndexPageComponent implements OnInit, OnDestroy {
           this.formData = this.form.value;
         }
 
-        if (data && (this.cityToId !== data.location)) {
-          this.cityToId = data.location;
+        if (data && (this.pickup.cityId !== data.location)) {
+          this.pickup = Object.assign(this.pickup, {cityId: data.location});
         }
 
-        this.courier = Object.assign({}, this.courier, {
-          delivery: (data.options.active === FormControlName.Delivery) || false
-        });
+        if (data) {
+          this.pickup = Object.assign(this.pickup,
+            {
+              courier: (data.options.active === FormControlName.Delivery) || false,
+              officeId: (data.options.get && data.options.get.office) || null
+            });
+        }
     });
 
     this.ordersSub = this.form.get(FormControlName.Orders).valueChanges

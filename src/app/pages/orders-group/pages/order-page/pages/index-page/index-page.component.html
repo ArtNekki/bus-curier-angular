@@ -23,7 +23,8 @@
             </div>
           </section>
           <div *ngIf="cityFromId && cityToId">
-            <app-orders-form [cityFromId]="cityFromId" [cityToId]="cityToId" formControlName="orders"></app-orders-form>
+<!--            [departure]="departure" [pickup]="pickup"-->
+            <app-orders-form formControlName="orders"></app-orders-form>
           </div>
           <app-recipient-form [author]="form.value.steps[0].author" [formControlName]="FormControlName.Recipient"></app-recipient-form>
         </div>

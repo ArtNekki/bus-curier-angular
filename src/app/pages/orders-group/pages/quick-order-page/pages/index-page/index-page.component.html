@@ -13,13 +13,13 @@
           <div>
             <h2 class="form__heading form__heading--no-mgb">Куда</h2>
             <app-pickup-point-form
-              [cityFromId]="cityFromId" noLabel="true"
+              [cityFromId]="departure.cityId" noLabel="true"
               [formControlName]="FormControlName.PickupPoint"></app-pickup-point-form>
           </div>
         </div>
       </div>
-      <div *ngIf="cityFromId && cityToId">
-        <app-orders-form [cityFromId]="cityFromId" [cityToId]="cityToId" [courier]="courier" formControlName="orders"></app-orders-form>
+      <div *ngIf="departure.cityId && pickup.cityId">
+        <app-orders-form [departure]="departure" [pickup]="pickup" formControlName="orders"></app-orders-form>
       </div>
       <div *ngIf="cityFromId && cityToId" class="form__fieldset form__fieldset--delivery">
         <app-btn mods="lg" [disabled]="form.invalid">Рассчитать стоимость</app-btn>
