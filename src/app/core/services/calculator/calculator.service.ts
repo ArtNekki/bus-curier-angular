@@ -51,6 +51,7 @@ export class CalculatorService {
 
   calculateTotalSum({cityFromId, cityToId, orders}) {
     const arr = [];
+    const ordersCount = orders.length;
 
     orders.forEach((order) => {
       arr.push(this.calculateOrderSum(cityFromId, cityToId, order));
@@ -78,6 +79,7 @@ export class CalculatorService {
   calculateOrderSum(cityFromId, cityToId, order): Observable<TotalSum> {
     let cargoId = order.activeCargo;
     let result = null;
+    let places = 0;
 
     if (!order.cargo) {
       return new Observable<TotalSum>();
@@ -87,18 +89,20 @@ export class CalculatorService {
 
     if (cargoId === Cargo.Docs) {
       cargoId = `${cargoId}, ${cargo.counter}`;
+      places = cargo.counter;
     }
 
     if (cargoId === Cargo.AutoParts || cargoId === Cargo.Other) {
       cargoId = `${cargo.item}, ${cargo.counter}`;
+      places = cargo.counter;
     }
 
+    console.log('placeCount', places);
     const servicesId = this.getServicesId(order);
 
     if (cargoId === Cargo.Parcels) {
       result = this.getParcelsSum(cityFromId, cityToId, cargoId, servicesId, cargo);
     } else {
-
       result = cargo.counter
         ? this.getResult(cityFromId, cityToId, cargoId, servicesId, 0, 0)
         : of({price: 0});
