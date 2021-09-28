@@ -34,11 +34,8 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
   public isInvalid = false;
 
   public formGroup: FormGroup;
-  // public pickup: boolean;
-  // public delivery: boolean;
 
   private valueSub: Subscription;
-
   private maxParamsSum = 250;
 
   constructor(
@@ -76,25 +73,30 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // this.pickup = changes.courier.currentValue.pickup;
-    // this.delivery = changes.courier.currentValue.delivery;
-    //
-    // if (this.formGroup) {
-    //
-    //   if (this.pickup || this.delivery) {
-    //     this.formGroup.get(FormControlName.Weight)
-    //       .setValidators([Validators.max(30), Validators.required, Validators.min(1)]);
-    //     this.maxParamsSum = 130;
-    //   } else {
-    //     this.formGroup.get(FormControlName.Weight)
-    //       .setValidators([Validators.max(100), Validators.required, Validators.min(1)]);
-    //     this.maxParamsSum = 250;
-    //   }
-    //
-    //   // this.toggleDimensionsError(this.formGroup.value);
-    //   this.formGroup.reset(this.formGroup.value);
-    //   this.formGroup.markAllAsTouched();
-    // }
+    if (changes.departure && changes.departure.currentValue) {
+      this.departure = changes.departure.currentValue;
+    }
+
+    if (changes.pickup && changes.pickup.currentValue) {
+      this.pickup = changes.pickup.currentValue;
+    }
+
+    if (this.formGroup) {
+
+      if (this.pickup.courier || this.departure.courier) {
+        this.formGroup.get(FormControlName.Weight)
+          .setValidators([Validators.max(30), Validators.required, Validators.min(1)]);
+        this.maxParamsSum = 130;
+      } else {
+        this.formGroup.get(FormControlName.Weight)
+          .setValidators([Validators.max(100), Validators.required, Validators.min(1)]);
+        this.maxParamsSum = 250;
+      }
+
+      // this.toggleDimensionsError(this.formGroup.value);
+      this.formGroup.reset(this.formGroup.value);
+      this.formGroup.markAllAsTouched();
+    }
   }
 
   toggleDimensionsError(parcel) {
@@ -125,5 +127,4 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
       this.valueSub.unsubscribe();
     }
   }
-
 }
