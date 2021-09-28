@@ -30,6 +30,18 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     delivery: false
   };
 
+  public departure = {
+    cityId: '',
+    officeId: '',
+    courier: false
+  };
+
+  public pickup = {
+    cityId: '',
+    officeId: '',
+    courier: false
+  };
+
   private departureSub: Subscription;
   private pickupSub: Subscription;
   private ordersSub: Subscription;
