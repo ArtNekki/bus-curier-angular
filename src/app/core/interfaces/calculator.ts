@@ -67,6 +67,13 @@ export interface CourierMode {
   delivery?: boolean;
 }
 
+export interface ParcelLimits {
+  name: string;
+  maxWeight?: number;
+  maxDimensionsSum?: number;
+}
+
+
 
 
 

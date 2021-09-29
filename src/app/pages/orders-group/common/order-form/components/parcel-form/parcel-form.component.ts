@@ -4,7 +4,7 @@ import {FormUtilsService} from '../../../../../../core/services/form-utils.servi
 import FormControlName from '../../../../../../core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
-import {CourierMode} from '../../../../../../core/interfaces/calculator';
+import {CourierMode, ParcelLimits} from '../../../../../../core/interfaces/calculator';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -36,13 +36,13 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
   public formGroup: FormGroup;
 
   private valueSub: Subscription;
-  private maxParamsSum = 250;
+  private maxDimensionsSum = 250;
 
-  private Cities = {
-    Vanino: ['1675', '1885', '414', '1756', '1615', '1775', '1932'],
-    SovGavan: ['1676', '1888', '1759', '1824', '1933'],
-    Dalnegorsk: ['754', '192', '4', '12', '1783', '101'],
-    Olga: ['1627', '207', '30', '235', '119', '1808', '180'],
+  private CitiesLimits = {
+    ['1675, 1885, 414, 1756, 1615, 1775, 1932']: {name: 'Ванино', maxWeight: 20, maxDimensionsSum: 130},
+    ['1676, 1888, 1759, 1824, 1933']: {name: 'Cов. Гавань', maxWeight: 20, maxDimensionsSum: 130},
+    ['754, 192, 4, 12, 1783, 101']: {name: 'Дальнегорск', maxWeight: 40},
+    ['1627, 207, 30, 235, 119, 1808, 180']: {name: 'Ольга', maxWeight: 50},
   };
 
   constructor(
@@ -89,8 +89,6 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
       this.pickup = changes.pickup.currentValue;
     }
 
-    console.log('changes', changes.pickup);
-
     if (this.formGroup) {
       this.setLimit();
       // this.toggleDimensionsError(this.formGroup.value);
@@ -100,15 +98,39 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
   }
 
   setLimit() {
-    if (this.pickup.courier || this.departure.courier) {
-      this.formGroup.get(FormControlName.Weight)
-        .setValidators([Validators.max(30), Validators.required, Validators.min(1)]);
-      this.maxParamsSum = 130;
-    } else {
-      this.formGroup.get(FormControlName.Weight)
-        .setValidators([Validators.max(100), Validators.required, Validators.min(1)]);
-      this.maxParamsSum = 250;
+    const cityLimits = this.getLimitsOfCity(this.pickup.cityId);
+    const courierMaxWeight = 20;
+    const courierMaxDimensionsSum = 130;
+    let maxWeight = 100;
+
+    if (cityLimits) {
+      maxWeight = cityLimits.maxWeight || maxWeight;
+      this.maxDimensionsSum = cityLimits.maxDimensionsSum || this.maxDimensionsSum;
+    } else if (this.pickup.courier || this.departure.courier) {
+      maxWeight = courierMaxWeight;
+      this.maxDimensionsSum = courierMaxDimensionsSum;
     }
+
+    this.formGroup.get(FormControlName.Weight)
+      .setValidators([Validators.max(maxWeight), Validators.required, Validators.min(1)]);
+
+    // if (this.pickup.courier || this.departure.courier) {
+    //
+    //   this.maxDimensionsSum = 130;
+    // } else {
+    //   this.formGroup.get(FormControlName.Weight)
+    //     .setValidators([Validators.max(100), Validators.required, Validators.min(1)]);
+    //   this.maxDimensionsSum = 250;
+    // }
+  }
+
+  getLimitsOfCity(id): ParcelLimits {
+    const result = Object.entries(this.CitiesLimits)
+      .filter(([ids, data]) => {
+          return ids.split(', ').indexOf(id) !== -1;
+    });
+
+    return result.length ? result[0][1] : null;
   }
 
   toggleDimensionsError(parcel) {
@@ -127,8 +149,8 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
         return total += +value;
       }, 0);
 
-    if (paramsSum > this.maxParamsSum) {
-      this.formGroup.setErrors({dimensions: { incorrect: true, diff: paramsSum - this.maxParamsSum}});
+    if (paramsSum > this.maxDimensionsSum) {
+      this.formGroup.setErrors({dimensions: { incorrect: true, diff: paramsSum - this.maxDimensionsSum}});
     } else {
       this.formGroup.setErrors(null);
     }

@@ -106,8 +106,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
           this.pickup = Object.assign({}, this.pickup, {cityId: data.location});
         }
 
-        console.log('data.location', data.location);
-
         if (data) {
           this.pickup = Object.assign({}, this.pickup,
             {
