@@ -3,8 +3,10 @@
    <ng-container *ngFor="let control of formUtils.getGroupControls(formGroup)  | keyvalue: formUtils.originalOrder;">
      <div *ngIf="control.key === FormControlName.Item" class="form__field">
        <label class="form__label"
-              [class.form__label--invalid]="control.value.invalid && !(pickup.courier || departure.courier)"
-              [class.form__label--light]="control.value.disabled || (pickup.courier || departure.courier)" >
+              [class.form__label--invalid]="control.value.invalid
+              && !(pickup.courier || departure.courier || departureOfficeLimits || pickupOfficeLimits)"
+              [class.form__label--light]="control.value.disabled
+              || (pickup.courier || departure.courier || departureOfficeLimits || pickupOfficeLimits)" >
          Выберите запчасть:
          <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
        </label>
@@ -13,7 +15,7 @@
          [items]="parts"
          [formControlName]="control.key"
          [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
-         [disabled]="control.value.value || (pickup.courier || departure.courier)"
+         [disabled]="control.value.value || (pickup.courier || departure.courier || departureOfficeLimits || pickupOfficeLimits)"
        >
        </app-select>
      </div>
@@ -39,7 +41,7 @@
    </div>
  </div>
   <small *ngIf="pickup.courier || departure.courier" style="margin: 0; color: #C74141">
-    *Невозможно выбрать автозапчасти, т.к. габариты запчастей <br />слишком большие и курьер не может их перевозить.
+    <sup>*</sup> Невозможно выбрать автозапчасти, т.к. габариты запчастей <br />слишком большие и курьер не может их перевозить.
 <!--    <ng-container *ngIf="pickup && !delivery">-->
 <!--      габариты все запчастей слишком большие и курьер не может их перевозить.-->
 <!--    </ng-container>-->
@@ -50,6 +52,12 @@
 <!--    <ng-container *ngIf="pickup && delivery">-->
 <!--      забирать заказ у отправителя и доставлять его получателю будет курьер.-->
 <!--    </ng-container>-->
+  </small>
+  <small *ngIf="departureOfficeLimits" style="margin: 0; color: #C74141">
+    <sup>*</sup>Из выбранного отделения  автозапчасти не отправляются
+  </small>
+  <small *ngIf="pickupOfficeLimits" style="margin: 0; color: #C74141">
+    <sup>*</sup>Выбранное отделение автозапчасти не принимает
   </small>
   <dl class="form__details">
     <dt><b>Тип груза:</b></dt>

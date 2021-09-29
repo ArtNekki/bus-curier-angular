@@ -37,9 +37,6 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
   public formGroup: FormGroup;
   public parts: Array<Select> = [];
 
-  public pickupInner: boolean;
-  public departureInner: boolean;
-
   constructor(
     public formUtils: FormUtilsService,
     private cdr: ChangeDetectorRef,
@@ -53,6 +50,7 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
       [FormControlName.Counter]: new FormControl(1, [Validators.required, Validators.min(1)])
     });
 
+    // this.getOfficeLimits();
     this.setParts(this.types);
     this.toggleTouched();
 
@@ -72,8 +70,7 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
       this.pickup = changes.pickup.currentValue;
     }
 
-    console.log('this....', this.pickup.cityId);
-
+    // this.getOfficeLimits();
     this.toggleTouched();
   }
 
@@ -86,12 +83,20 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
     this.parts = [{value: '', name: ''}, ...parts];
   }
 
+  get departureOfficeLimits() {
+    return this.departure.officeId === '2' || this.departure.officeId === '3';
+  }
+
+  get pickupOfficeLimits() {
+    return this.pickup.officeId === '2' || this.pickup.officeId === '3';
+  }
+
   toggleTouched() {
-    if (!(this.pickup.courier && this.departure.courier) && this.formGroup) {
+    if (!(this.pickup.courier && this.departure.courier && this.departureOfficeLimits && this.pickupOfficeLimits) && this.formGroup) {
       this.formGroup.markAllAsTouched();
     }
 
-    if ((this.pickup.courier || this.departure.courier) && this.formGroup) {
+    if ((this.pickup.courier || this.departure.courier || this.departureOfficeLimits || this.pickupOfficeLimits) && this.formGroup) {
       this.formGroup.markAsUntouched();
     }
   }

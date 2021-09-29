@@ -105,8 +105,6 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
     || this.pickup.officeId === '2' || this.pickup.officeId === '3';
     let maxWeight = 100;
 
-    console.log('this.departure.officeId', officeLimits);
-
     if (cityLimits) {
       maxWeight = cityLimits.maxWeight || maxWeight;
       this.maxDimensionsSum = cityLimits.maxDimensionsSum || this.maxDimensionsSum;
