@@ -132,6 +132,11 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         })
       )
       .subscribe((cities: any) => {
+
+        cities = cities.sort((a: Select, b: Select) => {
+          return a.name.localeCompare(b.name);
+        });
+
         this.cities = [{value: '', name: 'Выберите город'}, ...cities];
 
         setTimeout(() => {

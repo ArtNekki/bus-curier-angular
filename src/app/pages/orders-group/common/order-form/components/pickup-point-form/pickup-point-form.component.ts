@@ -110,6 +110,11 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       )
       .subscribe((cities: any) => {
         if (cities.length) {
+
+          cities = cities.sort((a: Select, b: Select) => {
+            return a.name.localeCompare(b.name);
+          });
+
           this.cities = [{value: '', name: 'Выберите город'}, ...cities];
 
           setTimeout(() => {

@@ -38,6 +38,13 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
   private valueSub: Subscription;
   private maxParamsSum = 250;
 
+  private Cities = {
+    Vanino: ['1675', '1885', '414', '1756', '1615', '1775', '1932'],
+    SovGavan: ['1676', '1888', '1759', '1824', '1933'],
+    Dalnegorsk: ['754', '192', '4', '12', '1783', '101'],
+    Olga: ['1627', '207', '30', '235', '119', '1808', '180'],
+  };
+
   constructor(
     public formUtils: FormUtilsService) {
     super();
@@ -81,6 +88,8 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
     if (changes.pickup && changes.pickup.currentValue) {
       this.pickup = changes.pickup.currentValue;
     }
+
+    console.log('changes', changes.pickup);
 
     if (this.formGroup) {
       this.setLimit();

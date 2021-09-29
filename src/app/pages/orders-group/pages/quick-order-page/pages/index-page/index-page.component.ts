@@ -93,7 +93,10 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     });
 
     this.pickupSub = this.form.get(FormControlName.PickupPoint).valueChanges
-      .pipe(delay(0))
+      .pipe(
+        delay(0),
+        debounceTime(0),
+      )
       .subscribe((data) => {
         if (this.formData) {
           this.formData = this.form.value;
@@ -102,6 +105,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         if (data && (this.pickup.cityId !== data.location)) {
           this.pickup = Object.assign({}, this.pickup, {cityId: data.location});
         }
+
+        console.log('data.location', data.location);
 
         if (data) {
           this.pickup = Object.assign({}, this.pickup,
