@@ -24,7 +24,7 @@
     <ng-container [formGroupName]="FormControlName.Options">
       <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
         <ng-container *ngIf="control.key === FormControlName.NeedToMeet">
-          <app-checkbox [formControlName]="control.key" [@fadeIn]="">
+          <app-checkbox [formControlName]="control.key" [@fadeIn]="" isDisabled="true">
             <div class="text">
               {{FormFieldMeta[control.key].label}}
             </div>
