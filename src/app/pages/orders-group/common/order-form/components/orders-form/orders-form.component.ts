@@ -72,27 +72,10 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
       this.currentPickup = changes.pickup.currentValue;
     }
 
-    // if ((this.currentDeparture.cityId)
-    //   && (changes.pickup.previousValue && (changes.pickup.currentValue.cityId !== changes.pickup.previousValue.cityId))
-    //   || (changes.pickup && changes.pickup.currentValue.cityId)) {
-    //
-    //   console.log('this.currentPickup.cityId', this.currentPickup.cityId);
-    //
-    //
-    // }
-
-
-    // if ((changes.pickup.currentValue.cityId !== changes.pickup.previousValue && changes.pickup.previousValue.cityId)) {
-    //
-    //   console.log('this.currentPickup.cityId', this.currentPickup.cityId);
-    //
-    //
-    // }
-
     if (this.currentDeparture.cityId && (this.currentPickup.cityId
       !== (changes.pickup && changes.pickup.previousValue && changes.pickup.previousValue.cityId))) {
 
-      this.types = [];
+      // this.types = [];
 
       this.typesSub = this.calcService.getTypes(this.currentDeparture.cityId, this.currentPickup.cityId)
         // .pipe(delay(500))

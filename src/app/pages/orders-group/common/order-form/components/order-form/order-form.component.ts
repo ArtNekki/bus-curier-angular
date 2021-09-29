@@ -81,52 +81,13 @@ export class OrderFormComponent extends SubFormComponent implements OnInit, OnCh
       .pipe(delay(10))
       .subscribe((id: string) => {
 
-        switch (id) {
-          case this.Cargo.Docs:
-            this.cargo
-              .get(this.Cargo.Parcels)
-              .patchValue('', {onlySelf: true});
-            this.cargo
-              .get(this.Cargo.AutoParts)
-              .patchValue('', {onlySelf: true});
-            this.cargo
-              .get(this.Cargo.Other)
-              .patchValue('', {onlySelf: true});
-            break;
-          case this.Cargo.Parcels:
-            this.cargo
-              .get(this.Cargo.Docs)
-              .setValue('', {onlySelf: true});
-            this.cargo
-              .get(this.Cargo.AutoParts)
-              .setValue('', {onlySelf: true});
-            this.cargo
-              .get(this.Cargo.Other)
-              .patchValue('', {onlySelf: true});
-            break;
-          case this.Cargo.AutoParts:
-            this.cargo
-              .get(this.Cargo.Parcels)
-              .setValue('', {onlySelf: true});
-            this.cargo
-              .get(this.Cargo.Docs)
-              .setValue('', {onlySelf: true});
-            this.cargo
-              .get(this.Cargo.Other)
-              .patchValue('', {onlySelf: true});
-            break;
-          case this.Cargo.Other:
-            this.cargo
-              .get(this.Cargo.Parcels)
-              .setValue('', {onlySelf: true});
-            this.cargo
-              .get(this.Cargo.Docs)
-              .setValue('', {onlySelf: true});
-            this.cargo
-              .get(this.Cargo.AutoParts)
-              .patchValue('', {onlySelf: true});
-            break;
-        }
+        Object.entries(this.cargo.controls)
+          .filter((control) => {
+            return control[0] !== id;
+        })
+          .forEach((control) => {
+            control[1].patchValue('', {onlySelf: true});
+          });
       });
   }
 
