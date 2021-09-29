@@ -99,29 +99,27 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
 
   setLimit() {
     const cityLimits = this.getLimitsOfCity(this.pickup.cityId);
-    const courierMaxWeight = 20;
-    const courierMaxDimensionsSum = 130;
+    const standardWeight = 20;
+    const standardDimensionsSum = 130;
+    const officeLimits = this.departure.officeId === '2' || this.departure.officeId === '3'
+    || this.pickup.officeId === '2' || this.pickup.officeId === '3';
     let maxWeight = 100;
+
+    console.log('this.departure.officeId', officeLimits);
 
     if (cityLimits) {
       maxWeight = cityLimits.maxWeight || maxWeight;
       this.maxDimensionsSum = cityLimits.maxDimensionsSum || this.maxDimensionsSum;
-    } else if (this.pickup.courier || this.departure.courier) {
-      maxWeight = courierMaxWeight;
-      this.maxDimensionsSum = courierMaxDimensionsSum;
+    } else if (officeLimits || this.pickup.courier || this.departure.courier) {
+      maxWeight = standardWeight;
+      this.maxDimensionsSum = standardDimensionsSum;
+    } else {
+      maxWeight = 100;
+      this.maxDimensionsSum = 250;
     }
 
     this.formGroup.get(FormControlName.Weight)
       .setValidators([Validators.max(maxWeight), Validators.required, Validators.min(1)]);
-
-    // if (this.pickup.courier || this.departure.courier) {
-    //
-    //   this.maxDimensionsSum = 130;
-    // } else {
-    //   this.formGroup.get(FormControlName.Weight)
-    //     .setValidators([Validators.max(100), Validators.required, Validators.min(1)]);
-    //   this.maxDimensionsSum = 250;
-    // }
   }
 
   getLimitsOfCity(id): ParcelLimits {
