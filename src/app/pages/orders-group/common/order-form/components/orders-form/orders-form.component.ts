@@ -40,6 +40,9 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
   public services: Array<Service> = [];
   public servicesSub: Subscription;
 
+  public currentDeparture = null;
+  public currentPickup = null;
+
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
               private calcService: CalculatorService) {
@@ -61,8 +64,37 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ((changes.departure && changes.departure.currentValue.cityId) && (changes.pickup && changes.pickup.currentValue.cityId)) {
-      this.typesSub = this.calcService.getTypes(changes.departure.currentValue.cityId, changes.pickup.currentValue.cityId)
+    if (changes.departure && changes.departure.currentValue) {
+      this.currentDeparture = changes.departure.currentValue;
+    }
+
+    if (changes.pickup && changes.pickup.currentValue) {
+      this.currentPickup = changes.pickup.currentValue;
+    }
+
+    // if ((this.currentDeparture.cityId)
+    //   && (changes.pickup.previousValue && (changes.pickup.currentValue.cityId !== changes.pickup.previousValue.cityId))
+    //   || (changes.pickup && changes.pickup.currentValue.cityId)) {
+    //
+    //   console.log('this.currentPickup.cityId', this.currentPickup.cityId);
+    //
+    //
+    // }
+
+
+    // if ((changes.pickup.currentValue.cityId !== changes.pickup.previousValue && changes.pickup.previousValue.cityId)) {
+    //
+    //   console.log('this.currentPickup.cityId', this.currentPickup.cityId);
+    //
+    //
+    // }
+
+    if (this.currentDeparture.cityId && (this.currentPickup.cityId
+      !== (changes.pickup && changes.pickup.previousValue && changes.pickup.previousValue.cityId))) {
+
+      this.types = [];
+
+      this.typesSub = this.calcService.getTypes(this.currentDeparture.cityId, this.currentPickup.cityId)
         // .pipe(delay(500))
         .subscribe((result: Array<CargoType>) => {
           if (result.length) {
@@ -74,8 +106,8 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
         });
     }
 
-    if (changes.departure && changes.departure.currentValue.cityId) {
-      this.servicesSub = this.calcService.getServices(changes.departure.currentValue.cityId)
+    if (this.currentDeparture.cityId) {
+      this.servicesSub = this.calcService.getServices(this.currentDeparture.cityId)
         .subscribe((arr: Array<Service>) => {
           this.services = [...arr];
         });

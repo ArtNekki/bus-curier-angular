@@ -149,8 +149,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   clearForm() {
     return new Observable((sub) => {
-      this.cityFromId = '';
-      this.cityToId = '';
+      this.departure.cityId = '';
+      this.pickup.cityId = '';
       this.formData = null;
       this.form.get(FormControlName.PickupPoint).reset();
       this.form.get(FormControlName.Orders).reset();
