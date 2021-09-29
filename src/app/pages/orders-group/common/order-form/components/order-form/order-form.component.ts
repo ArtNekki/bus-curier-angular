@@ -131,7 +131,7 @@ export class OrderFormComponent extends SubFormComponent implements OnInit, OnCh
 
     if (onChanges) {
       this.cdr.detectChanges();
-      this.formGroup.reset(this.formGroup.value);
+      // this.formGroup.reset(this.formGroup.value); Из-за этой строчки некорректно работает валидация parcel
     }
   }
 

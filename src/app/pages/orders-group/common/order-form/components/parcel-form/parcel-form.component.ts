@@ -65,6 +65,7 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
       this.toggleDimensionsError(parcel);
     });
 
+    this.setLimit();
     this.formGroup.markAllAsTouched();
     this.formGroup.markAsTouched();
     this.onTouched();
@@ -82,20 +83,22 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
     }
 
     if (this.formGroup) {
-
-      if (this.pickup.courier || this.departure.courier) {
-        this.formGroup.get(FormControlName.Weight)
-          .setValidators([Validators.max(30), Validators.required, Validators.min(1)]);
-        this.maxParamsSum = 130;
-      } else {
-        this.formGroup.get(FormControlName.Weight)
-          .setValidators([Validators.max(100), Validators.required, Validators.min(1)]);
-        this.maxParamsSum = 250;
-      }
-
+      this.setLimit();
       // this.toggleDimensionsError(this.formGroup.value);
       this.formGroup.reset(this.formGroup.value);
       this.formGroup.markAllAsTouched();
+    }
+  }
+
+  setLimit() {
+    if (this.pickup.courier || this.departure.courier) {
+      this.formGroup.get(FormControlName.Weight)
+        .setValidators([Validators.max(30), Validators.required, Validators.min(1)]);
+      this.maxParamsSum = 130;
+    } else {
+      this.formGroup.get(FormControlName.Weight)
+        .setValidators([Validators.max(100), Validators.required, Validators.min(1)]);
+      this.maxParamsSum = 250;
     }
   }
 
