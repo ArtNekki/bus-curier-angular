@@ -4,6 +4,11 @@
 @import "src/variables";
 @import "src/assets/scss/settings";
 
+:host {
+  display: block;
+  height: inherit;
+}
+
 .contacts-map {
   height: inherit;
 

@@ -303,3 +303,9 @@
     }
   }
 }
+
+
+//contacts page remove space between it and footer
+::ng-deep app-contacts-page ~ app-page-footer > .page-footer {
+  margin-top: 0 !important;
+}

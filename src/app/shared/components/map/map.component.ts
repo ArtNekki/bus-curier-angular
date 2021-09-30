@@ -8,11 +8,16 @@ import {ModsService} from '../../../core/services/mods.service';
 })
 export class MapComponent implements OnInit {
   @Input() mods;
+  @Input() markers: Array<any>;
+  @Input() latitude: string;
+  @Input() longitude: string;
+  @Input() zoom: string;
+  @Input() disableDefaultUI: boolean;
+  @Input() gestureHandling: boolean;
+  @Input() scrollwheel: boolean;
+  @Input() styles: any;
 
   title = 'AGM project';
-  latitude = 48.5096027;
-  longitude = 135.1668322;
-  zoom = 16;
 
   public cssClass;
 

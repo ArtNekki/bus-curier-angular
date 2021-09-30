@@ -16,8 +16,14 @@
 //  width: auto;
 //}
 
+:host {
+  display: block;
+  height: inherit;
+}
+
 .map {
   width: 100%;
+  height: inherit;
 
   &--pickup {
     height: 300px;

@@ -17,9 +17,17 @@
     [longitude]="longitude"
     [zoom]="zoom"
     [disableDefaultUI]="false"
+    [gestureHandling]="true"
+    [scrollwheel]="false"
+    [styles]="[{
+      stylers: [{
+        saturation: -100
+      }]
+    }]"
   >
-    <agm-marker
-      [latitude]="latitude"
-      [longitude]="longitude"></agm-marker>
+    <agm-marker *ngFor="let marker of markers"
+      [latitude]="marker.lat"
+      [longitude]="marker.lng"
+      iconUrl="assets/img/svg/map-point.svg"></agm-marker>
   </agm-map>
 </article>
