@@ -6,17 +6,20 @@
       и нажмите кнопку “Найти посылку”.</p>
     <form class="order-search" [formGroup]="form" autocomplete="off" (ngSubmit)="onSubmit()">
       <app-input type="text" [formControlName]="FormControlName.OrderNumber"></app-input>
-      <app-btn type="submit" mods="lg" [disabled]="">Найти посылку</app-btn>
+      <app-btn type="submit" mods="lg" [disabled]="!form.get(FormControlName.OrderNumber).value">Найти посылку</app-btn>
       <div class="order-search__meta">
         <span><sup>*</sup>6 символов</span>
         Пример: МФ-045278
       </div>
+      <div *ngIf="!isLoading && error" class="order-search__empty">
+        Заказ не найден, пожалуйста проверьте номер заказа или попробуйте позже.
+      </div>
     </form>
-    <app-timeline *ngIf="!isLoading && orderData" [number]="orderNumber" [data]="orderData"></app-timeline>
+    <app-timeline *ngIf="!isLoading && orderData.length" [number]="orderNumber" [data]="orderData"></app-timeline>
     <div *ngIf="isLoading" style="height: 200px; display: flex; justify-content: center; align-items: center">
       <app-loader></app-loader>
     </div>
-    <section class="page-section" [class.page-section--top-line]="orderData">
+    <section class="page-section page-section--top-line">
       <h2 class="title title--md">Где найти номер заказа?</h2>
       <app-img name="team" alt="Бланк" breakpoints='{"sm": true, "md": true, "lg": true}'></app-img>
     </section>

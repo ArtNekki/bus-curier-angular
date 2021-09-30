@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {EndpointFactory} from '../endpoint-factory/endpoint-factory.service';
+import {OrderTracking} from '../../interfaces/order';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,8 @@ export class OrderEndpointService  extends EndpointFactory {
       () => this.getDetails(id));
   }
 
-  getTracking<T>(id: string): Observable<T> {
-    return this.execute(this.http.get<T>(`${this.url}/gettracking/${environment.api_key}/${id}`, this.getRequestHeaders()),
+  getTracking(id: string): Observable<OrderTracking[]> {
+    return this.execute(this.http.get(`${this.url}/gettracking/${environment.api_key}/${id}`, this.getRequestHeaders()),
       () => this.getTracking(id));
   }
 }

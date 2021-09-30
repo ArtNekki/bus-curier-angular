@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
-import {catchError, mergeMap} from 'rxjs/operators';
+import {Observable, Subject, throwError} from 'rxjs';
+import {catchError, mergeMap, tap} from 'rxjs/operators';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import {AuthService} from '../auth/auth.service';
@@ -138,7 +138,7 @@ export class EndpointFactory {
   }
 
   protected handleError(error, continuation: () => Observable<any>) {
-    return null;
+    return throwError(error);
     // if (error.status === 401) {
     //   if (this.isRefreshingLogin) {
     //     return this.pauseTask(continuation);

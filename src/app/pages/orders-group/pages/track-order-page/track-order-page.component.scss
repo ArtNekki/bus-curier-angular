@@ -9,6 +9,7 @@
   grid-template-columns: 1fr 270px;
   grid-column-gap: 10px;
   grid-row-gap: 15px;
+  //max-width: 670px;
 
   &__meta {
     grid-column: 1 / -1;
@@ -19,5 +20,15 @@
     span {
       color: $gray-color--down-11;
     }
+  }
+
+  &__empty {
+    padding-top: 20px;
+    grid-column: 1 / -1;
+    font-family: $font-family--secondary;
+    font-size: 18px;
+    line-height: 25.2px;
+    color: $gray-dark-color;
+    border-top: 1px solid $gray-color;
   }
 }

@@ -15,8 +15,9 @@ export class TrackOrderPageComponent implements OnInit {
 
   public form: FormGroup;
   public orderNumber = null;
-  public orderData;
+  public orderData: OrderTracking[] = [];
   public isLoading = false;
+  public error = false;
 
   constructor(private orderService: OrderService) { }
 
@@ -33,14 +34,24 @@ export class TrackOrderPageComponent implements OnInit {
 
     this.isLoading = true;
     this.orderNumber = this.form.value[FormControlName.OrderNumber];
+    this.form.reset();
 
     this.orderService.getTracking(this.orderNumber)
       .pipe(delay(1000))
-      .subscribe((data) => {
+      .subscribe((data: OrderTracking[]) => {
       if (data) {
         this.orderData = data;
+        this.error = false;
         this.isLoading = false;
       }
-    });
+    }, (err) => {
+        this.error = true;
+        this.orderData = [];
+        this.orderNumber = '';
+
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1000);
+      });
   }
 }

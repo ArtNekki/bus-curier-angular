@@ -7,8 +7,11 @@
 .timeline {
   @include list-clear();
 
-  margin-top: 43px;
-  margin-bottom: 63px;
+  margin-top: 25px;
+  margin-bottom: 60px;
+  //max-width: 670px;
+  padding-top: 40px;
+  border-top: 1px solid $gray-color;
 
   &__item {
     position: relative;
