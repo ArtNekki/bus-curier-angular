@@ -37,21 +37,17 @@ export class TrackOrderPageComponent implements OnInit {
     this.form.reset();
 
     this.orderService.getTracking(this.orderNumber)
-      .pipe(delay(1000))
       .subscribe((data: OrderTracking[]) => {
-      if (data) {
-        this.orderData = data;
-        this.error = false;
-        this.isLoading = false;
-      }
-    }, (err) => {
-        this.error = true;
-        this.orderData = [];
-        this.orderNumber = '';
-
-        setTimeout(() => {
+        if (data) {
+          this.orderData = data;
+          this.error = false;
           this.isLoading = false;
-        }, 1000);
+        }
+      }, (err) => {
+          this.error = true;
+          this.orderData = [];
+          this.orderNumber = '';
+          this.isLoading = false;
       });
   }
 }

@@ -1,7 +1,7 @@
 import {Injectable, Injector} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {OrderEndpointService} from './order-endpoint.service';
-import {map} from 'rxjs/operators';
+import {delay, map} from 'rxjs/operators';
 import {OrderTracking} from '../../interfaces/order';
 import {Observable, throwError} from 'rxjs';
 
@@ -20,6 +20,7 @@ export class OrderService {
   getTracking(id): Observable<OrderTracking[]> {
     return this.endpoint.getTracking(id)
       .pipe(
+        delay(1000),
         map((data: OrderTracking[]) => {
           if (!data.push) {
             throw new Error('Not found');
