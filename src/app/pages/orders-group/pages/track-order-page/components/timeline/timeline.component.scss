@@ -15,14 +15,25 @@
 
   &__item {
     position: relative;
-    padding-left: 32px;
-    display: flex;
+    //padding-left: 32px;
+    display: grid;
+    grid-template-columns: 5px 21px repeat(2, auto);
+    grid-template-areas: "mark . date order"
+                         ". . status ." ;
+    grid-row-gap: 5px;
+    justify-content: start;
+    justify-items: start;
     align-items: center;
+
+    @include media-breakpoint-up(sm) {
+      grid-template-columns: 5px 32px repeat(2, auto) 32px auto;
+      grid-template-areas: "mark . date order . status";
+      grid-row-gap: 0;
+    }
 
     &::before {
       content: "";
-      position: absolute;
-      left: 0;
+      grid-area: mark;
       width: 5px;
       height: 5px;
       background-color: #C4C4C4;
@@ -37,20 +48,27 @@
       content: "";
       position: absolute;
       left: 2px;
-      bottom: 23px;
+      bottom: 56px;
       width: 1px;
-      height: 58px;
+      height: 92px;
       background-color: $gray-light-color;
+
+      @include media-breakpoint-up(sm) {
+        bottom: 19px;
+        height: 66px;
+      }
     }
   }
 
   &__meta {
+    grid-area: order;
     font-family: $font-family--secondary;
     font-size: 18px;
     font-weight: 500;
     line-height: 25.2px;
 
     &--date {
+      grid-area: date;
       margin-right: 5px;
       font-weight: 400;
       color: $gray-dark-color;
@@ -58,7 +76,8 @@
   }
 
   &__status {
-    margin-left: 32px;
+    //margin-left: 32px;
+    grid-area: status;
     padding: 5px 10px;
     display: block;
     font-family: $font-family--secondary;
