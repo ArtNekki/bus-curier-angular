@@ -58,6 +58,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { ReportComponent } from './components/report/report.component';
 import { LocationComponent } from './components/location/location.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { HelpBoxComponent } from './components/help-box/help-box.component';
 
 // import { ɵs } from '@ng-select/ng-select;
 
@@ -115,7 +116,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     OrderResultComponent,
     PaginationComponent,
     ReportComponent,
-    LoaderComponent
+    LoaderComponent,
+    HelpBoxComponent
   ],
   declarations: [
     BtnComponent,
@@ -153,7 +155,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     PaginationComponent,
     ReportComponent,
     LocationComponent,
-    LoaderComponent
+    LoaderComponent,
+    HelpBoxComponent
   ]
   // providers: [NgSelectConfig, ɵs],
 })

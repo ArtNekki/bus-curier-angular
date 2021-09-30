@@ -5,7 +5,7 @@
     <p class="page__subtitle">Вам доступна вся история движения посылки. Чтобы воспользоваться поиском, введите номер вашего заказа
       и нажмите кнопку “Найти посылку”.</p>
     <form class="order-search" [formGroup]="form" autocomplete="off" (ngSubmit)="onSubmit()">
-      <app-input type="text" [formControlName]="FormControlName.OrderNumber"></app-input>
+      <app-input type="text" [formControlName]="FormControlName.OrderNumber" placeholder="Введите номер вашего заказа"></app-input>
       <app-btn type="submit" mods="lg" [disabled]="!form.get(FormControlName.OrderNumber).value">Найти посылку</app-btn>
       <div class="order-search__meta">
         <span><sup>*</sup>6 символов</span>
@@ -21,7 +21,11 @@
     </div>
     <section class="page-section page-section--top-line">
       <h2 class="title title--md">Где найти номер заказа?</h2>
-      <app-img name="team" alt="Бланк" breakpoints='{"sm": true, "md": true, "lg": true}'></app-img>
+      <app-img name="track-order/order" alt="Бланк" breakpoints='{"sm": true, "md": true, "lg": true}'></app-img>
+    </section>
+    <section class="page-section page-section--top-line">
+      <h2 class="title title--md">Нужна помощь специалиста?</h2>
+      <app-help-box></app-help-box>
     </section>
   </div>
 </div>

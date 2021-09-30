@@ -1,0 +1,61 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.help-box {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 30px;
+  justify-content: start;
+
+  @include media-breakpoint-up(sm) {
+    margin-top: 34px;
+    grid-template-columns: repeat(2, auto);
+    grid-column-gap: 54px;
+    grid-row-gap: 0;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 24px auto;
+    grid-template-areas: ". label"
+                         "icon link";
+    grid-column-gap: 16px;
+    align-items: end;
+  }
+
+  &__item svg-icon {
+    margin-bottom: 7px;
+    grid-area: icon;
+  }
+
+  &__label {
+    grid-area: label;
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  &__link {
+    position: relative;
+    grid-area: link;
+    justify-self: start;
+    font-family: $font-family--secondary;
+    font-size: 26px;
+    line-height: 42px;
+    color: $font-color;
+    text-decoration: none;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      border-top: 1px dashed $gray-color--down-11;
+    }
+  }
+}
