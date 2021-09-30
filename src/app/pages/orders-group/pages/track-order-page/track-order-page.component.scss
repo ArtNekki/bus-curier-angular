@@ -6,16 +6,28 @@
 
 .order-search {
   display: grid;
-  grid-template-columns: 1fr 270px;
+  grid-template-columns: 1fr;
   grid-column-gap: 10px;
-  grid-row-gap: 15px;
+  grid-row-gap: 10px;
   //max-width: 670px;
 
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: 1fr 270px;
+    grid-row-gap: 15px;
+  }
+
   &__meta {
+    margin-bottom: 10px;
+    grid-row: 2 / 3;
     grid-column: 1 / -1;
     font-family: $font-family--secondary;
     font-size: 14px;
     line-height: 20px;
+
+    @include media-breakpoint-up(sm) {
+      margin-bottom: 0;
+      grid-row: auto;
+    }
 
     span {
       color: $gray-color--down-11;
