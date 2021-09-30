@@ -55,6 +55,10 @@
     }
   }
 
+  &--mgt-md {
+    margin-top: 50px;
+  }
+
   &--examples {
     @include media-breakpoint-up(lg) {
       margin-top: 12px;
