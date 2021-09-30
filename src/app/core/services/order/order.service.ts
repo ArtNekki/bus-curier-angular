@@ -11,10 +11,10 @@ export class OrderService {
               private endpoint: OrderEndpointService) { }
 
   getDetails(id) {
-    this.endpoint.getDetails(id);
+    return this.endpoint.getDetails(id);
   }
 
   getTracking(id) {
-    this.endpoint.getTracking(id);
+    return this.endpoint.getTracking(id);
   }
 }

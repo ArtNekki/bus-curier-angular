@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {OrderTracking} from '../../../../../../core/interfaces/order';
 
 @Component({
   selector: 'app-timeline',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./timeline.component.scss']
 })
 export class TimelineComponent implements OnInit {
+  @Input() data: Array<OrderTracking>;
+  @Input() number: string;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  formatDate(date) {
+    const datetime = date.split(' ');
+    return `${new Intl.DateTimeFormat('ru-Ru').format(new Date(datetime[0]))} ${datetime[1]}`;
   }
 
 }

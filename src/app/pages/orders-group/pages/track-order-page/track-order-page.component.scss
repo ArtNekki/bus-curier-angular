@@ -1,0 +1,23 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.order-search {
+  display: grid;
+  grid-template-columns: 1fr 270px;
+  grid-column-gap: 10px;
+  grid-row-gap: 15px;
+
+  &__meta {
+    grid-column: 1 / -1;
+    font-family: $font-family--secondary;
+    font-size: 14px;
+    line-height: 20px;
+
+    span {
+      color: $gray-color--down-11;
+    }
+  }
+}

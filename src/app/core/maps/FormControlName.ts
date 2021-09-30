@@ -92,5 +92,6 @@ export default {
   Delivery: 'delivery',
   CityFrom: 'city-from',
   CityTo: 'city-to',
-  Item: 'item'
+  Item: 'item',
+  OrderNumber: 'order-number'
 };

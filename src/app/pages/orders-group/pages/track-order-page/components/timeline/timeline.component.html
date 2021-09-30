@@ -1,37 +1,37 @@
 <ul class="timeline">
-  <li class="timeline__item">
-    <time class="timeline__meta timeline__meta--date">26.04.2020 08:14</time>
-    <div class="timeline__meta">Заказ №123456</div>
-    <div class="timeline__status timeline__status--yellow">Оформлен</div>
+  <li class="timeline__item" *ngFor="let item of data">
+    <time class="timeline__meta timeline__meta--date">{{formatDate(item.serverdate)}}</time>
+    <div class="timeline__meta">Заказ №{{number}}</div>
+    <div class="timeline__status timeline__status--yellow">{{item.lk_name}}</div>
   </li>
-  <li class="timeline__item">
-    <time class="timeline__meta timeline__meta--date">26.04.2020 08:14</time>
-    <div class="timeline__meta">Заказ №123456</div>
-    <div class="timeline__status timeline__status--yellow">Подготовлен к отправлению</div>
-  </li>
-  <li class="timeline__item">
-    <time class="timeline__meta timeline__meta--date">26.04.2020 08:14</time>
-    <div class="timeline__meta">Заказ №123456</div>
-    <div class="timeline__status timeline__status--yellow">Отправлен</div>
-  </li>
-  <li class="timeline__item">
-    <time class="timeline__meta timeline__meta--date">26.04.2020 08:14</time>
-    <div class="timeline__meta">Заказ №123456</div>
-    <div class="timeline__status timeline__status--blue">Доставлен</div>
-  </li>
-  <li class="timeline__item">
-    <time class="timeline__meta timeline__meta--date">26.04.2020 08:14</time>
-    <div class="timeline__meta">Заказ №123456</div>
-    <div class="timeline__status timeline__status--blue">Готов к выдаче</div>
-  </li>
-  <li class="timeline__item">
-    <time class="timeline__meta timeline__meta--date">26.04.2020 08:14</time>
-    <div class="timeline__meta">Заказ №123456</div>
-    <div class="timeline__status timeline__status--blue">Выдан</div>
-  </li>
-  <li class="timeline__item">
-    <time class="timeline__meta timeline__meta--date">26.04.2020 08:14</time>
-    <div class="timeline__meta">Заказ №123456</div>
-    <div class="timeline__status timeline__status--pink">Возврат</div>
-  </li>
+<!--  <li class="timeline__item">-->
+<!--    <time class="timeline__meta timeline__meta&#45;&#45;date">26.04.2020 08:14</time>-->
+<!--    <div class="timeline__meta">Заказ №123456</div>-->
+<!--    <div class="timeline__status timeline__status&#45;&#45;yellow">Подготовлен к отправлению</div>-->
+<!--  </li>-->
+<!--  <li class="timeline__item">-->
+<!--    <time class="timeline__meta timeline__meta&#45;&#45;date">26.04.2020 08:14</time>-->
+<!--    <div class="timeline__meta">Заказ №123456</div>-->
+<!--    <div class="timeline__status timeline__status&#45;&#45;yellow">Отправлен</div>-->
+<!--  </li>-->
+<!--  <li class="timeline__item">-->
+<!--    <time class="timeline__meta timeline__meta&#45;&#45;date">26.04.2020 08:14</time>-->
+<!--    <div class="timeline__meta">Заказ №123456</div>-->
+<!--    <div class="timeline__status timeline__status&#45;&#45;blue">Доставлен</div>-->
+<!--  </li>-->
+<!--  <li class="timeline__item">-->
+<!--    <time class="timeline__meta timeline__meta&#45;&#45;date">26.04.2020 08:14</time>-->
+<!--    <div class="timeline__meta">Заказ №123456</div>-->
+<!--    <div class="timeline__status timeline__status&#45;&#45;blue">Готов к выдаче</div>-->
+<!--  </li>-->
+<!--  <li class="timeline__item">-->
+<!--    <time class="timeline__meta timeline__meta&#45;&#45;date">26.04.2020 08:14</time>-->
+<!--    <div class="timeline__meta">Заказ №123456</div>-->
+<!--    <div class="timeline__status timeline__status&#45;&#45;blue">Выдан</div>-->
+<!--  </li>-->
+<!--  <li class="timeline__item">-->
+<!--    <time class="timeline__meta timeline__meta&#45;&#45;date">26.04.2020 08:14</time>-->
+<!--    <div class="timeline__meta">Заказ №123456</div>-->
+<!--    <div class="timeline__status timeline__status&#45;&#45;pink">Возврат</div>-->
+<!--  </li>-->
 </ul>

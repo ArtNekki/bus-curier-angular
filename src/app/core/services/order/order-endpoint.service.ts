@@ -17,12 +17,12 @@ export class OrderEndpointService  extends EndpointFactory {
   }
 
   getDetails<T>(id: string): Observable<T> {
-    return this.execute(this.http.get<T>(`${this.url}/getdetails/${id}/${environment.api_key}`, this.getRequestHeaders()),
+    return this.execute(this.http.get<T>(`${this.url}/getdetails/${environment.api_key}/${id}`, this.getRequestHeaders()),
       () => this.getDetails(id));
   }
 
   getTracking<T>(id: string): Observable<T> {
-    return this.execute(this.http.get<T>(`${this.url}/gettracking/${id}/${environment.api_key}`, this.getRequestHeaders()),
+    return this.execute(this.http.get<T>(`${this.url}/gettracking/${environment.api_key}/${id}`, this.getRequestHeaders()),
       () => this.getTracking(id));
   }
 }
