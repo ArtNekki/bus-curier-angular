@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ModsService} from '../../../core/services/mods.service';
+import {AgmMarker} from '@agm/core';
 
 @Component({
   selector: 'app-map',
@@ -27,4 +28,11 @@ export class MapComponent implements OnInit {
     this.cssClass = this.modsService.setMods('map', this.mods);
   }
 
+  mapClick($event: MouseEvent) {
+    console.log('map click', $event);
+  }
+
+  markerClick($event: AgmMarker) {
+    console.log('marker click', $event);
+  }
 }

@@ -1,27 +1,27 @@
 <article class="point-card">
   <app-preloader></app-preloader>
-  <button type="button" class="point-card__close" data-close-btn></button>
+  <button type="button" class="point-card__close"></button>
   <div class="point-card__back">
-    <app-btn mods="w-full" [attr.data-close-btn]>
+    <app-btn mods="w-full" (click)="close.emit()">
       <svg-icon class="icon" src="assets/img/svg/back.svg" width="24px" height="20px"></svg-icon>
       Назад
     </app-btn>
   </div>
-  <h1 class="point-card__title">Владивосток, Автовокзал</h1>
+  <h1 class="point-card__title">{{data.name}}</h1>
   <div class="point-card__contacts">
     <div class="point-card__contact">
-      <p class="point-card__text">Русская ул., 2а, ст. 3.</p>
-      <app-link [attr.data-zoom-id]="'point-1'" mods="lg, gray">Посмотреть на карте</app-link>
+      <p class="point-card__text">{{data.address}}</p>
+      <app-link (click)="showOnMap.emit(data.id)" mods="lg, gray">Посмотреть на карте</app-link>
       <svg-icon class="icon icon--gray" src="assets/img/svg/location-point.svg" width="16px" height="20px"></svg-icon>
     </div>
     <div class="point-card__contact">
       <p class="point-card__text point-card__text--gray">График работы:</p>
-      <p class="point-card__text">с 8:00 до 20:00, без выходных</p>
+      <p class="point-card__text">{{data.worktime}}</p>
       <svg-icon class="icon icon--gray" src="assets/img/svg/alarm-clock.svg" width="20px" height="20px"></svg-icon>
     </div>
     <div class="point-card__contact">
       <p class="point-card__text point-card__text--gray">Контакты для связи:</p>
-      <app-link href="tel: +7(423)2937879" mods="lg, no-underline"><b>+7 (423) 293 78 79</b>, доб. 0</app-link>
+      <app-link href="tel: {{data.phone}}" mods="lg, no-underline"><b>{{data.phone}}</b></app-link>
       <svg-icon class="icon icon--gray" src="assets/img/svg/union.svg" width="20px" height="20px"></svg-icon>
     </div>
     <div class="point-card__contact">

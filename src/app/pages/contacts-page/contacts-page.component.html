@@ -29,13 +29,12 @@
       </button>
     </div>
     <div class="page-contacts__select">
-      <app-select [items]="cities" mods="no-shadow"></app-select>
+      <app-select [items]="cities" (change)="setCurrentCity($event)" mods="no-shadow"></app-select>
     </div>
-
-    <div id="contactsListPanel" class="page-contacts__list">
-      <app-points-list></app-points-list>
+    <div class="page-contacts__list">
+      <app-points-list [offices]="filteredOffices" (change)="setCurrentOffice($event)"></app-points-list>
     </div>
-    <div id="contactsMapPanel" class="page-contacts__map">
+    <div class="page-contacts__map">
       <app-contacts-map></app-contacts-map>
     </div>
     <div class="page-contacts__feedback">
@@ -56,8 +55,8 @@
     <div class="page-contacts__toggle">
       Скрыть список
     </div>
-    <div class="page-contacts__details">
-      <app-point-card></app-point-card>
+    <div *ngIf="currentOffice" class="page-contacts__details">
+      <app-point-card [data]="currentOffice" (close)="closeCard()"></app-point-card>
     </div>
   </div>
 </div>
