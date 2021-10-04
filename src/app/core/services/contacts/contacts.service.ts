@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Office} from '../../interfaces/calculator';
 import {ContactsEndpointService} from './contacts-endpoint.service';
 
@@ -7,6 +7,7 @@ import {ContactsEndpointService} from './contacts-endpoint.service';
   providedIn: 'root'
 })
 export class ContactsService {
+  public currentPointCoords = new BehaviorSubject({lat: '', lng: '', zoom: ''});
 
   constructor(private endpoint: ContactsEndpointService) { }
 

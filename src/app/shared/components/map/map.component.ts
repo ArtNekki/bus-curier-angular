@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ModsService} from '../../../core/services/mods.service';
 import {AgmMarker} from '@agm/core';
 
@@ -9,7 +9,7 @@ import {AgmMarker} from '@agm/core';
 })
 export class MapComponent implements OnInit {
   @Input() mods;
-  @Input() markers: Array<any>;
+  @Input() points: Array<any>;
   @Input() latitude: string;
   @Input() longitude: string;
   @Input() zoom: string;
@@ -17,6 +17,7 @@ export class MapComponent implements OnInit {
   @Input() gestureHandling: boolean;
   @Input() scrollwheel: boolean;
   @Input() styles: any;
+  @Output() pointClick: EventEmitter<any> = new EventEmitter<any>();
 
   title = 'AGM project';
 
@@ -32,7 +33,7 @@ export class MapComponent implements OnInit {
     console.log('map click', $event);
   }
 
-  markerClick($event: AgmMarker) {
-    console.log('marker click', $event);
+  pointChange($event: AgmMarker) {
+    this.pointClick.emit($event.label);
   }
 }

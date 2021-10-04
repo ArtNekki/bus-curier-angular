@@ -35,7 +35,7 @@
       <app-points-list [offices]="filteredOffices" (change)="setCurrentOffice($event)"></app-points-list>
     </div>
     <div class="page-contacts__map">
-      <app-contacts-map></app-contacts-map>
+      <app-contacts-map [currentPointId]="currentPointId" [points]="filteredOffices" (pointClick)="setCurrentOffice($event)"></app-contacts-map>
     </div>
     <div class="page-contacts__feedback">
       <p>Единая справочная для всего Приморского края:</p>
@@ -56,7 +56,7 @@
       Скрыть список
     </div>
     <div *ngIf="currentOffice" class="page-contacts__details">
-      <app-point-card [data]="currentOffice" (close)="closeCard()"></app-point-card>
+      <app-point-card [data]="currentOffice" (close)="closeCard()" (showOnMap)="showPointOnMap($event)"></app-point-card>
     </div>
   </div>
 </div>

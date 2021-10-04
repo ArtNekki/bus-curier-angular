@@ -1,21 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-contacts-map',
   templateUrl: './contacts-map.component.html',
   styleUrls: ['./contacts-map.component.scss']
 })
-export class ContactsMapComponent implements OnInit {
-  public markers = [
-    { id: 'point-1', lat: 43.1488997, lng: 131.9090131 },
-    {id: 'point-2', lat: 43.1592569, lng: 131.9147171 }
-  ];
+export class ContactsMapComponent implements OnInit, OnChanges {
+  @Input() currentPointId: string;
+  @Input() points = [];
 
-  public mapZoom = 13;
+  @Output() pointClick: EventEmitter<any> = new EventEmitter<any>();
+
+  public currentPoint = null;
+  public mapZoom = 6;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.points && changes.points.currentValue) {
+      this.points = changes.points.currentValue;
+    }
+
+    if (changes.currentPointId && changes.currentPointId.currentValue) {
+      this.currentPointId =  changes.currentPointId && changes.currentPointId.currentValue;
+    }
+
+    if (this.points && this.currentPointId) {
+      this.currentPoint = this.points.filter((point) => point.id === this.currentPointId);
+      this.currentPoint = this.currentPoint.length ? this.currentPoint[0] : null;
+      this.mapZoom = 15;
+    }
   }
 
 }

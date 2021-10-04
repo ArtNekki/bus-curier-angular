@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {ContactsService} from '../../../../core/services/contacts/contacts.service';
 
 @Component({
   selector: 'app-point-card',
@@ -10,9 +11,10 @@ export class PointCardComponent implements OnInit {
   @Output() showOnMap: EventEmitter<any> = new EventEmitter<any>();
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(private contactsService: ContactsService) { }
 
   ngOnInit(): void {
-    console.log('data', this.data);
+
   }
+
 }

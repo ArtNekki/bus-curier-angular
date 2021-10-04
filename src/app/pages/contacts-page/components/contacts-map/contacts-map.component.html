@@ -6,10 +6,10 @@
     </button>
   </div>
   <div class="contacts-map__main">
-    <app-map
-      [markers]="markers"
-      [latitude]="markers[0].lat"
-      [longitude]="markers[0].lng"
+    <app-map *ngIf="points.length"
+      [points]="points"
+      [latitude]="(currentPoint && +currentPoint.geo_x) || +points[0].geo_x"
+      [longitude]="(currentPoint && +currentPoint.geo_y) || +points[0].geo_y"
       [zoom]="mapZoom"
       [disableDefaultUI]="false"
       [gestureHandling]="true"
@@ -19,6 +19,7 @@
         saturation: -100
       }]
     }]"
+     (pointClick)="pointClick.emit($event)"
     ></app-map>
   </div>
 </div>

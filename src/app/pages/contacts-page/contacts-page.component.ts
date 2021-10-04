@@ -15,6 +15,7 @@ export class ContactsPageComponent implements OnInit {
 
   public currentCityId = '';
   public currentOfficeId = '';
+  public currentPointId = '';
   public currentOffice = '';
 
   constructor(private contactsService: ContactsService) { }
@@ -64,6 +65,11 @@ export class ContactsPageComponent implements OnInit {
 
   closeCard() {
     console.log('dd');
+    this.currentOffice = null;
+  }
+
+  showPointOnMap(id: string) {
+    this.currentPointId = id;
     this.currentOffice = null;
   }
 }
