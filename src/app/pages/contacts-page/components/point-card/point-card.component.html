@@ -1,6 +1,7 @@
 <article class="point-card">
-<!--  <app-loader></app-loader>-->
-  <p *ngIf="!data">Loading...</p>
+  <div *ngIf="!data" style="grid-column: 1 / -1;grid-row: 1 / -1;height: inherit;display: flex;justify-content: center;align-items: center;">
+    <app-loader></app-loader>
+  </div>
   <ng-container *ngIf="data">
     <button type="button" class="point-card__close" (click)="close()"></button>
     <div class="point-card__back">
