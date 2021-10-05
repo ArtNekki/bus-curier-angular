@@ -10,26 +10,42 @@
         </li>
       </ul>
     </div>
-    <div class="page-contacts__switcher">
-      <button type="button" class="page-contacts__btn active" (click)="filterBy(null)">
-        <svg-icon class="icon" src="assets/img/svg/location.svg" width="15px" height="18px"></svg-icon>
-        <span>Все адреса</span>
-      </button>
-      <button type="button" class="page-contacts__btn" (click)="filterBy('pickup')">
-        <svg-icon class="icon" src="assets/img/svg/accept.svg" width="18px" height="18px"></svg-icon>
-        <span>Прием грузов</span>
-      </button>
-      <button type="button" class="page-contacts__btn" (click)="filterBy('delivery')">
-        <svg-icon class="icon" src="assets/img/svg/give.svg" width="18px" height="18px"></svg-icon>
-        <span>Выдача грузов</span>
-      </button>
-      <button type="button" class="page-contacts__btn">
-        <svg-icon class="icon" src="assets/img/svg/office.svg" width="18px" height="18px"></svg-icon>
-        <span>Офис</span>
-      </button>
+    <div class="page-contacts__filter">
+      <label class="page-contacts__action active">
+        <input type="radio" name="filter" hidden checked="checked" (change)="filterBy(null)">
+        <div>
+          <svg-icon class="icon" src="assets/img/svg/location.svg" width="15px" height="18px"></svg-icon>
+          <span>Все адреса</span>
+        </div>
+      </label>
+      <label class="page-contacts__action">
+        <input type="radio" name="filter" hidden (change)="filterBy('pickup')">
+        <div>
+          <svg-icon class="icon" src="assets/img/svg/accept.svg" width="18px" height="18px"></svg-icon>
+          <span>Прием грузов</span>
+        </div>
+      </label>
+      <label class="page-contacts__action">
+        <input type="radio" name="filter" hidden (change)="filterBy('delivery')">
+        <div>
+          <svg-icon class="icon" src="assets/img/svg/give.svg" width="18px" height="18px"></svg-icon>
+          <span>Выдача грузов</span>
+        </div>
+      </label>
+      <label class="page-contacts__action">
+        <input type="radio" name="filter" hidden (change)="filterBy('office')">
+        <div>
+          <svg-icon class="icon" src="assets/img/svg/office.svg" width="18px" height="18px"></svg-icon>
+          <span>Офис</span>
+        </div>
+      </label>
     </div>
     <div class="page-contacts__select">
-      <app-select [items]="cities" (change)="setCurrentCity($event)" mods="no-shadow"></app-select>
+      <app-select
+        [items]="cities"
+        [(ngModel)]="defaultSelectValue"
+        (change)="setCurrentCity($event)"
+        mods="no-shadow"></app-select>
     </div>
     <div class="page-contacts__list">
       <app-points-list></app-points-list>

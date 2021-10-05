@@ -29,7 +29,7 @@
     grid-template-rows: repeat(3, auto) 1fr auto;
     grid-template-areas:
       "tabs"
-      "switcher"
+      "filter"
       "select"
       "tab-content"
       "panel";
@@ -46,7 +46,7 @@
       grid-template-columns: 400px  1fr 25px 1fr 65px;
       grid-template-rows: repeat(2, auto) 450px;
       grid-template-areas:
-        "switcher . . panel panel"
+        "filter . . panel panel"
         "select . . panel panel"
         "list . . . .";
       grid-column-gap: 10px;
@@ -58,7 +58,7 @@
       padding-right: 0;
       padding-left: 0;
       grid-template-areas:
-        "switcher . panel panel panel"
+        "filter . panel panel panel"
         "select . panel panel panel"
         "list details details details .";
       box-sizing: content-box;
@@ -114,13 +114,13 @@
     }
   }
 
-  &__switcher {
+  &__filter {
     margin-top: 25px;
     margin-bottom: 20px;
     display: grid;
     grid-template-columns: repeat(4, auto);
     grid-column-gap: 3px;
-    grid-area: switcher;
+    grid-area: filter;
 
     @include moveContactPageInfoLeft;
 
@@ -129,7 +129,7 @@
     }
   }
 
-  &__btn {
+  &__action div {
     margin: 0;
     padding: 5px;
     height: 55px;
@@ -142,11 +142,6 @@
     border: 1px solid $gray-color;
     border-radius: $border-radius;
     cursor: pointer;
-
-    &.active {
-      background-color: $primary-color;
-      border-color: $primary-color;
-    }
 
     @include hover {
       border-color: $primary-color;
@@ -167,7 +162,12 @@
     }
   }
 
-  &__btn span {
+  &__action input:checked ~ div {
+    background-color: $primary-color;
+    border-color: $primary-color;
+  }
+
+  &__action span {
     margin-top: 5px;
     display: block;
     white-space: nowrap;
@@ -180,6 +180,7 @@
       font-size: 12px;
     }
   }
+
 
   &__select {
     margin-bottom: 25px;
