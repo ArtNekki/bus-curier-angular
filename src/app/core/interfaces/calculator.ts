@@ -36,6 +36,8 @@ export interface Office {
   give: string;
   delivery: string;
   pickup: string;
+  geo_x: string;
+  geo_y: string;
 }
 
 export interface Parcel {

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, Si
 import {ContactsService} from '../../../../core/services/contacts/contacts.service';
 import {delay, tap} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
+import {Office} from '../../../../core/interfaces/calculator';
 
 @Component({
   selector: 'app-point-card',
@@ -9,7 +10,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./point-card.component.scss']
 })
 export class PointCardComponent implements OnInit, OnDestroy {
-  public data: any = null;
+  public data: Office = null;
   private dataSub: Subscription;
 
   constructor(private contactsService: ContactsService) { }
@@ -20,7 +21,7 @@ export class PointCardComponent implements OnInit, OnDestroy {
         tap(() => this.data = null),
         delay(500)
       )
-      .subscribe((data) => {
+      .subscribe((data: Office) => {
         this.data = data;
       });
   }

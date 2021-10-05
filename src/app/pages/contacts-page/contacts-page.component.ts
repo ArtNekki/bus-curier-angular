@@ -3,6 +3,7 @@ import cities from '../../mock-data/cities';
 import {ContactsService} from '../../core/services/contacts/contacts.service';
 import {Select} from '../../core/interfaces/form';
 import {Subscription} from 'rxjs';
+import {Office} from '../../core/interfaces/calculator';
 
 @Component({
   selector: 'app-contacts-page',
@@ -10,14 +11,14 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./contacts-page.component.scss']
 })
 export class ContactsPageComponent implements OnInit, OnDestroy {
-  public cities = [];
-  public offices = [];
+  public cities: Select[] | Array<any> = [];
+  public offices: Office[] = [];
   public officesSub: Subscription;
 
   constructor(public contactsService: ContactsService) { }
 
   ngOnInit(): void {
-    this.contactsService.getOffices()
+    this.officesSub = this.contactsService.getOffices()
       .subscribe((data: any) => {
         this.offices = data.sort((a: any, b: any) => {
           return a.name.localeCompare(b.name);
@@ -40,14 +41,14 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
   }
 
   setCurrentCity(id: string) {
-    this.contactsService.offices$.next(this.offices.filter((office) => office.office_id === id));
+    this.contactsService.offices$.next(this.offices.filter((office: Office) => office.office_id === id));
   }
 
   filterBy(type: string) {
     if (!type) {
       this.contactsService.offices$.next(this.offices);
     } else {
-      this.contactsService.offices$.next(this.offices.filter((office) => +office[type]));
+      this.contactsService.offices$.next(this.offices.filter((office: Office) => +office[type]));
     }
   }
 
