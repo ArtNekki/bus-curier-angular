@@ -20,6 +20,13 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
   private filteredOffices: Office[] = [];
   public officesSub: Subscription;
 
+  public Filter = {
+    All: null,
+    Pickup: 'pickup',
+    Delivery: 'delivery',
+    Office: 'office'
+  };
+
   constructor(public contactsService: ContactsService) { }
 
   ngOnInit(): void {
@@ -45,7 +52,7 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
           return a.name.localeCompare(b.name);
         });
 
-        this.cities = [{value: '', name: 'Все офисы'}, ...this.cities];
+        this.cities = [{value: '', name: 'Все города'}, ...this.cities];
 
         setTimeout(() => {
           this.cityControl.setValue(this.cities[0].value);
@@ -59,6 +66,7 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
         this.contactsService.offices$.next(this.filteredOffices);
 
         this.filterBy(this.currentFilterType);
+        this.contactsService.currentOffice$.next(null);
       });
   }
 
@@ -67,15 +75,16 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
     this.filteredOffices = this.cityControl.value
       ? this.offices.filter((office: Office) => office.office_id === this.cityControl.value) : this.offices;
 
-    if (type === 'office') {
+    if (type === this.Filter.Office) {
       this.filteredOffices = this.filteredOffices.filter((office: Office) => office.id === '1');
-    } else if (type && type !== 'office') {
+    } else if (type && type !== this.Filter.Office) {
       this.filteredOffices
         = this.filteredOffices.filter((office: Office) => +office[type]);
     }
 
     this.contactsService.offices$
       .next(this.filteredOffices);
+    this.contactsService.currentOffice$.next(null);
   }
 
   ngOnDestroy(): void {

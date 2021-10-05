@@ -12,28 +12,28 @@
     </div>
     <div class="page-contacts__filter">
       <label class="page-contacts__action active">
-        <input type="radio" name="filter" hidden checked="checked" (change)="filterBy(null)">
+        <input type="radio" name="filter" hidden checked="checked" (change)="filterBy(Filter.All)">
         <div>
           <svg-icon class="icon" src="assets/img/svg/location.svg" width="15px" height="18px"></svg-icon>
           <span>Все адреса</span>
         </div>
       </label>
       <label class="page-contacts__action">
-        <input type="radio" name="filter" hidden (change)="filterBy('pickup')">
+        <input type="radio" name="filter" hidden (change)="filterBy(Filter.Pickup)">
         <div>
           <svg-icon class="icon" src="assets/img/svg/accept.svg" width="18px" height="18px"></svg-icon>
           <span>Прием грузов</span>
         </div>
       </label>
       <label class="page-contacts__action">
-        <input type="radio" name="filter" hidden (change)="filterBy('delivery')">
+        <input type="radio" name="filter" hidden (change)="filterBy(Filter.Delivery)">
         <div>
           <svg-icon class="icon" src="assets/img/svg/give.svg" width="18px" height="18px"></svg-icon>
           <span>Выдача грузов</span>
         </div>
       </label>
       <label class="page-contacts__action">
-        <input type="radio" name="filter" hidden (change)="filterBy('office')">
+        <input type="radio" name="filter" hidden (change)="filterBy(Filter.Office)">
         <div>
           <svg-icon class="icon" src="assets/img/svg/office.svg" width="18px" height="18px"></svg-icon>
           <span>Офис</span>
