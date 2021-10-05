@@ -1,9 +1,9 @@
-<div id="contactsPage" class="page-contacts">
+<div class="page-contacts">
   <div class="page-contacts__main">
     <div class="tabs tabs--contacts">
       <ul class="tabs__nav">
         <li class="tabs__item">
-          <a  href="#contactsMapPanel" role="tab">На карте</a>
+          <a role="tab">На карте</a>
         </li>
         <li class="tabs__item">
           <a  data-tabby-default href="#contactsListPanel" role="tab">Списком</a>
@@ -35,7 +35,7 @@
       <app-points-list></app-points-list>
     </div>
     <div class="page-contacts__map">
-      <app-contacts-map (pointClick)="setCurrentOffice($event)"></app-contacts-map>
+      <app-contacts-map></app-contacts-map>
     </div>
     <div class="page-contacts__feedback">
       <p>Единая справочная для всего Приморского края:</p>

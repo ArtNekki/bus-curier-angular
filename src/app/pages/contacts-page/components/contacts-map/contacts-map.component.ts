@@ -1,25 +1,28 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ContactsService} from '../../../../core/services/contacts/contacts.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-contacts-map',
   templateUrl: './contacts-map.component.html',
   styleUrls: ['./contacts-map.component.scss']
 })
-export class ContactsMapComponent implements OnInit {
+export class ContactsMapComponent implements OnInit, OnDestroy {
   public points = [];
   public currentPoint = null;
+  private pointsSub: Subscription;
+  private currentOfficeIdSub: Subscription;
   public mapZoom = 6;
 
   constructor(private contactsService: ContactsService) { }
 
   ngOnInit(): void {
-    this.contactsService.offices$
+    this.pointsSub = this.contactsService.offices$
       .subscribe((offices) => {
         this.points = offices;
       });
 
-    this.contactsService.currentOfficeId$
+    this.currentOfficeIdSub = this.contactsService.currentOfficeId$
       .subscribe((id: string) => {
         if (id) {
           this.currentPoint = this.points.filter((point) => point.id === id);
@@ -32,5 +35,10 @@ export class ContactsMapComponent implements OnInit {
   pointClick(id: string) {
     const arr = this.points.filter((point) => point.id === id);
     this.contactsService.currentOffice$.next(arr.length ? arr[0] : null);
+  }
+
+  ngOnDestroy(): void {
+    this.pointsSub.unsubscribe();
+    this.currentOfficeIdSub.unsubscribe();
   }
 }

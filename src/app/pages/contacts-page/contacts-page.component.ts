@@ -1,22 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import cities from '../../mock-data/cities';
 import {ContactsService} from '../../core/services/contacts/contacts.service';
 import {Select} from '../../core/interfaces/form';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-contacts-page',
   templateUrl: './contacts-page.component.html',
   styleUrls: ['./contacts-page.component.scss']
 })
-export class ContactsPageComponent implements OnInit {
+export class ContactsPageComponent implements OnInit, OnDestroy {
   public cities = [];
   public offices = [];
-  public filteredOffices = [];
-
-  public currentCityId = '';
-  public currentOfficeId = '';
-  public currentPointId = '';
-  public currentOffice = '';
+  public officesSub: Subscription;
 
   constructor(public contactsService: ContactsService) { }
 
@@ -27,8 +23,7 @@ export class ContactsPageComponent implements OnInit {
           return a.name.localeCompare(b.name);
         });
 
-        this.filteredOffices = this.offices;
-        this.contactsService.offices$.next(this.filteredOffices);
+        this.contactsService.offices$.next(this.offices);
 
         this.cities = [...new Set(data.map(el => el.office_id))]
           .map((id) => {
@@ -41,37 +36,11 @@ export class ContactsPageComponent implements OnInit {
         this.cities = this.cities.sort((a: Select, b: Select) => {
           return a.name.localeCompare(b.name);
         });
-
-        console.log('this.offices', this.cities);
       });
   }
 
   setCurrentCity(id: string) {
-    this.currentCityId = id;
     this.contactsService.offices$.next(this.offices.filter((office) => office.office_id === id));
-  }
-
-  setCurrentOffice(id: string) {
-    this.currentOfficeId = id;
-    this.currentOffice = this.getOfficeData(id);
-  }
-
-  getOfficeData(id) {
-    const data = this.offices.filter((office) => {
-      return office.id === id;
-    });
-
-    return data.length ? data[0] : null;
-  }
-
-  closeCard() {
-    console.log('dd');
-    // this.currentOffice = null;
-  }
-
-  showPointOnMap(id: string) {
-    this.currentPointId = id;
-    this.currentOffice = null;
   }
 
   filterBy(type: string) {
@@ -80,5 +49,9 @@ export class ContactsPageComponent implements OnInit {
     } else {
       this.contactsService.offices$.next(this.offices.filter((office) => +office[type]));
     }
+  }
+
+  ngOnDestroy(): void {
+    this.officesSub.unsubscribe();
   }
 }
