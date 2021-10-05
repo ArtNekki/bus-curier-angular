@@ -43,8 +43,7 @@
     <div class="page-contacts__select">
       <app-select
         [items]="cities"
-        [(ngModel)]="defaultSelectValue"
-        (change)="setCurrentCity($event)"
+        [formControl]="cityControl"
         mods="no-shadow"></app-select>
     </div>
     <div class="page-contacts__list">

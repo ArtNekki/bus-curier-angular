@@ -4,6 +4,7 @@ import {ContactsService} from '../../core/services/contacts/contacts.service';
 import {Select} from '../../core/interfaces/form';
 import {Subscription} from 'rxjs';
 import {Office} from '../../core/interfaces/calculator';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-contacts-page',
@@ -11,17 +12,19 @@ import {Office} from '../../core/interfaces/calculator';
   styleUrls: ['./contacts-page.component.scss']
 })
 export class ContactsPageComponent implements OnInit, OnDestroy {
+  public cityControl: FormControl;
+  private cityControlSub: Subscription;
   public cities: Select[] | Array<any> = [];
-  private currentCityId = null;
   private currentFilterType = null;
   public offices: Office[] = [];
   private filteredOffices: Office[] = [];
-  public defaultSelectValue = '';
   public officesSub: Subscription;
 
   constructor(public contactsService: ContactsService) { }
 
   ngOnInit(): void {
+    this.cityControl = new FormControl('');
+
     this.officesSub = this.contactsService.getOffices()
       .subscribe((data: any) => {
         this.offices = data.sort((a: any, b: any) => {
@@ -43,22 +46,26 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
         });
 
         this.cities = [{value: '', name: 'Все офисы'}, ...this.cities];
-        this.defaultSelectValue = this.cities[0];
+
+        setTimeout(() => {
+          this.cityControl.setValue(this.cities[0].value);
+        }, 0);
       });
-  }
 
-  setCurrentCity(id: string) {
-    this.currentCityId = id;
-    this.filteredOffices = id ? this.offices.filter((office: Office) => office.office_id === id) : this.offices;
-    this.contactsService.offices$.next(this.filteredOffices);
+    this.cityControlSub = this.cityControl.valueChanges
+      .subscribe((id: string) => {
+        this.filteredOffices = id
+          ? this.offices.filter((office: Office) => office.office_id === id) : this.offices;
+        this.contactsService.offices$.next(this.filteredOffices);
 
-    this.filterBy(this.currentFilterType);
+        this.filterBy(this.currentFilterType);
+      });
   }
 
   filterBy(type: string) {
     this.currentFilterType = type;
-    this.filteredOffices = this.currentCityId
-      ? this.offices.filter((office: Office) => office.office_id === this.currentCityId) : this.offices;
+    this.filteredOffices = this.cityControl.value
+      ? this.offices.filter((office: Office) => office.office_id === this.cityControl.value) : this.offices;
 
     if (type === 'office') {
       this.filteredOffices = this.filteredOffices.filter((office: Office) => office.id === '1');
@@ -73,5 +80,6 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.officesSub.unsubscribe();
+    this.cityControlSub.unsubscribe();
   }
 }
