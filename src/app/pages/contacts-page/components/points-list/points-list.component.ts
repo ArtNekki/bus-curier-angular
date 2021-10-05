@@ -12,17 +12,25 @@ import {Office} from '../../../../core/interfaces/calculator';
 export class PointsListComponent implements OnInit, OnDestroy {
   public offices: Office[];
   private officesSub: Subscription;
+  public isLoading = false;
 
   constructor(private contactsService: ContactsService) { }
 
   ngOnInit(): void {
     this.officesSub = this.contactsService.offices$
       .pipe(
-        tap(() => this.offices = []),
+        tap(() => {
+          this.isLoading = true;
+          this.offices = [];
+        }),
         delay(1000)
       )
       .subscribe((offices: Office[]) => {
         this.offices = offices;
+
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 0);
       });
   }
 

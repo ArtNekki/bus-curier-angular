@@ -1,7 +1,9 @@
 <div class="points-list">
-<!--  <app-loader *ngIf="!offices.length"></app-loader>-->
-  <p *ngIf="!offices.length">Loading...</p>
-  <ul *ngIf="offices.length" class="points-list__scroll">
+  <div *ngIf="!offices.length && isLoading" style="height: inherit;display: flex;justify-content: center;align-items: center;">
+    <app-loader *ngIf="!offices.length"></app-loader>
+  </div>
+  <p *ngIf="!offices.length && !isLoading">Нет данных</p>
+  <ul *ngIf="offices.length && !isLoading" class="points-list__scroll">
     <li *ngFor="let office of offices" class="points-list__item">
       <app-link href="#" mods="blue, lg" (click)="changeOffice(office.id)">{{ office.name }}</app-link>
       <button class="points-list__action" [class.points-list__action--selected]="+office.pickup" data-tippy-content="Прием грузов">
