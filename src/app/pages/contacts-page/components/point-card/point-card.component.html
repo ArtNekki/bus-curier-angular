@@ -1,45 +1,48 @@
 <article class="point-card">
-  <app-preloader></app-preloader>
-  <button type="button" class="point-card__close" (click)="close.emit(true)"></button>
-  <div class="point-card__back">
-    <app-btn mods="w-full">
-      <svg-icon class="icon" src="assets/img/svg/back.svg" width="24px" height="20px"></svg-icon>
-      Назад
-    </app-btn>
-  </div>
-  <h1 class="point-card__title">{{data.name}}</h1>
-  <div class="point-card__contacts">
-    <div class="point-card__contact">
-      <p class="point-card__text">{{data.address}}</p>
-      <app-link (click)="showOnMap.emit(data.id)" mods="lg, gray">Посмотреть на карте</app-link>
-      <svg-icon class="icon icon--gray" src="assets/img/svg/location-point.svg" width="16px" height="20px"></svg-icon>
+<!--  <app-loader></app-loader>-->
+  <p *ngIf="!data">Loading...</p>
+  <ng-container *ngIf="data">
+    <button type="button" class="point-card__close" (click)="close()"></button>
+    <div class="point-card__back">
+      <app-btn mods="w-full">
+        <svg-icon class="icon" src="assets/img/svg/back.svg" width="24px" height="20px"></svg-icon>
+        Назад
+      </app-btn>
     </div>
-    <div class="point-card__contact">
-      <p class="point-card__text point-card__text--gray">График работы:</p>
-      <p class="point-card__text">{{data.worktime}}</p>
-      <svg-icon class="icon icon--gray" src="assets/img/svg/alarm-clock.svg" width="20px" height="20px"></svg-icon>
+    <h1 class="point-card__title">{{data.name}}</h1>
+    <div class="point-card__contacts">
+      <div class="point-card__contact">
+        <p class="point-card__text">{{data.address}}</p>
+        <app-link (click)="showOnMap(data.id);" mods="lg, gray">Посмотреть на карте</app-link>
+        <svg-icon class="icon icon--gray" src="assets/img/svg/location-point.svg" width="16px" height="20px"></svg-icon>
+      </div>
+      <div class="point-card__contact">
+        <p class="point-card__text point-card__text--gray">График работы:</p>
+        <p class="point-card__text">{{data.worktime}}</p>
+        <svg-icon class="icon icon--gray" src="assets/img/svg/alarm-clock.svg" width="20px" height="20px"></svg-icon>
+      </div>
+      <div class="point-card__contact">
+        <p class="point-card__text point-card__text--gray">Контакты для связи:</p>
+        <app-link href="tel: {{data.phone}}" mods="lg, no-underline"><b>{{data.phone}}</b></app-link>
+        <svg-icon class="icon icon--gray" src="assets/img/svg/union.svg" width="20px" height="20px"></svg-icon>
+      </div>
+      <div class="point-card__contact">
+        <p class="point-card__text point-card__text--gray">Почта отделения:</p>
+        <app-link href="malto: inbox@busbox.guru" mods="lg, blue, no-underline">inbox@busbox.guru</app-link>
+        <svg-icon class="icon icon--blue" src="assets/img/svg/email.svg" width="19px" height="16px"></svg-icon>
+      </div>
     </div>
-    <div class="point-card__contact">
-      <p class="point-card__text point-card__text--gray">Контакты для связи:</p>
-      <app-link href="tel: {{data.phone}}" mods="lg, no-underline"><b>{{data.phone}}</b></app-link>
-      <svg-icon class="icon icon--gray" src="assets/img/svg/union.svg" width="20px" height="20px"></svg-icon>
+    <div class="point-card__info">
+      <img class="point-card__img"
+           src="assets/img/content/index/example-slide.png"
+           srcset="assets/img/content/index/example-slide@2x.png 2x, assets/img/content/index/example-slide@3x.png 3x">
+      <p class="point-card__text point-card__text--sm">За содержимое грузов и документов (далее — отправление) несет ответственность лицо, являющееся Отправителем.</p>
     </div>
-    <div class="point-card__contact">
-      <p class="point-card__text point-card__text--gray">Почта отделения:</p>
-      <app-link href="malto: inbox@busbox.guru" mods="lg, blue, no-underline">inbox@busbox.guru</app-link>
-      <svg-icon class="icon icon--blue" src="assets/img/svg/email.svg" width="19px" height="16px"></svg-icon>
+    <div class="point-card__back">
+      <app-btn mods="w-full" [attr.data-close-btn]>
+        <svg-icon class="icon" src="assets/img/svg/back.svg" width="24px" height="20px"></svg-icon>
+        Назад
+      </app-btn>
     </div>
-  </div>
-  <div class="point-card__info">
-    <img class="point-card__img"
-         src="assets/img/content/index/example-slide.png"
-         srcset="assets/img/content/index/example-slide@2x.png 2x, assets/img/content/index/example-slide@3x.png 3x">
-    <p class="point-card__text point-card__text--sm">За содержимое грузов и документов (далее — отправление) несет ответственность лицо, являющееся Отправителем.</p>
-  </div>
-  <div class="point-card__back">
-    <app-btn mods="w-full" [attr.data-close-btn]>
-      <svg-icon class="icon" src="assets/img/svg/back.svg" width="24px" height="20px"></svg-icon>
-      Назад
-    </app-btn>
-  </div>
+  </ng-container>
 </article>

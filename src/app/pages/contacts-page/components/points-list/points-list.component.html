@@ -1,6 +1,7 @@
 <div class="points-list">
-  <app-preloader></app-preloader>
-  <ul class="points-list__scroll">
+<!--  <app-loader *ngIf="!offices.length"></app-loader>-->
+  <p *ngIf="!offices.length">Loading...</p>
+  <ul *ngIf="offices.length" class="points-list__scroll">
     <li *ngFor="let office of offices" class="points-list__item">
       <app-link href="#" mods="blue, lg" (click)="changeOffice(office.id)">{{ office.name }}</app-link>
       <button class="points-list__action" [class.points-list__action--selected]="+office.pickup" data-tippy-content="Прием грузов">

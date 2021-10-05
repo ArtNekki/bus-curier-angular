@@ -18,7 +18,7 @@ export class ContactsPageComponent implements OnInit {
   public currentPointId = '';
   public currentOffice = '';
 
-  constructor(private contactsService: ContactsService) { }
+  constructor(public contactsService: ContactsService) { }
 
   ngOnInit(): void {
     this.contactsService.getOffices()
@@ -28,6 +28,7 @@ export class ContactsPageComponent implements OnInit {
         });
 
         this.filteredOffices = this.offices;
+        this.contactsService.offices$.next(this.filteredOffices);
 
         this.cities = [...new Set(data.map(el => el.office_id))]
           .map((id) => {
@@ -47,7 +48,7 @@ export class ContactsPageComponent implements OnInit {
 
   setCurrentCity(id: string) {
     this.currentCityId = id;
-    this.filteredOffices = this.offices.filter((office) => office.office_id === id);
+    this.contactsService.offices$.next(this.offices.filter((office) => office.office_id === id));
   }
 
   setCurrentOffice(id: string) {
@@ -65,7 +66,7 @@ export class ContactsPageComponent implements OnInit {
 
   closeCard() {
     console.log('dd');
-    this.currentOffice = null;
+    // this.currentOffice = null;
   }
 
   showPointOnMap(id: string) {
@@ -75,9 +76,9 @@ export class ContactsPageComponent implements OnInit {
 
   filterBy(type: string) {
     if (!type) {
-      this.filteredOffices = this.offices;
+      this.contactsService.offices$.next(this.offices);
     } else {
-      this.filteredOffices = this.offices.filter((office) => +office[type]);
+      this.contactsService.offices$.next(this.offices.filter((office) => +office[type]));
     }
   }
 }

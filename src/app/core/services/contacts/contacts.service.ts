@@ -7,6 +7,9 @@ import {ContactsEndpointService} from './contacts-endpoint.service';
   providedIn: 'root'
 })
 export class ContactsService {
+  public offices$ = new BehaviorSubject<Array<any>>([]);
+  public currentOfficeId$ = new BehaviorSubject('');
+  public currentOffice$ = new BehaviorSubject(null);
   public currentPointCoords = new BehaviorSubject({lat: '', lng: '', zoom: ''});
 
   constructor(private endpoint: ContactsEndpointService) { }
