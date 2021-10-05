@@ -1,8 +1,8 @@
 <article class="point-card">
   <app-preloader></app-preloader>
-  <button type="button" class="point-card__close"></button>
+  <button type="button" class="point-card__close" (click)="close.emit(true)"></button>
   <div class="point-card__back">
-    <app-btn mods="w-full" (click)="close.emit(true)">
+    <app-btn mods="w-full">
       <svg-icon class="icon" src="assets/img/svg/back.svg" width="24px" height="20px"></svg-icon>
       Назад
     </app-btn>

@@ -11,15 +11,15 @@
       </ul>
     </div>
     <div class="page-contacts__switcher">
-      <button type="button" class="page-contacts__btn active">
+      <button type="button" class="page-contacts__btn active" (click)="filterBy(null)">
         <svg-icon class="icon" src="assets/img/svg/location.svg" width="15px" height="18px"></svg-icon>
         <span>Все адреса</span>
       </button>
-      <button type="button" class="page-contacts__btn">
+      <button type="button" class="page-contacts__btn" (click)="filterBy('pickup')">
         <svg-icon class="icon" src="assets/img/svg/accept.svg" width="18px" height="18px"></svg-icon>
         <span>Прием грузов</span>
       </button>
-      <button type="button" class="page-contacts__btn">
+      <button type="button" class="page-contacts__btn" (click)="filterBy('delivery')">
         <svg-icon class="icon" src="assets/img/svg/give.svg" width="18px" height="18px"></svg-icon>
         <span>Выдача грузов</span>
       </button>

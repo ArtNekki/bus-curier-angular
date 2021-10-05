@@ -3,10 +3,10 @@
   <ul class="points-list__scroll">
     <li *ngFor="let office of offices" class="points-list__item">
       <app-link href="#" mods="blue, lg" (click)="changeOffice(office.id)">{{ office.name }}</app-link>
-      <button class="points-list__action" data-tippy-content="Прием грузов">
+      <button class="points-list__action" [class.points-list__action--selected]="+office.pickup" data-tippy-content="Прием грузов">
         <svg-icon class="icon" src="assets/img/svg/give.svg" width="18px" height="18px"></svg-icon>
       </button>
-      <button class="points-list__action" data-tippy-content="Выдача грузов">
+      <button class="points-list__action" [class.points-list__action--selected]="+office.delivery" data-tippy-content="Выдача грузов">
         <svg-icon class="icon" src="assets/img/svg/accept.svg" width="18px" height="18px"></svg-icon>
       </button>
       <button class="points-list__action" data-tippy-content="Офис">

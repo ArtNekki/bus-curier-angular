@@ -72,4 +72,12 @@ export class ContactsPageComponent implements OnInit {
     this.currentPointId = id;
     this.currentOffice = null;
   }
+
+  filterBy(type: string) {
+    if (!type) {
+      this.filteredOffices = this.offices;
+    } else {
+      this.filteredOffices = this.offices.filter((office) => +office[type]);
+    }
+  }
 }
