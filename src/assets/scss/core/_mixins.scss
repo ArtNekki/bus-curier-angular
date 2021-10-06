@@ -328,7 +328,7 @@
 
     @include media-breakpoint-only(xs) {
       transform: translateX(calc(-100% - #{$container-padding-x} * 2));
-      position: absolute;
+      //position: absolute;
     }
   }
 }

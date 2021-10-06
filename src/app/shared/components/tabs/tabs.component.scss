@@ -8,8 +8,6 @@
   $tabs-nav-space: 4px;
   $tab-nav-border-height: 2px;
 
-  grid-area: tabs;
-
   &__nav {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

@@ -1,4 +1,4 @@
-<div class="tabs">
+<div class="tabs tabs--contacts">
   <div class="tabs__nav">
     <label *ngFor="let tab of tabs" class="tabs__item">
       <input type="radio" name="name" hidden [checked]="tab.checked" (change)="this.onChange.emit(tab.type)">

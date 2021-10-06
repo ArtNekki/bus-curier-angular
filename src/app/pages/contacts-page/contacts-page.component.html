@@ -1,10 +1,14 @@
-<div class="page-contacts">
+<div class="page-contacts"
+     [class.page-contacts--details]="contactsService.currentOffice$ | async"
+     [class.page-contacts--map-panel]="currentTab === Tab.Map" >
   <div class="page-contacts__main">
-    <app-tabs
-      name="contacts"
-      [tabs]="tabs"
-      (onChange)="setCurrentTab($event)"
-    ></app-tabs>
+    <div class="page-contacts__tabs">
+      <app-tabs
+        name="contacts"
+        [tabs]="tabs"
+        (onChange)="setCurrentTab($event)"
+      ></app-tabs>
+    </div>
     <div class="page-contacts__filter">
       <label class="page-contacts__action active">
         <input type="radio" name="filter" hidden checked="checked" (change)="filterBy(Filter.All)">
@@ -65,7 +69,7 @@
     <div class="page-contacts__toggle">
       Скрыть список
     </div>
-    <div *ngIf="contactsService.currentOffice$ | async" class="page-contacts__details">
+    <div class="page-contacts__details">
       <app-point-card></app-point-card>
     </div>
   </div>

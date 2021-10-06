@@ -19,7 +19,7 @@ export class PointCardComponent implements OnInit, OnDestroy {
     this.dataSub = this.contactsService.currentOffice$
       .pipe(
         tap(() => this.data = null),
-        delay(500)
+        // delay(500)
       )
       .subscribe((data: Office) => {
         this.data = data;

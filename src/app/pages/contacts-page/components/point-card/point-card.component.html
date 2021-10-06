@@ -1,11 +1,11 @@
 <article class="point-card">
-  <div *ngIf="!data" style="grid-column: 1 / -1;grid-row: 1 / -1;height: inherit;display: flex;justify-content: center;align-items: center;">
-    <app-loader></app-loader>
-  </div>
+<!--  <div *ngIf="!data" style="grid-column: 1 / -1;grid-row: 1 / -1;height: inherit;display: flex;justify-content: center;align-items: center;">-->
+<!--    <app-loader></app-loader>-->
+<!--  </div>-->
   <ng-container *ngIf="data">
     <button type="button" class="point-card__close" (click)="close()"></button>
     <div class="point-card__back">
-      <app-btn mods="w-full">
+      <app-btn mods="w-full, back" (click)="close()">
         <svg-icon class="icon" src="assets/img/svg/back.svg" width="24px" height="20px"></svg-icon>
         Назад
       </app-btn>
@@ -40,7 +40,7 @@
       <p class="point-card__text point-card__text--sm">За содержимое грузов и документов (далее — отправление) несет ответственность лицо, являющееся Отправителем.</p>
     </div>
     <div class="point-card__back">
-      <app-btn mods="w-full" [attr.data-close-btn]>
+      <app-btn mods="w-full, back" (click)="close()">
         <svg-icon class="icon" src="assets/img/svg/back.svg" width="24px" height="20px"></svg-icon>
         Назад
       </app-btn>
