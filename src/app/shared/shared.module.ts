@@ -44,10 +44,6 @@ import {environment} from '../../environments/environment';
 import { InputComponent } from './components/input/input.component';
 import { SupportFormComponent } from './components/support-form/support-form.component';
 import { TabsComponent } from './components/tabs/tabs.component';
-import { TabItemComponent } from './components/tabs/tab-item/tab-item.component';
-import { TabLabelComponent } from './components/tabs/tab-label/tab-label.component';
-import { TabBodyComponent } from './components/tabs/tab-body/tab-body.component';
-import {TabsModule} from './components/tabs/tabs.module';
 import { TagComponent } from './components/tag/tag.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { RadioGroupComponent } from './components/radio-group/radio-group.component';
@@ -75,8 +71,7 @@ import { HelpBoxComponent } from './components/help-box/help-box.component';
       apiKey: environment.firebaseConfig.apiKey,
       libraries: ['places']
     }),
-    NgxMaskModule.forRoot(options),
-    TabsModule
+    NgxMaskModule.forRoot(options)
     // DeviceDetectorModule.forRoot(),
   ],
   exports: [
@@ -85,7 +80,6 @@ import { HelpBoxComponent } from './components/help-box/help-box.component';
     AngularSvgIconModule,
     FormsModule,
     ReactiveFormsModule,
-    TabsModule,
     BtnComponent,
     SelectComponent,
     CheckboxComponent,
@@ -117,7 +111,8 @@ import { HelpBoxComponent } from './components/help-box/help-box.component';
     PaginationComponent,
     ReportComponent,
     LoaderComponent,
-    HelpBoxComponent
+    HelpBoxComponent,
+    TabsComponent
   ],
   declarations: [
     BtnComponent,
@@ -156,7 +151,8 @@ import { HelpBoxComponent } from './components/help-box/help-box.component';
     ReportComponent,
     LocationComponent,
     LoaderComponent,
-    HelpBoxComponent
+    HelpBoxComponent,
+    TabsComponent
   ]
   // providers: [NgSelectConfig, ɵs],
 })

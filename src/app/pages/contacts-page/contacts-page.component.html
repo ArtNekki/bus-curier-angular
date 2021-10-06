@@ -1,15 +1,10 @@
 <div class="page-contacts">
   <div class="page-contacts__main">
-    <div class="tabs tabs--contacts">
-      <ul class="tabs__nav">
-        <li class="tabs__item">
-          <a role="tab">На карте</a>
-        </li>
-        <li class="tabs__item">
-          <a  data-tabby-default href="#contactsListPanel" role="tab">Списком</a>
-        </li>
-      </ul>
-    </div>
+    <app-tabs
+      name="contacts"
+      [tabs]="tabs"
+      (onChange)="setCurrentTab($event)"
+    ></app-tabs>
     <div class="page-contacts__filter">
       <label class="page-contacts__action active">
         <input type="radio" name="filter" hidden checked="checked" (change)="filterBy(Filter.All)">
@@ -46,10 +41,10 @@
         [formControl]="cityControl"
         mods="no-shadow"></app-select>
     </div>
-    <div class="page-contacts__list">
+    <div *ngIf="currentTab === Tab.List" class="page-contacts__list">
       <app-points-list></app-points-list>
     </div>
-    <div class="page-contacts__map">
+    <div *ngIf="currentTab === Tab.Map" class="page-contacts__map">
       <app-contacts-map></app-contacts-map>
     </div>
     <div class="page-contacts__feedback">

@@ -19,6 +19,12 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
   public offices: Office[] = [];
   private filteredOffices: Office[] = [];
   public officesSub: Subscription;
+  public currentTab = '';
+
+  public Tab = {
+    Map: 'map',
+    List: 'list'
+  };
 
   public Filter = {
     All: null,
@@ -26,6 +32,9 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
     Delivery: 'delivery',
     Office: 'office'
   };
+
+  public tabs = [{type: this.Tab.Map, name: 'На карте', checked: true },
+    {type: this.Tab.List, name: 'Списком'}];
 
   constructor(public contactsService: ContactsService) { }
 
@@ -68,6 +77,8 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
         this.filterBy(this.currentFilterType);
         this.contactsService.currentOffice$.next(null);
       });
+
+    this.currentTab = this.tabs.filter((tab) => tab.checked)[0].type;
   }
 
   filterBy(type: string) {
@@ -90,5 +101,9 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.officesSub.unsubscribe();
     this.cityControlSub.unsubscribe();
+  }
+
+  setCurrentTab(type: string) {
+    this.currentTab = type;
   }
 }
