@@ -2,7 +2,7 @@
      [class.page-contacts--details]="contactsService.currentOffice$ | async"
      [class.page-contacts--map-panel]="currentTab === Tab.Map" >
   <div class="page-contacts__main">
-    <div class="page-contacts__tabs">
+    <div *ngIf="!isBreakpointMatched" class="page-contacts__tabs">
       <app-tabs
         name="contacts"
         [tabs]="tabs"
@@ -45,10 +45,10 @@
         [formControl]="cityControl"
         mods="no-shadow"></app-select>
     </div>
-    <div *ngIf="currentTab === Tab.List" class="page-contacts__list">
+    <div *ngIf="((currentTab === Tab.List) && !isBreakpointMatched) || isBreakpointMatched" class="page-contacts__list">
       <app-points-list></app-points-list>
     </div>
-    <div *ngIf="currentTab === Tab.Map" class="page-contacts__map">
+    <div *ngIf="((currentTab === Tab.Map) && !isBreakpointMatched) || isBreakpointMatched" class="page-contacts__map">
       <app-contacts-map></app-contacts-map>
     </div>
     <div class="page-contacts__feedback">

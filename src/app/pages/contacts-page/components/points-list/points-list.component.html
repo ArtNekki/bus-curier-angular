@@ -2,7 +2,7 @@
   <div *ngIf="!offices.length && isLoading" style="height: inherit;display: flex;justify-content: center;align-items: center;">
     <app-loader *ngIf="!offices.length"></app-loader>
   </div>
-  <p *ngIf="!offices.length && !isLoading">Нет данных</p>
+  <p *ngIf="!offices.length && !isLoading" class="points-list__empty">Нет данных...</p>
   <ul *ngIf="offices.length && !isLoading" class="points-list__scroll">
     <li *ngFor="let office of offices" class="points-list__item">
       <app-link href="#" mods="blue, lg" (click)="changeOffice(office.id)">{{ office.name }}</app-link>

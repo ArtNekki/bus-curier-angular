@@ -277,6 +277,7 @@
     height: 100%;
     //height: 100vh;
     grid-area: tab-content;
+    background-color: #dedede;
 
     @include moveContactPageInfoLeft;
 

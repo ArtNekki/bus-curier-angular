@@ -1,10 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import cities from '../../mock-data/cities';
 import {ContactsService} from '../../core/services/contacts/contacts.service';
 import {Select} from '../../core/interfaces/form';
 import {Subscription} from 'rxjs';
 import {Office} from '../../core/interfaces/calculator';
 import {FormControl} from '@angular/forms';
+import {AlertModalComponent} from '../../modals/alert-modal/alert-modal.component';
+import {delay, take} from 'rxjs/operators';
+import {SimpleModalService} from 'ngx-simple-modal';
 
 @Component({
   selector: 'app-contacts-page',
@@ -20,6 +23,7 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
   private filteredOffices: Office[] = [];
   public officesSub: Subscription;
   public currentTab = '';
+  public isBreakpointMatched = false;
 
   public Tab = {
     Map: 'map',
@@ -36,7 +40,9 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
   public tabs = [{type: this.Tab.Map, name: 'На карте', checked: true },
     {type: this.Tab.List, name: 'Списком'}];
 
-  constructor(public contactsService: ContactsService) { }
+  constructor(
+    public contactsService: ContactsService,
+    private simpleModal: SimpleModalService) { }
 
   ngOnInit(): void {
     this.cityControl = new FormControl('');
@@ -79,6 +85,7 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
       });
 
     this.currentTab = this.tabs.filter((tab) => tab.checked)[0].type;
+    this.isBreakpointMatched =  window.matchMedia(`(min-width: 768px)`).matches;
   }
 
   filterBy(type: string) {
@@ -93,6 +100,10 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
         = this.filteredOffices.filter((office: Office) => +office[type]);
     }
 
+    if (!this.filteredOffices.length && !this.isBreakpointMatched && this.currentTab === this.Tab.Map) {
+      this.alert();
+    }
+
     this.contactsService.offices$
       .next(this.filteredOffices);
     this.contactsService.currentOffice$.next(null);
@@ -105,5 +116,27 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
 
   setCurrentTab(type: string) {
     this.currentTab = type;
+
+    if (!this.filteredOffices.length && !this.isBreakpointMatched && this.currentTab === this.Tab.Map) {
+      this.alert();
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+
+  resize() {
+    this.isBreakpointMatched =  window.matchMedia(`(min-width: 768px)`).matches;
+
+    // if (!this.filteredOffices.length && !this.isBreakpointMatched) {
+    //   this.alert();
+    // }
+  }
+
+  alert() {
+    this.simpleModal.addModal(AlertModalComponent, {
+      message: 'Нет данных'
+    }).pipe(
+      take(1)
+    ).subscribe(() => {});
   }
 }

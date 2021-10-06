@@ -54,4 +54,12 @@
       text-transform: lowercase;
     }
   }
+
+  &__empty {
+    font-family: $font-family--secondary;
+    font-size: 14px;
+    line-height: 20px;
+    color: $gray-dark-color;
+    text-align: center;
+  }
 }
