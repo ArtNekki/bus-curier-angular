@@ -27,7 +27,7 @@
     (mapClick)="mapClick($event)"
   >
     <agm-marker *ngFor="let point of points"
-      [label]="point.id"
+      [title]="point.id"
       [latitude]="point.geo_x"
       [longitude]="point.geo_y"
       iconUrl="assets/img/svg/map-point.svg"

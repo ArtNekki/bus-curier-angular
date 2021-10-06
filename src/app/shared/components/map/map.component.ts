@@ -34,6 +34,6 @@ export class MapComponent implements OnInit {
   }
 
   pointChange($event: AgmMarker) {
-    this.pointClick.emit($event.label);
+    this.pointClick.emit($event.title);
   }
 }
