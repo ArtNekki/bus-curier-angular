@@ -22,7 +22,7 @@ export class PointCardComponent implements OnInit, OnDestroy {
         // delay(500)
       )
       .subscribe((data: Office) => {
-        this.data = data;
+        this.data = Object.assign({}, data);
       });
   }
 
