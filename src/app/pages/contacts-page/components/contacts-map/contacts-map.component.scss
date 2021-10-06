@@ -64,14 +64,16 @@
   }
 
   &__full {
-    @include btn-default();
+    width: 25px;
+    height: 25px;
 
+    @include btn-default();
     @include map-full-mode {
       display: none;
     }
   }
 
-  &__full svg {
+  ::ng-deep &__full svg {
     fill: rgba($black-color, 0.6);
 
     &:hover {

@@ -375,7 +375,7 @@
 
 
 @mixin map-full-mode() {
-  .page--full-map & {
+  ::ng-deep .page--full-mode & {
     @include media-breakpoint-down(md) {
       @content;
     }

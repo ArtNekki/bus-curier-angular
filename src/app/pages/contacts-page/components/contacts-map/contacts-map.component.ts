@@ -42,4 +42,14 @@ export class ContactsMapComponent implements OnInit, OnDestroy {
     this.pointsSub.unsubscribe();
     this.currentOfficeIdSub.unsubscribe();
   }
+
+  toggleFullMode(show) {
+    if (show) {
+      document.documentElement.classList.add('page--full-mode');
+      this.mapZoom = 7;
+    } else {
+      document.documentElement.classList.remove('page--full-mode');
+      this.mapZoom = 6;
+    }
+  }
 }

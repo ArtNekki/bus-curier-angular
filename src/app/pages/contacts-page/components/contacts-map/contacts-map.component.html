@@ -1,9 +1,9 @@
 <div class="contacts-map">
   <div class="contacts-map__header">
-    <button type="button" class="contacts-map__close"></button>
-<!--    <button type="button" class="contacts-map__full" data-full-mode>-->
-<!--      <svg-icon class="icon" src="assets/img/svg/full-screen.svg" width="25px" height="25px"></svg-icon>-->
-<!--    </button>-->
+    <button type="button" class="contacts-map__close" (click)="toggleFullMode(false)"></button>
+    <button type="button" class="contacts-map__full" (click)="toggleFullMode(true)">
+      <svg-icon class="icon" src="assets/img/svg/full-screen.svg" width="25px" height="25px"></svg-icon>
+    </button>
   </div>
   <div class="contacts-map__main">
     <app-map *ngIf="points.length"
