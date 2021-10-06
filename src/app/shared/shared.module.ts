@@ -55,6 +55,7 @@ import { ReportComponent } from './components/report/report.component';
 import { LocationComponent } from './components/location/location.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { HelpBoxComponent } from './components/help-box/help-box.component';
+import {NgxTippyModule} from 'ngx-tippy-wrapper';
 
 // import { ɵs } from '@ng-select/ng-select;
 
@@ -71,13 +72,15 @@ import { HelpBoxComponent } from './components/help-box/help-box.component';
       apiKey: environment.firebaseConfig.apiKey,
       libraries: ['places']
     }),
-    NgxMaskModule.forRoot(options)
+    NgxMaskModule.forRoot(options),
+    NgxTippyModule
     // DeviceDetectorModule.forRoot(),
   ],
   exports: [
     CommonModule,
     HttpClientModule,
     AngularSvgIconModule,
+    NgxTippyModule,
     FormsModule,
     ReactiveFormsModule,
     BtnComponent,

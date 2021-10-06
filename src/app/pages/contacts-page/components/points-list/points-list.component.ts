@@ -3,6 +3,7 @@ import {ContactsService} from '../../../../core/services/contacts/contacts.servi
 import {delay, tap} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {Office} from '../../../../core/interfaces/calculator';
+import {NgxTippyProps} from 'ngx-tippy-wrapper';
 
 @Component({
   selector: 'app-points-list',
@@ -13,6 +14,10 @@ export class PointsListComponent implements OnInit, OnDestroy {
   public offices: Office[];
   private officesSub: Subscription;
   public isLoading = false;
+  public tippyProps: NgxTippyProps = {
+    theme: 'light',
+    placement: 'bottom'
+  };
 
   constructor(private contactsService: ContactsService) { }
 
