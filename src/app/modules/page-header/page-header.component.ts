@@ -30,8 +30,6 @@ export class PageHeaderComponent implements OnInit, AfterViewInit {
   }
 
   setStickyMenu() {
-    console.log('fffff', this.header.nativeElement.getBoundingClientRect().top);
-
     if ((this.header.nativeElement.getBoundingClientRect().top < -5) && !this.isSticky) { // -30
       this.isSticky = true;
       document.body.style.paddingTop = '70px';

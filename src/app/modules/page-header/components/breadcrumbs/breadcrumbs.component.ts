@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {filter} from 'rxjs/operators';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Subject} from 'rxjs';
+import {UtilsService} from '../../../../core/services/utils.service';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -13,7 +14,11 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
   breadcrumbs: Array<object>;
   unsubscribeAll = new Subject();
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private utils: UtilsService
+    ) {}
 
   ngOnInit(): void {
     this.router.events.pipe(
@@ -41,13 +46,16 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
           const routeData = Object.assign({}, route.snapshot.data);
 
-          this.breadcrumbs.push({
-            isStub: typeof routeSnapshot.component === 'undefined',
-            label: routeData,
-            url
-          });
+          if (this.utils.getObjectKey(routeData).length) {
+            this.breadcrumbs.push({
+              isStub: typeof routeSnapshot.component === 'undefined',
+              label: routeData,
+              url
+            });
+          }
 
-          console.log('this.breadcrumbs', this.breadcrumbs);
+          console.log('breadcrumbs', this.breadcrumbs);
+
           currentRoute = route;
         }
       });

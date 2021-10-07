@@ -1,4 +1,4 @@
-<div class="breadcrumbs">
+<div *ngIf="breadcrumbs.length > 1" class="breadcrumbs">
   <ul class="breadcrumbs__list">
     <ng-template ngFor let-breadcrumb [ngForOf]="breadcrumbs" let-last = last>
       <li class="breadcrumbs__item" [class.breadcrumbs__item--active]="last"
