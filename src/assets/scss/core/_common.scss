@@ -10,6 +10,10 @@ body {
 
 body {
   touch-action: pan-x pan-y;
+
+  //@include header-sticky(xs) {
+  //  padding-top: 70px;
+  //}
 }
 
 p {

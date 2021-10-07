@@ -22,6 +22,7 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
   public offices: Office[] = [];
   private filteredOffices: Office[] = [];
   public officesSub: Subscription;
+  private currentOfficeSub: Subscription;
   public currentTab = '';
   public isBreakpointMatched = false;
 
@@ -74,6 +75,13 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
         }, 0);
       });
 
+    this.currentOfficeSub = this.contactsService.currentOffice$
+      .subscribe((office: Office) => {
+        if (office) {
+          this.scrollToTop();
+        }
+      });
+
     this.cityControlSub = this.cityControl.valueChanges
       .subscribe((id: string) => {
         this.filteredOffices = id
@@ -111,6 +119,7 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.officesSub.unsubscribe();
+    this.currentOfficeSub.unsubscribe();
     this.cityControlSub.unsubscribe();
   }
 
@@ -138,5 +147,12 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
     }).pipe(
       take(1)
     ).subscribe(() => {});
+  }
+
+  scrollToTop() {
+    window.scrollTo({
+      top: 5,
+      behavior: this.isBreakpointMatched ? 'smooth' : 'auto'
+    });
   }
 }
