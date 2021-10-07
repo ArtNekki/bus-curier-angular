@@ -68,6 +68,11 @@
     @include active-map-panel(sm) {
       height: 100vh;
     }
+
+    //@include map-full-mode {
+    //  padding-right: 0;
+    //  padding-left: 0;
+    //}
   }
 
   &__tabs {
@@ -141,7 +146,7 @@
   &__action div {
     margin: 0;
     padding: 5px;
-    height: 55px;
+    height: 49px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -274,7 +279,7 @@
 
   &__map {
     position: relative;
-    height: 100%;
+    height: inherit;
     //height: 100vh;
     grid-area: tab-content;
     background-color: #dedede;
@@ -287,6 +292,8 @@
       left: 0;
       bottom: 0;
       right: 0;
+      z-index: 10;
+      display: -webkit-box;
     }
 
     @include media-breakpoint-up(md) {
