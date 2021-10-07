@@ -49,12 +49,12 @@ export class CalculatorService {
     return this.endpoint.getResult(cityFromId, cityToId, typeId, services, weight, dim);
   }
 
-  calculateTotalSum({cityFromId, cityToId, orders}) {
+  calculateTotalSum({cityFromId, cityToId, courierFromId, courierToId, orders}) {
     const arr = [];
     const ordersCount = orders.length;
 
     orders.forEach((order) => {
-      arr.push(this.calculateOrderSum(cityFromId, cityToId, order));
+      arr.push(this.calculateOrderSum(cityFromId, cityToId, courierFromId, courierToId, order));
     });
 
     return zip(...arr)
@@ -76,7 +76,7 @@ export class CalculatorService {
       );
   }
 
-  calculateOrderSum(cityFromId, cityToId, order): Observable<TotalSum> {
+  calculateOrderSum(cityFromId, cityToId, courierFromId, courierToId, order): Observable<TotalSum> {
     let cargoId = order.activeCargo;
     let result = null;
     let places = 0;
@@ -97,8 +97,9 @@ export class CalculatorService {
       places = cargo.counter;
     }
 
-    console.log('placeCount', places);
-    const servicesId = this.getServicesId(order);
+    let servicesId = this.getServicesId(order);
+    servicesId = [courierToId, courierFromId, ...servicesId]
+      .filter((id) => id);
 
     if (cargoId === Cargo.Parcels) {
       result = this.getParcelsSum(cityFromId, cityToId, cargoId, servicesId, cargo);
