@@ -78,7 +78,11 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
 
     const services = [...new Set(arr.map((service: Service) => service.id))]
       .map((id: string) => {
-        return arr.find((service: Service) => service.id === id);
+        const obj = arr.find((service: Service) => service.id === id);
+
+        return Object.assign({}, obj, {
+          name: obj.id === this.Service.INSURANCE ? 'Страхование' : obj.name
+        });
       });
 
     services.filter((item: Service) => item.group_id === '3')
