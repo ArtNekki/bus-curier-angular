@@ -41,6 +41,14 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
   public activeCheckboxId: string;
   public formattedData = {};
 
+  Service = {
+    SMS: '66',
+    EXT_SMS: '65',
+    INSURANCE_15: '58',
+    INSURANCE_30: '59',
+    INSURANCE: 'insurance'
+  };
+
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService) {
     super();
@@ -62,7 +70,18 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
   }
 
   setServices(arr: Array<Service>) {
-    arr.filter((item: Service) => item.group_id === '3')
+    arr.map((service: Service) => {
+      if (service.id === this.Service.INSURANCE_15 || service.id === this.Service.INSURANCE_30) {
+        service.id = 'insurance';
+      }
+    });
+
+    const services = [...new Set(arr.map((service: Service) => service.id))]
+      .map((id: string) => {
+        return arr.find((service: Service) => service.id === id);
+      });
+
+    services.filter((item: Service) => item.group_id === '3')
       .forEach((item: Service) => {
         this.formattedData[item.id] = {
           name: item.name,
@@ -71,29 +90,24 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
           price: item.price
         };
 
-        if (this.checkSms(item.name)) {
-          this.items.push(new FormGroup({
-            [item.id]: new FormControl(''),
-            [FormControlName.Tel]: new FormControl('', {updateOn: 'blur'})
-          }));
-        } else if (this.checkInsurance(item.name)) {
-          this.items.push(new FormGroup({
-            [item.id]: new FormControl(''),
-            [FormControlName.Sum]: new FormControl('', {updateOn: 'blur'})
-          }));
+        switch (item.id) {
+          case this.Service.SMS:
+          case this.Service.EXT_SMS:
+            this.items.push(new FormGroup({
+              [item.id]: new FormControl(''),
+              [FormControlName.Tel]: new FormControl('', {updateOn: 'blur'})
+            }));
+            break;
+          case this.Service.INSURANCE:
+            this.items.push(new FormGroup({
+              ['insurance']: new FormControl(''),
+              [FormControlName.Sum]: new FormControl('', {updateOn: 'blur'})
+            }));
         }});
   }
 
   public get items(): FormArray {
     return this.formGroup.get('items') as FormArray;
-  }
-
-  checkSms(name: string) {
-    return name.indexOf('СМС') !== -1;
-  }
-
-  checkInsurance(name: string) {
-    return name.indexOf('Страхование') !== -1;
   }
 
   getCheckbox(i: number, arr: any) {
