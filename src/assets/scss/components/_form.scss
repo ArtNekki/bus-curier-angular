@@ -968,4 +968,12 @@
     padding: 5px;
     background-color: $white-color;
   }
+
+  &__meta {
+    margin-top: 5px;
+    font-family: $font-family--secondary;
+    font-size: 12px;
+    line-height: 16px;
+    color: $gray-dark-color;
+  }
 }

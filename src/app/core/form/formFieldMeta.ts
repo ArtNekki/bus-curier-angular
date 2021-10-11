@@ -45,7 +45,7 @@ export default {
   [FormControlName.Sum]: {
     label: 'Сумма',
     type: 'text',
-    mask: '',
+    mask: 'separator.2',
     prefix: ''
   },
   [FormControlName.Street]: {

@@ -49,6 +49,14 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
     INSURANCE: 'insurance'
   };
 
+  public Insurance = {
+    LIMIT_MIN: 15000,
+    PRICE_MIN: 50,
+    PRICE_MAX: 100
+  };
+
+  public insuranceSum = this.Insurance.PRICE_MIN;
+
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService) {
     super();
@@ -70,6 +78,7 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
   }
 
   setServices(arr: Array<Service>) {
+
     arr.map((service: Service) => {
       if (service.id === this.Service.INSURANCE_15 || service.id === this.Service.INSURANCE_30) {
         service.id = 'insurance';
@@ -103,10 +112,22 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
             }));
             break;
           case this.Service.INSURANCE:
-            this.items.push(new FormGroup({
+            const insurance = new FormGroup({
               ['insurance']: new FormControl(''),
-              [FormControlName.Sum]: new FormControl('', {updateOn: 'blur'})
-            }));
+              [FormControlName.Sum]: new FormControl('')
+            });
+
+            this.items.push(insurance);
+
+            insurance.valueChanges.subscribe((data) => {
+              const sum = +data.sum.split(' ').join('');
+
+              if (sum > this.Insurance.LIMIT_MIN) {
+                this.insuranceSum = this.Insurance.PRICE_MAX;
+              } else {
+                this.insuranceSum = this.Insurance.PRICE_MIN;
+              }
+            });
         }});
   }
 

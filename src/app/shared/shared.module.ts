@@ -18,7 +18,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 export let options: Partial<IConfig> = {
   validation: true,
   dropSpecialCharacters: false,
-  showMaskTyped: true
+  showMaskTyped: false
 };
 
 // import {DeviceDetectorModule} from 'ngx-device-detector';

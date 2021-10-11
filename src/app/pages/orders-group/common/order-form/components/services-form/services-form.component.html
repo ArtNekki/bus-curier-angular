@@ -16,6 +16,9 @@
                 [mask]="FormFieldMeta[control.key].mask"
                 [prefix]="FormFieldMeta[control.key].prefix"
               ></app-input>
+              <ng-container *ngIf="control.key === FormControlName.Sum">
+                <div class="form__meta">Стоимость страхования: {{insuranceSum | currency: 'RUB':'symbol-narrow':'1.0':'ru'}}</div>
+              </ng-container>
             </dd>
           </ng-container>
           <ng-template #checkbox>
