@@ -53,6 +53,7 @@
           </div>
           <ng-container *ngIf="order.services && formatServices(order.services).length">
             <ng-container *ngFor="let service of formatServices(order.services)">
+              {{service | json}}
               <p class="gray">{{service.name}}</p>
               <p><b class="lg">{{service.price}} руб.</b></p>
             </ng-container>

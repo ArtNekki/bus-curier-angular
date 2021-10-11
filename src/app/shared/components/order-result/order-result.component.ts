@@ -33,6 +33,20 @@ export class OrderResultComponent implements OnInit, OnChanges {
   public services = {};
   public cities = {};
 
+  Service = {
+    SMS: '66',
+    EXT_SMS: '65',
+    INSURANCE_15: '58',
+    INSURANCE_30: '59',
+    INSURANCE: 'insurance'
+  };
+
+  public Insurance = {
+    LIMIT_MIN: 15000,
+    PRICE_MIN: 50,
+    PRICE_MAX: 100
+  };
+
   constructor(
     public formUtils: FormUtilsService,
     public utils: UtilsService,
@@ -111,13 +125,17 @@ export class OrderResultComponent implements OnInit, OnChanges {
     const list = services.items.map((obj) => {
       const selected = Object.values(obj)[0];
       const id = Object.keys(obj)[0];
-      const value = Object.values(obj)[1];
+      const value: string | any = Object.values(obj)[1];
+
+      const formattedId = id === 'insurance'
+        ? value.split(' ').join('') >= this.Insurance.LIMIT_MIN
+          ? this.Service.INSURANCE_30 : this.Service.INSURANCE_15 : id;
 
       return selected ? {
-        id,
+        id: formattedId,
         value,
-        name: this.services[id].name,
-        price: this.services[id].price,
+        name: this.services[formattedId].name,
+        price: this.services[formattedId].price,
       } : null;
     })
       .filter((item) => item);
