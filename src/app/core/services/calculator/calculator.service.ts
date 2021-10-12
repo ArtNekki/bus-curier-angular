@@ -18,6 +18,20 @@ interface TotalSum {
 export class CalculatorService {
   public courierDelivery$ = new BehaviorSubject('');
 
+  Service = {
+    SMS: '66',
+    EXT_SMS: '65',
+    INSURANCE_15: '58',
+    INSURANCE_30: '59',
+    INSURANCE: 'insurance'
+  };
+
+  public Insurance = {
+    LIMIT_MIN: 15000,
+    PRICE_MIN: 50,
+    PRICE_MAX: 100
+  };
+
   constructor(private http: HttpClient,
               private endpoint: CalculatorEndpointService) { }
 
@@ -223,7 +237,14 @@ export class CalculatorService {
 
     const servicesIds = services
       .map((obj) => {
-        return Object.entries(obj)[0][1] ?  Object.entries(obj)[0][0] : null;
+        const id = Object.entries(obj)[0][0];
+        const checked = Object.entries(obj)[0][1];
+
+        const formattedId = (id === 'insurance' && obj.sum)
+          ? obj.sum.split(' ').join('') >= this.Insurance.LIMIT_MIN
+            ? this.Service.INSURANCE_30 : this.Service.INSURANCE_15 : id;
+
+        return checked ?  formattedId : null;
       })
       .filter((id) => id);
 
