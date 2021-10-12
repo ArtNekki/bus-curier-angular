@@ -6,6 +6,7 @@ import {FormUtilsService} from '../../../core/services/form-utils.service';
 import {UtilsService} from '../../../core/services/utils.service';
 import {LocalStorageService} from '../../../core/services/local-storage.service';
 import {Cargo, OptionName, PackageName} from '../../../core/maps/order';
+import {Parcel} from '../../../core/interfaces/calculator';
 
 @Component({
   selector: 'app-order-result',
@@ -154,7 +155,12 @@ export class OrderResultComponent implements OnInit, OnChanges {
   }
 
   formatDepartureOption(data) {
+    const price = 300;
     const options = data[FormControlName.DeparturePoint].options;
+
+    const allPlacesCount = this.calcAllCargosPlacesCount(data.orders.orders);
+    console.log('allPlacesCount', allPlacesCount);
+
     return {
       type: options.active,
       price: ''
@@ -167,5 +173,28 @@ export class OrderResultComponent implements OnInit, OnChanges {
       type: options.active,
       price: ''
     };
+  }
+
+  calcAllCargosPlacesCount(orders) {
+    const allPlacesCount = orders.reduce((sum, order) => {
+      return sum + this.calcCargoPlaces(order.cargo);
+    }, 0);
+
+    return orders.length + allPlacesCount;
+  }
+
+  calcCargoPlaces(cargo) {
+    return Object.values(cargo).reduce((sum, value: Parcel[] | any) => {
+      const count = value ? value.length ? this.calcParcelPlaces(value) : value.counter : 0;
+      return sum + count;
+    }, 0);
+  }
+
+  calcParcelPlaces(cargo: Parcel[]) {
+    if (!cargo) {
+      return 0;
+    }
+
+    return cargo.reduce((sum, obj) => sum + +obj['place-count'], 0);
   }
 }
