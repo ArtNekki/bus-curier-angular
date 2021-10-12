@@ -155,15 +155,22 @@ export class OrderResultComponent implements OnInit, OnChanges {
   }
 
   formatDepartureOption(data) {
+    const FREE_PLACES = 5;
+
     const price = 300;
+    const bonus = 50;
+    const orders = data.orders.orders;
+
     const options = data[FormControlName.DeparturePoint].options;
 
-    const allPlacesCount = this.calcAllCargosPlacesCount(data.orders.orders);
-    console.log('allPlacesCount', allPlacesCount);
+    const allPlacesCount = orders.length + this.calcAllCargosPlacesCount(orders);
+    const extraPlacesSum = allPlacesCount > FREE_PLACES ? (allPlacesCount - FREE_PLACES) * bonus : 0;
+
+    console.log('extraPlaceSum', extraPlacesSum);
 
     return {
       type: options.active,
-      price: ''
+      price: price + extraPlacesSum
     };
   }
 
@@ -180,7 +187,7 @@ export class OrderResultComponent implements OnInit, OnChanges {
       return sum + this.calcCargoPlaces(order.cargo);
     }, 0);
 
-    return orders.length + allPlacesCount;
+    return allPlacesCount;
   }
 
   calcCargoPlaces(cargo) {

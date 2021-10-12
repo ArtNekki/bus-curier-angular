@@ -11,7 +11,7 @@
         </ng-container>
         <ng-container *ngIf="formatDepartureOption(currentData)">
           <p class="gray">Забор посылки у отправителя - <span style="color: #000000">{{OptionName[formatDepartureOption(currentData).type]}}</span></p>
-<!--          <p><b class="lg">{{formatDepartureOption(currentData).price}} руб.</b></p>-->
+          <p><b class="lg">{{formatDepartureOption(currentData).price}} руб.</b></p>
         </ng-container>
         <ng-container *ngIf="formatPickupOption(currentData)">
           <p class="gray">Доставка посылки до получателя - <span style="color: #000000">{{OptionName[formatPickupOption(currentData).type]}}</span></p>
