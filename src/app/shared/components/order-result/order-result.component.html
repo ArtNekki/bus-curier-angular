@@ -53,8 +53,11 @@
           </div>
           <ng-container *ngIf="order.services && formatServices(order.services).length">
             <ng-container *ngFor="let service of formatServices(order.services)">
-              {{service | json}}
-              <p class="gray">{{service.name}}</p>
+<!--              <p class="gray">{{service.id === Service.INSURANCE_15 || service.id === Service.INSURANCE_30-->
+<!--                ? 'Страхование на сумму ' + (service.value.split(' ').join('') | currency: 'RUB':'symbol-narrow':'1.0':'ru')-->
+<!--                :  service.name}}</p>-->
+              <p class="gray">{{service.id === Service.INSURANCE_15 || service.id === Service.INSURANCE_30
+                ? 'Страхование на сумму ' + service.value + ' руб.' :  service.name}}</p>
               <p><b class="lg">{{service.price}} руб.</b></p>
             </ng-container>
           </ng-container>
