@@ -48,6 +48,11 @@ export class OrderResultComponent implements OnInit, OnChanges {
     PRICE_MAX: 100
   };
 
+  private Courier = {
+    pickup: '1',
+    delivery: '2'
+  };
+
   constructor(
     public formUtils: FormUtilsService,
     public utils: UtilsService,
@@ -157,20 +162,27 @@ export class OrderResultComponent implements OnInit, OnChanges {
   formatDepartureOption(data) {
     const FREE_PLACES = 5;
 
-    const price = 300;
-    const bonus = 50;
+    const extraPrice = 50;
     const orders = data.orders.orders;
 
     const options = data[FormControlName.DeparturePoint].options;
+    const courier = this.Courier[options.active];
+    let courierData = null;
 
-    const allPlacesCount = orders.length + this.calcAllCargosPlacesCount(orders);
-    const extraPlacesSum = allPlacesCount > FREE_PLACES ? (allPlacesCount - FREE_PLACES) * bonus : 0;
+    if (courier) {
+      courierData = this.services[courier];
+    }
 
-    console.log('extraPlaceSum', extraPlacesSum);
+    console.log('courierData', courierData);
+
+    const allPlacesCount = this.calcAllCargosPlacesCount(orders);
+    const extraPlacesSum = allPlacesCount > FREE_PLACES ? (allPlacesCount - FREE_PLACES) * extraPrice : 0;
+
+    // console.log('extraPlaceSum', extraPlacesSum);
 
     return {
       type: options.active,
-      price: price + extraPlacesSum
+      price: courierData ? +courierData.price + extraPlacesSum : 0
     };
   }
 
