@@ -159,14 +159,14 @@ export class OrderResultComponent implements OnInit, OnChanges {
     return this.cities[id] ? this.cities[id].name : '';
   }
 
-  formatDepartureOption(data) {
+  calcCourierPrice(data, type) {
     const FREE_PLACES = 5;
-
     const extraPrice = 50;
     const orders = data.orders.orders;
 
-    const options = data[FormControlName.DeparturePoint].options;
+    const options = data[type].options;
     const courier = this.Courier[options.active];
+
     let courierData = null;
 
     if (courier) {
@@ -176,22 +176,9 @@ export class OrderResultComponent implements OnInit, OnChanges {
     console.log('courierData', courierData);
 
     const allPlacesCount = this.calcAllCargosPlacesCount(orders);
-    const extraPlacesSum = allPlacesCount > FREE_PLACES ? (allPlacesCount - FREE_PLACES) * extraPrice : 0;
+    const extraTotalSum = allPlacesCount > FREE_PLACES ? (allPlacesCount - FREE_PLACES) * extraPrice : 0;
 
-    // console.log('extraPlaceSum', extraPlacesSum);
-
-    return {
-      type: options.active,
-      price: courierData ? +courierData.price + extraPlacesSum : 0
-    };
-  }
-
-  formatPickupOption(data) {
-    const options = data[FormControlName.PickupPoint].options;
-    return {
-      type: options.active,
-      price: ''
-    };
+    return courierData ? +courierData.price + extraTotalSum : 0;
   }
 
   calcAllCargosPlacesCount(orders) {

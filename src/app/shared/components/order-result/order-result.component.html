@@ -9,13 +9,21 @@
           <p class="gray">Направление перевозки:</p>
           <p>г. {{formatCityFrom(currentData)}} - г. {{formatCityTo(currentData)}}</p>
         </ng-container>
-        <ng-container *ngIf="formatDepartureOption(currentData)">
-          <p class="gray">Забор посылки у отправителя - <span style="color: #000000">{{OptionName[formatDepartureOption(currentData).type]}}</span></p>
-          <p><b class="lg">{{formatDepartureOption(currentData).price}} руб.</b></p>
+        <ng-container>
+          <p class="gray">Забор посылки у отправителя - <span style="color: #000000">
+            {{OptionName[currentData[FormControlName.DeparturePoint].options.active]}}</span>
+          </p>
+          <p *ngIf="currentData[FormControlName.DeparturePoint].options.active === 'pickup'">
+            <b class="lg">{{calcCourierPrice(currentData, FormControlName.DeparturePoint)}} руб.</b>
+          </p>
         </ng-container>
-        <ng-container *ngIf="formatPickupOption(currentData)">
-          <p class="gray">Доставка посылки до получателя - <span style="color: #000000">{{OptionName[formatPickupOption(currentData).type]}}</span></p>
-<!--          <p><b class="lg">{{formatPickupOption(currentData).price}} руб.</b></p>-->
+        <ng-container>
+          <p class="gray">Доставка посылки до получателя - <span style="color: #000000">
+            {{OptionName[data[FormControlName.PickupPoint].options.active]}}</span>
+          </p>
+          <p *ngIf="currentData[FormControlName.PickupPoint].options.active === 'delivery'">
+            <b class="lg">{{calcCourierPrice(currentData, FormControlName.PickupPoint)}} руб.</b>
+          </p>
         </ng-container>
       </div>
       <ng-container *ngFor="let order of getOrders(currentData); let groupIndex = index">
