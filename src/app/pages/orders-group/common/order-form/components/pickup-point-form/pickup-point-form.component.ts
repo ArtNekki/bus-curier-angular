@@ -46,7 +46,8 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
   public TabName = {
     get: 'Забрать в отделении',
-    delivery: 'Вызвать курьера'
+    delivery: 'Вызвать курьера',
+    'need-to-meet': 'Встретить с автобуса'
   };
 
   public isFormGroupDisabled = false;
@@ -258,5 +259,9 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
     if (this.defaultCitySub) {
       this.defaultCitySub.unsubscribe();
     }
+  }
+
+  getControlsAmount(data) {
+    return Object.values(data).length;
   }
 }
