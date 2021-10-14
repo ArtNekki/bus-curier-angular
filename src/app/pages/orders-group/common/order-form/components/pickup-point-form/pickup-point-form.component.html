@@ -23,8 +23,15 @@
   <ng-container *ngIf="formGroup.get(FormControlName.Location).value">
     <ng-container [formGroupName]="FormControlName.Options">
       <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
-        <ng-container *ngIf="control.key === FormControlName.NeedToMeet
-        && getControlsAmount(formUtils.getGroupControls(this.formGroup.get(FormControlName.Options))) < 3">
+<!--        <ng-container *ngIf="control.key === FormControlName.NeedToMeet-->
+<!--        && getControlsAmount(formUtils.getGroupControls(this.formGroup.get(FormControlName.Options))) < 3">-->
+<!--          <app-checkbox [formControlName]="control.key" [@fadeIn]="" isDisabled="true">-->
+<!--            <div class="text">-->
+<!--              {{FormFieldMeta[control.key].label}}-->
+<!--            </div>-->
+<!--          </app-checkbox>-->
+<!--        </ng-container>-->
+        <ng-container *ngIf="control.key === FormControlName.NeedToMeet">
           <app-checkbox [formControlName]="control.key" [@fadeIn]="" isDisabled="true">
             <div class="text">
               {{FormFieldMeta[control.key].label}}
@@ -34,9 +41,19 @@
       </ng-container>
       <div class="form__tabs" [@fadeIn]="">
         <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
+<!--          <label-->
+<!--            *ngIf="(control.key !== FormControlName.Active && control.key !== FormControlName.NeedToMeet)-->
+<!--                  || control.key !== FormControlName.Active && ((control.key === FormControlName.NeedToMeet) && getControlsAmount(formUtils.getGroupControls(this.formGroup.get(FormControlName.Options))) > 2)" class="form__tab">-->
+<!--            <input type="radio"-->
+<!--                   [checked]="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === control.key"-->
+<!--                   [name]="FormControlName.Active"-->
+<!--                   [value]="control.key"-->
+<!--                   (change)="changeType(control.key)"-->
+<!--                   [formControlName]="FormControlName.Active" hidden />-->
+<!--            <div>{{TabName[control.key]}}</div>-->
+<!--          </label>-->
           <label
-            *ngIf="(control.key !== FormControlName.Active && control.key !== FormControlName.NeedToMeet)
-                  || control.key !== FormControlName.Active && ((control.key === FormControlName.NeedToMeet) && getControlsAmount(formUtils.getGroupControls(this.formGroup.get(FormControlName.Options))) > 2)" class="form__tab">
+            *ngIf="control.key !== FormControlName.Active && control.key !== FormControlName.NeedToMeet" class="form__tab">
             <input type="radio"
                    [checked]="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === control.key"
                    [name]="FormControlName.Active"
@@ -55,10 +72,10 @@
           <ng-container *ngIf="control.key === FormControlName.Delivery">
             <app-courier-form [formControlName]="control.key"></app-courier-form>
           </ng-container>
-          <ng-container *ngIf="(control.key === FormControlName.NeedToMeet)
-          && getControlsAmount(formUtils.getGroupControls(this.formGroup.get(FormControlName.Options))) > 2">
-            <div class="form__meta">Посылку необходимо забрать с автобуса.</div>
-          </ng-container>
+<!--          <ng-container *ngIf="(control.key === FormControlName.NeedToMeet)-->
+<!--          && getControlsAmount(formUtils.getGroupControls(this.formGroup.get(FormControlName.Options))) > 2">-->
+<!--            <div class="form__meta">Посылку необходимо забрать с автобуса.</div>-->
+<!--          </ng-container>-->
         </div>
       </ng-container>
     </ng-container>
