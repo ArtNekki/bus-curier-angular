@@ -22,7 +22,7 @@
   </div>
   <ng-container *ngIf="formGroup.get(FormControlName.Location).value">
     <ng-container [formGroupName]="FormControlName.Options">
-      <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
+      <ng-container *ngFor="let control of formUtils.getGroupControls(options) | keyvalue: formUtils.originalOrder">
 <!--        <ng-container *ngIf="control.key === FormControlName.NeedToMeet-->
 <!--        && getControlsAmount(formUtils.getGroupControls(this.formGroup.get(FormControlName.Options))) < 3">-->
 <!--          <app-checkbox [formControlName]="control.key" [@fadeIn]="" isDisabled="true">-->
@@ -40,7 +40,7 @@
         </ng-container>
       </ng-container>
       <div class="form__tabs" [@fadeIn]="">
-        <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
+        <ng-container *ngFor="let control of formUtils.getGroupControls(options) | keyvalue: formUtils.originalOrder">
 <!--          <label-->
 <!--            *ngIf="(control.key !== FormControlName.Active && control.key !== FormControlName.NeedToMeet)-->
 <!--                  || control.key !== FormControlName.Active && ((control.key === FormControlName.NeedToMeet) && getControlsAmount(formUtils.getGroupControls(this.formGroup.get(FormControlName.Options))) > 2)" class="form__tab">-->
@@ -55,7 +55,7 @@
           <label
             *ngIf="control.key !== FormControlName.Active && control.key !== FormControlName.NeedToMeet" class="form__tab">
             <input type="radio"
-                   [checked]="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === control.key"
+                   [checked]="options.get(FormControlName.Active).value === control.key"
                    [name]="FormControlName.Active"
                    [value]="control.key"
                    (change)="changeType(control.key)"
@@ -64,8 +64,8 @@
           </label>
         </ng-container>
       </div>
-      <ng-container *ngFor="let control of formUtils.getGroupControls(this.formGroup.get(FormControlName.Options)) | keyvalue: formUtils.originalOrder">
-        <div class="form__panel" *ngIf="formGroup.get(FormControlName.Options).get(FormControlName.Active).value === control.key" [@fadeIn]="">
+      <ng-container *ngFor="let control of formUtils.getGroupControls(options) | keyvalue: formUtils.originalOrder">
+        <div class="form__panel" *ngIf="options.get(FormControlName.Active).value === control.key" [@fadeIn]="">
           <ng-container *ngIf="control.key === FormControlName.Get">
             <app-department-form [offices]="departments" [formControlName]="control.key"></app-department-form>
           </ng-container>

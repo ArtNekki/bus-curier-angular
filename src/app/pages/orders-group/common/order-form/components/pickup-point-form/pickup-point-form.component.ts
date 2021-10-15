@@ -98,6 +98,10 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
     }
   }
 
+  get options() {
+    return this.formGroup.get(FormControlName.Options) as FormGroup;
+  }
+
   initLocation(id: string) {
     this.citiesSub = this.calcService.getCityTo(id, 0)
       .pipe(
@@ -167,37 +171,37 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
       )
       .subscribe((offices: any) => {
         if (offices.length) {
-          (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(FormControlName.Get, new FormControl('', [Validators.required]));
-          this.formGroup.get(FormControlName.Options).get(FormControlName.Active).setValue(FormControlName.Get);
+          this.options.addControl(FormControlName.Get, new FormControl('', [Validators.required]));
+          this.options.get(FormControlName.Active).setValue(FormControlName.Get);
 
           if (+offices[0].delivery) {
-            (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(FormControlName.Delivery, new FormControl(''));
+            this.options.addControl(FormControlName.Delivery, new FormControl(''));
           }
 
           this.departments = offices;
         } else {
-          (this.formGroup.get(FormControlName.Options) as FormGroup).removeControl(FormControlName.Get);
-          (this.formGroup.get(FormControlName.Options) as FormGroup).removeControl(FormControlName.Delivery);
+          this.options.removeControl(FormControlName.Get);
+          this.options.removeControl(FormControlName.Delivery);
         }
       });
   }
 
   createNeedToMeetControl(id) {
     if (this.cityData[id].need_to_meet !== '0') {
-      (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(FormControlName.NeedToMeet, new FormControl(true));
+      this.options.addControl(FormControlName.NeedToMeet, new FormControl(true));
 
-      const active = this.formGroup.get(FormControlName.Options).get(FormControlName.Active);
+      const active = this.options.get(FormControlName.Active);
 
       if (!active.value) {
         active.setValue(FormControlName.NeedToMeet);
       }
     } else {
-      (this.formGroup.get(FormControlName.Options) as FormGroup).removeControl(FormControlName.NeedToMeet);
+      this.options.removeControl(FormControlName.NeedToMeet);
     }
   }
 
   changeType(type: string) {
-    Object.entries((this.formGroup.get(FormControlName.Options) as FormGroup).controls)
+    Object.entries(this.options.controls)
       .forEach(([key, control]: [string, AbstractControl]) => {
         if (key !== FormControlName.Active) {
           control.clearValidators();
@@ -205,14 +209,14 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
         }
       });
 
-    this.formGroup.get(FormControlName.Options).get(type).setValidators([Validators.required]);
+    this.options.get(type).setValidators([Validators.required]);
   }
 
   clearOptions() {
-    Object.entries((this.formGroup.get(FormControlName.Options) as FormGroup).controls)
+    Object.entries(this.options.controls)
       .forEach(([key, control]: [string, AbstractControl]) => {
         if (key !== FormControlName.Active) {
-          (this.formGroup.get(FormControlName.Options) as FormGroup).removeControl(key);
+          this.options.removeControl(key);
         }
       });
 
