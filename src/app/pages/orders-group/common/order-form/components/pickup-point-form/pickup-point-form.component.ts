@@ -188,12 +188,19 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
   createNeedToMeetControl(id) {
     if (this.cityData[id].need_to_meet !== '0') {
-      this.options.addControl(FormControlName.NeedToMeet, new FormControl(true));
+      if (this.getControlsAmount(this.options.controls) === 2) {
+        this.options.addControl(FormControlName.NeedToMeet, new FormControl(''));
+        console.log('tab');
 
-      const active = this.options.get(FormControlName.Active);
+      } else {
+        console.log('checkbox');
+        this.options.addControl(FormControlName.NeedToMeet, new FormControl(true));
 
-      if (!active.value) {
-        active.setValue(FormControlName.NeedToMeet);
+        const active = this.options.get(FormControlName.Active);
+
+        if (!active.value) {
+          active.setValue(FormControlName.NeedToMeet);
+        }
       }
     } else {
       this.options.removeControl(FormControlName.NeedToMeet);

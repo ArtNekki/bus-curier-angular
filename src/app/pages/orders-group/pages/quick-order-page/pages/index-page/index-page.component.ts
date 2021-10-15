@@ -126,6 +126,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.formData = this.form.value;
+    console.log('this.formData', this.formData);
   }
 
   // confirmClear(cityId, value) {
