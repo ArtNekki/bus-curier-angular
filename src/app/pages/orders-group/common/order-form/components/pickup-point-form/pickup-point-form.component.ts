@@ -189,7 +189,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
   createNeedToMeetControl(id) {
     if (this.cityData[id].need_to_meet !== '0') {
-      this.options.addControl(FormControlName.NeedToMeet, new FormControl('', [Validators.required]));
+      this.options.addControl(FormControlName.NeedToMeet, new FormControl(''));
 
       const active = this.options.get(FormControlName.Active);
 
