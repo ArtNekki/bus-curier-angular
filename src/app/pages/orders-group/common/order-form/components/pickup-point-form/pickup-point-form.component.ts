@@ -170,7 +170,6 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
       )
       .subscribe((offices: any) => {
-        console.log('iffff', offices);
         if (offices.length) {
           this.options.addControl(FormControlName.Get, new FormControl('', [Validators.required]));
           this.options.get(FormControlName.Active).setValue(FormControlName.Get);
@@ -193,33 +192,10 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
       const active = this.options.get(FormControlName.Active);
 
-      if (this.getControlsAmount(this.options.controls) === 2) {
+      if (this.findControl(FormControlName.NeedToMeet) && !this.findControl(FormControlName.Get)) {
         active.setValue(FormControlName.NeedToMeet);
       }
 
-      // this.options.get(FormControlName.Active).setValue(FormControlName.NeedToMeet);
-      // console.log('fff', this.getControlsAmount(this.options.controls));
-      //
-      // if (true) {
-      //
-      // }
-
-      //
-      //
-      // if (this.getControlsAmount(this.options.controls) === 2) {
-      //   this.options.addControl(FormControlName.NeedToMeet, new FormControl(''));
-      //   console.log('tab');
-      //
-      // } else {
-      //   console.log('checkbox');
-      //   this.options.addControl(FormControlName.NeedToMeet, new FormControl(true));
-      //
-      //   const active = this.options.get(FormControlName.Active);
-      //
-      //   if (!active.value) {
-      //     active.setValue(FormControlName.NeedToMeet);
-      //   }
-      // }
     } else {
       this.options.removeControl(FormControlName.NeedToMeet);
     }
@@ -245,6 +221,14 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
         }
       });
 
+  }
+
+  getControlsAmount(data) {
+    return Object.values(data).length;
+  }
+
+  findControl(name) {
+    return Object.keys(this.options.controls).indexOf(name) !== -1;
   }
 
   setDisabledState?(isDisabled: boolean): void {
@@ -288,9 +272,5 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
     if (this.defaultCitySub) {
       this.defaultCitySub.unsubscribe();
     }
-  }
-
-  getControlsAmount(data) {
-    return Object.values(data).length;
   }
 }

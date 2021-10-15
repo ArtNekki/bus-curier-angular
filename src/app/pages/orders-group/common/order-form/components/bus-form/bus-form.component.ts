@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
@@ -22,6 +22,8 @@ import formFieldMeta from '../../../../../../core/form/formFieldMeta';
   ]
 })
 export class BusFormComponent extends SubFormComponent implements OnInit {
+  @Input() title = 'Встретить с автобуса';
+
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public formGroup: FormGroup;
