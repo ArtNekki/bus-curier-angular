@@ -94,6 +94,10 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     super.ngOnInit();
   }
 
+  get options() {
+    return this.formGroup.get(FormControlName.Options) as FormGroup;
+  }
+
   loadCities() {
     return this.calculatorService.getCitiesFrom()
       .pipe(
@@ -159,7 +163,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   changeType(type: string) {
-    Object.entries((this.formGroup.get(FormControlName.Options) as FormGroup).controls)
+    Object.entries(this.options.controls)
       .forEach(([key, control]: [string, AbstractControl]) => {
         if (key !== FormControlName.Active) {
           control.clearValidators();
@@ -167,7 +171,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         }
       });
 
-    this.formGroup.get(FormControlName.Options).get(type).setValidators([Validators.required]);
+    this.options.get(type).setValidators([Validators.required]);
 
     if (type === FormControlName.Pickup) {
       this.calculatorService.courierDelivery$.next(type);
@@ -196,10 +200,10 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       .subscribe((tabs: string[]) => {
         if (tabs.length) {
           tabs.forEach((name: string) => {
-            (this.formGroup.get(FormControlName.Options) as FormGroup).addControl(name, new FormControl(''));
+            this.options.addControl(name, new FormControl(''));
           });
 
-          this.formGroup.get(FormControlName.Options).get(FormControlName.Active).setValue(tabs[0]);
+          this.options.get(FormControlName.Active).setValue(tabs[0]);
           this.getDepartments(id);
         }
       });
