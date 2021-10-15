@@ -25,11 +25,12 @@
       <ng-container *ngFor="let control of formUtils.getGroupControls(options) | keyvalue: formUtils.originalOrder">
         <ng-container *ngIf="control.key === FormControlName.NeedToMeet
         && getControlsAmount(options.controls) < 3">
-          <app-checkbox [formControlName]="control.key" [@fadeIn]="" isDisabled="true">
-            <div class="text">
-              {{FormFieldMeta[control.key].label}}
-            </div>
-          </app-checkbox>
+<!--          <app-bus-form [formControlName]="control.key"></app-bus-form>-->
+          <div class="form__field">
+            <app-checkbox [formControlName]="control.key" [isDisabled]="control.value.value">
+              <div class="text">Встретить с автобуса</div>
+            </app-checkbox>
+          </div>
         </ng-container>
 <!--        <ng-container *ngIf="control.key === FormControlName.NeedToMeet">-->
 <!--          <app-checkbox [formControlName]="control.key" [@fadeIn]="" isDisabled="true">-->
@@ -75,7 +76,12 @@
           </ng-container>
           <ng-container *ngIf="(control.key === FormControlName.NeedToMeet)
           && getControlsAmount(options.controls) > 2">
-            <div class="form__meta">Посылку необходимо забрать на автовокзале.</div>
+            <div class="form__field">
+              cc: {{control.value.value}}
+              <app-checkbox [formControlName]="control.key" [isDisabled]="control.value.value">
+                <div class="text">Забрать на автовокзале</div>
+              </app-checkbox>
+            </div>
           </ng-container>
         </div>
       </ng-container>

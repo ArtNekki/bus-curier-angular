@@ -22,6 +22,7 @@ import { PackageModalComponent } from './components/package-modal/package-modal.
 import { OtherFormComponent } from './components/other-form/other-form.component';
 import { OrdersFormComponent } from './components/orders-form/orders-form.component';
 import { OrderFormComponent } from './components/order-form/order-form.component';
+import { BusFormComponent } from './components/bus-form/bus-form.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { OrderFormComponent } from './components/order-form/order-form.component
     PackageModalComponent,
     OtherFormComponent,
     OrdersFormComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    BusFormComponent
   ],
   imports: [
     CommonModule,

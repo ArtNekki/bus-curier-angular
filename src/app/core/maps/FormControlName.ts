@@ -93,5 +93,6 @@ export default {
   CityFrom: 'city-from',
   CityTo: 'city-to',
   Item: 'item',
-  OrderNumber: 'order-number'
+  OrderNumber: 'order-number',
+  Meet: 'meet'
 };
