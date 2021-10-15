@@ -170,6 +170,7 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
       )
       .subscribe((offices: any) => {
+        console.log('iffff', offices);
         if (offices.length) {
           this.options.addControl(FormControlName.Get, new FormControl('', [Validators.required]));
           this.options.get(FormControlName.Active).setValue(FormControlName.Get);
@@ -188,8 +189,15 @@ export class PickupPointFormComponent extends SubFormComponent implements OnInit
 
   createNeedToMeetControl(id) {
     if (this.cityData[id].need_to_meet !== '0') {
-      this.options.addControl(FormControlName.NeedToMeet, new FormControl(true, [Validators.required]));
-      this.options.get(FormControlName.Active).setValue(FormControlName.NeedToMeet);
+      this.options.addControl(FormControlName.NeedToMeet, new FormControl('', [Validators.required]));
+
+      const active = this.options.get(FormControlName.Active);
+
+      if (this.getControlsAmount(this.options.controls) === 2) {
+        active.setValue(FormControlName.NeedToMeet);
+      }
+
+      // this.options.get(FormControlName.Active).setValue(FormControlName.NeedToMeet);
       // console.log('fff', this.getControlsAmount(this.options.controls));
       //
       // if (true) {

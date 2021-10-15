@@ -32,10 +32,14 @@ export class BusFormComponent extends SubFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.Meet]: new FormControl(true, [Validators.required])
+      [FormControlName.Meet]: new FormControl('', [Validators.required])
     });
 
-    this.formGroup.markAllAsTouched();
+    setTimeout(() => {
+      this.formGroup.get(FormControlName.Meet).setValue(true);
+      this.formGroup.markAllAsTouched();
+    }, 0);
+
     super.ngOnInit();
   }
 }

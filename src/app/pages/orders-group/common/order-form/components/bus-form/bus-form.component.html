@@ -1,4 +1,4 @@
-<ng-container [formGroup]="formGroup">
+<ng-container *ngIf="formGroup" [formGroup]="formGroup">
   <div class="form__field">
     <app-checkbox [formControlName]="FormControlName.Meet" [isDisabled]="formGroup.get(FormControlName.Meet).value">
       <div class="text">Забор посылки на автовокзале</div>

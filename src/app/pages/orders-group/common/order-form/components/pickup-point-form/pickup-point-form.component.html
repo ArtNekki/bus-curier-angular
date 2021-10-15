@@ -27,9 +27,10 @@
         && getControlsAmount(options.controls) < 3">
 <!--          <app-bus-form [formControlName]="control.key"></app-bus-form>-->
           <div class="form__field">
-            <app-checkbox [formControlName]="control.key" [isDisabled]="control.value.value">
-              <div class="text">Встретить с автобуса</div>
-            </app-checkbox>
+<!--            <app-checkbox [formControlName]="control.key" [isDisabled]="control.value.value">-->
+<!--              <div class="text">Встретить с автобуса</div>-->
+<!--            </app-checkbox>-->
+            <app-bus-form [formControlName]="control.key"></app-bus-form>
           </div>
         </ng-container>
 <!--        <ng-container *ngIf="control.key === FormControlName.NeedToMeet">-->
@@ -77,10 +78,10 @@
           <ng-container *ngIf="(control.key === FormControlName.NeedToMeet)
           && getControlsAmount(options.controls) > 2">
             <div class="form__field">
-              cc: {{control.value.value}}
-              <app-checkbox [formControlName]="control.key" [isDisabled]="control.value.value">
-                <div class="text">Забрать на автовокзале</div>
-              </app-checkbox>
+              <app-bus-form [formControlName]="control.key"></app-bus-form>
+<!--              <app-checkbox [formControlName]="control.key" [isDisabled]="control.value.value">-->
+<!--                <div class="text">Забрать на автовокзале</div>-->
+<!--              </app-checkbox>-->
             </div>
           </ng-container>
         </div>
