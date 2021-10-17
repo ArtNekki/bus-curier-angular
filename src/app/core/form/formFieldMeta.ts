@@ -76,7 +76,7 @@ export default {
     label: 'Адрес',
     type: 'text'
   },
-  [FormControlName.PlaceCount]: {
+  [FormControlName.Count]: {
     label: 'Кол-во мест',
     type: 'text'
   },

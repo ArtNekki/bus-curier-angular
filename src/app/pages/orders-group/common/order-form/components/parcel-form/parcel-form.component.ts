@@ -52,7 +52,7 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.PlaceCount]:
+      [FormControlName.Count]:
         new FormControl(1, [Validators.required, Validators.min(1)]),
       [FormControlName.Weight]:
         new FormControl( '',
@@ -132,7 +132,7 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
   toggleDimensionsError(parcel) {
     const dimensions = Object.entries(parcel)
       .filter(([key, value]) => {
-        return !(key === FormControlName.PlaceCount || key === FormControlName.Weight);
+        return !(key === FormControlName.Count || key === FormControlName.Weight);
       });
 
     const params = dimensions.reduce((obj: {width: number, height: number, length: number}, [key, value]) => {

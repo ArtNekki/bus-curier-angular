@@ -78,32 +78,32 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
         case '1':
           this.boxes.push(new FormGroup({
             [item.id]: new FormControl(''),
-            [FormControlName.Counter]: new FormControl(0)
+            [FormControlName.Count]: new FormControl(0)
           }));
           break;
         case '2':
           this.safePacks.push(new FormGroup({
             [item.id]: new FormControl(''),
-            [FormControlName.Counter]: new FormControl('')
+            [FormControlName.Count]: new FormControl('')
           }));
           break;
         case '3':
           this.plasticPacks.push(new FormGroup({
             [item.id]: new FormControl(''),
-            [FormControlName.Counter]: new FormControl('')
+            [FormControlName.Count]: new FormControl('')
           }));
           break;
         case '4':
         case '5':
           this.other.push(new FormGroup({
             [item.id]: new FormControl(''),
-            [FormControlName.Counter]: new FormControl('')
+            [FormControlName.Count]: new FormControl('')
           }));
           break;
         case '6':
           this.skins.push(new FormGroup({
             [item.id]: new FormControl(''),
-            [FormControlName.Counter]: new FormControl('')
+            [FormControlName.Count]: new FormControl('')
           }));
           break;
       }

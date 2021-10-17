@@ -102,13 +102,13 @@ export class CalculatorService {
     const cargo = order.cargo[cargoId];
 
     if (cargoId === Cargo.Docs) {
-      cargoId = `${cargoId}, ${cargo.counter}`;
-      places = cargo.counter;
+      cargoId = `${cargoId}, ${cargo.count}`;
+      places = cargo.count;
     }
 
     if (cargoId === Cargo.AutoParts || cargoId === Cargo.Other) {
-      cargoId = `${cargo.item}, ${cargo.counter}`;
-      places = cargo.counter;
+      cargoId = `${cargo.item}, ${cargo.count}`;
+      places = cargo.count;
     }
 
     let servicesId = this.getServicesId(order);
@@ -118,7 +118,7 @@ export class CalculatorService {
     if (cargoId === Cargo.Parcels) {
       result = this.getParcelsSum(cityFromId, cityToId, cargoId, servicesId, cargo);
     } else {
-      result = cargo.counter
+      result = cargo.count
         ? this.getResult(cityFromId, cityToId, cargoId, servicesId, 0, 0)
         : of({price: 0});
     }
@@ -133,7 +133,7 @@ export class CalculatorService {
 
     const isWidthCorrect = this.checkParcelParams(cargo, 'width');
     const isHeightCorrect = this.checkParcelParams(cargo, 'height');
-    const isPlacesCorrect = this.checkParcelParams(cargo, 'place-count');
+    const isPlacesCorrect = this.checkParcelParams(cargo, 'count');
     const isLengthCorrect = this.checkParcelParams(cargo, 'length');
     const isWeightCorrect = this.checkParcelParams(cargo, 'weight');
 
@@ -209,7 +209,7 @@ export class CalculatorService {
       return 0;
     }
 
-    return cargo.reduce((sum, obj) => sum + +obj['place-count'], 0);
+    return cargo.reduce((sum, obj) => sum + +obj['count'], 0);
   }
 
   getServicesId(order) {
@@ -219,7 +219,7 @@ export class CalculatorService {
     const packageIds = Object.entries(packages)
       .map(([key, value]: [string, any]) => {
         return value.filter((item) => {
-          return item.counter;
+          return item.count;
         });
       })
       .filter((array) => {

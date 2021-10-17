@@ -6,7 +6,7 @@
       <div class="form__field" [formGroupName]="i">
         <ng-container
           *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;">
-          <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
+          <ng-container *ngIf="control.key === FormControlName.Count; else checkbox">
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, boxes.controls)"
               [formControlName]="control.key"
@@ -54,7 +54,7 @@
         <ng-container
           *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;
           let controlIndex = index;">
-          <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
+          <ng-container *ngIf="control.key === FormControlName.Count; else checkbox">
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, safePacks.controls)"
               [type]="FormControlName.SafePack"
@@ -101,7 +101,7 @@
         <ng-container
           *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;
           let controlIndex = index;">
-          <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
+          <ng-container *ngIf="control.key === FormControlName.Count; else checkbox">
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, plasticPacks.controls)"
               [type]="FormControlName.PlasticPack"
@@ -148,7 +148,7 @@
         <ng-container
           *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;
           let controlIndex = index;">
-          <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
+          <ng-container *ngIf="control.key === FormControlName.Count; else checkbox">
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, skins.controls)"
               [formControlName]="control.key"
@@ -191,7 +191,7 @@
         <ng-container
           *ngFor="let control of formUtils.getGroupControls(itemGroup)  | keyvalue: formUtils.originalOrder;
           let controlIndex = index;">
-          <ng-container *ngIf="control.key === FormControlName.Counter; else checkbox">
+          <ng-container *ngIf="control.key === FormControlName.Count; else checkbox">
             <app-package-modal
               *ngIf="activeCheckboxId === getId(i, other.controls)"
               [formControlName]="control.key"

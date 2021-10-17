@@ -80,7 +80,7 @@ export class OrderResultComponent implements OnInit, OnChanges {
   }
 
   formatDocs(data: any) {
-    return `Документы (мест: ${data[FormControlName.Counter]})`;
+    return `Документы (мест: ${data[FormControlName.Count]})`;
   }
 
   formatParcels(arr: any) {
@@ -88,18 +88,18 @@ export class OrderResultComponent implements OnInit, OnChanges {
   }
 
   formatAutoparts(obj: any) {
-    return `Автозапчасть: ${this.types[obj.item].name} (${obj.counter}шт.)`;
+    return `Автозапчасть: ${this.types[obj.item].name} (${obj.count}шт.)`;
   }
 
   formatOther(obj: any) {
-    return `Другое: ${this.types[obj.item].name} (${obj.counter}шт.)`;
+    return `Другое: ${this.types[obj.item].name} (${obj.count}шт.)`;
   }
 
   formatPackage(arr) {
     const list = Object.entries(arr)
           .map(([key, value]: [string, any]) => {
               return value.filter((item) => {
-                return item.counter;
+                return item.count;
               });
           })
           .filter((array) => {
@@ -112,7 +112,7 @@ export class OrderResultComponent implements OnInit, OnChanges {
             return {
               id,
               name: this.services[id].name,
-              count: obj.counter,
+              count: obj.count,
               price: this.services[id].price,
               params: this.services[id].property,
               type: PackageName[this.services[id].subgroup_id],
@@ -191,7 +191,7 @@ export class OrderResultComponent implements OnInit, OnChanges {
 
   calcCargoPlaces(cargo) {
     return Object.values(cargo).reduce((sum, value: Parcel[] | any) => {
-      const count = value ? value.length ? this.calcParcelPlaces(value) : value.counter : 0;
+      const count = value ? value.length ? this.calcParcelPlaces(value) : value.count : 0;
       return sum + count;
     }, 0);
   }
@@ -201,6 +201,6 @@ export class OrderResultComponent implements OnInit, OnChanges {
       return 0;
     }
 
-    return cargo.reduce((sum, obj) => sum + +obj['place-count'], 0);
+    return cargo.reduce((sum, obj) => sum + +obj['count'], 0);
   }
 }

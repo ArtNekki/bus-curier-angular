@@ -29,7 +29,7 @@
       </ng-container>
     </ng-container>
     <ng-container *ngIf="order.activeCargo === Cargo.Docs">
-      <app-data-list [data]="formatDocs(order.cargo[order.activeCargo][FormControlName.Counter])"></app-data-list>
+      <app-data-list [data]="formatDocs(order.cargo[order.activeCargo][FormControlName.Count])"></app-data-list>
     </ng-container>
     <ng-container *ngIf="order.activeCargo === Cargo.AutoParts">
       <app-data-list [data]="formatAutoparts(order.cargo[order.activeCargo])"></app-data-list>

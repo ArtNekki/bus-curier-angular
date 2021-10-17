@@ -253,11 +253,11 @@ export class OrderReportComponent implements OnInit {
   }
 
   formatAutoparts(obj: any) {
-    return [{name: 'Автозапчасть', value: `${this.types[obj.item].name} (${obj.counter}шт.)`}];
+    return [{name: 'Автозапчасть', value: `${this.types[obj.item].name} (${obj.count}шт.)`}];
   }
 
   formatOther(obj: any) {
-    return [{name: 'Другое', value: `${this.types[obj.item].name} (${obj.counter}шт.)`}];
+    return [{name: 'Другое', value: `${this.types[obj.item].name} (${obj.count}шт.)`}];
   }
 
   formatData(data) {
@@ -274,7 +274,7 @@ export class OrderReportComponent implements OnInit {
     const list = Object.entries(data)
       .map(([key, value]: [string, any]) => {
         return value.filter((item) => {
-          return item.counter;
+          return item.count;
         });
       })
       .filter((array) => {
@@ -287,7 +287,7 @@ export class OrderReportComponent implements OnInit {
         return {
           id,
           name: this.services[id].name,
-          count: obj.counter,
+          count: obj.count,
           price: this.services[id].price,
           params: this.services[id].property,
           type: this.PackageName[this.services[id].subgroup_id],

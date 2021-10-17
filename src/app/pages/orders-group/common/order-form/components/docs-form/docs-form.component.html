@@ -1,15 +1,15 @@
 <ng-container [formGroup]="formGroup">
   <div class="form__field">
     <label class="form__label"
-           [class.form__label--invalid]="formGroup.get(FormControlName.Counter).invalid">
+           [class.form__label--invalid]="formGroup.get(FormControlName.Count).invalid">
       Количество мест
-      <sup *ngIf="formGroup.get(FormControlName.Counter).errors
-        && formGroup.get(FormControlName.Counter).hasError('required')">*</sup>
+      <sup *ngIf="formGroup.get(FormControlName.Count).errors
+        && formGroup.get(FormControlName.Count).hasError('required')">*</sup>
     </label>
     <app-counter
-      [formControlName]="FormControlName.Counter"
-      [isInvalid]="(formGroup.get(FormControlName.Counter).invalid
-          && formGroup.get(FormControlName.Counter).touched)"
+      [formControlName]="FormControlName.Count"
+      [isInvalid]="(formGroup.get(FormControlName.Count).invalid
+          && formGroup.get(FormControlName.Count).touched)"
     >
     </app-counter>
   </div>

@@ -17,7 +17,7 @@
         >
         </app-select>
       </div>
-      <div *ngIf="control.key === FormControlName.Counter && formGroup.get(FormControlName.Item).value" class="form__field">
+      <div *ngIf="control.key === FormControlName.Count && formGroup.get(FormControlName.Item).value" class="form__field">
         <label class="form__label" [class.form__label--invalid]="control.value.invalid">
           Количество мест:
           <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
