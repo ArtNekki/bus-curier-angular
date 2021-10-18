@@ -16,24 +16,24 @@ import {CityTo} from '../../../../../../core/interfaces/calculator';
 import {Select} from '../../../../../../core/interfaces/form';
 
 @Component({
-  selector: 'app-pickup-point-form',
-  templateUrl: './pickup-point-form.component.html',
-  styleUrls: ['./pickup-point-form.component.scss'],
+  selector: 'app-delivery-point-form',
+  templateUrl: './delivery-point-form.component.html',
+  styleUrls: ['./delivery-point-form.component.scss'],
   animations: [fadeIn],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => PickupPointFormComponent),
+      useExisting: forwardRef(() => DeliveryPointFormComponent),
       multi: true
     },
     {
       provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => PickupPointFormComponent),
+      useExisting: forwardRef(() => DeliveryPointFormComponent),
       multi: true
     }
   ]
 })
-export class PickupPointFormComponent extends SubFormComponent implements OnInit, OnChanges, OnDestroy {
+export class DeliveryPointFormComponent extends SubFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() cityFromId: string;
   @Input() noLabel: boolean;
 

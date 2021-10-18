@@ -12,7 +12,6 @@ import { IndividualFormComponent } from './components/individual-form/individual
 import { PackagingFormComponent } from './components/packaging-form/packaging-form.component';
 import { ParcelFormComponent } from './components/parcel-form/parcel-form.component';
 import { ParcelsFormComponent } from './components/parcels-form/parcels-form.component';
-import { PickupPointFormComponent } from './components/pickup-point-form/pickup-point-form.component';
 import { RecipientFormComponent } from './components/recipient-form/recipient-form.component';
 import { SenderFormComponent } from './components/sender-form/sender-form.component';
 import { ServicesFormComponent } from './components/services-form/services-form.component';
@@ -23,6 +22,7 @@ import { OtherFormComponent } from './components/other-form/other-form.component
 import { OrdersFormComponent } from './components/orders-form/orders-form.component';
 import { OrderFormComponent } from './components/order-form/order-form.component';
 import { BusFormComponent } from './components/bus-form/bus-form.component';
+import {DeliveryPointFormComponent} from './components/delivery-point-form/delivery-point-form.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { BusFormComponent } from './components/bus-form/bus-form.component';
     PackagingFormComponent,
     ParcelFormComponent,
     ParcelsFormComponent,
-    PickupPointFormComponent,
+    DeliveryPointFormComponent,
     RecipientFormComponent,
     SenderFormComponent,
     ServicesFormComponent,
@@ -66,7 +66,7 @@ import { BusFormComponent } from './components/bus-form/bus-form.component';
     PackagingFormComponent,
     ParcelFormComponent,
     ParcelsFormComponent,
-    PickupPointFormComponent,
+    DeliveryPointFormComponent,
     RecipientFormComponent,
     SenderFormComponent,
     ServicesFormComponent,

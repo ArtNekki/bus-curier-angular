@@ -19,7 +19,7 @@
           <section class="form__section">
             <h2 class="form__heading">Пункт получения</h2>
             <div class="form__fieldset form__fieldset--row-gap-lg">
-              <app-pickup-point-form [cityFromId]="departure.cityId" [formControlName]="FormControlName.DeliveryPoint"></app-pickup-point-form>
+              <app-delivery-point-form [cityFromId]="departure.cityId" [formControlName]="FormControlName.DeliveryPoint"></app-delivery-point-form>
             </div>
           </section>
           <div *ngIf="departure.cityId && delivery.cityId">
