@@ -25,10 +25,10 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   public cityFromId: string;
   public cityToId: string;
 
-  public courier: CourierMode = {
-    pickup: false,
-    delivery: false
-  };
+  // public courier: CourierMode = {
+  //   pickup: false,
+  //   delivery: false
+  // };
 
   public departure = {
     cityId: '',
@@ -36,14 +36,14 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     courier: false
   };
 
-  public pickup = {
+  public delivery = {
     cityId: '',
     officeId: '',
     courier: false
   };
 
   private departureSub: Subscription;
-  private pickupSub: Subscription;
+  private deliverySub: Subscription;
   private ordersSub: Subscription;
   private confirmSub: Subscription;
 
@@ -56,7 +56,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.form = new FormGroup({
       [FormControlName.DeparturePoint]: new FormControl('', [Validators.required]),
-      [FormControlName.PickupPoint]: new FormControl('', [Validators.required]),
+      [FormControlName.DeliveryPoint]: new FormControl('', [Validators.required]),
       ['orders']: new FormControl('', [Validators.required])
     });
 
@@ -92,7 +92,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         }
     });
 
-    this.pickupSub = this.form.get(FormControlName.PickupPoint).valueChanges
+    this.deliverySub = this.form.get(FormControlName.DeliveryPoint).valueChanges
       .pipe(
         delay(0),
         debounceTime(0),
@@ -102,12 +102,12 @@ export class IndexPageComponent implements OnInit, OnDestroy {
           this.formData = this.form.value;
         }
 
-        if (data && (this.pickup.cityId !== data.location)) {
-          this.pickup = Object.assign({}, this.pickup, {cityId: data.location});
+        if (data && (this.delivery.cityId !== data.location)) {
+          this.delivery = Object.assign({}, this.delivery, {cityId: data.location});
         }
 
         if (data) {
-          this.pickup = Object.assign({}, this.pickup,
+          this.delivery = Object.assign({}, this.delivery,
             {
               courier: (data.options.active === FormControlName.Delivery) || false,
               officeId: (data.options.get && data.options.get.office) || null
@@ -154,9 +154,9 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   clearForm() {
     return new Observable((sub) => {
       this.departure.cityId = '';
-      this.pickup.cityId = '';
+      this.delivery.cityId = '';
       this.formData = null;
-      this.form.get(FormControlName.PickupPoint).reset();
+      this.form.get(FormControlName.DeliveryPoint).reset();
       this.form.get(FormControlName.Orders).reset();
 
       this.router.navigate([], {
@@ -188,8 +188,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       this.departureSub.unsubscribe();
     }
 
-    if (this.pickupSub) {
-      this.pickupSub.unsubscribe();
+    if (this.deliverySub) {
+      this.deliverySub.unsubscribe();
     }
 
     if (this.ordersSub) {

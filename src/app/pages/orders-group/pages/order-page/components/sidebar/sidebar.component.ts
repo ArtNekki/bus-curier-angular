@@ -41,13 +41,13 @@ export class SidebarComponent implements OnInit, OnChanges {
     this.isLoading = true;
 
     const cityFromId = data[FormControlName.DeparturePoint].location;
-    const cityToId = data[FormControlName.PickupPoint].location;
+    const cityToId = data[FormControlName.DeliveryPoint].location;
     const orders = data.orders.orders;
 
     const courierFromId = this.Courier[data[FormControlName.DeparturePoint].options
     && data[FormControlName.DeparturePoint].options.active];
-    const courierToId = this.Courier[data[FormControlName.PickupPoint].options
-    && data[FormControlName.PickupPoint].options.active];
+    const courierToId = this.Courier[data[FormControlName.DeliveryPoint].options
+    && data[FormControlName.DeliveryPoint].options.active];
 
     this.calcService.calculateTotalSum({cityFromId, cityToId, courierFromId, courierToId, orders})
       .pipe(delay(1000))

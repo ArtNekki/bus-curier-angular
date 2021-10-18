@@ -4,9 +4,9 @@
      <div *ngIf="control.key === FormControlName.Item" class="form__field">
        <label class="form__label"
               [class.form__label--invalid]="control.value.invalid
-              && !(pickup.courier || departure.courier || departureOfficeLimits || pickupOfficeLimits)"
+              && !(delivery.courier || departure.courier || departureOfficeLimits || deliveryOfficeLimits)"
               [class.form__label--light]="control.value.disabled
-              || (pickup.courier || departure.courier || departureOfficeLimits || pickupOfficeLimits)" >
+              || (delivery.courier || departure.courier || departureOfficeLimits || deliveryOfficeLimits)" >
          Выберите запчасть:
          <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
        </label>
@@ -15,7 +15,7 @@
          [items]="parts"
          [formControlName]="control.key"
          [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
-         [disabled]="control.value.value || (pickup.courier || departure.courier || departureOfficeLimits || pickupOfficeLimits)"
+         [disabled]="control.value.value || (delivery.courier || departure.courier || departureOfficeLimits || deliveryOfficeLimits)"
        >
        </app-select>
      </div>
@@ -40,7 +40,7 @@
      </app-btn>
    </div>
  </div>
-  <small *ngIf="pickup.courier || departure.courier" style="margin: 0; color: #C74141">
+  <small *ngIf="delivery.courier || departure.courier" style="margin: 0; color: #C74141">
     <sup>*</sup> Невозможно выбрать автозапчасти, т.к. габариты запчастей <br />слишком большие и курьер не может их перевозить.
 <!--    <ng-container *ngIf="pickup && !delivery">-->
 <!--      габариты все запчастей слишком большие и курьер не может их перевозить.-->
@@ -56,7 +56,7 @@
   <small *ngIf="departureOfficeLimits" style="margin: 0; color: #C74141">
     <sup>*</sup>Из выбранного отделения  автозапчасти не отправляются
   </small>
-  <small *ngIf="pickupOfficeLimits" style="margin: 0; color: #C74141">
+  <small *ngIf="deliveryOfficeLimits" style="margin: 0; color: #C74141">
     <sup>*</sup>Выбранное отделение автозапчасти не принимает
   </small>
   <dl class="form__details">

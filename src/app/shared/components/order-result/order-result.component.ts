@@ -155,7 +155,7 @@ export class OrderResultComponent implements OnInit, OnChanges {
   }
 
   formatCityTo(data) {
-    const id = data[FormControlName.PickupPoint].location;
+    const id = data[FormControlName.DeliveryPoint].location;
     return this.cities[id] ? this.cities[id].name : '';
   }
 

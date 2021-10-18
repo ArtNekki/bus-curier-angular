@@ -17,7 +17,7 @@
   </section>
   <section class="form__section form__section--w-underline">
     <h2 class="form__heading form__heading--w-counter">Пункт получения</h2>
-    <app-data-list [data]="pickupPoint"></app-data-list>
+    <app-data-list [data]="deliveryPoint"></app-data-list>
   </section>
   <section *ngFor="let order of orders.orders; let orderIndex = index" class="form__section form__section--w-underline">
     <h2 class="form__heading form__heading--w-counter">Заказ №{{orderIndex + 1}}</h2>

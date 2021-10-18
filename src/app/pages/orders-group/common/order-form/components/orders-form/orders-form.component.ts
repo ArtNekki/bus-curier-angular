@@ -27,7 +27,7 @@ import {CargoType, CourierMode, Service} from '../../../../../../core/interfaces
 })
 export class OrdersFormComponent extends SubFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() departure: any;
-  @Input() pickup: any;
+  @Input() delivery: any;
 
   public FormControlName = FormControlName;
 
@@ -41,7 +41,7 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
   public servicesSub: Subscription;
 
   public currentDeparture = null;
-  public currentPickup = null;
+  public currentDelivery = null;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -68,16 +68,16 @@ export class OrdersFormComponent extends SubFormComponent implements OnInit, OnC
       this.currentDeparture = changes.departure.currentValue;
     }
 
-    if (changes.pickup && changes.pickup.currentValue) {
-      this.currentPickup = changes.pickup.currentValue;
+    if (changes.delivery && changes.delivery.currentValue) {
+      this.currentDelivery = changes.delivery.currentValue;
     }
 
-    if (this.currentDeparture.cityId && (this.currentPickup.cityId
-      !== (changes.pickup && changes.pickup.previousValue && changes.pickup.previousValue.cityId))) {
+    if (this.currentDeparture.cityId && (this.currentDelivery.cityId
+      !== (changes.delivery && changes.delivery.previousValue && changes.delivery.previousValue.cityId))) {
 
       // this.types = [];
 
-      this.typesSub = this.calcService.getTypes(this.currentDeparture.cityId, this.currentPickup.cityId)
+      this.typesSub = this.calcService.getTypes(this.currentDeparture.cityId, this.currentDelivery.cityId)
         // .pipe(delay(500))
         .subscribe((result: Array<CargoType>) => {
           if (result.length) {

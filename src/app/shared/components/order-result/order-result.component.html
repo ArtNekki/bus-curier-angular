@@ -19,10 +19,10 @@
         </ng-container>
         <ng-container>
           <p class="gray">Доставка посылки до получателя - <span style="color: #000000">
-            {{OptionName[data[FormControlName.PickupPoint].options.active]}}</span>
+            {{OptionName[data[FormControlName.DeliveryPoint].options.active]}}</span>
           </p>
-          <p *ngIf="currentData[FormControlName.PickupPoint].options.active === 'delivery'">
-            <b class="lg">{{calcCourierPrice(currentData, FormControlName.PickupPoint)}} руб.</b>
+          <p *ngIf="currentData[FormControlName.DeliveryPoint].options.active === 'delivery'">
+            <b class="lg">{{calcCourierPrice(currentData, FormControlName.DeliveryPoint)}} руб.</b>
           </p>
         </ng-container>
       </div>

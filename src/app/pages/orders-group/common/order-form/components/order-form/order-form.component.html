@@ -17,8 +17,8 @@
         formUtils.getGroupControls(formGroup.get('cargo')) | keyvalue: formUtils.originalOrder;">
         <div *ngIf="formGroup.get('activeCargo').value === control.key" [@fadeIn]="">
           <app-docs-form *ngIf="control.key === Cargo.Docs" [formControlName]="control.key"></app-docs-form>
-          <app-parcels-form *ngIf="control.key === Cargo.Parcels" [departure]="departure" [pickup]="pickup" [formControlName]="control.key"></app-parcels-form>
-          <app-auto-parts-form *ngIf="control.key === Cargo.AutoParts" [types]="types" [departure]="departure" [pickup]="pickup" [formControlName]="control.key"></app-auto-parts-form>
+          <app-parcels-form *ngIf="control.key === Cargo.Parcels" [departure]="departure" [delivery]="delivery" [formControlName]="control.key"></app-parcels-form>
+          <app-auto-parts-form *ngIf="control.key === Cargo.AutoParts" [types]="types" [departure]="departure" [delivery]="delivery" [formControlName]="control.key"></app-auto-parts-form>
           <app-other-form [types]="types" *ngIf="control.key === Cargo.Other" [formControlName]="control.key"></app-other-form>
         </div>
       </ng-container>

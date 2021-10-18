@@ -164,8 +164,8 @@ export class OrderReportComponent implements OnInit {
     return result;
   }
 
-  get pickupPoint() {
-    const data =  this.data[FormControlName.PickupPoint];
+  get deliveryPoint() {
+    const data =  this.data[FormControlName.DeliveryPoint];
 
     if (!data) {
       return;

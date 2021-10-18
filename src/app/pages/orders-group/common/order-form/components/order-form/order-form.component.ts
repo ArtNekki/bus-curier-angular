@@ -32,7 +32,7 @@ import {CargoType, CourierMode, Service} from '../../../../../../core/interfaces
 })
 export class OrderFormComponent extends SubFormComponent implements OnInit, OnChanges {
   @Input() departure: any;
-  @Input() pickup: any;
+  @Input() delivery: any;
   @Input() types: Array<CargoType>;
   @Input() services: Array<Service>;
 

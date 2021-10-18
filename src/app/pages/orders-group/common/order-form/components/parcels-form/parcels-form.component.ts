@@ -30,7 +30,7 @@ import {CourierMode} from '../../../../../../core/interfaces/calculator';
 
 export class ParcelsFormComponent extends SubFormComponent implements OnInit {
   @Input() departure: any;
-  @Input() pickup: any;
+  @Input() delivery: any;
 
   public FormFieldError = fieldError;
 

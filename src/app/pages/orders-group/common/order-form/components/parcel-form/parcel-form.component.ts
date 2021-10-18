@@ -27,7 +27,7 @@ import {Subscription} from 'rxjs';
 })
 export class ParcelFormComponent extends SubFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() departure: any;
-  @Input() pickup: any;
+  @Input() delivery: any;
 
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
@@ -85,8 +85,8 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
       this.departure = changes.departure.currentValue;
     }
 
-    if (changes.pickup && changes.pickup.currentValue) {
-      this.pickup = changes.pickup.currentValue;
+    if (changes.delivery && changes.delivery.currentValue) {
+      this.delivery = changes.delivery.currentValue;
     }
 
     if (this.formGroup) {
@@ -98,17 +98,17 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
   }
 
   setLimit() {
-    const cityLimits = this.getLimitsOfCity(this.pickup.cityId);
+    const cityLimits = this.getLimitsOfCity(this.delivery.cityId);
     const standardWeight = 20;
     const standardDimensionsSum = 130;
     const officeLimits = this.departure.officeId === '2' || this.departure.officeId === '3'
-    || this.pickup.officeId === '2' || this.pickup.officeId === '3';
+    || this.delivery.officeId === '2' || this.delivery.officeId === '3';
     let maxWeight = 100;
 
     if (cityLimits) {
       maxWeight = cityLimits.maxWeight || maxWeight;
       this.maxDimensionsSum = cityLimits.maxDimensionsSum || this.maxDimensionsSum;
-    } else if (officeLimits || this.pickup.courier || this.departure.courier) {
+    } else if (officeLimits || this.delivery.courier || this.departure.courier) {
       maxWeight = standardWeight;
       this.maxDimensionsSum = standardDimensionsSum;
     } else {
