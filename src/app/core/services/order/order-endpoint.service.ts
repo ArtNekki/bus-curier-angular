@@ -26,4 +26,9 @@ export class OrderEndpointService  extends EndpointFactory {
     return this.execute(this.http.get(`${this.url}/gettracking/${environment.api_key}/${id}`, this.getRequestHeaders()),
       () => this.getTracking(id));
   }
+
+  sendOrder<T>(data): Observable<T> {
+    return this.execute(this.http.post<T>(`${this.url}`, JSON.stringify(data), this.getRequestHeaders()),
+      () => this.sendOrder(data));
+  }
 }

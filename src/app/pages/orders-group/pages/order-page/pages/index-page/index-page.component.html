@@ -29,7 +29,7 @@
           <app-recipient-form [author]="form.value.steps[0].author" [formControlName]="FormControlName.Recipient"></app-recipient-form>
         </div>
         <div *ngIf="currentStep === FormStep.Four" [formGroup]="steps[FormStep.Four]" [@fadeIn]="">
-          <app-order-report [data]="formatFormValue(form.value)"></app-order-report>
+<!--          <app-order-report [data]="formatFormValue(form.value)"></app-order-report>-->
           <section class="form__section">
             <div class="form__fieldset">
               <div class="form__field">
@@ -63,4 +63,10 @@
     </form>
   </div>
   <app-sidebar [form]="formData"></app-sidebar>
+  <div *ngIf="isLoading" style="
+      position: fixed;top: 0;left: 0;right: 0; bottom: 0; z-index: 101;
+      display: flex;justify-content: center;align-items: center;
+      background-color: rgba(0, 0, 0, 0.5)">
+    <app-loader></app-loader>
+  </div>
 </div>

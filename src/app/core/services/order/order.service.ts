@@ -4,6 +4,7 @@ import {OrderEndpointService} from './order-endpoint.service';
 import {delay, map} from 'rxjs/operators';
 import {OrderTracking} from '../../interfaces/order';
 import {Observable, throwError} from 'rxjs';
+import {UtilsService} from '../utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import {Observable, throwError} from 'rxjs';
 export class OrderService {
 
   constructor(private http: HttpClient,
+              private utilsService: UtilsService,
               private endpoint: OrderEndpointService) { }
 
   getDetails(id) {
@@ -28,5 +30,19 @@ export class OrderService {
             return data;
           }
         }));
+  }
+
+  sendOrder(data) {
+    return this.endpoint.sendOrder(data)
+      .pipe(
+        delay(2000),
+        map((result: any) => {
+          if (!this.utilsService.getObjectKey(result).length) {
+            throw new Error(result);
+          } else {
+            return result;
+          }
+        })
+      );
   }
 }

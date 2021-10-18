@@ -10,6 +10,7 @@ import {LocalStorageService} from '../../../../../../core/services/local-storage
 import {debounceTime, delay, pairwise, take} from 'rxjs/operators';
 import {Observable, Subscription} from 'rxjs';
 import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
+import {OrderService} from '../../../../../../core/services/order/order.service';
 
 @Component({
   selector: 'app-index-page',
@@ -47,7 +48,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   };
 
   public formData;
-  public orderSuccess = true;
+  public isLoading = false;
 
   private departureSub: Subscription;
   private deliverySub: Subscription;
@@ -55,6 +56,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   constructor(
     public authService: AuthService,
+    public orderService: OrderService,
     private router: Router,
     private simpleModal: SimpleModalService,
     private localStorage: LocalStorageService,
@@ -231,12 +233,46 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     };
   }
 
+
   completeOrder() {
-    if (this.orderSuccess) {
-      this.router.navigate(['orders', 'order', 'new', 'id', 'done']);
-    } else {
-      this.confirmRetry();
-    }
+    this.isLoading = true;
+
+    const formValue = this.formatFormValue(this.form.value);
+
+    const orders = formValue.orders.orders.map((order) => {
+      const activeCargoData = order.cargo[order.activeCargo];
+
+      return {
+        'cargo_type': order.activeCargo,
+        'cargo_count': !activeCargoData.length ? activeCargoData.count : '',
+        'dimensions': activeCargoData.length ? activeCargoData : '',
+        'services': []
+      };
+    });
+
+    const data = {
+      'api-key': '8aab09f6-c5b3-43be-8895-153ea164984e',
+      'site_id': '1',
+      'sending_date': formValue[FormControlName.DeparturePoint].date,
+      'start_city': formValue[FormControlName.DeparturePoint].location,
+      'end_city': formValue[FormControlName.DeliveryPoint].location,
+      'sender_name': formValue.sender.fio,
+      'sender_phone': formValue.sender.tel,
+      'sender_passport': formValue.sender[FormControlName.RusPassport],
+      'recipient_name': formValue.recipient.fio,
+      'recipient_phone': formValue.recipient.tel,
+      'orders': orders
+    };
+
+    this.orderService.sendOrder(data)
+      .subscribe((result) => {
+        this.isLoading = false;
+        this.router.navigate(['orders', 'order', 'new', 'id', 'done']);
+      },
+      (error) => {
+        this.isLoading = false;
+        this.confirmRetry();
+      });
   }
 
   confirmRetry() {
