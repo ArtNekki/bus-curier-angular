@@ -270,7 +270,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
       return {
         cargo_type: order.activeCargo,
-        cargo_count: !activeCargoData.length ? activeCargoData.count : '',
+        cargo_count: activeCargoData.length ? this.calcService.getParcelPlaces(activeCargoData) : activeCargoData.count,
         dimensions: activeCargoData.length ? activeCargoData : '',
         services
       };
