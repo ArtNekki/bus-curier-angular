@@ -214,7 +214,6 @@ export class CalculatorService {
 
   getServicesId(order) {
     const packages = order.package || [];
-    const services = (order.services && order.services.items) || [];
 
     const packageIds = Object.entries(packages)
       .map(([key, value]: [string, any]) => {
@@ -235,19 +234,29 @@ export class CalculatorService {
       .reduce((acc, val) => acc.concat(val), [])
       .filter((el) => el);
 
-    const servicesIds = services
+    const servicesIds = this.formatServices(order)
+      .map((service) => service.id);
+    console.log('servicesIds', servicesIds);
+      // .filter((id) => id);
+
+    return [...packageIds, ...servicesIds];
+  }
+
+  formatServices(order) {
+    const services = (order.services && order.services.items) || [];
+
+    return services
       .map((obj) => {
         const id = Object.entries(obj)[0][0];
         const checked = Object.entries(obj)[0][1];
+        const value = obj.sum || obj.tel;
 
         const formattedId = (id === 'insurance' && obj.sum)
           ? obj.sum.split(' ').join('') >= this.Insurance.LIMIT_MIN
             ? this.Service.INSURANCE_30 : this.Service.INSURANCE_15 : id;
 
-        return checked ?  formattedId : null;
+        return checked && value ?  {id: formattedId, value} : null;
       })
-      .filter((id) => id);
-
-    return [...packageIds, ...servicesIds];
+      .filter((service) => service);
   }
 }

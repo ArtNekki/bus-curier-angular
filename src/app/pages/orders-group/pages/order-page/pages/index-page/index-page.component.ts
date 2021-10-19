@@ -11,6 +11,7 @@ import {debounceTime, delay, pairwise, take} from 'rxjs/operators';
 import {Observable, Subscription} from 'rxjs';
 import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
 import {OrderService} from '../../../../../../core/services/order/order.service';
+import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 
 @Component({
   selector: 'app-index-page',
@@ -47,6 +48,11 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     courier: false
   };
 
+  private Courier = {
+    pickup: '1',
+    delivery: '2'
+  };
+
   public formData;
   public isLoading = false;
 
@@ -56,7 +62,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   constructor(
     public authService: AuthService,
-    public orderService: OrderService,
+    private orderService: OrderService,
+    private calcService: CalculatorService,
     private router: Router,
     private simpleModal: SimpleModalService,
     private localStorage: LocalStorageService,
@@ -233,14 +240,26 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     };
   }
 
-
   completeOrder() {
     this.isLoading = true;
 
     const formValue = this.formatFormValue(this.form.value);
+    const courierFromId = this.Courier[formValue[FormControlName.DeparturePoint].options
+    && formValue[FormControlName.DeparturePoint].options.active];
+    const courierToId = this.Courier[formValue[FormControlName.DeliveryPoint].options
+    && formValue[FormControlName.DeliveryPoint].options.active];
+
+    console.log('formValue', formValue);
 
     const orders = formValue.orders.orders.map((order) => {
       const activeCargoData = order.cargo[order.activeCargo];
+
+      let servicesId = this.calcService.getServicesId(order);
+
+      servicesId = [courierToId, courierFromId, ...servicesId]
+        .filter((id) => id);
+
+      console.log('servicesId', servicesId);
 
       return {
         'cargo_type': order.activeCargo,
@@ -266,6 +285,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
     this.orderService.sendOrder(data)
       .subscribe((result) => {
+        console.log('result', result);
         this.isLoading = false;
         this.router.navigate(['orders', 'order', 'new', 'id', 'done']);
       },
