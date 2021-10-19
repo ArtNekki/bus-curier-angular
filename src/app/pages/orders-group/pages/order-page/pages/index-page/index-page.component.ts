@@ -251,36 +251,43 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
     console.log('formValue', formValue);
 
-    const orders = formValue.orders.orders.map((order) => {
+    const orders = formValue.orders.orders.map((order, i) => {
       const activeCargoData = order.cargo[order.activeCargo];
 
-      let servicesId = this.calcService.getServicesId(order);
-
-      servicesId = [courierToId, courierFromId, ...servicesId]
-        .filter((id) => id);
-
-      console.log('servicesId', servicesId);
+      const services = [
+        courierFromId && i === 0 ? {
+          id: courierFromId,
+          value: this.formatCourierData(formValue[FormControlName.DeparturePoint].options.pickup)
+        } : null,
+        courierToId && i === 0 ? {
+          id: courierToId,
+          value: this.formatCourierData(formValue[FormControlName.DeliveryPoint].options.delivery)
+        } : null,
+        ...this.calcService.getPackageIds(order)
+          .map((id) => ({id, value: ''})),
+        ...this.calcService.getAddServices(order)
+      ].filter((service) => service);
 
       return {
-        'cargo_type': order.activeCargo,
-        'cargo_count': !activeCargoData.length ? activeCargoData.count : '',
-        'dimensions': activeCargoData.length ? activeCargoData : '',
-        'services': []
+        cargo_type: order.activeCargo,
+        cargo_count: !activeCargoData.length ? activeCargoData.count : '',
+        dimensions: activeCargoData.length ? activeCargoData : '',
+        services
       };
     });
 
     const data = {
       'api-key': '8aab09f6-c5b3-43be-8895-153ea164984e',
-      'site_id': '1',
-      'sending_date': formValue[FormControlName.DeparturePoint].date,
-      'start_city': formValue[FormControlName.DeparturePoint].location,
-      'end_city': formValue[FormControlName.DeliveryPoint].location,
-      'sender_name': formValue.sender.fio,
-      'sender_phone': formValue.sender.tel,
-      'sender_passport': formValue.sender[FormControlName.RusPassport],
-      'recipient_name': formValue.recipient.fio,
-      'recipient_phone': formValue.recipient.tel,
-      'orders': orders
+      site_id: '1',
+      sending_date: formValue[FormControlName.DeparturePoint].date,
+      start_city: formValue[FormControlName.DeparturePoint].location,
+      end_city: formValue[FormControlName.DeliveryPoint].location,
+      sender_name: formValue.sender.fio,
+      sender_phone: formValue.sender.tel,
+      sender_passport: formValue.sender[FormControlName.RusPassport],
+      recipient_name: formValue.recipient.fio,
+      recipient_phone: formValue.recipient.tel,
+      orders
     };
 
     this.orderService.sendOrder(data)
@@ -293,6 +300,12 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.confirmRetry();
       });
+  }
+
+  formatCourierData(data) {
+    return `
+    ул. ${data.street}, дом. ${data.building}, кв. ${data.apartment},
+    время прибытия: ${data['courier-time']}`;
   }
 
   confirmRetry() {

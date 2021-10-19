@@ -213,9 +213,19 @@ export class CalculatorService {
   }
 
   getServicesId(order) {
+
+
+    const packageIds = this.getPackageIds(order);
+    const servicesIds = this.getAddServices(order)
+      .map((service) => service.id);
+
+    return [...packageIds, ...servicesIds];
+  }
+
+  getPackageIds(order) {
     const packages = order.package || [];
 
-    const packageIds = Object.entries(packages)
+    return Object.entries(packages)
       .map(([key, value]: [string, any]) => {
         return value.filter((item) => {
           return item.count;
@@ -233,16 +243,9 @@ export class CalculatorService {
       })
       .reduce((acc, val) => acc.concat(val), [])
       .filter((el) => el);
-
-    const servicesIds = this.formatServices(order)
-      .map((service) => service.id);
-    console.log('servicesIds', servicesIds);
-      // .filter((id) => id);
-
-    return [...packageIds, ...servicesIds];
   }
 
-  formatServices(order) {
+  getAddServices(order) {
     const services = (order.services && order.services.items) || [];
 
     return services
