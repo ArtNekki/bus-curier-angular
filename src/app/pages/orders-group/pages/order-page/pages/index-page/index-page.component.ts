@@ -87,7 +87,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
           [FormControlName.DeliveryPoint]: new FormControl('', [Validators.required])
         }),
         new FormGroup({
-
+          [FormControlName.Comment]: new FormControl(''),
+          [FormControlName.Agree]: new FormControl('', [Validators.required])
         }),
       ])
     });
@@ -230,13 +231,16 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   }
 
   formatFormValue(obj) {
+
     return {
       [FormControlName.Author]: obj.steps[0].author,
       [FormControlName.Sender]: obj.steps[1].sender,
       [FormControlName.DeparturePoint]: obj.steps[1][FormControlName.DeparturePoint],
       orders: obj.steps[2].orders,
       [FormControlName.DeliveryPoint]: obj.steps[2][FormControlName.DeliveryPoint],
-      [FormControlName.Recipient]: obj.steps[2].recipient
+      [FormControlName.Recipient]: obj.steps[2].recipient,
+      [FormControlName.Comment]: obj.steps[3].comment,
+      [FormControlName.Agree]: obj.steps[3].agree
     };
   }
 
@@ -287,6 +291,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       sender_passport: formValue.sender[FormControlName.RusPassport],
       recipient_name: formValue.recipient.fio,
       recipient_phone: formValue.recipient.tel,
+      note: formValue.comment,
       orders
     };
 

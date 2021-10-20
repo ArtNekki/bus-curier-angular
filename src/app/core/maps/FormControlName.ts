@@ -95,5 +95,6 @@ export default {
   Item: 'item',
   OrderNumber: 'order-number',
   Meet: 'meet',
-  DeliveryPoint: 'delivery-point'
+  DeliveryPoint: 'delivery-point',
+  Comment: 'comment'
 };

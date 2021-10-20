@@ -34,9 +34,9 @@
             <div class="form__fieldset">
               <div class="form__field">
                 <label class="form__label">Комментарий к заявке</label>
-                <app-input type="textarea"></app-input>
+                <app-input type="textarea" [formControlName]="FormControlName.Comment"></app-input>
               </div>
-              <app-checkbox mods="sm">
+              <app-checkbox mods="sm" [formControlName]="FormControlName.Agree">
                 <ng-container class="text">
                   Нажимая кнопку «Отправить», я даю свое согласие на
                   <app-link href="#" mods="blue, in-text">обработку моих персональных данных</app-link>
@@ -51,7 +51,9 @@
           <svg-icon class="icon" src="assets/img/svg/back.svg" width="24" height="20"></svg-icon>
           Назад
         </app-btn>
-        <app-btn *ngIf="currentStep === FormStep.Four; else next" mods="lg" (click)="completeOrder()">
+<!--        invalid: {{}}-->
+        <app-btn *ngIf="currentStep === FormStep.Four; else next"
+                 mods="lg" (click)="completeOrder()" [disabled]="!steps[FormStep.Four].get(FormControlName.Agree).value">
           Оформить заявку
         </app-btn>
         <ng-template #next>
