@@ -56,8 +56,19 @@ import { LocationComponent } from './components/location/location.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { HelpBoxComponent } from './components/help-box/help-box.component';
 import {NgxTippyModule} from 'ngx-tippy-wrapper';
+import {
+  RECAPTCHA_SETTINGS,
+  RECAPTCHA_V3_SITE_KEY,
+  RecaptchaFormsModule,
+  RecaptchaModule,
+  RecaptchaSettings,
+  RecaptchaV3Module
+} from 'ng-recaptcha';
 
 // import { ɵs } from '@ng-select/ng-select;
+
+const RECAPTCHA_V3_STACKBLITZ_KEY = '6LeHBK0bAAAAAOQVTvBOWhfb08cQfUpFoSE3FsmP';
+const RECAPTCHA_V2_DUMMY_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
 
 @NgModule({
   imports: [
@@ -73,7 +84,10 @@ import {NgxTippyModule} from 'ngx-tippy-wrapper';
       libraries: ['places']
     }),
     NgxMaskModule.forRoot(options),
-    NgxTippyModule
+    NgxTippyModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    RecaptchaV3Module,
     // DeviceDetectorModule.forRoot(),
   ],
   exports: [
@@ -83,6 +97,9 @@ import {NgxTippyModule} from 'ngx-tippy-wrapper';
     NgxTippyModule,
     FormsModule,
     ReactiveFormsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    RecaptchaV3Module,
     BtnComponent,
     SelectComponent,
     CheckboxComponent,
@@ -156,7 +173,18 @@ import {NgxTippyModule} from 'ngx-tippy-wrapper';
     LoaderComponent,
     HelpBoxComponent,
     TabsComponent
-  ]
-  // providers: [NgSelectConfig, ɵs],
+  ],
+  providers: [
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: RECAPTCHA_V3_STACKBLITZ_KEY
+    },
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: RECAPTCHA_V2_DUMMY_KEY
+      } as RecaptchaSettings
+    }
+  ],
 })
 export class SharedModule { }

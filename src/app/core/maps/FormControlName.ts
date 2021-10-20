@@ -96,5 +96,6 @@ export default {
   OrderNumber: 'order-number',
   Meet: 'meet',
   DeliveryPoint: 'delivery-point',
-  Comment: 'comment'
+  Comment: 'comment',
+  Captcha: 'captcha'
 };

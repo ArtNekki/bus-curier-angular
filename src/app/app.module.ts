@@ -58,7 +58,6 @@ registerLocaleData(ruLocale, 'ru');
     AngularFireDatabaseModule,
     AngularFirestoreModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

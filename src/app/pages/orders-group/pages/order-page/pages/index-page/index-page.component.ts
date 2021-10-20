@@ -88,7 +88,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         }),
         new FormGroup({
           [FormControlName.Comment]: new FormControl(''),
-          [FormControlName.Agree]: new FormControl('', [Validators.required])
+          [FormControlName.Agree]: new FormControl('', [Validators.required]),
+          [FormControlName.Captcha]: new FormControl('', [Validators.required])
         }),
       ])
     });
@@ -358,5 +359,9 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     if (this.ordersSub) {
       this.ordersSub.unsubscribe();
     }
+  }
+
+  captchaResolved($event: string) {
+    console.log('captcha', $event);
   }
 }
