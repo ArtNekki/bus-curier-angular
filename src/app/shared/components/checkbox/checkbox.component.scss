@@ -46,6 +46,10 @@
         border-color: $gray-light-color;
       }
 
+      .checkbox--invalid & {
+        border-color: $red-color;
+      }
+
       .checkbox--inverted .checkbox__input:checked ~ & {
         background-color: $white-color;
       }
@@ -87,6 +91,10 @@
 
     .checkbox__input:disabled ~ .checkbox__body & {
       color: $gray-light-color;
+    }
+
+    .checkbox--invalid & {
+      color: $red-color;
     }
 
     .checkbox--sm & {

@@ -1,4 +1,4 @@
-<label [class]="cssClass">
+<label [class]="cssClass" [class.checkbox--invalid]="isInvalid">
   <input #checkbox type="checkbox"
          [id]="id" [name]="name" class="checkbox__input"
          [ngModel]="value" (ngModelChange)="changeValue($event)"
