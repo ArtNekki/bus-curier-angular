@@ -57,6 +57,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { HelpBoxComponent } from './components/help-box/help-box.component';
 import {NgxTippyModule} from 'ngx-tippy-wrapper';
 import {
+  RECAPTCHA_LANGUAGE,
   RECAPTCHA_SETTINGS,
   RECAPTCHA_V3_SITE_KEY,
   RecaptchaFormsModule,
@@ -184,7 +185,11 @@ const RECAPTCHA_V2_DUMMY_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
       useValue: {
         siteKey: RECAPTCHA_V2_DUMMY_KEY
       } as RecaptchaSettings
-    }
+    },
+    {
+      provide: RECAPTCHA_LANGUAGE,
+      useValue: 'ru'
+    },
   ],
 })
 export class SharedModule { }
