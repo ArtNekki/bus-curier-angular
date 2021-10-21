@@ -13,11 +13,7 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import {Router} from '@angular/router';
 import {CityFrom, CityTo} from '../../../../core/interfaces/calculator';
 import {Select} from '../../../../core/interfaces/form';
-
-const Department = {
-  Aleutskaya: '15',
-  Gogolya: '7'
-};
+import {VLOffice} from '../../../../core/maps/calculator';
 
 @Component({
   selector: 'app-index-form-calculator',
@@ -61,7 +57,7 @@ export class IndexFormCalculatorComponent implements OnInit, OnDestroy {
       .pipe(
         map<CityFrom, Select>((cities: any) => {
           return cities
-            .filter((city) => city.site_id !== Department.Aleutskaya && city.site_id !== Department.Gogolya)
+            .filter((city) => city.id !== VLOffice.Aleutskaya && city.id !== VLOffice.Gogolya)
             .map((city) => {
               // this.cityData[city.id] = city;
               return {value: city.id, name: city.name};

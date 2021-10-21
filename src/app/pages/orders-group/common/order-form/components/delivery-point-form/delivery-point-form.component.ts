@@ -164,7 +164,7 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
         map((offices: any) => {
           return offices
             .map((office) => {
-              return {value: office.id, name: office.address, delivery: office.delivery};
+              return {value: office.home_id || office.id, name: office.address, delivery: office.delivery};
             });
         })
 

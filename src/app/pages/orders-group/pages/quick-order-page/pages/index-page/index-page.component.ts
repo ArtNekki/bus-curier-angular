@@ -67,6 +67,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         pairwise()
       )
       .subscribe(([prev, next]) => {
+
         if (this.formData) {
           this.formData = this.form.value;
         }

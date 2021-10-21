@@ -6,6 +6,7 @@ import {SubFormComponent} from '../sub-form/sub-form.component';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {CourierMode, ParcelLimits} from '../../../../../../core/interfaces/calculator';
 import {Subscription} from 'rxjs';
+import {VLOffice} from '../../../../../../core/maps/calculator';
 
 @Component({
   selector: 'app-parcel-form',
@@ -101,8 +102,8 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
     const cityLimits = this.getLimitsOfCity(this.delivery.cityId);
     const standardWeight = 20;
     const standardDimensionsSum = 130;
-    const officeLimits = this.departure.officeId === '2' || this.departure.officeId === '3'
-    || this.delivery.officeId === '2' || this.delivery.officeId === '3';
+    const officeLimits = this.departure.officeId === VLOffice.Aleutskaya || this.departure.officeId === VLOffice.Gogolya
+    || this.delivery.officeId === VLOffice.Aleutskaya || this.delivery.officeId === VLOffice.Gogolya;
     let maxWeight = 100;
 
     if (cityLimits) {

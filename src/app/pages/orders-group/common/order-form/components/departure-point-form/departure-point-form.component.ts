@@ -14,11 +14,7 @@ import {concatAll, delay, first, map, take, tap} from 'rxjs/operators';
 import {ActivatedRoute, Params} from '@angular/router';
 import {CityFrom} from '../../../../../../core/interfaces/calculator';
 import {Select} from '../../../../../../core/interfaces/form';
-
-const Department = {
-  Aleutskaya: '15',
-  Gogolya: '7'
-};
+import {VLOffice} from '../../../../../../core/maps/calculator';
 
 @Component({
   selector: 'app-departure-point-form',
@@ -103,7 +99,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       .pipe(
         map((cities: any) => {
           return cities
-            .filter((city) => city.site_id !== Department.Aleutskaya && city.site_id !== Department.Gogolya);
+            .filter((city) => city.id !== VLOffice.Aleutskaya && city.id !== VLOffice.Gogolya);
         })
       );
   }
@@ -203,6 +199,18 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
             this.options.addControl(name, new FormControl(''));
           });
 
+          const departmentControl = this.options.get(FormControlName.Give);
+
+          if (departmentControl) {
+            departmentControl.valueChanges
+              .subscribe((data) => {
+                if (data.office === VLOffice.Rus
+                  || data.office === VLOffice.Aleutskaya || data.office === VLOffice.Gogolya) {
+                  this.formGroup.get(FormControlName.Location).setValue(data.office);
+                }
+              });
+          }
+
           this.options.get(FormControlName.Active).setValue(tabs[0]);
           this.getDepartments(id);
         }
@@ -214,7 +222,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       .pipe(
         map((offices: any) => {
           return offices.map((office) => {
-            return {value: office.id, name: office.address};
+            return {value: office.home_id || office.id, name: office.address};
           });
         })
       )

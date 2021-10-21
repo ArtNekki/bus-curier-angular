@@ -8,6 +8,7 @@ import {FormUtilsService} from '../../../../../../core/services/form-utils.servi
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {CargoType, CourierMode} from '../../../../../../core/interfaces/calculator';
 import {Select} from '../../../../../../core/interfaces/form';
+import {VLOffice} from '../../../../../../core/maps/calculator';
 
 @Component({
   selector: 'app-auto-parts-form',
@@ -84,11 +85,11 @@ export class AutoPartsFormComponent extends SubFormComponent implements OnInit, 
   }
 
   get departureOfficeLimits() {
-    return this.departure.officeId === '2' || this.departure.officeId === '3';
+    return this.departure.officeId === VLOffice.Aleutskaya || this.departure.officeId === VLOffice.Gogolya;
   }
 
   get deliveryOfficeLimits() {
-    return this.delivery.officeId === '2' || this.delivery.officeId === '3';
+    return this.delivery.officeId === VLOffice.Aleutskaya || this.delivery.officeId === VLOffice.Gogolya;
   }
 
   toggleTouched() {
