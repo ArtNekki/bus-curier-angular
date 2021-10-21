@@ -97,6 +97,11 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   loadCities() {
     return this.calculatorService.getCitiesFrom()
       .pipe(
+        tap((cities: any) => {
+          cities.forEach((city) => {
+            this.cityData[city.id] = city;
+          });
+        }),
         map((cities: any) => {
           return cities
             .filter((city) => city.id !== VLOffice.Aleutskaya && city.id !== VLOffice.Gogolya);
@@ -126,7 +131,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         map<CityFrom, Select>((cities: any) => {
           return cities
             .map((city) => {
-              this.cityData[city.id] = city;
               return {value: city.id, name: city.name};
             });
         })

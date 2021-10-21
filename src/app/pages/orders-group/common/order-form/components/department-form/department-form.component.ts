@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
@@ -63,11 +63,13 @@ export class DepartmentFormComponent extends SubFormComponent implements OnInit,
     }
   }
 
-  // writeValue(value: any): void {
-  //   if (value) {
-  //     super.writeValue(value);
-  //   } else if (this.formGroup) {
-  //     this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
-  //   }
-  // }
+  writeValue(value: any): void {
+    if (value) {
+      setTimeout(() => {
+        super.writeValue(value);
+      }, 0);
+    } else if (this.formGroup) {
+      // this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
+    }
+  }
 }
