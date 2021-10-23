@@ -83,10 +83,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       this.defaultCity = params.cityFromId;
     });
 
-    this.initLocation();
-    this.loadOffices();
-    this.initDate();
-
     super.ngOnInit();
   }
 
@@ -125,35 +121,52 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       );
   }
 
-  initLocation() {
+  initLocation(data) {
+    console.log('data', data);
+
     this.citiesSub = this.loadCities()
       .pipe(
         map<CityFrom, Select>((cities: any) => {
           return cities
             .map((city) => {
+
+              if ((data.location === VLOffice.Rus || data.location === VLOffice.Gogolya
+                || data.location === VLOffice.Aleutskaya) && city.site_id === '1') {
+                city.id = data.location;
+              }
+
               return {value: city.id, name: city.name};
             });
         })
       )
       .subscribe((cities: any) => {
-
         cities = cities.sort((a: Select, b: Select) => {
           return a.name.localeCompare(b.name);
         });
 
         this.cities = [{value: '', name: 'Выберите город'}, ...cities];
 
+        console.log('cities', cities);
+
+        // setTimeout(() => {
+        //   if (this.defaultCity) {
+        //     this.formGroup.get(FormControlName.Location).setValue(this.defaultCity);
+        //     this.setCity(this.defaultCity);
+        //   } else {
+        //     this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
+        //   }
+        // }, 0);
+
         setTimeout(() => {
-          if (this.defaultCity) {
-            this.formGroup.get(FormControlName.Location).setValue(this.defaultCity);
-            this.setCity(this.defaultCity);
+          if (data) {
+            this.formGroup.get(FormControlName.Location).setValue(data.location);
+            this.setCity(data.location);
           } else {
             this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
           }
+
+          super.writeValue(data);
         }, 0);
-
-        this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
-
       });
   }
 
@@ -236,15 +249,20 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   writeValue(value: any): void {
-    if (value) {
-      this.defaultCitySub = this.loadCities()
-        .pipe(delay(0))
-        .subscribe((cities) => {
-          this.setCity(value.location);
-          super.writeValue(value);
-          this.formGroup.reset(this.formGroup.value);
-        });
-    }
+    this.initLocation(value);
+    this.loadOffices();
+    this.initDate();
+
+    // if (value) {
+    //   console.log('write value', value);
+    //   this.defaultCitySub = this.loadCities()
+    //     .pipe(delay(0))
+    //     .subscribe((cities) => {
+    //       this.setCity(value.location);
+    //
+    //       this.formGroup.reset(this.formGroup.value);
+    //     });
+    // }
   }
 
   ngOnDestroy(): void {
