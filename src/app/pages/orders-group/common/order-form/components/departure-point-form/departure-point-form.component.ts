@@ -137,36 +137,28 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
               return {value: city.id, name: city.name};
             });
-        })
+        }),
+        map((cities: any) => {
+          const sorted = cities.sort((a: Select, b: Select) => {
+            return a.name.localeCompare(b.name);
+          });
+
+          return [{value: '', name: 'Выберите город'}, ...sorted];
+        }),
+        tap((cities: any) => {
+          this.cities = cities;
+        }),
+        delay(0)
       )
       .subscribe((cities: any) => {
-        cities = cities.sort((a: Select, b: Select) => {
-          return a.name.localeCompare(b.name);
-        });
+        if (data) {
+          this.formGroup.get(FormControlName.Location).setValue(data.location);
+          this.setCity(data.location);
+        } else {
+          this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
+        }
 
-        this.cities = [{value: '', name: 'Выберите город'}, ...cities];
-
-        console.log('cities', cities);
-
-        // setTimeout(() => {
-        //   if (this.defaultCity) {
-        //     this.formGroup.get(FormControlName.Location).setValue(this.defaultCity);
-        //     this.setCity(this.defaultCity);
-        //   } else {
-        //     this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
-        //   }
-        // }, 0);
-
-        setTimeout(() => {
-          if (data) {
-            this.formGroup.get(FormControlName.Location).setValue(data.location);
-            this.setCity(data.location);
-          } else {
-            this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
-          }
-
-          super.writeValue(data);
-        }, 0);
+        super.writeValue(data);
       });
   }
 
