@@ -154,7 +154,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       .subscribe((cities: any) => {
         if (data) {
           this.formGroup.get(FormControlName.Location).setValue(data.location);
-          this.getTabs(data.location);
+          this.setTabs(data.location);
         } else {
           this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
         }
@@ -184,7 +184,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     }
   }
 
-  getTabs(id: string) {
+  setTabs(id: string) {
     this.getOfficesById(id)
       .pipe(
         concatAll(),
@@ -205,6 +205,11 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
             this.options.addControl(name, new FormControl(''));
           });
 
+          this.options.get(FormControlName.Active).setValue(tabs[0]);
+        }
+      },
+        () => {},
+        () => {
           const departmentControl = this.options.get(FormControlName.Give);
 
           if (departmentControl) {
@@ -218,10 +223,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
             this.getDepartments(id);
           }
-
-          this.options.get(FormControlName.Active).setValue(tabs[0]);
-        }
-      });
+        });
   }
 
   getDepartments(id: string) {
