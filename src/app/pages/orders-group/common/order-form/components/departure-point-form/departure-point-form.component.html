@@ -11,7 +11,7 @@
       type="text"
       [items]="cities"
       id="departure-location"
-      (change)="setCity(formGroup.get(FormControlName.Location).value)"
+      (change)="getTabs(formGroup.get(FormControlName.Location).value)"
       [formControlName]="FormControlName.Location"
       [isInvalid]="(formGroup.get(FormControlName.Location).invalid
         && formGroup.get(FormControlName.Location).touched) && 'invalid'"

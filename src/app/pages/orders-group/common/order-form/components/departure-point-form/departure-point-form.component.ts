@@ -150,7 +150,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         tap((cities: any) => {
           if (data) {
             this.formGroup.get(FormControlName.Location).setValue(data.location);
-            this.setCity(data.location);
+            this.getTabs(data.location);
           } else {
             this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
           }
@@ -184,10 +184,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     }
   }
 
-  setCity(id: string) {
-    this.getTabs(id);
-  }
-
   getTabs(id: string) {
     this.getOfficesById(id)
       .pipe(
@@ -219,10 +215,11 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
                   this.formGroup.get(FormControlName.Location).setValue(data.office);
                 }
               });
+
+            this.getDepartments(id);
           }
 
           this.options.get(FormControlName.Active).setValue(tabs[0]);
-          this.getDepartments(id);
         }
       });
   }
@@ -243,17 +240,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
   writeValue(value: any): void {
     this.init(value);
-
-    // if (value) {
-    //   console.log('write value', value);
-    //   this.defaultCitySub = this.loadCities()
-    //     .pipe(delay(0))
-    //     .subscribe((cities) => {
-    //       this.setCity(value.location);
-    //
-    //       this.formGroup.reset(this.formGroup.value);
-    //     });
-    // }
   }
 
   ngOnDestroy(): void {
