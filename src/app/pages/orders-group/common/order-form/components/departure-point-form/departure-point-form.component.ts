@@ -121,9 +121,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       );
   }
 
-  initLocation(data) {
-    console.log('data', data);
-
+  init(data) {
     this.citiesSub = this.loadCities()
       .pipe(
         map<CityFrom, Select>((cities: any) => {
@@ -148,21 +146,24 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         tap((cities: any) => {
           this.cities = cities;
         }),
-        delay(0)
+        delay(0),
+        tap((cities: any) => {
+          if (data) {
+            this.formGroup.get(FormControlName.Location).setValue(data.location);
+            this.setCity(data.location);
+          } else {
+            this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
+          }
+        })
       )
-      .subscribe((cities: any) => {
-        if (data) {
-          this.formGroup.get(FormControlName.Location).setValue(data.location);
-          this.setCity(data.location);
-        } else {
-          this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
-        }
-
+      .subscribe(() => {
+        this.loadOffices();
+        this.setDate();
         super.writeValue(data);
       });
   }
 
-  initDate() {
+  setDate() {
     this.formGroup.get(FormControlName.Date).setValue(new Intl.DateTimeFormat('ru-Ru').format(new Date()));
     this.formGroup.get(FormControlName.Date).markAsDirty();
   }
@@ -241,9 +242,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   writeValue(value: any): void {
-    this.initLocation(value);
-    this.loadOffices();
-    this.initDate();
+    this.init(value);
 
     // if (value) {
     //   console.log('write value', value);

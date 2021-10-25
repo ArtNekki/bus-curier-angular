@@ -25,7 +25,7 @@ import {Select} from '../../../../../../core/interfaces/form';
     }
   ]
 })
-export class DepartmentFormComponent extends SubFormComponent implements OnInit, OnChanges {
+export class DepartmentFormComponent extends SubFormComponent implements OnInit {
   @Input() offices: Array<Select> = [];
 
   public FormFieldMeta = formFieldMeta;
@@ -48,28 +48,32 @@ export class DepartmentFormComponent extends SubFormComponent implements OnInit,
       [FormControlName.Office]: new FormControl('', [Validators.required])
     });
 
-    setTimeout(() => {
-      // this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
-    }, 0);
+    // setTimeout(() => {
+    //   // this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
+    // }, 0);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    const offices = changes.offices.currentValue;
-
-    if (offices.length && this.formGroup) {
-      setTimeout(() => {
-        // this.formGroup.get(FormControlName.Office).setValue(changes.offices.currentValue[0].value);
-      });
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   const offices = changes.offices.currentValue;
+  //
+  //   if (offices.length && this.formGroup) {
+  //     setTimeout(() => {
+  //       // this.formGroup.get(FormControlName.Office).setValue(changes.offices.currentValue[0].value);
+  //     });
+  //   }
+  // }
 
   writeValue(value: any): void {
     if (value) {
       setTimeout(() => {
+        this.formGroup.get(FormControlName.Office).setValue(value.office);
         super.writeValue(value);
       }, 0);
     } else if (this.formGroup) {
-      // this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
+      // console.log('blaaa');
+      setTimeout(() => {
+        this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
+      }, 0);
     }
   }
 }
