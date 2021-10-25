@@ -79,10 +79,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       [FormControlName.Date]: new FormControl('', [Validators.required]),
     });
 
-    this.route.queryParams.subscribe((params: Params) => {
-      this.defaultCity = params.cityFromId;
-    });
-
     this.loadOffices();
     this.setDate();
 
@@ -125,6 +121,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   init(cityId) {
+    console.log('cityId', cityId);
     return this.loadCities()
       .pipe(
         map<CityFrom, Select>((cities: any) => {
@@ -230,20 +227,26 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   writeValue(value: any): void {
-    console.log('value4444', value);
-    this.initSub = this.init(value.location)
-      .pipe(delay(0))
-      .subscribe((cities: any) => {
-        if (value) {
-          console.log('value', value);
-          this.formGroup.get(FormControlName.Location).setValue(value.location);
-          this.setTabs(value.location);
-        } else {
-          this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
-        }
 
-        super.writeValue(value);
-      });
+    this.route.queryParams
+      .subscribe((params: Params) => {
+
+        const cityId = params.cityFromId || (value && value.location);
+
+        this.initSub = this.init(cityId)
+          .pipe(delay(0))
+          .subscribe((cities: any) => {
+            if (cityId) {
+              console.log('value', value);
+              this.formGroup.get(FormControlName.Location).setValue(cityId);
+              this.setTabs(cityId);
+            } else {
+              this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
+            }
+
+            super.writeValue(value);
+        });
+    });
   }
 
   ngOnDestroy(): void {
