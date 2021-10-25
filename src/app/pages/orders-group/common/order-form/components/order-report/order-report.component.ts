@@ -197,8 +197,6 @@ export class OrderReportComponent implements OnInit {
   }
 
   formatCourier(data, target) {
-    console.log('order-report', 'data', data);
-    console.log('order-report', 'target', target);
     const obj =
       {
         [FormControlName.Address]: `ул. ${target.street}, д. ${target.building},кв. ${target.apartment}`,
@@ -253,15 +251,15 @@ export class OrderReportComponent implements OnInit {
   }
 
   formatDocs(item: any) {
-    return [{name: 'Количество', value: `${item} шт.`}];
+    return [{name: 'Документы', value: `${item} шт.`}];
   }
 
   formatAutoparts(obj: any) {
-    return [{name: 'Автозапчасть', value: `${this.types[obj.item].name} (${obj.count}шт.)`}];
+    return [{name: 'Автозапчасть', value: `${this.types[obj.item] && this.types[obj.item].name} (${obj.count}шт.)`}];
   }
 
   formatOther(obj: any) {
-    return [{name: 'Другое', value: `${this.types[obj.item].name} (${obj.count}шт.)`}];
+    return [{name: 'Другое', value: `${this.types[obj.item] && this.types[obj.item].name} (${obj.count}шт.)`}];
   }
 
   formatData(data) {
@@ -290,19 +288,20 @@ export class OrderReportComponent implements OnInit {
 
         return {
           id,
-          name: this.services[id].name,
+          name: this.services[id] && this.services[id].name,
           count: obj.count,
-          price: this.services[id].price,
-          params: this.services[id].property,
+          price: this.services[id] && this.services[id].price,
+          params: this.services[id] && this.services[id].property,
           type: this.PackageName[this.services[id].subgroup_id],
-          size: this.services[id].site_name
+          size: this.services[id] && this.services[id].site_name
         };
       })
       .map((obj) => {
         return `${obj.type} ${obj.size} (${obj.count} шт.)`;
       });
 
-    return [{name: 'Упаковка', value: list.join(', ')}];
+    return list.length ?
+      [{name: 'Упаковка', value: list.join(', ')}] : [{name: 'Упаковка', value: 'Нет'}];
   }
 
   formatServices(services: any) {
@@ -319,8 +318,8 @@ export class OrderReportComponent implements OnInit {
         return selected ? {
           id,
           value,
-          name: this.services[id].name,
-          price: this.services[id].price,
+          name: this.services[id] && this.services[id].name,
+          price: this.services[id] && this.services[id].price,
         } : null;
       })
       .filter((item) => item)
@@ -328,6 +327,6 @@ export class OrderReportComponent implements OnInit {
         return `${item.name}`;
       });
 
-    return [{name: 'Доп. услуги', value: list.join(', ')}];
+    return list.length ? [{name: 'Доп. услуги', value: list.join(', ')}] : [{name: 'Доп. услуги', value: 'Нет'}];
   }
 }
