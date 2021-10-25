@@ -57,7 +57,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   public offices$ = new BehaviorSubject([]);
   public cityData = {};
 
-  private citiesSub: Subscription;
+  private initSub: Subscription;
   private officesSub: Subscription;
   private departmentsSub: Subscription;
   private tabsSub: Subscription;
@@ -124,16 +124,16 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       );
   }
 
-  init(data) {
-    this.citiesSub = this.loadCities()
+  init(cityId) {
+    return this.loadCities()
       .pipe(
         map<CityFrom, Select>((cities: any) => {
           return cities
             .map((city) => {
 
-              if ((data.location === VLOffice.Rus || data.location === VLOffice.Gogolya
-                || data.location === VLOffice.Aleutskaya) && city.site_id === '1') {
-                city.id = data.location;
+              if ((cityId === VLOffice.Rus || cityId === VLOffice.Gogolya
+                || cityId === VLOffice.Aleutskaya) && city.site_id === '1') {
+                city.id = cityId;
               }
 
               return {value: city.id, name: city.name};
@@ -148,19 +148,8 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         }),
         tap((cities: any) => {
           this.cities = cities;
-        }),
-        delay(0)
-      )
-      .subscribe((cities: any) => {
-        if (data) {
-          this.formGroup.get(FormControlName.Location).setValue(data.location);
-          this.setTabs(data.location);
-        } else {
-          this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
-        }
-
-        super.writeValue(data);
-      });
+        })
+      );
   }
 
   setDate() {
@@ -241,12 +230,25 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   writeValue(value: any): void {
-    this.init(value);
+    console.log('value4444', value);
+    this.initSub = this.init(value.location)
+      .pipe(delay(0))
+      .subscribe((cities: any) => {
+        if (value) {
+          console.log('value', value);
+          this.formGroup.get(FormControlName.Location).setValue(value.location);
+          this.setTabs(value.location);
+        } else {
+          this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
+        }
+
+        super.writeValue(value);
+      });
   }
 
   ngOnDestroy(): void {
-    if (this.citiesSub) {
-      this.citiesSub.unsubscribe();
+    if (this.initSub) {
+      this.initSub.unsubscribe();
     }
 
     if (this.officesSub) {
