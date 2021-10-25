@@ -14,18 +14,17 @@ export class OrdersGroupComponent implements OnInit {
     private localStorage: LocalStorageService) { }
 
   ngOnInit(): void {
-    if (!(this.localStorage.get('cities') &&
-      this.localStorage.get('types') && this.localStorage.get('services') && this.localStorage.get('offices'))) {
+    if (!(this.localStorage.get('types')
+      && this.localStorage.get('services')
+      && this.localStorage.get('offices'))) {
       zip(
-        this.calcService.getCityTo('1', 0),
         this.calcService.getTypes('1', '1'),
         this.calcService.getServices('1'),
         this.calcService.getOffices()
-      ).subscribe((arr) => {
-        this.localStorage.set('cities', arr[0]),
-        this.localStorage.set('types', arr[1]),
-        this.localStorage.set('services', arr[2]);
-        this.localStorage.set('offices', arr[3]);
+      ).subscribe(([types, services, offices]) => {
+        this.localStorage.set('types', types),
+        this.localStorage.set('services', services);
+        this.localStorage.set('offices', offices);
       });
     }
   }

@@ -14,6 +14,7 @@ import {BehaviorSubject, combineLatest, Subscription, zip} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
 import {CityTo} from '../../../../../../core/interfaces/calculator';
 import {Select} from '../../../../../../core/interfaces/form';
+import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-delivery-point-form',
@@ -72,6 +73,7 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
               private route: ActivatedRoute,
+              private localStorage: LocalStorageService,
               private calcService: CalculatorService) {
     super();
   }
@@ -100,6 +102,9 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
   loadCities(id) {
     return this.calcService.getCityTo(id, 0)
       .pipe(
+        tap((cities) => {
+          this.localStorage.set('cities', cities);
+        }),
         map<CityTo, Select>((cities: any) => {
           return cities
             .map((city) => {
