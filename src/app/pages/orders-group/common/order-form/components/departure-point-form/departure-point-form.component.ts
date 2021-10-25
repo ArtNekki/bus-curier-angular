@@ -83,6 +83,9 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       this.defaultCity = params.cityFromId;
     });
 
+    this.loadOffices();
+    this.setDate();
+
     super.ngOnInit();
   }
 
@@ -146,19 +149,16 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         tap((cities: any) => {
           this.cities = cities;
         }),
-        delay(0),
-        tap((cities: any) => {
-          if (data) {
-            this.formGroup.get(FormControlName.Location).setValue(data.location);
-            this.getTabs(data.location);
-          } else {
-            this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
-          }
-        })
+        delay(0)
       )
-      .subscribe(() => {
-        this.loadOffices();
-        this.setDate();
+      .subscribe((cities: any) => {
+        if (data) {
+          this.formGroup.get(FormControlName.Location).setValue(data.location);
+          this.getTabs(data.location);
+        } else {
+          this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
+        }
+
         super.writeValue(data);
       });
   }
