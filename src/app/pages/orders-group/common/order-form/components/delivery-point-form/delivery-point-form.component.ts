@@ -103,7 +103,7 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
     return this.calcService.getCityTo(id, 0)
       .pipe(
         tap((cities) => {
-          this.localStorage.set('cities', cities);
+          this.localStorage.set('citiesTo', cities);
         }),
         map<CityTo, Select>((cities: any) => {
           return cities

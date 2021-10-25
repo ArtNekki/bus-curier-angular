@@ -1,11 +1,11 @@
-<div *ngIf="data && cities && services && types" class="order-result">
+<div *ngIf="data && citiesFrom && citiesTo && services && types" class="order-result">
   <div *ngIf="isLoading" class="order-result__loader">
     <app-loader></app-loader>
   </div>
   <ng-container>
     <div class="order-result__scroll">
       <div>
-        <ng-container *ngIf="utils.getObjectKey(cities).length">
+        <ng-container *ngIf="utils.getObjectKey(citiesFrom).length && utils.getObjectKey(citiesTo).length">
           <p class="gray">Направление перевозки:</p>
           <p>г. {{formatCityFrom(currentData)}} - г. {{formatCityTo(currentData)}}</p>
         </ng-container>

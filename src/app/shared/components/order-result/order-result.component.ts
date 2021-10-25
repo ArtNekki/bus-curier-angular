@@ -32,7 +32,8 @@ export class OrderResultComponent implements OnInit, OnChanges {
 
   public types = {};
   public services = {};
-  public cities = {};
+  public citiesFrom = {};
+  public citiesTo = {};
 
   Service = {
     SMS: '66',
@@ -63,7 +64,8 @@ export class OrderResultComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.cities = this.formUtils.getAllCities();
+    this.citiesFrom = this.formUtils.getCitiesFrom();
+    this.citiesTo = this.formUtils.getCitiesTo();
     this.services = this.formUtils.getAllServices();
     this.types = this.formUtils.getAllTypes();
   }
@@ -151,12 +153,12 @@ export class OrderResultComponent implements OnInit, OnChanges {
 
   formatCityFrom(data) {
     const id = data[FormControlName.DeparturePoint].location;
-    return this.cities[id] ? this.cities[id].name : '';
+    return this.citiesFrom[id] ? this.citiesFrom[id].name : '';
   }
 
   formatCityTo(data) {
     const id = data[FormControlName.DeliveryPoint].location;
-    return this.cities[id] ? this.cities[id].name : '';
+    return this.citiesTo[id] ? this.citiesTo[id].name : '';
   }
 
   calcCourierPrice(data, type) {

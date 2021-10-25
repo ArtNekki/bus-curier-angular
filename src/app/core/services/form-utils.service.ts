@@ -18,8 +18,12 @@ export class FormUtilsService {
     return 0;
   }
 
-  getAllCities() {
-    return this.getDefaultFromStorage('cities');
+  getCitiesFrom() {
+    return this.getDefaultFromStorage('citiesFrom');
+  }
+
+  getCitiesTo() {
+    return this.getDefaultFromStorage('citiesTo');
   }
 
   getAllTypes() {
