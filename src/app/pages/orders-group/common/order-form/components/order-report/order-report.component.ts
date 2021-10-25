@@ -81,10 +81,11 @@ export class OrderReportComponent implements OnInit {
     public formUtils: FormUtilsService) { }
 
   ngOnInit(): void {
-    if (this.localStorage.get('cities')) {
-      const cities = this.localStorage.get('cities');
+    const citiesFrom = this.localStorage.get('citiesFrom');
+    const citiesTo = this.localStorage.get('citiesTo');
 
-      cities.forEach((city: any) => {
+    if (citiesFrom && citiesTo) {
+      [...citiesFrom, citiesTo].forEach((city: any) => {
         this.cities[city.id] = city;
       });
     }
@@ -224,10 +225,13 @@ export class OrderReportComponent implements OnInit {
         if ((item[0] === FormControlName.Options)) {
           return null;
         } else {
+          console.log('item[1]', item[0],
+            (item[0] === FormControlName.Office) && item[1]
+            );
           return {
             name: this.Label[item[0]],
-            value: item[0] === FormControlName.Location && this.cities[item[1]].name
-                   || item[0] === FormControlName.Office && this.offices[item[1]].address
+            value: item[0] === FormControlName.Location && this.cities[item[1]] && this.cities[item[1]].name
+                   || item[0] === FormControlName.Office && this.offices[item[1]] && this.offices[item[1]].address
                    || item[1]};
         }
       })
