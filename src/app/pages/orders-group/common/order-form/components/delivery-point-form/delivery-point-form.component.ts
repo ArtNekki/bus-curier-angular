@@ -9,8 +9,8 @@ import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import addressPoints from 'src/app/mock-data/address-points';
 import fadeIn from '../../../../../../core/animations/fadeIn';
-import {delay, map, tap} from 'rxjs/operators';
-import {BehaviorSubject, Subscription} from 'rxjs';
+import {combineAll, delay, map, tap} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, Subscription, zip} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
 import {CityTo} from '../../../../../../core/interfaces/calculator';
 import {Select} from '../../../../../../core/interfaces/form';
@@ -82,10 +82,6 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
       [FormControlName.Options]: new FormGroup({
         [FormControlName.Active]: new FormControl('', [Validators.required]),
       })
-    });
-
-    this.route.queryParams.subscribe((params: Params) => {
-      this.defaultCity = params.cityToId;
     });
 
     this.loadOffices();
@@ -229,19 +225,24 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
   }
 
   writeValue(value: any): void {
-    this.calcService.cityFromId$
-      .subscribe((id: string) => {
+    combineLatest(
+      this.route.queryParams,
+      this.calcService.cityFromId$)
+      .pipe(delay(0))
+      .subscribe(([params, id]) => {
+        const cityFromId = params.cityFromId || id;
+        const cityToId = params.cityToId || (value && value.location);
 
-        if (!id) {
+        if (!cityFromId) {
           return;
         }
 
-        this.loadCities(id)
+        this.loadCities(cityFromId)
           .pipe(delay(0))
           .subscribe((cities: any) => {
-            if (value) {
-              this.formGroup.get(FormControlName.Location).setValue(value.location);
-              this.setCity(value.location);
+            if (cityToId) {
+              this.formGroup.get(FormControlName.Location).setValue(cityToId);
+              this.setCity(cityToId);
             } else {
               this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
             }
@@ -250,18 +251,7 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
             super.writeValue(value);
             this.clearOptions();
           });
-
       });
-
-    // if (value) {
-    //   this.defaultCitySub = this.calcService.getCityTo(this.currentCityId, 0)
-    //     .pipe(delay(0))
-    //     .subscribe((cities) => {
-    //       this.setCity(value.location);
-    //       super.writeValue(value);
-    //       this.formGroup.reset(this.formGroup.value);
-    //     });
-    // }
   }
 
   ngOnDestroy(): void {

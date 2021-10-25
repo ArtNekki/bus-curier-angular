@@ -62,6 +62,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   private departmentsSub: Subscription;
   private tabsSub: Subscription;
   private defaultCitySub: Subscription;
+  private routeSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -228,7 +229,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
   writeValue(value: any): void {
 
-    this.route.queryParams
+    this.routeSub = this.route.queryParams
       .subscribe((params: Params) => {
 
         const cityId = params.cityFromId || (value && value.location);
@@ -237,7 +238,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
           .pipe(delay(0))
           .subscribe((cities: any) => {
             if (cityId) {
-              console.log('value', value);
               this.formGroup.get(FormControlName.Location).setValue(cityId);
               this.setTabs(cityId);
             } else {
@@ -268,6 +268,10 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
     if (this.defaultCitySub) {
       this.defaultCitySub.unsubscribe();
+    }
+
+    if (this.routeSub) {
+      this.routeSub.unsubscribe();
     }
   }
 }
