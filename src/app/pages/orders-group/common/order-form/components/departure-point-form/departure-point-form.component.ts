@@ -185,7 +185,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   setTabs(id: string) {
-    this.getOfficesById(id)
+    this.tabsSub = this.getOfficesById(id)
       .pipe(
         concatAll(),
         first(),
