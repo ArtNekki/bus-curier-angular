@@ -238,15 +238,15 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
 
         this.loadCities(id)
           .pipe(delay(0))
-          .subscribe(() => {
+          .subscribe((cities: any) => {
             if (value) {
               this.formGroup.get(FormControlName.Location).setValue(value.location);
               this.setCity(value.location);
             } else {
-              this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
-              this.formGroup.get(FormControlName.Location).markAsTouched();
+              this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
             }
 
+            this.formGroup.get(FormControlName.Location).markAsTouched();
             super.writeValue(value);
             this.clearOptions();
           });
