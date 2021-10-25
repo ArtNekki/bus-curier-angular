@@ -122,6 +122,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
         if (next && (this.departure.cityId !== next.location)) {
           this.departure = Object.assign({}, this.departure, {cityId: next.location});
+          this.calcService.cityFromId$.next(next.location);
         }
 
         if (next) {

@@ -9,7 +9,7 @@ import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import addressPoints from 'src/app/mock-data/address-points';
 import fadeIn from '../../../../../../core/animations/fadeIn';
-import {delay, map} from 'rxjs/operators';
+import {delay, map, tap} from 'rxjs/operators';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
 import {CityTo} from '../../../../../../core/interfaces/calculator';
@@ -94,7 +94,6 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
   ngOnChanges(changes: SimpleChanges): void {
     if ((changes.cityFromId && changes.cityFromId.currentValue)) {
       this.currentCityId = changes.cityFromId.currentValue;
-      this.initLocation(changes.cityFromId.currentValue);
     }
   }
 
@@ -102,39 +101,28 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
     return this.formGroup.get(FormControlName.Options) as FormGroup;
   }
 
-  initLocation(id: string) {
-    this.citiesSub = this.calcService.getCityTo(id, 0)
+  loadCities(id) {
+    return this.calcService.getCityTo(id, 0)
       .pipe(
         map<CityTo, Select>((cities: any) => {
           return cities
             .map((city) => {
               this.cityData[city.id] = city;
               return {value: city.id, name: city.name};
-            });
-        })
-      )
-      .subscribe((cities: any) => {
-        if (cities.length) {
-
-          cities = cities.sort((a: Select, b: Select) => {
+          });
+        }),
+        map((cities: any) => {
+          const sorted = cities.sort((a: Select, b: Select) => {
             return a.name.localeCompare(b.name);
           });
 
-          this.cities = [{value: '', name: 'Выберите город'}, ...cities];
-
-          setTimeout(() => {
-            if (this.defaultCity) {
-              this.formGroup.get(FormControlName.Location).setValue(this.defaultCity);
-              this.setCity(this.defaultCity);
-            } else {
-              this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
-              this.formGroup.get(FormControlName.Location).markAsTouched();
-            }
-          }, 0);
-
-          this.clearOptions();
-        }
-      });
+          return [{value: '', name: 'Выберите город'}, ...sorted];
+        }),
+        tap((cities: any) => {
+          this.cities = cities;
+        }),
+        delay(0)
+    );
   }
 
   loadOffices() {
@@ -223,9 +211,9 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
 
   }
 
-  getControlsAmount(data) {
-    return Object.values(data).length;
-  }
+  // getControlsAmount(data) {
+  //   return Object.values(data).length;
+  // }
 
   findControl(name) {
     return Object.keys(this.options.controls).indexOf(name) !== -1;
@@ -241,15 +229,39 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
   }
 
   writeValue(value: any): void {
-    if (value) {
-      this.defaultCitySub = this.calcService.getCityTo(this.currentCityId, 0)
-        .pipe(delay(0))
-        .subscribe((cities) => {
-          this.setCity(value.location);
-          super.writeValue(value);
-          this.formGroup.reset(this.formGroup.value);
-        });
-    }
+    this.calcService.cityFromId$
+      .subscribe((id: string) => {
+
+        if (!id) {
+          return;
+        }
+
+        this.loadCities(id)
+          .pipe(delay(0))
+          .subscribe(() => {
+            if (value) {
+              this.formGroup.get(FormControlName.Location).setValue(value.location);
+              this.setCity(value.location);
+            } else {
+              this.formGroup.get(FormControlName.Location).setValue(this.cities[0].value);
+              this.formGroup.get(FormControlName.Location).markAsTouched();
+            }
+
+            super.writeValue(value);
+            this.clearOptions();
+          });
+
+      });
+
+    // if (value) {
+    //   this.defaultCitySub = this.calcService.getCityTo(this.currentCityId, 0)
+    //     .pipe(delay(0))
+    //     .subscribe((cities) => {
+    //       this.setCity(value.location);
+    //       super.writeValue(value);
+    //       this.formGroup.reset(this.formGroup.value);
+    //     });
+    // }
   }
 
   ngOnDestroy(): void {

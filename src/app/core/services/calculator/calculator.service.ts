@@ -17,6 +17,7 @@ interface TotalSum {
 
 export class CalculatorService {
   public courierDelivery$ = new BehaviorSubject('');
+  public cityFromId$ = new BehaviorSubject('');
 
   Service = {
     SMS: '66',
