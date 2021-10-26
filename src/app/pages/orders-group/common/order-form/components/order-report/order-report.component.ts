@@ -3,6 +3,8 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
+import {of, zip} from 'rxjs';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-order-report',
@@ -76,43 +78,42 @@ export class OrderReportComponent implements OnInit {
   public cities = {};
   public offices = {};
 
+  public contentLoaded = false;
+
   constructor(
     private localStorage: LocalStorageService,
     public formUtils: FormUtilsService) { }
 
   ngOnInit(): void {
-    const citiesFrom = this.localStorage.get('citiesFrom');
-    const citiesTo = this.localStorage.get('citiesTo');
+    zip(
+      of(this.localStorage.get('citiesFrom')),
+      of(this.localStorage.get('citiesTo')),
+      of(this.localStorage.get('types')),
+      of(this.localStorage.get('services')),
+      of(this.localStorage.get('offices'))
+    )
+      .pipe(
+        delay(0)
+      )
+      .subscribe(([citiesFrom, citiesTo, types, services, offices]) => {
+        this.contentLoaded = true;
 
-    if (citiesFrom && citiesTo) {
-      [...citiesFrom, citiesTo].forEach((city: any) => {
-        this.cities[city.id] = city;
+        [...citiesFrom, ...citiesTo].forEach((city: any) => {
+          this.cities[city.id] = city;
+        });
+
+        types.forEach((type: any) => {
+          this.types[type.id] = type;
+        });
+
+        services.forEach((service: any) => {
+          this.services[service.id] = service;
+        });
+
+        offices.forEach((office: any) => {
+          this.offices[office.home_id || office.office_id] = office;
+        });
       });
-    }
-
-    if (this.localStorage.get('types')) {
-      const types = this.localStorage.get('types');
-
-      types.forEach((type: any) => {
-        this.types[type.id] = type;
-      });
-    }
-
-    if (this.localStorage.get('services')) {
-      const services = this.localStorage.get('services');
-
-      services.forEach((service: any) => {
-        this.services[service.id] = service;
-      });
-    }
-
-    if (this.localStorage.get('offices')) {
-      const offices = this.localStorage.get('offices');
-
-      offices.forEach((office: any) => {
-        this.offices[office.id] = office;
-      });
-    }
   }
 
   get author() {
@@ -128,18 +129,6 @@ export class OrderReportComponent implements OnInit {
   get recipient() {
     return this.formatData(this.data.recipient);
   }
-
-  // get services() {
-  //   const data = this.data.steps[2][FormControlName.Services];
-  //
-  //   if (!data) {
-  //     return;
-  //   }
-  //
-  //   return Object.entries(data).map((el) => {
-  //     return {name: this.FormFieldMeta[el[0]].label, value: Object.values(el[1])[1]};
-  //   });
-  // }
 
   get departurePoint() {
     const data =  this.data[FormControlName.DeparturePoint];
@@ -207,8 +196,7 @@ export class OrderReportComponent implements OnInit {
   }
 
   formatOffice(data, target) {
-    const obj = {[FormControlName.Office]: target.office};
-
+    const obj = {[FormControlName.Office]: target && target.office};
     return this.formatPointData(Object.assign(data, obj));
   }
 
@@ -219,18 +207,19 @@ export class OrderReportComponent implements OnInit {
 
   formatPointData(obj) {
     return Object.entries(obj)
-      .map((item: [string, string]) => {
-        if ((item[0] === FormControlName.Options)) {
+      .map(([key, value]) => {
+        if ((key === FormControlName.Options)) {
           return null;
         } else {
-          console.log('item[1]', item[0],
-            (item[0] === FormControlName.Office) && item[1]
-            );
-          return {
-            name: this.Label[item[0]],
-            value: item[0] === FormControlName.Location && this.cities[item[1]] && this.cities[item[1]].name
-                   || item[0] === FormControlName.Office && this.offices[item[1]] && this.offices[item[1]].address
-                   || item[1]};
+
+          if (value) {
+
+            return {
+              name: this.Label[key],
+              value: (key === FormControlName.Location && (this.cities[value.toString()].name))
+                || (key === FormControlName.Office && (this.offices[value.toString()].address))
+                || value};
+          }
         }
       })
       .filter((item) => item);

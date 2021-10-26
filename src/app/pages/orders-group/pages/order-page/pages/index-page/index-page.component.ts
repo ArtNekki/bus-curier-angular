@@ -233,7 +233,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   }
 
   formatFormValue(obj) {
-
     return {
       [FormControlName.Author]: obj.steps[0].author,
       [FormControlName.Sender]: obj.steps[1].sender,
@@ -254,8 +253,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     && formValue[FormControlName.DeparturePoint].options.active];
     const courierToId = this.Courier[formValue[FormControlName.DeliveryPoint].options
     && formValue[FormControlName.DeliveryPoint].options.active];
-
-    console.log('formValue', formValue);
 
     const orders = formValue.orders.orders.map((order, i) => {
       const activeCargoData = order.cargo[order.activeCargo];
@@ -284,7 +281,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
     const data = {
       'api-key': '8aab09f6-c5b3-43be-8895-153ea164984e',
-      site_id: '1',
       sending_date: formValue[FormControlName.DeparturePoint].date,
       start_city: formValue[FormControlName.DeparturePoint].location,
       end_city: formValue[FormControlName.DeliveryPoint].location,
@@ -297,6 +293,9 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       orders
     };
 
+
+    console.log('sendData', data);
+
     this.orderService.sendOrder(data)
       .subscribe((result) => {
         console.log('result', result);
@@ -304,6 +303,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         this.router.navigate(['orders', 'order', 'new', 'id', 'done']);
       },
       (error) => {
+        console.log('error', error);
         this.isLoading = false;
         this.confirmRetry();
       });

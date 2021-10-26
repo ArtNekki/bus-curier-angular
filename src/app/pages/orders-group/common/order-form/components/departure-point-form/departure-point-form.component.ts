@@ -122,7 +122,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   init(cityId) {
-    console.log('cityId', cityId);
     return this.loadCities()
       .pipe(
         map<CityFrom, Select>((cities: any) => {
@@ -218,7 +217,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       .pipe(
         map((offices: any) => {
           return offices.map((office) => {
-            return {value: office.home_id || office.id, name: office.address};
+            return {value: office.home_id || office.office_id, name: office.address};
           });
         })
       )
