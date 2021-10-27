@@ -158,6 +158,7 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
         })
 
       )
+      .pipe(delay(0))
       .subscribe((offices: any) => {
         if (offices.length) {
           this.options.addControl(FormControlName.Get, new FormControl('', [Validators.required]));
