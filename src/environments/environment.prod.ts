@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: 'AIzaSyBn4my8mkySLnBi2fbuZZcmadCdycF9AsI',
+    apiKey: '8aab09f6-c5b3-43be-8895-153ea164984e',
     authDomain: 'bus-curier.firebaseapp.com',
     projectId: 'bus-curier',
     storageBucket: 'bus-curier.appspot.com',
