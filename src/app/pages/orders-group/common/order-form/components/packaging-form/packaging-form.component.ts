@@ -29,7 +29,7 @@ import {Service} from '../../../../../../core/interfaces/calculator';
     }
   ]
 })
-export class PackagingFormComponent extends SubFormComponent implements OnInit, OnDestroy, OnChanges {
+export class PackagingFormComponent extends SubFormComponent implements OnInit, OnDestroy {
   @Input() services: Array<Service> = [];
 
   public FormFieldMeta = formFieldMeta;
@@ -59,13 +59,13 @@ export class PackagingFormComponent extends SubFormComponent implements OnInit, 
     this.setPackage(this.services);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-
-    if (changes.services && changes.services.currentValue.length && this.formGroup) {
-      this.clearPackage();
-      this.setPackage(changes.services.currentValue);
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //
+  //   if (changes.services && changes.services.currentValue.length && this.formGroup) {
+  //     this.clearPackage();
+  //     this.setPackage(changes.services.currentValue);
+  //   }
+  // }
 
   setPackage(arr: Array<Service>) {
 

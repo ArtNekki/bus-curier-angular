@@ -31,7 +31,7 @@ import {Service} from '../../../../../../core/interfaces/calculator';
     ])
   ])]
 })
-export class ServicesFormComponent extends SubFormComponent implements OnInit, OnChanges {
+export class ServicesFormComponent extends SubFormComponent implements OnInit {
   @Input() services: Array<Service> = [];
 
   public FormControlName = FormControlName;
@@ -70,12 +70,12 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
     this.setServices(this.services);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.services && changes.services.currentValue.length && this.formGroup) {
-      this.items.clear();
-      this.setServices(changes.services.currentValue);
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (changes.services && changes.services.currentValue.length && this.formGroup) {
+  //     this.items.clear();
+  //     this.setServices(changes.services.currentValue);
+  //   }
+  // }
 
   setServices(arr: Array<Service>) {
 
