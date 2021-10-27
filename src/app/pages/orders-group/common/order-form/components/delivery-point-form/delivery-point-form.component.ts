@@ -9,7 +9,7 @@ import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import addressPoints from 'src/app/mock-data/address-points';
 import fadeIn from '../../../../../../core/animations/fadeIn';
-import {combineAll, delay, map, tap} from 'rxjs/operators';
+import {combineAll, debounceTime, delay, map, tap} from 'rxjs/operators';
 import {BehaviorSubject, combineLatest, Subscription, zip} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
 import {CityTo} from '../../../../../../core/interfaces/calculator';
@@ -158,7 +158,9 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
         })
 
       )
-      .pipe(delay(0))
+      .pipe(
+        debounceTime(0), // quick's form's trigger to valid
+        delay(0))
       .subscribe((offices: any) => {
         if (offices.length) {
           this.options.addControl(FormControlName.Get, new FormControl('', [Validators.required]));
