@@ -4,8 +4,8 @@ import {DefaultSimpleModalOptionConfig, defaultSimpleModalOptions, SimpleModalMo
 import {SharedModule} from '../shared/shared.module';
 import {SignInModalComponent} from './sign-in-modal/sign-in-modal.component';
 import {LoginModalComponent} from './login-modal/login-modal.component';
-import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
-import { InvoiceDoneComponent } from './invoice-done/invoice-done.component';
+import { CreateInvoiceModalComponent } from './create-invoice-modal/create-invoice-modal.component';
+import { InvoiceDoneModalComponent } from './invoice-done-modal/invoice-done-modal.component';
 import { OrderModalComponent } from './order-modal/order-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
@@ -15,8 +15,8 @@ import { ManagerCallModalComponent } from './manager-call-modal/manager-call-mod
   declarations: [
     LoginModalComponent,
     SignInModalComponent,
-    CreateInvoiceComponent,
-    InvoiceDoneComponent,
+    CreateInvoiceModalComponent,
+    InvoiceDoneModalComponent,
     OrderModalComponent,
     ConfirmModalComponent,
     AlertModalComponent,

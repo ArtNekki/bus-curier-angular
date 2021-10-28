@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SimpleModalService} from 'ngx-simple-modal';
-import {CreateInvoiceComponent} from '../../../../modals/create-invoice/create-invoice.component';
+import {CreateInvoiceModalComponent} from '../../../../modals/create-invoice-modal/create-invoice-modal.component';
 import {OrderModalComponent} from '../../../../modals/order-modal/order-modal.component';
 import {ManagerCallModalComponent} from '../../../../modals/manager-call-modal/manager-call-modal.component';
 import {ActivatedRoute, Params, Router} from '@angular/router';
@@ -34,7 +34,7 @@ export class AccountComponent implements OnInit {
   }
 
   showInvoiceModal() {
-    this.modalService.addModal(CreateInvoiceComponent);
+    this.modalService.addModal(CreateInvoiceModalComponent);
   }
 
   showOrderModal() {

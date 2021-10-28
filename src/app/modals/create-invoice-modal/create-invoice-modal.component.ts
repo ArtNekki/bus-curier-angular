@@ -4,14 +4,14 @@ import fieldError from '../../core/form/fieldError';
 import {UtilsService} from '../../core/services/utils.service';
 import {SimpleModalComponent, SimpleModalService} from 'ngx-simple-modal';
 import FormControlName from 'src/app/core/maps/FormControlName';
-import {InvoiceDoneComponent} from '../invoice-done/invoice-done.component';
+import {InvoiceDoneModalComponent} from '../invoice-done-modal/invoice-done-modal.component';
 
 @Component({
-  selector: 'app-create-invoice',
-  templateUrl: './create-invoice.component.html',
-  styleUrls: ['./create-invoice.component.scss']
+  selector: 'app-create-invoice-modal',
+  templateUrl: './create-invoice-modal.component.html',
+  styleUrls: ['./create-invoice-modal.component.scss']
 })
-export class CreateInvoiceComponent extends SimpleModalComponent<null, null> implements OnInit, OnDestroy {
+export class CreateInvoiceModalComponent extends SimpleModalComponent<null, null> implements OnInit, OnDestroy {
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
 
@@ -33,7 +33,7 @@ export class CreateInvoiceComponent extends SimpleModalComponent<null, null> imp
   }
 
   showDoneModal() {
-    this.modalService.addModal(InvoiceDoneComponent);
+    this.modalService.addModal(InvoiceDoneModalComponent);
   }
 
   onSubmit() {
