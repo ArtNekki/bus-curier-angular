@@ -5,7 +5,7 @@ import fieldError from '../../core/form/fieldError';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {UtilsService} from '../../core/services/utils.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {SignInComponent} from '../sign-in/sign-in.component';
+import {SignInModalComponent} from '../sign-in-modal/sign-in-modal.component';
 import {AuthService} from '../../core/services/auth/auth.service';
 import {Router} from '@angular/router';
 import firebase from 'firebase';
@@ -43,7 +43,7 @@ export class LoginModalComponent extends SimpleModalComponent<null, null> implem
 
   showSignInModal(e) {
     e.preventDefault();
-    this.modalService.addModal(SignInComponent);
+    this.modalService.addModal(SignInModalComponent);
   }
 
   onSubmit() {

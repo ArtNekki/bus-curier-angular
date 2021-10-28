@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {DefaultSimpleModalOptionConfig, defaultSimpleModalOptions, SimpleModalModule} from 'ngx-simple-modal';
 import {SharedModule} from '../shared/shared.module';
-import {SignInComponent} from './sign-in/sign-in.component';
+import {SignInModalComponent} from './sign-in-modal/sign-in-modal.component';
 import {LoginModalComponent} from './login-modal/login-modal.component';
 import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
 import { InvoiceDoneComponent } from './invoice-done/invoice-done.component';
@@ -14,7 +14,7 @@ import { ManagerCallModalComponent } from './manager-call-modal/manager-call-mod
 @NgModule({
   declarations: [
     LoginModalComponent,
-    SignInComponent,
+    SignInModalComponent,
     CreateInvoiceComponent,
     InvoiceDoneComponent,
     OrderModalComponent,

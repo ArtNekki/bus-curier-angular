@@ -5,7 +5,7 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import UserType from 'src/app/core/maps/UserType';
 import {AuthService} from '../../../../../../core/services/auth/auth.service';
 import {LoginModalComponent} from '../../../../../../modals/login-modal/login-modal.component';
-import {SignInComponent} from '../../../../../../modals/sign-in/sign-in.component';
+import {SignInModalComponent} from '../../../../../../modals/sign-in-modal/sign-in-modal.component';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
@@ -69,7 +69,7 @@ export class AuthorFormComponent extends SubFormComponent implements OnInit {
 
   showSignInModal(e) {
     e.preventDefault();
-    this.modalService.addModal(SignInComponent);
+    this.modalService.addModal(SignInModalComponent);
   }
 
   showAlertModal() {

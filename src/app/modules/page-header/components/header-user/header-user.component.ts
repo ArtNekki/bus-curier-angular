@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
 import dropdown from '../../../../core/animations/dropdown';
 import {AuthService} from '../../../../core/services/auth/auth.service';
-import {SignInComponent} from '../../../../modals/sign-in/sign-in.component';
+import {SignInModalComponent} from '../../../../modals/sign-in-modal/sign-in-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {LoginModalComponent} from '../../../../modals/login-modal/login-modal.component';
 import {Router} from '@angular/router';
@@ -39,7 +39,7 @@ export class HeaderUserComponent implements OnInit {
 
   showSignInModal(e) {
     e.preventDefault();
-    this.modalService.addModal(SignInComponent);
+    this.modalService.addModal(SignInModalComponent);
     this.isOpen = false;
   }
 

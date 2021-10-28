@@ -12,12 +12,12 @@ import User = firebase.User;
 import fadeIn from '../../core/animations/fadeIn';
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss'],
+  selector: 'app-sign-in-modal',
+  templateUrl: './sign-in-modal.component.html',
+  styleUrls: ['./sign-in-modal.component.scss'],
   animations: [fadeIn]
 })
-export class SignInComponent extends SimpleModalComponent<null, null> implements OnInit, OnDestroy {
+export class SignInModalComponent extends SimpleModalComponent<null, null> implements OnInit, OnDestroy {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
