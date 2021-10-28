@@ -1,0 +1,36 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.cities-block {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 30px;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  &__letter {
+    font-family: $font-family;
+    font-size: 24px;
+    line-height: 1.2;
+    color: #999999;
+  }
+
+  &__list {
+    @include list-clear();
+  }
+
+  &__name {
+    font-family: $font-family--secondary;
+    font-size: 16px;
+    line-height: 1.2;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+}

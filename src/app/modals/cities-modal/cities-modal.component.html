@@ -1,0 +1,15 @@
+<app-modal mods="lg" title="Населенные пункты получения" (close)="close()">
+  <form action="#" class="form form--no-margin" autocomplete="off">
+    <div class="form__fieldset">
+      <div class="form__field">
+        <label for="city-name" class="form__label form__label--light">Или введите название города</label>
+        <app-input id="city-name" type="text" placeholder="Например, Артем"></app-input>
+      </div>
+    </div>
+    <div class="cities-list">
+      <div class="cities-list__scroll">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </form>
+</app-modal>

@@ -1,14 +1,14 @@
 <ul class="coverage-list">
-  <li class="coverage-list__item" data-count="9">
+  <li class="coverage-list__item" [attr.data-count]="citiesFrom ? citiesFrom.length : 0">
     <p>Пунктов отправления<br class="br br--show-xs" />в ключевых городах <br class="br br--show-lg" /> региона</p>
     <div class="coverage-list__link">
-      <!--          {{> info-link name="Список пунктов отправления"}}-->
+      <app-link (click)="showCitiesModal($event, citiesFrom)">Список пунктов отправления</app-link>
     </div>
   </li>
-  <li class="coverage-list__item" data-count="50">
+  <li class="coverage-list__item" [attr.data-count]="citiesTo ? citiesTo.length : 0">
     <p>Населенных пунктов<br class="br br--show-xs" /> для получения ваших<br class="br br--show-lg" /> посылок в <br class="br br--show-xs br--hide-lg" />Приморье</p>
     <div class="coverage-list__link">
-      <!--          {{> info-link name="Список пунктов получения"}}-->
+      <app-link (click)="showCitiesModal($event, citiesTo)">Список пунктов получения</app-link>
     </div>
   </li>
   <li class="coverage-list__item" data-count="58">

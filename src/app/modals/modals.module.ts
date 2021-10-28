@@ -10,6 +10,7 @@ import { OrderModalComponent } from './order-modal/order-modal.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { ManagerCallModalComponent } from './manager-call-modal/manager-call-modal.component';
+import { CitiesModalComponent } from './cities-modal/cities-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ManagerCallModalComponent } from './manager-call-modal/manager-call-mod
     OrderModalComponent,
     ConfirmModalComponent,
     AlertModalComponent,
-    ManagerCallModalComponent
+    ManagerCallModalComponent,
+    CitiesModalComponent
   ],
   imports: [
     CommonModule,

@@ -65,6 +65,8 @@ import {
   RecaptchaSettings,
   RecaptchaV3Module
 } from 'ng-recaptcha';
+import { CitiesBlockComponent } from './components/cities-block/cities-block.component';
+import { CitiesListComponent } from './components/cities-list/cities-list.component';
 
 // import { ɵs } from '@ng-select/ng-select;
 
@@ -133,7 +135,9 @@ const RECAPTCHA_V2_DUMMY_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     ReportComponent,
     LoaderComponent,
     HelpBoxComponent,
-    TabsComponent
+    TabsComponent,
+    CitiesBlockComponent,
+    CitiesListComponent
   ],
   declarations: [
     BtnComponent,
@@ -173,7 +177,9 @@ const RECAPTCHA_V2_DUMMY_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     LocationComponent,
     LoaderComponent,
     HelpBoxComponent,
-    TabsComponent
+    TabsComponent,
+    CitiesBlockComponent,
+    CitiesListComponent
   ],
   providers: [
     {

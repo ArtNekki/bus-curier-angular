@@ -1,0 +1,21 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+.cities-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  &__scroll {
+    display: grid;
+    flex-shrink: 0;
+    flex-grow: 1;
+    grid-template-columns: repeat(2, 1fr);
+    height: 300px;
+  }
+}
+
