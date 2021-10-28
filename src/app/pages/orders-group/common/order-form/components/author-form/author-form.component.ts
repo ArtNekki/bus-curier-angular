@@ -4,7 +4,7 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import UserType from 'src/app/core/maps/UserType';
 import {AuthService} from '../../../../../../core/services/auth/auth.service';
-import {LoginComponent} from '../../../../../../modals/login/login.component';
+import {LoginModalComponent} from '../../../../../../modals/login-modal/login-modal.component';
 import {SignInComponent} from '../../../../../../modals/sign-in/sign-in.component';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import fadeIn from '../../../../../../core/animations/fadeIn';
@@ -64,7 +64,7 @@ export class AuthorFormComponent extends SubFormComponent implements OnInit {
 
   showLoginModal(e) {
     e.preventDefault();
-    this.modalService.addModal(LoginComponent);
+    this.modalService.addModal(LoginModalComponent);
   }
 
   showSignInModal(e) {

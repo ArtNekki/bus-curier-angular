@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth/auth.service';
-import {LoginComponent} from '../../modals/login/login.component';
+import {LoginModalComponent} from '../../modals/login-modal/login-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
 
 @Injectable({
@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
   showLoginModal() {
-    this.modalService.addModal(LoginComponent).subscribe((result) => {
+    this.modalService.addModal(LoginModalComponent).subscribe((result) => {
       this.router.navigate(['/account', 'index'], {
 
       });

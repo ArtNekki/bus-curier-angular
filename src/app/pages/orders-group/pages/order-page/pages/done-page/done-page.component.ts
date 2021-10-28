@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {Router} from '@angular/router';
-import {LoginComponent} from '../../../../../../modals/login/login.component';
+import {LoginModalComponent} from '../../../../../../modals/login-modal/login-modal.component';
 
 @Component({
   selector: 'app-done-page',
@@ -20,7 +20,7 @@ export class DonePageComponent implements OnInit {
 
   showLoginModal() {
     // e.preventDefault();
-    this.modalService.addModal(LoginComponent);
+    this.modalService.addModal(LoginModalComponent);
   }
 
   goToIndex() {

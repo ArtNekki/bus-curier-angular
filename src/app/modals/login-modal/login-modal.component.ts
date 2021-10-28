@@ -11,11 +11,11 @@ import {Router} from '@angular/router';
 import firebase from 'firebase';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-login-modal',
+  templateUrl: './login-modal.component.html',
+  styleUrls: ['./login-modal.component.scss']
 })
-export class LoginComponent extends SimpleModalComponent<null, null> implements OnInit, OnDestroy  {
+export class LoginModalComponent extends SimpleModalComponent<null, null> implements OnInit, OnDestroy  {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
