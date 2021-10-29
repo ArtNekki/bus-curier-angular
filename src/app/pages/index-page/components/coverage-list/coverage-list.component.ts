@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {CitiesModalComponent} from '../../../../modals/cities-modal/cities-modal.component';
 import {CalculatorService} from '../../../../core/services/calculator/calculator.service';
-import {zip} from 'rxjs';
+import {of, zip} from 'rxjs';
 import {CityFrom, CityTo} from '../../../../core/interfaces/calculator';
 
 @Component({
@@ -32,7 +32,7 @@ export class CoverageListComponent implements OnInit {
     e.preventDefault();
     this.modalService.addModal(CitiesModalComponent, {
       title,
-      cities
+      list: of(cities)
     });
   }
 
