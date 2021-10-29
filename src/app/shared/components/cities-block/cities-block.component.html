@@ -1,1 +1,6 @@
-<p>cities-block works!</p>
+<article class="cities-block">
+  <div class="cities-block__letter">{{letter}}</div>
+  <ul class="cities-block__list">
+    <li class="cities-block__name" *ngFor="let name of names">{{name}}</li>
+  </ul>
+</article>

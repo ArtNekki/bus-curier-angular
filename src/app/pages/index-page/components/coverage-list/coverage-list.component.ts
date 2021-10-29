@@ -28,9 +28,10 @@ export class CoverageListComponent implements OnInit {
       });
   }
 
-  showCitiesModal(e, cities) {
+  showCitiesModal(e, title, cities) {
     e.preventDefault();
     this.modalService.addModal(CitiesModalComponent, {
+      title,
       cities
     });
   }

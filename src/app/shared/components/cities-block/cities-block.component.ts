@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class CitiesBlockComponent implements OnInit {
   @Input() letter: string;
-  @Input() list: any;
+  @Input() names: any;
 
   constructor() { }
 

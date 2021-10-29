@@ -30,7 +30,6 @@
     box-sizing: border-box;
     border-radius: 10px;
     background-color: $white-color;
-    text-align: center;
 
     @include media-breakpoint-up(md) {
       padding-right: 50px;
