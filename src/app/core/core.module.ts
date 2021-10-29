@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FilterCitiesPipe } from './pipes/filter-cities.pipe';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    FilterCitiesPipe
+  ],
   imports: [
     CommonModule
   ]

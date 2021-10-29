@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SimpleModalComponent} from 'ngx-simple-modal';
 import {FormUtilsService} from '../../core/services/form-utils.service';
+import {FormControl} from '@angular/forms';
 
 export interface CitiesModel {
   cities: Array<any>;
@@ -19,12 +20,15 @@ export class CitiesModalComponent extends SimpleModalComponent<null, null> imple
                     'Ц', 'Ч', 'Ш', 'Щ', 'Э', 'Ю', 'Я'];
 
   public citiesGroups: any;
+  public searchField: FormControl;
 
   constructor(public formUtils: FormUtilsService) {
     super();
   }
 
   ngOnInit(): void {
+    this.searchField = new FormControl('', []);
+
     this.cities = this.cities
       .map((city) => {
         return city.name;
@@ -44,8 +48,18 @@ export class CitiesModalComponent extends SimpleModalComponent<null, null> imple
       });
 
     this.cities = [this.citiesGroups.splice(0, Math.ceil(this.citiesGroups.length / 2)), this.citiesGroups];
+
+    this.searchField.valueChanges
+      .subscribe((value) => {
+          console.log('value', value);
+          console.log('cities', this.cities);
+      });
   }
 
   ngOnDestroy(): void {
+  }
+
+  searchCity($event: Event) {
+    console.log('$event', $event);
   }
 }
