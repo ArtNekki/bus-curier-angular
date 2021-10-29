@@ -3,7 +3,7 @@ import {SimpleModalComponent} from 'ngx-simple-modal';
 import {FormUtilsService} from '../../core/services/form-utils.service';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, mergeMap, startWith} from 'rxjs/operators';
 import {CityFrom} from '../../core/interfaces/calculator';
 
 export interface CitiesModel {
@@ -32,17 +32,22 @@ export class CitiesModalComponent extends SimpleModalComponent<null, null> imple
   ngOnInit(): void {
     this.searchField = new FormControl('', []);
 
-    this.list
+    this.searchField.valueChanges
       .pipe(
+        startWith(this.searchField.value),
+        mergeMap((search) => {
+          return this.list
+            .pipe(
+              map((cities: any) => {
+                return cities.filter((city) => {
+                  return city.name.toLowerCase().includes(search.toLowerCase());
+                });
+              })
+            );
+        }),
         map((cities: Array<CityFrom> | any) => {
             return cities
               .map((city) => city.name);
-        }),
-        map((cities: Array<CityFrom> | any) => {
-          return cities
-            .filter((city) => {
-              return city.toLowerCase().includes(this.searchField.value.toLowerCase());
-            });
         }),
         map((cities: Array<CityFrom> | any) => {
           return this.letters.reduce((obj: object, letter: string) => {
@@ -84,12 +89,12 @@ export class CitiesModalComponent extends SimpleModalComponent<null, null> imple
     //
     // this.cities = [this.citiesGroups.splice(0, Math.ceil(this.citiesGroups.length / 2)), this.citiesGroups];
 
-    this.searchField.valueChanges
-      .pipe()
-      .subscribe((value) => {
-          console.log('value', value);
-          // console.log('cities', this.cities);
-      });
+    // this.searchField.valueChanges
+    //   .pipe()
+    //   .subscribe((value) => {
+    //       console.log('value', value);
+    //       // console.log('cities', this.cities);
+    //   });
   }
 
   ngOnDestroy(): void {
