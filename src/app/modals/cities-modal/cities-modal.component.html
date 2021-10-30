@@ -7,9 +7,14 @@
       </div>
     </div>
     <app-cities-list>
-      <div *ngFor="let col of cities">
-        <app-cities-block *ngFor="let group of col" [letter]="group[0]" [names]="group[1]"></app-cities-block>
-      </div>
+      <ng-container *ngFor="let col of cities">
+        <div *ngIf="col.length">
+          <app-cities-block *ngFor="let group of col" [letter]="group[0]" [names]="group[1]"></app-cities-block>
+        </div>
+      </ng-container>
+      <p *ngIf="!cities[0].length && !cities[1].length">
+        Ничего не найдено...
+      </p>
     </app-cities-list>
   </form>
 </app-modal>

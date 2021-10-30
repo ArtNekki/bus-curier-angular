@@ -14,8 +14,12 @@
     display: grid;
     flex-shrink: 0;
     flex-grow: 1;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     height: 300px;
+
+    @include media-breakpoint-up(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 }
 

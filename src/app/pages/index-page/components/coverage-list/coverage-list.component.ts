@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {CitiesModalComponent} from '../../../../modals/cities-modal/cities-modal.component';
 import {CalculatorService} from '../../../../core/services/calculator/calculator.service';
-import {of, zip} from 'rxjs';
+import {of, Subscription, zip} from 'rxjs';
 import {CityFrom, CityTo} from '../../../../core/interfaces/calculator';
 
 @Component({
@@ -10,16 +10,18 @@ import {CityFrom, CityTo} from '../../../../core/interfaces/calculator';
   templateUrl: './coverage-list.component.html',
   styleUrls: ['./coverage-list.component.scss']
 })
-export class CoverageListComponent implements OnInit {
+export class CoverageListComponent implements OnInit, OnDestroy {
   public citiesFrom: any = null;
   public citiesTo: any = null;
+
+  private sub: Subscription;
 
   constructor(
     private calcService: CalculatorService,
     private modalService: SimpleModalService) { }
 
   ngOnInit(): void {
-    zip(
+    this.sub = zip(
       this.calcService.getCitiesFrom(),
       this.calcService.getCityTo(1, 0))
       .subscribe(([citiesFrom, citiesTo]) => {
@@ -36,4 +38,7 @@ export class CoverageListComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

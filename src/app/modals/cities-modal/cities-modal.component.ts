@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SimpleModalComponent} from 'ngx-simple-modal';
 import {FormUtilsService} from '../../core/services/form-utils.service';
 import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {map, mergeMap, startWith} from 'rxjs/operators';
 import {CityFrom} from '../../core/interfaces/calculator';
 
@@ -17,13 +17,15 @@ export interface CitiesModel {
 })
 export class CitiesModalComponent extends SimpleModalComponent<null, null> implements OnInit, OnDestroy, CitiesModel  {
   public title: string;
-  public list: any;
+  public list: Array<CityFrom> | any;
   private letters = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'К',
                     'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х',
                     'Ц', 'Ч', 'Ш', 'Щ', 'Э', 'Ю', 'Я'];
 
-  public cities: any;
+  public cities: Array<CityFrom> | any;
   public searchField: FormControl;
+
+  private sub: Subscription;
 
   constructor(public formUtils: FormUtilsService) {
     super();
@@ -32,13 +34,13 @@ export class CitiesModalComponent extends SimpleModalComponent<null, null> imple
   ngOnInit(): void {
     this.searchField = new FormControl('', []);
 
-    this.searchField.valueChanges
+    this.sub = this.searchField.valueChanges
       .pipe(
         startWith(this.searchField.value),
-        mergeMap((search) => {
+        mergeMap((search: string) => {
           return this.list
             .pipe(
-              map((cities: any) => {
+              map((cities: Array<CityFrom> | any) => {
                 return cities.filter((city) => {
                   return city.name.toLowerCase().includes(search.toLowerCase());
                 });
@@ -65,42 +67,12 @@ export class CitiesModalComponent extends SimpleModalComponent<null, null> imple
             });
         }),
       )
-      .subscribe((cities) => {
+      .subscribe((cities: Array<CityFrom> | any) => {
         this.cities = [cities.splice(0, Math.ceil(cities.length / 2)), cities];
       });
-
-    // this.cities = this.cities
-    //   .map((city) => {
-    //     return city.name;
-    //   });
-    //
-    // this.citiesGroups = this.letters.reduce((obj: object, letter: string) => {
-    //   return {
-    //     ...obj,
-    //    [letter]: this.cities.filter((city) => city.charAt(0) === letter)
-    //   };
-    // }, {});
-    //
-    // this.citiesGroups = Object
-    //   .entries(this.citiesGroups)
-    //   .filter((obj: [string, any]) => {
-    //     return obj[1].length;
-    //   });
-    //
-    // this.cities = [this.citiesGroups.splice(0, Math.ceil(this.citiesGroups.length / 2)), this.citiesGroups];
-
-    // this.searchField.valueChanges
-    //   .pipe()
-    //   .subscribe((value) => {
-    //       console.log('value', value);
-    //       // console.log('cities', this.cities);
-    //   });
   }
 
   ngOnDestroy(): void {
-  }
-
-  searchCity($event: Event) {
-    console.log('$event', $event);
+    this.sub.unsubscribe();
   }
 }
