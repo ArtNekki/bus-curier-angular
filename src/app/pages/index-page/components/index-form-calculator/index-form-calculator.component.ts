@@ -65,7 +65,7 @@ export class IndexFormCalculatorComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((cities: any) => {
-        this.citiesFrom = [{value: '0', name: 'Выберите город'}, ...cities];
+        this.citiesFrom = [{value: '', name: 'Выберите город'}, ...cities];
 
         setTimeout(() => {
           this.form.get(FormControlName.CityFrom).setValue(this.citiesFrom[0].value);
@@ -97,7 +97,7 @@ export class IndexFormCalculatorComponent implements OnInit, OnDestroy {
       )
       .subscribe((cities: any) => {
         if (cities.length) {
-          this.citiesTo = [{value: '0', name: 'Выберите город'}, ...cities];
+          this.citiesTo = [{value: '', name: 'Выберите город'}, ...cities];
 
           setTimeout(() => {
             this.form.get(FormControlName.CityTo).setValue(this.citiesTo[0].value);

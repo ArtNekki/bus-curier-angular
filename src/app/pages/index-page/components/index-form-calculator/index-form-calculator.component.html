@@ -29,6 +29,6 @@
     </div>
   </div>
   <div style="margin-top: 30px;">
-    <app-btn type="submit" mods="lg, black, w-full">Рассчитать</app-btn>
+    <app-btn type="submit" mods="lg, black, w-full" [disabled]="form.invalid">Рассчитать</app-btn>
   </div>
 </form>
