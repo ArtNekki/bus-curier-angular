@@ -13,7 +13,7 @@ export class CommonService {
   sendMail(data) {
     return this.endpoint.sendMail(data)
       .pipe(
-        delay(5000),
+        delay(1500),
         map((result: boolean | string) => {
           if (result !== true) {
             throw new Error('Error');

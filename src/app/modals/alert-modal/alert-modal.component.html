@@ -2,6 +2,6 @@
   <svg-icon class="icon" src="assets/img/svg/circle-ok.svg" width="52" height="46"></svg-icon>
   <p [innerHTML]="message || 'Готово'"></p>
   <div style="margin-top: 20px;">
-    <app-btn type="button" mods="black" (click)="ok()">Хорошо, спасибо!</app-btn>
+    <app-btn type="button" mods="black" (click)="ok()">{{btnText || 'Хорошо, спасибо!'}}</app-btn>
   </div>
 </app-modal>

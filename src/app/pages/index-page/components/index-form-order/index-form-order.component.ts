@@ -58,13 +58,20 @@ export class IndexFormOrderComponent implements OnInit {
       email: '',
       message: data.message
     })
+    .pipe(take(1))
     .subscribe(() => {
       this.isLoading = false;
-      this.alert('Ваше сообщение отправлено!<br /> Мы свяжемся с Вами в ближайшее время!');
+      this.alert('Ваше сообщение отправлено!<br /> Мы свяжемся с Вами в ближайшее время!')
+        .pipe(take(1))
+        .subscribe(() => {
+          this.form.reset();
+        });
     },
     (error) => {
       this.isLoading = false;
-      this.alert('Ой, что-то пошло не так!<br /> Сообщение не было отправлено!');
+      this.alert('Ой, что-то пошло не так!<br /> Сообщение не было отправлено!', 'Понятно!')
+        .pipe(take(1))
+        .subscribe(() => {});
     });
   }
 
@@ -80,11 +87,10 @@ export class IndexFormOrderComponent implements OnInit {
     this.form.markAllAsTouched();
   }
 
-  alert(message) {
-    this.simpleModal.addModal(AlertModalComponent, {
-      message
-    }).pipe(take(1)).subscribe(() => {
-      this.form.reset();
+  alert(message, btnText = null) {
+    return this.simpleModal.addModal(AlertModalComponent, {
+      message,
+      btnText
     });
   }
 }

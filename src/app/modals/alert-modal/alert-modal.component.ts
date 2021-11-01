@@ -4,6 +4,7 @@ import {ConfirmModel} from '../confirm-modal/confirm-modal.component';
 
 export interface AlertModel {
   message: string;
+  btnText?: string;
 }
 
 @Component({
@@ -13,6 +14,7 @@ export interface AlertModel {
 })
 export class AlertModalComponent extends SimpleModalComponent<AlertModel, boolean> implements AlertModel {
   message: string;
+  btnText: string;
 
   constructor() {
     super();
