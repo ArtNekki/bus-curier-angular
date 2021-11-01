@@ -5,6 +5,7 @@ import fieldError from '../../../../core/form/fieldError';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UtilsService} from '../../../../core/services/utils.service';
+import {RecaptchaComponent, ReCaptchaV3Service} from 'ng-recaptcha';
 
 @Component({
   selector: 'app-index-form-order',
@@ -17,23 +18,34 @@ export class IndexFormOrderComponent implements OnInit {
   public FormFieldError = fieldError;
 
   public form: FormGroup;
-  public cities = cities;
 
-  constructor(public utils: UtilsService) { }
+  constructor(
+    public utils: UtilsService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      [FormControlName.CityStart]: new FormControl('', [Validators.required]),
-      [FormControlName.CityEnd]: new FormControl('', [Validators.required]),
+      [FormControlName.Fio]: new FormControl('', [Validators.required]),
+      [FormControlName.Tel]: new FormControl('', [Validators.required, Validators.pattern(/((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/)]),
       [FormControlName.Question]: new FormControl('', [Validators.required]),
-      [FormControlName.Agree]: new FormControl(''),
+      [FormControlName.Agree]: new FormControl(false, [Validators.required]),
+      [FormControlName.Captcha]: new FormControl('', [Validators.required])
     });
-
-    // cities.unshift({value: '', name: 'Не выбрано'});
-    this.cities = cities;
   }
 
   onSubmit() {
+    console.log('form', this.form.value);
+    this.form.markAllAsTouched();
+  }
+
+  captchaResolved(value: string) {
+
+    if (!value) {
+      this.form.get(FormControlName.Agree).setValue(false);
+    }
+  }
+
+  executeCaptcha(captcha) {
+    captcha.execute();
     this.form.markAllAsTouched();
   }
 }

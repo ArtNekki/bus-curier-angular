@@ -44,6 +44,7 @@
       .checkbox__input:disabled ~ & {
         background-color: $gray-light-color;
         border-color: $gray-light-color;
+        cursor: not-allowed;
       }
 
       .checkbox--invalid & {
@@ -90,7 +91,8 @@
     //color: #988300;
 
     .checkbox__input:disabled ~ .checkbox__body & {
-      color: $gray-light-color;
+      opacity: 0.3;
+      cursor: not-allowed;
     }
 
     .checkbox--invalid & {
@@ -135,7 +137,8 @@
     color: $gray-dark-color;
 
     .checkbox__input:disabled ~ .checkbox__body & {
-      color: $gray-light-color;
+      opacity: 0.3;
+      cursor: not-allowed;
     }
   }
 

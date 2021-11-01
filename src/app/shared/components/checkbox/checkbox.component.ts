@@ -20,7 +20,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
   @Input() isDisabled = false;
   @Input() isClear;
 
-  @Output() customChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() change: EventEmitter<any> = new EventEmitter<any>();
   @Output() clear: EventEmitter<any> = new EventEmitter<any>();
 
   public cssClass = 'checkbox';
@@ -38,7 +38,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
   changeValue(value) {
     this.value = value;
     this.onChange(value);
-    this.customChange.emit(value);
+    this.change.emit(value);
   }
 
   writeValue(value: boolean): void {

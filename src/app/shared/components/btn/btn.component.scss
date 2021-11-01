@@ -30,13 +30,16 @@
 
 
   &:disabled {
-    background-color: $gray-light-color--up-5 !important;
-    color: $gray-color--down-11 !important;
+    //background-color: $gray-light-color--up-5 !important;
+    //color: $gray-color--down-11 !important;
+    opacity: 0.2;
     cursor: not-allowed !important;
   }
 
   @include hover {
-    background-color: #FFEC23;
+    &:not(:disabled) {
+      background-color: #FFEC23;
+    }
   }
 
   @include focus {
@@ -54,7 +57,9 @@
     background-color: $black-color;
 
     @include hover {
-      background-color: #333333;
+      &:not(:disabled) {
+        background-color: #333333;
+      }
     }
   }
 
