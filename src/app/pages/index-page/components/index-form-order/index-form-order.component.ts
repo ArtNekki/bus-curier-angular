@@ -6,6 +6,11 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UtilsService} from '../../../../core/services/utils.service';
 import {RecaptchaComponent, ReCaptchaV3Service} from 'ng-recaptcha';
+import { CommonService } from 'src/app/core/services/common/common.service';
+import {environment} from '../../../../../environments/environment';
+import {AlertModalComponent} from '../../../../modals/alert-modal/alert-modal.component';
+import {take} from 'rxjs/operators';
+import {SimpleModalService} from 'ngx-simple-modal';
 
 @Component({
   selector: 'app-index-form-order',
@@ -18,9 +23,12 @@ export class IndexFormOrderComponent implements OnInit {
   public FormFieldError = fieldError;
 
   public form: FormGroup;
+  public isLoading = false;
 
   constructor(
-    public utils: UtilsService) { }
+    public utils: UtilsService,
+    private simpleModal: SimpleModalService,
+    private commonService: CommonService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -33,8 +41,31 @@ export class IndexFormOrderComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('form', this.form.value);
     this.form.markAllAsTouched();
+
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.isLoading = true;
+
+    const data = this.form.value;
+
+    this.commonService.sendMail({
+     'api-key': environment.api_key,
+      sender: data.fio,
+      phone: data.tel,
+      email: '',
+      message: data.message
+    })
+    .subscribe(() => {
+      this.isLoading = false;
+      this.alert('Ваше сообщение отправлено!<br /> Мы свяжемся с Вами в ближайшее время!');
+    },
+    (error) => {
+      this.isLoading = false;
+      this.alert('Ой, что-то пошло не так!<br /> Сообщение не было отправлено!');
+    });
   }
 
   captchaResolved(value: string) {
@@ -47,5 +78,13 @@ export class IndexFormOrderComponent implements OnInit {
   executeCaptcha(captcha) {
     captcha.execute();
     this.form.markAllAsTouched();
+  }
+
+  alert(message) {
+    this.simpleModal.addModal(AlertModalComponent, {
+      message
+    }).pipe(take(1)).subscribe(() => {
+      this.form.reset();
+    });
   }
 }

@@ -53,10 +53,13 @@
       background-color: $primary-color;
     }
 
-    .modal--content-justify-center & {
-      align-items: center;
-      text-align: center;
-    }
+    //.modal--content-justify-center & {
+    //  align-items: center;
+    //  text-align: center;
+    //}
+
+    align-items: center;
+    text-align: center;
   }
 
   &__close {
@@ -72,7 +75,7 @@
     font-family: $font-family;
     font-size: 26px;
     line-height: 32px;
-    //text-align: center;
+    text-align: center;
 
     @include media-breakpoint-up(md) {
       font-size: 32px;

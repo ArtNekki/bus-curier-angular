@@ -68,6 +68,13 @@
     </div>
   </div>
   <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--1-col-lg form__fieldset--2-col-xl">
-    <app-btn mods="lg, black, w-full" [disabled]="form.invalid">Отправить</app-btn>
+    <app-btn mods="lg, black, w-full" [disabled]="form.invalid || (!form.invalid && isLoading)">
+      <div *ngIf="isLoading; else text" style="height: inherit; display: flex; justify-content: center; align-items: center">
+        <app-loader mods="sm"></app-loader>
+      </div>
+      <ng-template #text>
+        Отправить
+      </ng-template>
+    </app-btn>
   </div>
 </form>

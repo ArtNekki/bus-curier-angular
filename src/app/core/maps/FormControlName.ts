@@ -97,5 +97,6 @@ export default {
   Meet: 'meet',
   DeliveryPoint: 'delivery-point',
   Comment: 'comment',
-  Captcha: 'captcha'
+  Captcha: 'captcha',
+  Message: 'message'
 };
