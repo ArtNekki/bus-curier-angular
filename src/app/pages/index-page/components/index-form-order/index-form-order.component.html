@@ -3,7 +3,7 @@
     <div class="form__field">
       <label class="form__label form__label--light"
              [class.form__label--invalid]="form.get(FormControlName.Fio).invalid && form.get(FormControlName.Fio).touched">
-        Ваше имя
+        Имя
         <sup class="form__required" *ngIf="form.get(FormControlName.Fio).errors && form.get(FormControlName.Fio).hasError('required')">*</sup>
       </label>
       <app-input type="text"
@@ -19,7 +19,7 @@
     <div class="form__field">
       <label class="form__label form__label--light"
              [class.form__label--invalid]="form.get(FormControlName.Tel).invalid && form.get(FormControlName.Tel).touched">
-        Ваш телефон
+        Телефон
         <sup class="form__required" *ngIf="form.get(FormControlName.Tel).errors && form.get(FormControlName.Tel).hasError('required')">*</sup>
       </label>
       <app-input type="tel"

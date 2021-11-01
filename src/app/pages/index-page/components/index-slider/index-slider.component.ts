@@ -27,8 +27,6 @@ export class IndexSliderComponent implements OnInit, AfterViewInit {
 
   initSwiper() {
 
-    //|| !this.swiper.initialized
-
     if (!this.swiper) {
       this.swiper = new Swiper(this.slider.nativeElement, indexSlider);
     }
