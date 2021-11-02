@@ -1,0 +1,13 @@
+@import 'src/assets/scss/core/functions';
+@import "src/assets/scss/core/breakpoints";
+@import "src/assets/scss/core/mixins";
+@import "src/variables";
+@import "src/assets/scss/settings";
+
+:host {
+  @include media-breakpoint-up(xl) {
+    position: sticky;
+    top: 100px;
+    display: block;
+  }
+}

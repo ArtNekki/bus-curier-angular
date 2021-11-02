@@ -13,6 +13,8 @@
 
   &__inner {
     @include container();
+
+    position: relative;
     padding-top: 40px;
 
     @include media-breakpoint-up(md) {
@@ -146,7 +148,7 @@
     }
   }
 
-  &__list svg,
+  &__list svg-icon,
   &__list span {
     vertical-align: middle;
     display: inline-block;
@@ -163,7 +165,6 @@
 
     &::before {
 
-
       @include media-breakpoint-up(lg) {
         content: "";
         position: absolute;
@@ -179,8 +180,8 @@
       }
 
       @include media-breakpoint-up(xl) {
-        top: 30%;
-        right: -35%;
+        top: 120px;
+        right: -53%;
         width: 810px;
         background-size: cover;
       }
@@ -192,6 +193,14 @@
 
     @include media-breakpoint-up(lg) {
       text-align: right;
+    }
+
+    @include media-breakpoint-up(xl) {
+      position: absolute;
+      top: 70px;
+      right: 0;
+      z-index: 10;
+      height: 1180px;
     }
   }
 }
