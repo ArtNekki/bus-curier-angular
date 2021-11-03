@@ -12,6 +12,7 @@ import { SelectComponent } from './components/select/select.component';
 import { SwitcherComponent } from './components/switcher/switcher.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
+import { SwiperModule } from 'swiper/angular';
 
 // mask
 import { NgxMaskModule, IConfig } from 'ngx-mask';
@@ -92,6 +93,7 @@ const RECAPTCHA_V2_DUMMY_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     RecaptchaModule,
     RecaptchaFormsModule,
     RecaptchaV3Module,
+    SwiperModule
     // DeviceDetectorModule.forRoot(),
   ],
   exports: [
@@ -138,7 +140,8 @@ const RECAPTCHA_V2_DUMMY_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     HelpBoxComponent,
     TabsComponent,
     CitiesBlockComponent,
-    CitiesListComponent
+    CitiesListComponent,
+    SwiperModule
   ],
   declarations: [
     BtnComponent,

@@ -1,12 +1,21 @@
 <div class="swiper swiper--examples">
-  <div #slider class="swiper-container">
-    <div class="swiper-wrapper">
-      <div *ngFor="let example of examples" class="swiper-slide">
-        <app-example [data]="example"></app-example>
-      </div>
-    </div>
-    <div id="index-pagination" class="swiper-pagination"></div>
-  </div>
-  <button id="index-button-prev" class="swiper-button swiper-button-prev"></button>
-  <button id="index-button-next" class="swiper-button swiper-button-next"></button>
+  <swiper #swiper
+    [config]="config"
+    (swiper)="onSwiper($event)"
+    (slideChange)="onSlideChange()"
+  >
+    <ng-template *ngFor="let example of examples" swiperSlide>
+      <app-example [data]="example"></app-example>
+    </ng-template>
+  </swiper>
+  <div class="swiper-pagination" slot="container-end"></div>
+  <button
+    class="swiper-btn swiper-btn-prev"
+    (click)="slidePrev()"
+    [disabled]="(swiper && swiper.swiperRef) && swiper.swiperRef.activeIndex === 0"></button>
+  <button
+    class="swiper-btn swiper-btn-next"
+    (click)="slideNext()"
+    [disabled]="(swiper && swiper.swiperRef) && swiper.swiperRef.activeIndex >= this.swiper.swiperRef.slides.length - 1"
+  ></button>
 </div>

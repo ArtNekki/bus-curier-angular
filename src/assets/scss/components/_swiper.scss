@@ -9,7 +9,7 @@
     }
   }
 
-  &-container {
+   &-container {
     .swiper--shadow & {
       //margin-left: -20px;
       padding: 40px 0 20px;
@@ -33,6 +33,7 @@
   }
 
   &-pagination {
+    position: relative;
     margin-top: 25px;
     display: flex;
     justify-content: center;
@@ -48,7 +49,7 @@
     }
   }
 
-  &-button {
+  &-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-5px);
@@ -63,7 +64,7 @@
     cursor: pointer;
 
     .swiper--examples & {
-      top: 105px;
+      top: 84px;
       transform: unset;
     }
 
@@ -96,6 +97,10 @@
         left: 10px;
         border-right-color: $black-color;
       }
+
+      //.swiper-btn:disabled &::before {
+      //  border-right-color: $gray-color;
+      //}
     }
 
     &-next {
@@ -106,15 +111,26 @@
         border-left-color:$black-color;
       }
     }
+
+    &:disabled {
+      background-color: $gray-light-color;
+      cursor: not-allowed;
+    }
+
+    @include hover {
+      &:not(:disabled) {
+        background-color: lighten($primary-color, 15%);
+      }
+    }
   }
 
   &-pagination-bullet {
-    margin:  0 12px 10px 12px;
+    margin: 0 12px 10px 12px;
     width: 6px;
     height: 6px;
     display: block;
     border-radius: 50%;
-    background-color: $gray-light-color;
+    background-color: $gray-dark-color;
     cursor: pointer;
 
     &-active {
