@@ -1,30 +1,63 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import Swiper from 'swiper';
-import {commonSlider} from '../../../core/config/slider';
+import Swiper, {Navigation, Pagination} from 'swiper';
+import {SwiperComponent} from 'swiper/angular';
+import {Example} from '../../../core/interfaces/common';
+import MediaQuery from '../../../core/utils/media';
+import SwiperCore from 'swiper';
+
+SwiperCore.use([Navigation, Pagination]);
 
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss']
 })
-export class SliderComponent implements OnInit, AfterViewInit {
-  @ViewChild('slider', {read: ElementRef}) slider: ElementRef;
+export class SliderComponent implements OnInit {
+  @ViewChild('swiper', { static: false }) swiper?: SwiperComponent;
 
-  public swiper: Swiper;
+  @Input() id: string;
+  @Input() data: any;
+
+  public config = null;
 
   constructor() { }
 
   ngOnInit(): void {
+
+    this.config = {
+      slidesPerView: 1,
+      spaceBetween: 15,
+      breakpointsInverse: true,
+      breakpoints: {
+        // [MediaQuery.S]: {
+        //   slidesPerView: 2,
+        //   spaceBetween: 15
+        // },
+        [MediaQuery.SM]: {
+          slidesPerView: 2,
+          spaceBetween: 15
+        },
+        [MediaQuery.MD]: {
+          slidesPerView: 3,
+          spaceBetween: 15
+        },
+        [MediaQuery.LG]: {
+          slidesPerView: 3,
+          spaceBetween: 30
+        }
+      },
+      // pagination: {
+      //   el: '.swiper-pagination',
+      //   clickable: true}
+    };
+
   }
 
-  ngAfterViewInit(): void {
-    this.initSwiper();
+  slideNext() {
+    this.swiper.swiperRef.slideNext(100);
   }
 
-  initSwiper() {
-
-    if (!this.swiper) {
-      this.swiper = new Swiper(this.slider.nativeElement, commonSlider);
-    }
+  slidePrev() {
+    this.swiper.swiperRef.slidePrev(100);
   }
 }

@@ -1,10 +1,21 @@
-<div class="swiper swiper--shadow">
-  <div #slider class="swiper-container">
-    <div class="swiper-wrapper">
-      <ng-content></ng-content>
-    </div>
-    <div class="swiper-pagination"></div>
-  </div>
-  <button class="swiper-button swiper-button-prev"></button>
-  <button class="swiper-button swiper-button-next"></button>
+<div *ngIf="id && data.length" class="swiper swiper--shadow">
+  <swiper #swiper
+          [config]="config"
+          [pagination]="{ el: '.' + id, clickable: true }"
+  >
+    <ng-template *ngFor="let item of data" swiperSlide>
+      <app-box [data]="item" [mods]="item.mods"></app-box>
+    </ng-template>
+  </swiper>
+  <div id="" [class]="'swiper-pagination ' + id"  slot="container-end"></div>
+  <button
+    class="swiper-btn swiper-btn-prev"
+    (click)="slidePrev()"
+    [disabled]="(swiper && swiper.swiperRef) && swiper.swiperRef.activeIndex === 0"></button>
+  <button
+    class="swiper-btn swiper-btn-next"
+    (click)="slideNext()"
+    [disabled]="(swiper && swiper.swiperRef) && swiper.swiperRef.activeIndex >= this.swiper.swiperRef.slides.length - 1"
+  ></button>
 </div>
+

@@ -12,12 +12,12 @@
    &-container {
     .swiper--shadow & {
       //margin-left: -20px;
-      padding: 40px 0 20px;
+      padding: 40px 0;
       //width: calc(100% + 40px);
 
-      @include media-breakpoint-up(lg) {
-        padding: 40px 0;
-      }
+      //@include media-breakpoint-up(lg) {
+      //  padding: 40px 0;
+      //}
     }
   }
 
@@ -32,27 +32,10 @@
     }
   }
 
-  &-pagination {
-    position: relative;
-    margin-top: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    //left: 50%;
-    //transform: translateX(-50%);
-    //width: 100%;
-    //display: grid;
-    //grid-template-columns: repeat(4, auto);
-
-    @include media-breakpoint-up(xl) {
-      display: none;
-    }
-  }
-
   &-btn {
     position: absolute;
     top: 50%;
-    transform: translateY(-5px);
+    transform: translateY(-50%);
     z-index: 10;
     padding: 0;
     width: $swiper-btn-size;
@@ -121,6 +104,22 @@
       &:not(:disabled) {
         background-color: lighten($primary-color, 15%);
       }
+    }
+  }
+
+  &-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .swiper--examples & {
+      position: relative;
+      margin-top: 25px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      display: none;
     }
   }
 

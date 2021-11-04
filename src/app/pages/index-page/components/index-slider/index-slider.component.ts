@@ -4,7 +4,7 @@ import examples from '../../../../mock-data/examples';
 import {Example} from '../../../../core/interfaces/common';
 import {SwiperComponent} from 'swiper/angular';
 
-SwiperCore.use([Navigation, Pagination]);
+// SwiperCore.use([Navigation, Pagination]);
 
 @Component({
   selector: 'app-index-slider',

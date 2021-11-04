@@ -4,11 +4,7 @@
   <div class="page-section__container">
     <h2 class="title title--md">Более 20 000 интернет-магазинов пользуются<br />нашими услугами в Приморском крае</h2>
     <p class="subtitle subtitle--md">С нами работает более 500 компаний, которые регулярно отправляют грузы по Приморскому краю и в Хабаровск.</p>
-    <app-slider>
-      <div *ngFor="let shop of shops" class="swiper-slide">
-        <app-box [data]="shop" [mods]="shop.mods"></app-box>
-      </div>
-    </app-slider>
+    <app-slider id="shops" [data]="shops"></app-slider>
   </div>
 </section>
 
@@ -16,11 +12,7 @@
   <div class="page-section__container">
     <h2 class="title title--md">Мы представляем официальные пункты выдачи<br />междунарожных курьерских служб</h2>
     <p class="subtitle subtitle--md">С нами работает более 500 компаний, которые регулярно отправляют грузы по Приморскому краю и в Хабаровск.</p>
-    <app-slider>
-      <div *ngFor="let point of pickPoints" class="swiper-slide">
-        <app-box [data]="point" [mods]="point.mods"></app-box>
-      </div>
-    </app-slider>
+    <app-slider id="points" [data]="pickPoints"></app-slider>
   </div>
 </section>
 
