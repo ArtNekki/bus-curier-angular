@@ -1,6 +1,7 @@
 <div *ngIf="id && data.length" class="swiper swiper--shadow">
   <swiper #swiper
           [config]="config"
+          (swiper)="onSwiper($event)"
           [pagination]="{ el: '.' + id, clickable: true }"
   >
     <ng-template *ngFor="let item of data" swiperSlide>
@@ -9,13 +10,14 @@
   </swiper>
   <div id="" [class]="'swiper-pagination ' + id"  slot="container-end"></div>
   <button
+    *ngIf="(swiper && swiper.swiperRef) && (!swiper.swiperRef.isBeginning || !this.swiper.swiperRef.isEnd)"
     class="swiper-btn swiper-btn-prev"
     (click)="slidePrev()"
     [disabled]="(swiper && swiper.swiperRef) && swiper.swiperRef.activeIndex === 0"></button>
   <button
+    *ngIf="(swiper && swiper.swiperRef) && (!swiper.swiperRef.isBeginning || !this.swiper.swiperRef.isEnd)"
     class="swiper-btn swiper-btn-next"
     (click)="slideNext()"
     [disabled]="(swiper && swiper.swiperRef) && swiper.swiperRef.activeIndex >= this.swiper.swiperRef.slides.length - 1"
   ></button>
 </div>
-

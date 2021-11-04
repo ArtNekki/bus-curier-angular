@@ -42,7 +42,7 @@ export class SliderComponent implements OnInit {
           spaceBetween: 15
         },
         [MediaQuery.LG]: {
-          slidesPerView: 3,
+          slidesPerView: 4,
           spaceBetween: 30
         }
       },
@@ -59,5 +59,9 @@ export class SliderComponent implements OnInit {
 
   slidePrev() {
     this.swiper.swiperRef.slidePrev(100);
+  }
+
+  onSwiper($event: any) {
+    console.log('$event', $event);
   }
 }
