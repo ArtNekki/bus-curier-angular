@@ -9,8 +9,7 @@
 <!--  <ng-template ngFor let-breadcrumb [ngForOf]="pick" ></ng-template>-->
   <div *ngFor="let point of points | keyvalue: utils.originalOrder;" class="pickup-tabs__panel" [class.pickup-tabs__panel--active]="activeTab === point.key">
     <div *ngIf="activeTab === point.key" class="pickup-tabs__content" [@activeTab]="">
-      point: {{point.value | json}}
-<!--      <app-pickup [data]="point.value"></app-pickup>-->
+      <app-pickup [cities]="point.value"></app-pickup>
       <app-map *ngIf="minWidthMD" mods="pickup"></app-map>
     </div>
   </div>

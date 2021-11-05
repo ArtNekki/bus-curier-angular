@@ -17,7 +17,7 @@ import media from '../../../../core/utils/media';
   ]
 })
 export class PickupComponent implements OnInit {
-  @Input() data;
+  @Input() cities;
 
   public activePanel = null;
   public breakpoint = null;
@@ -26,11 +26,31 @@ export class PickupComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.activePanel = this.data[0];
+    // this.activePanel = this.data[0];
 
     this.breakpoint = window.matchMedia(`(min-width: ${media.MD}px)`);
     this.breakpoint.addListener(this.checkScreen.bind(this));
     this.checkScreen();
+
+    this.cities = this.cities.map((city) => {
+      return {
+        name: city.name,
+        addresses: [
+          [
+            {
+              label: 'Адрес:',
+              text: city.address
+            },
+            {
+              label: 'Режим работы:',
+              text: city.worktime
+            }
+          ]
+        ]
+      };
+    });
+
+    console.log('this.cities', this.cities);
   }
 
    checkScreen() {

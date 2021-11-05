@@ -10,7 +10,7 @@ import {map, take} from 'rxjs/operators';
 import {UtilService} from 'angular-mydatepicker';
 import { FormUtilsService } from 'src/app/core/services/form-utils.service';
 
-const points = ['IML', 'HERMES', 'KCE', 'Boxberry'];
+const points = ['IML', 'HERMES', 'CSE', 'Boxberry'];
 
 @Component({
   selector: 'app-pick-up-tabs',
