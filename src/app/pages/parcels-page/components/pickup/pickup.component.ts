@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {DeviceDetectorService} from 'ngx-device-detector';
 import media from '../../../../core/utils/media';
@@ -17,6 +17,8 @@ import media from '../../../../core/utils/media';
   ]
 })
 export class PickupComponent implements OnInit {
+  @Output() change: EventEmitter<any> = new EventEmitter<any>();
+
   @Input() cities;
 
   public activePanel = null;
@@ -35,6 +37,10 @@ export class PickupComponent implements OnInit {
           return {
             office_id: city.office_id,
             name: city.name,
+            coords: [{
+              geo_x: +city.geo_x,
+              geo_y: +city.geo_y
+            }],
             points: [
               [
                 {
@@ -58,12 +64,13 @@ export class PickupComponent implements OnInit {
         return {
           office_id: city.office_id,
           name: 'Владивосток',
+          coords: [...obj.coords, ...city.coords],
           points: [...obj.points, ...city.points]
         };
-      }, {office_id: '', name: '', points: []});
+      }, {office_id: '', name: '', coords: [], points: []});
 
     this.cities = [vlReduced, ...this.cities];
-    this.activePanel = this.cities[0];
+    this.showContacts(this.cities[0]);
   }
 
    checkScreen() {
@@ -72,6 +79,8 @@ export class PickupComponent implements OnInit {
 
   showContacts(data) {
     this.activePanel = data;
+    console.log('data', data);
+    this.change.emit(data);
   }
 
   setIcon(city: string) {

@@ -40,6 +40,7 @@ export class PickUpTabsComponent implements OnInit {
   public minWidthMD = false;
 
   public points = {};
+  public currentCityPoint = null;
   private sub: Subscription;
 
   constructor(

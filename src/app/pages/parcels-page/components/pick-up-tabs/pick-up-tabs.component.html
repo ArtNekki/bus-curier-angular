@@ -9,8 +9,22 @@
 <!--  <ng-template ngFor let-breadcrumb [ngForOf]="pick" ></ng-template>-->
   <div *ngFor="let point of points | keyvalue: utils.originalOrder;" class="pickup-tabs__panel" [class.pickup-tabs__panel--active]="activeTab === point.key">
     <div *ngIf="activeTab === point.key" class="pickup-tabs__content" [@activeTab]="">
-      <app-pickup [cities]="point.value"></app-pickup>
-      <app-map *ngIf="minWidthMD" mods="pickup"></app-map>
+      <app-pickup (change)="currentCityPoint = $event" [cities]="point.value"></app-pickup>
+      <app-map
+        *ngIf="minWidthMD && currentCityPoint.coords.length" mods="pickup"
+        [points]="currentCityPoint.coords"
+        [latitude]="currentCityPoint.coords[0].geo_x"
+        [longitude]="currentCityPoint.coords[0].geo_y"
+        [zoom]="11"
+        [disableDefaultUI]="false"
+        [gestureHandling]="true"
+        [scrollwheel]="false"
+        [styles]="[{
+          stylers: [{
+            saturation: -100
+          }]
+        }]"
+      ></app-map>
     </div>
   </div>
 </div>
