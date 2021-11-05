@@ -62,6 +62,6 @@ export class SliderComponent implements OnInit {
   }
 
   onSwiper($event: any) {
-    console.log('$event', $event);
+    // console.log('$event', $event);
   }
 }

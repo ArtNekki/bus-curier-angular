@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {KeyValue} from '@angular/common';
+import {AbstractControl} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +40,9 @@ export class UtilsService {
 
   capitalizeFirstLetter(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  originalOrder = (a: KeyValue<string, AbstractControl>, b: KeyValue<string, AbstractControl>): number => {
+    return 0;
   }
 }

@@ -1,14 +1,16 @@
 <div class="pickup-tabs">
-  <button #btn *ngFor="let point of pickupPoints" type="button" class="pickup-tabs__btn" [class.pickup-tabs__btn--active]="activeTab === tabsMap[point.name]" (click)="showTab(tabsMap[point.name], btn)">
-    <div>{{ point.name }} <span>({{ point.departments }} отделения)</span></div>
-    <svg-icon class="icon" [src]="setIcon(tabsMap[point.name])" width="8" height="4"></svg-icon>
+  <button #btn *ngFor="let point of points | keyvalue: utils.originalOrder;"
+    type="button" class="pickup-tabs__btn"
+    [class.pickup-tabs__btn--active]="activeTab === point.key" (click)="showTab(point.key, btn)">
+    <div>{{ point.key }} <span>({{ point.value.length }} отделений)</span></div>
+    <svg-icon class="icon" [src]="setIcon(point.key)" width="8" height="4"></svg-icon>
   </button>
 
-
 <!--  <ng-template ngFor let-breadcrumb [ngForOf]="pick" ></ng-template>-->
-  <div *ngFor="let point of pickupPoints" class="pickup-tabs__panel" [class.pickup-tabs__panel--active]="activeTab === tabsMap[point.name]">
-    <div *ngIf="activeTab === tabsMap[point.name]" class="pickup-tabs__content" [@activeTab]="">
-      <app-pickup [data]="point.cities"></app-pickup>
+  <div *ngFor="let point of points | keyvalue: utils.originalOrder;" class="pickup-tabs__panel" [class.pickup-tabs__panel--active]="activeTab === point.key">
+    <div *ngIf="activeTab === point.key" class="pickup-tabs__content" [@activeTab]="">
+      point: {{point.value | json}}
+<!--      <app-pickup [data]="point.value"></app-pickup>-->
       <app-map *ngIf="minWidthMD" mods="pickup"></app-map>
     </div>
   </div>

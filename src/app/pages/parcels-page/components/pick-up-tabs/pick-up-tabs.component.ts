@@ -3,6 +3,14 @@ import pickupPoints from '../../../../mock-data/pickup-points';
 import dropdown from '../../../../core/animations/dropdown';
 import {animate, keyframes, state, style, transition, trigger} from '@angular/animations';
 import media from '../../../../core/utils/media';
+import { ContactsService } from 'src/app/core/services/contacts/contacts.service';
+import {Subscription} from 'rxjs';
+import {Office} from '../../../../core/interfaces/calculator';
+import {map, take} from 'rxjs/operators';
+import {UtilService} from 'angular-mydatepicker';
+import { FormUtilsService } from 'src/app/core/services/form-utils.service';
+
+const points = ['IML', 'HERMES', 'KCE', 'Boxberry'];
 
 @Component({
   selector: 'app-pick-up-tabs',
@@ -23,20 +31,48 @@ export class PickUpTabsComponent implements OnInit {
     BoxBerry: 'BoxBerry',
     IML: 'IML',
     Hermes: 'Hermes',
-    Kce: 'Kce'
-  }
+    KCE: 'Kce'
+  };
 
   public pickupPoints = pickupPoints;
-  public activeTab = this.tabsMap.BoxBerry;
+  public activeTab = '';
   public breakpoint = null;
   public minWidthMD = false;
 
-  constructor() { }
+  public points = {};
+  private sub: Subscription;
+
+  constructor(
+    public utils: FormUtilsService,
+    public contactsService: ContactsService) { }
 
   ngOnInit(): void {
     this.breakpoint = window.matchMedia(`(min-width: ${media.MD}px)`);
     this.breakpoint.addListener(this.checkScreen.bind(this));
     this.checkScreen();
+
+    this.contactsService.getOffices()
+      .pipe(
+        take(1),
+        map((offices: any) => {
+          return offices.filter((office) => {
+            return office.pvz;
+          });
+        }),
+        map((offices: any) => {
+          return points.reduce((obj, point: string) => {
+            return {
+              ...obj,
+              [point]: offices.filter((office) => JSON.parse(office.pvz)[point])
+            };
+          }, {});
+        })
+      )
+      .subscribe((obj: any) => {
+        this.points = obj;
+        this.activeTab = Object.keys(obj)[0];
+        console.log('this.points', this.points);
+      });
   }
 
   checkScreen() {
@@ -44,6 +80,7 @@ export class PickUpTabsComponent implements OnInit {
   }
 
   showTab(tab, btn) {
+    console.log('tab', tab);
     this.activeTab = tab;
     // btn.scrollTo(0, btn.getBoundingClientRect().top);
     btn.scrollIntoView({block: 'start',  behavior: 'smooth'});
