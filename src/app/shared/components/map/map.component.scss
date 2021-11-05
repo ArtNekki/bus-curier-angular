@@ -29,12 +29,13 @@
     height: 300px;
 
     @include media-breakpoint-up(md) {
-      height: 415px;
+      //height: 415px;
+      height: 100%;
     }
 
-    @include media-breakpoint-up(lg) {
-      height: 385px;
-    }
+    //@include media-breakpoint-up(lg) {
+    //  height: 385px;
+    //}
 
     @include media-breakpoint-up(xl) {
 
