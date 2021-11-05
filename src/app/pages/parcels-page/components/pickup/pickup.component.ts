@@ -32,25 +32,42 @@ export class PickupComponent implements OnInit {
     this.breakpoint.addListener(this.checkScreen.bind(this));
     this.checkScreen();
 
-    this.cities = this.cities.map((city) => {
-      return {
-        name: city.name,
-        addresses: [
-          [
-            {
-              label: 'Адрес:',
-              text: city.address
-            },
-            {
-              label: 'Режим работы:',
-              text: city.worktime
-            }
-          ]
-        ]
-      };
-    });
+    this.cities = this.cities
+      .map((city) => {
+          return {
+            office_id: city.office_id,
+            name: city.name,
+            addresses: [
+              [
+                {
+                  label: 'Адрес:',
+                  text: city.address
+                },
+                {
+                  label: 'Режим работы:',
+                  text: city.worktime
+                }
+              ]
+            ]
+          };
+      })
+      .sort((a: any, b: any) => {
+        return a.office_id.localeCompare(b.office_id);
+      });
 
-    console.log('this.cities', this.cities);
+    const vlReduced = this.cities.splice(0, 3)
+      .reduce((obj, city) => {
+        return {
+          office_id: city.office_id,
+          name: 'Владивосток',
+          addresses: [...obj.addresses, ...city.addresses]
+        };
+      }, {office_id: '', name: '', addresses: []});
+
+    this.cities = [vlReduced, ...this.cities];
+
+    // console.log('vlReduced', vlReduced);
+    // console.log('this.cities', this.cities);
   }
 
    checkScreen() {

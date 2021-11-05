@@ -14,7 +14,7 @@
 
   <div *ngFor="let city of cities" class="pickup__section">
     <button type="button" class="pickup__btn" [class.pickup__btn--active]="activePanel === city" (click)="showContacts(city)">
-      <b class="pickup__label">{{city.name}} <span>({{city.addresses.length}})</span></b>
+      <b class="pickup__label">{{city.name}} <span>({{city.addresses.length}} отделения)</span></b>
       <svg-icon class="icon" [src]="setIcon(city)" width="19" height="19"></svg-icon>
     </button>
     <div *ngIf="activePanel === city" class="pickup__panel" [class.pickup__panel--active]="activePanel === city" [@activePanel]="">
