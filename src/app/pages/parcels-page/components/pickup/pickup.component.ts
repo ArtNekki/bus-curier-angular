@@ -26,8 +26,6 @@ export class PickupComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // this.activePanel = this.data[0];
-
     this.breakpoint = window.matchMedia(`(min-width: ${media.MD}px)`);
     this.breakpoint.addListener(this.checkScreen.bind(this));
     this.checkScreen();
@@ -37,7 +35,7 @@ export class PickupComponent implements OnInit {
           return {
             office_id: city.office_id,
             name: city.name,
-            addresses: [
+            points: [
               [
                 {
                   label: 'Адрес:',
@@ -60,14 +58,12 @@ export class PickupComponent implements OnInit {
         return {
           office_id: city.office_id,
           name: 'Владивосток',
-          addresses: [...obj.addresses, ...city.addresses]
+          points: [...obj.points, ...city.points]
         };
-      }, {office_id: '', name: '', addresses: []});
+      }, {office_id: '', name: '', points: []});
 
     this.cities = [vlReduced, ...this.cities];
-
-    // console.log('vlReduced', vlReduced);
-    // console.log('this.cities', this.cities);
+    this.activePanel = this.cities[0];
   }
 
    checkScreen() {
