@@ -21,8 +21,22 @@
       <div class="pickup__contact">
         <app-contact-box *ngFor="let city of city.points" [data]="city"></app-contact-box>
       </div>
-      <div *ngIf="!minWidthMD" class="pickup__map">
-        <app-map mods="pickup"></app-map>
+      <div *ngIf="!minWidthMD && activePanel.coords.length" class="pickup__map">
+        <app-map
+          mods="pickup"
+          [points]="activePanel.coords"
+          [latitude]="activePanel.coords[0].geo_x"
+          [longitude]="activePanel.coords[0].geo_y"
+          [zoom]="11"
+          [disableDefaultUI]="false"
+          [gestureHandling]="true"
+          [scrollwheel]="false"
+          [styles]="[{
+          stylers: [{
+            saturation: -100
+          }]
+        }]"
+        ></app-map>
       </div>
     </div>
   </div>
