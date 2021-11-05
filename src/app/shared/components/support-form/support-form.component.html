@@ -3,43 +3,43 @@
     <ng-container *ngFor="let control of formUtils.getGroupControls(form)
     | keyvalue: formUtils.originalOrder; let i = index">
       <div *ngIf="i <= 3" class="form__field" [class.form__field--full]="control.key === FormControlName.Question">
-        <label [for]="control.key" class="form__label">
+        <label [for]="control.key" class="form__label"
+           [class.form__label--invalid]="control.value.invalid && control.value.touched"
+        >
           {{FormFieldMeta[control.key].label}}
-          <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
+          <sup *ngIf="control.value.errors && control.value.hasError('required')" class="form__required">*</sup>
         </label>
-        <app-select
-          *ngIf="control.key === FormControlName.Location; else input"
+        <app-input
+          [type]="FormFieldMeta[control.key].type"
+          [id]="control.key"
           [formControlName]="control.key"
-          [items]="cities"
+          [mask]="FormFieldMeta[control.key].mask" [prefix]="FormFieldMeta[control.key].prefix"
           [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
-        ></app-select>
-        <ng-template #input>
-          <app-input
-            [type]="FormFieldMeta[control.key].type"
-            [id]="control.key"
-            [formControlName]="control.key"
-            [mask]="FormFieldMeta[control.key].mask" [prefix]="FormFieldMeta[control.key].prefix"
-            [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
-          >
-            <ng-container class="errors">
-              <small *ngIf="utils.getObjectKey(control.value.errors).length">
-                {{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}
-              </small>
-            </ng-container>
-          </app-input>
-        </ng-template>
+        >
+        </app-input>
       </div>
     </ng-container>
     <div class="form__field form__field--full">
-      <app-checkbox [formControlName]="FormControlName.Agree" mods="md">
+      <app-checkbox [formControlName]="FormControlName.Agree" mods="md"
+                    (change)="executeCaptcha(invisible)" [isDisabled]="form.get(FormControlName.Captcha).value">
         <ng-container class="text">
           Нажимая кнопку «Отправить», я даю свое согласие на
           <app-link href="#" mods="in-text, blue">обработку моих персональных данных</app-link>
         </ng-container>
       </app-checkbox>
+      <re-captcha size="invisible" #invisible
+                  [formControlName]="FormControlName.Captcha" (resolved)="captchaResolved($event)">
+      </re-captcha>
     </div>
   </div>
   <div class="form__fieldset form__fieldset--3-col-md" style="margin-top: 30px;">
-    <app-btn type="submit" mods="lg, w-full">Отправить вопрос</app-btn>
+    <app-btn type="submit" mods="lg, w-full" [disabled]="form.invalid || (!form.invalid && isLoading)">
+      <div *ngIf="isLoading; else text" style="height: inherit; display: flex; justify-content: center; align-items: center">
+        <app-loader mods="sm"></app-loader>
+      </div>
+      <ng-template #text>
+        Отправить
+      </ng-template>
+    </app-btn>
   </div>
 </form>
