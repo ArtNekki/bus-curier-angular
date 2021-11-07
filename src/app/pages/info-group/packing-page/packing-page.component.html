@@ -74,7 +74,11 @@
       <b>Важно!</b> Упаковка груза должна обеспечивать его сохранность
       в процессе доставки и исключать возможность причинения вреда или повреждения другим грузам.
     </app-alert>
-<!--    {{{ media theme="two" title="Вы можете скачать файл «Правила приемки<br /> и отправки грузов» в формате PDF" link='{"href": "#", "text": "Скачать в PDF (80 кб)"}' imgName="pdf" imgWidth="36" imgHeight="40" mods="under-list" }}}-->
+    <app-media [data]="{title: 'Вы можете скачать файл «Правила приемки<br /> и отправки грузов» в формате PDF'}" mods="under-list, theme-two">
+      <ng-container class="link">
+        <app-link href="#" mods="lg">Скачать</app-link>
+      </ng-container>
+    </app-media>
   </div>
   <aside class="page__sidebar">
     <app-media [data]="{title: 'Тарифы на упаковку в другом городе'}">
