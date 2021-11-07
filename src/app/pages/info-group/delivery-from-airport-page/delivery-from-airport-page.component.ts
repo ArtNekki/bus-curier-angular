@@ -9,8 +9,8 @@ import { shops } from 'src/app/mock-data/slider';
 export class DeliveryFromAirportPageComponent implements OnInit {
   public icons = [
     {
-      icon: 'aeroflot',
-      mods: 'aeroflot, shadow-right'
+      icon: 'aeroflot-2',
+      mods: 'aeroflot-2, shadow-right'
     },
     {
       icon: 'aurora',
