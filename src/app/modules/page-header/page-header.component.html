@@ -9,12 +9,12 @@
           <app-location-selector></app-location-selector>
         </div>
         <a href="tel:+74232026532" class="page-header__contact mgo-number-13954">
-          <svg-icon class="icon" src="/assets/img/svg/tel.svg" width="15" height="15"></svg-icon>
+          <svg-icon class="icon" src="/assets/img/svg/phone.svg" width="15" height="15"></svg-icon>
           <span>8 (423) 202-65-32</span>
         </a>
-        <div class="page-header__user">
-          <app-header-user></app-header-user>
-        </div>
+<!--        <div class="page-header__user">-->
+<!--          <app-header-user></app-header-user>-->
+<!--        </div>-->
         <div class="page-header__open">
           <button type="button" (click)="openMobileNav()">
             <span></span>
@@ -24,12 +24,12 @@
       <nav class="page-header__nav">
         <app-main-nav></app-main-nav>
         <a href="tel: " class="page-header__contact page-header__contact--sticky">
-          <svg-icon class="icon" src="/assets/img/svg/tel.svg" width="15" height="15"></svg-icon>
+          <svg-icon class="icon" src="/assets/img/svg/phone.svg" width="15" height="15"></svg-icon>
           <span>8 800 222 22 68</span>
         </a>
-        <div class="page-header__user page-header__user--sticky">
-          <app-header-user></app-header-user>
-        </div>
+<!--        <div class="page-header__user page-header__user&#45;&#45;sticky">-->
+<!--          <app-header-user></app-header-user>-->
+<!--        </div>-->
       </nav>
       <app-mobile-nav [isOpen]="mobileNavIsOpen" (onClose)="closeMobileNav($event)"></app-mobile-nav>
     </div>

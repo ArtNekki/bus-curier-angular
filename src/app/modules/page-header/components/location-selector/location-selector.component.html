@@ -9,7 +9,7 @@
       <ul class="location-selector__list">
         <li *ngFor="let city of region.cities" class="location-selector__item">
           <a class="location-selector__link" (click)="selectCity(city)">{{city.name}}</a>
-          <a *ngIf="city.link" class="location-selector__link location-selector__link--more">{{city.link}}</a>
+<!--          <a *ngIf="city.link" class="location-selector__link location-selector__link&#45;&#45;more">{{city.link}}</a>-->
         </li>
       </ul>
     </div>

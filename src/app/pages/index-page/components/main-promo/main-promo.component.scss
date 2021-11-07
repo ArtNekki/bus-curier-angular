@@ -57,6 +57,7 @@
 
   &__text {
     margin-top: 35px;
+    font-family: $font-family;
     font-size: 16px;
     line-height: 26.4px;
     color: $black-color;
@@ -201,7 +202,7 @@
       right: 0;
       z-index: 10;
       //height: 1180px;
-      height: 1135px;
+      height: 1205px;
     }
   }
 }

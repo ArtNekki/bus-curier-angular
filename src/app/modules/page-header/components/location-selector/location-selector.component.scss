@@ -43,7 +43,7 @@
       outline: none;
     }
 
-    @include caret(0.55em, -1em);
+    @include caret(0.45em, -1em);
   }
 
   ::ng-deep &__btn svg {
@@ -74,7 +74,7 @@
     position: absolute;
     top: 100%;
     left: 0;
-    z-index: 100;
+    z-index: 101;
     padding: 25px;
     display: grid;
     grid-template-columns: repeat(2, auto);
@@ -132,6 +132,7 @@
     color: $font-color;
     text-decoration: none;
     white-space: nowrap;
+    cursor: pointer;
 
     @include hover {
       color: $black-color;
