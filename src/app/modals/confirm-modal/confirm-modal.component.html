@@ -1,4 +1,4 @@
-<app-modal (close)="close()">
+<app-modal mods="content-center" (close)="close()">
   <svg-icon class="icon" src="assets/img/svg/notice.svg" width="50" height="45"></svg-icon>
   <p [innerHTML]="message || 'Вы уверены?'"></p>
   <div style="margin-top: 20px; display: grid; grid-template-columns: repeat(2, 1fr); grid-column-gap: 10px;">
