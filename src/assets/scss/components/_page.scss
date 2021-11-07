@@ -119,19 +119,23 @@
     //grid-column: 1 / 2;
 
     &--media {
-      display: grid;
-      grid-row-gap: 20px;
+      $bottom-space: 20px;
 
-      @include media-breakpoint-up(md) {
+      //margin-top: 20px;
+      margin-bottom: $bottom-space;
+      display: grid;
+      grid-row-gap: $bottom-space;
+
+      @include media-breakpoint-up(xl) {
         grid-template-columns: repeat(2, auto);
         grid-column-gap: 20px;
         justify-content: start;
       }
 
-      @include media-breakpoint-up(lg) {
-        grid-column-gap: 30px;
-        grid-row-gap: 30px;
-      }
+      //@include media-breakpoint-up(lg) {
+      //  grid-column-gap: 30px;
+      //  grid-row-gap: 30px;
+      //}
     }
   }
 

@@ -4,6 +4,10 @@
 @import "src/variables";
 @import "src/assets/scss/settings";
 
+:host {
+  display: contents;
+}
+
 .media {
   padding: 23px 30px 28px;
   width: 100%;
@@ -86,7 +90,11 @@
   }
 
   &__link {
-    grid-area: media-link;
+    grid-area: media-title;
+
+    .media__title + & {
+      grid-area: media-link;
+    }
   }
 
   &__img {
