@@ -52,10 +52,6 @@
 <div class="page-section page-section--top-line">
   <div class="page-section__container">
     <h2 class="title title--md">Авиакомпании, с которыми мы сотрудничаем</h2>
-    <app-slider>
-      <div *ngFor="let shop of shops" class="swiper-slide">
-        <app-box [data]="shop" [mods]="shop.mods"></app-box>
-      </div>
-    </app-slider>
+    <app-slider id="aero" [data]="icons"></app-slider>
   </div>
 </div>

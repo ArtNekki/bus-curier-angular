@@ -7,7 +7,25 @@ import { shops } from 'src/app/mock-data/slider';
   styleUrls: ['./delivery-from-airport-page.component.scss']
 })
 export class DeliveryFromAirportPageComponent implements OnInit {
-  public shops = shops;
+  public icons = [
+    {
+      icon: 'aeroflot',
+      mods: 'aeroflot, shadow-right'
+    },
+    {
+      icon: 'aurora',
+      mods: 'aurora'
+    },
+    {
+      icon: 'eastjet',
+      mods: 'eastjet'
+    },
+    {
+      icon: 's7',
+      mods: 's7'
+    }
+  ]
+
 
   constructor() { }
 
