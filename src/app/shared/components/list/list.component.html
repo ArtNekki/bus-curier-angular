@@ -2,7 +2,7 @@
   <li *ngFor="let item of data" class="list__item">
     <ng-container *ngIf="isLink(item); else default">
       <svg-icon class="icon" src="assets/img/svg/outer-link.svg" width="24" height="20"></svg-icon>
-      <app-link  [href]="item.href" mods="outer">{{item.text}}</app-link>
+      <app-link [href]='item.href' mods="outer">{{item.text}}</app-link>
     </ng-container>
     <ng-template #default>
       <svg-icon class="icon" src="assets/img/svg/check.svg" width="24" height="20"></svg-icon>

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 const links = [
-  {text: 'Как отправить посылку', href: '#'},
-  {text: 'Как получить посылку', href: '#'},
-  {text: 'Правила приемки и отправки грузов', href: '#'},
-  {text: 'Тарифы на перевозку', href: '#'},
-  {text: 'Упаковки грузов и виды упаковки', href: '#'},
-  {text: 'Хранение груза', href: '#'},
-  {text: 'Доставка грузов и багажа из Аэропорта', href: '#'}
+  {text: 'Как отправить посылку', href: '/info/how-to-send'},
+  {text: 'Как получить посылку', href: '/info/how-to-get'},
+  {text: 'Правила приемки и отправки грузов', href: '/info/rules-of-send'},
+  {text: 'Тарифы на перевозку', href: '/info/transportation-rates'},
+  {text: 'Упаковки грузов и виды упаковки', href: '/info/packing'},
+  {text: 'Хранение груза', href: '/info/storage-cargo'},
+  {text: 'Доставка грузов и багажа из Аэропорта', href: '/info/delivery-from-airport'}
 ];
 
 @Component({

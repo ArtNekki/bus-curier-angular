@@ -69,6 +69,7 @@ import {
 } from 'ng-recaptcha';
 import { CitiesBlockComponent } from './components/cities-block/cities-block.component';
 import { CitiesListComponent } from './components/cities-list/cities-list.component';
+import {RouterModule} from '@angular/router';
 
 // import { ɵs } from '@ng-select/ng-select;
 
@@ -93,7 +94,8 @@ const RECAPTCHA_V2_DUMMY_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     RecaptchaModule,
     RecaptchaFormsModule,
     RecaptchaV3Module,
-    SwiperModule
+    SwiperModule,
+    RouterModule
     // DeviceDetectorModule.forRoot(),
   ],
   exports: [
@@ -141,7 +143,8 @@ const RECAPTCHA_V2_DUMMY_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     TabsComponent,
     CitiesBlockComponent,
     CitiesListComponent,
-    SwiperModule
+    SwiperModule,
+    RouterModule
   ],
   declarations: [
     BtnComponent,
