@@ -6,7 +6,11 @@
         <p>Передать посылку в Баскурьер:</p>
         <ul class="list list--letters">
           <li class="list__item">Если вы хотите, чтобы курьер забрал посылку от вашей <br class="br br--show-sm br--hide-lg">двери, <br class="br br--show-lg">вы можете оставить заявку на вызов курьера.</li>
-          <li class="list__item">Прийти в филиал. Смотреть адреса филиалов.</li>
+          <li class="list__item">
+            <div class="list__content">
+              <span>Прийти в филиал. </span>
+              <app-link mods="lg, blue" (click)="showCitiesModal($event)">Смотреть адреса филиалов</app-link>
+            </div>
         </ul>
       </div>
     </li>
@@ -15,7 +19,7 @@
     <li class="list__item">
       <div class="list__content">
         <p>Упаковка груза должна обеспечивать его сохранность. <br class="br br--show-sm">Если у вас нет упаковки, мы ее обязательно предложим.</p>
-        <app-link href="#" mods="lg, blue">Смотреть виды упаковки и стоимость</app-link>
+        <app-link href="/info/packing" mods="lg, blue">Смотреть виды упаковки и стоимость</app-link>
       </div>
     </li>
     <li class="list__item">Груз обязательно предоставляется для осмотра <br class="br br--show-sm">в открытом виде.</li>

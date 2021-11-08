@@ -7,8 +7,8 @@
     <ol class="list list--numbers">
       <li class="list__item">
         <div class="list__content">
-          <p>Вы можете забрать посылку в одном из наших филиалов. </p>
-          <app-link mods="lg, blue">Смотреть адреса филиалов</app-link>
+          <p>Вы можете забрать посылку в одном из наших филиалов.</p>
+          <app-link mods="lg, blue" (click)="showCitiesModal($event)">Смотреть адреса филиалов</app-link>
         </div>
       </li>
       <li class="list__item">Если вы получаете посылку в населенном пункте, где нет <br class="br br--show-md">нашего филиала,
