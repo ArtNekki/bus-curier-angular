@@ -13,6 +13,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 35px;
+    grid-row-gap: 30px;
   }
 
   @include media-breakpoint-up(lg) {
