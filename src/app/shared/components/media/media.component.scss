@@ -95,6 +95,10 @@
     .media__title + & {
       grid-area: media-link;
     }
+
+    .media__text + & {
+      grid-area: media-link;
+    }
   }
 
   &__img {

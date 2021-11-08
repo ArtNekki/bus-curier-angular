@@ -15,7 +15,15 @@
       </div>
     </div>
     <div class="work-in-team__footer">
-<!--      {{{ media theme="two" title="Хотите присоединиться к нашей команде?" text="Отправляйте своё резюме на почту!" link='{"href": "#", "text": "personal@untd.pro"}' mods="no-icon" }}}-->
+      <app-media [data]="{
+        title: 'Хотите присоединиться к нашей команде?',
+        text: 'Отправляйте своё резюме на почту!'
+        }" mods="theme-two, no-icon, under-list">
+        <ng-container class="link">
+          <app-link href="email: personal@untd.pro" mods="lg">personal@untd.pro</app-link>
+        </ng-container>
+      </app-media>
+<!--      {{{ media theme="two" title="" text="" link='{"href": "#", "text": ""}' mods="no-icon" }}}-->
     </div>
   </div>
 </div>

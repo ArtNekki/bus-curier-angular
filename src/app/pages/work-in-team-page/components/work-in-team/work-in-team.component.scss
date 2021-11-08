@@ -37,6 +37,10 @@
     @include media-breakpoint-up(lg) {
       grid-column-gap: 45px;
     }
+
+    @include media-breakpoint-up(xl) {
+      padding-left: 94px;
+    }
   }
 
   &__list {
@@ -50,6 +54,7 @@
     margin: 25px 0 15px 0;
     font-family: $font-family;
     font-size: 22px;
+    font-weight: 400;
     line-height: 26.4px;
 
     @include media-breakpoint-up(lg) {

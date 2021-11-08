@@ -2,7 +2,8 @@
   <div class="media__img">
     <svg-icon class="icon" src="assets/img/svg/pdf.svg" width="42px" height="42px"></svg-icon>
   </div>
-  <h1 class="media__title" *ngIf="data" [innerHTML]="data.title"></h1>
+  <h1 class="media__title" *ngIf="data && data.title" [innerHTML]="data.title"></h1>
+  <p class="media__text" *ngIf="data && data.text" [innerHTML]="data.text"></p>
   <div class="media__link">
     <ng-content select=".link"></ng-content>
   </div>

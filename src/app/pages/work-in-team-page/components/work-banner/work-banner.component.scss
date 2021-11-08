@@ -38,6 +38,7 @@
 
     @include media-breakpoint-up(sm) {
       right: unset;
+      width: 100%;
       max-width: 345px;
     }
 
@@ -58,6 +59,7 @@
     margin: 0 0 10px 0;
     font-family: $font-family;
     font-size: 22px;
+    font-weight: 400;
     line-height: 26.4px;
 
     @include media-breakpoint-up(lg) {
