@@ -5,24 +5,33 @@
     <span class="form__label form__label--light">Выберите отделение:</span>
     <div class="form__fieldset form__fieldset--feedback">
       <div class="form__field">
-        <app-radio name="feedback" checked="true">Вопрос</app-radio>
+        <app-radio name="feedback"
+           [checked]="form.get(FormControlName.Type).value === FeedbackType.Question"
+           (change)="setType(FeedbackType.Question)">Вопрос</app-radio>
       </div>
       <div class="form__field">
-        <app-radio name="feedback">Отзыв</app-radio>
+        <app-radio name="feedback"
+           [checked]="form.get(FormControlName.Type).value === FeedbackType.Review"
+           (change)="setType(FeedbackType.Review)">Отзыв</app-radio>
       </div>
       <div class="form__field">
-        <app-radio name="feedback">Предложение или замечание</app-radio>
+        <app-radio name="feedback"
+           [checked]="form.get(FormControlName.Type).value === FeedbackType.Note"
+           (change)="setType(FeedbackType.Note)">Предложение или замечание</app-radio>
       </div>
       <div class="form__field">
-        <app-radio name="feedback">Вопросы сотрудничества</app-radio>
+        <app-radio name="feedback"
+           [checked]="form.get(FormControlName.Type).value === FeedbackType.Coop"
+           (change)="setType(FeedbackType.Coop)">Вопросы сотрудничества</app-radio>
       </div>
     </div>
     <div class="form__fieldset form__fieldset--row-gap-lg form__fieldset--col-gap-lg form__fieldset--2-col-sm form__fieldset--w-575">
       <ng-container *ngFor="let control of formUtils.getGroupControls(form) | keyvalue: formUtils.originalOrder; let i = index">
         <div *ngIf="i <= 3" class="form__field">
-          <label [for]="control.key" class="form__label">
+          <label [for]="control.key" class="form__label"
+                 [class.form__label--invalid]="control.value.invalid && control.value.touched">
             {{FormFieldMeta[control.key].label}}
-            <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
+            <sup class="form__required" *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
           </label>
           <app-select
             *ngIf="control.key === FormControlName.Location; else input"
@@ -38,19 +47,20 @@
               [mask]="FormFieldMeta[control.key].mask" [prefix]="FormFieldMeta[control.key].prefix"
               [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
             >
-              <ng-container class="errors">
-                <small *ngIf="utils.getObjectKey(control.value.errors).length">
-                  {{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}
-                </small>
-              </ng-container>
+<!--              <ng-container class="errors">-->
+<!--                <small *ngIf="utils.getObjectKey(control.value.errors).length">-->
+<!--                  {{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}-->
+<!--                </small>-->
+<!--              </ng-container>-->
             </app-input>
           </ng-template>
         </div>
       </ng-container>
       <div class="form__field form__field--span-2">
-        <label [for]="" class="form__label">
+        <label [for]="" class="form__label"
+               [class.form__label--invalid]="form.get(FormControlName.Question).invalid && form.get(FormControlName.Question).touched">
           {{FormFieldMeta[FormControlName.Question].label}}
-          <sup *ngIf="form.get(FormControlName.Question).errors &&
+          <sup class="form__required" *ngIf="form.get(FormControlName.Question).errors &&
            form.get(FormControlName.Question).hasError('required')">*</sup>
         </label>
         <app-input
@@ -59,24 +69,35 @@
           [formControlName]="FormControlName.Question"
           [isInvalid]="(form.get(FormControlName.Question).invalid && form.get(FormControlName.Question).touched) && 'invalid'"
         >
-          <ng-container class="errors">
-            <small *ngIf="utils.getObjectKey(form.get(FormControlName.Question).errors).length">
-              {{FormFieldError[utils.getObjectKey(form.get(FormControlName.Question).errors)[0]]}}
-            </small>
-          </ng-container>
+<!--          <ng-container class="errors">-->
+<!--            <small *ngIf="utils.getObjectKey(form.get(FormControlName.Question).errors).length">-->
+<!--              {{FormFieldError[utils.getObjectKey(form.get(FormControlName.Question).errors)[0]]}}-->
+<!--            </small>-->
+<!--          </ng-container>-->
         </app-input>
       </div>
       <div class="form__field form__field--span-2">
-        <app-checkbox [formControlName]="FormControlName.Agree" mods="sm">
+        <app-checkbox [formControlName]="FormControlName.Agree" mods="sm"
+                      (change)="executeCaptcha(invisible)" [isDisabled]="form.get(FormControlName.Captcha).value">
           <ng-container class="text">
             Нажимая кнопку «Отправить», я даю свое согласие на
             <app-link href="#" mods="blue, in-text">обработку моих персональных данных</app-link>
           </ng-container>
         </app-checkbox>
+        <re-captcha size="invisible" #invisible
+                    [formControlName]="FormControlName.Captcha" (resolved)="captchaResolved($event)">
+        </re-captcha>
       </div>
     </div>
     <div class="form__action" style="margin-top: 35px;">
-      <app-btn mods="lg, max-w-270">Отправить заявку</app-btn>
+      <app-btn mods="lg, max-w-270" [disabled]="form.invalid || (!form.invalid && isLoading)">
+        <div *ngIf="isLoading; else text" style="height: inherit; display: flex; justify-content: center; align-items: center">
+          <app-loader mods="sm"></app-loader>
+        </div>
+        <ng-template #text>
+          Отправить
+        </ng-template>
+      </app-btn>
     </div>
   </form>
 </div>
