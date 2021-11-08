@@ -118,6 +118,10 @@
       grid-column-gap: 30px;
     }
 
+    &--align-end {
+      align-items: end;
+    }
+
     &--w-575 {
       max-width: 575px;
     }

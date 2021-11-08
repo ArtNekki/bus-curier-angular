@@ -26,7 +26,7 @@
     <h2 class="title title--md">Закажите звонок менеджера</h2>
     <p class="subtitle subtitle--md">Оставьте свой номер телефона и мы перезвоним вам в ближайшее время</p>
     <form action="#" class="form form--max-w-820" autocomplete="off" [formGroup]="form" (submit)="onSubmit()">
-      <div class="form__fieldset form__fieldset--2-col-sm">
+      <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--align-end">
         <div class="form__field">
           <label for="tel" class="form__label form__label--light">{{FormFieldMeta[FormControlName.Tel].label}}</label>
           <app-input
@@ -47,7 +47,7 @@
           </app-input>
         </div>
         <div class="form__field">
-          <app-btn mods="lg, black">Отправить заявку</app-btn>
+          <app-btn mods="lg, black, max-w-270">Отправить заявку</app-btn>
         </div>
       </div>
       <div class="form__fieldset form__fieldset--2-col-sm">

@@ -1,6 +1,6 @@
 export const topNav = [
   {link: 'orders/track-order', name: 'Отследить посылку'},
-  {link: 'orders/calc-rate', name: 'Рассчет тарифа по Приморью'},
+  {link: 'orders/quick-order/new', name: 'Рассчет тарифа по Приморью'},
   {link: 'our-services', name: 'Услуги'},
   {link: 'useful-info', name: 'Информация'},
   {link: 'documents', name: 'Документы'},
