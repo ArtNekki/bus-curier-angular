@@ -21,4 +21,11 @@ export class CommonEndpointService extends EndpointFactory {
     return this.execute(this.http.post<T>(`${this.url}/mailer`, JSON.stringify(data), this.getRequestHeaders()),
       () => this.sendMail(data));
   }
+
+  getPrivacyPolicy<T>(): Observable<T> {
+    const id = '8aab09f6-c5b3-43be-8895-153ea164984e/53';
+
+    return this.execute(this.http.get<T>(`${this.url}/page/${id}`, this.getRequestHeaders()),
+      () => this.getPrivacyPolicy());
+  }
 }

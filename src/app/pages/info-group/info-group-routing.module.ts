@@ -8,6 +8,7 @@ import {RulesOfSendPageComponent} from './rules-of-send-page/rules-of-send-page.
 import {TransportationRatesPageComponent} from './transportation-rates-page/transportation-rates-page.component';
 import {HowToGetPageComponent} from './how-to-get-page/how-to-get-page.component';
 import {StorageOfCargoPageComponent} from './storage-of-cargo-page/storage-of-cargo-page.component';
+import {PrivacyPolicyPageComponent} from './privacy-policy-page/privacy-policy-page.component';
 
 const routes: Routes = [
   {path: '', component: InfoGroupComponent, data: { title: 'Информация' }, children: [
@@ -18,7 +19,8 @@ const routes: Routes = [
     { path: 'packing', component:  PackingPageComponent, data: { title: 'Упаковки грузов и виды упаковки' }},
     { path: 'storage-cargo', component: StorageOfCargoPageComponent, data: { title: 'Хранение груза на складах Bus-курьер' }},
     { path: 'rules-of-send', component:  RulesOfSendPageComponent, data: { title: 'Правила приемки и отправки грузов' }},
-    { path: 'transportation-rates', component:  TransportationRatesPageComponent, data: { title: 'Тарифы на перевозку' }}
+    { path: 'transportation-rates', component:  TransportationRatesPageComponent, data: { title: 'Тарифы на перевозку' }},
+    { path: 'privacy-policy', component:  PrivacyPolicyPageComponent, data: { title: 'Политика конфиденциальности' }}
   ]}
 ];
 

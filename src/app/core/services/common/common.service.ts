@@ -22,4 +22,8 @@ export class CommonService {
           }
         }));
   }
+
+  getPrivacyPolicy() {
+    return this.endpoint.getPrivacyPolicy();
+  }
 }

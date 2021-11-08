@@ -10,12 +10,14 @@ import {RulesOfSendPageModule} from './rules-of-send-page/rules-of-send-page.mod
 import {TransportationRatesPageModule} from './transportation-rates-page/transportation-rates-page.module';
 import { HowToGetPageComponent } from './how-to-get-page/how-to-get-page.component';
 import { StorageOfCargoPageComponent } from './storage-of-cargo-page/storage-of-cargo-page.component';
+import { PrivacyPolicyPageComponent } from './privacy-policy-page/privacy-policy-page.component';
 
 @NgModule({
   declarations: [
     InfoGroupComponent,
     HowToGetPageComponent,
-    StorageOfCargoPageComponent
+    StorageOfCargoPageComponent,
+    PrivacyPolicyPageComponent
   ],
   imports: [
     CommonModule,
