@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../core/form/fieldError';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -10,7 +10,7 @@ import FormControlName from 'src/app/core/maps/FormControlName';
   templateUrl: './index-page.component.html',
   styleUrls: ['./index-page.component.scss']
 })
-export class IndexPageComponent implements OnInit {
+export class IndexPageComponent implements OnInit, OnDestroy {
   public FormFieldMeta = formFieldMeta;
   public FormControlName = FormControlName;
   public FormFieldError = fieldError;
@@ -24,7 +24,13 @@ export class IndexPageComponent implements OnInit {
       [FormControlName.Tel]: new FormControl('', [Validators.required]),
       [FormControlName.Agree]: new FormControl('')
     });
+
+    document.body.classList.add('non-standard-tasks');
   }
 
   onSubmit() {}
+
+  ngOnDestroy(): void {
+    document.body.classList.remove('non-standard-tasks');
+  }
 }

@@ -313,3 +313,7 @@
 ::ng-deep app-contacts-page ~ app-page-footer > .page-footer {
   margin-top: 0 !important;
 }
+
+::ng-deep .non-standard-tasks app-page-footer > .page-footer {
+  margin-top: 0 !important;
+}
