@@ -9,15 +9,15 @@ import {AccountInnerPageComponent} from './pages/account-inner-page/account-inne
 import { AuthGuard } from 'src/app/core/services/auth.guard';
 
 const routes: Routes = [
-  {path: '', component: AccountPageComponent, data: { title: 'Личный кабинет' }, canActivate: [AuthGuard], children: [
-      {path: '', redirectTo: '/account/index', pathMatch: 'full'},
-      {path: 'index', component: AccountIndexPageComponent},
-      {path: 'inner', component: AccountInnerPageComponent, children: [
-          {path: 'personal', component: AccountPersonalDataPageComponent, data: { title: 'Персональные данные' }},
-          {path: 'orders', component: AccountOrdersPageComponent, data: { title: 'Мои заказы' }},
-          {path: 'report', component: AccountReportPageComponent, data: { title: 'Сформировать отчет' }}
-      ]},
-  ]}
+  // {path: '', component: AccountPageComponent, data: { title: 'Личный кабинет' }, canActivate: [AuthGuard], children: [
+  //     {path: '', redirectTo: '/account/index', pathMatch: 'full'},
+  //     {path: 'index', component: AccountIndexPageComponent},
+  //     {path: 'inner', component: AccountInnerPageComponent, children: [
+  //         {path: 'personal', component: AccountPersonalDataPageComponent, data: { title: 'Персональные данные' }},
+  //         {path: 'orders', component: AccountOrdersPageComponent, data: { title: 'Мои заказы' }},
+  //         {path: 'report', component: AccountReportPageComponent, data: { title: 'Сформировать отчет' }}
+  //     ]},
+  // ]}
 ];
 
 @NgModule({
