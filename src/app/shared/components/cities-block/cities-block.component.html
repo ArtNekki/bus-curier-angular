@@ -1,6 +1,6 @@
 <article class="cities-block">
   <div class="cities-block__letter">{{letter}}</div>
-  <ul class="cities-block__list">
+  <ul class="cities-block__list" [style]="{paddingTop: names.length < 2 ? '4px' : 0}">
     <li class="cities-block__name" *ngFor="let name of names">{{name}}</li>
   </ul>
 </article>
