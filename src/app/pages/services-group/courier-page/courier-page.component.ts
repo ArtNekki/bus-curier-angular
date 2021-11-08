@@ -1,18 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-const list = [
-  [
-    'Владивосток (забор и доставка груза)',
-    'Уссурийск (забор и доставка груза)',
-    'Находка (забор и доставка груза)',
-    'Дальнегорск (только доставка груза)'
-  ],
-  [
-    'на сайте, в разделе <a href=\'#\' class=\'link link--blue link--no-underline link--in-text\'><span class=\'link__text\'>«Отследить посылку»</span></a>',
-    'при отправлении посылки оформить дополнительную <br>услугу «смс-уведомление отправителю»;',
-    'позвонить по номеру телефона: <a href=\'tel: 8(423)2937879\' class=\'link link--blue link--no-underline link--in-text\'><span class=\'link__text\'>8 (423) 293 78 79</span></a>'
-  ]
-];
+
+
+// ,
+// [
+//   '<app-link [href]="/">rr</app-link>',
+//   '',
+//   '',
+//   ' <a href=\'tel: 8(423)2937879\' class=\'link link--blue link--no-underline link--in-text\'><span class=\'link__text\'></span></a>'
+// ]
 
 @Component({
   selector: 'app-courier-page',
@@ -20,7 +16,15 @@ const list = [
   styleUrls: ['./courier-page.component.scss']
 })
 export class CourierPageComponent implements OnInit {
-  public list = list;
+  public cities = [
+    'Владивосток (забор и доставка груза)',
+    'Уссурийск (забор и доставка груза)',
+    'Находка (забор и доставка груза)',
+    'Дальнегорск (только доставка груза по будням)',
+    'Спасск-Дальний (только доставка)',
+    'Арсеньев (только доставка)',
+    'Хабаровск (забор и доставка)'
+  ];
 
   constructor() { }
 

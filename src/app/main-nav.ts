@@ -5,7 +5,7 @@ export default [
       {link: 'no', name: 'Грузоперевозки по Приморскому краю'},
       {link: 'services/delivery-russia', name: 'Грузоперевозки по России'},
       {link: 'services/courier', name: 'Забор и доставка курьером'},
-      {link: 'no', name: 'Доставка посылок из интернет-магазинов'},
+      {link: 'parcels', name: 'Доставка посылок из интернет-магазинов'},
       {link: 'services/non-standard-tasks', name: 'Реализация нестандартных логистических задач'},
       {link: 'services/cargo-insurance', name: 'Страхование груза'},
   ]},

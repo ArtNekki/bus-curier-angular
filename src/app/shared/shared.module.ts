@@ -70,6 +70,7 @@ import {
 import { CitiesBlockComponent } from './components/cities-block/cities-block.component';
 import { CitiesListComponent } from './components/cities-list/cities-list.component';
 import {RouterModule} from '@angular/router';
+import { ListItemDirective } from './components/list/listItem.directive';
 
 // import { ɵs } from '@ng-select/ng-select;
 
@@ -144,7 +145,8 @@ const RECAPTCHA_V2_DUMMY_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     CitiesBlockComponent,
     CitiesListComponent,
     SwiperModule,
-    RouterModule
+    RouterModule,
+    ListItemDirective
   ],
   declarations: [
     BtnComponent,
@@ -186,7 +188,8 @@ const RECAPTCHA_V2_DUMMY_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
     HelpBoxComponent,
     TabsComponent,
     CitiesBlockComponent,
-    CitiesListComponent
+    CitiesListComponent,
+    ListItemDirective
   ],
   providers: [
     {
