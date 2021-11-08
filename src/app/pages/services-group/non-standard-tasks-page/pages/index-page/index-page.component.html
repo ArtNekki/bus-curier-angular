@@ -28,7 +28,12 @@
     <form action="#" class="form form--max-w-820" autocomplete="off" [formGroup]="form" (submit)="onSubmit()">
       <div class="form__fieldset form__fieldset--2-col-sm form__fieldset--align-end">
         <div class="form__field">
-          <label for="tel" class="form__label form__label--light">{{FormFieldMeta[FormControlName.Tel].label}}</label>
+          <label for="tel" class="form__label form__label--light"
+                 [class.form__label--invalid]="form.get(FormControlName.Tel).invalid && form.get(FormControlName.Tel).touched">
+            {{FormFieldMeta[FormControlName.Tel].label}}
+            <sup class="form__required" *ngIf="form.get(FormControlName.Tel).errors &&
+           form.get(FormControlName.Tel).hasError('required')">*</sup>
+          </label>
           <app-input
             id="tel"
             [type]="FormFieldMeta[FormControlName.Tel].type"
@@ -39,25 +44,36 @@
            && form.get(FormControlName.Tel).touched) && 'invalid'"
             mods="clean"
           >
-            <ng-container class="errors">
-              <small *ngIf="utils.getObjectKey(form.get(FormControlName.Tel).errors).length">
-                {{FormFieldError[utils.getObjectKey(form.get(FormControlName.Tel).errors)[0]]}}
-              </small>
-            </ng-container>
+<!--            <ng-container class="errors">-->
+<!--              <small *ngIf="utils.getObjectKey(form.get(FormControlName.Tel).errors).length">-->
+<!--                {{FormFieldError[utils.getObjectKey(form.get(FormControlName.Tel).errors)[0]]}}-->
+<!--              </small>-->
+<!--            </ng-container>-->
           </app-input>
         </div>
         <div class="form__field">
-          <app-btn mods="lg, black, max-w-270">Отправить заявку</app-btn>
+          <app-btn mods="lg, black, max-w-270" [disabled]="form.invalid || (!form.invalid && isLoading)">
+            <div *ngIf="isLoading; else text" style="height: inherit; display: flex; justify-content: center; align-items: center">
+              <app-loader mods="sm"></app-loader>
+            </div>
+            <ng-template #text>
+              Отправить заявку
+            </ng-template>
+          </app-btn>
         </div>
       </div>
       <div class="form__fieldset form__fieldset--2-col-sm">
         <div class="form__field form__field--full">
-          <app-checkbox [formControlName]="FormControlName.Agree" mods="md">
+          <app-checkbox [formControlName]="FormControlName.Agree" mods="md"
+            (change)="executeCaptcha(invisible)" [isDisabled]="form.get(FormControlName.Captcha).value">
             <ng-container class="text">
               Нажимая кнопку «Отправить», я даю свое согласие на
               <app-link href="#">обработку моих персональных данных</app-link>
             </ng-container>
           </app-checkbox>
+          <re-captcha size="invisible" #invisible
+                      [formControlName]="FormControlName.Captcha" (resolved)="captchaResolved($event)">
+          </re-captcha>
         </div>
       </div>
     </form>

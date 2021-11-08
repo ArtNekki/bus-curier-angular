@@ -78,7 +78,7 @@
       </div>
       <div class="form__field form__field--span-2">
         <app-checkbox [formControlName]="FormControlName.Agree" mods="sm"
-                      (change)="executeCaptcha(invisible)" [isDisabled]="form.get(FormControlName.Captcha).value">
+          (change)="executeCaptcha(invisible)" [isDisabled]="form.get(FormControlName.Captcha).value">
           <ng-container class="text">
             Нажимая кнопку «Отправить», я даю свое согласие на
             <app-link href="#" mods="blue, in-text">обработку моих персональных данных</app-link>
