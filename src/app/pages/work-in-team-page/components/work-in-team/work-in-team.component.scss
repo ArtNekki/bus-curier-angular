@@ -4,12 +4,18 @@
 @import "src/variables";
 @import "src/assets/scss/settings";
 
-.work-in-team {
+:host {
   order: 2;
 
   @include media-breakpoint-up(md) {
-    margin-top: 20px;
     order: unset;
+  }
+}
+
+.work-in-team {
+
+  @include media-breakpoint-up(md) {
+    margin-top: 20px;
   }
 
   @include media-breakpoint-up(lg) {
