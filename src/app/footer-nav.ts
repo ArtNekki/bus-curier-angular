@@ -10,7 +10,7 @@ export const topNav = [
 export const mainNav = [
   {link: 'our-services', name: 'Услуги', dropdown: [
     {link: 'no', name: 'Грузоперевозки по Приморскому краю'},
-    {link: 'no', name: 'Грузоперевозки в республике Татарстан'},
+    // {link: 'no', name: 'Грузоперевозки в республике Татарстан'},
     {link: 'services/delivery-russia', name: 'Грузоперевозки по России'},
     {link: 'services/courier', name: 'Забор и доставка курьером'},
     {link: 'parcels', name: 'Доставка посылок из интернет-магазинов'},
@@ -31,7 +31,7 @@ export const mainNav = [
       // {link: 'account', name: 'Личный кабинет', sm: true},
       {link: 'orders/order', name: 'Онлайн-заявка', sm: true},
       {link: 'orders/quick-order', name: 'Расчет тарифа по Приморью', sm: true},
-      {link: 'no', name: 'Расчет тарифа по Республике Татарстан', sm: true},
+      // {link: 'no', name: 'Расчет тарифа по Республике Татарстан', sm: true},
       {link: 'no', name: 'Расчет тарифа по России', sm: true},
       {link: 'about', name: 'О компании'},
       {link: 'work-in-team', name: 'Вакансии'},
