@@ -315,55 +315,31 @@
   }
 
   &__fieldset--package {
-    //$template-columns-md: repeat(3, minmax(max-content, auto));
-    //$column-gap-md: 35px;
-    //$row-gap-md: 35px;
-
-    //grid-row-gap: 10px;
-
     position: relative;
     margin-top: 30px;
     padding: 30px 15px 25px;
-    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
-    grid-column-gap: 10px;
-    align-items: start;
+    display: flex;
+    flex-wrap: wrap;
+    grid-column-gap: 30px;
+    column-gap: 30px;
+    grid-row-gap: 15px;
+    row-gap: 15px;
     border: 1px solid $gray-light-color;
     border-radius: 5px;
 
     @include media-breakpoint-up(sm) {
       padding-right: 25px;
       padding-left: 25px;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    }
-
-    @include media-breakpoint-up(md) {
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     }
 
     @include media-breakpoint-up(lg) {
-      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+      grid-row-gap: 30px;
+      row-gap: 30px;
     }
 
     & + & {
       margin-top: 30px;
     }
-    //
-    //@include media-breakpoint-up(sm) {
-    //  grid-template-columns: repeat(2, 1fr);
-    //  grid-row-gap: 15px;
-    //}
-    //
-    //@include media-breakpoint-only(md) {
-    //  grid-template-columns: $template-columns-md;
-    //  grid-column-gap: $column-gap-md;
-    //  grid-row-gap: $row-gap-md;
-    //}
-    //
-    //@include media-breakpoint-up(xl) {
-    //  grid-template-columns: $template-columns-md;
-    //  grid-column-gap: $column-gap-md;
-    //  grid-row-gap: $row-gap-md;
-    //}
   }
 
   &__fieldset--delivery-point {
