@@ -1,5 +1,5 @@
 <div class="page__container page__container--col-2 page__container--calculator">
-  <div class="page__content">
+  <div class="page__content" [class.page__content--blur]="isSidebarOpened">
     <h1 class="page__title">Заявка на перевозку</h1>
     <p class="page__subtitle">Заполните форму необходимыми данными и отправьте</p>
     <app-order-steps [steps]="steps" [currentStep]="currentStep"></app-order-steps>
@@ -69,7 +69,7 @@
       </div>
     </form>
   </div>
-  <app-sidebar [form]="formData"></app-sidebar>
+  <app-sidebar (toggle)="isSidebarOpened = $event" [form]="formData"></app-sidebar>
   <div *ngIf="isLoading" style="
       position: fixed;top: 0;left: 0;right: 0; bottom: 0; z-index: 101;
       display: flex;justify-content: center;align-items: center;

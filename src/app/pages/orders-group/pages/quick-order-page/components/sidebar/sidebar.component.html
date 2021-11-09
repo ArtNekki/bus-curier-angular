@@ -31,7 +31,7 @@
         <span *ngIf="!isBreakpointMatched && !totalSum && !isLoading" class="gray">Информация</span>
       </p>
       <button *ngIf="!isBreakpointMatched" type="button"
-              class="sidebar-result__collapse" (click)="toggle()">&#160;</button>
+              class="sidebar-result__collapse" (click)="toggleContent()">&#160;</button>
     </div>
     <div *ngIf="form && isContentVisible && !isLoading;" class="sidebar-result__footer">
       <small>Срок отправки: от 2 до 24 часов<br />*в направлении Владивосток-Находка возможна задержка   сроков до 24 часов.</small>

@@ -10,6 +10,8 @@ import {SimpleModalService} from 'ngx-simple-modal';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, OnChanges {
+  @Output() toggle: EventEmitter<any> = new EventEmitter<any>();
+
   @Input() form;
 
   public totalSum = 0;
@@ -65,8 +67,9 @@ export class SidebarComponent implements OnInit, OnChanges {
       });
   }
 
-  toggle() {
+  toggleContent() {
     this.isContentVisible = !this.isContentVisible;
+    this.toggle.emit(this.isContentVisible);
   }
 
   @HostListener('window:resize', ['$event'])

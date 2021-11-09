@@ -16,6 +16,8 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
 })
 export class SidebarComponent implements OnInit, OnChanges {
   @Input() form;
+
+  @Output() toggle: EventEmitter<any> = new EventEmitter<any>();
   @Output() clear: EventEmitter<any> = new EventEmitter<any>();
 
   public totalSum = 0;
@@ -89,8 +91,9 @@ export class SidebarComponent implements OnInit, OnChanges {
     });
   }
 
-  toggle() {
+  toggleContent() {
     this.isContentVisible = !this.isContentVisible;
+    this.toggle.emit(this.isContentVisible);
   }
 
   @HostListener('window:resize', ['$event'])

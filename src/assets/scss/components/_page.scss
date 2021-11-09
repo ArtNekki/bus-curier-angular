@@ -137,6 +137,10 @@
       //  grid-row-gap: 30px;
       //}
     }
+
+    &--blur {
+      filter: blur(3px);
+    }
   }
 
   //&__content-top {
