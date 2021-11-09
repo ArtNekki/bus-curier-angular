@@ -18,6 +18,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   @Input() form;
 
   @Output() toggle: EventEmitter<any> = new EventEmitter<any>();
+  @Output() totalSumUpdated: EventEmitter<any> = new EventEmitter<any>();
   @Output() clear: EventEmitter<any> = new EventEmitter<any>();
 
   public totalSum = 0;
@@ -59,6 +60,8 @@ export class SidebarComponent implements OnInit, OnChanges {
     const courierToId = this.Courier[data[FormControlName.DeliveryPoint].options
     && data[FormControlName.DeliveryPoint].options.active];
 
+    this.totalSumUpdated.emit(false);
+
     this.calcService.calculateTotalSum({cityFromId, cityToId, courierFromId, courierToId, orders})
       .pipe(delay(1000))
       .subscribe((sum: number) => {
@@ -66,7 +69,7 @@ export class SidebarComponent implements OnInit, OnChanges {
         if (sum) {
           this.totalSum = sum;
           this.isTotalSumUpdated = true;
-          // this.isContentVisible = true;
+          this.totalSumUpdated.emit(true);
           this.isLoading = false;
         }
 

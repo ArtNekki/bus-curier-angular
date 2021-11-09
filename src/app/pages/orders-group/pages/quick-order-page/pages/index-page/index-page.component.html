@@ -22,8 +22,13 @@
         <app-orders-form [departure]="departure" [delivery]="delivery" formControlName="orders"></app-orders-form>
       </div>
       <div *ngIf="departure.cityId && delivery.cityId" class="form__fieldset form__fieldset--delivery">
-        <app-btn *ngIf="!isBreakpointMatched" type="submit" mods="lg" [disabled]="form.invalid">
-          {{formData ? 'Оформить заказ' : 'Рассчитать стоимость' }}
+        <app-btn *ngIf="!isBreakpointMatched" type="submit" mods="lg" [disabled]="form.invalid || formData && !isTotalSumUpdated">
+          <div *ngIf="formData && !isTotalSumUpdated; else text" style="height: inherit; display: flex; justify-content: center; align-items: center">
+            <app-loader mods="sm"></app-loader>
+          </div>
+          <ng-template #text>
+            {{formData ? 'Оформить заказ' : 'Рассчитать стоимость' }}
+          </ng-template>
         </app-btn>
         <app-btn *ngIf="isBreakpointMatched" type="submit" mods="lg" [disabled]="form.invalid || formData">
           Рассчитать стоимость
@@ -46,5 +51,9 @@
       </div>
     </app-text-box>
   </div>
-  <app-sidebar [form]="formData" (toggle)="isSidebarOpened = $event" (clear)="clearAllForm()"></app-sidebar>
+  <app-sidebar [form]="formData"
+     (totalSumUpdated)="isTotalSumUpdated = $event"
+     (toggle)="isSidebarOpened = $event"
+     (clear)="clearAllForm()">
+  </app-sidebar>
 </div>

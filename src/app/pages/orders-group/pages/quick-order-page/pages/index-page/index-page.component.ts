@@ -28,6 +28,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   public isBreakpointMatched = false;
   public isSidebarOpened = false;
+  public isTotalSumUpdated = false;
 
   // public courier: CourierMode = {
   //   pickup: false,
