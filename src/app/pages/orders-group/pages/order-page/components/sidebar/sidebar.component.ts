@@ -30,7 +30,6 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.isBreakpointMatched =  window.matchMedia(`(min-width: 992px)`).matches;
-    this.isContentVisible = this.isBreakpointMatched;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -76,6 +75,9 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   resize() {
     this.isBreakpointMatched =  window.matchMedia(`(min-width: 992px)`).matches;
-    this.isContentVisible = this.isBreakpointMatched;
+
+    if (this.isBreakpointMatched) {
+      this.toggle.emit(false);
+    }
   }
 }
