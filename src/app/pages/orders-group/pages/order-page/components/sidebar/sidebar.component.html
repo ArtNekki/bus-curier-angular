@@ -20,7 +20,7 @@
       <h2 class="sidebar-result__title">Расчет</h2>
       <app-order-result [data]="form"></app-order-result>
     </div>
-    <div class="sidebar-result__total">
+    <div class="sidebar-result__total" [class.sidebar-result__total--updated]="isTotalSumUpdated">
       <p>
         <ng-container *ngIf="form && totalSum && !isLoading">
           <span class="gray">Итого: </span><b>{{totalSum}} руб.</b>

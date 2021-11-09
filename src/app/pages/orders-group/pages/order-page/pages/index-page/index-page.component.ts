@@ -55,7 +55,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   public formData;
   public isLoading = false;
-  public isSidebarOpened = false;
 
   private departureSub: Subscription;
   private deliverySub: Subscription;

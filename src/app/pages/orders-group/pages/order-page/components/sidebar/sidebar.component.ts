@@ -10,14 +10,13 @@ import {SimpleModalService} from 'ngx-simple-modal';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, OnChanges {
-  @Output() toggle: EventEmitter<any> = new EventEmitter<any>();
-
   @Input() form;
 
   public totalSum = 0;
   public isLoading = false;
   public isContentVisible = false;
   public isBreakpointMatched = false;
+  public isTotalSumUpdated = false;
 
   private Courier = {
     pickup: '1',
@@ -56,28 +55,29 @@ export class SidebarComponent implements OnInit, OnChanges {
 
         if (sum) {
           this.totalSum = sum;
-          // this.isContentVisible = true;
+          this.isTotalSumUpdated = true;
           this.isLoading = false;
         }
 
         setTimeout(() => {
-          // this.isContentVisible = false;
-        }, 1250);
+          this.isTotalSumUpdated = false;
+        }, 1000);
       });
   }
 
   toggleContent() {
     this.isContentVisible = !this.isContentVisible;
-    this.toggle.emit(this.isContentVisible);
+
+    if (this.isContentVisible) {
+      document.documentElement.classList.add('page--order-sidebar-open');
+    } else {
+      document.documentElement.classList.remove('page--order-sidebar-open');
+    }
   }
 
   @HostListener('window:resize', ['$event'])
 
   resize() {
     this.isBreakpointMatched =  window.matchMedia(`(min-width: 992px)`).matches;
-
-    if (this.isBreakpointMatched) {
-      this.toggle.emit(false);
-    }
   }
 }
