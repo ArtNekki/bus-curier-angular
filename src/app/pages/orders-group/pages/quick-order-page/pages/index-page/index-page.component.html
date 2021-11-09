@@ -1,5 +1,5 @@
 <div class="page__container page__container--col-2 page__container--calculator">
-  <div class="page__content" [class.page__content--blur]="isSidebarOpened">
+  <div class="page__content">
     <h1 class="page__title">Расчет стоимости перевозки <br class="br br--show-sm">по Приморскому краю</h1>
     <form action="#" class="form" autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form__section" [class.form__section--w-underline]="departure.cityId && delivery.cityId" [style]="{marginBottom: departure.cityId && delivery.cityId ? '50px' : '0'}">
@@ -53,7 +53,6 @@
   </div>
   <app-sidebar [form]="formData"
      (totalSumUpdated)="isTotalSumUpdated = $event"
-     (toggle)="isSidebarOpened = $event"
      (clear)="clearAllForm()">
   </app-sidebar>
 </div>

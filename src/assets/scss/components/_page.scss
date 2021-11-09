@@ -138,8 +138,12 @@
       //}
     }
 
-    &--blur {
+    .page--order-sidebar-open & {
       filter: blur(3px);
+
+      @include media-breakpoint-up(lg) {
+        filter: unset;
+      }
     }
   }
 

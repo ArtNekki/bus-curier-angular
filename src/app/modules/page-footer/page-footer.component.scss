@@ -14,6 +14,14 @@
     margin-top: 0;
   }
 
+  ::ng-deep .page--order-sidebar-open & {
+    filter: blur(3px);
+
+    @include media-breakpoint-up(lg) {
+      filter: unset;
+    }
+  }
+
   &__container {
     @include container();
 

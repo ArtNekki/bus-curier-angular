@@ -27,7 +27,6 @@ export class IndexPageComponent implements OnInit, OnDestroy {
   public cityToId: string;
 
   public isBreakpointMatched = false;
-  public isSidebarOpened = false;
   public isTotalSumUpdated = false;
 
   // public courier: CourierMode = {

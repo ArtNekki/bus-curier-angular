@@ -390,6 +390,17 @@
   }
 }
 
+@mixin order-sidebar-open() {
+  ::ng-deep .page--order-sidebar-open &,
+  .page--order-sidebar-open & {
+    filter: blur(2px);
+
+    @include media-breakpoint-up(lg) {
+      filter: unset;
+    }
+  }
+}
+
 @mixin list-clear {
   margin: 0;
   padding: 0;

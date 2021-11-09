@@ -97,7 +97,12 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   toggleContent() {
     this.isContentVisible = !this.isContentVisible;
-    this.toggle.emit(this.isContentVisible);
+
+    if (this.isContentVisible) {
+      document.documentElement.classList.add('page--order-sidebar-open');
+    } else {
+      document.documentElement.classList.remove('page--order-sidebar-open');
+    }
   }
 
   @HostListener('window:resize', ['$event'])
