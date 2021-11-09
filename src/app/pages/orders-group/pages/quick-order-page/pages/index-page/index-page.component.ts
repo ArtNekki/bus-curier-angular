@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {SimpleModalService} from 'ngx-simple-modal';
@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
 import {CourierMode} from '../../../../../../core/interfaces/calculator';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-index-page',
@@ -24,6 +25,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   public cityFromId: string;
   public cityToId: string;
+
+  public isBreakpointMatched = false;
 
   // public courier: CourierMode = {
   //   pickup: false,
@@ -51,6 +54,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     private calcService: CalculatorService,
     private cdr: ChangeDetectorRef,
     private simpleModal: SimpleModalService,
+    private localStorage: LocalStorageService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -124,11 +128,21 @@ export class IndexPageComponent implements OnInit, OnDestroy {
           this.formData = this.form.value;
         }
     });
+
+    this.isBreakpointMatched =  window.matchMedia(`(min-width: 992px)`).matches;
   }
 
   onSubmit() {
+    if (this.form.invalid) {
+      return;
+    }
+
+    if (this.formData) {
+      this.localStorage.set('quick-order', this.formData);
+      this.router.navigate(['orders', 'order', 'new']);
+    }
+
     this.formData = this.form.value;
-    console.log('this.formData', this.formData);
   }
 
   // confirmClear(cityId, value) {
@@ -182,6 +196,12 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     this.router.navigate(['orders', 'quick-order', 'new']).then(() => {
       window.location.reload();
     });
+  }
+
+  @HostListener('window:resize', ['$event'])
+
+  resize() {
+    this.isBreakpointMatched =  window.matchMedia(`(min-width: 992px)`).matches;
   }
 
   ngOnDestroy(): void {

@@ -980,4 +980,21 @@
     line-height: 16px;
     color: $gray-dark-color;
   }
+
+  &__reset {
+    @include btn-default();
+
+    margin-top: 15px;
+    display: inline-block;
+    font-family: $font-family--secondary;
+    font-size: 14px;
+    line-height: 1.2;
+    color: $red-color;
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 13px;
+      margin-left: 0;
+      display: block;
+    }
+  }
 }

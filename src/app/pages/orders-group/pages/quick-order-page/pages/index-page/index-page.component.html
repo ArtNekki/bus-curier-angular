@@ -22,7 +22,13 @@
         <app-orders-form [departure]="departure" [delivery]="delivery" formControlName="orders"></app-orders-form>
       </div>
       <div *ngIf="departure.cityId && delivery.cityId" class="form__fieldset form__fieldset--delivery">
-        <app-btn mods="lg" [disabled]="form.invalid">Рассчитать стоимость</app-btn>
+        <app-btn *ngIf="!isBreakpointMatched" type="submit" mods="lg" [disabled]="form.invalid">
+          {{formData ? 'Оформить заказ' : 'Рассчитать стоимость' }}
+        </app-btn>
+        <app-btn *ngIf="isBreakpointMatched" type="submit" mods="lg" [disabled]="form.invalid || formData">
+          Рассчитать стоимость
+        </app-btn>
+        <button type="button" *ngIf="formData && !isBreakpointMatched" class="form__reset" (click)="clearAllForm()">Сбросить расчет</button>
       </div>
     </form>
     <app-text-box>

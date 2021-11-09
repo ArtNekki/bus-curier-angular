@@ -25,19 +25,24 @@
         <ng-container *ngIf="form && totalSum && !isLoading">
           <span class="gray">Итого: </span><b>{{totalSum}} руб.</b>
         </ng-container>
-        <span *ngIf="!isBreakpointMatched && !totalSum" class="gray">Информация</span>
+        <span *ngIf="isLoading && !isBreakpointMatched" style="height: 30px; display: flex; justify-content: center; align-items: center">
+          <app-loader mods="sm"></app-loader>
+        </span>
+        <span *ngIf="!isBreakpointMatched && !totalSum && !isLoading" class="gray">Информация</span>
       </p>
       <button *ngIf="!isBreakpointMatched" type="button"
               class="sidebar-result__collapse" (click)="toggle()">&#160;</button>
     </div>
     <div *ngIf="form && isContentVisible && !isLoading;" class="sidebar-result__footer">
       <small>Срок отправки: от 2 до 24 часов<br />*в направлении Владивосток-Находка возможна задержка   сроков до 24 часов.</small>
-      <div class="sidebar-result__submit">
-        <app-btn type="button" mods="lg" (click)="completeOrder()">Оформить заказ</app-btn>
-      </div>
-      <button type="button" class="sidebar-result__reset" (click)="confirmClear()">Сбросить расчет</button>
+      <ng-container *ngIf="isBreakpointMatched">
+        <div class="sidebar-result__submit">
+          <app-btn type="button" mods="lg" (click)="completeOrder()">Оформить заказ</app-btn>
+        </div>
+        <button type="button" class="sidebar-result__reset" (click)="confirmClear()">Сбросить расчет</button>
+      </ng-container>
     </div>
-    <div *ngIf="isLoading" style="height: 450px; display: flex; justify-content: center; align-items: center">
+    <div *ngIf="isLoading && isBreakpointMatched" style="height: 450px; display: flex; justify-content: center; align-items: center">
       <app-loader></app-loader>
     </div>
   </section>
