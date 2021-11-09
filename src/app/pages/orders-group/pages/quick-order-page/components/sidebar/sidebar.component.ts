@@ -99,6 +99,10 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   resize() {
     this.isBreakpointMatched =  window.matchMedia(`(min-width: 992px)`).matches;
+
+    if (this.isBreakpointMatched) {
+      this.toggle.emit(false);
+    }
   }
 
 }
