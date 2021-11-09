@@ -24,6 +24,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   public isLoading = false;
   public isContentVisible = false;
   public isBreakpointMatched = false;
+  public isTotalSumUpdated = false;
 
   private Courier = {
     pickup: '1',
@@ -64,13 +65,14 @@ export class SidebarComponent implements OnInit, OnChanges {
 
         if (sum) {
           this.totalSum = sum;
+          this.isTotalSumUpdated = true;
           // this.isContentVisible = true;
           this.isLoading = false;
         }
 
-        // setTimeout(() => {
-        //   this.isContentVisible = false;
-        // }, 1000);
+        setTimeout(() => {
+          this.isTotalSumUpdated = false;
+        }, 1000);
       });
   }
 
