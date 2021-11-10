@@ -8,6 +8,7 @@ import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import userDocs from 'src/app/data/user-docs';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {Pattern} from '../../../../../../core/pattern/pattern';
 
 @Component({
   selector: 'app-sender-form',
@@ -80,13 +81,13 @@ export class SenderFormComponent extends SubFormComponent implements OnInit {
       case FormControlName.RusPassport:
         this.formGroup.setControl(FormControlName.RusPassport,
           new FormControl('', [Validators.required,
-          Validators.pattern(/(\d{4} \d{6})/)]));
+          Validators.pattern(Pattern.RusPassport)]));
         this.formGroup.removeControl(FormControlName.DriverLicense);
         this.isOtherUserDoc = false;
         break;
       case FormControlName.DriverLicense:
         this.formGroup.setControl(FormControlName.DriverLicense, new FormControl('',
-          [Validators.required, Validators.pattern(/(\d{2} \d{2} \d{6})/)]));
+          [Validators.required, Validators.pattern(Pattern.DriverLicense)]));
         this.formGroup.removeControl(FormControlName.RusPassport);
         this.isOtherUserDoc = false;
         break;

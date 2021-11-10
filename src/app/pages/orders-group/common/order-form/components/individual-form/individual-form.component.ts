@@ -1,13 +1,13 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
-import Pattern from '../../../../../../core/patterns/index';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import userRoles from 'src/app/data/user-roles';
 import FormControlName from 'src/app/core/maps/FormControlName';
+import {Pattern} from '../../../../../../core/pattern/pattern';
 
 @Component({
   selector: 'app-individual-form',
@@ -42,7 +42,8 @@ export class IndividualFormComponent extends SubFormComponent implements OnInit 
   ngOnInit(): void {
 
     this.formGroup = new FormGroup({
-      [FormControlName.LastName]: new FormControl('', [Validators.required]),
+      [FormControlName.LastName]: new FormControl('',
+        [Validators.required, Validators.pattern(Pattern.Text)]),
       [FormControlName.FirstName]: new FormControl('', [Validators.required]),
       [FormControlName.MiddleName]: new FormControl('', [Validators.required]),
       [FormControlName.Email]: new FormControl('', [Validators.required, Validators.email]),
