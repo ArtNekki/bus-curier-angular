@@ -87,13 +87,89 @@
     max-width: 270px;
   }
 
+  &--sm-max-w-270 {
+    @include media-breakpoint-up(sm) {
+      max-width: 270px;
+    }
+  }
+
+  &--md-max-w-270 {
+    @include media-breakpoint-up(md) {
+      max-width: 270px;
+    }
+  }
+
+  &--lg-max-w-270 {
+    @include media-breakpoint-up(lg) {
+      max-width: 270px;
+    }
+  }
+
+  &--xl-max-w-270 {
+    @include media-breakpoint-up(lg) {
+      max-width: 270px;
+    }
+  }
+
+  &--w-full {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  &--sm-w-full {
+    @include media-breakpoint-up(sm) {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  &--md-w-full {
+    @include media-breakpoint-up(md) {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  &--lg-w-full {
+    @include media-breakpoint-up(lg) {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  &--xl-w-full {
+    @include media-breakpoint-up(lg) {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
   &--max-w-300 {
     max-width: 300px;
   }
 
-  &--w-full {
-    display: block;
-    width: 100%;
+  &--sm-max-w-300 {
+    @include media-breakpoint-up(sm) {
+      max-width: 300px;
+    }
+  }
+
+  &--md-max-w-300 {
+    @include media-breakpoint-up(md) {
+      max-width: 300px;
+    }
+  }
+
+  &--lg-max-w-300 {
+    @include media-breakpoint-up(lg) {
+      max-width: 300px;
+    }
+  }
+
+  &--xl-max-w-300 {
+    @include media-breakpoint-up(lg) {
+      max-width: 300px;
+    }
   }
 
   &--checkbox-action {
