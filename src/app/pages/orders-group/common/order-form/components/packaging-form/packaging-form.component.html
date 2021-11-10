@@ -34,11 +34,12 @@
                   getCounterControl(i, boxes.controls).value * formattedData[control.key].price : formattedData[control.key].price}}
                   руб за {{ getCounterControl(i, boxes.controls).value || '1' }} шт.
                 </div>
-                <div *ngIf="getCounterControl(i, boxes.controls).value" style="font-size: 10px;">
-                  <span style="margin-top: 5px; display: inline-block;
-                        color: #FFDC00; cursor: pointer;"
-                        (click)="setActiveCheckbox(control.key)">изменить</span>
-                </div>
+              </ng-container>
+              <ng-container class="actions">
+                <app-btn type="button" mods="checkbox-action" *ngIf="getCounterControl(i, boxes.controls).value"
+                 (click)="setActiveCheckbox(control.key)">
+                  изменить
+                </app-btn>
               </ng-container>
             </app-checkbox>
           </ng-template>
@@ -82,11 +83,12 @@
                   getCounterControl(i, safePacks.controls).value * formattedData[control.key].price : formattedData[control.key].price}}
                   руб за {{ getCounterControl(i, safePacks.controls).value || '1' }} шт.
                 </div>
-                <div *ngIf="getCounterControl(i, safePacks.controls).value" style="font-size: 10px;">
-                  <span style="margin-top: 5px; display: inline-block;
-                        color: #FFDC00; cursor: pointer;"
-                        (click)="setActiveCheckbox(control.key)">изменить</span>
-                </div>
+              </ng-container>
+              <ng-container class="actions">
+                <app-btn type="button" mods="checkbox-action" *ngIf="getCounterControl(i, safePacks.controls).value"
+                         (click)="setActiveCheckbox(control.key)">
+                  изменить
+                </app-btn>
               </ng-container>
             </app-checkbox>
           </ng-template>
@@ -129,11 +131,12 @@
                   getCounterControl(i, plasticPacks.controls).value * formattedData[control.key].price : formattedData[control.key].price}}
                   руб за {{ getCounterControl(i, plasticPacks.controls).value || '1' }} шт.
                 </div>
-                <div *ngIf="getCounterControl(i, plasticPacks.controls).value" style="font-size: 10px;">
-                  <span style="margin-top: 5px; display: inline-block;
-                        color: #FFDC00; cursor: pointer;"
-                        (click)="setActiveCheckbox(control.key)">изменить</span>
-                </div>
+              </ng-container>
+              <ng-container class="actions">
+                <app-btn type="button" mods="checkbox-action" *ngIf="getCounterControl(i, plasticPacks.controls).value"
+                         (click)="setActiveCheckbox(control.key)">
+                  изменить
+                </app-btn>
               </ng-container>
             </app-checkbox>
           </ng-template>
@@ -172,11 +175,12 @@
                   getCounterControl(i, skins.controls).value * formattedData[control.key].price : formattedData[control.key].price}}
                   руб за {{ getCounterControl(i, skins.controls).value || '1' }} шт.
                 </div>
-                <div *ngIf="getCounterControl(i, skins.controls).value" style="font-size: 10px;">
-                  <span style="margin-top: 5px; display: inline-block;
-                        color: #FFDC00; cursor: pointer;"
-                        (click)="setActiveCheckbox(control.key)">изменить</span>
-                </div>
+              </ng-container>
+              <ng-container class="actions">
+                <app-btn type="button" mods="checkbox-action" *ngIf="getCounterControl(i, skins.controls).value"
+                         (click)="setActiveCheckbox(control.key)">
+                  изменить
+                </app-btn>
               </ng-container>
             </app-checkbox>
           </ng-template>
@@ -215,11 +219,12 @@
                   getCounterControl(i, other.controls).value * formattedData[control.key].price : formattedData[control.key].price}}
                   руб за {{ getCounterControl(i, other.controls).value || '1' }} шт.
                 </div>
-                <div *ngIf="getCounterControl(i, other.controls).value" style="font-size: 10px;">
-                  <span style="margin-top: 5px; display: inline-block;
-                        color: #FFDC00; cursor: pointer;"
-                        (click)="setActiveCheckbox(control.key)">изменить</span>
-                </div>
+              </ng-container>
+              <ng-container class="actions">
+                <app-btn type="button" mods="checkbox-action" *ngIf="getCounterControl(i, other.controls).value"
+                         (click)="setActiveCheckbox(control.key)">
+                  изменить
+                </app-btn>
               </ng-container>
             </app-checkbox>
           </ng-template>

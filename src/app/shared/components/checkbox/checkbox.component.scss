@@ -82,13 +82,17 @@
     }
   }
 
-  &__label {
+  &__top {
+    position: relative;
     grid-column: 2 / 3;
     grid-row: 1 / 2;
+    justify-self: start;
+  }
+
+  &__label {
     font-size: 16px;
     line-height: 20px;
     cursor: pointer;
-    //color: #988300;
 
     .checkbox__input:disabled ~ .checkbox__body & {
       opacity: 0.3;
@@ -136,9 +140,22 @@
     line-height: 1.2;
     color: $gray-dark-color;
 
+    &:empty {
+      display: none;
+    }
+
     .checkbox__input:disabled ~ .checkbox__body & {
       opacity: 0.3;
       cursor: not-allowed;
+    }
+  }
+
+  &__actions {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+
+    &:empty {
+      display: none;
     }
   }
 
@@ -146,8 +163,12 @@
     @include close-button(12px, lighten($red-color, 5%), darken($red-color, 8%));
 
     position: absolute;
-    top: -5px;
+    top: -10px;
     right: -15px;
+
+    @include hover {
+      opacity: 0.8;
+    }
   }
 }
 

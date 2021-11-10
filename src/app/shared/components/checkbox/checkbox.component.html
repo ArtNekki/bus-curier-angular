@@ -4,16 +4,22 @@
          [ngModel]="value" (ngModelChange)="changeValue($event)"
          [disabled]="isControlDisabled" [attr.disabled]="isDisabled || null">
   <div class="checkbox__body">
-    <span  class="checkbox__label">
-      <ng-content select=".text"></ng-content>
-    </span>
-    <span class="checkbox__meta">
+    <div class="checkbox__top">
+      <div class="checkbox__label">
+        <ng-content select=".text"></ng-content>
+      </div>
+      <button
+        *ngIf="isClear && (isDisabled || isControlDisabled)" type="button" class="checkbox__clear"
+        (click)="onClear($event)" alt="Очистить">&#160;
+      </button>
+    </div>
+    <div class="checkbox__meta">
       <ng-content select=".meta"></ng-content>
-    </span>
+    </div>
+    <div class="checkbox__actions">
+      <ng-content select=".actions"></ng-content>
+    </div>
     <ng-content select=".help"></ng-content>
     <ng-content select=".other"></ng-content>
-    <button
-      *ngIf="isClear && (isDisabled || isControlDisabled)" type="button" class="checkbox__clear"
-      (click)="onClear($event)" alt="Очистить">&#160;</button>
   </div>
 </label>

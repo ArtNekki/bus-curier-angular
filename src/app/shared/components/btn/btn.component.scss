@@ -96,6 +96,22 @@
     width: 100%;
   }
 
+  &--checkbox-action {
+    @extend .btn--default;
+
+    width: unset;
+    height: unset;
+    font-size: 10px;
+    color: $red-color;
+
+    @include hover {
+      &:not(:disabled) {
+        color: rgba($red-color, 0.8);
+        background-color: transparent;
+      }
+    }
+  }
+
   &--delete {
     margin-top: auto;
     margin-bottom: auto;
