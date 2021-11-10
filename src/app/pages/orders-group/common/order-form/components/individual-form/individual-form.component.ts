@@ -1,6 +1,7 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
+import Pattern from '../../../../../../core/patterns/index';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {UtilsService} from '../../../../../../core/services/utils.service';
@@ -46,7 +47,7 @@ export class IndividualFormComponent extends SubFormComponent implements OnInit 
       [FormControlName.MiddleName]: new FormControl('', [Validators.required]),
       [FormControlName.Email]: new FormControl('', [Validators.required, Validators.email]),
       [FormControlName.Tel]: new FormControl('', [Validators.required,
-        Validators.pattern(/((\(\d{3}\)?)|(\d{3}-))?\d{3}-\d{4}/)]),
+        Validators.pattern(Pattern.Phone)]),
       [FormControlName.Role]: new FormControl(FormControlName.Sender, [Validators.required]),
     });
 
