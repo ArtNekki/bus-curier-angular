@@ -15,7 +15,8 @@
            routerLinkActive="mobile-nav__link--active" class="mobile-nav__link" (click)="closeNav()">
           {{item.name}}
         </a>
-        <span *ngIf="item.dropdown" class="mobile-nav__link mobile-nav__link--toggle" [class.mobile-nav__link--active]="activeItem === item" (click)="openDropdown(item)">{{item.name}}</span>
+        <a [routerLink]="item.link" *ngIf="item.dropdown" class="mobile-nav__link mobile-nav__link--toggle"
+              [class.mobile-nav__link--active]="activeItem === item" (click)="openDropdown(item)">{{item.name}}</a>
         <ul  *ngIf="item.dropdown && activeItem === item" class="mobile-nav__list mobile-nav__list--inner">
           <li *ngFor="let item of item.dropdown" class="mobile-nav__item">
             <a [routerLink]="item.link" class="mobile-nav__link"
