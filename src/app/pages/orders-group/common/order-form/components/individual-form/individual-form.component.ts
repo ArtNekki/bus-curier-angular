@@ -44,8 +44,9 @@ export class IndividualFormComponent extends SubFormComponent implements OnInit 
       [FormControlName.LastName]: new FormControl('', [Validators.required]),
       [FormControlName.FirstName]: new FormControl('', [Validators.required]),
       [FormControlName.MiddleName]: new FormControl('', [Validators.required]),
-      [FormControlName.Email]: new FormControl('', [Validators.required, Validators.required]),
-      [FormControlName.Tel]: new FormControl('', [Validators.required]),
+      [FormControlName.Email]: new FormControl('', [Validators.required, Validators.email]),
+      [FormControlName.Tel]: new FormControl('', [Validators.required,
+        Validators.pattern(/((\(\d{3}\)?)|(\d{3}-))?\d{3}-\d{4}/)]),
       [FormControlName.Role]: new FormControl(FormControlName.Sender, [Validators.required]),
     });
 

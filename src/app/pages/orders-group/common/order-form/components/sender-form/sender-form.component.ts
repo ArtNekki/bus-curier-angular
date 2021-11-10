@@ -48,7 +48,8 @@ export class SenderFormComponent extends SubFormComponent implements OnInit {
     this.formGroup = new FormGroup({
       [FormControlName.Fio]: new FormControl('', [Validators.required]),
       [FormControlName.Doc]: new FormControl(FormControlName.RusPassport, [Validators.required]),
-      [FormControlName.Tel]: new FormControl('', [Validators.required]),
+      [FormControlName.Tel]: new FormControl('', [Validators.required,
+        Validators.pattern(/((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/)]),
     });
 
     this.changeUserDoc(this.formGroup.get(FormControlName.Doc).value);
@@ -77,12 +78,15 @@ export class SenderFormComponent extends SubFormComponent implements OnInit {
   changeUserDoc(type: any) {
     switch (type) {
       case FormControlName.RusPassport:
-        this.formGroup.setControl(FormControlName.RusPassport, new FormControl('', [Validators.required]));
+        this.formGroup.setControl(FormControlName.RusPassport,
+          new FormControl('', [Validators.required,
+          Validators.pattern(/(\d{4} \d{6})/)]));
         this.formGroup.removeControl(FormControlName.DriverLicense);
         this.isOtherUserDoc = false;
         break;
       case FormControlName.DriverLicense:
-        this.formGroup.setControl(FormControlName.DriverLicense, new FormControl('', [Validators.required]));
+        this.formGroup.setControl(FormControlName.DriverLicense, new FormControl('',
+          [Validators.required, Validators.pattern(/(\d{2} \d{2} \d{6})/)]));
         this.formGroup.removeControl(FormControlName.RusPassport);
         this.isOtherUserDoc = false;
         break;

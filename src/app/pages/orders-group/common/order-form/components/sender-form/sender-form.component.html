@@ -13,9 +13,9 @@
                   [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
                   [items]="userDocs"
                   (change)="changeUserDoc($event)">
-        <ng-container class="errors">
-          <small *ngIf="utils.getObjectKey(control.value.errors).length">{{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}</small>
-        </ng-container>
+<!--        <ng-container class="errors">-->
+<!--          <small *ngIf="utils.getObjectKey(control.value.errors).length">{{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}</small>-->
+<!--        </ng-container>-->
       </app-select>
       <ng-template #input>
         <app-input
@@ -25,9 +25,9 @@
           [mask]="FormFieldMeta[control.key].mask" [prefix]="FormFieldMeta[control.key].prefix"
           [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
         >
-          <ng-container class="errors">
-            <small *ngIf="utils.getObjectKey(control.value.errors).length">{{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}</small>
-          </ng-container>
+<!--          <ng-container class="errors">-->
+<!--            <small *ngIf="utils.getObjectKey(control.value.errors).length">{{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}</small>-->
+<!--          </ng-container>-->
         </app-input>
       </ng-template>
     </div>
