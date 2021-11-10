@@ -175,6 +175,10 @@
       animation: update;
       animation-duration: 1s;
       animation-fill-mode: forwards;
+
+      @include media-breakpoint-up(lg) {
+        animation: none;
+      }
     }
   }
 
