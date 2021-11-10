@@ -73,13 +73,18 @@
 
   &__counter {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
   }
 
   &__counter small {
     margin: 0 0 0 5px;
+    display: none;
     font-size: 14px;
     color: $black-color;
+
+    @include media-breakpoint-up(sm) {
+      display: block;
+    }
   }
 
   &__sum {
