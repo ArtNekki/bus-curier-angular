@@ -95,6 +95,7 @@
     padding: 15px $mobile-padding-right 15px $mobile-padding-left;
     display: block;
     border-bottom: 1px solid $gray-light-color;
+    font-family: $font-family--secondary;
     font-size: 18px;
     line-height: 25.2px;
     color: $font-color;
@@ -111,6 +112,13 @@
       border: none;
       font-size: 16px;
       line-height: 19.2px;
+
+      &--active {
+        background-color: unset;
+        box-shadow: unset;
+        //font-weight: 700;
+        color: rgba($black-color, 0.3);
+      }
     }
 
      &--active {
@@ -137,6 +145,8 @@
 
   &__footer-link {
     @include text();
+
+    font-family: $font-family--secondary;
     text-decoration: none;
 
     &--lg {
@@ -149,7 +159,9 @@
 
   &__text {
     @include text();
+
     margin-top: 10px;
+    font-family: $font-family--secondary;
   }
 
   &-backdrop {
