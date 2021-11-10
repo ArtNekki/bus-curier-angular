@@ -1,6 +1,6 @@
 <div class="mobile-nav" [@navBlock]="isOpen">
   <div class="mobile-nav__header">
-    <a href="#" class="mobile-nav__logo">
+    <a routerLink="/" class="mobile-nav__logo" (click)="closeNav()">
       <svg-icon class="icon" src="assets/img/svg/logo.svg" width="68" height="40"></svg-icon>
     </a>
     <a href="tel:" class="mobile-nav__contact">
