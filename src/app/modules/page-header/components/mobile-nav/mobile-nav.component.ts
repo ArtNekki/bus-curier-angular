@@ -29,10 +29,10 @@ export class MobileNavComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   closeNav() {
+    console.log('close');
     this.isOpen = false;
     this.onClose.emit(false);
   }

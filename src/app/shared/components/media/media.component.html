@@ -1,5 +1,5 @@
 <article [class]="cssClass">
-  <div class="media__img" *ngIf="!data.text">
+  <div class="media__img" *ngIf="data && !data.text">
     <svg-icon class="icon" src="assets/img/svg/pdf.svg" width="42px" height="42px"></svg-icon>
   </div>
   <h1 class="media__title" *ngIf="data && data.title" [innerHTML]="data.title"></h1>
