@@ -7,6 +7,7 @@
             [rows]="rows" [ngModel]="value"
             (ngModelChange)="changeValue($event)"
             (blur)="markAsTouched()"
+            maxlength="700"
   >
   </textarea>
   <div class="input__errors">
@@ -15,10 +16,16 @@
 </div>
 
 <ng-template #input>
-  <div *ngIf="unit; else simpleInput" [class]="cssClass" [class.input--focused]="isFocused" (click)="onFocus()">
+  <div *ngIf="unit; else simpleInput" [class]="cssClass"
+       [class.input--focused]="isFocused" (click)="onFocus()">
     <div class="input__field">
-      <input #inputField [type]="type" [id]="id" [name]="name" [placeholder]="placeholder" hidden  />
-      <span #editContent class="input__edit" contenteditable (blur)="onBlur()" (input)="changeValue(editContent.textContent)">{{ inputField.value}}</span>
+      <input #inputField
+             [type]="type" [id]="id" [name]="name"
+             [placeholder]="placeholder" hidden
+             [maxLength]="maxLength"
+      />
+      <span #editContent class="input__edit" contenteditable (blur)="onBlur()"
+            (input)="changeValue(editContent.textContent)">{{ inputField.value}}</span>
       <span class="input__unit">{{unit}}</span>
     </div>
     <div class="input__errors">
@@ -30,9 +37,11 @@
       <input  *ngIf="mask; else withoutMask"
               #simpleInputField [type]="type" [id]="id" class="input__field"
               [placeholder]="placeholder" [mask]="mask" [prefix]="prefix" [ngModel]="value"
-              (ngModelChange)="changeValue($event)" (blur)="markAsTouched()" />
+              [maxLength]="maxLength" (ngModelChange)="changeValue($event)" (blur)="markAsTouched()" />
       <ng-template #withoutMask>
-        <input #simpleInputField [type]="type" [id]="id" class="input__field" [placeholder]="placeholder" [ngModel]="value" (ngModelChange)="changeValue($event)" (blur)="markAsTouched()"/>
+        <input #simpleInputField [type]="type" [id]="id" class="input__field"
+               [placeholder]="placeholder" [ngModel]="value" (ngModelChange)="changeValue($event)"
+               (blur)="markAsTouched()" [maxLength]="maxLength"/>
       </ng-template>
       <ng-content select=".restore"></ng-content>
       <div *ngIf="isInvalid" class="input__errors">

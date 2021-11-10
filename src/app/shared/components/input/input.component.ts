@@ -29,6 +29,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() mods;
   @Input() isInvalid = false;
   @Input() isValid = false;
+  @Input() maxLength = 100;
 
   public cssClass;
   public isFocused = false;
