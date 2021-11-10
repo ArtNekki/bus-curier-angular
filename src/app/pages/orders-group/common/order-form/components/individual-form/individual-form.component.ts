@@ -43,8 +43,7 @@ export class IndividualFormComponent extends SubFormComponent implements OnInit 
 
     this.formGroup = new FormGroup({
       [FormControlName.LastName]: new FormControl('',
-      [Validators.required, Validators.pattern(Pattern.Text),
-                    Validators.maxLength(10)]),
+      [Validators.required, Validators.pattern(Pattern.Text)]),
       [FormControlName.FirstName]: new FormControl('', [Validators.required]),
       [FormControlName.MiddleName]: new FormControl('', [Validators.required]),
       [FormControlName.Email]: new FormControl('', [Validators.required, Validators.email]),
