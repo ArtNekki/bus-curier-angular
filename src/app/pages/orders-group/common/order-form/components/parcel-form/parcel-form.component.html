@@ -13,6 +13,7 @@
         </label>
         <app-input
           type="number"
+          maxlength="2"
           [formControlName]="control.key"
           [isInvalid]="(control.value.invalid && control.value.touched)
           || (control.key === FormControlName.Width || control.key === FormControlName.Height

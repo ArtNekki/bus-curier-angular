@@ -30,7 +30,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() mods;
   @Input() isInvalid = false;
   @Input() isValid = false;
-  @Input() maxLength = 100;
+  @Input() maxlength: number;
 
   public Pattern = Pattern;
 
@@ -43,6 +43,9 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   ngOnInit(): void {
     this.cssClass = this.modsService.setMods('input', this.mods);
+
+    this.maxlength = !this.maxlength ?
+      this.type === 'text' ? 100 : this.type === 'number' ? 8 : 100 : this.maxlength;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -117,7 +120,13 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     this.onTouched();
   }
 
-  checkPattern(field: any, event: any) {
+  check(field: any, event: any) {
+
+    if (field.value.length > this.maxlength) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
     const ok = new RegExp(field.pattern).test(field.value);
 
     if (!ok) {

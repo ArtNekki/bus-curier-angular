@@ -22,7 +22,7 @@
       <input #inputField
              [type]="type" [id]="id" [name]="name"
              [placeholder]="placeholder" hidden
-             [maxLength]="maxLength"
+             [maxLength]="maxlength"
              [pattern]="(type === 'text') ? Pattern.Text : ''"
       />
       <span #editContent class="input__edit" contenteditable (blur)="onBlur()"
@@ -38,12 +38,12 @@
       <input  *ngIf="mask; else withoutMask"
               #simpleInputField [type]="type" [id]="id" class="input__field"
               [placeholder]="placeholder" [mask]="mask" [prefix]="prefix" [ngModel]="value"
-              [maxLength]="maxLength" (ngModelChange)="changeValue($event)" (blur)="markAsTouched()" />
+              [maxlength]="maxlength" (ngModelChange)="changeValue($event)" (blur)="markAsTouched()" />
       <ng-template #withoutMask>
         <input #simpleInputField [type]="type" [id]="id" class="input__field"
                [placeholder]="placeholder" [ngModel]="value" (ngModelChange)="changeValue($event)"
-               (blur)="markAsTouched()" (keypress)="checkPattern(simpleInputField, $event)"
-               [maxLength]="maxLength" [pattern]="(type === 'text') ? Pattern.Text : ''"/>
+               (blur)="markAsTouched()" (keypress)="check(simpleInputField, $event)"
+               [maxlength]="maxlength" [pattern]="(type === 'text') ? Pattern.Text : ''"/>
       </ng-template>
       <ng-content select=".restore"></ng-content>
       <div *ngIf="isInvalid" class="input__errors">

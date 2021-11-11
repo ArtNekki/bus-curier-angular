@@ -7,6 +7,7 @@ import {UtilsService} from '../../../../../../core/services/utils.service';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import schedule from 'src/app/mock-data/schedule';
+import {Pattern} from '../../../../../../core/pattern/pattern';
 
 @Component({
   selector: 'app-courier-form',
@@ -40,9 +41,12 @@ export class CourierFormComponent extends SubFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      [FormControlName.Street]: new FormControl('', [Validators.required]),
-      [FormControlName.Building]: new FormControl('', [Validators.required]),
-      [FormControlName.Apartment]: new FormControl('', [Validators.required]),
+      [FormControlName.Street]: new FormControl('',
+        [Validators.required, Validators.pattern(Pattern.Text)]),
+      [FormControlName.Building]: new FormControl('',
+        [Validators.required, Validators.pattern(Pattern.Text)]),
+      [FormControlName.Apartment]: new FormControl('',
+        [Validators.required, Validators.pattern(Pattern.Text)]),
       [FormControlName.CourierTime]: new FormControl('time-1', [])
     });
 
