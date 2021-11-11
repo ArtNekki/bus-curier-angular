@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
@@ -7,6 +7,8 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import {Service} from '../../../../../../core/interfaces/calculator';
+import {Pattern} from '../../../../../../core/pattern/pattern';
+import {delay, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-services-form',
@@ -67,17 +69,17 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
       items: new FormArray([])
     });
 
-    this.formGroup.valueChanges.subscribe((data) => {
-      data.items.forEach((item, i) => {
-
-        if (Object.values(item)[0]) {
-          this.items.at(i).setValidators(Validators.required);
-        } else {
-          this.items.at(i).clearValidators();
-        }
-
-      });
-    });
+    // this.formGroup.valueChanges.subscribe((data) => {
+    //   data.items.forEach((item, i) => {
+    //
+    //     if (Object.values(item)[0]) {
+    //       this.items.at(i).setValidators(Validators.required);
+    //     } else {
+    //       this.items.at(i).clearValidators();
+    //     }
+    //
+    //   });
+    // });
 
     this.setServices(this.services);
   }
@@ -118,20 +120,40 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
         switch (item.id) {
           case this.Service.SMS:
           case this.Service.EXT_SMS:
-            this.items.push(new FormGroup({
+            const phoneGroup = new FormGroup({
               [item.id]: new FormControl(''),
-              [FormControlName.Tel]: new FormControl('', {updateOn: 'blur'})
-            }));
+              [FormControlName.Tel]: new FormControl('')
+            });
+
+            this.items.push(phoneGroup);
+
+            phoneGroup.valueChanges
+              .pipe(
+                take(1)
+              )
+              .subscribe((data) => {
+                if (Object.values(data)[0]) {
+                  phoneGroup.get(FormControlName.Tel).setValidators([Validators.required, Validators.pattern(Pattern.Phone)]);
+                } else {
+                  phoneGroup.get(FormControlName.Tel).clearValidators();
+                }
+
+                setTimeout(() => {
+                  phoneGroup.markAllAsTouched();
+                  phoneGroup.reset(phoneGroup.value);
+                }, 0);
+            });
+
             break;
           case this.Service.INSURANCE:
-            const insurance = new FormGroup({
+            const insuranceGroup = new FormGroup({
               ['insurance']: new FormControl(''),
               [FormControlName.Sum]: new FormControl('')
             });
 
-            this.items.push(insurance);
+            this.items.push(insuranceGroup);
 
-            insurance.valueChanges.subscribe((data) => {
+            insuranceGroup.valueChanges.subscribe((data) => {
               const sum = +data.sum.split(' ').join('');
 
               if (sum > this.Insurance.LIMIT_MIN) {
