@@ -8,14 +8,17 @@
           <ng-container *ngIf="(control.key === FormControlName.Sum)
           || (control.key === FormControlName.Tel); else checkbox">
             <dd *ngIf="getCheckbox(i, items.controls).value">
-              <label [for]="control.key" class="form__label">
+              <label [for]="control.key" class="form__label"
+                     [class.form__label--invalid]="control.value.invalid">
                 {{control.key === FormControlName.Sum ? 'Объявленная ценность:' : 'Номер телефона:'}}
+                <sup class="form__required" *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
               </label>
               <app-input
                 [type]="FormFieldMeta[control.key].type"
                 [formControlName]="control.key"
                 [mask]="FormFieldMeta[control.key].mask"
                 [prefix]="FormFieldMeta[control.key].prefix"
+                [isInvalid]="control.value.invalid && control.value.touched"
               ></app-input>
 <!--              <ng-container *ngIf="control.key === FormControlName.Sum">-->
 <!--                <div class="form__meta">Стоимость страхования: {{insuranceSum | currency: 'RUB':'symbol-narrow':'1.0':'ru'}}</div>-->

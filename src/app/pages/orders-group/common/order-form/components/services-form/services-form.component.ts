@@ -69,27 +69,8 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
       items: new FormArray([])
     });
 
-    // this.formGroup.valueChanges.subscribe((data) => {
-    //   data.items.forEach((item, i) => {
-    //
-    //     if (Object.values(item)[0]) {
-    //       this.items.at(i).setValidators(Validators.required);
-    //     } else {
-    //       this.items.at(i).clearValidators();
-    //     }
-    //
-    //   });
-    // });
-
     this.setServices(this.services);
   }
-
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   if (changes.services && changes.services.currentValue.length && this.formGroup) {
-  //     this.items.clear();
-  //     this.setServices(changes.services.currentValue);
-  //   }
-  // }
 
   setServices(arr: Array<Service>) {
 
