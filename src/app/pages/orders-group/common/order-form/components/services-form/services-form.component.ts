@@ -69,6 +69,15 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
       items: new FormArray([])
     });
 
+    // this.formGroup.valueChanges.subscribe((data) => {
+    //   data.items.forEach((item, i) => {
+    //     if (!Object.values(item)[0]) {
+    //       const controls = Object.values((this.items.at(i) as FormGroup).controls);
+    //       controls[1].clearValidators();
+    //     }
+    //   });
+    // });
+
     this.setServices(this.services);
   }
 
