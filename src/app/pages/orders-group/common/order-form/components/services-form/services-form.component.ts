@@ -134,14 +134,29 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
 
             this.items.push(insuranceGroup);
 
-            insuranceGroup.valueChanges.subscribe((data) => {
-              const sum = +data.sum.split(' ').join('');
+            insuranceGroup.valueChanges
+              .pipe(
+                take(1)
+              )
+              .subscribe((data) => {
+                const sum = +data.sum.split(' ').join('');
 
-              if (sum > this.Insurance.LIMIT_MIN) {
-                this.insuranceSum = this.Insurance.PRICE_MAX;
-              } else {
-                this.insuranceSum = this.Insurance.PRICE_MIN;
-              }
+                if (sum > this.Insurance.LIMIT_MIN) {
+                  this.insuranceSum = this.Insurance.PRICE_MAX;
+                } else {
+                  this.insuranceSum = this.Insurance.PRICE_MIN;
+                }
+
+                if (Object.values(data)[0]) {
+                  insuranceGroup.get(FormControlName.Sum).setValidators([Validators.required]);
+                } else {
+                  insuranceGroup.get(FormControlName.Sum).clearValidators();
+                }
+
+                setTimeout(() => {
+                  insuranceGroup.markAllAsTouched();
+                  insuranceGroup.reset(insuranceGroup.value);
+                }, 0);
             });
         }});
   }
