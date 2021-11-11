@@ -15,9 +15,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./sidebar.component.scss'],
   animations: [fadeIn]
 })
-export class SidebarComponent implements OnInit, OnChanges, OnDestroy {
-  // @Input() form;
-
+export class SidebarComponent implements OnInit, OnDestroy {
   @Output() toggle: EventEmitter<any> = new EventEmitter<any>();
   @Output() totalSumUpdated: EventEmitter<any> = new EventEmitter<any>();
   @Output() clear: EventEmitter<any> = new EventEmitter<any>();
@@ -55,12 +53,6 @@ export class SidebarComponent implements OnInit, OnChanges, OnDestroy {
           this.calculateTotalSum(form.value);
         }
       });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.form.currentValue) {
-      this.calculateTotalSum(changes.form.currentValue);
-    }
   }
 
   calculateTotalSum(data) {
