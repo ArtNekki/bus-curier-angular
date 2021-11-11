@@ -119,12 +119,13 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
               )
               .subscribe(([prev, next]) => {
                 if (Object.values(next)[0]) {
-                  phoneGroup.get(FormControlName.Tel).setValidators([Validators.required, Validators.pattern(Pattern.Phone)]);
+                  phoneGroup.get(FormControlName.Tel).setValidators([Validators.required,
+                    Validators.pattern(Pattern.Phone)]);
                 } else {
                   phoneGroup.get(FormControlName.Tel).clearValidators();
                 }
 
-                // if checkbox's value changes then reset
+                // if previous checkbox's key or value not equal next key or value then form reset
                 if ((Object.keys(prev)[0] !== Object.keys(next)[0])
                   || Object.values(prev)[0] !== Object.values(next)[0]) {
 
@@ -164,7 +165,7 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
                   insuranceGroup.get(FormControlName.Sum).clearValidators();
                 }
 
-                // if checkbox's value changes then reset
+                // if previous checkbox's key or value not equal next key or value then form reset
                 if ((Object.keys(prev)[0] !== Object.keys(next)[0])
                   || Object.values(prev)[0] !== Object.values(next)[0]) {
 
