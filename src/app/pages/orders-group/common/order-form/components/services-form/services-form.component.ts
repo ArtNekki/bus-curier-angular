@@ -1,6 +1,6 @@
 import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
-import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
@@ -65,6 +65,18 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       items: new FormArray([])
+    });
+
+    this.formGroup.valueChanges.subscribe((data) => {
+      data.items.forEach((item, i) => {
+
+        if (Object.values(item)[0]) {
+          this.items.at(i).setValidators(Validators.required);
+        } else {
+          this.items.at(i).clearValidators();
+        }
+
+      });
     });
 
     this.setServices(this.services);

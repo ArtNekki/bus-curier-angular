@@ -12,6 +12,7 @@
                 {{control.key === FormControlName.Sum ? 'Объявленная ценность:' : 'Номер телефона:'}}
               </label>
               <app-input
+                [type]="FormFieldMeta[control.key].type"
                 [formControlName]="control.key"
                 [mask]="FormFieldMeta[control.key].mask"
                 [prefix]="FormFieldMeta[control.key].prefix"
