@@ -22,18 +22,18 @@
         <app-orders-form [departure]="departure" [delivery]="delivery" formControlName="orders"></app-orders-form>
       </div>
       <div *ngIf="departure.cityId && delivery.cityId" class="form__fieldset form__fieldset--delivery">
-        <app-btn *ngIf="!isBreakpointMatched" type="submit" mods="lg" [disabled]="form.invalid || formData && !isTotalSumUpdated">
-          <div *ngIf="formData && !isTotalSumUpdated; else text" style="height: inherit; display: flex; justify-content: center; align-items: center">
+        <app-btn *ngIf="!isBreakpointMatched" type="submit" mods="lg" [disabled]="form.invalid || isSubmitted && !isTotalSumUpdated">
+          <div *ngIf="isSubmitted && !isTotalSumUpdated; else text" style="height: inherit; display: flex; justify-content: center; align-items: center">
             <app-loader mods="sm"></app-loader>
           </div>
           <ng-template #text>
-            {{formData ? 'Оформить заказ' : 'Рассчитать стоимость' }}
+            {{isSubmitted ? 'Оформить заказ' : 'Рассчитать стоимость' }}
           </ng-template>
         </app-btn>
-        <app-btn *ngIf="isBreakpointMatched" type="submit" mods="lg" [disabled]="form.invalid || formData">
+        <app-btn *ngIf="isBreakpointMatched" type="submit" mods="lg" [disabled]="form.invalid || isSubmitted">
           Рассчитать стоимость
         </app-btn>
-        <button type="button" *ngIf="formData && !isBreakpointMatched" class="form__reset" (click)="clearAllForm()">Сбросить расчет</button>
+        <button type="button" *ngIf="isSubmitted && !isBreakpointMatched" class="form__reset" (click)="clearAllForm()">Сбросить расчет</button>
       </div>
     </form>
     <app-text-box>
@@ -51,7 +51,7 @@
       </div>
     </app-text-box>
   </div>
-  <app-sidebar [form]="formData"
+  <app-sidebar
      (totalSumUpdated)="isTotalSumUpdated = $event"
      (clear)="clearAllForm()">
   </app-sidebar>

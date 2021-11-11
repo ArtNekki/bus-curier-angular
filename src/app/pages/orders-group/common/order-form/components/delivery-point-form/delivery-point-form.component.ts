@@ -203,6 +203,12 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
       });
 
     this.options.get(type).setValidators([Validators.required]);
+
+    // После того как форма Department или Courier была выбрана обновляем ее значения,
+    // чтобы общая форма показала статус invalid при необходимости
+    setTimeout(() => {
+      this.options.get(type).updateValueAndValidity();
+    }, 0);
   }
 
   clearOptions() {

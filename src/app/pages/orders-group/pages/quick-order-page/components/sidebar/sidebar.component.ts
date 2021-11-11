@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ConfirmModalComponent} from '../../../../../../modals/confirm-modal/confirm-modal.component';
 import {SimpleModalService} from 'ngx-simple-modal';
 import {Router} from '@angular/router';
@@ -7,6 +7,7 @@ import FormControlName from '../../../../../../core/maps/FormControlName';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
 import {debounceTime, delay} from 'rxjs/operators';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,18 +15,21 @@ import fadeIn from '../../../../../../core/animations/fadeIn';
   styleUrls: ['./sidebar.component.scss'],
   animations: [fadeIn]
 })
-export class SidebarComponent implements OnInit, OnChanges {
-  @Input() form;
+export class SidebarComponent implements OnInit, OnChanges, OnDestroy {
+  // @Input() form;
 
   @Output() toggle: EventEmitter<any> = new EventEmitter<any>();
   @Output() totalSumUpdated: EventEmitter<any> = new EventEmitter<any>();
   @Output() clear: EventEmitter<any> = new EventEmitter<any>();
 
+  public form: any = {};
   public totalSum = 0;
   public isLoading = false;
   public isContentVisible = false;
   public isBreakpointMatched = false;
   public isTotalSumUpdated = false;
+
+  private formSub: Subscription;
 
   private Courier = {
     pickup: '1',
@@ -39,7 +43,18 @@ export class SidebarComponent implements OnInit, OnChanges {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.isBreakpointMatched =  window.matchMedia(`(min-width: 992px)`).matches;
+    this.isBreakpointMatched = window.matchMedia(`(min-width: 992px)`).matches;
+
+    this.formSub = this.calcService.form$
+      .subscribe((form: any) => {
+        this.form = form;
+
+        if (form.invalid) {
+          this.isLoading = true;
+        } else if (form.value) {
+          this.calculateTotalSum(form.value);
+        }
+      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -80,7 +95,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
   completeOrder() {
-    this.localStorage.set('quick-order', this.form);
+    this.localStorage.set('quick-order', this.form.value);
     this.router.navigate(['orders', 'order', 'new']);
   }
 
@@ -115,4 +130,7 @@ export class SidebarComponent implements OnInit, OnChanges {
     }
   }
 
+  ngOnDestroy(): void {
+    this.formSub.unsubscribe();
+  }
 }

@@ -50,6 +50,8 @@ export class CourierFormComponent extends SubFormComponent implements OnInit {
       [FormControlName.CourierTime]: new FormControl('time-1', [])
     });
 
+    this.formGroup.markAllAsTouched();
+
     super.ngOnInit();
   }
 }

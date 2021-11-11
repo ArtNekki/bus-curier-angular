@@ -28,6 +28,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   public isBreakpointMatched = false;
   public isTotalSumUpdated = false;
+  public isSubmitted = false;
 
   // public courier: CourierMode = {
   //   pickup: false,
@@ -73,8 +74,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       )
       .subscribe(([prev, next]) => {
 
-        if (this.formData) {
-          this.formData = this.form.value;
+        if (this.isSubmitted) {
+          this.calcService.form$.next(this.form);
         }
 
         if (prev.location && (prev.location !== next.location)) {
@@ -105,8 +106,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         debounceTime(0),
       )
       .subscribe((data) => {
-        if (this.formData) {
-          this.formData = this.form.value;
+        if (this.isSubmitted) {
+          this.calcService.form$.next(this.form);
         }
 
         if (data && (this.delivery.cityId !== data.location)) {
@@ -125,8 +126,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     this.ordersSub = this.form.get(FormControlName.Orders).valueChanges
       .pipe(delay(0))
       .subscribe((result) => {
-        if (this.formData) {
-          this.formData = this.form.value;
+        if (this.isSubmitted) {
+          this.calcService.form$.next(this.form);
         }
     });
 
@@ -138,12 +139,13 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (this.formData) {
-      this.localStorage.set('quick-order', this.formData);
+    if (this.isSubmitted) {
+      this.localStorage.set('quick-order', this.form.value);
       this.router.navigate(['orders', 'order', 'new']);
     }
 
-    this.formData = this.form.value;
+    this.isSubmitted = true;
+    this.calcService.form$.next(this.form);
   }
 
   // confirmClear(cityId, value) {
@@ -172,7 +174,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     return new Observable((sub) => {
       this.departure.cityId = '';
       this.delivery.cityId = '';
-      this.formData = null;
+      this.calcService.form$.next({});
       this.form.get(FormControlName.DeliveryPoint).reset();
       this.form.get(FormControlName.Orders).reset();
 
@@ -218,5 +220,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     if (this.ordersSub) {
       this.ordersSub.unsubscribe();
     }
+
+    // очистим данные формы в сервисе
+    this.calcService.form$.next({});
   }
 }

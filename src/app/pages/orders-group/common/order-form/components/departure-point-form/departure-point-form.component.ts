@@ -165,6 +165,15 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
     this.options.get(type).setValidators([Validators.required]);
 
+    // После того как форма Department или Courier была выбрана обновляем ее значения,
+    // чтобы общая форма показала статус invalid при необходимости
+    setTimeout(() => {
+      this.options.get(type).updateValueAndValidity();
+    }, 0);
+
+    // this.formGroup.get(FormControlName.Pickup).updateValueAndValidity();
+    console.log('changeType');
+
     if (type === FormControlName.Pickup) {
       this.calculatorService.courierDelivery$.next(type);
     }
