@@ -123,6 +123,7 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
                 // if checkbox's value changes then reset
                 if ((Object.keys(prev)[0] !== Object.keys(next)[0])
                   || Object.values(prev)[0] !== Object.values(next)[0]) {
+
                   setTimeout(() => {
                     phoneGroup.markAllAsTouched();
                     phoneGroup.reset(phoneGroup.value);
@@ -141,10 +142,11 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
 
             insuranceGroup.valueChanges
               .pipe(
-                take(1)
+                startWith(insuranceGroup.value),
+                pairwise()
               )
-              .subscribe((data) => {
-                const sum = +data.sum.split(' ').join('');
+              .subscribe(([prev, next]) => {
+                const sum = +next.sum.split(' ').join('');
 
                 if (sum > this.Insurance.LIMIT_MIN) {
                   this.insuranceSum = this.Insurance.PRICE_MAX;
@@ -152,16 +154,21 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
                   this.insuranceSum = this.Insurance.PRICE_MIN;
                 }
 
-                if (Object.values(data)[0]) {
+                if (Object.values(next)[0]) {
                   insuranceGroup.get(FormControlName.Sum).setValidators([Validators.required]);
                 } else {
                   insuranceGroup.get(FormControlName.Sum).clearValidators();
                 }
 
-                setTimeout(() => {
-                  insuranceGroup.markAllAsTouched();
-                  insuranceGroup.reset(insuranceGroup.value);
-                }, 0);
+                // if checkbox's value changes then reset
+                if ((Object.keys(prev)[0] !== Object.keys(next)[0])
+                  || Object.values(prev)[0] !== Object.values(next)[0]) {
+
+                  setTimeout(() => {
+                    insuranceGroup.markAllAsTouched();
+                    insuranceGroup.reset(insuranceGroup.value);
+                  }, 0);
+                }
             });
         }});
   }
