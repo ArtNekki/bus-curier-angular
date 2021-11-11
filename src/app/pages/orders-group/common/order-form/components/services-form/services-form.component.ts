@@ -111,7 +111,6 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
             phoneGroup.valueChanges
               .pipe(
                 startWith(phoneGroup.value),
-                delay(0),
                 pairwise()
               )
               .subscribe(([prev, next]) => {
@@ -124,7 +123,6 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
                 // if checkbox's value changes then reset
                 if ((Object.keys(prev)[0] !== Object.keys(next)[0])
                   || Object.values(prev)[0] !== Object.values(next)[0]) {
-                  console.log('daa');
                   setTimeout(() => {
                     phoneGroup.markAllAsTouched();
                     phoneGroup.reset(phoneGroup.value);
