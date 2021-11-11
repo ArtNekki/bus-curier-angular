@@ -8,7 +8,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import {Service} from '../../../../../../core/interfaces/calculator';
 import {Pattern} from '../../../../../../core/pattern/pattern';
-import {delay, take} from 'rxjs/operators';
+import {delay, pairwise, startWith, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-services-form',
@@ -69,15 +69,6 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
       items: new FormArray([])
     });
 
-    // this.formGroup.valueChanges.subscribe((data) => {
-    //   data.items.forEach((item, i) => {
-    //     if (!Object.values(item)[0]) {
-    //       const controls = Object.values((this.items.at(i) as FormGroup).controls);
-    //       controls[1].clearValidators();
-    //     }
-    //   });
-    // });
-
     this.setServices(this.services);
   }
 
@@ -111,7 +102,7 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
           case this.Service.SMS:
           case this.Service.EXT_SMS:
             const phoneGroup = new FormGroup({
-              [item.id]: new FormControl(''),
+              [item.id]: new FormControl(false),
               [FormControlName.Tel]: new FormControl('')
             });
 
@@ -119,25 +110,32 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
 
             phoneGroup.valueChanges
               .pipe(
-                take(1)
+                startWith(phoneGroup.value),
+                delay(0),
+                pairwise()
               )
-              .subscribe((data) => {
-                if (Object.values(data)[0]) {
+              .subscribe(([prev, next]) => {
+                if (Object.values(next)[0]) {
                   phoneGroup.get(FormControlName.Tel).setValidators([Validators.required, Validators.pattern(Pattern.Phone)]);
                 } else {
                   phoneGroup.get(FormControlName.Tel).clearValidators();
                 }
 
-                setTimeout(() => {
-                  phoneGroup.markAllAsTouched();
-                  phoneGroup.reset(phoneGroup.value);
-                }, 0);
+                // if checkbox's value changes then reset
+                if ((Object.keys(prev)[0] !== Object.keys(next)[0])
+                  || Object.values(prev)[0] !== Object.values(next)[0]) {
+                  console.log('daa');
+                  setTimeout(() => {
+                    phoneGroup.markAllAsTouched();
+                    phoneGroup.reset(phoneGroup.value);
+                  }, 0);
+                }
             });
 
             break;
           case this.Service.INSURANCE:
             const insuranceGroup = new FormGroup({
-              ['insurance']: new FormControl(''),
+              ['insurance']: new FormControl(false),
               [FormControlName.Sum]: new FormControl('')
             });
 
