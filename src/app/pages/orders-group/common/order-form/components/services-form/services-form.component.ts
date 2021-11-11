@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {FormArray, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {FormUtilsService} from '../../../../../../core/services/form-utils.service';
@@ -9,6 +9,7 @@ import {UtilsService} from '../../../../../../core/services/utils.service';
 import {Service} from '../../../../../../core/interfaces/calculator';
 import {Pattern} from '../../../../../../core/pattern/pattern';
 import {delay, pairwise, startWith, take} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-services-form',
@@ -33,7 +34,7 @@ import {delay, pairwise, startWith, take} from 'rxjs/operators';
     ])
   ])]
 })
-export class ServicesFormComponent extends SubFormComponent implements OnInit {
+export class ServicesFormComponent extends SubFormComponent implements OnInit, OnDestroy {
   @Input() services: Array<Service> = [];
 
   public FormControlName = FormControlName;
@@ -42,6 +43,9 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
   public formGroup: FormGroup;
   public activeCheckboxId: string;
   public formattedData = {};
+
+  private phoneGroupSub: Subscription;
+  private insuranceGroupSub: Subscription;
 
   Service = {
     SMS: '66',
@@ -183,5 +187,10 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit {
 
   setActiveCheckbox(id: string) {
     this.activeCheckboxId = id;
+  }
+
+  ngOnDestroy(): void {
+    this.phoneGroupSub.unsubscribe();
+    this.insuranceGroupSub.unsubscribe();
   }
 }
