@@ -23,6 +23,7 @@
              [type]="type" [id]="id" [name]="name"
              [placeholder]="placeholder" hidden
              [maxLength]="maxLength"
+             [pattern]="(type === 'text') ? Pattern.Text : ''"
       />
       <span #editContent class="input__edit" contenteditable (blur)="onBlur()"
             (input)="changeValue(editContent.textContent)">{{ inputField.value}}</span>
@@ -41,7 +42,8 @@
       <ng-template #withoutMask>
         <input #simpleInputField [type]="type" [id]="id" class="input__field"
                [placeholder]="placeholder" [ngModel]="value" (ngModelChange)="changeValue($event)"
-               (blur)="markAsTouched()" [maxLength]="maxLength"/>
+               (blur)="markAsTouched()" (keypress)="checkPattern(simpleInputField, $event)"
+               [maxLength]="maxLength" [pattern]="(type === 'text') ? Pattern.Text : ''"/>
       </ng-template>
       <ng-content select=".restore"></ng-content>
       <div *ngIf="isInvalid" class="input__errors">

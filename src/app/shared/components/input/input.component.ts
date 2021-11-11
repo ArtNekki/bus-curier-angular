@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, forwardRef, Input, OnChanges, OnIn
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import State from 'src/app/core/maps/State';
 import {ModsService} from '../../../core/services/mods.service';
+import {Pattern} from '../../../core/pattern/pattern';
 
 @Component({
   selector: 'app-input',
@@ -30,6 +31,8 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() isInvalid = false;
   @Input() isValid = false;
   @Input() maxLength = 100;
+
+  public Pattern = Pattern;
 
   public cssClass;
   public isFocused = false;
@@ -112,5 +115,14 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
     }
 
     this.onTouched();
+  }
+
+  checkPattern(field: any, event: any) {
+    const ok = new RegExp(field.pattern).test(field.value);
+
+    if (!ok) {
+      // event.preventDefault();
+      // event.stopPropagation();
+    }
   }
 }
