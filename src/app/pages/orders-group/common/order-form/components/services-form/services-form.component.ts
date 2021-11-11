@@ -191,7 +191,12 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
   }
 
   ngOnDestroy(): void {
-    this.phoneGroupSub.unsubscribe();
-    this.insuranceGroupSub.unsubscribe();
+    if (this.phoneGroupSub) {
+      this.phoneGroupSub.unsubscribe();
+    }
+
+    if (this.insuranceGroupSub) {
+      this.insuranceGroupSub.unsubscribe();
+    }
   }
 }
