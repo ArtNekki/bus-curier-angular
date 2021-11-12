@@ -53,7 +53,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     delivery: '2'
   };
 
-  public formData;
+  public isFormDataReady = false;
   public isLoading = false;
 
   private departureSub: Subscription;
@@ -104,8 +104,9 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         pairwise()
       )
       .subscribe(([prev, next]) => {
-        if (this.formData) {
-          this.formData = this.formatFormValue(this.form.value);
+        if (this.isFormDataReady) {
+          this.calcService.form$.next(this.form);
+          // this.formData = this.formatFormValue(this.form.value);
         }
 
         if (prev.location && (prev.location !== next.location)) {
@@ -138,8 +139,9 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       .get(FormControlName.DeliveryPoint).valueChanges
       .pipe(delay(0))
       .subscribe((data) => {
-        if (this.formData) {
-          this.formData = this.formatFormValue(this.form.value);
+        if (this.isFormDataReady) {
+          this.calcService.form$.next(this.form);
+          // this.formData = this.formatFormValue(this.form.value);
         }
 
         if (data && (this.delivery.cityId !== data.location)) {
@@ -159,8 +161,9 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       .get('orders').valueChanges
       .pipe(delay(0))
       .subscribe((result) => {
-        if (this.formData) {
-          this.formData = this.formatFormValue(this.form.value);
+        if (this.isFormDataReady) {
+          this.calcService.form$.next(this.form);
+          // this.formData = this.formatFormValue(this.form.value);
           // this.scrollToTop();
         }
     });
@@ -180,7 +183,9 @@ export class IndexPageComponent implements OnInit, OnDestroy {
         .get('orders')
         .setValue(defaultData.orders);
 
-      this.formData = defaultData;
+      // Если пришли данные из quick-form, то ставим флаг = true
+      this.isFormDataReady = true;
+      this.calcService.form$.next(this.form);
     }
   }
 
@@ -202,7 +207,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     this.changeDetectorRef.detectChanges();
 
     if (this.currentStep === this.FormStep.Four) {
-      this.formData = this.formatFormValue(this.form.value);
+      this.isFormDataReady = true;
+      this.calcService.form$.next(this.form);
     }
   }
 
@@ -215,7 +221,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     this.scrollToTop();
 
     if (this.currentStep === this.FormStep.Four) {
-      this.formData = this.formatFormValue(this.form.value);
+      this.isFormDataReady = true;
+      this.calcService.form$.next(this.form);
     }
   }
 
@@ -331,7 +338,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     return new Observable((sub) => {
       this.departure.cityId = '';
       this.delivery.cityId = '';
-      this.formData = null;
+      this.calcService.form$.next({});
+      this.isFormDataReady = false;
       this.steps[this.FormStep.Three]
         .get(FormControlName.DeliveryPoint).reset();
       this.steps[this.FormStep.Three]
@@ -348,6 +356,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.localStorage.remove('quick-order');
+    this.calcService.form$.next({});
 
     if (this.departureSub) {
       this.departureSub.unsubscribe();
