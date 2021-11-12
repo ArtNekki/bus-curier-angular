@@ -40,11 +40,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
       .subscribe((form: any) => {
         this.form = form;
 
-        //
-        // console.log('departurePointInvalid', departurePoint.invalid, departurePoint.value);
-        // console.log('deliveryPointInvalid', deliveryPointInvalid);
-        // console.log('ordersInvalid', ordersInvalid);
-
         if (form.value) {
           const departureInvalid = this.steps[1].get(FormControlName.DeparturePoint).invalid;
           const deliveryInvalid = this.steps[2].get(FormControlName.DeliveryPoint).invalid;

@@ -261,6 +261,11 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     const courierToId = this.Courier[formValue[FormControlName.DeliveryPoint].options
     && formValue[FormControlName.DeliveryPoint].options.active];
 
+    const give = formValue[FormControlName.DeparturePoint].options
+    && formValue[FormControlName.DeparturePoint].options.give;
+    const get = formValue[FormControlName.DeliveryPoint].options
+    && formValue[FormControlName.DeliveryPoint].options.get;
+
     const orders = formValue.orders.orders.map((order, i) => {
       const activeCargoData = order.cargo[order.activeCargo];
 
@@ -286,6 +291,28 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       };
     });
 
+    let departureOffice = null;
+    let deliveryOffice = null;
+
+    const offices = this.localStorage.get('offices');
+
+    if (offices.length) {
+
+      departureOffice = offices.filter((office) => (office.home_id === give.office)
+        || office.office_id === give.office);
+
+      deliveryOffice = offices.filter((office) => (office.home_id === get.office)
+        || office.office_id === get.office);
+
+    }
+
+    const note = `
+      ${formValue.comment}.
+      ${departureOffice && departureOffice.length ?
+        ' Место отправления: г. ' + departureOffice[0].name + ', ' + departureOffice[0].address : ''}.
+      ${deliveryOffice && deliveryOffice.length ?
+        ' Место получения: г. ' + deliveryOffice[0].name + ', ' + deliveryOffice[0].address : ''}`;
+
     const data = {
       'api-key': '8aab09f6-c5b3-43be-8895-153ea164984e',
       sending_date: formValue[FormControlName.DeparturePoint].date,
@@ -296,16 +323,14 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       sender_passport: formValue.sender[FormControlName.RusPassport],
       recipient_name: formValue.recipient.fio,
       recipient_phone: formValue.recipient.tel,
-      note: formValue.comment,
+      note,
       orders
     };
 
-
-    console.log('sendData', data);
+    console.log('step form data', data);
 
     this.orderService.sendOrder(data)
       .subscribe((result) => {
-        console.log('result', result);
         this.isLoading = false;
         this.router.navigate(['orders', 'order', 'new', 'id', 'done']);
       },

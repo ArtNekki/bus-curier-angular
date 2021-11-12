@@ -144,6 +144,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
       this.router.navigate(['orders', 'order', 'new']);
     }
 
+    console.log('quick-order', this.form.value);
+
     this.isSubmitted = true;
     this.calcService.form$.next(this.form);
   }

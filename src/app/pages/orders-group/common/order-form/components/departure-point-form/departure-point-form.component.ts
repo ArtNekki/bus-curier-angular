@@ -171,9 +171,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       this.options.get(type).updateValueAndValidity();
     }, 0);
 
-    // this.formGroup.get(FormControlName.Pickup).updateValueAndValidity();
-    console.log('changeType');
-
     if (type === FormControlName.Pickup) {
       this.calculatorService.courierDelivery$.next(type);
     }
