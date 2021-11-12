@@ -36,17 +36,18 @@
                 <label class="form__label">Комментарий к заявке</label>
                 <app-input type="textarea" [formControlName]="FormControlName.Comment"></app-input>
               </div>
+<!--              [isInvalid]="!steps[FormStep.Four].get(FormControlName.Agree).value"-->
               <app-checkbox mods="sm"
                 [formControlName]="FormControlName.Agree"
-                [isInvalid]="!steps[FormStep.Four].get(FormControlName.Agree).value"
-                [isDisabled]="steps[FormStep.Four].get(FormControlName.Agree).value">
+                (change)="executeCaptcha(invisible)"
+                [isDisabled]="steps[FormStep.Four].get(FormControlName.Captcha).value">
                 <ng-container class="text">
                   Нажимая кнопку «Отправить», я даю свое согласие на
                   <app-link href="#" mods="blue, in-text">обработку моих персональных данных</app-link>
                 </ng-container>
               </app-checkbox>
-              <re-captcha *ngIf="steps[FormStep.Four].get(FormControlName.Agree).value"
-                [formControlName]="FormControlName.Captcha" (resolved)="captchaResolved($event)">
+              <re-captcha size="invisible" #invisible
+                          [formControlName]="FormControlName.Captcha" (resolved)="captchaResolved($event)">
               </re-captcha>
             </div>
           </section>
@@ -57,8 +58,8 @@
           <svg-icon class="icon" src="assets/img/svg/back.svg" width="24" height="20"></svg-icon>
           Назад
         </app-btn>
-        <app-btn *ngIf="currentStep === FormStep.Four; else next"
-                 mods="lg" (click)="completeOrder()" [disabled]="!steps[FormStep.Four].get(FormControlName.Captcha).value">
+        <app-btn *ngIf="currentStep === FormStep.Four; else next" mods="lg" (click)="completeOrder()"
+                 [disabled]="form.invalid || !steps[FormStep.Four].get(FormControlName.Captcha).value">
           Оформить заявку
         </app-btn>
         <ng-template #next>

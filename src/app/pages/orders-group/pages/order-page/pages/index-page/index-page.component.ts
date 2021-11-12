@@ -379,6 +379,17 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     }).pipe(take(1)).subscribe(() => {});
   }
 
+  captchaResolved(value: string) {
+    if (!value) {
+      this.steps[this.FormStep.Four].get(FormControlName.Agree).setValue(false);
+    }
+  }
+
+  executeCaptcha(captcha) {
+    captcha.execute();
+    // this.form.markAllAsTouched();
+  }
+
   ngOnDestroy(): void {
     this.localStorage.remove('quick-order');
     this.calcService.form$.next({});
@@ -394,9 +405,5 @@ export class IndexPageComponent implements OnInit, OnDestroy {
     if (this.ordersSub) {
       this.ordersSub.unsubscribe();
     }
-  }
-
-  captchaResolved($event: string) {
-    console.log('captcha', $event);
   }
 }
