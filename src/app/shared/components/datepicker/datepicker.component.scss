@@ -21,6 +21,10 @@
       background-image: url("/assets/img/svg/calendar.svg");
       background-repeat: no-repeat;
     }
+
+    .datepicker:hover &::after {
+      background-image: url("/assets/img/svg/calendar--yellow.svg");
+    }
   }
 
   &__field {
@@ -30,6 +34,10 @@
       border: 1px solid $red-color;
       background-color: rgba($red-color, 0.5);
       color: $red-color;
+    }
+
+    .datepicker:hover & {
+      border-color: $primary-color;
     }
   }
 }
