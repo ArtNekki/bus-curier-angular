@@ -6,6 +6,7 @@ import {FormUtilsService} from '../../../../../../core/services/form-utils.servi
 import {UtilsService} from '../../../../../../core/services/utils.service';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
+import {Pattern} from '../../../../../../core/pattern/pattern';
 
 @Component({
   selector: 'app-recipient-form',
@@ -41,7 +42,7 @@ export class RecipientFormComponent extends SubFormComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       [FormControlName.Fio]: new FormControl('', [Validators.required]),
-      [FormControlName.Tel]: new FormControl('', [Validators.required])
+      [FormControlName.Tel]: new FormControl('', [Validators.required, Validators.pattern(Pattern.Phone)])
     });
 
     this.setDefaultAuthor();
