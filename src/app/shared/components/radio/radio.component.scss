@@ -10,6 +10,18 @@
   vertical-align: middle;
   cursor: pointer;
 
+  //@include hover {
+  //
+  //  &--invalid {
+  //
+  //    .radio__label {
+  //      color: $red-color;
+  //    }
+  //
+  //  }
+  //
+  //}
+
   &__input {
     display: none;
     visibility: hidden;
@@ -23,6 +35,23 @@
     grid-row-gap: 5px;
     align-items: center;
     font-family: $font-family--secondary;
+
+    @include hover {
+      .radio__input:not(:disabled) ~ & {
+
+        &::before {
+          border-color: $primary-color;
+        }
+
+        .radio__label {
+          color: $gray-dark-color;
+        }
+
+        .radio__meta {
+          color: lighten($gray-dark-color, 15%);
+        }
+      }
+    }
 
     .radio--no-indicator & {
       grid-auto-columns: auto auto 18px;
@@ -94,6 +123,7 @@
     grid-row: 1 / 2;
     font-size: 16px;
     line-height: 1;
+    color: $font-color;
     cursor: pointer;
 
     .radio--invalid & {
