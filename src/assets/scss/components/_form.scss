@@ -771,11 +771,6 @@
       cursor: pointer;
     }
 
-    //&:hover div::before,
-    //&:hover div::after {
-    //  background-color: lighten($primary-color, 15%);
-    //}
-
     &:hover div {
       background-color: lighten($primary-color, 35%);
     }

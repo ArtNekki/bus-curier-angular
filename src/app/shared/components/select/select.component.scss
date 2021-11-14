@@ -32,7 +32,7 @@
   }
 
   &--invalid:hover::before {
-    border: 1px solid lighten($red-color, 15%);
+    border-color: lighten($red-color, 15%);
     border-top-color: transparent;
     border-right-color: transparent;
   }
