@@ -408,6 +408,7 @@
 }
 
 @mixin btn-default {
+  position: relative;
   margin: 0;
   padding: 0;
   background: none;
@@ -416,6 +417,10 @@
 
   @include focus {
     outline: none;
+  }
+
+  @include active {
+    top: 1px;
   }
 }
 
