@@ -28,6 +28,13 @@
     cursor: pointer;
     user-select: none;
 
+    @include hover {
+      &:not(:checked),
+      &:not(:disabled) {
+        background-color: $primary-color;
+      }
+    }
+
     .tag__input:checked ~ & {
       background-color: $primary-color;
     }
@@ -47,12 +54,27 @@
     .tag--add & {
       padding-right: 12px;
       border-width: 1px;
-      border-color: #e5e5e5;
+      border-color: $gray-light-color;
       justify-content: center;
+    }
 
-      // @include media-breakpoint-up(md) {
+    .tag--add:disabled & {
+      @include hover {
+        background-color: transparent;
+      }
+    }
 
-      // }
+    ::ng-deep .tag--add:not(:disabled) & {
+      @include hover {
+        background-color: transparent;
+        border-color: $primary-color;
+        color: $gray-dark-color;
+
+        svg {
+          --color: #333333;
+          --circle-bg-color: #FFDC00;
+        }
+      }
     }
   }
 
@@ -71,17 +93,24 @@
 
   &__delete {
     position: relative;
+    display: none;
 
     .tag__input:checked ~ .tag__body & {
       @include close-button(12px, $black-color, darken($gray-color, 8%));
+      display: block;
     }
 
     .tag--invalid .tag__input:checked ~ .tag__body & {
       @include close-button(12px, $white-color, darken($gray-color, 8%));
+      display: block;
     }
 
     .tag__input:disabled ~ .tag__body & {
       display: none;
+    }
+
+    @include hover {
+      opacity: 0.6;
     }
   }
 
@@ -94,5 +123,15 @@
 
     // flex-basis: 100%;
     margin-bottom: $bottom-space;
+  }
+
+  ::ng-deep &--add svg {
+    --color: #808080;
+    --circle-bg-color: #F2F2F2;
+
+    //@include hover {
+    //  --color: #333333;
+    //  --circle-bg-color: #FFDC00;
+    //}
   }
 }
