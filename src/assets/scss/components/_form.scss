@@ -771,6 +771,15 @@
       cursor: pointer;
     }
 
+    //&:hover div::before,
+    //&:hover div::after {
+    //  background-color: lighten($primary-color, 15%);
+    //}
+
+    &:hover div {
+      background-color: lighten($primary-color, 35%);
+    }
+
     input:checked ~ div {
       color: $black-color;
       background-color: $primary-color;
@@ -793,10 +802,6 @@
 
     input:disabled ~ div {
       cursor: not-allowed;
-    }
-
-    @include hover {
-      //background-color: red;
     }
   }
 
