@@ -18,11 +18,16 @@
                 [formControlName]="control.key"
                 [mask]="FormFieldMeta[control.key].mask"
                 [prefix]="FormFieldMeta[control.key].prefix"
+                [dropSpecialCharacters]="FormFieldMeta[control.key].dropSpecialCharacters"
+                [maxlength]="FormFieldMeta[control.key].maxlength"
                 [isInvalid]="control.value.invalid && control.value.touched"
               ></app-input>
-<!--              <ng-container *ngIf="control.key === FormControlName.Sum">-->
+              <ng-container *ngIf="control.key === FormControlName.Sum">
+                <div class="form__error" *ngIf="control.value.errors && control.value.errors.max" style="margin-top: 5px;font-size: 10px;">
+                  <span>Максимальная сумма страхования {{control.value.errors.max.max}} руб.</span>
+                </div>
 <!--                <div class="form__meta">Стоимость страхования: {{insuranceSum | currency: 'RUB':'symbol-narrow':'1.0':'ru'}}</div>-->
-<!--              </ng-container>-->
+              </ng-container>
             </dd>
           </ng-container>
           <ng-template #checkbox>

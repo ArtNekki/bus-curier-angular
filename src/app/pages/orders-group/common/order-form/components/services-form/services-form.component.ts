@@ -172,7 +172,8 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
                 }
 
                 if (Object.values(next)[0]) {
-                  insuranceGroup.get(FormControlName.Sum).setValidators([Validators.required]);
+                  insuranceGroup.get(FormControlName.Sum).setValidators(
+                    [Validators.required, Validators.max(30000)]);
                 } else {
                   insuranceGroup.get(FormControlName.Sum).clearValidators();
                 }

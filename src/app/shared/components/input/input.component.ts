@@ -31,6 +31,7 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() isInvalid = false;
   @Input() isValid = false;
   @Input() maxlength: number;
+  @Input() dropSpecialCharacters: boolean;
 
   public Pattern = Pattern;
 

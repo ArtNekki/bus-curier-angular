@@ -40,13 +40,16 @@ export default {
     label: 'Номер телефона',
     type: 'tel',
     mask: '(000) 000-0000',
-    prefix: '+7'
+    prefix: '+7',
+    dropSpecialCharacters: false,
   },
   [FormControlName.Sum]: {
     label: 'Сумма',
     type: 'text',
     mask: 'separator.2',
-    prefix: ''
+    prefix: '',
+    dropSpecialCharacters: true,
+    maxlength: 7
   },
   [FormControlName.Street]: {
     label: 'Улица',
