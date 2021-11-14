@@ -41,6 +41,7 @@ export default {
     type: 'tel',
     mask: '(000) 000-0000',
     prefix: '+7',
+    suffix: '',
     dropSpecialCharacters: false,
   },
   [FormControlName.Sum]: {
@@ -48,8 +49,9 @@ export default {
     type: 'text',
     mask: 'separator.2',
     prefix: '',
+    suffix: ' ₽',
     dropSpecialCharacters: true,
-    maxlength: 7
+    maxlength: 9
   },
   [FormControlName.Street]: {
     label: 'Улица',

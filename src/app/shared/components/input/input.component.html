@@ -37,7 +37,10 @@
     <div [class]="cssClass" [class.input--invalid]="isInvalid" [class.input--valid]="isValid">
       <input  *ngIf="mask; else withoutMask"
               #simpleInputField [type]="type" [id]="id" class="input__field"
-              [placeholder]="placeholder" [mask]="mask" [prefix]="prefix"
+              [placeholder]="placeholder"
+              [mask]="mask"
+              [prefix]="prefix"
+              [suffix]="suffix"
               [dropSpecialCharacters]="dropSpecialCharacters" [ngModel]="value"
               [maxlength]="maxlength"
               (ngModelChange)="changeValue($event)"  (blur)="markAsTouched()" />
