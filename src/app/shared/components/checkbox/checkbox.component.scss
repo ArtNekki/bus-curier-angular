@@ -142,6 +142,18 @@
     &:empty {
       display: none;
     }
+
+    ::ng-deep svg {
+      --circle-color: #F2F2F2;
+      --circle-bg-color: none;
+      --question-color: #999999;
+
+      @include hover {
+        --circle-color: #FFDC00;
+        --circle-bg-color: #FFDC00;
+        --question-color: #000000;
+      }
+    }
   }
 
   &__meta {
