@@ -31,6 +31,12 @@
     border-right-color: transparent;
   }
 
+  &--invalid:hover::before {
+    border: 1px solid lighten($red-color, 15%);
+    border-top-color: transparent;
+    border-right-color: transparent;
+  }
+
   &--disabled:hover::before {
     border: 1px solid $gray-dark-color;
     border-top-color: transparent;
@@ -57,6 +63,10 @@
     display: flex;
     align-items: center;
 
+    .select:hover & {
+      border-color: $primary-color;
+    }
+
     .select--no-shadow & {
       box-shadow: none;
     }
@@ -65,6 +75,10 @@
       border: 1px solid $red-color;
       background-color: rgba($red-color, 0.5);
       color: $red-color;
+    }
+
+    .select--invalid:hover & {
+      border: 1px solid lighten($red-color, 15%);
     }
 
     &:disabled,
@@ -78,10 +92,6 @@
     .select--inverted &--disabled {
       background-color: $black-color;
       cursor: not-allowed;
-    }
-
-    .select:hover & {
-      border-color: $primary-color;
     }
 
     .select:hover &:disabled,
