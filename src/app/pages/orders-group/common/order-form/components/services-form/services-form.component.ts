@@ -10,6 +10,7 @@ import {Service} from '../../../../../../core/interfaces/calculator';
 import {Pattern} from '../../../../../../core/pattern/pattern';
 import {delay, pairwise, startWith, take} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
+import {NgxTippyProps} from 'ngx-tippy-wrapper';
 
 @Component({
   selector: 'app-services-form',
@@ -47,7 +48,12 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
   private phoneGroupSub: Subscription;
   private insuranceGroupSub: Subscription;
 
-  Service = {
+  public tippyProps: NgxTippyProps = {
+    theme: 'light',
+    placement: 'auto-end',
+  };
+
+  public Service = {
     SMS: '66',
     EXT_SMS: '65',
     INSURANCE_15: '58',
@@ -59,6 +65,12 @@ export class ServicesFormComponent extends SubFormComponent implements OnInit, O
     LIMIT_MIN: 15000,
     PRICE_MIN: 50,
     PRICE_MAX: 100
+  };
+
+  public TooltipText = {
+    insurance: 'Страхование..Страхование..Страхование.. Страхование..Страхование.. Страхование..Страхование.. Страхование',
+    65: 'Расширенная СМС...Расширенная СМС... Расширенная СМС...Расширенная СМС... Расширенная СМС...',
+    66: 'Смс отправителю...Смс отправителю... Смс отправителю...Смс отправителю... Смс отправителю...Смс отправителю...'
   };
 
   public insuranceSum = this.Insurance.PRICE_MIN;

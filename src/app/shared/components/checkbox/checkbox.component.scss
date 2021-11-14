@@ -115,21 +115,14 @@
   &__help {
     @include btn-default();
 
+    position: relative;
     display: flex;
     grid-column: 3 / 4;
     grid-row: 1 / 2;
     align-self: start;
-  }
 
-  &__help svg {
-    --circle-color: #F2F2F2;
-    --circle-bg-color: none;
-    --question-color: #999999;
-
-    @include hover {
-      --circle-color: #FFDC00;
-      --circle-bg-color: #FFDC00;
-      --question-color: #000000;
+    &:empty {
+      display: none;
     }
   }
 

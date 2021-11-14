@@ -5,7 +5,7 @@
 @import "src/assets/scss/settings";
 
 :host {
-  display: contents;
+  //display: contents;
 }
 
 .btn {
@@ -52,6 +52,35 @@
     background: none;
     border: none;
     transition: unset;
+    height: auto;
+
+    @include hover() {
+      &:not(:disabled) {
+        background-color: transparent;
+      }
+    }
+
+    @include active() {
+      &:not(:disabled) {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &--help {
+    @extend .btn--default;
+
+     ::ng-deep svg {
+      --circle-color: #F2F2F2;
+      --circle-bg-color: none;
+      --question-color: #999999;
+
+      @include hover {
+        --circle-color: #FFDC00;
+        --circle-bg-color: #FFDC00;
+        --question-color: #000000;
+      }
+    }
   }
 
   &--black {
