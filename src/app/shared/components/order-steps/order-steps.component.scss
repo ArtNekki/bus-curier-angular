@@ -28,6 +28,7 @@
 
     grid-column-gap: 10px;
     grid-row-gap: $row-gap;
+    cursor: not-allowed;
 
     &:not(:last-child)::after,
     &:not(:last-child)::before {
