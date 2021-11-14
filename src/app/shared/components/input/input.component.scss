@@ -12,6 +12,14 @@
     display: flex;
     align-items: center;
 
+    .input:hover & {
+      border-color: $primary-color;
+    }
+
+    .input--invalid:hover & {
+      border-color: lighten($red-color, 15%);
+    }
+
     .input--textarea & {
       padding-top: 10px;
       padding-bottom: 10px;
