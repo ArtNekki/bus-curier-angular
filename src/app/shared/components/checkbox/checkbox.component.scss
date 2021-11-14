@@ -24,6 +24,23 @@
     align-items: center;
     font-family: $font-family--secondary;
 
+    @include hover {
+      .checkbox__input:not(:disabled) ~ & {
+
+        &::before {
+          border-color: $primary-color;
+        }
+
+        .checkbox__label {
+          color: $gray-dark-color;
+        }
+
+        .checkbox__meta {
+          color: lighten($gray-dark-color, 15%);
+        }
+      }
+    }
+
     &::before {
       content: '';
       grid-column: 1 / 2;
@@ -92,6 +109,7 @@
   &__label {
     font-size: 16px;
     line-height: 20px;
+    color: $font-color;
     cursor: pointer;
 
     .checkbox__input:disabled ~ .checkbox__body & {
@@ -132,6 +150,7 @@
     font-size: 14px;
     line-height: 1.2;
     color: $gray-dark-color;
+    cursor: pointer;
 
     &:empty {
       display: none;
