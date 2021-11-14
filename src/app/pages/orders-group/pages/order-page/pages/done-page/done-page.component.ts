@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SimpleModalService} from 'ngx-simple-modal';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {LoginModalComponent} from '../../../../../../modals/login-modal/login-modal.component';
 
 @Component({
@@ -13,9 +13,14 @@ export class DonePageComponent implements OnInit {
 
   constructor(
     private modalService: SimpleModalService,
+    private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.route.queryParams
+      .subscribe((params: Params) => {
+        console.log('params', params);
+      });
   }
 
   showLoginModal() {

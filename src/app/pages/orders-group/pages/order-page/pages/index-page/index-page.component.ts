@@ -331,8 +331,10 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
     this.orderService.sendOrder(data)
       .subscribe((result) => {
+        const id = 'df2142343';
+
         this.isLoading = false;
-        this.router.navigate(['orders', 'order', 'new', 'id', 'done']);
+        this.router.navigate(['orders', 'order', 'new', id, 'done']);
       },
       (error) => {
         console.log('error', error);
