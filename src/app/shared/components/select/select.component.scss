@@ -25,6 +25,18 @@
     transform: rotate3d(0, 0, 1, -45deg) translateY(-6px);
   }
 
+  &:hover::before {
+    border: 1px solid $primary-color;
+    border-top-color: transparent;
+    border-right-color: transparent;
+  }
+
+  &--disabled:hover::before {
+    border: 1px solid $gray-dark-color;
+    border-top-color: transparent;
+    border-right-color: transparent;
+  }
+
   &--invalid::before {
     border-bottom-color: $red-color;
     border-left-color: $red-color;
@@ -66,6 +78,15 @@
     .select--inverted &--disabled {
       background-color: $black-color;
       cursor: not-allowed;
+    }
+
+    .select:hover & {
+      border-color: $primary-color;
+    }
+
+    .select:hover &:disabled,
+    .select:hover &--disabled {
+      border-color: transparent;
     }
   }
 
