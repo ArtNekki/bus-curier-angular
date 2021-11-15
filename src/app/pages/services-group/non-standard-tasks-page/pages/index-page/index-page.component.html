@@ -40,6 +40,8 @@
             [formControlName]="FormControlName.Tel"
             [mask]="FormFieldMeta[FormControlName.Tel].mask"
             [prefix]="FormFieldMeta[FormControlName.Tel].prefix"
+            [dropSpecialCharacters]="FormFieldMeta[FormControlName.Tel].dropSpecialCharacters"
+            [showMaskTyped]="FormFieldMeta[FormControlName.Tel].showMaskTyped"
             [isInvalid]="(form.get(FormControlName.Tel).invalid
            && form.get(FormControlName.Tel).touched) && 'invalid'"
             mods="clean"
