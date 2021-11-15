@@ -322,13 +322,13 @@
 }
 
 @mixin moveContactPageInfoLeft {
-  transition: transform 0.5s ease-in;
+  transition: all 0.1s ease-in;
 
   .page-contacts--details & {
 
     @include media-breakpoint-only(xs) {
       transform: translateX(calc(-100% - #{$container-padding-x} * 2));
-      //position: absolute;
+      position: absolute;
     }
   }
 }
@@ -383,7 +383,7 @@
 }
 
 @mixin active-map-panel($bp) {
-  .page-contacts--map-panel & {
+  .page-contacts--map-panel:not(.page-contacts--details) & {
     @include media-breakpoint-down($bp) {
       @content;
     }
