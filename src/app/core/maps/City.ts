@@ -4,5 +4,5 @@ export default {
   Artem: 'artem',
   Nahodka: 'nahodka',
   Dalnegorsk: 'dalnegorsk',
-  Kazan: 'kazan'
+  Khabarovsk: 'khabarovsk'
 };

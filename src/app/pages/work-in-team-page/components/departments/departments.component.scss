@@ -137,6 +137,16 @@
     grid-template-rows: auto 1fr;
     grid-column-gap: 20px;
 
+    .departments__col--tat & {
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 10px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        margin-bottom: 25px;
+      }
+    }
+
     @include media-breakpoint-up(sm) {
       margin-left: 0;
     }

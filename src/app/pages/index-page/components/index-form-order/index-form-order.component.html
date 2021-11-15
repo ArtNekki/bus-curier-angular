@@ -59,7 +59,7 @@
     <div class="form__field form__field--full">
       <label for="question" class="form__label form__label--light"
        [class.form__label--invalid]="form.get(FormControlName.Question).invalid && form.get(FormControlName.Question).touched">
-        Опишите задачу
+        Опишите вашу задачу
         <sup class="form__required" *ngIf="form.get(FormControlName.Question).errors
         && form.get(FormControlName.Question).hasError('required')">*</sup>
       </label>
@@ -96,7 +96,7 @@
         <app-loader mods="sm"></app-loader>
       </div>
       <ng-template #text>
-        Отправить
+        Отправить заявку
       </ng-template>
     </app-btn>
   </div>

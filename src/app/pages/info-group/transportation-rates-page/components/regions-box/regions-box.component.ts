@@ -19,7 +19,7 @@ export class RegionsBoxComponent implements OnInit {
 
   public regions = [
     {id: Region.Primorye, name: 'Приморский край'},
-    {id: Region.Tatarstan, name: 'Республика Татарстан'}
+    {id: Region.Khabarovsk, name: 'Хабаровский край'}
   ];
 
   public cities = {
@@ -30,8 +30,8 @@ export class RegionsBoxComponent implements OnInit {
       {id: City.Nahodka, name: 'Находка'},
       {id: City.Dalnegorsk, name: 'Дальнегорск'},
     ],
-    [Region.Tatarstan]: [
-      {id: City.Kazan, name: 'Казань'},
+    [Region.Khabarovsk]: [
+      {id: City.Khabarovsk, name: 'Хабаровск'},
     ]
   };
 

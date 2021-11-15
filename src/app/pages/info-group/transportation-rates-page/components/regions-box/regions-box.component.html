@@ -17,8 +17,8 @@
         </ng-container>
       </app-radio>
     </ng-container>
-    <ng-container *ngIf="currentRegion === Region.Tatarstan" [@fadeIn]="">
-      <app-radio *ngFor="let city of cities[Region.Tatarstan]" name="cities" (change)="setCurrentCity(city.id)" [checked]="true">
+    <ng-container *ngIf="currentRegion === Region.Khabarovsk" [@fadeIn]="">
+      <app-radio *ngFor="let city of cities[Region.Khabarovsk]" name="cities" (change)="setCurrentCity(city.id)" [checked]="true">
         <ng-container class="text">
           {{city.name}}
         </ng-container>

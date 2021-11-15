@@ -138,6 +138,10 @@
     grid-column: 3 / 4;
     grid-row: 1 / 2;
     align-self: start;
+
+    &:empty {
+      display: none;
+    }
   }
 
   &__help svg {
@@ -158,5 +162,9 @@
     font-size: 14px;
     line-height: 1.2;
     color: $gray-dark-color;
+
+    &:empty {
+      display: none;
+    }
   }
 }
