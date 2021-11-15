@@ -47,7 +47,7 @@
     outline: none;
   }
 
-  &--default {
+  &--clear {
     padding: 0;
     background: none;
     border: none;
@@ -68,7 +68,7 @@
   }
 
   &--help {
-    @extend .btn--default;
+    @extend .btn--clear;
 
      ::ng-deep svg {
       --circle-color: #F2F2F2;
@@ -202,7 +202,7 @@
   }
 
   &--checkbox-action {
-    @extend .btn--default;
+    @extend .btn--clear;
 
     width: unset;
     height: unset;
@@ -212,22 +212,25 @@
     @include hover {
       &:not(:disabled) {
         color: rgba($red-color, 0.8);
-        background-color: transparent;
       }
     }
   }
 
   &--delete {
+    @extend .btn--clear;
+
     margin-top: auto;
     margin-bottom: auto;
     padding: 0;
     display: flex;
     align-items: center;
     font-size: 14px;
-    background-color: transparent;
+    font-weight: 400;
+    color: $red-color;
+    text-align: left;
 
     @include hover {
-      background: transparent;
+      color: lighten($red-color, 15%);
     }
   }
 
@@ -279,13 +282,6 @@
 
     .btn--black & {
       color: $white-color;
-    }
-
-    .btn--delete & {
-      font-size: 14px;
-      font-weight: 400;
-      color: $red-color;
-      text-align: left;
     }
   }
 }

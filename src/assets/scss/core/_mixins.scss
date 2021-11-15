@@ -419,8 +419,16 @@
     outline: none;
   }
 
-  @include active {
-    top: 1px;
+  @include hover() {
+    &:not(:disabled) {
+      background-color: transparent;
+    }
+  }
+
+  @include active() {
+    &:not(:disabled) {
+      top: 1px;
+    }
   }
 }
 

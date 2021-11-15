@@ -177,7 +177,7 @@
     text-decoration: none;
 
     &--active {
-      color: red !important;
+      color: $primary-color !important;
     }
 
     @include hover {
