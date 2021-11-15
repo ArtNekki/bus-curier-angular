@@ -12,6 +12,7 @@ import {Observable, Subscription} from 'rxjs';
 import {AlertModalComponent} from '../../../../../../modals/alert-modal/alert-modal.component';
 import {OrderService} from '../../../../../../core/services/order/order.service';
 import {CalculatorService} from '../../../../../../core/services/calculator/calculator.service';
+import {Pattern} from '../../../../../../core/pattern/pattern';
 
 @Component({
   selector: 'app-index-page',
@@ -87,7 +88,8 @@ export class IndexPageComponent implements OnInit, OnDestroy {
           [FormControlName.DeliveryPoint]: new FormControl('', [Validators.required])
         }),
         new FormGroup({
-          [FormControlName.Comment]: new FormControl(''),
+          [FormControlName.Comment]: new FormControl('',
+            [Validators.pattern(Pattern.TextWithNumbersAndSymbols)]),
           [FormControlName.Agree]: new FormControl('', [Validators.required]),
           [FormControlName.Captcha]: new FormControl('', [Validators.required])
         }),

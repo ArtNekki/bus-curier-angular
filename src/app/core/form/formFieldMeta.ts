@@ -63,7 +63,8 @@ export default {
   },
   [FormControlName.Apartment]: {
     label: 'Кв. / офис',
-    type: 'text'
+    type: 'text',
+    maxlength: 15
   },
   [FormControlName.Courier]: {
     label: 'Курьер',
