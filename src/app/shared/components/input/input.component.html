@@ -41,8 +41,10 @@
               [mask]="mask"
               [prefix]="prefix"
               [suffix]="suffix"
-              [dropSpecialCharacters]="dropSpecialCharacters" [ngModel]="value"
+              [dropSpecialCharacters]="dropSpecialCharacters"
+              [showMaskTyped]="showMaskTyped"
               [maxlength]="maxlength"
+              [ngModel]="value"
               (ngModelChange)="changeValue($event)"  (blur)="markAsTouched()" />
       <ng-template #withoutMask>
         <input #simpleInputField [type]="type" [id]="id" class="input__field"

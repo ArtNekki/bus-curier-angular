@@ -19,7 +19,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 export let options: Partial<IConfig> = {
   validation: true,
   dropSpecialCharacters: false,
-  showMaskTyped: false,
+  // showMaskTyped: false,
   // clearIfNotMatch: true
 };
 

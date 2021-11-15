@@ -43,6 +43,7 @@ export default {
     prefix: '+7',
     suffix: '',
     dropSpecialCharacters: false,
+    showMaskTyped: true
   },
   [FormControlName.Sum]: {
     label: 'Сумма',
@@ -275,13 +276,15 @@ export default {
     label: 'Номер документа',
     type: 'text',
     mask: '0000 000000',
-    prefix: ''
+    prefix: '',
+    showMaskTyped: true
   },
   [FormControlName.DriverLicense]: {
     label: 'Номер документа',
     type: 'text',
     mask: '00 00 000000',
-    prefix: ''
+    prefix: '',
+    showMaskTyped: true
   },
   [FormControlName.Question]: {
     label: 'Опишите ваш вопрос',

@@ -22,7 +22,9 @@
           [type]="FormFieldMeta[control.key].type"
           [id]="FormControlName.Sender + '-' + control.key"
           [formControlName]="control.key"
-          [mask]="FormFieldMeta[control.key].mask" [prefix]="FormFieldMeta[control.key].prefix"
+          [mask]="FormFieldMeta[control.key].mask"
+          [prefix]="FormFieldMeta[control.key].prefix"
+          [showMaskTyped]="FormFieldMeta[control.key].showMaskTyped"
           [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
         >
 <!--          <ng-container class="errors">-->

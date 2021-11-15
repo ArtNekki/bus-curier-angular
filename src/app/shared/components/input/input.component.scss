@@ -4,6 +4,16 @@
 @import "src/variables";
 @import "src/assets/scss/settings";
 
+:host {
+  &.ng-pristine.ng-invalid {
+
+    .input__field {
+      color: $gray-color;
+    }
+
+  }
+}
+
 .input {
   position: relative;
 

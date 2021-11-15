@@ -300,11 +300,11 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
     if (offices.length) {
 
-      departureOffice = offices.filter((office) => (office.home_id === give.office)
-        || office.office_id === give.office);
+      departureOffice = offices.filter((office) => (office.home_id === (give && give.office))
+        || office.office_id === (give && give.office));
 
-      deliveryOffice = offices.filter((office) => (office.home_id === get.office)
-        || office.office_id === get.office);
+      deliveryOffice = offices.filter((office) => (office.home_id === (get && get.office))
+        || office.office_id === (get && get.office));
 
     }
 
