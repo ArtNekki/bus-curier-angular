@@ -42,7 +42,8 @@ export class RecipientFormComponent extends SubFormComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       [FormControlName.Fio]: new FormControl('',
-        [Validators.required, Validators.pattern(Pattern.Text)]),
+        [Validators.required, Validators.pattern(Pattern.Text),
+          Validators.minLength(2)]),
       [FormControlName.Tel]: new FormControl('',
         [Validators.required, Validators.pattern(Pattern.Phone)])
     });

@@ -48,7 +48,7 @@ export class SenderFormComponent extends SubFormComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       [FormControlName.Fio]: new FormControl('',
-        [Validators.required, Validators.pattern(Pattern.Text)]),
+        [Validators.required, Validators.pattern(Pattern.Text), Validators.minLength(2)]),
       [FormControlName.Doc]: new FormControl(FormControlName.RusPassport, [Validators.required]),
       [FormControlName.Tel]: new FormControl('',
         [Validators.required, Validators.pattern(Pattern.Phone)])

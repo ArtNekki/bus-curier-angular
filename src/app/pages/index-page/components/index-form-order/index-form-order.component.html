@@ -24,7 +24,10 @@
       </label>
       <app-input type="tel"
          [formControlName]="FormControlName.Tel"
-         [mask]="FormFieldMeta[FormControlName.Tel].mask" [prefix]="FormFieldMeta[FormControlName.Tel].prefix"
+         [mask]="FormFieldMeta[FormControlName.Tel].mask"
+         [prefix]="FormFieldMeta[FormControlName.Tel].prefix"
+         [dropSpecialCharacters]="FormFieldMeta[FormControlName.Tel].dropSpecialCharacters"
+         [showMaskTyped]="FormFieldMeta[FormControlName.Tel].showMaskTyped"
          [isInvalid]="form.get(FormControlName.Tel).invalid && form.get(FormControlName.Tel).touched">
 <!--        <ng-container class="errors">-->
 <!--          <small *ngIf="utils.getObjectKey(form.get(FormControlName.Fio).errors).length">-->
@@ -32,6 +35,26 @@
 <!--          </small>-->
 <!--        </ng-container>-->
       </app-input>
+    </div>
+    <div class="form__field form__field--full">
+      <div class="form__field">
+        <label class="form__label form__label--light"
+               [class.form__label--invalid]="form.get(FormControlName.Email).invalid
+               && form.get(FormControlName.Email).touched">
+          Email
+          <sup class="form__required" *ngIf="form.get(FormControlName.Email).errors
+          && form.get(FormControlName.Email).hasError('required')">*</sup>
+        </label>
+        <app-input type="text"
+                   [formControlName]="FormControlName.Email"
+                   [isInvalid]="form.get(FormControlName.Email).invalid && form.get(FormControlName.Email).touched">
+          <!--        <ng-container class="errors">-->
+          <!--          <small *ngIf="utils.getObjectKey(form.get(FormControlName.Fio).errors).length">-->
+          <!--            {{FormFieldError[utils.getObjectKey(form.get(FormControlName.Fio).errors)[0]]}}-->
+          <!--          </small>-->
+          <!--        </ng-container>-->
+        </app-input>
+      </div>
     </div>
     <div class="form__field form__field--full">
       <label for="question" class="form__label form__label--light"

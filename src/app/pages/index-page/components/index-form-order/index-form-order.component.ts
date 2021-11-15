@@ -11,6 +11,7 @@ import {environment} from '../../../../../environments/environment';
 import {AlertModalComponent} from '../../../../modals/alert-modal/alert-modal.component';
 import {take} from 'rxjs/operators';
 import {SimpleModalService} from 'ngx-simple-modal';
+import {Pattern} from '../../../../core/pattern/pattern';
 
 @Component({
   selector: 'app-index-form-order',
@@ -32,9 +33,16 @@ export class IndexFormOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      [FormControlName.Fio]: new FormControl('', [Validators.required]),
-      [FormControlName.Tel]: new FormControl('', [Validators.required, Validators.pattern(/((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/)]),
-      [FormControlName.Question]: new FormControl('', [Validators.required]),
+      [FormControlName.Fio]: new FormControl('',
+        [Validators.required, Validators.pattern(Pattern.Text),
+          Validators.minLength(2)]),
+      [FormControlName.Tel]: new FormControl('',
+        [Validators.required, Validators.pattern(Pattern.Phone)]),
+      [FormControlName.Email]: new FormControl('',
+        [Validators.required, Validators.email]),
+      [FormControlName.Question]: new FormControl('',
+        [Validators.required, Validators.pattern(Pattern.TextWithNumbersAndSymbols),
+        Validators.minLength(2)]),
       [FormControlName.Agree]: new FormControl(false, [Validators.required]),
       [FormControlName.Captcha]: new FormControl('', [Validators.required])
     });

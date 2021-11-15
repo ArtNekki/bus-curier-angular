@@ -42,11 +42,14 @@ export class CourierFormComponent extends SubFormComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       [FormControlName.Street]: new FormControl('',
-        [Validators.required, Validators.pattern(Pattern.TextWithNumbersAndSymbols)]),
+        [Validators.required, Validators.pattern(Pattern.TextWithNumbersAndSymbols),
+          Validators.minLength(2)]),
       [FormControlName.Building]: new FormControl('',
-        [Validators.required, Validators.pattern(Pattern.TextWithNumbersAndSymbols)]),
+        [Validators.required, Validators.pattern(Pattern.TextWithNumbersAndSymbols),
+          Validators.minLength(2)]),
       [FormControlName.Apartment]: new FormControl('',
-        [Validators.required, Validators.pattern(Pattern.TextWithNumbersAndSymbols)]),
+        [Validators.required, Validators.pattern(Pattern.TextWithNumbersAndSymbols),
+          Validators.minLength(2)]),
       [FormControlName.CourierTime]: new FormControl('time-1', [])
     });
 
