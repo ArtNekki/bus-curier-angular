@@ -11,6 +11,7 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import {environment} from '../../../environments/environment';
 import {take} from 'rxjs/operators';
+import {Pattern} from '../../core/pattern/pattern';
 
 @Component({
   selector: 'app-feedback-page',
@@ -41,11 +42,17 @@ export class FeedbackPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      [FormControlName.FirstName]: new FormControl('', [Validators.required]),
-      [FormControlName.Tel]: new FormControl('', [Validators.required, Validators.pattern(/((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/)]),
+      [FormControlName.FirstName]: new FormControl('',
+        [Validators.required, Validators.pattern(Pattern.Text),
+          Validators.minLength(2)]),
+      [FormControlName.Tel]: new FormControl('',
+        [Validators.required, Validators.pattern(Pattern.Phone)]),
       [FormControlName.Location]: new FormControl('', [Validators.required]),
-      [FormControlName.Email]: new FormControl('', [Validators.required, Validators.email]),
-      [FormControlName.Question]: new FormControl('', [Validators.required]),
+      [FormControlName.Email]: new FormControl('',
+        [Validators.required, Validators.email]),
+      [FormControlName.Question]: new FormControl('',
+        [Validators.required, Validators.pattern(Pattern.TextWithNumbersAndSymbols),
+        Validators.minLength(2)]),
       [FormControlName.Type]: new FormControl(this.FeedbackType.Question, [Validators.required]),
       [FormControlName.Agree]: new FormControl('', []),
       [FormControlName.Captcha]: new FormControl('', [Validators.required])
