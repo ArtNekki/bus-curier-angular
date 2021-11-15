@@ -251,14 +251,16 @@
     font-size: 16px;
     line-height: 1.4;
     color: #333333;
-    background-color: #FAFAFA;
+    background-color: lighten($gray-light-color, 5%);
 
     @include active {
       background-color: $gray-color;
     }
 
     @include hover {
-      background-color: #F0F0F0;
+      &:not(:disabled) {
+        background-color: $gray-light-color;
+      }
     }
   }
 
