@@ -41,10 +41,10 @@
                   {{formattedData[control.key].name}}
                 </div>
                 <ng-container class="help">
-                  <app-btn type="button" mods="help" ngxTippy
+                  <span ngxTippy
                            [tippyProps]="tippyProps" [attr.data-tippy-content]="TooltipText[control.key]">
                     <svg-icon class="icon" src="assets/img/svg/help.svg" width="18" height="18"></svg-icon>
-                  </app-btn>
+                  </span>
                 </ng-container>
               </app-checkbox>
             </dt>

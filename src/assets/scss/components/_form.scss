@@ -257,10 +257,9 @@
 
     margin-bottom: 30px;
     grid-template-columns: repeat(2, auto);
+    grid-column-gap: 30px;
     justify-content: start;
     align-items: center;
-    grid-column-gap: 0;
-    //grid-column-gap: $form-column-gap;
 
     @include media-breakpoint-up(sm) {
       grid-template-columns: repeat(4, auto);
@@ -268,11 +267,6 @@
 
     @include media-breakpoint-only(md) {
       grid-template-columns: $template-columns-md;
-    }
-
-    @include media-breakpoint-only(lg) {
-      grid-column-gap: 0;
-      //grid-column-gap: $form-column-gap;
     }
 
     @include media-breakpoint-up(xl) {
