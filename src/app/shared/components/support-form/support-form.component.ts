@@ -11,6 +11,7 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import {environment} from '../../../../environments/environment';
 import {take} from 'rxjs/operators';
 import { CommonService } from 'src/app/core/services/common/common.service';
+import {Pattern} from '../../../core/pattern/pattern';
 
 @Component({
   selector: 'app-support-form',
@@ -33,10 +34,16 @@ export class SupportFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      [FormControlName.Fio]: new FormControl('', [Validators.required]),
-      [FormControlName.Email]: new FormControl('', [Validators.required, Validators.email]),
-      [FormControlName.Tel]: new FormControl('', [Validators.required, Validators.pattern(/((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/)]),
-      [FormControlName.Question]: new FormControl('', [Validators.required]),
+      [FormControlName.Fio]: new FormControl('',
+        [Validators.required, Validators.pattern(Pattern.Text),
+          Validators.minLength(2)]),
+      [FormControlName.Email]: new FormControl('',
+        [Validators.required, Validators.email]),
+      [FormControlName.Tel]: new FormControl('',
+        [Validators.required, Validators.pattern(Pattern.Phone)]),
+      [FormControlName.Question]: new FormControl('',
+        [Validators.required,  Validators.pattern(Pattern.TextWithNumbersAndSymbols),
+        Validators.minLength(2)]),
       [FormControlName.Agree]: new FormControl(false, [Validators.required]),
       [FormControlName.Captcha]: new FormControl('', [Validators.required])
     });
