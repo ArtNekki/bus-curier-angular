@@ -46,7 +46,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.formSub = this.calcService.form$
       .subscribe((form: any) => {
         this.form = form;
-        // console.log('quick sidebar', this.form.value);
+        console.log('quick sidebar', this.form.value);
 
         if (form.invalid) {
           this.isLoading = true;

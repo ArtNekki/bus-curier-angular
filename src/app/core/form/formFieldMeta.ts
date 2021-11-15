@@ -85,27 +85,42 @@ export default {
   },
   [FormControlName.Count]: {
     label: 'Кол-во мест',
-    type: 'text'
+    type: 'text',
+    mask: '000',
+    unit: '',
+    showMaskTyped: false
   },
   [FormControlName.Weight]: {
     label: 'Вес',
     type: 'text',
-    unit: 'кг'
+    unit: 'кг',
+    mask: '000',
+    dropSpecialCharacters: true,
+    showMaskTyped: false
   },
   [FormControlName.Width]: {
     label: 'Ширина',
     type: 'text',
-    unit: 'см'
+    unit: 'см',
+    mask: '000',
+    dropSpecialCharacters: true,
+    showMaskTyped: false
   },
   [FormControlName.Height]: {
     label: 'Высота',
     type: 'text',
-    unit: 'см'
+    unit: 'см',
+    mask: '000',
+    dropSpecialCharacters: true,
+    showMaskTyped: false
   },
   [FormControlName.Length]: {
     label: 'Длина',
     type: 'text',
-    unit: 'см'
+    unit: 'см',
+    mask: '000',
+    dropSpecialCharacters: true,
+    showMaskTyped: false
   },
   [FormControlName.Date]: {
     label: 'Дата',

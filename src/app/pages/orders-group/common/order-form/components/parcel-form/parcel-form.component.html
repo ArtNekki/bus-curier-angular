@@ -3,17 +3,22 @@
     <div class="parcel__body">
       <div *ngFor="let control of formUtils.getGroupControls(formGroup) | keyvalue: formUtils.originalOrder"
            class="parcel__field">
+<!--        <span *ngIf="FormFieldMeta[control.key].unit" [style]="{color: control.value.invalid ? '#C74141' : '#808080'}">({{FormFieldMeta[control.key].unit}})</span>-->
         <label
           [for]="'parcel-' + control.key"
           class="parcel__label"
           [class.parcel__label--invalid]="control.value.invalid">
           {{FormFieldMeta[control.key].label}}
-          <span *ngIf="FormFieldMeta[control.key].unit" [style]="{color: control.value.invalid ? '#C74141' : '#808080'}">({{FormFieldMeta[control.key].unit}})</span>
           <sup *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
         </label>
+<!--        type="number"-->
+<!--        maxlength="2"-->
         <app-input
-          type="number"
-          maxlength="2"
+          type="text"
+          maxlength="6"
+          [mask]="FormFieldMeta[control.key].mask"
+          [suffix]="' ' + FormFieldMeta[control.key].unit"
+          [dropSpecialCharacters]="FormFieldMeta[control.key].dropSpecialCharacters"
           [formControlName]="control.key"
           [isInvalid]="(control.value.invalid && control.value.touched)
           || (control.key === FormControlName.Width || control.key === FormControlName.Height

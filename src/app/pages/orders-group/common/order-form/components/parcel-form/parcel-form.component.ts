@@ -56,16 +56,16 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
       [FormControlName.Count]:
         new FormControl(1, [Validators.required, Validators.min(1)]),
       [FormControlName.Weight]:
-        new FormControl( '',
+        new FormControl( null,
           [Validators.required, Validators.min(1), Validators.max(100)]),
       [FormControlName.Width]:
-        new FormControl( '',
+        new FormControl( null,
             [Validators.required, Validators.min(1)]),
       [FormControlName.Height]:
-        new FormControl( '',
+        new FormControl( null,
           [Validators.required, Validators.min(1)]),
       [FormControlName.Length]:
-        new FormControl( '',
+        new FormControl( null,
           [Validators.required, Validators.min(1)])
     });
 
