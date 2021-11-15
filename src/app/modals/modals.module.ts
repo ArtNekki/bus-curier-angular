@@ -12,6 +12,7 @@ import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { ManagerCallModalComponent } from './manager-call-modal/manager-call-modal.component';
 import { CitiesModalComponent } from './cities-modal/cities-modal.component';
 import { RegionsModalComponent } from './regions-modal/regions-modal.component';
+import { CseModalComponent } from './cse-modal/cse-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RegionsModalComponent } from './regions-modal/regions-modal.component';
     AlertModalComponent,
     ManagerCallModalComponent,
     CitiesModalComponent,
-    RegionsModalComponent
+    RegionsModalComponent,
+    CseModalComponent
   ],
   imports: [
     CommonModule,
