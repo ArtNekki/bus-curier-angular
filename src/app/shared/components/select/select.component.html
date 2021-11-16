@@ -5,31 +5,24 @@
           [disabled]="controlDisabled || disabled || !items.length" >
     <option *ngFor="let item of items" [value]="item.value">{{ item.name }}</option>
   </select>
-<!--  <div *ngIf="isInvalid" class="select__errors">-->
-<!--    <ng-content select=".errors"></ng-content>-->
-<!--  </div>-->
 </div>
 <!--<ng-select  [id]="id" [items]="items" bindLabel="name" bindValue="value" [ngModel]="value" (change)="changeValue($event)">-->
 <!--</ng-select>-->
 
 <div *ngIf="deviceService.isDesktop()" [class]="cssClass" [class.select--invalid]="isInvalid"
      [class.select--opened]="isSelectOpened" [class.select--disabled]="controlDisabled || disabled || !items.length">
- <ng-container>
-   <div class="select__field" (click)="openSelect()"
-        [class.select__field--disabled]="controlDisabled || disabled || !items.length">
-     <span>{{fieldValue}}</span>
-     <i class="fa fa-chevron-down" data-type="arrow"></i>
-   </div>
-   <div *ngIf="isSelectOpened" class="select__dropdown">
-     <ul class="select__list">
-       <li *ngFor="let item of items" class="select__item" [attr.data-value]="item.value" (click)="closeSelect();changeValue(item.value)">{{ item.name }}</li>
-     </ul>
-   </div>
-   <div *ngIf="isSelectOpened" class="select__backdrop" (click)="closeSelect()"></div>
- </ng-container>
-<!-- <ng-template #loader>-->
-<!--   <div class="select__loader">-->
-<!--     <app-loader></app-loader>-->
-<!--   </div>-->
-<!-- </ng-template>-->
+  <div class="select__loader">
+    <ng-content select="app-loader"></ng-content>
+  </div>
+  <div class="select__field" (click)="openSelect()"
+       [class.select__field--disabled]="controlDisabled || disabled || !items.length">
+    <span>{{fieldValue}}</span>
+    <i class="fa fa-chevron-down" data-type="arrow"></i>
+  </div>
+  <div *ngIf="isSelectOpened" class="select__dropdown">
+    <ul class="select__list">
+      <li *ngFor="let item of items" class="select__item" [attr.data-value]="item.value" (click)="closeSelect();changeValue(item.value)">{{ item.name }}</li>
+    </ul>
+  </div>
+  <div *ngIf="isSelectOpened" class="select__backdrop" (click)="closeSelect()"></div>
 </div>

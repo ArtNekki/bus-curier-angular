@@ -67,6 +67,10 @@
       border-color: $primary-color;
     }
 
+    .select__loader:not(:empty) ~ & {
+      opacity: 0;
+    }
+
     .select--no-shadow & {
       box-shadow: none;
     }
@@ -149,6 +153,25 @@
     //}
   }
 
+  &__loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $border-radius;
+    background: rgba($black-color, 0.2);
+
+    &:empty {
+      position: static;
+      display: none;
+    }
+  }
+
   &__item {
     font-family: $font-family--secondary;
     font-size: 16px;
@@ -169,11 +192,5 @@
     @include hover {
       color: $gray-dark-color;
     }
-  }
-
-  &__loader {
-    display: flex;
-    justify-content: center;
-    background-color: lighten($gray-light-color, 7%);
   }
 }

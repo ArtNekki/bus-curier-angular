@@ -10,6 +10,7 @@
         && form.get(FormControlName.CityFrom).touched) && 'invalid'"
         mods="no-shadow"
       >
+        <app-loader *ngIf="!citiesFrom.length" mods="sm, white"></app-loader>
       </app-select>
     </div>
   </div>
@@ -24,7 +25,9 @@
                      && form.get(FormControlName.CityTo).touched) && 'invalid'"
                     [disabled]="!currentCityFrom"
                     mods="no-shadow, inverted"
-        ></app-select>
+        >
+          <app-loader *ngIf="currentCityFrom && !citiesTo.length" mods="sm, white"></app-loader>
+        </app-select>
       </div>
     </div>
   </div>
