@@ -10,7 +10,9 @@
       </li>
       <li class="list__item">
         <p>Вы можете оформить доставку груза из аэропорта по <br class="br br--show-md">номеру телефона
-          <app-link href="#" mods="blue, no-underline, in-text">8 (423) 293 78 79</app-link>
+          <app-link [href]="'tel:' + phoneNumber" mods="blue, no-underline, in-text">
+            <ng-container class="contact">{{phoneNumber}}</ng-container>
+          </app-link>
           или <app-link href="/orders/quick-order/new" mods="blue, no-underline, in-text">на сайте</app-link>
           с пометкой <br class="br br--show-md">"аэропорт".</p>
       </li>
