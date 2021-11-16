@@ -7,32 +7,24 @@
 :host {
   display: block;
   height: 100%;
+  width: 100%;
 }
 
 .contacts-map {
   position: relative;
   height: inherit;
+  left: -15px;
+  width: calc(100% + 30px);
+  background-color: #dedede;
 
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: $container-padding-x;
-    background-color: #dedede;
-
-    @include media-breakpoint-up(md) {
-      display: none;
-    }
+  @include map-full-mode {
+    left: 0;
+    width: auto;
   }
 
-  &::before {
-    left: -$container-padding-x;
-  }
-
-  &::after {
-    right: -$container-padding-x;
+  @include media-breakpoint-up(md) {
+    left: 0;
+    width: auto;
   }
 
   &__main {
@@ -42,6 +34,11 @@
     left: -$container-padding-x;
     right: -$container-padding-x;
     height: inherit;
+
+    @include map-full-mode {
+      right: 0;
+      left: 0;
+    }
 
     @include media-breakpoint-up(md) {
       position: static;
@@ -91,6 +88,8 @@
     @include map-full-mode {
       display: none;
     }
+
+    right: $container-padding-x;
   }
 
   ::ng-deep &__full svg {
