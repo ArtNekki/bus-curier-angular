@@ -265,7 +265,7 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
               this.formGroup.get(FormControlName.Location).setValue(cities[0].value);
             }
 
-            this.formGroup.get(FormControlName.Location).markAsTouched();
+            // this.formGroup.get(FormControlName.Location).markAsTouched();
             super.writeValue(value);
             this.clearOptions();
           });
