@@ -1,19 +1,29 @@
 <ng-template #content><ng-content></ng-content></ng-template>
 
-<a *ngIf="href.startsWith('tel:') || href.startsWith('http'); else router" [href]='href' [class]="cssClass"
-  [attr.target]="href.startsWith('http') ? '_blank' : ''">
-  <ng-content select="svg-icon"></ng-content>
-  <span class="link__text">
+<ng-container *ngIf="href; else withoutHref">
+  <a *ngIf="href.startsWith('tel:') || href.startsWith('http'); else router" [href]='href' [class]="cssClass"
+     [attr.target]="href.startsWith('http') ? '_blank' : ''">
+    <ng-content select="svg-icon"></ng-content>
+    <span class="link__text">
     <ng-container *ngTemplateOutlet="content"></ng-container>
   </span>
-</a>
+  </a>
 
-<ng-template #router>
-  <a [routerLink]="href" [class]="cssClass">
+  <ng-template #router>
+    <a [routerLink]="href" [class]="cssClass">
+      <ng-content select="svg-icon"></ng-content>
+      <span class="link__text">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </span>
+    </a>
+  </ng-template>
+</ng-container>
+
+<ng-template #withoutHref>
+  <a [class]="cssClass">
     <ng-content select="svg-icon"></ng-content>
     <span class="link__text">
       <ng-container *ngTemplateOutlet="content"></ng-container>
     </span>
   </a>
 </ng-template>
-

@@ -16,8 +16,8 @@
         </div>
       </li>
       <li class="list__item">
-        <p>Вы можете оформить вызов курьера по номеру телефона <br><app-link href="#" mods="blue, no-underline, in-text">8 (423) 293 78 79</app-link>
-          или <app-link href="/orders/quick-order/new" mods="blue, no-underline, in-text">Заполните заявку на сайте</app-link>.
+        <p>Вы можете оформить вызов курьера по номеру телефона <br><app-link [href]="'tel:' + phoneNumber" mods="blue, no-underline, in-text">
+          {{phoneNumber}}</app-link> или <app-link href="/orders/quick-order/new" mods="blue, no-underline, in-text">Заполните заявку на сайте</app-link>.
           Наш менеджер <br>свяжется с вами и проинформирует о стоимости и сроках <br>доставки.</p>
       </li>
       <li class="list__item">
