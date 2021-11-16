@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, Si
 import {ContactsService} from '../../../../core/services/contacts/contacts.service';
 import {Subscription} from 'rxjs';
 import {Office} from '../../../../core/interfaces/calculator';
+import {debounceTime, delay, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-contacts-map',
@@ -19,8 +20,13 @@ export class ContactsMapComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.pointsSub = this.contactsService.offices$
+      .pipe(debounceTime(500))
       .subscribe((offices: Office[]) => {
         this.points = offices;
+
+        if (offices.length && (offices.length <= 3)) {
+          this.mapZoom = 12;
+        }
       });
 
     this.currentOfficeIdSub = this.contactsService.currentOfficeId$
