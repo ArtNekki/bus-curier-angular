@@ -1,5 +1,5 @@
 <div class="page__container page__container--col-2">
-  <h1 class="page__title">Упаковка грузов г. Владивосток</h1>
+  <h1 class="page__title">Упаковка грузов</h1>
   <p class="page__subtitle">Правильно выбранная упаковка обеспечит целостность и&nbsp;сохранность вашего груза при перевозке.
     Мы&nbsp;подобрали для вас большой ассортимент надежных упаковочных материалов, для самых разнообразных видов отправлений.</p>
 </div>
@@ -12,15 +12,13 @@
       img="package-1"
       count="1"
     >
-      <div class="package-block__table">
-        <app-table
-          [head]='["Название", "Размер", "Цена"]'
-          [body]='[["Мини", "150 х 150 х 150", "50 руб"], ["Маленькая", "380 х 285 х 142", "80 руб"],
+      <app-table
+        [head]='["Название", "Размер", "Цена"]'
+        [body]='[["Мини", "150 х 150 х 150", "50 руб"], ["Маленькая", "380 х 285 х 142", "80 руб"],
           ["Средняя", "450 х 450 х 300", "120 руб"], ["Большая", "680 х 470 х 470", "180 руб"]]'
-          headerMods="uppercase, primary"
-        >
-        </app-table>
-      </div>
+        headerMods="uppercase, primary"
+      >
+      </app-table>
     </app-package-block>
     <app-package-block
       title="Пленка стрейч черная"
@@ -59,15 +57,13 @@
       img="package-6"
       count="6"
     >
-      <div class="package-block__table">
-        <app-table
-          [head]='["Название", "Размер", "Цена"]'
-          [body]='[["Мини", "162 x 220 x 40", "15 руб."], ["Маленькая", "205 х 295 х 45", "20 руб."],
+      <app-table
+        [head]='["Название", "Размер", "Цена"]'
+        [body]='[["Мини", "162 x 220 x 40", "15 руб."], ["Маленькая", "205 х 295 х 45", "20 руб."],
           ["Средняя", "245 х 320 х 40", "25 руб."], ["Большая", "296 х 400 х 45", "30 руб."]]'
-          headerMods="uppercase, primary"
-        >
-        </app-table>
-      </div>
+        headerMods="uppercase, primary"
+      >
+      </app-table>
     </app-package-block>
     <app-alert mods="under-list">
       <svg-icon class="icon" src="assets/img/svg/attention.svg" width="50" height="45"></svg-icon>

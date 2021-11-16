@@ -64,6 +64,10 @@
     grid-column: 1 / -1;
     grid-row: 4 / 5;
 
+    &:empty {
+      display: none;
+    }
+
     @include media-breakpoint-up(sm) {
       grid-column: 2 / -1;
     }
@@ -106,7 +110,7 @@
     width: 270px;
     height: 175px;
     display: block;
-    background-color: red;
+    background-color: $gray-light-color;
     border-radius: 10px;
 
     @include media-breakpoint-up(md) {

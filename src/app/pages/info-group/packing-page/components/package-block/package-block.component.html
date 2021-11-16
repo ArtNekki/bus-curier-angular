@@ -1,7 +1,9 @@
 <article [class]="cssClass" [attr.data-count]="count">
   <h1 class="package-block__title">{{title}}</h1>
   <p class="package-block__text">{{text}}</p>
-  <ng-content></ng-content>
+  <div class="package-block__table">
+    <ng-content select="app-table"></ng-content>
+  </div>
   <div *ngIf="label" class="package-block__label" [innerHTML]="label"></div>
   <img *ngIf="img" class="package-block__img"
        src="assets/img/content/cargo-packaging/{{img}}.jpg"
