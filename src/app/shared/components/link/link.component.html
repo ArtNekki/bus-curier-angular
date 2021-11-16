@@ -1,8 +1,8 @@
 <ng-template #content><ng-content></ng-content></ng-template>
 
 <ng-container *ngIf="href; else withoutHref">
-  <a *ngIf="href.startsWith('tel:') || href.startsWith('http'); else router" [href]='href' [class]="cssClass"
-     [attr.target]="href.startsWith('http') ? '_blank' : ''">
+  <a *ngIf="href.startsWith('tel:') || href.startsWith('http') || href.startsWith('mailto:');
+  else router" [href]='href' [class]="cssClass" [attr.target]="href.startsWith('http') ? '_blank' : ''">
     <ng-content select="svg-icon"></ng-content>
     <span class="link__text">
     <ng-container *ngTemplateOutlet="content"></ng-container>

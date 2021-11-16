@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 const list = [
   'Мы гарантируем, 100 % возмещение убытков в течение 30 <br>календарных дней с момента подачи заявления о наступлении <br />страхового случая.',
@@ -13,11 +14,15 @@ const list = [
   styleUrls: ['./cargo-insurance-page.component.scss']
 })
 export class CargoInsurancePageComponent implements OnInit {
+  public phoneNumber = '';
+  public email = '';
   public list = list;
 
-  constructor() { }
+  constructor(private localStorage: LocalStorageService) { }
 
   ngOnInit(): void {
+    this.phoneNumber = this.localStorage.get('phone-number');
+    this.email = this.localStorage.get('email');
   }
 
 }

@@ -23,8 +23,8 @@
     <p>Если вы обнаружили нарушение целостности упаковки или <br>повреждение груза при встрече груза с автобуса, вам необходимо
       <br>самостоятельно зафиксировать этот факт, сделав фотографии <br>повреждений, и оставить посылку в багажном отделении автобуса.
       <br>После чего связаться с нами по телефону:
-      <app-link href="#" mods="blue, no-underline, in-text">8 (423) 293 78 79</app-link>
-       или <br>электронному адресу: <app-link href="emailTo: inbox@busbox.guru" mods="blue, no-underline, in-text">inbox@busbox.guru</app-link> Вы также можете
+      <app-link [href]="'tel:' + phoneNumber" mods="blue, no-underline, in-text">{{phoneNumber}}</app-link>
+       или <br>электронному адресу: <app-link [href]="'mailto:' + email" mods="blue, no-underline, in-text">{{email}}</app-link> Вы также можете
       <br>обратиться в онлайн-чат справа и задать вопрос нашему <br>онлайн-консультанту.</p>
   </div>
   <aside class="page__sidebar">
