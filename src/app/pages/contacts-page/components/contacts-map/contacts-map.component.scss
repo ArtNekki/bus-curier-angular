@@ -10,7 +10,30 @@
 }
 
 .contacts-map {
+  position: relative;
   height: inherit;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: $container-padding-x;
+    background-color: #dedede;
+
+    @include media-breakpoint-up(md) {
+      display: none;
+    }
+  }
+
+  &::before {
+    left: -$container-padding-x;
+  }
+
+  &::after {
+    right: -$container-padding-x;
+  }
 
   &__main {
     position: absolute;
@@ -64,9 +87,6 @@
   }
 
   &__full {
-    width: 25px;
-    height: 25px;
-
     @include btn-default();
     @include map-full-mode {
       display: none;
@@ -74,6 +94,8 @@
   }
 
   ::ng-deep &__full svg {
+    width: 25px;
+    height: 25px;
     fill: rgba($black-color, 0.6);
 
     &:hover {

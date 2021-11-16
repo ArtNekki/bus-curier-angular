@@ -14,6 +14,7 @@
     max-width: 570px;
     display: grid;
     grid-template-columns: 2fr 1fr;
+    grid-column-gap: 20px;
     grid-template-rows: repeat(2, auto);
     background-color: $white-color;
     border-radius: $border-radius;
@@ -64,7 +65,7 @@
       margin-bottom: 18px;
 
       @include media-breakpoint-up(md) {
-        margin-bottom: 35px;
+        margin-bottom: 24px;
       }
     }
   }
