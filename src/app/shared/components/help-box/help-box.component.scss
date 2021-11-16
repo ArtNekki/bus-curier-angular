@@ -49,6 +49,10 @@
     color: $black-color;
     text-decoration: none;
 
+    &:hover {
+      color: $primary-color;
+    }
+
     &::before {
       content: "";
       position: absolute;
@@ -57,5 +61,10 @@
       width: 100%;
       border-top: 1px dashed $gray-color--down-11;
     }
+
+    &:hover::before {
+      border-color: $primary-color;
+    }
+
   }
 }
