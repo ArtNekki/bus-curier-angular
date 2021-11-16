@@ -8,7 +8,6 @@ import {Component, Input, OnInit} from '@angular/core';
 export class LinkComponent implements OnInit {
   @Input() id;
   @Input() href;
-  @Input() router;
   @Input() mods;
 
   public cssClass = 'link';

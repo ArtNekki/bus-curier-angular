@@ -1,15 +1,17 @@
-<a *ngIf="href.startsWith('tel:'); else link" [href]='href' [class]="cssClass">
+<ng-template #content><ng-content></ng-content></ng-template>
+
+<a *ngIf="href.startsWith('tel:'); else router" [href]='href' [class]="cssClass">
   <ng-content select="svg-icon"></ng-content>
   <span class="link__text">
-    <ng-content select=".contact"></ng-content>
+    <ng-container *ngTemplateOutlet="content"></ng-container>
   </span>
 </a>
 
-<ng-template #link>
+<ng-template #router>
   <a [routerLink]="href" [class]="cssClass">
     <ng-content select="svg-icon"></ng-content>
     <span class="link__text">
-      <ng-content></ng-content>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
     </span>
   </a>
 </ng-template>
