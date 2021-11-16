@@ -1,7 +1,9 @@
+<ng-template #content><ng-content select="app-loader"></ng-content></ng-template>
+
 <div *ngIf="deviceService.isMobile() || deviceService.isTablet()"
      [class]="cssClass" [class.select--invalid]="isInvalid" [class.select--disabled]="controlDisabled || disabled || !items.length">
   <div class="select__loader">
-    <ng-content select="app-loader"></ng-content>
+    <ng-container *ngTemplateOutlet="content"></ng-container>
   </div>
   <select #select [name]="id" [id]="id"
           class="select__field" [ngModel]="value" (ngModelChange)="changeValue($event)"
@@ -15,7 +17,7 @@
 <div *ngIf="deviceService.isDesktop()" [class]="cssClass" [class.select--invalid]="isInvalid"
      [class.select--opened]="isSelectOpened" [class.select--disabled]="controlDisabled || disabled || !items.length">
   <div class="select__loader">
-    <ng-content select="app-loader"></ng-content>
+    <ng-container *ngTemplateOutlet="content"></ng-container>
   </div>
   <div class="select__field" (click)="openSelect()"
        [class.select__field--disabled]="controlDisabled || disabled || !items.length">

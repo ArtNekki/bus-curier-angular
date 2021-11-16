@@ -24,7 +24,7 @@ export const mainNav = [
     {link: 'info/transportation-rates', name: 'Тарифы на перевозку', sm: true},
     {link: 'info/packing', name: 'Упаковки грузов и виды упаковки', sm: true},
     {link: 'info/delivery-from-airport', name: 'Доставка грузов и багажа из Аэропорта', sm: true},
-    {link: 'no', name: 'Франшиза Bus-Курьер', sm: true}
+    // {link: 'no', name: 'Франшиза Bus-Курьер', sm: true}
   ]},
   {link: 'no', name: 'Сервисы', dropdown: [
       {link: 'no', name: 'Поиск заказа', sm: true},

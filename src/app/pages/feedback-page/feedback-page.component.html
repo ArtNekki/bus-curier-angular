@@ -27,36 +27,23 @@
     </div>
     <div class="form__fieldset form__fieldset--row-gap-lg form__fieldset--col-gap-lg form__fieldset--2-col-sm form__fieldset--w-575">
       <ng-container *ngFor="let control of formUtils.getGroupControls(form) | keyvalue: formUtils.originalOrder; let i = index">
-        <div *ngIf="i <= 3" class="form__field">
+        <div *ngIf="i <= 2" class="form__field" [class.form__field--span-2]="control.key === FormControlName.Email">
           <label [for]="control.key" class="form__label"
                  [class.form__label--invalid]="control.value.invalid && control.value.touched">
             {{FormFieldMeta[control.key].label}}
             <sup class="form__required" *ngIf="control.value.errors && control.value.hasError('required')">*</sup>
           </label>
-          <app-select
-            *ngIf="control.key === FormControlName.Location; else input"
+          <app-input
+            [type]="FormFieldMeta[control.key].type"
+            [id]="control.key"
             [formControlName]="control.key"
-            [items]="cities"
+            [mask]="FormFieldMeta[control.key].mask"
+            [prefix]="FormFieldMeta[control.key].prefix"
+            [dropSpecialCharacters]="FormFieldMeta[control.key].dropSpecialCharacters"
+            [showMaskTyped]="FormFieldMeta[control.key].showMaskTyped"
             [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
-          ></app-select>
-          <ng-template #input>
-            <app-input
-              [type]="FormFieldMeta[control.key].type"
-              [id]="control.key"
-              [formControlName]="control.key"
-              [mask]="FormFieldMeta[control.key].mask"
-              [prefix]="FormFieldMeta[control.key].prefix"
-              [dropSpecialCharacters]="FormFieldMeta[control.key].dropSpecialCharacters"
-              [showMaskTyped]="FormFieldMeta[control.key].showMaskTyped"
-              [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'"
-            >
-<!--              <ng-container class="errors">-->
-<!--                <small *ngIf="utils.getObjectKey(control.value.errors).length">-->
-<!--                  {{FormFieldError[utils.getObjectKey(control.value.errors)[0]]}}-->
-<!--                </small>-->
-<!--              </ng-container>-->
-            </app-input>
-          </ng-template>
+          >
+          </app-input>
         </div>
       </ng-container>
       <div class="form__field form__field--span-2">

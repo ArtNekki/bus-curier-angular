@@ -47,7 +47,6 @@ export class FeedbackPageComponent implements OnInit {
           Validators.minLength(2)]),
       [FormControlName.Tel]: new FormControl('',
         [Validators.required, Validators.pattern(Pattern.Phone)]),
-      [FormControlName.Location]: new FormControl('', [Validators.required]),
       [FormControlName.Email]: new FormControl('',
         [Validators.required, Validators.email]),
       [FormControlName.Question]: new FormControl('',
