@@ -29,6 +29,7 @@ export class PointCardComponent implements OnInit, OnDestroy {
   showOnMap(id: string) {
     this.contactsService.currentOfficeId$.next(id);
     this.contactsService.currentOffice$.next(null);
+    document.documentElement.classList.add('page--full-mode');
   }
 
   close() {
