@@ -16,11 +16,12 @@
       [isInvalid]="(formGroup.get(FormControlName.Location).invalid
         && formGroup.get(FormControlName.Location).touched) && 'invalid'"
     >
-      <ng-container class="errors">
-        <small *ngIf="utils.getObjectKey(formGroup.get(FormControlName.Location).errors).length">
-          {{FormFieldError[utils.getObjectKey(formGroup.get(FormControlName.Location).errors)[0]]}}
-        </small>
-      </ng-container>
+<!--      <ng-container class="errors">-->
+<!--        <small *ngIf="utils.getObjectKey(formGroup.get(FormControlName.Location).errors).length">-->
+<!--          {{FormFieldError[utils.getObjectKey(formGroup.get(FormControlName.Location).errors)[0]]}}-->
+<!--        </small>-->
+<!--      </ng-container>-->
+      <app-loader *ngIf="!cities.length" mods="sm"></app-loader>
     </app-select>
   </div>
   <ng-container *ngIf="formGroup.get(FormControlName.Location).value">

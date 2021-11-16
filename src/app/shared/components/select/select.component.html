@@ -1,5 +1,8 @@
 <div *ngIf="deviceService.isMobile() || deviceService.isTablet()"
      [class]="cssClass" [class.select--invalid]="isInvalid" [class.select--disabled]="controlDisabled || disabled || !items.length">
+  <div class="select__loader">
+    <ng-content select="app-loader"></ng-content>
+  </div>
   <select #select [name]="id" [id]="id"
           class="select__field" [ngModel]="value" (ngModelChange)="changeValue($event)"
           [disabled]="controlDisabled || disabled || !items.length" >

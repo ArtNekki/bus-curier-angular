@@ -62,6 +62,8 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
 
   private currentCityId = null;
 
+  public cityFromLoaded = false;
+
   private citiesSub: Subscription;
   private departmentsSub: Subscription;
 
@@ -250,6 +252,8 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
         if (!cityFromId) {
           return;
         }
+
+        this.cityFromLoaded = true;
 
         this.loadCities(cityFromId)
           .pipe(delay(0))

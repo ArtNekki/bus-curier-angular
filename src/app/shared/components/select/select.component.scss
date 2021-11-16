@@ -87,9 +87,14 @@
 
     &:disabled,
     &--disabled {
-      opacity: 0.2;
+      opacity: 0.4;
       background-color: $gray-light-color;
       cursor: not-allowed;
+    }
+
+    .select--no-shadow &:disabled,
+    .select--no-shadow &--disabled {
+      opacity: 0.2;
     }
 
     .select--inverted &:disabled,
@@ -164,11 +169,19 @@
     justify-content: center;
     align-items: center;
     border-radius: $border-radius;
-    background: rgba($black-color, 0.2);
+    background: rgba($gray-light-color, 0.4);
+    border: 1px solid rgba($gray-light-color, 0.4);
+    cursor: not-allowed;
 
     &:empty {
       position: static;
       display: none;
+    }
+
+    .select--no-shadow & {
+      opacity: 1;
+      background: rgba($black-color, 0.2);
+      border-color: transparent;
     }
   }
 

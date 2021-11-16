@@ -8,7 +8,7 @@ import {ModsService} from '../../../core/services/mods.service';
 })
 export class LoaderComponent implements OnInit {
   @Input() mods;
-  @Input() color = 'rgba(255, 255, 255, 0.5)';
+  @Input() color = 'rgba(0, 0, 0, 0.2)';
 
   public cssClass;
 
