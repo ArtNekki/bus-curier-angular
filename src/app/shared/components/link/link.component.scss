@@ -54,6 +54,11 @@
     .link--bold & {
       font-weight: 500;
     }
+
+    .link:hover & {
+      border-bottom: transparent;
+      opacity: 0.7;
+    }
   }
 
   ::ng-deep svg {

@@ -6,14 +6,13 @@
                 src="assets/img/svg/info.svg" width="22" height="21"
       ></svg-icon>
     </app-link>
-    <!--    {{{ link href="#" text="" type="help" mods="gray, align-start"}}}-->
   </div>
   <section class="sidebar-result__main">
     <div *ngIf="!form.value" class="sidebar-result__info">
       <p>Для расчета стоимости отправления, укажите место отправления и прибытия, а также тип груза.</p>
       <p><b>Внимание!</b> Информация, приведенная в калькуляторе справочная, точную информацию по доставкам в населенные пункты вы можете уточнить в чате на сайте или у диспетчера.</p>
       <p>Если вам необходимо отправить посылку между разными регионами России, воспользуйтесь другим калькулятором -
-        <app-link href="#" mods="blue">расчет перевозки по России.</app-link>
+        <app-link href="/services/delivery-russia" mods="blue">расчет перевозки по России.</app-link>
       </p>
     </div>
     <div *ngIf="form.value && !isLoading;" class="sidebar-result__details">
