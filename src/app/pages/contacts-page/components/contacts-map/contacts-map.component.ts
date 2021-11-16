@@ -26,6 +26,8 @@ export class ContactsMapComponent implements OnInit, OnDestroy {
 
         if (offices.length && (offices.length <= 3)) {
           this.mapZoom = 12;
+        } else {
+          this.mapZoom = 6;
         }
       });
 
