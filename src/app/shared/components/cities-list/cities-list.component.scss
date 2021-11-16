@@ -10,6 +10,8 @@
   flex-direction: column;
   overflow-y: auto;
 
+  @include scollbar;
+
   &__scroll {
     display: grid;
     flex-shrink: 0;
