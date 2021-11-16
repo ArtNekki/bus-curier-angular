@@ -1,5 +1,3 @@
-<!--dd: {{}}-->
-
 <a *ngIf="href.startsWith('tel:'); else link" [href]='href' [class]="cssClass">
   <ng-content select="svg-icon"></ng-content>
   <span class="link__text">
@@ -11,7 +9,6 @@
   <a [routerLink]="href" [class]="cssClass">
     <ng-content select="svg-icon"></ng-content>
     <span class="link__text">
-      asdas
       <ng-content></ng-content>
     </span>
   </a>
