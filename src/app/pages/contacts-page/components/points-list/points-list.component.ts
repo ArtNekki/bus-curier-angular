@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ContactsService} from '../../../../core/services/contacts/contacts.service';
-import {delay, tap} from 'rxjs/operators';
+import {debounceTime, delay, tap} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {Office} from '../../../../core/interfaces/calculator';
 import {NgxTippyProps} from 'ngx-tippy-wrapper';
@@ -28,14 +28,14 @@ export class PointsListComponent implements OnInit, OnDestroy {
           this.isLoading = true;
           this.offices = [];
         }),
-        delay(1000)
+        debounceTime(500),
+        delay(500)
       )
       .subscribe((offices: Office[]) => {
-        this.offices = offices;
-
-        setTimeout(() => {
+        if (offices.length) {
+          this.offices = offices;
           this.isLoading = false;
-        }, 0);
+        }
       });
   }
 
