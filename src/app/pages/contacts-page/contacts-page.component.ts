@@ -8,6 +8,7 @@ import {FormControl} from '@angular/forms';
 import {AlertModalComponent} from '../../modals/alert-modal/alert-modal.component';
 import {delay, take} from 'rxjs/operators';
 import {SimpleModalService} from 'ngx-simple-modal';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-contacts-page',
@@ -25,6 +26,7 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
   private currentOfficeSub: Subscription;
   public currentTab = '';
   public isBreakpointMatched = false;
+  public email = '';
 
   public Tab = {
     Map: 'map',
@@ -43,9 +45,11 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
 
   constructor(
     public contactsService: ContactsService,
-    private simpleModal: SimpleModalService) { }
+    private simpleModal: SimpleModalService,
+    private localStorage: LocalStorageService) { }
 
   ngOnInit(): void {
+    this.email = this.localStorage.get('email');
     this.cityControl = new FormControl('');
 
     this.officesSub = this.contactsService.getOffices()

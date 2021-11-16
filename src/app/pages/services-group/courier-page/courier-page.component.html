@@ -32,7 +32,8 @@
           <app-list>
             <div appListItem>
               <svg-icon class="icon" src="assets/img/svg/check.svg" width="24" height="20"></svg-icon>
-              <span>на сайте, в разделе <app-link href="/orders/track-order" mods="no-underline, blue, in-text">«Отследить посылку»</app-link></span>
+              <span>на сайте, в разделе <app-link href="/orders/track-order" mods="no-underline, blue, in-text">
+                «Отследить посылку»</app-link></span>
             </div>
             <div appListItem>
               <svg-icon class="icon" src="assets/img/svg/check.svg" width="24" height="20"></svg-icon>
@@ -40,7 +41,8 @@
             </div>
             <div appListItem>
               <svg-icon class="icon" src="assets/img/svg/check.svg" width="24" height="20"></svg-icon>
-              <span>позвонить по номеру телефона: <app-link mods="no-underline, blue, in-text">8 (423) 293 78 79</app-link></span>
+              <span>позвонить по номеру телефона: <app-link [href]="'tel:' + phoneNumber" mods="blue, no-underline, in-text">
+              {{phoneNumber}}</app-link></span>
             </div>
           </app-list>
         </div>

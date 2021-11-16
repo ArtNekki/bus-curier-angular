@@ -60,9 +60,8 @@
         </app-link>
       </div>
       <div>
-        <app-link href="mailto: inbox@busbox.guru" mods="lg, dashed">
-          <svg-icon class="icon icon--black" src="assets/img/svg/email.svg" width="19px" height="16px"></svg-icon>
-          inbox@busbox.guru
+        <app-link [href]="'mailto:' + email" mods="lg, dashed">
+          <svg-icon class="icon icon--black" src="assets/img/svg/email.svg" width="19px" height="16px"></svg-icon>{{email}}
         </app-link>
       </div>
     </div>
