@@ -15,7 +15,13 @@ export class TimelineComponent implements OnInit {
     ORDER_INTRANSIT: 'yellow',
     ORDER_SORTING: 'yellow',
     ORDER_READY: 'blue',
-    ORDER_DELIVERED: 'blue'
+    ORDER_DELIVERED: 'blue',
+    ORDER_SELFEXTRACT: 'yellow',
+    ORDER_RETURN: 'yellow',
+    ORDER_FAILURE: 'red',
+    ORDER_STORAGE: 'blue',
+    ORDER_RESENT: 'yellow',
+    ORDER_CANCELED: 'red'
   };
 
   constructor() { }
@@ -24,12 +30,14 @@ export class TimelineComponent implements OnInit {
 
   formatDate(date) {
     const datetime = date.split(' ');
-    const formattedDate = new Intl.DateTimeFormat('ru-Ru').format(new Date(datetime[0]));
-    const formattedTime = new Intl.DateTimeFormat('ru-Ru', {
+    const formattedDate = new Intl.DateTimeFormat('ru-Ru', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
       hour: 'numeric',
-      minute: 'numeric'
-    }).format(new Date(date));
+      minute: 'numeric',
+    }).format(new Date(datetime[0]));
 
-    return `${formattedDate} ${formattedTime}`;
+    return formattedDate;
   }
 }
