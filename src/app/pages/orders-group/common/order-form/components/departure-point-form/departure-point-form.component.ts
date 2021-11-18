@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {AbstractControl, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
@@ -198,7 +198,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
             .map((item: [string, any]) => {
               return item[0];
             });
-        })
+        }),
       )
       .subscribe((tabs: string[]) => {
         if (tabs.length) {
@@ -230,16 +230,24 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   getDepartments(id: string) {
     this.departmentsSub = this.getOfficesById(id)
       .pipe(
+        tap(() => {
+          this.departments = [];
+        }),
+        delay(0),
         map((offices: any) => {
           return offices
             .filter((office) => +office.give)
             .map((office) => {
               return {value: office.home_id || office.office_id, name: office.address};
             });
-        })
+        }),
+        tap((offices: any) => {
+          this.departments = offices;
+        }),
+        take(1)
       )
       .subscribe((offices: any) => {
-        this.departments = offices;
+        this.options.get(FormControlName.Give).setValue({office: offices[0]});
       });
   }
 

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
@@ -47,33 +47,10 @@ export class DepartmentFormComponent extends SubFormComponent implements OnInit 
     this.formGroup = new FormGroup({
       [FormControlName.Office]: new FormControl('', [Validators.required])
     });
-
-    // setTimeout(() => {
-    //   // this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
-    // }, 0);
   }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   const offices = changes.offices.currentValue;
-  //
-  //   if (offices.length && this.formGroup) {
-  //     setTimeout(() => {
-  //       // this.formGroup.get(FormControlName.Office).setValue(changes.offices.currentValue[0].value);
-  //     });
-  //   }
-  // }
-
-  writeValue(value: any): void {
-    if (value) {
-      setTimeout(() => {
-        this.formGroup.get(FormControlName.Office).setValue(value.office);
-        super.writeValue(value);
-      }, 0);
-    } else if (this.formGroup) {
-      // console.log('blaaa');
-      setTimeout(() => {
-        this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
-      }, 0);
-    }
+  writeValue(data: any): void {
+    console.log('data', data);
+    super.writeValue(data.value || {office: this.offices[0].value});
   }
 }

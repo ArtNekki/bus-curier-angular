@@ -41,7 +41,7 @@
       <ng-container *ngFor="let control of formUtils.getGroupControls(options) | keyvalue: formUtils.originalOrder">
         <div class="form__panel" *ngIf="options.get(FormControlName.Active).value === control.key" [@fadeIn]="">
           <ng-container *ngIf="control.key === 'give'; else courier">
-            <app-department-form [offices]="departments" [formControlName]="control.key"></app-department-form>
+            <app-department-form *ngIf="departments.length" [offices]="departments" [formControlName]="control.key"></app-department-form>
           </ng-container>
           <ng-template #courier>
             <app-courier-form [formControlName]="control.key"></app-courier-form>
