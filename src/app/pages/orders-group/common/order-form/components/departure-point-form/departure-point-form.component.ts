@@ -10,7 +10,7 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import { SubFormComponent } from '../sub-form/sub-form.component';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {BehaviorSubject, Observable, PartialObserver, Subject, Subscription} from 'rxjs';
-import {concatAll, delay, first, map, take, tap} from 'rxjs/operators';
+import {concatAll, debounceTime, delay, first, map, take, tap} from 'rxjs/operators';
 import {ActivatedRoute, Params} from '@angular/router';
 import {CityFrom} from '../../../../../../core/interfaces/calculator';
 import {Select} from '../../../../../../core/interfaces/form';
@@ -84,6 +84,16 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     this.setDate();
 
     super.ngOnInit();
+
+    this.formGroup.get(FormControlName.Location).valueChanges
+      .pipe(debounceTime(100))
+      .subscribe((id) => {
+
+        if (id) {
+          this.setTabs(id);
+        }
+
+      });
   }
 
   get options() {
