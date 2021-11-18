@@ -222,9 +222,11 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     this.departmentsSub = this.getOfficesById(id)
       .pipe(
         map((offices: any) => {
-          return offices.map((office) => {
-            return {value: office.home_id || office.office_id, name: office.address};
-          });
+          return offices
+            .filter((office) => +office.give)
+            .map((office) => {
+              return {value: office.home_id || office.office_id, name: office.address};
+            });
         })
       )
       .subscribe((offices: any) => {
