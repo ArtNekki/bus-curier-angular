@@ -63,6 +63,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   private tabsSub: Subscription;
   private defaultCitySub: Subscription;
   private routeSub: Subscription;
+  private locationSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -85,14 +86,12 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
     super.ngOnInit();
 
-    this.formGroup.get(FormControlName.Location).valueChanges
+    this.locationSub = this.formGroup.get(FormControlName.Location).valueChanges
       .pipe(debounceTime(100))
       .subscribe((id) => {
-
         if (id) {
           this.setTabs(id);
         }
-
       });
   }
 
@@ -289,6 +288,10 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
     if (this.routeSub) {
       this.routeSub.unsubscribe();
+    }
+
+    if (this.locationSub) {
+      this.locationSub.unsubscribe();
     }
   }
 }

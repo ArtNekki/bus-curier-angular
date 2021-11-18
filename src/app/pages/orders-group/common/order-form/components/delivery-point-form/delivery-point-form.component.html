@@ -9,7 +9,6 @@
     <app-select
       [items]="cities" id="departure-location"
       [formControlName]="FormControlName.Location"
-      (change)="setCity(formGroup.get(FormControlName.Location).value)"
       [isInvalid]="(formGroup.get(FormControlName.Location).invalid
         && formGroup.get(FormControlName.Location).touched) && 'invalid'"
     >

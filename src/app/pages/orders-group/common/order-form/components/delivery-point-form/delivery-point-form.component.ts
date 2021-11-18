@@ -70,6 +70,7 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
   public offices$ = new BehaviorSubject([]);
   private officesSub: Subscription;
   private officesByIdSub: Subscription;
+  private locationSub: Subscription;
 
 
   constructor(public formUtils: FormUtilsService,
@@ -89,6 +90,14 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
     });
 
     this.loadOffices();
+
+    this.locationSub = this.formGroup.get(FormControlName.Location).valueChanges
+      .pipe(debounceTime(100))
+      .subscribe((id) => {
+        if (id) {
+          this.setCity(id);
+        }
+      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -291,6 +300,10 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
 
     if (this.defaultCitySub) {
       this.defaultCitySub.unsubscribe();
+    }
+
+    if (this.locationSub) {
+      this.locationSub.unsubscribe();
     }
   }
 }
