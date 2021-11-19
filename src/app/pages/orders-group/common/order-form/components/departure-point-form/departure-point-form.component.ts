@@ -183,6 +183,11 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     if (type === FormControlName.Pickup) {
       this.calculatorService.courierDelivery$.next(type);
     }
+
+    // Выбрать офис по умолчанию при переключении таб с Курьера на отделение
+    if (this.options.get(FormControlName.Active).value === 'give') {
+      this.getDepartments(this.formGroup.get(FormControlName.Location).value);
+    }
   }
 
   setTabs(id: string) {
@@ -217,7 +222,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
             departmentControl.valueChanges
               .pipe(take(1))
               .subscribe((officeId) => {
-                console.log('value111', officeId);
                 if (officeId === VLOffice.Rus
                   || officeId === VLOffice.Aleutskaya || officeId === VLOffice.Gogolya) {
                   this.formGroup.get(FormControlName.Location).setValue(officeId);
@@ -230,7 +234,7 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   getDepartments(id: string) {
-    this.departmentsSub = this.getOfficesById(id)
+    this.getOfficesById(id)
       .pipe(
         map((offices: any) => {
           return offices
