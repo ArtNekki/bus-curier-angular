@@ -215,10 +215,12 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
           if (departmentControl) {
             departmentControl.valueChanges
-              .subscribe((data) => {
-                if (data.office === VLOffice.Rus
-                  || data.office === VLOffice.Aleutskaya || data.office === VLOffice.Gogolya) {
-                  this.formGroup.get(FormControlName.Location).setValue(data.office);
+              .pipe(take(1))
+              .subscribe((officeId) => {
+                console.log('value111', officeId);
+                if (officeId === VLOffice.Rus
+                  || officeId === VLOffice.Aleutskaya || officeId === VLOffice.Gogolya) {
+                  this.formGroup.get(FormControlName.Location).setValue(officeId);
                 }
               });
 
@@ -230,10 +232,9 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   getDepartments(id: string) {
     this.departmentsSub = this.getOfficesById(id)
       .pipe(
-        tap(() => {
-          this.departments = [];
-        }),
-        delay(0),
+        // tap(() => {
+        //   this.departments = [];
+        // }),
         map((offices: any) => {
           return offices
             .filter((office) => +office.give)
@@ -244,10 +245,13 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
         tap((offices: any) => {
           this.departments = offices;
         }),
-        take(1)
+        take(1),
+        delay(0)
       )
       .subscribe((offices: any) => {
-        this.options.get(FormControlName.Give).setValue({office: offices[0]});
+        if (!this.options.get(FormControlName.Give).value) {
+          this.options.get(FormControlName.Give).setValue(offices[0].value);
+        }
       });
   }
 
