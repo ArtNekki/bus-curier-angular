@@ -62,8 +62,7 @@ export class DepartmentFormComponent extends SubFormComponent implements OnInit,
           take(1),
           delay(0))
         .subscribe((offices: Select[]) => {
-          console.log('wtf');
-            this.formGroup.get(FormControlName.Office).setValue(offices[0].value);
+          this.formGroup.get(FormControlName.Office).setValue(offices[0].value);
         });
     }
 
@@ -75,8 +74,9 @@ export class DepartmentFormComponent extends SubFormComponent implements OnInit,
         take(1),
         delay(0))
       .subscribe((offices: Select[]) => {
-        console.log('data', data);
         super.writeValue(data || {office: offices[0].value});
+        this.formGroup.markAllAsTouched();
+        this.formGroup.markAsTouched();
       });
   }
 }

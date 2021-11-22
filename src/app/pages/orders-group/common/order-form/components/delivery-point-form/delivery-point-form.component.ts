@@ -9,7 +9,7 @@ import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import addressPoints from 'src/app/mock-data/address-points';
 import fadeIn from '../../../../../../core/animations/fadeIn';
-import {combineAll, debounceTime, delay, map, tap} from 'rxjs/operators';
+import {combineAll, debounceTime, delay, map, pairwise, tap} from 'rxjs/operators';
 import {BehaviorSubject, combineLatest, Subscription, zip} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
 import {CityTo} from '../../../../../../core/interfaces/calculator';
@@ -92,10 +92,13 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
     this.loadOffices();
 
     this.locationSub = this.formGroup.get(FormControlName.Location).valueChanges
-      .pipe(debounceTime(100))
-      .subscribe((id) => {
-        if (id) {
-          this.setCity(id);
+      .pipe(
+        // debounceTime(100)
+        pairwise()
+      )
+      .subscribe(([prevId, nextId]) => {
+        if (prevId !== nextId) {
+          this.setCity(nextId);
         }
       });
   }
@@ -166,28 +169,21 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
             .map((office) => {
               return {value: office.home_id || office.office_id, name: office.address, delivery: office.delivery};
             });
-        }),
-        tap((offices: any) => {
-          if (offices.length) {
-            this.options.addControl(FormControlName.Get, new FormControl('', [Validators.required]));
-            this.options.get(FormControlName.Active).setValue(FormControlName.Get);
-
-            if (+offices[0].delivery) {
-              this.options.addControl(FormControlName.Delivery, new FormControl(''));
-            }
-
-            this.departments = offices;
-          } else {
-            this.options.removeControl(FormControlName.Get);
-            this.options.removeControl(FormControlName.Delivery);
-          }
-        }),
-        // debounceTime(0), // quick's form's trigger to valid
-        // delay(0)
+        })
       )
       .subscribe((offices: any) => {
-        if (this.options.get(FormControlName.Get) && !this.options.get(FormControlName.Get).value) {
-          this.options.get(FormControlName.Get).setValue(offices[0].value);
+        if (offices.length) {
+          this.options.addControl(FormControlName.Get, new FormControl('', [Validators.required]));
+          this.options.get(FormControlName.Active).setValue(FormControlName.Get);
+
+          if (+offices[0].delivery) {
+            this.options.addControl(FormControlName.Delivery, new FormControl(''));
+          }
+
+          this.departments = offices;
+        } else {
+          this.options.removeControl(FormControlName.Get);
+          this.options.removeControl(FormControlName.Delivery);
         }
       });
   }
