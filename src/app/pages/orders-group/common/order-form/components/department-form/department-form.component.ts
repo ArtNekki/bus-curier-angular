@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
@@ -7,6 +7,8 @@ import {UtilsService} from '../../../../../../core/services/utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import {Select} from '../../../../../../core/interfaces/form';
+import {of} from 'rxjs';
+import {delay, take, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-department-form',
@@ -25,7 +27,7 @@ import {Select} from '../../../../../../core/interfaces/form';
     }
   ]
 })
-export class DepartmentFormComponent extends SubFormComponent implements OnInit {
+export class DepartmentFormComponent extends SubFormComponent implements OnInit, OnChanges {
   @Input() offices: Array<Select> = [];
 
   public FormFieldMeta = formFieldMeta;
@@ -47,33 +49,39 @@ export class DepartmentFormComponent extends SubFormComponent implements OnInit 
     this.formGroup = new FormGroup({
       [FormControlName.Office]: new FormControl('', [Validators.required])
     });
-
-    // setTimeout(() => {
-    //   // this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
-    // }, 0);
   }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   const offices = changes.offices.currentValue;
-  //
-  //   if (offices.length && this.formGroup) {
-  //     setTimeout(() => {
-  //       // this.formGroup.get(FormControlName.Office).setValue(changes.offices.currentValue[0].value);
-  //     });
-  //   }
-  // }
+  ngOnChanges(changes: SimpleChanges): void {
+    const firstChange = changes.offices.firstChange;
+    const previousOffices = changes.offices.previousValue;
+    const currentOffices = changes.offices.currentValue;
+
+    if (((previousOffices && previousOffices[0].value) !== currentOffices[0].value) && !firstChange) {
+      // this.offices = currentOffices;
+      this.writeValue({office: currentOffices[0].value});
+    }
+  }
 
   writeValue(value: any): void {
-    if (value) {
-      setTimeout(() => {
-        this.formGroup.get(FormControlName.Office).setValue(value.office);
-        super.writeValue(value);
-      }, 0);
-    } else if (this.formGroup) {
-      // console.log('blaaa');
-      setTimeout(() => {
-        this.formGroup.get(FormControlName.Office).setValue(this.offices[0].value);
-      }, 0);
-    }
+    // if (value) {
+    //   setTimeout(() => {
+    //     super.writeValue(value);
+    //   }, 0);
+    // } else {
+    //   setTimeout(() => {
+    //     super.writeValue({office: this.offices[0].value});
+    //   }, 0);
+    // }
+
+     of(this.offices)
+        .pipe(
+          take(1),
+          tap(() => { console.log('this.offices', this.offices); }),
+          delay(0)
+        )
+        .subscribe((offices: Select[]) => {
+          console.log('tada_2', this.offices);
+          super.writeValue(value || {office: offices[0].value});
+        });
   }
 }

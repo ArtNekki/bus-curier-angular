@@ -162,7 +162,8 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
       )
       .pipe(
         debounceTime(0), // quick's form's trigger to valid
-        delay(0))
+        delay(0)
+      )
       .subscribe((offices: any) => {
         if (offices.length) {
           this.options.addControl(FormControlName.Get, new FormControl('', [Validators.required]));

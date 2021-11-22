@@ -30,7 +30,7 @@ export class SubFormComponent implements OnInit, OnDestroy, Validator, ControlVa
 
   writeValue(value: any): void {
     if (value) {
-      this.formGroup.setValue(value, { emitEvent: false });
+      this.formGroup.setValue(value);
       this.onChange(value);
       this.onTouched();
     }
