@@ -178,20 +178,15 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
     this.options.get(type).setValidators([Validators.required]);
 
-    // После того как форма Department или Courier была выбрана обновляем ее значения,
-    // чтобы общая форма показала статус invalid при необходимости
-    setTimeout(() => {
-      this.options.get(type).updateValueAndValidity();
-    }, 0);
-
     if (type === FormControlName.Pickup) {
       this.calculatorService.courierDelivery$.next(type);
     }
   }
 
   setTabs(id: string) {
-    this.tabsSub = this.getOfficesById(id)
+    this.getOfficesById(id)
       .pipe(
+        take(1),
         concatAll(),
         first(),
         map((office: any) => {
@@ -232,11 +227,12 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   getDepartments(id: string) {
-    this.departmentsSub = this.getOfficesById(id)
+    this.getOfficesById(id)
       .pipe(
+        take(1),
         map((offices: any) => {
           return offices
-            // .filter((office) => +office.give)
+            .filter((office) => +office.give)
             .map((office) => {
               return {value: office.home_id || office.office_id, name: office.address};
             });
