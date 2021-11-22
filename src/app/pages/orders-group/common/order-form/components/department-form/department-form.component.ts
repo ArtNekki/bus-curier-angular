@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
@@ -7,6 +7,8 @@ import {UtilsService} from '../../../../../../core/services/utils.service';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import {SubFormComponent} from '../sub-form/sub-form.component';
 import {Select} from '../../../../../../core/interfaces/form';
+import {of} from 'rxjs';
+import {delay, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-department-form',
@@ -25,7 +27,7 @@ import {Select} from '../../../../../../core/interfaces/form';
     }
   ]
 })
-export class DepartmentFormComponent extends SubFormComponent implements OnInit {
+export class DepartmentFormComponent extends SubFormComponent implements OnInit, OnChanges {
   @Input() offices: Array<Select> = [];
 
   public FormFieldMeta = formFieldMeta;
@@ -49,8 +51,32 @@ export class DepartmentFormComponent extends SubFormComponent implements OnInit 
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    const firstChange = changes.offices.firstChange;
+    const previousOffices = changes.offices.previousValue;
+    const currentOffices = changes.offices.currentValue;
+
+    if (((previousOffices && previousOffices[0].value) !== currentOffices[0].value) && !firstChange) {
+      of(this.offices)
+        .pipe(
+          take(1),
+          delay(0))
+        .subscribe((offices: Select[]) => {
+          console.log('wtf');
+            this.formGroup.get(FormControlName.Office).setValue(offices[0].value);
+        });
+    }
+
+  }
+
   writeValue(data: any): void {
-    console.log('data', data);
-    super.writeValue(data.value || {office: this.offices[0].value});
+    of(this.offices)
+      .pipe(
+        take(1),
+        delay(0))
+      .subscribe((offices: Select[]) => {
+        console.log('data', data);
+        super.writeValue(data || {office: offices[0].value});
+      });
   }
 }

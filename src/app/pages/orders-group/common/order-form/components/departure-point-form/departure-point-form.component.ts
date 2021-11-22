@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
 import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import fieldError from '../../../../../../core/form/fieldError';
 import {AbstractControl, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
@@ -10,7 +10,7 @@ import FormControlName from 'src/app/core/maps/FormControlName';
 import { SubFormComponent } from '../sub-form/sub-form.component';
 import fadeIn from '../../../../../../core/animations/fadeIn';
 import {BehaviorSubject, Observable, PartialObserver, Subject, Subscription} from 'rxjs';
-import {concatAll, debounceTime, delay, first, map, take, tap} from 'rxjs/operators';
+import {concatAll, debounceTime, delay, first, map, pairwise, take, tap} from 'rxjs/operators';
 import {ActivatedRoute, Params} from '@angular/router';
 import {CityFrom} from '../../../../../../core/interfaces/calculator';
 import {Select} from '../../../../../../core/interfaces/form';
@@ -63,7 +63,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   private tabsSub: Subscription;
   private defaultCitySub: Subscription;
   private routeSub: Subscription;
-  private locationSub: Subscription;
 
   constructor(public formUtils: FormUtilsService,
               public utils: UtilsService,
@@ -86,12 +85,17 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
     super.ngOnInit();
 
-    this.locationSub = this.formGroup.get(FormControlName.Location).valueChanges
-      .pipe(debounceTime(100))
-      .subscribe((id) => {
-        if (id) {
-          this.setTabs(id);
+    this.formGroup.get(FormControlName.Location).valueChanges
+      .pipe(
+        debounceTime(100),
+        pairwise()
+      )
+      .subscribe(([prevId, nextId]) => {
+
+        if (prevId !== nextId) {
+          this.setTabs(nextId);
         }
+
       });
   }
 
@@ -124,9 +128,9 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   getOfficesById(id) {
     return this.offices$
       .pipe(
-          map((offices: any) => {
-            return offices.filter((office) => office.office_id === this.cityData[id].office_id);
-          })
+        map((offices: any) => {
+          return offices.filter((office) => office.office_id === this.cityData[id].office_id);
+        })
       );
   }
 
@@ -183,11 +187,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
     if (type === FormControlName.Pickup) {
       this.calculatorService.courierDelivery$.next(type);
     }
-
-    // Выбрать офис по умолчанию при переключении таб с Курьера на отделение
-    if (this.options.get(FormControlName.Active).value === 'give') {
-      this.getDepartments(this.formGroup.get(FormControlName.Location).value);
-    }
   }
 
   setTabs(id: string) {
@@ -203,28 +202,27 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
             .map((item: [string, any]) => {
               return item[0];
             });
-        }),
+        })
       )
       .subscribe((tabs: string[]) => {
-        if (tabs.length) {
-          tabs.forEach((name: string) => {
-            this.options.addControl(name, new FormControl(''));
-          });
+          if (tabs.length) {
+            tabs.forEach((name: string) => {
+              this.options.addControl(name, new FormControl(''));
+            });
 
-          this.options.get(FormControlName.Active).setValue(tabs[0]);
-        }
-      },
+            this.options.get(FormControlName.Active).setValue(tabs[0]);
+          }
+        },
         () => {},
         () => {
           const departmentControl = this.options.get(FormControlName.Give);
 
           if (departmentControl) {
             departmentControl.valueChanges
-              .pipe(take(1))
-              .subscribe((officeId) => {
-                if (officeId === VLOffice.Rus
-                  || officeId === VLOffice.Aleutskaya || officeId === VLOffice.Gogolya) {
-                  this.formGroup.get(FormControlName.Location).setValue(officeId);
+              .subscribe((data) => {
+                if (data.office === VLOffice.Rus
+                  || data.office === VLOffice.Aleutskaya || data.office === VLOffice.Gogolya) {
+                  this.formGroup.get(FormControlName.Location).setValue(data.office);
                 }
               });
 
@@ -234,25 +232,18 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   }
 
   getDepartments(id: string) {
-    this.getOfficesById(id)
+    this.departmentsSub = this.getOfficesById(id)
       .pipe(
         map((offices: any) => {
           return offices
-            .filter((office) => +office.give)
+            // .filter((office) => +office.give)
             .map((office) => {
               return {value: office.home_id || office.office_id, name: office.address};
             });
-        }),
-        tap((offices: any) => {
-          this.departments = offices;
-        }),
-        take(1),
-        delay(0)
+        })
       )
       .subscribe((offices: any) => {
-        if (!this.options.get(FormControlName.Give).value) {
-          this.options.get(FormControlName.Give).setValue(offices[0].value);
-        }
+        this.departments = offices;
       });
   }
 
@@ -274,8 +265,8 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
             }
 
             super.writeValue(value);
-        });
-    });
+          });
+      });
   }
 
   ngOnDestroy(): void {
@@ -301,10 +292,6 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
 
     if (this.routeSub) {
       this.routeSub.unsubscribe();
-    }
-
-    if (this.locationSub) {
-      this.locationSub.unsubscribe();
     }
   }
 }
