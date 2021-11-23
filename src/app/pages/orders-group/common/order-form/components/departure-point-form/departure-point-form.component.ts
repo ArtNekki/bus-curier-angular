@@ -179,6 +179,9 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
   setTabs(id: string) {
     this.tabsSub = this.getOfficesById(id)
       .pipe(
+        tap(() => {
+          this.clearOptions();
+        }),
         concatAll(),
         first(),
         map((office: any) => {
@@ -231,6 +234,15 @@ export class DeparturePointFormComponent extends SubFormComponent implements OnI
       )
       .subscribe((offices: any) => {
         this.departments = offices;
+      });
+  }
+
+  clearOptions() {
+    Object.entries(this.options.controls)
+      .forEach(([key, control]: [string, AbstractControl]) => {
+        if (key !== FormControlName.Active) {
+          this.options.removeControl(key);
+        }
       });
   }
 

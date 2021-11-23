@@ -9,12 +9,13 @@ import {SubFormComponent} from '../sub-form/sub-form.component';
 import FormControlName from 'src/app/core/maps/FormControlName';
 import addressPoints from 'src/app/mock-data/address-points';
 import fadeIn from '../../../../../../core/animations/fadeIn';
-import {combineAll, debounceTime, delay, map, tap} from 'rxjs/operators';
+import {combineAll, concatAll, debounceTime, delay, first, map, take, tap} from 'rxjs/operators';
 import {BehaviorSubject, combineLatest, Subscription, zip} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
 import {CityTo} from '../../../../../../core/interfaces/calculator';
 import {Select} from '../../../../../../core/interfaces/form';
 import {LocalStorageService} from '../../../../../../core/services/local-storage.service';
+import {VLOffice} from '../../../../../../core/maps/calculator';
 
 @Component({
   selector: 'app-delivery-point-form',
@@ -152,32 +153,71 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
   createTabs(id: string) {
     this.officesByIdSub = this.getOfficesById(id)
       .pipe(
-        map((offices: any) => {
-          return offices
-            .map((office) => {
-              return {value: office.home_id || office.office_id, name: office.address, delivery: office.delivery};
+        tap(() => {
+          this.clearOptions();
+          console.log('opt', this.formGroup.get(FormControlName.Options));
+        }),
+        concatAll(),
+        first(),
+        map((office: any) => {
+          return Object.entries(office)
+            .filter((item: [string, any]) => {
+              return item[0] === 'get' && item[1] === '1' || item[0] === 'delivery' && item[1] === '1';
+            })
+            .map((item: [string, any]) => {
+              return item[0];
             });
         })
-
       )
+      .subscribe((tabs: string[]) => {
+        // if (offices.length) {
+        //   this.options.addControl(FormControlName.Get, new FormControl('', [Validators.required]));
+        //   this.options.get(FormControlName.Active).setValue(FormControlName.Get);
+        //
+        //   if (+offices[0].delivery) {
+        //     this.options.addControl(FormControlName.Delivery, new FormControl(''));
+        //   }
+        //
+        //   this.departments = offices;
+        // } else {
+        //   this.options.removeControl(FormControlName.Get);
+        //   this.options.removeControl(FormControlName.Delivery);
+        // }
+
+        console.log('tabs', tabs);
+
+        if (tabs.length) {
+          tabs.forEach((name: string) => {
+            this.options.addControl(name, new FormControl(''));
+          });
+
+          this.options.get(FormControlName.Active).setValue(tabs[0]);
+        }
+      },
+        () => {},
+     () => {
+        const departmentControl = this.options.get(FormControlName.Get);
+
+        if (departmentControl) {
+          this.getDepartments(id);
+        }
+      });
+  }
+
+  getDepartments(id: string) {
+    this.getOfficesById(id)
       .pipe(
-        debounceTime(0), // quick's form's trigger to valid
-        delay(0)
+        take(1),
+        map((offices: any) => {
+          return offices
+            .filter((office) => +office.get)
+            .map((office) => {
+              return {value: office.home_id || office.office_id, name: office.address};
+            });
+        })
       )
       .subscribe((offices: any) => {
-        if (offices.length) {
-          this.options.addControl(FormControlName.Get, new FormControl('', [Validators.required]));
-          this.options.get(FormControlName.Active).setValue(FormControlName.Get);
-
-          if (+offices[0].delivery) {
-            this.options.addControl(FormControlName.Delivery, new FormControl(''));
-          }
-
-          this.departments = offices;
-        } else {
-          this.options.removeControl(FormControlName.Get);
-          this.options.removeControl(FormControlName.Delivery);
-        }
+        this.departments = offices;
       });
   }
 
@@ -221,7 +261,6 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
           this.options.removeControl(key);
         }
       });
-
   }
 
   // getControlsAmount(data) {
@@ -268,7 +307,7 @@ export class DeliveryPointFormComponent extends SubFormComponent implements OnIn
 
             // this.formGroup.get(FormControlName.Location).markAsTouched();
             super.writeValue(value);
-            this.clearOptions();
+            // this.clearOptions();
           });
       });
   }
