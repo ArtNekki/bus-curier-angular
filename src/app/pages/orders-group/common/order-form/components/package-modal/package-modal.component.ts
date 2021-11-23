@@ -81,4 +81,8 @@ export class PackageModalComponent implements OnInit {
   registerOnTouched(fn) {
     this.onTouched = fn;
   }
+
+  setCurrentValue($event: number | any) {
+    this.currentValue = $event.target ? $event.target.value : $event;
+  }
 }
