@@ -7,6 +7,7 @@ import formFieldMeta from '../../../../../../core/form/formFieldMeta';
 import {CourierMode, ParcelLimits} from '../../../../../../core/interfaces/calculator';
 import {Subscription} from 'rxjs';
 import {VLOffice} from '../../../../../../core/maps/calculator';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'app-parcel-form',
@@ -47,6 +48,7 @@ export class ParcelFormComponent extends SubFormComponent implements OnInit, OnC
   };
 
   constructor(
+    public device: DeviceDetectorService,
     public formUtils: FormUtilsService) {
     super();
   }

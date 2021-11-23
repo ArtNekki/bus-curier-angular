@@ -14,18 +14,30 @@
 <!--        type="number"-->
 <!--        maxlength="2"-->
         <app-input
-          type="text"
-          maxlength="6"
-          [mask]="FormFieldMeta[control.key].mask"
-          [suffix]="' ' + FormFieldMeta[control.key].unit"
-          [dropSpecialCharacters]="FormFieldMeta[control.key].dropSpecialCharacters"
+          *ngIf="device.deviceType === 'mobile'; else desktop"
+          type="number"
+          maxlength="2"
           [formControlName]="control.key"
           [isInvalid]="(control.value.invalid && control.value.touched)
           || (control.key === FormControlName.Width || control.key === FormControlName.Height
           || control.key === FormControlName.Length) && (formGroup.errors && formGroup.errors.dimensions)"
         >
-          <!--[unit]="formGroupMeta.Parcel[parcelControl.key].unit"-->
         </app-input>
+        <ng-template #desktop>
+          <app-input
+            type="text"
+            maxlength="6"
+            [mask]="FormFieldMeta[control.key].mask"
+            [suffix]="' ' + FormFieldMeta[control.key].unit"
+            [dropSpecialCharacters]="FormFieldMeta[control.key].dropSpecialCharacters"
+            [formControlName]="control.key"
+            [isInvalid]="(control.value.invalid && control.value.touched)
+          || (control.key === FormControlName.Width || control.key === FormControlName.Height
+          || control.key === FormControlName.Length) && (formGroup.errors && formGroup.errors.dimensions)"
+          >
+            <!--[unit]="formGroupMeta.Parcel[parcelControl.key].unit"-->
+          </app-input>
+        </ng-template>
       </div>
       <div class="parcel__delete">
         <label class="parcel__label">&#160;</label>
