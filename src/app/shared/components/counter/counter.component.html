@@ -2,8 +2,9 @@
   <button type="button" class="counter__btn" (click)="countDown()">
     <svg-icon class="icon" src="assets/img/svg/minus.svg" width="19" height="19"></svg-icon>
   </button>
-  <input type="text" class="counter__input" [ngModel]="currentCount" disabled="true" />
+  <input #input type="text" class="counter__input" [ngModel]="currentCount" inputmode="numeric" />
   <button type="button" class="counter__btn" (click)="countUp()">
     <svg-icon class="icon" src="assets/img/svg/plus.svg" width="19" height="19"></svg-icon>
   </button>
+  <div class="counter__overlay" (click)="onFocus()"></div>
 </div>

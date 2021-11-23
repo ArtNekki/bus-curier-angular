@@ -1,4 +1,16 @@
-import {Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {ModsService} from '../../../core/services/mods.service';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import State from '../../../core/maps/State';
@@ -16,6 +28,8 @@ import State from '../../../core/maps/State';
   ]
 })
 export class CounterComponent implements ControlValueAccessor, OnInit, OnChanges {
+  @ViewChild('input', {read: ElementRef}) input: ElementRef;
+
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
   @Input() value: any;
   @Input() mods;
@@ -24,7 +38,9 @@ export class CounterComponent implements ControlValueAccessor, OnInit, OnChanges
   public cssClass;
   public currentCount = 0;
 
-  constructor(private modsService: ModsService) { }
+  constructor(
+    private modsService: ModsService,
+    private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
 
@@ -83,5 +99,16 @@ export class CounterComponent implements ControlValueAccessor, OnInit, OnChanges
 
     this.currentCount--;
     this.changeValue(this.currentCount);
+  }
+
+  onFocus() {
+    console.log('this.input.nativeElement', this.input.nativeElement);
+    this.cdr.detectChanges();
+    this.input.nativeElement.focus();
+
+  }
+
+  go() {
+    alert(1);
   }
 }
