@@ -44,10 +44,11 @@
               [dropSpecialCharacters]="dropSpecialCharacters"
               [showMaskTyped]="showMaskTyped"
               [maxlength]="maxlength"
+              [attr.inputmode]="inputmode"
               [ngModel]="value"
               (ngModelChange)="changeValue($event)"  (blur)="markAsTouched()" />
       <ng-template #withoutMask>
-        <input #simpleInputField [type]="type" [id]="id" class="input__field"
+        <input #simpleInputField [type]="type" [id]="id" class="input__field" [attr.inputmode]="inputmode"
                [placeholder]="placeholder" [ngModel]="value" (ngModelChange)="changeValue($event)"
                (blur)="markAsTouched()" (keypress)="check(simpleInputField, $event)"
                [maxlength]="maxlength" [pattern]="(type === 'text') ? Pattern.Text : ''"/>
