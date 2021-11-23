@@ -14,6 +14,7 @@ import {
 import {ModsService} from '../../../core/services/mods.service';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import State from '../../../core/maps/State';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'app-counter',
@@ -40,7 +41,8 @@ export class CounterComponent implements ControlValueAccessor, OnInit, OnChanges
 
   constructor(
     private modsService: ModsService,
-    private cdr: ChangeDetectorRef) { }
+    private cdr: ChangeDetectorRef,
+    public device: DeviceDetectorService) { }
 
   ngOnInit(): void {
 
@@ -87,6 +89,11 @@ export class CounterComponent implements ControlValueAccessor, OnInit, OnChanges
     this.onTouched = fn;
   }
 
+  setCount(value) {
+    this.currentCount = value;
+    this.changeValue(this.currentCount);
+  }
+
   countUp() {
     this.currentCount++;
     this.changeValue(this.currentCount);
@@ -102,10 +109,15 @@ export class CounterComponent implements ControlValueAccessor, OnInit, OnChanges
   }
 
   onFocus() {
-    console.log('this.input.nativeElement', this.input.nativeElement);
     this.cdr.detectChanges();
     this.input.nativeElement.focus();
+    this.input.nativeElement.select();
+  }
 
+  onBlur() {
+    if (!this.currentCount) {
+      this.currentCount = 0;
+    }
   }
 
   go() {

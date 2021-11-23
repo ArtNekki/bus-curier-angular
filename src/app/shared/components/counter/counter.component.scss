@@ -21,6 +21,10 @@
     border-color: $primary-color;
   }
 
+  @include focus {
+    border-color: lighten($red-color, 15%);
+  }
+
   &--full {
     width: 100%;
   }
@@ -33,10 +37,16 @@
     @include hover {
       border-color: lighten($red-color, 15%);
     }
+
+    @include focus {
+      border-color: lighten($red-color, 15%);
+    }
   }
 
   &__input {
     padding: 0;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2 ;
     width: 100%;
     font-family: $font-family--secondary;
     font-size: 16px;
@@ -46,6 +56,15 @@
     border: none;
     background-color: transparent;
     user-select: none;
+
+    &[type="number"] {
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
 
     .counter--invalid & {
       color: $red-color;
@@ -61,6 +80,10 @@
 
     display: flex;
 
+    ::ng-deep html.touch & {
+      transition: all 0.25s ease-in;
+    }
+
     ::ng-deep svg {
       --color: #808080;
       --circle-bg-color: #F2F2F2;
@@ -70,6 +93,19 @@
         --circle-bg-color: #FFDC00;
       }
     }
+
+    ::ng-deep html.touch .counter__input:focus ~ & svg {
+      --color: #333333;
+      --circle-bg-color: #FFDC00;
+    }
+
+    ::ng-deep html.touch .counter--invalid .counter__input:focus ~ & {
+      opacity: 0.2;
+    }
+
+    ::ng-deep html.touch .counter--invalid .counter__input:focus ~ & svg {
+      --circle-bg-color: #F2F2F2;
+    }
   }
 
   &__overlay {
@@ -78,6 +114,5 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: red;
   }
 }

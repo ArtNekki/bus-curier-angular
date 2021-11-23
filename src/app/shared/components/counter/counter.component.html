@@ -1,10 +1,27 @@
-<div [class]="cssClass" [class.counter--invalid]="isInvalid">
+<div [class]="cssClass" [class.counter--invalid]="isInvalid" tabindex="0">
+  <input *ngIf="device.deviceType === 'mobile'; else desktop"
+       #input
+       type="number"
+       class="counter__input"
+       inputmode="numeric"
+       [ngModel]="currentCount"
+       (ngModelChange)="setCount(input.value)"
+       (blur)="onBlur()"
+  />
+  <ng-template #desktop>
+    <input
+        type="number"
+        class="counter__input"
+        inputmode="numeric"
+        disabled="true"
+        [ngModel]="currentCount"
+    />
+  </ng-template>
   <button type="button" class="counter__btn" (click)="countDown()">
     <svg-icon class="icon" src="assets/img/svg/minus.svg" width="19" height="19"></svg-icon>
   </button>
-  <input #input type="text" class="counter__input" [ngModel]="currentCount" inputmode="numeric" />
   <button type="button" class="counter__btn" (click)="countUp()">
     <svg-icon class="icon" src="assets/img/svg/plus.svg" width="19" height="19"></svg-icon>
   </button>
-  <div class="counter__overlay" (click)="onFocus()"></div>
+  <div *ngIf="device.deviceType === 'mobile'" class="counter__overlay" (click)="onFocus()"></div>
 </div>
