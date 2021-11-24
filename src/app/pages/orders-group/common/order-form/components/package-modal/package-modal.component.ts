@@ -1,7 +1,8 @@
 import {Component, EventEmitter, forwardRef, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ModsService} from '../../../../../../core/services/mods.service';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import {FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import fadeIn from '../../../../../../core/animations/fadeIn';
+import {startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-package-modal',
@@ -26,9 +27,7 @@ export class PackageModalComponent implements OnInit {
   @Output() ok: EventEmitter<any> = new EventEmitter<any>();
 
   public cssClass;
-  public currentValue = 0;
-  public value = 0;
-  public sum = 0;
+  public counter: FormControl;
 
   public Package = {
     box: 'Коробка',
@@ -42,13 +41,12 @@ export class PackageModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.cssClass = this.modsService.setMods('package-modal', this.mods);
+    this.counter = new FormControl(0);
   }
 
   onOk() {
-    const value = this.currentValue || this.value;
-
-    this.changeValue(value);
-    this.ok.emit(value);
+    this.changeValue(this.counter.value);
+    this.ok.emit(this.counter.value);
   }
 
   onClose() {
@@ -56,14 +54,11 @@ export class PackageModalComponent implements OnInit {
   }
 
   changeValue(value) {
-    this.value = value;
     this.onChange(value);
-    // this.onTouched();
   }
 
   writeValue(value) {
-    this.value = value;
-    this.currentValue = value;
+    this.counter.setValue(value || 1);
   }
 
   onChange: any = (data) => {
@@ -80,9 +75,5 @@ export class PackageModalComponent implements OnInit {
 
   registerOnTouched(fn) {
     this.onTouched = fn;
-  }
-
-  setCurrentValue($event: number | any) {
-    this.currentValue = $event.target ? $event.target.value : $event;
   }
 }
