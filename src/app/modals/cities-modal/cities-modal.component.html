@@ -3,7 +3,7 @@
     <div class="form__fieldset">
       <div class="form__field">
         <label for="city-name" class="form__label form__label--light">Введите название города</label>
-        <app-input id="city-name" type="text" [formControl]="searchField" placeholder="Например, Артем"></app-input>
+        <app-input id="city-name" type="search" [formControl]="searchField" inputmode="search" placeholder="Например, Артем"></app-input>
       </div>
     </div>
     <app-cities-list>

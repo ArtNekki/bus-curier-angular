@@ -28,6 +28,7 @@
          [prefix]="FormFieldMeta[FormControlName.Tel].prefix"
          [dropSpecialCharacters]="FormFieldMeta[FormControlName.Tel].dropSpecialCharacters"
          [showMaskTyped]="FormFieldMeta[FormControlName.Tel].showMaskTyped"
+         [inputmode]="FormFieldMeta[FormControlName.Tel].inputmode"
          [isInvalid]="form.get(FormControlName.Tel).invalid && form.get(FormControlName.Tel).touched">
 <!--        <ng-container class="errors">-->
 <!--          <small *ngIf="utils.getObjectKey(form.get(FormControlName.Fio).errors).length">-->
@@ -45,8 +46,9 @@
           <sup class="form__required" *ngIf="form.get(FormControlName.Email).errors
           && form.get(FormControlName.Email).hasError('required')">*</sup>
         </label>
-        <app-input type="text"
+        <app-input type="email"
                    [formControlName]="FormControlName.Email"
+                   [inputmode]="FormFieldMeta[FormControlName.Email].inputmode"
                    [isInvalid]="form.get(FormControlName.Email).invalid && form.get(FormControlName.Email).touched">
           <!--        <ng-container class="errors">-->
           <!--          <small *ngIf="utils.getObjectKey(form.get(FormControlName.Fio).errors).length">-->

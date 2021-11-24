@@ -20,7 +20,8 @@ export default {
   },
   [FormControlName.Email]: {
     label: 'Email',
-    type: 'email'
+    type: 'email',
+    inputmode: 'email',
   },
   [FormControlName.Role]: {
     label: 'Роль',
@@ -34,7 +35,8 @@ export default {
     label: 'Серия и номер документа',
     type: 'text',
     mask: '0000 000000',
-    prefix: ''
+    prefix: '',
+    inputmode: 'numeric',
   },
   [FormControlName.Tel]: {
     label: 'Номер телефона',
@@ -43,7 +45,8 @@ export default {
     prefix: '+7',
     suffix: '',
     dropSpecialCharacters: false,
-    showMaskTyped: true
+    showMaskTyped: true,
+    inputmode: 'tel',
   },
   [FormControlName.Sum]: {
     label: 'Сумма',
@@ -52,6 +55,7 @@ export default {
     prefix: '',
     suffix: ' ₽',
     dropSpecialCharacters: true,
+    inputmode: 'numeric',
     maxlength: 9
   },
   [FormControlName.Street]: {
@@ -204,7 +208,8 @@ export default {
     type: 'tel',
     placeholder: 'Номер телефона',
     mask: '(000) 000-0000',
-    prefix: '+7'
+    prefix: '+7',
+    inputmode: 'tel',
   },
   [FormControlName.Password]: {
     label: 'Пароль',
@@ -292,14 +297,16 @@ export default {
     type: 'text',
     mask: '0000 000000',
     prefix: '',
-    showMaskTyped: true
+    showMaskTyped: true,
+    inputmode: 'numeric'
   },
   [FormControlName.DriverLicense]: {
     label: 'Номер документа',
     type: 'text',
     mask: '00 00 000000',
     prefix: '',
-    showMaskTyped: true
+    showMaskTyped: true,
+    inputmode: 'numeric'
   },
   [FormControlName.Question]: {
     label: 'Опишите ваш вопрос',

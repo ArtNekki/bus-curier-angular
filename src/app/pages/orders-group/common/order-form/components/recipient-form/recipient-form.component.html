@@ -15,6 +15,7 @@
         [mask]="FormFieldMeta[control.key].mask"
         [prefix]="FormFieldMeta[control.key].prefix"
         [showMaskTyped]="FormFieldMeta[control.key].showMaskTyped"
+        [inputmode]="FormFieldMeta[control.key].inputmode"
         [isInvalid]="(control.value.invalid && control.value.touched) && 'invalid'">
         <ng-container class="errors">
           <small *ngIf="utils.getObjectKey(control.value.errors).length">

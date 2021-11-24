@@ -22,6 +22,7 @@
                 [dropSpecialCharacters]="FormFieldMeta[control.key].dropSpecialCharacters"
                 [showMaskTyped]="FormFieldMeta[control.key].showMaskTyped"
                 [maxlength]="FormFieldMeta[control.key].maxlength"
+                [inputmode]="FormFieldMeta[control.key].inputmode"
                 [isInvalid]="control.value.invalid && control.value.touched"
               ></app-input>
               <ng-container *ngIf="control.key === FormControlName.Sum">
